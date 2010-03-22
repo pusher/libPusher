@@ -21,6 +21,8 @@
     channel = [channelName copy];
     eventListeners = [[NSMutableDictionary alloc] init];
     socket = [[ZTWebSocket alloc] initWithURLString:@"ws://ws.pusherapp.com:8080" delegate:self];
+
+    [socket open];
   }
   return self;
 }
@@ -81,7 +83,7 @@
 
 - (void)webSocket:(ZTWebSocket*)webSocket didReceiveMessage:(NSString*)message;
 {
-  
+  NSLog(@"Received %@", message);
 }
 
 - (void)webSocketDidSendMessage:(ZTWebSocket*)webSocket;

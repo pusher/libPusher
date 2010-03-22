@@ -49,6 +49,7 @@
 		A3D1D0A51157CC68009A12AD /* AsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncUdpSocket.m; sourceTree = "<group>"; };
 		A3D1D0B01157CCA9009A12AD /* ZTLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZTLog.h; sourceTree = "<group>"; };
 		A3D1D0B51157CCDE009A12AD /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		A3D1D0F51157CE2C009A12AD /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +105,7 @@
 			children = (
 				32CA4F630368D1EE00C91783 /* PusherEvents_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
+				A3D1D0F51157CE2C009A12AD /* Constants.h */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";

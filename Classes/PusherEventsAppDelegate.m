@@ -9,6 +9,7 @@
 #import "PusherEventsAppDelegate.h"
 #import "PusherEventsViewController.h"
 #import "PTPusher.h"
+#import "Constants.h"
 
 @implementation PusherEventsAppDelegate
 
@@ -18,7 +19,7 @@
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application 
 {    
-  pusher = [[PTPusher alloc] initWithKey:@"MY_API_KEY" channel:@"demo"];
+  pusher = [[PTPusher alloc] initWithKey:PUSHER_API_KEY channel:@"test_channel"];
 
   [window addSubview:viewController.view];
   [window makeKeyAndVisible];
