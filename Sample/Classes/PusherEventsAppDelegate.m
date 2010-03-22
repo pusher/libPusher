@@ -10,7 +10,10 @@
 #import "PusherEventsViewController.h"
 #import "PTPusher.h"
 #import "PTPusherEvent.h"
-#import "Constants.h"
+
+// this is not included in the source
+// you must create this yourself and define PUSHER_API_KEY in it
+#import "Constants.h" 
 
 @implementation PusherEventsAppDelegate
 
