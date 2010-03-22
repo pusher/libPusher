@@ -40,7 +40,7 @@
 
 - (void)pusherConnected:(id)data;
 {
-  NSLog(@"Pusher connected with socket id %@", [data valueForKey:@"socket_id"]);
+  NSLog(@"Pusher connected with socket id %d", pusher.socketID);
 }
 
 - (void)handleAlertEvent:(id)data;

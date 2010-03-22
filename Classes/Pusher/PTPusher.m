@@ -19,6 +19,7 @@ NSString *const PTPusherEventKey = @"event";
 
 @synthesize APIKey;
 @synthesize channel;
+@synthesize socketID;
 
 - (id)initWithKey:(NSString *)key channel:(NSString *)channelName;
 {
@@ -28,7 +29,6 @@ NSString *const PTPusherEventKey = @"event";
     eventListeners = [[NSMutableDictionary alloc] init];
     
     socket = [[ZTWebSocket alloc] initWithURLString:[NSString stringWithFormat:@"ws://ws.pusherapp.com:8080/app/%@?channel=%@", APIKey, channel] delegate:self];
-
     [socket open];
   }
   return self;
@@ -93,8 +93,13 @@ NSString *const PTPusherEventKey = @"event";
   NSLog(@"Received %@", message);
   
   id messageDictionary = [message JSONValue];
-  NSString *event = [messageDictionary valueForKey:PTPusherEventKey];
-  [self handleEvent:event eventData:[messageDictionary valueForKey:PTPusherDataKey]];
+  NSString *eventName = [messageDictionary valueForKey:PTPusherEventKey];
+  id eventData = [messageDictionary valueForKey:PTPusherDataKey];
+  
+  if ([eventName isEqualToString:@"connection_established"]) {
+    socketID = [[eventData valueForKey:@"socket_id"] intValue];
+  }  
+  [self handleEvent:eventName eventData:eventData];
 }
 
 @end

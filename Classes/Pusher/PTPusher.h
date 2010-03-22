@@ -17,9 +17,11 @@ extern NSString *const PTPusherEventKey;
   NSString *channel;
   NSMutableDictionary *eventListeners;
   ZTWebSocket *socket;
+  NSUInteger socketID;
 }
 @property (nonatomic, readonly) NSString *APIKey;
 @property (nonatomic, readonly) NSString *channel;
+@property (nonatomic, readonly) NSUInteger socketID;
 
 - (id)initWithKey:(NSString *)key channel:(NSString *)channelName;
 - (void)addEventListener:(NSString *)event target:(id)target selector:(SEL)selector;
