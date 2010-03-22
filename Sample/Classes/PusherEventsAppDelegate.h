@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PTPusherDelegate.h"
 
 @class PusherEventsViewController;
 @class PTPusher;
 
-@interface PusherEventsAppDelegate : NSObject <UIApplicationDelegate> {
+@interface PusherEventsAppDelegate : NSObject <UIApplicationDelegate, PTPusherDelegate> {
   UIWindow *window;
   PusherEventsViewController *viewController;
   PTPusher *pusher;

@@ -59,6 +59,11 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
   [super dealloc];
 }
 
+- (NSString *)description;
+{
+  return [NSString stringWithFormat:@"<PTPusher channel:%@>", channel];
+}
+
 #pragma mark -
 #pragma mark Event listening
 

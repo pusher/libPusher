@@ -21,6 +21,7 @@
 - (void)applicationDidFinishLaunching:(UIApplication *)application 
 {    
   pusher = [[PTPusher alloc] initWithKey:PUSHER_API_KEY channel:@"test_channel"];
+  pusher.delegate = self;
   
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handlePusherEvent:) name:PTPusherEventReceivedNotification object:nil];
   
@@ -67,6 +68,24 @@
 - (void)dismissAlertView:(UIAlertView *)alertView;
 {
   [alertView dismissWithClickedButtonIndex:0 animated:YES];
+}
+
+#pragma mark -
+#pragma mark PTPusherDelegate methods
+
+- (void)pusherDidConnect:(PTPusher *)_pusher;
+{
+  NSLog(@"Pusher %@ connected", _pusher);
+}
+
+- (void)pusherDidDisconnect:(PTPusher *)_pusher;
+{
+  NSLog(@"Pusher %@ disconnected", _pusher);
+}
+
+- (void)pusherDidFailToConnect:(PTPusher *)_pusher withError:(NSError *)error;
+{
+  NSLog(@"Pusher %@ failed with error %@", _pusher, error);
 }
 
 @end
