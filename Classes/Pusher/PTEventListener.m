@@ -15,7 +15,7 @@
 {
   if (self = [super init]) {
     target = [_target retain];
-    selector = selector;
+    selector = _selector;
   }
   return self;
 }
@@ -24,6 +24,11 @@
 {
   [target release];
   [super dealloc];
+}
+
+- (NSString *)description;
+{
+  return [NSString stringWithFormat:@"<PTEventListener target:%@ selector:%@>", target, NSStringFromSelector(selector)];
 }
 
 - (void)dispatch:(id)eventData;
