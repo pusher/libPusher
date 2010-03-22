@@ -10,7 +10,7 @@ Apple provides its own push notification service which is great for getting aler
 
 The libPusher Xcode project contains a static library target that lets you compile a static library for use in your own applications. There are several ways of getting this static library into your application: one convenient way would be to import the libPusher Xcode project into your own Xcode project as a cross-project reference. This will ensure the latest static library gets built whenever your app is built and means you can refer to Git clone of the project and keep up-to-date with the latest changes.
 
-For more detailed instructions on adding a static library via an Xcode cross-project reference, please refer to [this guide](http://www.amateurinmotion.com/articles/2009/02/08/creating-a-static-library-for-iphone.html). 
+For more detailed instructions on adding a static library via an Xcode cross-project reference, please refer to [this guide](http://www.amateurinmotion.com/articles/2009/02/08/creating-a-static-library-for-iphone.html), starting from the section "Linking against static library". 
 
 Alternatively, you can simply copy the relevant files (all the files in the Library folder, plus all of the files in Vendor) into your project although you will need to take care of updating the files with changes yourself.
 
