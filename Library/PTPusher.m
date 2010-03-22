@@ -30,6 +30,7 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 @synthesize socketID;
 @synthesize host;
 @synthesize port;
+@synthesize delegate;
 @dynamic URLString;
 
 - (id)initWithKey:(NSString *)key channel:(NSString *)channelName;
@@ -40,6 +41,7 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
     eventListeners = [[NSMutableDictionary alloc] init];
     host = @"ws.pusherapp.com";
     port = 8080;
+    delegate = nil;
     
     socket = [[ZTWebSocket alloc] initWithURLString:self.URLString delegate:self];
     [socket open];
@@ -90,17 +92,17 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 
 - (void)webSocket:(ZTWebSocket*)webSocket didFailWithError:(NSError*)error;
 {
-  NSLog(@"WebSocket failed with error %@", error);
+  [delegate pusherDidFailToConnect:self withError:error];
 }
 
 - (void)webSocketDidOpen:(ZTWebSocket*)webSocket;
 {
-  NSLog(@"WebSocket did open");
+  [delegate pusherDidConnect:self];
 }
 
 - (void)webSocketDidClose:(ZTWebSocket*)webSocket;
 {
-  NSLog(@"WebSocket did close");
+  [delegate pusherDidDisconnect:self];
 }
 
 - (void)webSocket:(ZTWebSocket*)webSocket didReceiveMessage:(NSString*)message;

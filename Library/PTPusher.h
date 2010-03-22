@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "ZTWebSocket.h"
+#import "PTPusherDelegate.h"
 
 extern NSString *const PTPusherDataKey;
 extern NSString *const PTPusherEventKey;
@@ -21,12 +22,14 @@ extern NSString *const PTPusherEventReceivedNotification;
   NSMutableDictionary *eventListeners;
   ZTWebSocket *socket;
   NSUInteger socketID;
+  id<PTPusherDelegate> delegate;
 }
 @property (nonatomic, readonly) NSString *APIKey;
 @property (nonatomic, readonly) NSString *channel;
 @property (nonatomic, readonly) NSUInteger socketID;
 @property (nonatomic, copy) NSString *host;
 @property (nonatomic, assign) NSUInteger port;
+@property (nonatomic, assign) id<PTPusherDelegate> delegate;
 
 - (id)initWithKey:(NSString *)key channel:(NSString *)channelName;
 - (void)addEventListener:(NSString *)event target:(id)target selector:(SEL)selector;
