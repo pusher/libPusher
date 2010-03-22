@@ -13,6 +13,11 @@
 NSString *const PTPusherDataKey = @"data";
 NSString *const PTPusherEventKey = @"event";
 
+@interface PTPusher ()
+- (NSString *)URLString;
+@property (nonatomic, readonly) NSString *URLString;
+@end
+
 #pragma mark -
 
 @implementation PTPusher
@@ -20,6 +25,9 @@ NSString *const PTPusherEventKey = @"event";
 @synthesize APIKey;
 @synthesize channel;
 @synthesize socketID;
+@synthesize host;
+@synthesize port;
+@dynamic URLString;
 
 - (id)initWithKey:(NSString *)key channel:(NSString *)channelName;
 {
@@ -27,8 +35,10 @@ NSString *const PTPusherEventKey = @"event";
     APIKey  = [key copy];
     channel = [channelName copy];
     eventListeners = [[NSMutableDictionary alloc] init];
+    host = @"ws.pusherapp.com";
+    port = 8080;
     
-    socket = [[ZTWebSocket alloc] initWithURLString:[NSString stringWithFormat:@"ws://ws.pusherapp.com:8080/app/%@?channel=%@", APIKey, channel] delegate:self];
+    socket = [[ZTWebSocket alloc] initWithURLString:self.URLString delegate:self];
     [socket open];
   }
   return self;
@@ -100,6 +110,15 @@ NSString *const PTPusherEventKey = @"event";
     socketID = [[eventData valueForKey:@"socket_id"] intValue];
   }  
   [self handleEvent:eventName eventData:eventData];
+}
+
+#pragma mark -
+#pragma mark Private methods
+
+- (NSString *)URLString;
+{
+  return [NSString stringWithFormat:@"ws://%@:%d/app/%@?channel=%@",
+          self.host, self.port, self.APIKey, self.channel];
 }
 
 @end
