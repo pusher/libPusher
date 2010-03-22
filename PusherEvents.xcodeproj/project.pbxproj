@@ -17,6 +17,7 @@
 		28D7ACF80DDB3853001CB0EB /* PusherEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* PusherEventsViewController.m */; };
 		A3D1D0461157BFDA009A12AD /* PTPusher.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D0451157BFDA009A12AD /* PTPusher.m */; };
 		A3D1D0491157C0A5009A12AD /* PTEventListener.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D0481157C0A5009A12AD /* PTEventListener.m */; };
+		A3D1D06D1157C33C009A12AD /* PTWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D06C1157C33C009A12AD /* PTWebSocket.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,8 @@
 		A3D1D0451157BFDA009A12AD /* PTPusher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTPusher.m; sourceTree = "<group>"; };
 		A3D1D0471157C0A5009A12AD /* PTEventListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTEventListener.h; sourceTree = "<group>"; };
 		A3D1D0481157C0A5009A12AD /* PTEventListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTEventListener.m; sourceTree = "<group>"; };
+		A3D1D06B1157C33C009A12AD /* PTWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTWebSocket.h; sourceTree = "<group>"; };
+		A3D1D06C1157C33C009A12AD /* PTWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTWebSocket.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +124,8 @@
 				A3D1D0451157BFDA009A12AD /* PTPusher.m */,
 				A3D1D0471157C0A5009A12AD /* PTEventListener.h */,
 				A3D1D0481157C0A5009A12AD /* PTEventListener.m */,
+				A3D1D06B1157C33C009A12AD /* PTWebSocket.h */,
+				A3D1D06C1157C33C009A12AD /* PTWebSocket.m */,
 			);
 			path = Pusher;
 			sourceTree = "<group>";
@@ -184,6 +189,7 @@
 				28D7ACF80DDB3853001CB0EB /* PusherEventsViewController.m in Sources */,
 				A3D1D0461157BFDA009A12AD /* PTPusher.m in Sources */,
 				A3D1D0491157C0A5009A12AD /* PTEventListener.m in Sources */,
+				A3D1D06D1157C33C009A12AD /* PTWebSocket.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
