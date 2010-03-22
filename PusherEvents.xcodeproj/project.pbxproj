@@ -29,6 +29,31 @@
 		A3D1D2921157FA4C009A12AD /* PTEventListener.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D28D1157FA4C009A12AD /* PTEventListener.m */; };
 		A3D1D2931157FA4C009A12AD /* PTPusher.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D28F1157FA4C009A12AD /* PTPusher.m */; };
 		A3D1D2941157FA4C009A12AD /* PTPusherEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D2911157FA4C009A12AD /* PTPusherEvent.m */; };
+		A3D1D2C711580162009A12AD /* PTEventListener.h in Headers */ = {isa = PBXBuildFile; fileRef = A3D1D28C1157FA4C009A12AD /* PTEventListener.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		A3D1D2C811580162009A12AD /* PTEventListener.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D28D1157FA4C009A12AD /* PTEventListener.m */; };
+		A3D1D2C911580162009A12AD /* PTPusher.h in Headers */ = {isa = PBXBuildFile; fileRef = A3D1D28E1157FA4C009A12AD /* PTPusher.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A3D1D2CA11580162009A12AD /* PTPusher.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D28F1157FA4C009A12AD /* PTPusher.m */; };
+		A3D1D2CB11580162009A12AD /* PTPusherEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = A3D1D2901157FA4C009A12AD /* PTPusherEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A3D1D2CC11580162009A12AD /* PTPusherEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D2911157FA4C009A12AD /* PTPusherEvent.m */; };
+		A3D1D2CD11580177009A12AD /* JSON.h in Headers */ = {isa = PBXBuildFile; fileRef = A3D1D1191157CF2F009A12AD /* JSON.h */; };
+		A3D1D2CE11580177009A12AD /* NSObject+SBJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = A3D1D11A1157CF2F009A12AD /* NSObject+SBJSON.h */; };
+		A3D1D2CF11580177009A12AD /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D11B1157CF2F009A12AD /* NSObject+SBJSON.m */; };
+		A3D1D2D011580177009A12AD /* NSString+SBJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = A3D1D11C1157CF2F009A12AD /* NSString+SBJSON.h */; };
+		A3D1D2D111580177009A12AD /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D11D1157CF2F009A12AD /* NSString+SBJSON.m */; };
+		A3D1D2D211580177009A12AD /* SBJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = A3D1D11E1157CF2F009A12AD /* SBJSON.h */; };
+		A3D1D2D311580177009A12AD /* SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D11F1157CF2F009A12AD /* SBJSON.m */; };
+		A3D1D2D411580177009A12AD /* SBJsonBase.h in Headers */ = {isa = PBXBuildFile; fileRef = A3D1D1201157CF2F009A12AD /* SBJsonBase.h */; };
+		A3D1D2D511580177009A12AD /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D1211157CF2F009A12AD /* SBJsonBase.m */; };
+		A3D1D2D611580177009A12AD /* SBJsonParser.h in Headers */ = {isa = PBXBuildFile; fileRef = A3D1D1221157CF2F009A12AD /* SBJsonParser.h */; };
+		A3D1D2D711580177009A12AD /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D1231157CF2F009A12AD /* SBJsonParser.m */; };
+		A3D1D2D811580177009A12AD /* SBJsonWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = A3D1D1241157CF2F009A12AD /* SBJsonWriter.h */; };
+		A3D1D2D911580177009A12AD /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D1251157CF2F009A12AD /* SBJsonWriter.m */; };
+		A3D1D2DA1158017D009A12AD /* AsyncSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A3D1D0A21157CC68009A12AD /* AsyncSocket.h */; };
+		A3D1D2DB1158017D009A12AD /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D0A31157CC68009A12AD /* AsyncSocket.m */; };
+		A3D1D2DC1158017D009A12AD /* AsyncUdpSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A3D1D0A41157CC68009A12AD /* AsyncUdpSocket.h */; };
+		A3D1D2DD1158017D009A12AD /* AsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D0A51157CC68009A12AD /* AsyncUdpSocket.m */; };
+		A3D1D2DE11580180009A12AD /* ZTWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A3D1D09F1157CC5D009A12AD /* ZTWebSocket.h */; };
+		A3D1D2DF11580180009A12AD /* ZTWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D09D1157CC56009A12AD /* ZTWebSocket.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +99,7 @@
 		A3D1D2901157FA4C009A12AD /* PTPusherEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherEvent.h; sourceTree = "<group>"; };
 		A3D1D2911157FA4C009A12AD /* PTPusherEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTPusherEvent.m; sourceTree = "<group>"; };
 		A3D1D29B1157FA80009A12AD /* PusherEvents-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PusherEvents-Info.plist"; sourceTree = "<group>"; };
+		A3D1D2B71158013F009A12AD /* libPusher.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPusher.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +111,13 @@
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
 				A3D1D0B61157CCDE009A12AD /* CFNetwork.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A3D1D2B51158013F009A12AD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				1D6058910D05DD3D006BFB54 /* PusherEvents.app */,
+				A3D1D2B71158013F009A12AD /* libPusher.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -215,6 +249,29 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		A3D1D2B31158013F009A12AD /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A3D1D2C711580162009A12AD /* PTEventListener.h in Headers */,
+				A3D1D2C911580162009A12AD /* PTPusher.h in Headers */,
+				A3D1D2CB11580162009A12AD /* PTPusherEvent.h in Headers */,
+				A3D1D2CD11580177009A12AD /* JSON.h in Headers */,
+				A3D1D2CE11580177009A12AD /* NSObject+SBJSON.h in Headers */,
+				A3D1D2D011580177009A12AD /* NSString+SBJSON.h in Headers */,
+				A3D1D2D211580177009A12AD /* SBJSON.h in Headers */,
+				A3D1D2D411580177009A12AD /* SBJsonBase.h in Headers */,
+				A3D1D2D611580177009A12AD /* SBJsonParser.h in Headers */,
+				A3D1D2D811580177009A12AD /* SBJsonWriter.h in Headers */,
+				A3D1D2DA1158017D009A12AD /* AsyncSocket.h in Headers */,
+				A3D1D2DC1158017D009A12AD /* AsyncUdpSocket.h in Headers */,
+				A3D1D2DE11580180009A12AD /* ZTWebSocket.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
 		1D6058900D05DD3D006BFB54 /* PusherEvents */ = {
 			isa = PBXNativeTarget;
@@ -233,6 +290,23 @@
 			productReference = 1D6058910D05DD3D006BFB54 /* PusherEvents.app */;
 			productType = "com.apple.product-type.application";
 		};
+		A3D1D2B61158013F009A12AD /* libPusher */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A3D1D2C411580144009A12AD /* Build configuration list for PBXNativeTarget "libPusher" */;
+			buildPhases = (
+				A3D1D2B31158013F009A12AD /* Headers */,
+				A3D1D2B41158013F009A12AD /* Sources */,
+				A3D1D2B51158013F009A12AD /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = libPusher;
+			productName = libPusher;
+			productReference = A3D1D2B71158013F009A12AD /* libPusher.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -246,6 +320,7 @@
 			projectRoot = "";
 			targets = (
 				1D6058900D05DD3D006BFB54 /* PusherEvents */,
+				A3D1D2B61158013F009A12AD /* libPusher */,
 			);
 		};
 /* End PBXProject section */
@@ -286,6 +361,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A3D1D2B41158013F009A12AD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A3D1D2C811580162009A12AD /* PTEventListener.m in Sources */,
+				A3D1D2CA11580162009A12AD /* PTPusher.m in Sources */,
+				A3D1D2CC11580162009A12AD /* PTPusherEvent.m in Sources */,
+				A3D1D2CF11580177009A12AD /* NSObject+SBJSON.m in Sources */,
+				A3D1D2D111580177009A12AD /* NSString+SBJSON.m in Sources */,
+				A3D1D2D311580177009A12AD /* SBJSON.m in Sources */,
+				A3D1D2D511580177009A12AD /* SBJsonBase.m in Sources */,
+				A3D1D2D711580177009A12AD /* SBJsonParser.m in Sources */,
+				A3D1D2D911580177009A12AD /* SBJsonWriter.m in Sources */,
+				A3D1D2DB1158017D009A12AD /* AsyncSocket.m in Sources */,
+				A3D1D2DD1158017D009A12AD /* AsyncUdpSocket.m in Sources */,
+				A3D1D2DF11580180009A12AD /* ZTWebSocket.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
@@ -312,6 +406,31 @@
 				GCC_PREFIX_HEADER = PusherEvents_Prefix.pch;
 				INFOPLIST_FILE = "PusherEvents-Info.plist";
 				PRODUCT_NAME = PusherEvents;
+			};
+			name = Release;
+		};
+		A3D1D2B811580140009A12AD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PREBINDING = NO;
+				PRODUCT_NAME = Pusher;
+			};
+			name = Debug;
+		};
+		A3D1D2B911580140009A12AD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				PREBINDING = NO;
+				PRODUCT_NAME = Pusher;
+				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
@@ -349,6 +468,15 @@
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
 				1D6058950D05DD3E006BFB54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A3D1D2C411580144009A12AD /* Build configuration list for PBXNativeTarget "libPusher" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A3D1D2B811580140009A12AD /* Debug */,
+				A3D1D2B911580140009A12AD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
