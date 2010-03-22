@@ -11,6 +11,7 @@
 
 extern NSString *const PTPusherDataKey;
 extern NSString *const PTPusherEventKey;
+extern NSString *const PTPusherEventReceivedNotification;
 
 @interface PTPusher : NSObject <ZTWebSocketDelegate> {
   NSString *APIKey;

@@ -9,12 +9,15 @@
 #import "PTPusher.h"
 #import "PTEventListener.h"
 #import "NSString+SBJSON.h"
+#import "PTPusherEvent.h"
 
 NSString *const PTPusherDataKey = @"data";
 NSString *const PTPusherEventKey = @"event";
+NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotification";
 
 @interface PTPusher ()
 - (NSString *)URLString;
+- (void)handleEvent:(PTPusherEvent *)event;
 @property (nonatomic, readonly) NSString *URLString;
 @end
 
@@ -72,11 +75,11 @@ NSString *const PTPusherEventKey = @"event";
 #pragma mark -
 #pragma mark Event handling
 
-- (void)handleEvent:(NSString *)eventName eventData:(id)data;
+- (void)handleEvent:(PTPusherEvent *)event;
 {
-  NSArray *listenersForEvent = [eventListeners objectForKey:eventName];
+  NSArray *listenersForEvent = [eventListeners objectForKey:event.name];
   for (PTEventListener *listener in listenersForEvent) {
-    [listener dispatch:data];
+    [listener dispatch:event];
   }
 }
 
@@ -103,13 +106,13 @@ NSString *const PTPusherEventKey = @"event";
   NSLog(@"Received %@", message);
   
   id messageDictionary = [message JSONValue];
-  NSString *eventName = [messageDictionary valueForKey:PTPusherEventKey];
-  id eventData = [messageDictionary valueForKey:PTPusherDataKey];
+  PTPusherEvent *event = [[PTPusherEvent alloc] initWithEventName:[messageDictionary valueForKey:PTPusherEventKey] data:[messageDictionary valueForKey:PTPusherDataKey]];
   
-  if ([eventName isEqualToString:@"connection_established"]) {
-    socketID = [[eventData valueForKey:@"socket_id"] intValue];
+  if ([event.name isEqualToString:@"connection_established"]) {
+    socketID = [[event.data valueForKey:@"socket_id"] intValue];
   }  
-  [self handleEvent:eventName eventData:eventData];
+  [self handleEvent:event];
+  [event release];
 }
 
 #pragma mark -

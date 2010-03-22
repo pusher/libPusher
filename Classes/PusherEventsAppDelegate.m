@@ -9,6 +9,7 @@
 #import "PusherEventsAppDelegate.h"
 #import "PusherEventsViewController.h"
 #import "PTPusher.h"
+#import "PTPusherEvent.h"
 #import "Constants.h"
 
 @implementation PusherEventsAppDelegate
@@ -43,9 +44,9 @@
   NSLog(@"Pusher connected with socket id %d", pusher.socketID);
 }
 
-- (void)handleAlertEvent:(id)data;
+- (void)handleAlertEvent:(PTPusherEvent *)event;
 {
-  UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[data valueForKey:@"title"] message:[data valueForKey:@"message"] delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
+  UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[event.data valueForKey:@"title"] message:[event.data valueForKey:@"message"] delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
   [alertView show];
   [alertView release];
 }

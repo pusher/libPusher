@@ -8,11 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+@class PTPusherEvent;
 
 @interface PTEventListener : NSObject {
   id target;
   SEL selector;
 }
 - (id)initWithTarget:(id)_target selector:(SEL)_selector;
-- (void)dispatch:(id)eventData;
+- (void)dispatch:(PTPusherEvent *)eventData;
 @end

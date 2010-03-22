@@ -31,9 +31,9 @@
   return [NSString stringWithFormat:@"<PTEventListener target:%@ selector:%@>", target, NSStringFromSelector(selector)];
 }
 
-- (void)dispatch:(id)eventData;
+- (void)dispatch:(PTPusherEvent *)event;
 {
-  [target performSelectorOnMainThread:selector withObject:eventData waitUntilDone:NO];
+  [target performSelectorOnMainThread:selector withObject:event waitUntilDone:NO];
 }
 
 @end
