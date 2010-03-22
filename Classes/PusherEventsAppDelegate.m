@@ -22,7 +22,7 @@
   pusher = [[PTPusher alloc] initWithKey:PUSHER_API_KEY channel:@"test_channel"];
   
   [pusher addEventListener:@"connection_established" target:self selector:@selector(pusherConnected:)];
-  [pusher addEventListener:@"test-event" target:self selector:@selector(handleTestEvent:)];
+  [pusher addEventListener:@"alert" target:self selector:@selector(handleAlertEvent:)];
   [window addSubview:viewController.view];
   [window makeKeyAndVisible];
 }
@@ -43,7 +43,7 @@
   NSLog(@"Pusher connected with socket id %@", [data valueForKey:@"socket_id"]);
 }
 
-- (void)handleTestEvent:(id)data;
+- (void)handleAlertEvent:(id)data;
 {
   UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[data valueForKey:@"title"] message:[data valueForKey:@"message"] delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
   [alertView show];
