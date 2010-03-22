@@ -11,19 +11,21 @@
 
 @implementation PTPusherEvent
 
-@synthesize name, data;
+@synthesize name, data, channel;
 
-- (id)initWithEventName:(NSString *)eventName data:(id)eventData;
+- (id)initWithEventName:(NSString *)eventName data:(id)eventData channel:(NSString *)eventChannel;
 {
   if (self = [super init]) {
     name = [eventName copy];
     data = [eventData copy];
+    channel = [eventChannel copy];
   }
   return self;
 }
 
 - (void)dealloc;
 {
+  [channel release];
   [name release];
   [data release];
   [super dealloc];
@@ -31,7 +33,7 @@
 
 - (NSString *)description;
 {
-  return [NSString stringWithFormat:@"<PTPusherEvent name:%@ data:%@>", name, data];
+  return [NSString stringWithFormat:@"<PTPusherEvent channel:%@ name:%@ data:%@>", channel, name, data];
 }
 
 @end
