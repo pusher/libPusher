@@ -8,26 +8,28 @@
 
 #import "PusherEventsAppDelegate.h"
 #import "PusherEventsViewController.h"
+#import "PTPusher.h"
 
 @implementation PusherEventsAppDelegate
 
 @synthesize window;
 @synthesize viewController;
+@synthesize pusher;
 
+- (void)applicationDidFinishLaunching:(UIApplication *)application 
+{    
+  pusher = [[PTPusher alloc] initWithKey:@"MY_API_KEY" channel:@"demo"];
 
-- (void)applicationDidFinishLaunching:(UIApplication *)application {    
-    
-    // Override point for customization after app launch    
-    [window addSubview:viewController.view];
-    [window makeKeyAndVisible];
+  [window addSubview:viewController.view];
+  [window makeKeyAndVisible];
 }
 
-
-- (void)dealloc {
-    [viewController release];
-    [window release];
-    [super dealloc];
+- (void)dealloc 
+{
+  [pusher release];
+  [viewController release];
+  [window release];
+  [super dealloc];
 }
-
 
 @end
