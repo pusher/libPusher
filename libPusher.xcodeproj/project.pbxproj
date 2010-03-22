@@ -65,6 +65,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		A3A1A43C11582FC2001EF877 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A3A1A0EA115813E2001EF877 /* UnitTests */;
+			remoteInfo = UnitTests;
+		};
 		A3D1D3021158029F009A12AD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
@@ -388,6 +395,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				A3A1A43D11582FC2001EF877 /* PBXTargetDependency */,
 			);
 			name = libPusher;
 			productName = libPusher;
@@ -501,6 +509,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		A3A1A43D11582FC2001EF877 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A3A1A0EA115813E2001EF877 /* UnitTests */;
+			targetProxy = A3A1A43C11582FC2001EF877 /* PBXContainerItemProxy */;
+		};
 		A3D1D3031158029F009A12AD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A3D1D2B61158013F009A12AD /* libPusher */;
