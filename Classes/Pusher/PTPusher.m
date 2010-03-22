@@ -81,6 +81,8 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
   for (PTEventListener *listener in listenersForEvent) {
     [listener dispatch:event];
   }
+  [[NSNotificationCenter defaultCenter] 
+    postNotificationName:PTPusherEventReceivedNotification object:event];
 }
 
 #pragma mark -
@@ -103,8 +105,6 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 
 - (void)webSocket:(ZTWebSocket*)webSocket didReceiveMessage:(NSString*)message;
 {
-  NSLog(@"Received %@", message);
-  
   id messageDictionary = [message JSONValue];
   PTPusherEvent *event = [[PTPusherEvent alloc] initWithEventName:[messageDictionary valueForKey:PTPusherEventKey] data:[messageDictionary valueForKey:PTPusherDataKey]];
   

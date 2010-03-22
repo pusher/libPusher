@@ -29,4 +29,9 @@
   [super dealloc];
 }
 
+- (NSString *)description;
+{
+  return [NSString stringWithFormat:@"<PTPusherEvent name:%@ data:%@>", name, data];
+}
+
 @end
