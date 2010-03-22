@@ -90,14 +90,11 @@ NSString *const PTPusherEventKey = @"event";
 
 - (void)webSocket:(ZTWebSocket*)webSocket didReceiveMessage:(NSString*)message;
 {
+  NSLog(@"Received %@", message);
+  
   id messageDictionary = [message JSONValue];
   NSString *event = [messageDictionary valueForKey:PTPusherEventKey];
   [self handleEvent:event eventData:[messageDictionary valueForKey:PTPusherDataKey]];
-}
-
-- (void)webSocketDidSendMessage:(ZTWebSocket*)webSocket;
-{
-
 }
 
 @end
