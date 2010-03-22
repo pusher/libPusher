@@ -46,6 +46,26 @@ Like any Cocoa notification, the notification callback will be passed an `NSNoti
     
 For more information, read [this introductory blog post](http://lukeredpath.co.uk/blog/pushing-events-to-your-iphone-using-websockets-and-pusher.html).
 
+## Other options
+
+### Delegate object
+
+PTPusher has a delegate property which can be used to notify the owner of the `PTPusher` instance of certain events in the pusher's life-cycle (such as disconnections etc.). Your delegate must conform to the `PTPusherDelegate` protocol, although all of the delegate methods are optional. To set the delegate:
+
+    // where self conforms to PTPusherDelegate
+    pusher = [[PTPusher alloc] initWithKey:@"YOUR_API_KEY" channel:@"CHANNEL_NAME"];
+    pusher.delegate = self;
+    
+For an overview of the available delegate methods, see PTPusherDelegate.h.
+
+### Reconnections
+
+By default, `PTPusher` will not attempt to reconnect if the connection is broken. You can turn reconnection support on using the `reconnect` property:
+
+    pusher.reconnect = YES;
+    
+Currently, reconnect support is fairly basic; there is no maximum retry limit and the retry delay is hard-coded to 5 seconds.
+
 ## Credits
 
 PusherTouch uses the [ZTWebSocket](http://github.com/openresearch/zimt) library by [OpenResearch](http://github.com/openresearch), without which I probably wouldn't have got anywhere.
