@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "ZTWebSocket.h"
 
+extern NSString *const PTPusherDataKey;
+extern NSString *const PTPusherEventKey;
+
 @interface PTPusher : NSObject <ZTWebSocketDelegate> {
   NSString *APIKey;
   NSString *channel;

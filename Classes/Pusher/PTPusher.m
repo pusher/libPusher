@@ -8,7 +8,12 @@
 
 #import "PTPusher.h"
 #import "PTEventListener.h"
-#import "SBJSON.h"
+#import "NSString+SBJSON.h"
+
+NSString *const PTPusherDataKey = @"data";
+NSString *const PTPusherEventKey = @"event";
+
+#pragma mark -
 
 @implementation PTPusher
 
@@ -44,12 +49,12 @@
 
 - (void)addEventListener:(NSString *)eventName target:(id)target selector:(SEL)selector;
 {
-  PTEventListener *listener = [[PTEventListener alloc] initWithTarget:target selector:selector];
-  
   NSMutableArray *listeners = [eventListeners objectForKey:eventName];
   if (listeners == nil) {
     listeners = [[[NSMutableArray alloc] init] autorelease];
+    [eventListeners setValue:listeners forKey:eventName];
   }
+  PTEventListener *listener = [[PTEventListener alloc] initWithTarget:target selector:selector];
   [listeners addObject:listener];
   [listener release];
 }
@@ -85,8 +90,9 @@
 
 - (void)webSocket:(ZTWebSocket*)webSocket didReceiveMessage:(NSString*)message;
 {
-  id data = [message JSONValue];
-  NSLog(@"Received %@", data);
+  id messageDictionary = [message JSONValue];
+  NSString *event = [messageDictionary valueForKey:PTPusherEventKey];
+  [self handleEvent:event eventData:[messageDictionary valueForKey:PTPusherDataKey]];
 }
 
 - (void)webSocketDidSendMessage:(ZTWebSocket*)webSocket;
