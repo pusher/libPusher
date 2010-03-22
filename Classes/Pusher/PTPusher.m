@@ -20,12 +20,15 @@
     APIKey  = [key copy];
     channel = [channelName copy];
     eventListeners = [[NSMutableDictionary alloc] init];
+    socket = [[ZTWebSocket alloc] initWithURLString:@"ws://ws.pusherapp.com:8080" delegate:self];
   }
   return self;
 }
 
 - (void)dealloc;
 {
+  [socket close];
+  [socket release];
   [eventListeners release];
   [APIKey release];
   [channel release];

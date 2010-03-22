@@ -17,7 +17,10 @@
 		28D7ACF80DDB3853001CB0EB /* PusherEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* PusherEventsViewController.m */; };
 		A3D1D0461157BFDA009A12AD /* PTPusher.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D0451157BFDA009A12AD /* PTPusher.m */; };
 		A3D1D0491157C0A5009A12AD /* PTEventListener.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D0481157C0A5009A12AD /* PTEventListener.m */; };
-		A3D1D06D1157C33C009A12AD /* PTWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D06C1157C33C009A12AD /* PTWebSocket.m */; };
+		A3D1D09E1157CC56009A12AD /* ZTWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D09D1157CC56009A12AD /* ZTWebSocket.m */; };
+		A3D1D0A81157CC68009A12AD /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D0A31157CC68009A12AD /* AsyncSocket.m */; };
+		A3D1D0A91157CC68009A12AD /* AsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D0A51157CC68009A12AD /* AsyncUdpSocket.m */; };
+		A3D1D0B61157CCDE009A12AD /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3D1D0B51157CCDE009A12AD /* CFNetwork.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,8 +41,14 @@
 		A3D1D0451157BFDA009A12AD /* PTPusher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTPusher.m; sourceTree = "<group>"; };
 		A3D1D0471157C0A5009A12AD /* PTEventListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTEventListener.h; sourceTree = "<group>"; };
 		A3D1D0481157C0A5009A12AD /* PTEventListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTEventListener.m; sourceTree = "<group>"; };
-		A3D1D06B1157C33C009A12AD /* PTWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTWebSocket.h; sourceTree = "<group>"; };
-		A3D1D06C1157C33C009A12AD /* PTWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTWebSocket.m; sourceTree = "<group>"; };
+		A3D1D09D1157CC56009A12AD /* ZTWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZTWebSocket.m; sourceTree = "<group>"; };
+		A3D1D09F1157CC5D009A12AD /* ZTWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZTWebSocket.h; sourceTree = "<group>"; };
+		A3D1D0A21157CC68009A12AD /* AsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncSocket.h; sourceTree = "<group>"; };
+		A3D1D0A31157CC68009A12AD /* AsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncSocket.m; sourceTree = "<group>"; };
+		A3D1D0A41157CC68009A12AD /* AsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncUdpSocket.h; sourceTree = "<group>"; };
+		A3D1D0A51157CC68009A12AD /* AsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncUdpSocket.m; sourceTree = "<group>"; };
+		A3D1D0B01157CCA9009A12AD /* ZTLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZTLog.h; sourceTree = "<group>"; };
+		A3D1D0B51157CCDE009A12AD /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +59,7 @@
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
+				A3D1D0B61157CCDE009A12AD /* CFNetwork.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +89,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				A3D1D0991157CC3F009A12AD /* Vendor */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -110,6 +121,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A3D1D0B51157CCDE009A12AD /* CFNetwork.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765A40DF7441C002DB57D /* CoreGraphics.framework */,
@@ -124,10 +136,30 @@
 				A3D1D0451157BFDA009A12AD /* PTPusher.m */,
 				A3D1D0471157C0A5009A12AD /* PTEventListener.h */,
 				A3D1D0481157C0A5009A12AD /* PTEventListener.m */,
-				A3D1D06B1157C33C009A12AD /* PTWebSocket.h */,
-				A3D1D06C1157C33C009A12AD /* PTWebSocket.m */,
 			);
 			path = Pusher;
+			sourceTree = "<group>";
+		};
+		A3D1D0991157CC3F009A12AD /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				A3D1D0B01157CCA9009A12AD /* ZTLog.h */,
+				A3D1D0A01157CC68009A12AD /* AsyncSocket */,
+				A3D1D09F1157CC5D009A12AD /* ZTWebSocket.h */,
+				A3D1D09D1157CC56009A12AD /* ZTWebSocket.m */,
+			);
+			path = Vendor;
+			sourceTree = "<group>";
+		};
+		A3D1D0A01157CC68009A12AD /* AsyncSocket */ = {
+			isa = PBXGroup;
+			children = (
+				A3D1D0A21157CC68009A12AD /* AsyncSocket.h */,
+				A3D1D0A31157CC68009A12AD /* AsyncSocket.m */,
+				A3D1D0A41157CC68009A12AD /* AsyncUdpSocket.h */,
+				A3D1D0A51157CC68009A12AD /* AsyncUdpSocket.m */,
+			);
+			path = AsyncSocket;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -189,7 +221,9 @@
 				28D7ACF80DDB3853001CB0EB /* PusherEventsViewController.m in Sources */,
 				A3D1D0461157BFDA009A12AD /* PTPusher.m in Sources */,
 				A3D1D0491157C0A5009A12AD /* PTEventListener.m in Sources */,
-				A3D1D06D1157C33C009A12AD /* PTWebSocket.m in Sources */,
+				A3D1D09E1157CC56009A12AD /* ZTWebSocket.m in Sources */,
+				A3D1D0A81157CC68009A12AD /* AsyncSocket.m in Sources */,
+				A3D1D0A91157CC68009A12AD /* AsyncUdpSocket.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

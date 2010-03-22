@@ -7,12 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ZTWebSocket.h"
 
-
-@interface PTPusher : NSObject {
+@interface PTPusher : NSObject <ZTWebSocketDelegate> {
   NSString *APIKey;
   NSString *channel;
   NSMutableDictionary *eventListeners;
+  ZTWebSocket *socket;
 }
 @property (nonatomic, readonly) NSString *APIKey;
 @property (nonatomic, readonly) NSString *channel;
