@@ -119,13 +119,17 @@ enum {
     NSString* requestOrigin = self.origin;
     if (!requestOrigin) requestOrigin = [NSString stringWithFormat:@"http://%@",url.host];
         
+    NSString *requestPath = url.path;
+    if (url.query) {
+      requestPath = [requestPath stringByAppendingFormat:@"?%@", url.query];
+    }  
     NSString* getRequest = [NSString stringWithFormat:@"GET %@ HTTP/1.1\r\n"
                                                        "Upgrade: WebSocket\r\n"
                                                        "Connection: Upgrade\r\n"
                                                        "Host: %@\r\n"
                                                        "Origin: %@\r\n"
                                                        "\r\n",
-                                                        url.path,url.host,requestOrigin];
+                                                        requestPath,url.host,requestOrigin];
     [socket writeData:[getRequest dataUsingEncoding:NSASCIIStringEncoding] withTimeout:-1 tag:ZTWebSocketTagHandshake];
 }
 
