@@ -8,6 +8,7 @@
 
 #import "PTPusher.h"
 #import "PTEventListener.h"
+#import "SBJSON.h"
 
 @implementation PTPusher
 
@@ -84,7 +85,8 @@
 
 - (void)webSocket:(ZTWebSocket*)webSocket didReceiveMessage:(NSString*)message;
 {
-  NSLog(@"Received %@", message);
+  id data = [message JSONValue];
+  NSLog(@"Received %@", data);
 }
 
 - (void)webSocketDidSendMessage:(ZTWebSocket*)webSocket;
