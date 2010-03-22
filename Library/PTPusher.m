@@ -8,7 +8,7 @@
 
 #import "PTPusher.h"
 #import "PTEventListener.h"
-#import "NSString+SBJSON.h"
+#import "JSON.h"
 #import "PTPusherEvent.h"
 
 NSString *const PTPusherDataKey = @"data";
