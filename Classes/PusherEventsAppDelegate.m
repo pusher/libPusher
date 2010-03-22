@@ -55,7 +55,7 @@
 
 - (void)didPresentAlertView:(UIAlertView *)alertView
 {
-  [self performSelector:@selector(dismissAlertView) withObject:alertView afterDelay:2];
+  [self performSelector:@selector(dismissAlertView:) withObject:alertView afterDelay:1];
 }
 
 - (void)dismissAlertView:(UIAlertView *)alertView;
