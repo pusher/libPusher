@@ -26,6 +26,9 @@
   pusher = [[PTPusher alloc] initWithKey:PUSHER_API_KEY channel:@"test_channel"];
   pusher.delegate = self;
   
+  // uncomment to allow reconnections
+  // pusher.reconnect = YES;
+  
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handlePusherEvent:) name:PTPusherEventReceivedNotification object:nil];
   
   [pusher addEventListener:@"alert" target:self selector:@selector(handleAlertEvent:)];
@@ -76,6 +79,11 @@
 #pragma mark -
 #pragma mark PTPusherDelegate methods
 
+- (void)pusherWillConnect:(PTPusher *)_pusher;
+{
+  NSLog(@"Pusher %@ connecting...", _pusher);
+}
+
 - (void)pusherDidConnect:(PTPusher *)_pusher;
 {
   NSLog(@"Pusher %@ connected", _pusher);
@@ -89,6 +97,11 @@
 - (void)pusherDidFailToConnect:(PTPusher *)_pusher withError:(NSError *)error;
 {
   NSLog(@"Pusher %@ failed with error %@", _pusher, error);
+}
+
+- (void)pusherWillReconnect:(PTPusher *)_pusher afterDelay:(NSUInteger)delay;
+{
+  NSLog(@"Pusher %@ will reconnect after %d seconds", _pusher, delay);
 }
 
 @end

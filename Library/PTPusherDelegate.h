@@ -11,7 +11,9 @@
 @protocol PTPusherDelegate
 
 @optional
+- (void)pusherWillConnect:(PTPusher *)pusher;
 - (void)pusherDidConnect:(PTPusher *)pusher;
 - (void)pusherDidDisconnect:(PTPusher *)pusher;
 - (void)pusherDidFailToConnect:(PTPusher *)pusher withError:(NSError *)error;
+- (void)pusherWillReconnect:(PTPusher *)pusher afterDelay:(NSUInteger)delay;
 @end

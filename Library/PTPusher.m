@@ -15,9 +15,12 @@ NSString *const PTPusherDataKey = @"data";
 NSString *const PTPusherEventKey = @"event";
 NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotification";
 
+#define kPTPusherReconnectDelay 5.0
+
 @interface PTPusher ()
 - (NSString *)URLString;
 - (void)handleEvent:(PTPusherEvent *)event;
+- (void)connect;
 @property (nonatomic, readonly) NSString *URLString;
 @end
 
@@ -31,6 +34,7 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 @synthesize host;
 @synthesize port;
 @synthesize delegate;
+@synthesize reconnect;
 @dynamic URLString;
 
 - (id)initWithKey:(NSString *)key channel:(NSString *)channelName;
@@ -42,9 +46,10 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
     host = @"ws.pusherapp.com";
     port = 8080;
     delegate = nil;
+    reconnect = NO;
     
     socket = [[ZTWebSocket alloc] initWithURLString:self.URLString delegate:self];
-    [socket open];
+    [self connect];
   }
   return self;
 }
@@ -108,6 +113,11 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 - (void)webSocketDidClose:(ZTWebSocket*)webSocket;
 {
   [delegate pusherDidDisconnect:self];
+  
+  if (self.reconnect) {
+    [delegate pusherWillReconnect:self afterDelay:kPTPusherReconnectDelay];
+    [self performSelector:@selector(connect) withObject:nil afterDelay:kPTPusherReconnectDelay];
+  }
 }
 
 - (void)webSocket:(ZTWebSocket*)webSocket didReceiveMessage:(NSString*)message;
@@ -129,6 +139,12 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 {
   return [NSString stringWithFormat:@"ws://%@:%d/app/%@?channel=%@",
           self.host, self.port, self.APIKey, self.channel];
+}
+
+- (void)connect;
+{
+  [delegate pusherWillConnect:self];
+  [socket open];
 }
 
 @end
