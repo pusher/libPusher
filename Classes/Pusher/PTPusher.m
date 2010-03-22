@@ -61,4 +61,32 @@
   }
 }
 
+#pragma mark -
+#pragma mark ZTWebSocketDelegate methods
+
+- (void)webSocket:(ZTWebSocket*)webSocket didFailWithError:(NSError*)error;
+{
+  NSLog(@"WebSocket failed with error %@", error);
+}
+
+- (void)webSocketDidOpen:(ZTWebSocket*)webSocket;
+{
+  NSLog(@"WebSocket did open");
+}
+
+- (void)webSocketDidClose:(ZTWebSocket*)webSocket;
+{
+  NSLog(@"WebSocket did close");
+}
+
+- (void)webSocket:(ZTWebSocket*)webSocket didReceiveMessage:(NSString*)message;
+{
+  
+}
+
+- (void)webSocketDidSendMessage:(ZTWebSocket*)webSocket;
+{
+
+}
+
 @end
