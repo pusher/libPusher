@@ -13,7 +13,7 @@ typedef enum {
   PTWebSocketOpen,
   PTWebSocketClosing,
   PTWebSocketClosed
-} PTWebSocketReadyState
+} PTWebSocketReadyState;
 
 @interface PTWebSocket : NSObject {
   NSURL *URL;
@@ -21,7 +21,7 @@ typedef enum {
   PTWebSocketReadyState readyState;
 }
 @property (nonatomic, readonly) NSURL *URL;
-@property (nonatomic, readonly) PTWebSocket readyState;
+@property (nonatomic, readonly) PTWebSocketReadyState readyState;
 
 - (id)initWithURL:(NSURL *)_URL;
 - (id)initWithURL:(NSURL *)_URL protocol:(NSString *)_protocol;
