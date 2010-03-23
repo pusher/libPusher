@@ -7,59 +7,66 @@
 //
 
 #import "PusherEventsViewController.h"
+#import "PTPusher.h"
+#import "PTPusherEvent.h"
 
 @implementation PusherEventsViewController
 
+@synthesize eventsPusher;
+@synthesize eventsReceived;
 
-
-/*
-// The designated initializer. Override to perform setup that is required before the view is loaded.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
-        // Custom initialization
-    }
-    return self;
+- (void)viewDidLoad 
+{
+  self.tableView.rowHeight = 55;
+  
+  if (eventsReceived == nil) {
+    eventsReceived = [[NSMutableArray alloc] init];
+  }
+  if (eventsPusher == nil) {
+    eventsPusher = [[PTPusher alloc] initWithKey:PUSHER_API_KEY channel:@"events"];
+    [eventsPusher addEventListener:@"new-event" target:self selector:@selector(handleNewEvent:)];
+  }
+  [super viewDidLoad];
 }
-*/
-
-/*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView {
-}
-*/
-
-
-/*
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad {
-    [super viewDidLoad];
-}
-*/
-
-
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
-
-- (void)didReceiveMemoryWarning {
-	// Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-	
-	// Release any cached data, images, etc that aren't in use.
-}
-
-- (void)viewDidUnload {
-	// Release any retained subviews of the main view.
-	// e.g. self.myOutlet = nil;
-}
-
 
 - (void)dealloc {
-    [super dealloc];
+  [eventsReceived release];
+  [eventsPusher release];
+  [super dealloc];
+}
+
+#pragma mark -
+#pragma mark PTPusherEvent handling
+
+- (void)handleNewEvent:(PTPusherEvent *)event;
+{
+  [self.tableView beginUpdates];
+  [eventsReceived insertObject:event atIndex:0];
+  [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
+  [self.tableView endUpdates];
+}
+
+#pragma mark -
+#pragma mark UITableViewDataSource methods
+
+- (NSInteger)tableView:(UITableView *)table numberOfRowsInSection:(NSInteger)section;
+{
+  return eventsReceived.count;
+}
+
+static NSString *EventCellIdentifier = @"EventCell";
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
+{
+  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:EventCellIdentifier];
+  if (cell == nil) {
+    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:EventCellIdentifier] autorelease];
+  }
+  PTPusherEvent *event = [eventsReceived objectAtIndex:indexPath.row];
+  cell.textLabel.text = [event.data valueForKey:@"title"];
+  cell.detailTextLabel.text = [event.data valueForKey:@"description"];
+  
+  return cell;
 }
 
 @end

@@ -8,9 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PusherEventsViewController : UIViewController {
+@class PTPusher;
 
+@interface PusherEventsViewController : UITableViewController {
+  PTPusher *eventsPusher;
+  NSMutableArray *eventsReceived;
 }
-
+@property (nonatomic, readonly) PTPusher *eventsPusher;
+@property (nonatomic, readonly) NSMutableArray *eventsReceived;
 @end
 
