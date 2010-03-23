@@ -33,7 +33,6 @@
 
 - (void)dispatch:(PTPusherEvent *)event;
 {
-  NSLog(@"Performing %@ on %@", NSStringFromSelector(selector), target);
   [target performSelectorOnMainThread:selector withObject:event waitUntilDone:NO];
 }
 
