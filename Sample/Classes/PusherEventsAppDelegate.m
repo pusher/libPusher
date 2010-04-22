@@ -18,7 +18,7 @@
 @implementation PusherEventsAppDelegate
 
 @synthesize window;
-@synthesize viewController;
+@synthesize navigationController;
 @synthesize pusher;
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application 
@@ -32,7 +32,7 @@
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handlePusherEvent:) name:PTPusherEventReceivedNotification object:nil];
   
   [pusher addEventListener:@"alert" target:self selector:@selector(handleAlertEvent:)];
-  [window addSubview:viewController.view];
+  [window addSubview:navigationController.view];
   [window makeKeyAndVisible];
 }
 
@@ -41,7 +41,7 @@
   [[NSNotificationCenter defaultCenter] 
     removeObserver:self name:PTPusherEventReceivedNotification object:pusher];
   [pusher release];
-  [viewController release];
+  [navigationController release];
   [window release];
   [super dealloc];
 }
