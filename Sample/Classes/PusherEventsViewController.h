@@ -10,11 +10,14 @@
 
 @class PTPusher;
 
-@interface PusherEventsViewController : UITableViewController {
+@protocol PusherEventsDelegate
+- (void)sendEventWithMessage:(NSString *)message;
+@end
+
+@interface PusherEventsViewController : UITableViewController <PusherEventsDelegate> {
   PTPusher *eventsPusher;
   NSMutableArray *eventsReceived;
 }
 @property (nonatomic, readonly) PTPusher *eventsPusher;
 @property (nonatomic, readonly) NSMutableArray *eventsReceived;
 @end
-

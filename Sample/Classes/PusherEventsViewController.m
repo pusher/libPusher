@@ -9,6 +9,7 @@
 #import "PusherEventsViewController.h"
 #import "PTPusher.h"
 #import "PTPusherEvent.h"
+#import "NewEventViewController.h"
 
 @implementation PusherEventsViewController
 
@@ -26,6 +27,10 @@
     eventsPusher = [[PTPusher alloc] initWithKey:PUSHER_API_KEY channel:@"events"];
     [eventsPusher addEventListener:@"new-event" target:self selector:@selector(handleNewEvent:)];
   }
+  
+  UIBarButtonItem *newEventButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(presentNewEventScreen)];
+  self.toolbarItems = [NSArray arrayWithObject:newEventButtonItem];
+  
   [super viewDidLoad];
 }
 
@@ -33,6 +38,23 @@
   [eventsReceived release];
   [eventsPusher release];
   [super dealloc];
+}
+
+#pragma mark -
+#pragma mark Actions
+
+- (void)presentNewEventScreen;
+{
+  NewEventViewController *newEventController = [[NewEventViewController alloc] init];
+  newEventController.delegate = self;
+  [self presentModalViewController:newEventController animated:YES];
+  [newEventController release];
+}
+
+- (void)sendEventWithMessage:(NSString *)message;
+{
+  NSLog(@"Got message: %@", message);
+  [self dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark -
