@@ -7,11 +7,12 @@
 //
 
 #import "PTPusherEvent.h"
-
+#import "JSON.h"
 
 @implementation PTPusherEvent
 
-@synthesize name, data, channel;
+@synthesize name, channel;
+@dynamic data;
 
 - (id)initWithEventName:(NSString *)eventName data:(id)eventData channel:(NSString *)eventChannel;
 {
@@ -34,6 +35,18 @@
 - (NSString *)description;
 {
   return [NSString stringWithFormat:@"<PTPusherEvent channel:%@ name:%@ data:%@>", channel, name, data];
+}
+
+- (id)data;
+{
+  id parsedData = nil;
+  if ([data respondsToSelector:@selector(JSONValue)]) {
+    parsedData = [data JSONValue];
+  }
+  if (parsedData == nil) {
+    parsedData = data;
+  }
+  return parsedData;
 }
 
 @end

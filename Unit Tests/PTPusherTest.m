@@ -112,22 +112,42 @@
   return YES;
 }
 
-- (void)testShouldParseJsonDataReceivedInAMessage;
+- (void)testShouldParseEncodedJsonDataReceivedInDataKey;
 {
   id mockListener = [OCMockObject mockForClass:[NSObject class]];
   SEL callback = @selector(handleEvent:);
-  [[mockListener expect] performSelectorOnMainThread:callback withObject:[OCMArg checkWithSelector:@selector(verifyEventJSON:) onObject:self] waitUntilDone:NO];
+  [[mockListener expect] performSelectorOnMainThread:callback withObject:[OCMArg checkWithSelector:@selector(verifyEventEncodedJSON:) onObject:self] waitUntilDone:NO];
+  
+  [pusher addEventListener:@"test-event" target:mockListener selector:@selector(handleEvent:)];
+  
+  NSString *rawJSON = @"{\"event\":\"test-event\",\"data\":{\\\"foo\\\":\\\"bar\\\"}}";
+  [pusher performSelector:@selector(webSocket:didReceiveMessage:) withObject:nil withObject:rawJSON];
+}
+- (BOOL)verifyEventEncodedJSON:(PTPusherEvent *)event;
+{
+  if (event == nil) return NO;
+  assertThat([event.data valueForKey:@"foo"], equalTo(@"bar"));
+  return YES;
+}
+
+- (void)testShouldParseUnencodedJsonDataReceivedInDataKey;
+{
+  id mockListener = [OCMockObject mockForClass:[NSObject class]];
+  SEL callback = @selector(handleEvent:);
+  [[mockListener expect] performSelectorOnMainThread:callback withObject:[OCMArg checkWithSelector:@selector(verifyEventUnencodedJSON:) onObject:self] waitUntilDone:NO];
   
   [pusher addEventListener:@"test-event" target:mockListener selector:@selector(handleEvent:)];
   
   NSString *rawJSON = @"{\"event\":\"test-event\",\"data\":{\"foo\":\"bar\"}}";
   [pusher performSelector:@selector(webSocket:didReceiveMessage:) withObject:nil withObject:rawJSON];
 }
-- (BOOL)verifyEventJSON:(PTPusherEvent *)event;
+- (BOOL)verifyEventUnencodedJSON:(PTPusherEvent *)event;
 {
   if (event == nil) return NO;
   assertThat([event.data valueForKey:@"foo"], equalTo(@"bar"));
   return YES;
 }
+
+
 
 @end
