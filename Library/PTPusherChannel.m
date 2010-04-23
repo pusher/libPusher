@@ -170,6 +170,7 @@ NSString *URLEncodedString(NSString *unencodedString) {
   NSError *error;
   
   [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+  [request release];
   
   if (error != nil) {
     if (self.channel && [self.delegate respondsToSelector:@selector(channelFailedToTriggerEvent:error:)]) {

@@ -32,6 +32,7 @@
   
   UIBarButtonItem *newEventButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(presentNewEventScreen)];
   self.toolbarItems = [NSArray arrayWithObject:newEventButtonItem];
+  [newEventButtonItem release];
   
   [super viewDidLoad];
 }
