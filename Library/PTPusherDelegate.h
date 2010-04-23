@@ -8,7 +8,7 @@
 
 @class PTPusher;
 
-@protocol PTPusherDelegate
+@protocol PTPusherDelegate <NSObject>
 
 @optional
 - (void)pusherWillConnect:(PTPusher *)pusher;

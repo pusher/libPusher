@@ -103,20 +103,28 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 
 - (void)webSocket:(ZTWebSocket*)webSocket didFailWithError:(NSError*)error;
 {
-  [delegate pusherDidFailToConnect:self withError:error];
+  if ([delegate respondsToSelector:@selector(pusherDidFailToConnect:withError:)]) {
+    [delegate pusherDidFailToConnect:self withError:error];
+  }
 }
 
 - (void)webSocketDidOpen:(ZTWebSocket*)webSocket;
 {
-  [delegate pusherDidConnect:self];
+  if ([delegate respondsToSelector:@selector(pusherDidConnect:)]) {
+    [delegate pusherDidConnect:self];
+  }
 }
 
 - (void)webSocketDidClose:(ZTWebSocket*)webSocket;
 {
-  [delegate pusherDidDisconnect:self];
+  if ([delegate respondsToSelector:@selector(pusherDidDisconnect:)]) {
+    [delegate pusherDidDisconnect:self];
+  }
   
   if (self.reconnect) {
-    [delegate pusherWillReconnect:self afterDelay:kPTPusherReconnectDelay];
+    if ([delegate respondsToSelector:@selector(pusherWillReconnect:afterDelay:)]) {
+      [delegate pusherWillReconnect:self afterDelay:kPTPusherReconnectDelay];
+    }
     [self performSelector:@selector(connect) withObject:nil afterDelay:kPTPusherReconnectDelay];
   }
 }
@@ -144,7 +152,9 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 
 - (void)connect;
 {
-  [delegate pusherWillConnect:self];
+  if ([delegate respondsToSelector:@selector(pusherWillConnect:)]) {
+    [delegate pusherWillConnect:self];
+  }
   [socket open];
 }
 
