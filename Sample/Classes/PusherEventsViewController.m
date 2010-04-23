@@ -25,7 +25,7 @@
     eventsReceived = [[NSMutableArray alloc] init];
   }
   if (eventsChannel == nil) {
-    eventsChannel = [[PTPusher channel:@"events"] retain];
+    eventsChannel = [[PTPusher channel:@"demo"] retain];
     eventsChannel.delegate = self;
   }
   [eventsChannel startListeningForEvents];
