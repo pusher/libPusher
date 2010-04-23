@@ -84,6 +84,13 @@
   [eventsReceived insertObject:event atIndex:0];
   [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
   [self.tableView endUpdates];
+  if ([event.name isEqualToString:@"new-event"]) {
+    [self.tableView beginUpdates];
+    [eventsReceived insertObject:event atIndex:0];
+    [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
+    [self.tableView endUpdates];
+  }
+}
 }
 
 #pragma mark -
