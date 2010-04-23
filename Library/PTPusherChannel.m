@@ -102,8 +102,6 @@ NSString *URLEncodedString(NSString *unencodedString) {
   
   [queryParameters setValue:URLEncodedString(signature) forKey:@"auth_signature"];
   
-  NSLog(@"Params: %@", queryParameters);
-  
   NSString *resourceString = [NSString stringWithFormat:@"http://%@%@?%@", kPTPusherWebServiceHost, path, [queryParameters sortedQueryString]];
   
   PTPusherClientOperation *operation = [[PTPusherClientOperation alloc] initWithURL:[NSURL URLWithString:resourceString] JSONString:body];
