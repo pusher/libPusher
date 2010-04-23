@@ -12,20 +12,27 @@
 #import "JSON.h"
 #import "NSString+Hashing.h"
 #import "NSDictionary+QueryString.h"
-#import "NSData+Base64.h"
+
 #import <CommonCrypto/CommonHMAC.h>
 
 #define kPTPusherWebServiceHost @"api.pusherapp.com"
 
-NSString *generateBase64EncodedHMAC(NSString *string, NSString *secret) {
+NSString *generateEncodedHMAC(NSString *string, NSString *secret) {
   const char *cKey  = [secret cStringUsingEncoding:NSASCIIStringEncoding];
   const char *cData = [string cStringUsingEncoding:NSASCIIStringEncoding];
   
   unsigned char cHMAC[CC_SHA256_DIGEST_LENGTH];
   
   CCHmac(kCCHmacAlgSHA256, cKey, strlen(cKey), cData, strlen(cData), cHMAC);
+
+	NSMutableString *result = [[NSMutableString alloc] init];
+	for (int i = 0; i < sizeof(cHMAC); i++) {
+		[result appendFormat:@"%02x", cHMAC[i] & 0xff];
+	}
+  NSString *digest = [result copy];
+  [result release];
   
-  return [[NSData dataWithBytes:cHMAC length:sizeof(cHMAC)] base64EncodedString];
+  return [digest autorelease];
 }
 
 NSString *URLEncodedString(NSString *unencodedString) {
@@ -98,9 +105,8 @@ NSString *URLEncodedString(NSString *unencodedString) {
 
   NSString *signatureQuery = [queryParameters sortedQueryString];
   NSMutableString *signatureString = [NSMutableString stringWithFormat:@"POST\n%@\n%@", path, signatureQuery];
-  NSString *signature = generateBase64EncodedHMAC(signatureString, secret);
   
-  [queryParameters setValue:URLEncodedString(signature) forKey:@"auth_signature"];
+  [queryParameters setValue:generateEncodedHMAC(signatureString, secret) forKey:@"auth_signature"];
   
   NSString *resourceString = [NSString stringWithFormat:@"http://%@%@?%@", kPTPusherWebServiceHost, path, [queryParameters sortedQueryString]];
   

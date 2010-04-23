@@ -66,8 +66,6 @@
 		A3FE41CC11811161009CF5D7 /* NewEventViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3FE41CA11811161009CF5D7 /* NewEventViewController.xib */; };
 		A3FE429E11811EEE009CF5D7 /* NSString+Hashing.h in Headers */ = {isa = PBXBuildFile; fileRef = A3FE429B11811EE8009CF5D7 /* NSString+Hashing.h */; };
 		A3FE429F11811EEE009CF5D7 /* NSString+Hashing.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FE429C11811EE8009CF5D7 /* NSString+Hashing.m */; };
-		A3FE4331118127F0009CF5D7 /* NSData+Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = A3FE432F118127F0009CF5D7 /* NSData+Base64.h */; };
-		A3FE4332118127F0009CF5D7 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FE4330118127F0009CF5D7 /* NSData+Base64.m */; };
 		A3FE44751181B7FC009CF5D7 /* PTPusherChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FE42191181173B009CF5D7 /* PTPusherChannel.m */; };
 		A3FE44761181B7FE009CF5D7 /* PTPusherChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FE42191181173B009CF5D7 /* PTPusherChannel.m */; };
 		A3FE44891181B8EE009CF5D7 /* PTPusherChannelDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = A3FE44881181B8EE009CF5D7 /* PTPusherChannelDelegate.h */; };
@@ -165,8 +163,6 @@
 		A3FE429C11811EE8009CF5D7 /* NSString+Hashing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Hashing.m"; sourceTree = "<group>"; };
 		A3FE42FF11812541009CF5D7 /* NSDictionary+QueryString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+QueryString.h"; sourceTree = "<group>"; };
 		A3FE430011812541009CF5D7 /* NSDictionary+QueryString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+QueryString.m"; sourceTree = "<group>"; };
-		A3FE432F118127F0009CF5D7 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
-		A3FE4330118127F0009CF5D7 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
 		A3FE44881181B8EE009CF5D7 /* PTPusherChannelDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherChannelDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -362,8 +358,6 @@
 		A3FE429311811ED6009CF5D7 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				A3FE432F118127F0009CF5D7 /* NSData+Base64.h */,
-				A3FE4330118127F0009CF5D7 /* NSData+Base64.m */,
 				A3FE429B11811EE8009CF5D7 /* NSString+Hashing.h */,
 				A3FE429C11811EE8009CF5D7 /* NSString+Hashing.m */,
 				A3FE42FF11812541009CF5D7 /* NSDictionary+QueryString.h */,
@@ -394,7 +388,6 @@
 				A3D1D2DC1158017D009A12AD /* AsyncUdpSocket.h in Headers */,
 				A3D1D2DE11580180009A12AD /* ZTWebSocket.h in Headers */,
 				A3FE429E11811EEE009CF5D7 /* NSString+Hashing.h in Headers */,
-				A3FE4331118127F0009CF5D7 /* NSData+Base64.h in Headers */,
 				A3FE44891181B8EE009CF5D7 /* PTPusherChannelDelegate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -563,7 +556,6 @@
 				A3D1D2DD1158017D009A12AD /* AsyncUdpSocket.m in Sources */,
 				A3D1D2DF11580180009A12AD /* ZTWebSocket.m in Sources */,
 				A3FE429F11811EEE009CF5D7 /* NSString+Hashing.m in Sources */,
-				A3FE4332118127F0009CF5D7 /* NSData+Base64.m in Sources */,
 				A3FE44761181B7FE009CF5D7 /* PTPusherChannel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
