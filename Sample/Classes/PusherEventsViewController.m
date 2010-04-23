@@ -80,10 +80,6 @@
 
 - (void)channel:(PTPusherChannel *)channel didReceiveEvent:(PTPusherEvent *)event;
 {
-  [self.tableView beginUpdates];
-  [eventsReceived insertObject:event atIndex:0];
-  [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
-  [self.tableView endUpdates];
   if ([event.name isEqualToString:@"new-event"]) {
     [self.tableView beginUpdates];
     [eventsReceived insertObject:event atIndex:0];
@@ -91,6 +87,20 @@
     [self.tableView endUpdates];
   }
 }
+
+- (void)channelDidConnect:(PTPusherChannel *)channel
+{
+  NSLog(@"Listening on channel %@", channel.name);
+}
+
+- (void)channelDidDisconnect:(PTPusherChannel *)channel
+{
+  NSLog(@"Stopped listening on channel %@", channel.name);
+}
+
+- (void)channelFailedToTriggerEvent:(PTPusherChannel *)channel error:(NSError *)error
+{
+  NSLog(@"Error triggering event on channel %@, error: %@", channel.name, error);
 }
 
 #pragma mark -
