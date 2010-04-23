@@ -1,9 +1,3 @@
-//
-//  NSString+Hashing.m
-//  SqueezeAPI
-//
-//  Created by Luke Redpath on 07/05/2009.
-//
 
 #import "NSString+Hashing.h"
 #import <CommonCrypto/CommonDigest.h>
