@@ -67,6 +67,7 @@ NSString *generateBase64EncodedHMAC(NSString *string, NSString *secret) {
   [pusher release];
   pusher = [[PTPusher alloc] initWithKey:APIKey channel:name];
   pusher.delegate = self;
+  pusher.reconnect = YES;
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedEventNotification:) name:PTPusherEventReceivedNotification object:nil];
 }
 
