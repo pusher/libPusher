@@ -7,6 +7,8 @@
 //
 
 #import "PTPusherChannel.h"
+#import "PTPusher.h"
+#import "PTPusherEvent.h"
 #import "JSON.h"
 #import "NSString+Hashing.h"
 #import "NSDictionary+QueryString.h"
@@ -29,6 +31,7 @@ NSString *generateBase64EncodedHMAC(NSString *string, NSString *secret) {
 @implementation PTPusherChannel
 
 @synthesize name;
+@synthesize delegate;
 
 - (id)initWithName:(NSString *)channelName appID:(NSString *)_id key:(NSString *)_key secret:(NSString *)_secret;
 {
@@ -38,18 +41,40 @@ NSString *generateBase64EncodedHMAC(NSString *string, NSString *secret) {
     APIKey = [_key copy];
     secret = [_secret copy];
     operationQueue = [[NSOperationQueue alloc] init];
+    pusher = nil;
+    delegate = nil;
   }
   return self;
 }
 
 - (void)dealloc;
 {
+  if (pusher != nil) {
+    [[NSNotificationCenter defaultCenter] removeObserver:self 
+      name:PTPusherEventReceivedNotification object:nil];
+  }
+  [pusher release];
   [name release];
   [operationQueue release];
   [appid release];
   [APIKey release];
   [secret release];
   [super dealloc];
+}
+
+- (void)startListeningForEvents;
+{
+  [pusher release];
+  pusher = [[PTPusher alloc] initWithKey:APIKey channel:name];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedEventNotification:) name:PTPusherEventReceivedNotification object:nil];
+}
+
+- (void)stopListeningForEvents;
+{
+  [[NSNotificationCenter defaultCenter] removeObserver:self 
+    name:PTPusherEventReceivedNotification object:nil];
+  [pusher release];
+  pusher = nil;
 }
 
 - (void)triggerEvent:(NSString *)event data:(id)data;
@@ -75,6 +100,19 @@ NSString *generateBase64EncodedHMAC(NSString *string, NSString *secret) {
   PTPusherClientOperation *operation = [[PTPusherClientOperation alloc] initWithURL:[NSURL URLWithString:resourceString] JSONString:body];
   [operationQueue addOperation:operation];
   [operation release];
+}
+
+#pragma mark -
+#pragma mark Private
+
+- (void)receivedEventNotification:(NSNotification *)note;
+{
+  PTPusherEvent *event = (PTPusherEvent *)note.object;
+  if ([event.channel isEqualToString:name]) {
+    if ([self.delegate respondsToSelector:@selector(channel:didReceiveEvent:)]) {
+      [self.delegate channel:self didReceiveEvent:event];
+    }
+  }
 }
 
 @end

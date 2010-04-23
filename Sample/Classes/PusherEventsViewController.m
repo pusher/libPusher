@@ -14,7 +14,6 @@
 
 @implementation PusherEventsViewController
 
-@synthesize eventsPusher;
 @synthesize eventsChannel;
 @synthesize eventsReceived;
 
@@ -25,12 +24,9 @@
   if (eventsReceived == nil) {
     eventsReceived = [[NSMutableArray alloc] init];
   }
-  if (eventsPusher == nil) {
-    eventsPusher = [[PTPusher alloc] initWithKey:PUSHER_API_KEY channel:@"events"];
-    [eventsPusher addEventListener:@"new-event" target:self selector:@selector(handleNewEvent:)];
-  }
   if (eventsChannel == nil) {
     eventsChannel = [[PTPusher channel:@"events"] retain];
+    eventsChannel.delegate = self;
   }
   
   UIBarButtonItem *newEventButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(presentNewEventScreen)];
@@ -39,10 +35,19 @@
   [super viewDidLoad];
 }
 
+- (void)viewWillAppear:(BOOL)animated;
+{
+  [eventsChannel startListeningForEvents];
+}
+
+- (void)viewDidDisappear:(BOOL)animated;
+{
+  [eventsChannel stopListeningForEvents];
+}
+
 - (void)dealloc {
   [eventsChannel release];
   [eventsReceived release];
-  [eventsPusher release];
   [super dealloc];
 }
 
@@ -71,9 +76,9 @@
 }
 
 #pragma mark -
-#pragma mark PTPusherEvent handling
+#pragma mark PTPusherChannel delegate
 
-- (void)handleNewEvent:(PTPusherEvent *)event;
+- (void)channel:(PTPusherChannel *)channel didReceiveEvent:(PTPusherEvent *)event;
 {
   [self.tableView beginUpdates];
   [eventsReceived insertObject:event atIndex:0];

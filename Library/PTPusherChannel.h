@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "PTPusherChannelDelegate.h"
 
+@class PTPusher;
 
 @interface PTPusherChannel : NSObject {
   NSString *name;
@@ -15,11 +17,20 @@
   NSString *APIKey;
   NSString *secret;
   NSOperationQueue *operationQueue;
+  PTPusher *pusher;
+  id<PTPusherChannelDelegate> delegate;
 }
 @property (nonatomic, readonly) NSString *name;
+@property (nonatomic, assign) id<PTPusherChannelDelegate> delegate;
 
-- (id)initWithName:(NSString *)channelName appID:(NSString *)_id key:(NSString *)_key secret:(NSString *)_secret;
+- (id)initWithName:(NSString *)channelName 
+             appID:(NSString *)_id 
+               key:(NSString *)_key 
+            secret:(NSString *)_secret;
+
 - (void)triggerEvent:(NSString *)name data:(id)data;
+- (void)startListeningForEvents;
+- (void)stopListeningForEvents;
 @end
 
 @interface PTPusherClientOperation : NSOperation
