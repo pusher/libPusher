@@ -28,21 +28,12 @@
     eventsChannel = [[PTPusher channel:@"events"] retain];
     eventsChannel.delegate = self;
   }
+  [eventsChannel startListeningForEvents];
   
   UIBarButtonItem *newEventButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(presentNewEventScreen)];
   self.toolbarItems = [NSArray arrayWithObject:newEventButtonItem];
   
   [super viewDidLoad];
-}
-
-- (void)viewWillAppear:(BOOL)animated;
-{
-  [eventsChannel startListeningForEvents];
-}
-
-- (void)viewDidDisappear:(BOOL)animated;
-{
-  [eventsChannel stopListeningForEvents];
 }
 
 - (void)dealloc {
