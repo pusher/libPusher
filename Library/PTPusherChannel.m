@@ -28,6 +28,11 @@ NSString *generateBase64EncodedHMAC(NSString *string, NSString *secret) {
   return [[NSData dataWithBytes:cHMAC length:sizeof(cHMAC)] base64EncodedString];
 }
 
+NSString *URLEncodedString(NSString *unencodedString) {
+  return (NSString *)CFURLCreateStringByAddingPercentEscapes(
+     NULL, (CFStringRef)unencodedString, NULL, (CFStringRef)@"!*'();:@&=+$,/?%#[]", kCFStringEncodingUTF8);
+}
+
 @implementation PTPusherChannel
 
 @synthesize name;
@@ -95,7 +100,9 @@ NSString *generateBase64EncodedHMAC(NSString *string, NSString *secret) {
   NSMutableString *signatureString = [NSMutableString stringWithFormat:@"POST\n%@\n%@", path, signatureQuery];
   NSString *signature = generateBase64EncodedHMAC(signatureString, secret);
   
-  [queryParameters setValue:[signature stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding] forKey:@"auth_signature"];
+  [queryParameters setValue:URLEncodedString(signature) forKey:@"auth_signature"];
+  
+  NSLog(@"Params: %@", queryParameters);
   
   NSString *resourceString = [NSString stringWithFormat:@"http://%@%@?%@", kPTPusherWebServiceHost, path, [queryParameters sortedQueryString]];
   
