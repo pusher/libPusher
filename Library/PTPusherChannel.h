@@ -8,10 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "PTPusherChannelDelegate.h"
+#import "PTPusherDelegate.h"
 
 @class PTPusher;
 
-@interface PTPusherChannel : NSObject {
+@interface PTPusherChannel : NSObject <PTPusherDelegate> {
   NSString *name;
   NSString *appid;
   NSString *APIKey;
@@ -37,7 +38,12 @@
 {
   NSURL *url;
   NSString *body;
+  PTPusherChannel *channel;
+  id<PTPusherChannelDelegate> delegate;
 }
+@property (nonatomic, assign) id<PTPusherChannelDelegate> delegate;
+@property (nonatomic, retain) PTPusherChannel *channel;
+
 - (id)initWithURL:(NSURL *)_url JSONString:(NSString *)json;
 @end
 

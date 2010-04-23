@@ -66,6 +66,7 @@ NSString *generateBase64EncodedHMAC(NSString *string, NSString *secret) {
 {
   [pusher release];
   pusher = [[PTPusher alloc] initWithKey:APIKey channel:name];
+  pusher.delegate = self;
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedEventNotification:) name:PTPusherEventReceivedNotification object:nil];
 }
 
@@ -98,12 +99,24 @@ NSString *generateBase64EncodedHMAC(NSString *string, NSString *secret) {
   NSString *resourceString = [NSString stringWithFormat:@"http://%@%@?%@", kPTPusherWebServiceHost, path, [queryParameters sortedQueryString]];
   
   PTPusherClientOperation *operation = [[PTPusherClientOperation alloc] initWithURL:[NSURL URLWithString:resourceString] JSONString:body];
+  operation.delegate = self.delegate;
+  operation.channel = self;
   [operationQueue addOperation:operation];
   [operation release];
 }
 
 #pragma mark -
 #pragma mark Private
+
+- (void)pusherDidConnect:(PTPusher *)pusher
+{
+  [self.delegate channelDidConnect:self];
+}
+
+- (void)pusherDidDisconnect:(PTPusher *)pusher
+{
+  [self.delegate channelDidDisconnect:self];
+}
 
 - (void)receivedEventNotification:(NSNotification *)note;
 {
@@ -118,6 +131,9 @@ NSString *generateBase64EncodedHMAC(NSString *string, NSString *secret) {
 @end
 
 @implementation PTPusherClientOperation
+
+@synthesize delegate;
+@synthesize channel;
 
 - (id)initWithURL:(NSURL *)_url JSONString:(NSString *)json;
 {
@@ -145,12 +161,23 @@ NSString *generateBase64EncodedHMAC(NSString *string, NSString *secret) {
   NSHTTPURLResponse *response;
   NSError *error;
   
-  NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+  [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
   
   if (error != nil) {
-    NSLog(@"Connection error: %@", error);
+    if (self.channel && [self.delegate respondsToSelector:@selector(channelFailedToTriggerEvent:error:)]) {
+      [self.delegate channelFailedToTriggerEvent:self.channel error:error];
+    }
   } else {
-    NSLog(@"Success! %@, %@", [NSHTTPURLResponse localizedStringForStatusCode:[response statusCode]], [NSString stringWithUTF8String:[data bytes]]);
+    if ([response statusCode] == 202) {
+      if (self.channel && [self.delegate respondsToSelector:@selector(channelDidTriggerEvent:)]) {
+        [self.delegate channelDidTriggerEvent:self.channel];
+      } 
+    } else {
+      if (self.channel && [self.delegate respondsToSelector:@selector(channelFailedToTriggerEvent:error:)]) {
+        NSError *error = [NSError errorWithDomain:@"PTPusherOperationFailed" code:[response statusCode] userInfo:[NSDictionary dictionaryWithObject:response forKey:@"response"]];
+        [self.delegate channelFailedToTriggerEvent:self.channel error:error];
+      }
+    }    
   }
 }
 

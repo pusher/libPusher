@@ -14,6 +14,10 @@
 @protocol PTPusherChannelDelegate <NSObject>
 
 @optional
+- (void)channelDidConnect:(PTPusherChannel *)channel;
+- (void)channelDidDisconnect:(PTPusherChannel *)channel;
 - (void)channel:(PTPusherChannel *)channel didReceiveEvent:(PTPusherEvent *)event;
+- (void)channelDidTriggerEvent:(PTPusherChannel *)channel;
+- (void)channelFailedToTriggerEvent:(PTPusherChannel *)channel error:(NSError *)error;
 
 @end
