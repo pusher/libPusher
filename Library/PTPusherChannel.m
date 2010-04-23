@@ -6,7 +6,7 @@
 //  Copyright 2010 LJR Software Limited. All rights reserved.
 //
 
-#import "PTPusherClient.h"
+#import "PTPusherChannel.h"
 #import "JSON.h"
 #import "NSString+Hashing.h"
 #import "NSDictionary+QueryString.h"
@@ -26,11 +26,14 @@ NSString *generateBase64EncodedHMAC(NSString *string, NSString *secret) {
   return [[NSData dataWithBytes:cHMAC length:sizeof(cHMAC)] base64EncodedString];
 }
 
-@implementation PTPusherClient
+@implementation PTPusherChannel
 
-- (id)initWithAppID:(NSString *)_id key:(NSString *)_key secret:(NSString *)_secret;
+@synthesize name;
+
+- (id)initWithName:(NSString *)channelName appID:(NSString *)_id key:(NSString *)_key secret:(NSString *)_secret;
 {
   if (self = [super init]) {
+    name = [channelName copy];
     appid = [_id copy];
     APIKey = [_key copy];
     secret = [_secret copy];
@@ -41,6 +44,7 @@ NSString *generateBase64EncodedHMAC(NSString *string, NSString *secret) {
 
 - (void)dealloc;
 {
+  [name release];
   [operationQueue release];
   [appid release];
   [APIKey release];
@@ -48,9 +52,9 @@ NSString *generateBase64EncodedHMAC(NSString *string, NSString *secret) {
   [super dealloc];
 }
 
-- (void)triggerEvent:(NSString *)name channel:(NSString *)channel data:(id)data;
+- (void)triggerEvent:(NSString *)event data:(id)data;
 {
-  NSString *path = [NSString stringWithFormat:@"/apps/%@/channels/%@/events", appid, channel];
+  NSString *path = [NSString stringWithFormat:@"/apps/%@/channels/%@/events", appid, name];
   NSString *body = [data JSONRepresentation];
   
   NSMutableDictionary *queryParameters = [NSMutableDictionary dictionary];
@@ -58,7 +62,7 @@ NSString *generateBase64EncodedHMAC(NSString *string, NSString *secret) {
   [queryParameters setValue:APIKey forKey:@"auth_key"];
   [queryParameters setValue:[NSNumber numberWithDouble:time(NULL)] forKey:@"auth_timestamp"];
   [queryParameters setValue:@"1.0" forKey:@"auth_version"];
-  [queryParameters setValue:name forKey:@"name"];
+  [queryParameters setValue:event forKey:@"name"];
 
   NSString *signatureQuery = [queryParameters sortedQueryString];
   NSMutableString *signatureString = [NSMutableString stringWithFormat:@"POST\n%@\n%@", path, signatureQuery];

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class PTPusher;
-@class PTPusherClient;
+@class PTPusherChannel;
 
 @protocol PusherEventsDelegate
 - (void)sendEventWithMessage:(NSString *)message;
@@ -17,10 +17,10 @@
 
 @interface PusherEventsViewController : UITableViewController <PusherEventsDelegate> {
   PTPusher *eventsPusher;
-  PTPusherClient *pusherClient;
+  PTPusherChannel *pusherClient;
   NSMutableArray *eventsReceived;
 }
 @property (nonatomic, readonly) PTPusher *eventsPusher;
-@property (nonatomic, readonly) PTPusherClient *pusherClient;
+@property (nonatomic, readonly) PTPusherChannel *pusherClient;
 @property (nonatomic, readonly) NSMutableArray *eventsReceived;
 @end

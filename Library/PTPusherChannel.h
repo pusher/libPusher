@@ -9,14 +9,17 @@
 #import <Foundation/Foundation.h>
 
 
-@interface PTPusherClient : NSObject {
+@interface PTPusherChannel : NSObject {
+  NSString *name;
   NSString *appid;
   NSString *APIKey;
   NSString *secret;
   NSOperationQueue *operationQueue;
 }
-- (id)initWithAppID:(NSString *)_id key:(NSString *)_key secret:(NSString *)_secret;
-- (void)triggerEvent:(NSString *)name channel:(NSString *)channel data:(id)data;
+@property (nonatomic, readonly) NSString *name;
+
+- (id)initWithName:(NSString *)channelName appID:(NSString *)_id key:(NSString *)_key secret:(NSString *)_secret;
+- (void)triggerEvent:(NSString *)name data:(id)data;
 @end
 
 @interface PTPusherClientOperation : NSOperation

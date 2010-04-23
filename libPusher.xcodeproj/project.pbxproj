@@ -64,7 +64,7 @@
 		A3D1D308115802B2009A12AD /* libPusher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3D1D2B71158013F009A12AD /* libPusher.a */; };
 		A3FE41CB11811161009CF5D7 /* NewEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FE41C911811161009CF5D7 /* NewEventViewController.m */; };
 		A3FE41CC11811161009CF5D7 /* NewEventViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3FE41CA11811161009CF5D7 /* NewEventViewController.xib */; };
-		A3FE421A1181173B009CF5D7 /* PTPusherClient.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FE42191181173B009CF5D7 /* PTPusherClient.m */; };
+		A3FE421A1181173B009CF5D7 /* PTPusherChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FE42191181173B009CF5D7 /* PTPusherChannel.m */; };
 		A3FE429E11811EEE009CF5D7 /* NSString+Hashing.h in Headers */ = {isa = PBXBuildFile; fileRef = A3FE429B11811EE8009CF5D7 /* NSString+Hashing.h */; };
 		A3FE429F11811EEE009CF5D7 /* NSString+Hashing.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FE429C11811EE8009CF5D7 /* NSString+Hashing.m */; };
 		A3FE430111812541009CF5D7 /* NSDictionary+QueryString.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FE430011812541009CF5D7 /* NSDictionary+QueryString.m */; };
@@ -157,8 +157,8 @@
 		A3FE41C811811161009CF5D7 /* NewEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewEventViewController.h; sourceTree = "<group>"; };
 		A3FE41C911811161009CF5D7 /* NewEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewEventViewController.m; sourceTree = "<group>"; };
 		A3FE41CA11811161009CF5D7 /* NewEventViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = NewEventViewController.xib; path = Sample/Classes/NewEventViewController.xib; sourceTree = "<group>"; };
-		A3FE42181181173B009CF5D7 /* PTPusherClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherClient.h; sourceTree = "<group>"; };
-		A3FE42191181173B009CF5D7 /* PTPusherClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTPusherClient.m; sourceTree = "<group>"; };
+		A3FE42181181173B009CF5D7 /* PTPusherChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherChannel.h; sourceTree = "<group>"; };
+		A3FE42191181173B009CF5D7 /* PTPusherChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTPusherChannel.m; sourceTree = "<group>"; };
 		A3FE429B11811EE8009CF5D7 /* NSString+Hashing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Hashing.h"; sourceTree = "<group>"; };
 		A3FE429C11811EE8009CF5D7 /* NSString+Hashing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Hashing.m"; sourceTree = "<group>"; };
 		A3FE42FF11812541009CF5D7 /* NSDictionary+QueryString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+QueryString.h"; sourceTree = "<group>"; };
@@ -212,8 +212,8 @@
 				A3D1D2901157FA4C009A12AD /* PTPusherEvent.h */,
 				A3D1D2911157FA4C009A12AD /* PTPusherEvent.m */,
 				A3A1A41611582DC3001EF877 /* PTPusherDelegate.h */,
-				A3FE42181181173B009CF5D7 /* PTPusherClient.h */,
-				A3FE42191181173B009CF5D7 /* PTPusherClient.m */,
+				A3FE42181181173B009CF5D7 /* PTPusherChannel.h */,
+				A3FE42191181173B009CF5D7 /* PTPusherChannel.m */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -517,7 +517,7 @@
 				A3D1D2871157FA30009A12AD /* PusherEventsViewController.m in Sources */,
 				A3D1D2881157FA30009A12AD /* main.m in Sources */,
 				A3FE41CB11811161009CF5D7 /* NewEventViewController.m in Sources */,
-				A3FE421A1181173B009CF5D7 /* PTPusherClient.m in Sources */,
+				A3FE421A1181173B009CF5D7 /* PTPusherChannel.m in Sources */,
 				A3FE430111812541009CF5D7 /* NSDictionary+QueryString.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -9,7 +9,7 @@
 #import "PusherEventsViewController.h"
 #import "PTPusher.h"
 #import "PTPusherEvent.h"
-#import "PTPusherClient.h"
+#import "PTPusherChannel.h"
 #import "NewEventViewController.h"
 
 @implementation PusherEventsViewController
@@ -30,7 +30,7 @@
     [eventsPusher addEventListener:@"new-event" target:self selector:@selector(handleNewEvent:)];
   }
   if (pusherClient == nil) {
-    pusherClient = [[PTPusherClient alloc] initWithAppID:@"40" key:PUSHER_API_KEY secret:PUSHER_API_SECRET];
+    pusherClient = [[PTPusherChannel alloc] initWithName:@"events" appID:@"40" key:PUSHER_API_KEY secret:PUSHER_API_SECRET];
   }
   
   UIBarButtonItem *newEventButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(presentNewEventScreen)];
@@ -67,7 +67,7 @@
 
 - (void)sendEvent:(id)payload;
 {
-  [self.pusherClient triggerEvent:@"new-event" channel:@"events" data:payload];
+  [self.pusherClient triggerEvent:@"new-event" data:payload];
 }
 
 #pragma mark -
