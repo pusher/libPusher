@@ -17,10 +17,10 @@
 
 @interface PusherEventsViewController : UITableViewController <PusherEventsDelegate> {
   PTPusher *eventsPusher;
-  PTPusherChannel *pusherClient;
+  PTPusherChannel *eventsChannel;
   NSMutableArray *eventsReceived;
 }
 @property (nonatomic, readonly) PTPusher *eventsPusher;
-@property (nonatomic, readonly) PTPusherChannel *pusherClient;
+@property (nonatomic, readonly) PTPusherChannel *eventsChannel;
 @property (nonatomic, readonly) NSMutableArray *eventsReceived;
 @end

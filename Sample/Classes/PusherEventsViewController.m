@@ -15,8 +15,8 @@
 @implementation PusherEventsViewController
 
 @synthesize eventsPusher;
+@synthesize eventsChannel;
 @synthesize eventsReceived;
-@synthesize pusherClient;
 
 - (void)viewDidLoad 
 {
@@ -29,8 +29,8 @@
     eventsPusher = [[PTPusher alloc] initWithKey:PUSHER_API_KEY channel:@"events"];
     [eventsPusher addEventListener:@"new-event" target:self selector:@selector(handleNewEvent:)];
   }
-  if (pusherClient == nil) {
-    pusherClient = [[PTPusherChannel alloc] initWithName:@"events" appID:@"40" key:PUSHER_API_KEY secret:PUSHER_API_SECRET];
+  if (eventsChannel == nil) {
+    eventsChannel = [[PTPusher channel:@"events"] retain];
   }
   
   UIBarButtonItem *newEventButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(presentNewEventScreen)];
@@ -40,7 +40,7 @@
 }
 
 - (void)dealloc {
-  [pusherClient release];
+  [eventsChannel release];
   [eventsReceived release];
   [eventsPusher release];
   [super dealloc];
@@ -67,7 +67,7 @@
 
 - (void)sendEvent:(id)payload;
 {
-  [self.pusherClient triggerEvent:@"new-event" data:payload];
+  [self.eventsChannel triggerEvent:@"new-event" data:payload];
 }
 
 #pragma mark -

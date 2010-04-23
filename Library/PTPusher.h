@@ -37,4 +37,13 @@ extern NSString *const PTPusherEventReceivedNotification;
 - (void)addEventListener:(NSString *)event target:(id)target selector:(SEL)selector;
 @end
 
+@class PTPusherChannel;
+
+@interface PTPusher (SharedFactory)
++ (void)setKey:(NSString *)apiKey;
++ (void)setSecret:(NSString *)secret;
++ (void)setAppID:(NSString *)appId;
++ (PTPusherChannel *)channel:(NSString *)name;
+@end
+
 

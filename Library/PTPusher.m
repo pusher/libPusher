@@ -10,6 +10,7 @@
 #import "PTEventListener.h"
 #import "JSON.h"
 #import "PTPusherEvent.h"
+#import "PTPusherChannel.h"
 
 NSString *const PTPusherDataKey = @"data";
 NSString *const PTPusherEventKey = @"event";
@@ -145,6 +146,36 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 {
   [delegate pusherWillConnect:self];
   [socket open];
+}
+
+@end
+
+#pragma mark -
+
+@implementation PTPusher (SharedFactory)
+
+static NSString *sharedKey = nil;
+static NSString *sharedSecret = nil;
+static NSString *sharedAppID = nil;
+
++ (void)setKey:(NSString *)apiKey;
+{
+  [sharedKey autorelease]; sharedKey = [apiKey copy];
+}
+
++ (void)setSecret:(NSString *)secret;
+{
+  [sharedSecret autorelease]; sharedSecret = [secret copy];
+}
+
++ (void)setAppID:(NSString *)appId;
+{
+  [sharedAppID autorelease]; sharedAppID = [appId copy];
+}
+
++ (PTPusherChannel *)channel:(NSString *)name;
+{
+  return [[[PTPusherChannel alloc] initWithName:name appID:sharedAppID key:sharedKey secret:sharedSecret] autorelease];
 }
 
 @end
