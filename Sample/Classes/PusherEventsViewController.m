@@ -9,12 +9,14 @@
 #import "PusherEventsViewController.h"
 #import "PTPusher.h"
 #import "PTPusherEvent.h"
+#import "PTPusherClient.h"
 #import "NewEventViewController.h"
 
 @implementation PusherEventsViewController
 
 @synthesize eventsPusher;
 @synthesize eventsReceived;
+@synthesize pusherClient;
 
 - (void)viewDidLoad 
 {
@@ -27,6 +29,9 @@
     eventsPusher = [[PTPusher alloc] initWithKey:PUSHER_API_KEY channel:@"events"];
     [eventsPusher addEventListener:@"new-event" target:self selector:@selector(handleNewEvent:)];
   }
+  if (pusherClient == nil) {
+    pusherClient = [[PTPusherClient alloc] initWithAppID:@"40" key:PUSHER_API_KEY secret:PUSHER_API_SECRET];
+  }
   
   UIBarButtonItem *newEventButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(presentNewEventScreen)];
   self.toolbarItems = [NSArray arrayWithObject:newEventButtonItem];
@@ -35,6 +40,7 @@
 }
 
 - (void)dealloc {
+  [pusherClient release];
   [eventsReceived release];
   [eventsPusher release];
   [super dealloc];
@@ -53,8 +59,15 @@
 
 - (void)sendEventWithMessage:(NSString *)message;
 {
-  NSLog(@"Got message: %@", message);
+  NSDictionary *payload = [NSDictionary dictionaryWithObjectsAndKeys:message, @"title", @"Sent from libPusher", @"description", nil];
+
+  [self performSelector:@selector(sendEvent:) withObject:payload afterDelay:0.3];
   [self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)sendEvent:(id)payload;
+{
+  [self.pusherClient triggerEvent:@"new-event" channel:@"events" data:payload];
 }
 
 #pragma mark -
