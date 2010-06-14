@@ -44,6 +44,6 @@ extern NSString *const PTPusherEventReceivedNotification;
 + (void)setSecret:(NSString *)secret;
 + (void)setAppID:(NSString *)appId;
 + (PTPusherChannel *)channel:(NSString *)name;
++ (PTPusherChannel *)newChannel:(NSString *)name;
 @end
-
 

@@ -65,7 +65,7 @@ Once this has been configured, creating a new channel is easy:
     self.eventsChannel = [PTPusher channel:@"events"];
     self.eventsChannel.delegate = self; // implement PTPusherChannelDelegate
     
-Its important to note that the `channel` factory method returns an auto-released instance, so you will need to ensure you retain it. 
+Its important to note that the `channel` factory method returns an auto-released instance, so you will need to ensure you retain it. If you want a non-autoreleased instance, you can alternatively call the `newChannel:` method instead.
 
 Once you have created a channel and assigned a delegate, new events on that channel will trigger the delegate method `channel:didReceiveEvent`, e.g.:
 

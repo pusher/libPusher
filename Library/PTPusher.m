@@ -185,7 +185,12 @@ static NSString *sharedAppID = nil;
 
 + (PTPusherChannel *)channel:(NSString *)name;
 {
-  return [[[PTPusherChannel alloc] initWithName:name appID:sharedAppID key:sharedKey secret:sharedSecret] autorelease];
+  return [[self newChannel:name] autorelease];
+}
+
++ (PTPusherChannel *)newChannel:(NSString *)name;
+{
+  return [[PTPusherChannel alloc] initWithName:name appID:sharedAppID key:sharedKey secret:sharedSecret];
 }
 
 @end
