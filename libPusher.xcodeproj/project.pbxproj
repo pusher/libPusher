@@ -203,6 +203,7 @@
 		080E96DDFE201D6D7F000001 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				A3A19FB211580DC8001EF877 /* Unit Tests */,
 				A3FE429311811ED6009CF5D7 /* Utility */,
 				A3D1D28C1157FA4C009A12AD /* PTEventListener.h */,
 				A3D1D28D1157FA4C009A12AD /* PTEventListener.m */,
@@ -321,7 +322,6 @@
 		A3D1D2711157F961009A12AD /* Sample Application */ = {
 			isa = PBXGroup;
 			children = (
-				A3A19FB211580DC8001EF877 /* Unit Tests */,
 				A30790D911583B7200EBFFF8 /* Constants.h */,
 				A3D1D27C1157FA30009A12AD /* Classes */,
 				A3D1D2821157FA30009A12AD /* main.m */,
