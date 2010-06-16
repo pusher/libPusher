@@ -45,7 +45,7 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
     channel = [channelName copy];
     eventListeners = [[NSMutableDictionary alloc] init];
     host = @"ws.pusherapp.com";
-    port = 8080;
+    port = 80;
     delegate = nil;
     reconnect = NO;
     
