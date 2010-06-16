@@ -24,11 +24,13 @@
 		A3A1A1A111581776001EF877 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D1231157CF2F009A12AD /* SBJsonParser.m */; };
 		A3A1A1A211581776001EF877 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D1251157CF2F009A12AD /* SBJsonWriter.m */; };
 		A3A1A1A311581776001EF877 /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D0A31157CC68009A12AD /* AsyncSocket.m */; };
-		A3A1A1A411581776001EF877 /* ZTWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D09D1157CC56009A12AD /* ZTWebSocket.m */; };
 		A3A1A20111581782001EF877 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3D1D0B51157CCDE009A12AD /* CFNetwork.framework */; };
 		A3A1A20211581782001EF877 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		A3A1A41311582D32001EF877 /* PTPusherTest.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A1A41211582D32001EF877 /* PTPusherTest.m */; };
 		A3A1A42A11582F26001EF877 /* PTPusherDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = A3A1A41611582DC3001EF877 /* PTPusherDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A3CDE3BA11C93E4E0051777E /* ZTWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CDE3B911C93E4E0051777E /* ZTWebSocket.m */; };
+		A3CDE3BD11C93E580051777E /* ZTLog.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CDE3BB11C93E580051777E /* ZTLog.h */; };
+		A3CDE3BE11C93E580051777E /* ZTWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CDE3BC11C93E580051777E /* ZTWebSocket.h */; };
 		A3D1D0B61157CCDE009A12AD /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3D1D0B51157CCDE009A12AD /* CFNetwork.framework */; };
 		A3D1D1261157CF2F009A12AD /* CREDITS in Resources */ = {isa = PBXBuildFile; fileRef = A3D1D1181157CF2F009A12AD /* CREDITS */; };
 		A3D1D2861157FA30009A12AD /* PusherEventsAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D27E1157FA30009A12AD /* PusherEventsAppDelegate.m */; };
@@ -59,8 +61,6 @@
 		A3D1D2DB1158017D009A12AD /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D0A31157CC68009A12AD /* AsyncSocket.m */; };
 		A3D1D2DC1158017D009A12AD /* AsyncUdpSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A3D1D0A41157CC68009A12AD /* AsyncUdpSocket.h */; };
 		A3D1D2DD1158017D009A12AD /* AsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D0A51157CC68009A12AD /* AsyncUdpSocket.m */; };
-		A3D1D2DE11580180009A12AD /* ZTWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A3D1D09F1157CC5D009A12AD /* ZTWebSocket.h */; };
-		A3D1D2DF11580180009A12AD /* ZTWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D09D1157CC56009A12AD /* ZTWebSocket.m */; };
 		A3D1D308115802B2009A12AD /* libPusher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3D1D2B71158013F009A12AD /* libPusher.a */; };
 		A3FE41CB11811161009CF5D7 /* NewEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FE41C911811161009CF5D7 /* NewEventViewController.m */; };
 		A3FE41CC11811161009CF5D7 /* NewEventViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3FE41CA11811161009CF5D7 /* NewEventViewController.xib */; };
@@ -73,13 +73,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		A3A1A43C11582FC2001EF877 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A3A1A0EA115813E2001EF877;
-			remoteInfo = UnitTests;
-		};
 		A3D1D3021158029F009A12AD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
@@ -117,13 +110,13 @@
 		A3A1A15B1158158D001EF877 /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OCMock.framework; path = Frameworks/OCMock.framework; sourceTree = "<group>"; };
 		A3A1A41211582D32001EF877 /* PTPusherTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTPusherTest.m; sourceTree = "<group>"; };
 		A3A1A41611582DC3001EF877 /* PTPusherDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherDelegate.h; sourceTree = "<group>"; };
-		A3D1D09D1157CC56009A12AD /* ZTWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZTWebSocket.m; sourceTree = "<group>"; };
-		A3D1D09F1157CC5D009A12AD /* ZTWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZTWebSocket.h; sourceTree = "<group>"; };
+		A3CDE3B911C93E4E0051777E /* ZTWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZTWebSocket.m; path = Zimt/src/ZTWebSocket.m; sourceTree = "<group>"; };
+		A3CDE3BB11C93E580051777E /* ZTLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZTLog.h; path = Zimt/src/Zimt/ZTLog.h; sourceTree = "<group>"; };
+		A3CDE3BC11C93E580051777E /* ZTWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZTWebSocket.h; path = Zimt/src/Zimt/ZTWebSocket.h; sourceTree = "<group>"; };
 		A3D1D0A21157CC68009A12AD /* AsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncSocket.h; sourceTree = "<group>"; };
 		A3D1D0A31157CC68009A12AD /* AsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncSocket.m; sourceTree = "<group>"; };
 		A3D1D0A41157CC68009A12AD /* AsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncUdpSocket.h; sourceTree = "<group>"; };
 		A3D1D0A51157CC68009A12AD /* AsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncUdpSocket.m; sourceTree = "<group>"; };
-		A3D1D0B01157CCA9009A12AD /* ZTLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZTLog.h; sourceTree = "<group>"; };
 		A3D1D0B51157CCDE009A12AD /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		A3D1D1181157CF2F009A12AD /* CREDITS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CREDITS; sourceTree = "<group>"; };
 		A3D1D1191157CF2F009A12AD /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
@@ -275,14 +268,22 @@
 			path = "../Unit Tests";
 			sourceTree = "<group>";
 		};
+		A3CDE3B811C93E460051777E /* ZTWebSocket */ = {
+			isa = PBXGroup;
+			children = (
+				A3CDE3BB11C93E580051777E /* ZTLog.h */,
+				A3CDE3BC11C93E580051777E /* ZTWebSocket.h */,
+				A3CDE3B911C93E4E0051777E /* ZTWebSocket.m */,
+			);
+			name = ZTWebSocket;
+			sourceTree = "<group>";
+		};
 		A3D1D0991157CC3F009A12AD /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				A3CDE3B811C93E460051777E /* ZTWebSocket */,
 				A3D1D1171157CF2F009A12AD /* JSON */,
-				A3D1D0B01157CCA9009A12AD /* ZTLog.h */,
 				A3D1D0A01157CC68009A12AD /* AsyncSocket */,
-				A3D1D09F1157CC5D009A12AD /* ZTWebSocket.h */,
-				A3D1D09D1157CC56009A12AD /* ZTWebSocket.m */,
 			);
 			path = Vendor;
 			sourceTree = "<group>";
@@ -386,9 +387,10 @@
 				A3D1D2D811580177009A12AD /* SBJsonWriter.h in Headers */,
 				A3D1D2DA1158017D009A12AD /* AsyncSocket.h in Headers */,
 				A3D1D2DC1158017D009A12AD /* AsyncUdpSocket.h in Headers */,
-				A3D1D2DE11580180009A12AD /* ZTWebSocket.h in Headers */,
 				A3FE429E11811EEE009CF5D7 /* NSString+Hashing.h in Headers */,
 				A3FE44891181B8EE009CF5D7 /* PTPusherChannelDelegate.h in Headers */,
+				A3CDE3BD11C93E580051777E /* ZTLog.h in Headers */,
+				A3CDE3BE11C93E580051777E /* ZTWebSocket.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,7 +445,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				A3A1A43D11582FC2001EF877 /* PBXTargetDependency */,
 			);
 			name = libPusher;
 			productName = libPusher;
@@ -532,7 +533,6 @@
 				A3A1A1A111581776001EF877 /* SBJsonParser.m in Sources */,
 				A3A1A1A211581776001EF877 /* SBJsonWriter.m in Sources */,
 				A3A1A1A311581776001EF877 /* AsyncSocket.m in Sources */,
-				A3A1A1A411581776001EF877 /* ZTWebSocket.m in Sources */,
 				A3A1A41311582D32001EF877 /* PTPusherTest.m in Sources */,
 				A3FE44751181B7FC009CF5D7 /* PTPusherChannel.m in Sources */,
 			);
@@ -554,20 +554,15 @@
 				A3D1D2D911580177009A12AD /* SBJsonWriter.m in Sources */,
 				A3D1D2DB1158017D009A12AD /* AsyncSocket.m in Sources */,
 				A3D1D2DD1158017D009A12AD /* AsyncUdpSocket.m in Sources */,
-				A3D1D2DF11580180009A12AD /* ZTWebSocket.m in Sources */,
 				A3FE429F11811EEE009CF5D7 /* NSString+Hashing.m in Sources */,
 				A3FE44761181B7FE009CF5D7 /* PTPusherChannel.m in Sources */,
+				A3CDE3BA11C93E4E0051777E /* ZTWebSocket.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		A3A1A43D11582FC2001EF877 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A3A1A0EA115813E2001EF877 /* UnitTests */;
-			targetProxy = A3A1A43C11582FC2001EF877 /* PBXContainerItemProxy */;
-		};
 		A3D1D3031158029F009A12AD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A3D1D2B61158013F009A12AD /* libPusher */;
