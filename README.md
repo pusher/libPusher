@@ -115,9 +115,15 @@ By default, `PTPusher` will not attempt to reconnect if the connection is broken
     
 Currently, reconnect support is fairly basic; there is no maximum retry limit and the retry delay is hard-coded to 5 seconds.
 
+## TODO
+
+* Support for Presence
+* Block-based API for iOS4/OSX 10.6 and above
+
 ## Credits
 
 PusherTouch uses the [ZTWebSocket](http://github.com/openresearch/zimt) library by [OpenResearch](http://github.com/openresearch), without which I probably wouldn't have got anywhere.
+[Pusher](http://pusherapp.com) is a [New Bamboo](http://new-bamboo.co.uk) product.
 
 ## License
 
