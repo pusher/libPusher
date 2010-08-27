@@ -8,13 +8,22 @@ Apple provides its own push notification service which is great for getting aler
 
 ## Installation instructions
 
-The libPusher Xcode project contains a static library target that lets you compile a static library for use in your own applications. There are several ways of getting this static library into your application: one convenient way would be to import the libPusher Xcode project into your own Xcode project as a cross-project reference. This will ensure the latest static library gets built whenever your app is built and means you can refer to Git clone of the project and keep up-to-date with the latest changes.
+The libPusher Xcode project contains a static library target that lets you compile a static library for use in your own 
+applications. There are several ways of getting this static library into your application: one convenient way would be to import the libPusher Xcode project into your own Xcode project as a cross-project reference. This will ensure the latest static library gets built whenever your app is built and means you can refer to Git clone of the project and keep up-to-date with the latest changes.
 
-For more detailed instructions on adding a static library via an Xcode cross-project reference, please refer to [this guide](http://www.amateurinmotion.com/articles/2009/02/08/creating-a-static-library-for-iphone.html), starting from the section "Linking against static library". 
+For more detailed instructions on adding a static library via an Xcode cross-project reference, please refer to [this guide](http://www.amateurinmotion.com/articles/2009/02/08/creating-a-static-library-for-iphone.html), starting from the section "Linking against static library". You will need to remember to update your project's header search path so it can find the header files if you haven't added them directly to your project.
 
 Alternatively, you can simply copy the relevant files (all the files in the Library folder, plus all of the files in Vendor) into your project although you will need to take care of updating the files with changes yourself.
 
-In addition to the above instructions, you will need to add `-all_load` to your build settings under "Other linker flags".
+In addition to the above instructions, you will need to add `-all_load` to your build settings under "Other linker flags", to ensure the categories defined by the library are loaded.
+
+### Building notes
+
+The project includes the Zimt library as a Git submodule; you'll need to init your Git submodules before you are able to build. 
+
+    $ git submodule update --init --recursive
+    
+To build and run the sample app, you'll need to create a Constants.h file containing your Pusher API key and secret; see the sample application app delegate for instructions.
 
 ## Getting started using simple event monitors
 
