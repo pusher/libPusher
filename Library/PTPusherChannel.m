@@ -170,8 +170,8 @@ NSString *URLEncodedString(NSString *unencodedString) {
   [request setHTTPMethod:@"POST"];
   [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
   
-  NSHTTPURLResponse *response;
-  NSError *error;
+  NSHTTPURLResponse *response = nil;
+  NSError *error = nil;
   
   [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
   [request release];
