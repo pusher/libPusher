@@ -15,13 +15,14 @@ NSString* const PTPusherPrivateChannelAuthPointException = @"PTPusherPrivateChan
 
 @implementation PTPusherPrivateChannel
 
-@synthesize authPointURL;
+@synthesize authPointURL, authParams;
 
 - (id)initWithName:(NSString *)channelName 
 			 appID:(NSString *)_id 
 			   key:(NSString *)_key 
 			secret:(NSString *)_secret 
 		 authPoint:(NSURL *)_authPoint
+		authParams:(NSDictionary *)_authParams
 		  delegate:(id<PTPusherPrivateChannelDelegate,PTPusherChannelDelegate>)_delegate
 {
 	if ([channelName rangeOfString:@"private-" options:NSCaseInsensitiveSearch].location == NSNotFound)
@@ -33,6 +34,7 @@ NSString* const PTPusherPrivateChannelAuthPointException = @"PTPusherPrivateChan
 		
 		self.delegate = _delegate;
 		self.authPointURL = _authPoint;
+		self.authParams = _authParams;
 	}
 	
 	return self;
@@ -41,6 +43,7 @@ NSString* const PTPusherPrivateChannelAuthPointException = @"PTPusherPrivateChan
 - (void)dealloc
 {
 	[authPointURL release];
+	[authParams release];
 	
 	[super dealloc];
 }
@@ -59,13 +62,11 @@ NSString* const PTPusherPrivateChannelAuthPointException = @"PTPusherPrivateChan
 
 - (void)authenticateWithSocketID:(NSString *)_socketID
 {
-	NSDictionary *params = [delegate performSelector:@selector(privateChannelParametersForAuthentication:) withObject:self];
-	
 	NSMutableString *queryString = [NSMutableString stringWithFormat:@"%@?", [authPointURL absoluteString]];
 	[queryString appendFormat:@"channel_name=%@&socket_id=%@", name, _socketID];
 	
-	for (NSString *key in params) {
-		NSString *value = [params objectForKey:key];
+	for (NSString *key in self.authParams) {
+		NSString *value = [self.authParams objectForKey:key];
 		
 		[queryString appendFormat:@"&%@=%@", key, value];
 	}
@@ -119,8 +120,6 @@ NSString* const PTPusherPrivateChannelAuthPointException = @"PTPusherPrivateChan
 		NSString *_socketid = pusher.socketID;
 		
 		[self authenticateWithSocketID:_socketid];
-	} else {
-		//[super performSelector:@selector(receivedEventNotification:) withObject:note];
 	}
 }
 

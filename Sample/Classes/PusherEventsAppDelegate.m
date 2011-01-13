@@ -28,10 +28,8 @@
 	[PTPusher setSecret:PUSHER_API_SECRET];
 	[PTPusher setAppID:PUSHER_APP_ID];
 	
-	if (privateEventsChannel == nil) {
-		privateEventsChannel = [PTPusher newPrivateChannel:@"private-my-channel" authPoint:[NSURL URLWithString:@"http://localhost:3000/pusher/auth"]];
-		privateEventsChannel.delegate = self;
-	}
+	privateEventsChannel = [PTPusher newPrivateChannel:@"private-my-channel" authPoint:[NSURL URLWithString:@"http://localhost:3000/pusher/auth"] authParams:nil];
+	privateEventsChannel.delegate = self;
 	[privateEventsChannel startListeningForEvents];
 	
 //	pusher = [[PTPusher alloc] initWithKey:PUSHER_API_KEY channel:@"test-channel"];

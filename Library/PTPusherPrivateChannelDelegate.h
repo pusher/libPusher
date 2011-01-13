@@ -12,9 +12,6 @@
 
 @protocol PTPusherPrivateChannelDelegate <NSObject>
 
-@required
-- (NSDictionary *)privateChannelParametersForAuthentication:(PTPusherPrivateChannel *)channel;
-
 @optional
 - (void)privateChannelAuthenticationStarted:(PTPusherPrivateChannel *)channel;
 - (void)privateChannelAuthenticated:(PTPusherPrivateChannel *)channel;
