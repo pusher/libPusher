@@ -77,7 +77,16 @@ NSString *URLEncodedString(NSString *unencodedString) {
 - (void)startListeningForEvents;
 {
 	[pusher release];
-	pusher = [[PTPusher alloc] initWithKey:APIKey channel:name];
+	
+	if ([name rangeOfString:kPrivateChannelPrefix options:NSCaseInsensitiveSearch].location != NSNotFound ||
+		[name rangeOfString:kPresenseChannelPrefix options:NSCaseInsensitiveSearch].location != NSNotFound)
+	{
+		pusher = [[PTPusher alloc] initWithKey:APIKey channel:nil];
+	}
+	else {
+		pusher = [[PTPusher alloc] initWithKey:APIKey channel:name];
+	}
+	
 	pusher.delegate = self;
 	pusher.reconnect = YES;
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedEventNotification:) name:PTPusherEventReceivedNotification object:nil];

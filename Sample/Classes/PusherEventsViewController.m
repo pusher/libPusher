@@ -24,11 +24,11 @@
   if (eventsReceived == nil) {
     eventsReceived = [[NSMutableArray alloc] init];
   }
-  if (eventsChannel == nil) {
-    eventsChannel = [PTPusher newChannel:@"demo"];
-    eventsChannel.delegate = self;
-  }
-  [eventsChannel startListeningForEvents];
+//  if (eventsChannel == nil) {
+//    eventsChannel = [PTPusher newChannel:@"demo"];
+//    eventsChannel.delegate = self;
+//  }
+//  [eventsChannel startListeningForEvents];
   
   UIBarButtonItem *newEventButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(presentNewEventScreen)];
   self.toolbarItems = [NSArray arrayWithObject:newEventButtonItem];

@@ -56,17 +56,17 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 
 - (void)dealloc;
 {
-  [socket close];
-  [socket release];
-  [eventListeners release];
-  [APIKey release];
-  [channel release];
-  [super dealloc];
+	[socket close];
+	[socket release];
+	[eventListeners release];
+	[APIKey release];
+	[channel release];
+	[super dealloc];
 }
 
 - (NSString *)description;
 {
-  return [NSString stringWithFormat:@"<PTPusher channel:%@>", channel];
+	return [NSString stringWithFormat:@"<PTPusher channel:%@>", channel];
 }
 
 - (void)sendToSocket:(NSString *)message
@@ -79,14 +79,16 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 
 - (void)addEventListener:(NSString *)eventName target:(id)target selector:(SEL)selector;
 {
-  NSMutableArray *listeners = [eventListeners objectForKey:eventName];
-  if (listeners == nil) {
-    listeners = [[[NSMutableArray alloc] init] autorelease];
-    [eventListeners setValue:listeners forKey:eventName];
-  }
-  PTEventListener *listener = [[PTEventListener alloc] initWithTarget:target selector:selector];
-  [listeners addObject:listener];
-  [listener release];
+	NSMutableArray *listeners = [eventListeners objectForKey:eventName];
+	
+	if (listeners == nil) {
+		listeners = [[[NSMutableArray alloc] init] autorelease];
+		[eventListeners setValue:listeners forKey:eventName];
+	}
+	
+	PTEventListener *listener = [[PTEventListener alloc] initWithTarget:target selector:selector];
+	[listeners addObject:listener];
+	[listener release];
 }
 
 #pragma mark -
@@ -94,12 +96,13 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 
 - (void)handleEvent:(PTPusherEvent *)event;
 {
-  NSArray *listenersForEvent = [eventListeners objectForKey:event.name];
-  for (PTEventListener *listener in listenersForEvent) {
-    [listener dispatch:event];
-  }
-  [[NSNotificationCenter defaultCenter] 
-    postNotificationName:PTPusherEventReceivedNotification object:event];
+	NSArray *listenersForEvent = [eventListeners objectForKey:event.name];
+	
+	for (PTEventListener *listener in listenersForEvent) {
+		[listener dispatch:event];
+	}
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:PTPusherEventReceivedNotification object:event];
 }
 
 #pragma mark -
@@ -107,30 +110,30 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 
 - (void)webSocket:(ZTWebSocket*)webSocket didFailWithError:(NSError*)error;
 {
-  if ([delegate respondsToSelector:@selector(pusherDidFailToConnect:withError:)]) {
-    [delegate pusherDidFailToConnect:self withError:error];
-  }
+	if ([delegate respondsToSelector:@selector(pusherDidFailToConnect:withError:)]) {
+		[delegate pusherDidFailToConnect:self withError:error];
+	}
 }
 
 - (void)webSocketDidOpen:(ZTWebSocket*)webSocket;
 {
-  if ([delegate respondsToSelector:@selector(pusherDidConnect:)]) {
-    [delegate pusherDidConnect:self];
-  }
+	if ([delegate respondsToSelector:@selector(pusherDidConnect:)]) {
+		[delegate pusherDidConnect:self];
+	}
 }
 
 - (void)webSocketDidClose:(ZTWebSocket*)webSocket;
 {
-  if ([delegate respondsToSelector:@selector(pusherDidDisconnect:)]) {
-    [delegate pusherDidDisconnect:self];
-  }
-  
-  if (self.reconnect) {
-    if ([delegate respondsToSelector:@selector(pusherWillReconnect:afterDelay:)]) {
-      [delegate pusherWillReconnect:self afterDelay:kPTPusherReconnectDelay];
-    }
-    [self performSelector:@selector(connect) withObject:nil afterDelay:kPTPusherReconnectDelay];
-  }
+	if ([delegate respondsToSelector:@selector(pusherDidDisconnect:)]) {
+		[delegate pusherDidDisconnect:self];
+	}
+
+	if (self.reconnect) {
+		if ([delegate respondsToSelector:@selector(pusherWillReconnect:afterDelay:)]) {
+			[delegate pusherWillReconnect:self afterDelay:kPTPusherReconnectDelay];
+		}
+		[self performSelector:@selector(connect) withObject:nil afterDelay:kPTPusherReconnectDelay];
+	}
 }
 
 - (void)webSocket:(ZTWebSocket*)webSocket didReceiveMessage:(NSString*)message;
@@ -138,9 +141,14 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 	id messageDictionary = [message JSONValue];
 	PTPusherEvent *event = [[PTPusherEvent alloc] initWithDictionary:messageDictionary];
   
-	if ([event.name isEqualToString:@"connection_established"]) {
+	if ([event.name isEqualToString:@"pusher:connection_established"]) {
 		socketID = [[event.data valueForKey:@"socket_id"] retain];
 	}  
+	
+	else if ([event.name isEqualToString:@"pusher:error"]) {
+		NSLog([event description], nil);
+	}
+
 	
 	[self handleEvent:event];
 	[event release];
@@ -151,7 +159,7 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 
 - (NSString *)URLString;
 {
-	if (self.channel)
+	if (self.channel != nil)
 		return [NSString stringWithFormat:@"ws://%@:%d/app/%@?channel=%@", self.host, self.port, self.APIKey, self.channel];
 	
 	return [NSString stringWithFormat:@"ws://%@:%d/app/%@", self.host, self.port, self.APIKey];
@@ -159,10 +167,11 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 
 - (void)connect;
 {
-  if ([delegate respondsToSelector:@selector(pusherWillConnect:)]) {
-    [delegate pusherWillConnect:self];
-  }
-  [socket open];
+	if ([delegate respondsToSelector:@selector(pusherWillConnect:)]) {
+		[delegate pusherWillConnect:self];
+	}
+	
+	[socket open];
 }
 
 @end
@@ -177,32 +186,37 @@ static NSString *sharedAppID = nil;
 
 + (void)setKey:(NSString *)apiKey;
 {
-  [sharedKey autorelease]; sharedKey = [apiKey copy];
+	[sharedKey autorelease]; sharedKey = [apiKey copy];
 }
 
 + (void)setSecret:(NSString *)secret;
 {
-  [sharedSecret autorelease]; sharedSecret = [secret copy];
+	[sharedSecret autorelease]; sharedSecret = [secret copy];
 }
 
 + (void)setAppID:(NSString *)appId;
 {
-  [sharedAppID autorelease]; sharedAppID = [appId copy];
+	[sharedAppID autorelease]; sharedAppID = [appId copy];
 }
 
 + (PTPusherChannel *)channel:(NSString *)name;
 {
-  return [[self newChannel:name] autorelease];
+	return [[self newChannel:name] autorelease];
 }
 
 + (PTPusherChannel *)newChannel:(NSString *)name;
 {
-  return [[PTPusherChannel alloc] initWithName:name appID:sharedAppID key:sharedKey secret:sharedSecret];
+	return [[PTPusherChannel alloc] initWithName:name appID:sharedAppID key:sharedKey secret:sharedSecret];
 }
 
 + (PTPusherPrivateChannel *)newPrivateChannel:(NSString *)name authPoint:(NSURL *)authPoint authParams:(NSDictionary *)authParams
 {
 	return [[PTPusherPrivateChannel alloc] initWithName:name appID:sharedAppID key:sharedKey secret:sharedSecret authPoint:authPoint authParams:authParams delegate:nil];
+}
+
++ (PTPusherPresenseChannel *)newPresenceChannel:(NSString *)name authPoint:(NSURL *)authPoint authParams:(NSDictionary *)authParams
+{
+	return [[PTPusherPresenseChannel alloc] initWithName:name appID:sharedAppID key:sharedKey secret:sharedSecret authPoint:authPoint authParams:authParams delegate:nil];
 }
 
 @end

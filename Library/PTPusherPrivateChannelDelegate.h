@@ -12,6 +12,9 @@
 
 @protocol PTPusherPrivateChannelDelegate <NSObject>
 
+@required
+- (BOOL)privateChannelShouldContinueWithAuthResponse:(NSData *)data;
+
 @optional
 - (void)privateChannelAuthenticationStarted:(PTPusherPrivateChannel *)channel;
 - (void)privateChannelAuthenticated:(PTPusherPrivateChannel *)channel;

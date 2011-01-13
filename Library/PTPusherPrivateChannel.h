@@ -11,6 +11,7 @@
 #import "PTPusherPrivateChannelDelegate.h"
 
 extern NSString *const PTPusherPrivateChannelAuthPointException;
+extern NSString *const PTPusherPrivateChannelInvalidNameException;
 
 @interface PTPusherPrivateChannel : PTPusherChannel <PTPusherDelegate> {
 	NSURL *authPointURL;

@@ -39,6 +39,8 @@ extern NSString *const PTPusherEventReceivedNotification;
 
 @class PTPusherChannel;
 @class PTPusherPrivateChannel;
+@class PTPusherPresenseChannel;
+
 @protocol PTPusherPrivateChannelDelegate;
 
 @interface PTPusher (SharedFactory)
@@ -48,5 +50,6 @@ extern NSString *const PTPusherEventReceivedNotification;
 + (PTPusherChannel *)channel:(NSString *)name;
 + (PTPusherChannel *)newChannel:(NSString *)name;
 + (PTPusherPrivateChannel *)newPrivateChannel:(NSString *)name authPoint:(NSURL *)authPoint authParams:(NSDictionary *)authParams;
++ (PTPusherPresenseChannel *)newPresenceChannel:(NSString *)name authPoint:(NSURL *)authPoint authParams:(NSDictionary *)authParams;
 @end
 

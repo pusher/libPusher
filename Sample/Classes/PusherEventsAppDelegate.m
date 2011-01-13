@@ -11,6 +11,7 @@
 #import "PTPusher.h"
 #import "PTPusherEvent.h"
 #import "PTPusherPrivateChannel.h"
+#import "PTPusherPresenseChannel.h"
 
 // this is not included in the source
 // you must create this yourself and define PUSHER_API_KEY in it
@@ -28,9 +29,13 @@
 	[PTPusher setSecret:PUSHER_API_SECRET];
 	[PTPusher setAppID:PUSHER_APP_ID];
 	
-	privateEventsChannel = [PTPusher newPrivateChannel:@"private-my-channel" authPoint:[NSURL URLWithString:@"http://localhost:3000/pusher/auth"] authParams:nil];
-	privateEventsChannel.delegate = self;
-	[privateEventsChannel startListeningForEvents];
+//	privateEventsChannel = [PTPusher newPrivateChannel:@"private-my-channel" authPoint:[NSURL URLWithString:@"http://localhost:3000/pusher/private_auth"] authParams:nil];
+//	privateEventsChannel.delegate = self;
+//	[privateEventsChannel startListeningForEvents];
+	
+	presenseEventsChannel = [PTPusher newPresenceChannel:@"presence-my-channel" authPoint:[NSURL URLWithString:@"http://localhost:3000/pusher/presence_auth"] authParams:[NSDictionary dictionaryWithObject:@"1" forKey:@"id"]];
+	presenseEventsChannel.delegate = self;
+	[presenseEventsChannel startListeningForEvents];
 	
 //	pusher = [[PTPusher alloc] initWithKey:PUSHER_API_KEY channel:@"test-channel"];
 //	pusher.delegate = self;
@@ -59,9 +64,10 @@
 #pragma mark -
 #pragma mark PTPusherPrivateChannel Delegate
 
-- (NSDictionary *)privateChannelParametersForAuthentication:(PTPusherPrivateChannel *)channel
+- (BOOL)privateChannelShouldContinueWithAuthResponse:(NSData *)data
 {
-	return nil;
+	// This method should check the response from the Authentication server and check to see if it's valid
+	return YES;
 }
 
 - (void)privateChannelAuthenticationStarted:(PTPusherPrivateChannel *)channel

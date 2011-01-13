@@ -10,6 +10,9 @@
 #import "PTPusherChannelDelegate.h"
 #import "PTPusherDelegate.h"
 
+#define kPrivateChannelPrefix @"private-"
+#define kPresenseChannelPrefix @"presence-"
+
 @class PTPusher;
 
 @interface PTPusherChannel : NSObject <PTPusherDelegate> {
