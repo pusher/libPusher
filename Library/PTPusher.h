@@ -10,8 +10,6 @@
 #import "ZTWebSocket.h"
 #import "PTPusherDelegate.h"
 
-extern NSString *const PTPusherDataKey;
-extern NSString *const PTPusherEventKey;
 extern NSString *const PTPusherEventReceivedNotification;
 
 @interface PTPusher : NSObject <ZTWebSocketDelegate> {
@@ -21,13 +19,13 @@ extern NSString *const PTPusherEventReceivedNotification;
   NSUInteger port;
   NSMutableDictionary *eventListeners;
   ZTWebSocket *socket;
-  NSUInteger socketID;
+  NSString *socketID;
   id<PTPusherDelegate> delegate;
   BOOL reconnect;
 }
 @property (nonatomic, readonly) NSString *APIKey;
 @property (nonatomic, readonly) NSString *channel;
-@property (nonatomic, readonly) NSUInteger socketID;
+@property (nonatomic, readonly) NSString *socketID;
 @property (nonatomic, copy) NSString *host;
 @property (nonatomic, assign) NSUInteger port;
 @property (nonatomic, assign) id<PTPusherDelegate> delegate;
@@ -35,9 +33,13 @@ extern NSString *const PTPusherEventReceivedNotification;
 
 - (id)initWithKey:(NSString *)key channel:(NSString *)channelName;
 - (void)addEventListener:(NSString *)event target:(id)target selector:(SEL)selector;
+
+- (void)sendToSocket:(NSString *)message;
 @end
 
 @class PTPusherChannel;
+@class PTPusherPrivateChannel;
+@protocol PTPusherPrivateChannelDelegate;
 
 @interface PTPusher (SharedFactory)
 + (void)setKey:(NSString *)apiKey;
@@ -45,5 +47,6 @@ extern NSString *const PTPusherEventReceivedNotification;
 + (void)setAppID:(NSString *)appId;
 + (PTPusherChannel *)channel:(NSString *)name;
 + (PTPusherChannel *)newChannel:(NSString *)name;
++ (PTPusherPrivateChannel *)newPrivateChannel:(NSString *)name authPoint:(NSURL *)authPoint;
 @end
 

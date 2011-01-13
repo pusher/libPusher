@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-
 @interface PTPusherEvent : NSObject {
   NSString *channel;
   NSString *name;
@@ -19,4 +18,5 @@
 @property (nonatomic, readonly) id data;
 
 - (id)initWithEventName:(NSString *)eventName data:(id)eventData channel:(NSString *)eventChannel;
+- (id)initWithDictionary:(NSDictionary *)dictionary;
 @end

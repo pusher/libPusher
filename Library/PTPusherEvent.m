@@ -9,6 +9,10 @@
 #import "PTPusherEvent.h"
 #import "JSON.h"
 
+#define PTPusherDataKey @"data"
+#define PTPusherEventKey @"event"
+#define PTPusherChannelKey @"channel"
+
 @implementation PTPusherEvent
 
 @synthesize name, channel;
@@ -16,37 +20,49 @@
 
 - (id)initWithEventName:(NSString *)eventName data:(id)eventData channel:(NSString *)eventChannel;
 {
-  if (self = [super init]) {
-    name = [eventName copy];
-    data = [eventData copy];
-    channel = [eventChannel copy];
-  }
-  return self;
+	if (self = [super init]) {
+		name = [eventName copy];
+		data = [eventData copy];
+		channel = [eventChannel copy];
+	}
+	
+	return self;
+}
+
+- (id)initWithDictionary:(NSDictionary *)dictionary
+{
+	return [self initWithEventName:[dictionary valueForKey:PTPusherEventKey] 
+							  data:[dictionary valueForKey:PTPusherDataKey] 
+						   channel:[dictionary valueForKey:PTPusherChannelKey]];
 }
 
 - (void)dealloc;
 {
-  [channel release];
-  [name release];
-  [data release];
-  [super dealloc];
+	[channel release];
+	[name release];
+	[data release];
+  
+	[super dealloc];
 }
 
 - (NSString *)description;
 {
-  return [NSString stringWithFormat:@"<PTPusherEvent channel:%@ name:%@ data:%@>", channel, name, data];
+	return [NSString stringWithFormat:@"<PTPusherEvent channel:%@ name:%@ data:%@>", channel, name, data];
 }
 
 - (id)data;
 {
-  id parsedData = nil;
-  if ([data respondsToSelector:@selector(JSONValue)]) {
-    parsedData = [data JSONValue];
-  }
-  if (parsedData == nil) {
-    parsedData = data;
-  }
-  return parsedData;
+	id parsedData = nil;
+	
+	if ([data respondsToSelector:@selector(JSONValue)]) {
+		parsedData = [data JSONValue];
+	}
+	
+	if (parsedData == nil) {
+		parsedData = data;
+	}
+	
+	return parsedData;
 }
 
 @end

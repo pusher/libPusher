@@ -10,6 +10,7 @@ extern NSString *const PTPusherPrivateChannelAuthPointException;
 
 #import <Foundation/Foundation.h>
 #import "PTPusherChannel.h"
+#import "PTPusherPrivateChannelDelegate.h"
 
 @interface PTPusherPrivateChannel : PTPusherChannel <PTPusherDelegate> {
 	NSURL *authPointURL;
@@ -20,6 +21,7 @@ extern NSString *const PTPusherPrivateChannelAuthPointException;
 			 appID:(NSString *)_id 
 			   key:(NSString *)_key 
 			secret:(NSString *)_secret 
-		 authPoint:(NSURL *)_authPoint;
+		 authPoint:(NSURL *)_authPoint
+		  delegate:(id <PTPusherPrivateChannelDelegate, PTPusherChannelDelegate>)_delegate;
 
 @end

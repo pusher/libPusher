@@ -11,9 +11,8 @@
 #import "JSON.h"
 #import "PTPusherEvent.h"
 #import "PTPusherChannel.h"
+#import "PTPusherPrivateChannel.h"
 
-NSString *const PTPusherDataKey = @"data";
-NSString *const PTPusherEventKey = @"event";
 NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotification";
 
 #define kPTPusherReconnectDelay 5.0
@@ -40,19 +39,19 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 
 - (id)initWithKey:(NSString *)key channel:(NSString *)channelName;
 {
-  if (self = [super init]) {
-    APIKey  = [key copy];
-    channel = [channelName copy];
-    eventListeners = [[NSMutableDictionary alloc] init];
-    host = @"ws.pusherapp.com";
-    port = 80;
-    delegate = nil;
-    reconnect = NO;
-    
-    socket = [[ZTWebSocket alloc] initWithURLString:self.URLString delegate:self];
-    [self connect];
-  }
-  return self;
+	if (self = [super init]) {
+		APIKey  = [key copy];
+		channel = [channelName copy];
+		eventListeners = [[NSMutableDictionary alloc] init];
+		host = @"ws.pusherapp.com";
+		port = 80;
+		delegate = nil;
+		reconnect = NO;
+
+		socket = [[ZTWebSocket alloc] initWithURLString:self.URLString delegate:self];
+		[self connect];
+	}
+	return self;
 }
 
 - (void)dealloc;
@@ -68,6 +67,11 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 - (NSString *)description;
 {
   return [NSString stringWithFormat:@"<PTPusher channel:%@>", channel];
+}
+
+- (void)sendToSocket:(NSString *)message
+{
+	[socket send:message];
 }
 
 #pragma mark -
@@ -131,14 +135,15 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 
 - (void)webSocket:(ZTWebSocket*)webSocket didReceiveMessage:(NSString*)message;
 {
-  id messageDictionary = [message JSONValue];
-  PTPusherEvent *event = [[PTPusherEvent alloc] initWithEventName:[messageDictionary valueForKey:PTPusherEventKey] data:[messageDictionary valueForKey:PTPusherDataKey] channel:self.channel];
+	id messageDictionary = [message JSONValue];
+	PTPusherEvent *event = [[PTPusherEvent alloc] initWithDictionary:messageDictionary];
   
-  if ([event.name isEqualToString:@"connection_established"]) {
-    socketID = [[event.data valueForKey:@"socket_id"] intValue];
-  }  
-  [self handleEvent:event];
-  [event release];
+	if ([event.name isEqualToString:@"connection_established"]) {
+		socketID = [[event.data valueForKey:@"socket_id"] retain];
+	}  
+	
+	[self handleEvent:event];
+	[event release];
 }
 
 #pragma mark -
@@ -146,8 +151,10 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 
 - (NSString *)URLString;
 {
-  return [NSString stringWithFormat:@"ws://%@:%d/app/%@?channel=%@",
-          self.host, self.port, self.APIKey, self.channel];
+	if (self.channel)
+		return [NSString stringWithFormat:@"ws://%@:%d/app/%@?channel=%@", self.host, self.port, self.APIKey, self.channel];
+	
+	return [NSString stringWithFormat:@"ws://%@:%d/app/%@", self.host, self.port, self.APIKey];
 }
 
 - (void)connect;
@@ -191,6 +198,11 @@ static NSString *sharedAppID = nil;
 + (PTPusherChannel *)newChannel:(NSString *)name;
 {
   return [[PTPusherChannel alloc] initWithName:name appID:sharedAppID key:sharedKey secret:sharedSecret];
+}
+
++ (PTPusherPrivateChannel *)newPrivateChannel:(NSString *)name authPoint:(NSURL *)authPoint
+{
+	return [[PTPusherPrivateChannel alloc] initWithName:name appID:sharedAppID key:sharedKey secret:sharedSecret authPoint:authPoint delegate:nil];
 }
 
 @end

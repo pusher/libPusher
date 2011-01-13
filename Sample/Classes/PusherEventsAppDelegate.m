@@ -10,6 +10,7 @@
 #import "PusherEventsViewController.h"
 #import "PTPusher.h"
 #import "PTPusherEvent.h"
+#import "PTPusherPrivateChannel.h"
 
 // this is not included in the source
 // you must create this yourself and define PUSHER_API_KEY in it
@@ -23,22 +24,28 @@
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application 
 {    
-  [PTPusher setKey:PUSHER_API_KEY];
-  [PTPusher setSecret:PUSHER_API_SECRET];
-  [PTPusher setAppID:PUSHER_APP_ID];
-  
-  
-  pusher = [[PTPusher alloc] initWithKey:PUSHER_API_KEY channel:@"test_channel"];
-  pusher.delegate = self;
-  
-  // uncomment to allow reconnections
-  // pusher.reconnect = YES;
-  
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handlePusherEvent:) name:PTPusherEventReceivedNotification object:nil];
-  
-  [pusher addEventListener:@"alert" target:self selector:@selector(handleAlertEvent:)];
-  [window addSubview:navigationController.view];
-  [window makeKeyAndVisible];
+	[PTPusher setKey:PUSHER_API_KEY];
+	[PTPusher setSecret:PUSHER_API_SECRET];
+	[PTPusher setAppID:PUSHER_APP_ID];
+	
+	if (privateEventsChannel == nil) {
+		privateEventsChannel = [PTPusher newPrivateChannel:@"private-my-channel" authPoint:[NSURL URLWithString:@"http://localhost:3000/pusher/auth"]];
+		privateEventsChannel.delegate = self;
+	}
+	[privateEventsChannel startListeningForEvents];
+	
+//	pusher = [[PTPusher alloc] initWithKey:PUSHER_API_KEY channel:@"test-channel"];
+//	pusher.delegate = self;
+
+	// uncomment to allow reconnections
+	//pusher.reconnect = YES;
+
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handlePusherEvent:) name:PTPusherEventReceivedNotification object:nil];
+
+//	[pusher addEventListener:@"alert" target:self selector:@selector(handleAlertEvent:)];
+
+	[window addSubview:navigationController.view];
+	[window makeKeyAndVisible];
 }
 
 - (void)dealloc 
@@ -49,6 +56,27 @@
   [navigationController release];
   [window release];
   [super dealloc];
+}
+
+#pragma mark -
+#pragma mark PTPusherPrivateChannel Delegate
+
+- (NSDictionary *)privateChannelParametersForAuthentication:(PTPusherPrivateChannel *)channel
+{
+	return nil;
+}
+
+- (void)privateChannelAuthenticationStarted:(PTPusherPrivateChannel *)channel
+{
+	NSLog(@"Private Channel Authentication Started: %@", channel.name);
+}
+- (void)privateChannelAuthenticated:(PTPusherPrivateChannel *)channel
+{
+	NSLog(@"Private Channel Authenticated: %@", channel.name);
+}
+- (void)privateChannelAuthenticationFailed:(PTPusherPrivateChannel *)channel withError:(NSError *)error
+{
+	NSLog(@"Private Channel Authentication Failed: %@", channel.name);
 }
 
 #pragma mark -

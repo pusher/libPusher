@@ -8,14 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import "PTPusherDelegate.h"
+#import "PTPusherChannelDelegate.h"
 
 @class PusherEventsViewController;
 @class PTPusher;
+@class PTPusherPrivateChannel;
 
-@interface PusherEventsAppDelegate : NSObject <UIApplicationDelegate, PTPusherDelegate> {
-  UIWindow *window;
-  UINavigationController *navigationController;
-  PTPusher *pusher;
+@interface PusherEventsAppDelegate : NSObject <UIApplicationDelegate, PTPusherDelegate, PTPusherChannelDelegate> {
+	UIWindow *window;
+	UINavigationController *navigationController;
+	PTPusher *pusher;
+	
+	PTPusherPrivateChannel *privateEventsChannel;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
