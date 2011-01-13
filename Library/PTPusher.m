@@ -200,9 +200,9 @@ static NSString *sharedAppID = nil;
   return [[PTPusherChannel alloc] initWithName:name appID:sharedAppID key:sharedKey secret:sharedSecret];
 }
 
-+ (PTPusherPrivateChannel *)newPrivateChannel:(NSString *)name authPoint:(NSURL *)authPoint
++ (PTPusherPrivateChannel *)newPrivateChannel:(NSString *)name authPoint:(NSURL *)authPoint authParams:(NSDictionary *)authParams
 {
-	return [[PTPusherPrivateChannel alloc] initWithName:name appID:sharedAppID key:sharedKey secret:sharedSecret authPoint:authPoint delegate:nil];
+	return [[PTPusherPrivateChannel alloc] initWithName:name appID:sharedAppID key:sharedKey secret:sharedSecret authPoint:authPoint authParams:authParams delegate:nil];
 }
 
 @end
