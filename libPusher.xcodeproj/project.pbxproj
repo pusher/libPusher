@@ -74,6 +74,7 @@
 		AB3F6A2C12DE8A780076D2EB /* PTPusherPresenseChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = AB3F6A2A12DE8A780076D2EB /* PTPusherPresenseChannel.m */; };
 		AB3F6A2D12DE8A8A0076D2EB /* PTPusherPrivateChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = ABB1C6EE12DA850300EDDA72 /* PTPusherPrivateChannel.h */; };
 		AB3F6A2E12DE8AB30076D2EB /* PTPusherPrivateChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = ABB1C6EF12DA850300EDDA72 /* PTPusherPrivateChannel.m */; };
+		AB3F6A9B12DFDEDC0076D2EB /* PTPusherPresenceChannelDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = AB3F6A9912DFDEDC0076D2EB /* PTPusherPresenceChannelDelegate.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -163,6 +164,7 @@
 		A3FE44881181B8EE009CF5D7 /* PTPusherChannelDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherChannelDelegate.h; sourceTree = "<group>"; };
 		AB3F6A2912DE8A780076D2EB /* PTPusherPresenseChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherPresenseChannel.h; sourceTree = "<group>"; };
 		AB3F6A2A12DE8A780076D2EB /* PTPusherPresenseChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTPusherPresenseChannel.m; sourceTree = "<group>"; };
+		AB3F6A9912DFDEDC0076D2EB /* PTPusherPresenceChannelDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherPresenceChannelDelegate.h; sourceTree = "<group>"; };
 		ABB1C6EE12DA850300EDDA72 /* PTPusherPrivateChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherPrivateChannel.h; sourceTree = "<group>"; };
 		ABB1C6EF12DA850300EDDA72 /* PTPusherPrivateChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTPusherPrivateChannel.m; sourceTree = "<group>"; };
 		ABB1C75212DA925100EDDA72 /* PTPusherPrivateChannelDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherPrivateChannelDelegate.h; sourceTree = "<group>"; };
@@ -222,6 +224,7 @@
 				ABB1C75212DA925100EDDA72 /* PTPusherPrivateChannelDelegate.h */,
 				AB3F6A2912DE8A780076D2EB /* PTPusherPresenseChannel.h */,
 				AB3F6A2A12DE8A780076D2EB /* PTPusherPresenseChannel.m */,
+				AB3F6A9912DFDEDC0076D2EB /* PTPusherPresenceChannelDelegate.h */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -407,6 +410,7 @@
 				AB3F6A2B12DE8A780076D2EB /* PTPusherPresenseChannel.h in Headers */,
 				A3CDE3BD11C93E580051777E /* ZTLog.h in Headers */,
 				A3CDE3BE11C93E580051777E /* ZTWebSocket.h in Headers */,
+				AB3F6A9B12DFDEDC0076D2EB /* PTPusherPresenceChannelDelegate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

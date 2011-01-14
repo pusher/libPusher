@@ -42,22 +42,30 @@ NSString* const PTPusherPresenceChannelInvalidNameException = @"PTPusherPrivateC
 {
 	PTPusherEvent *event = (PTPusherEvent *)note.object;
 	
-	if ([event.name isEqualToString:@"pusher:subscription_succeeded"]) {
-		NSLog(@"pusher:subscription_succeeded received:\n%@", [event description]);
+	if ([event.name isEqualToString:@"pusher:subscription_succeeded"] || [event.name rangeOfString:@"subscription_succeeded"].location != NSNotFound) {
+		SEL selector = @selector(presenceChannelSubscriptionSucceeded:withUserInfo:);
+		
+		if (self.delegate && [self.delegate respondsToSelector:selector])
+			[self.delegate performSelector:selector withObject:self withObject:event.data];
 	}
 	
 	else if ([event.name isEqualToString:@"pusher:member_added"]) {
-		NSLog(@"pusher:member_added received:\n%@", [event description]);
+		SEL selector = @selector(presenceChannel:memberAdded:);
+		
+		if (self.delegate && [self.delegate respondsToSelector:selector])
+			[self.delegate performSelector:selector withObject:self withObject:event.data];
 	}
 	
 	else if ([event.name isEqualToString:@"pusher:member_removed"]) {
-		NSLog(@"pusher:member_removed received:\n%@", [event description]);
+		SEL selector = @selector(presenceChannel:memberRemoved:);
+		
+		if (self.delegate && [self.delegate respondsToSelector:selector])
+			[self.delegate performSelector:selector withObject:self withObject:event.data];
 	}
 	
 	else {
 		[super receivedEventNotification:note];
 	}
-
 }
 
 @end

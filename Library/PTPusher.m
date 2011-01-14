@@ -12,6 +12,7 @@
 #import "PTPusherEvent.h"
 #import "PTPusherChannel.h"
 #import "PTPusherPrivateChannel.h"
+#import "PTPusherPresenseChannel.h"
 
 NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotification";
 
