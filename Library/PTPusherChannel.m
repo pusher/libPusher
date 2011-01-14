@@ -110,6 +110,9 @@ NSString *URLEncodedString(NSString *unencodedString) {
 	[queryParameters setValue:[NSNumber numberWithDouble:time(NULL)] forKey:@"auth_timestamp"];
 	[queryParameters setValue:@"1.0" forKey:@"auth_version"];
 	[queryParameters setValue:event forKey:@"name"];
+	
+	if (pusher.socketID != nil)
+		[queryParameters setValue:pusher.socketID forKey:@"socket_id"];
 
 	NSString *signatureQuery = [queryParameters sortedQueryString];
 	NSMutableString *signatureString = [NSMutableString stringWithFormat:@"POST\n%@\n%@", path, signatureQuery];
