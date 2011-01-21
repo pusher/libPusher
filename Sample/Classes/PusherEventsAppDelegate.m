@@ -10,8 +10,7 @@
 #import "PusherEventsViewController.h"
 #import "PTPusher.h"
 #import "PTPusherEvent.h"
-#import "PTPusherPrivateChannel.h"
-#import "PTPusherPresenseChannel.h"
+#import "PTPusherChannel.h"
 
 // this is not included in the source
 // you must create this yourself and define PUSHER_API_KEY in it
@@ -21,6 +20,7 @@
 
 @synthesize window;
 @synthesize navigationController;
+@synthesize eventsController;
 @synthesize pusher;
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application 
@@ -29,23 +29,19 @@
 	[PTPusher setSecret:PUSHER_API_SECRET];
 	[PTPusher setAppID:PUSHER_APP_ID];
 	
-//	pusher = [[PTPusher alloc] initWithKey:PUSHER_API_KEY channel:@"test-channel"];
-//	pusher.delegate = self;
-//
-//	//uncomment to allow reconnections
-//	pusher.reconnect = YES;
+	pusher = [[PTPusher alloc] initWithKey:PUSHER_API_KEY];
+	pusher.delegate = self;
+	pusher.reconnect = YES;
+	
+	PTPusherChannel *channel, *privateChannel, *presenceChannel = nil;
+	
+	channel = [pusher subscribeToChannel:@"test-channel" withAuthPoint:nil];
+	privateChannel = [pusher subscribeToChannel:@"private-my-channel" withAuthPoint:[NSURL URLWithString:@"http://localhost:3000/pusher/private_auth"]];
+	presenceChannel = [pusher subscribeToChannel:@"presence-my-channel" withAuthPoint:[NSURL URLWithString:@"http://localhost:3000/pusher/presence_auth"]];
+	
+	eventsController.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Unsubscribe" style:UIBarButtonItemStyleBordered target:self action:@selector(unsubscribe:)] autorelease];
 	
 //	[pusher addEventListener:@"alert" target:self selector:@selector(handleAlertEvent:)];
-	
-//	privateEventsChannel = [PTPusher newPrivateChannel:@"private-my-channel" authPoint:[NSURL URLWithString:@"http://localhost:3000/pusher/private_auth"] authParams:nil];
-//	privateEventsChannel.delegate = self;
-//	[privateEventsChannel startListeningForEvents];
-	
-	presenseEventsChannel = [PTPusher newPresenceChannel:@"presence-my-channel" authPoint:[NSURL URLWithString:@"http://localhost:3000/pusher/presence_auth"] authParams:[NSDictionary dictionaryWithObject:@"1" forKey:@"id"]];
-	presenseEventsChannel.delegate = self;
-	[presenseEventsChannel startListeningForEvents];
-
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handlePusherEvent:) name:PTPusherEventReceivedNotification object:nil];
 
 	[window addSubview:navigationController.view];
 	[window makeKeyAndVisible];
@@ -54,81 +50,73 @@
 - (void)dealloc 
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:PTPusherEventReceivedNotification object:pusher];
+
 	[pusher release];
 	[navigationController release];
 	[window release];
+	[eventsController release];
 	
 	[super dealloc];
 }
 
-#pragma mark -
-#pragma mark PTPusherPresenseChannel Delegate
+- (void)unsubscribe:(id)sender
+{
+	PTPusherChannel *channel = [pusher channelWithName:@"test-channel"];
+	[pusher unsubscribeFromChannel:channel];
+}
 
-- (void)presenceChannelSubscriptionSucceeded:(PTPusherPresenseChannel *)channel withUserInfo:(NSDictionary *)userInfo
+#pragma mark -
+#pragma mark Channel Delegate
+
+- (void)channel:(PTPusherChannel *)channel didReceiveEvent:(PTPusherEvent *)event
+{
+	NSLog([event description], nil);
+}
+
+#pragma mark -
+#pragma mark Private/Presence Channel Delegate
+
+- (NSDictionary *)extraParamsForChannelAuthentication:(PTPusherChannel *)channel
+{
+	// This is for sending additional parameters to Authentication server for further validation
+	return nil;
+}
+
+- (BOOL)privateChannelShouldContinueWithAuthResponse:(NSData *)data
+{
+	// This method should check the response from the Authentication server and see if it's valid
+	return YES;
+}
+
+#pragma mark -
+#pragma mark Presence Channel Delegate
+
+- (void)presenceChannelSubscriptionSucceeded:(PTPusherChannel *)channel withUserInfo:(NSDictionary *)userInfo
 {
 	NSLog(@"pusher:subscription_succeeded received:\n%@", [userInfo description]);
 }
 
-- (void)presenceChannel:(PTPusherPresenseChannel *)channel memberAdded:(NSDictionary *)memberInfo
+- (void)presenceChannel:(PTPusherChannel *)channel memberAdded:(NSDictionary *)memberInfo
 {
 	NSLog(@"pusher:member_added received:\n%@", [memberInfo description]);
 }
 
-- (void)presenceChannel:(PTPusherPresenseChannel *)channel memberRemoved:(NSDictionary *)memberInfo
+- (void)presenceChannel:(PTPusherChannel *)channel memberRemoved:(NSDictionary *)memberInfo
 {
 	NSLog(@"pusher:member_removed received:\n%@", [memberInfo description]);
 }
 
 #pragma mark -
-#pragma mark PTPusherPrivateChannel Delegate
+#pragma mark Private Channel Delegate
 
-- (BOOL)privateChannelShouldContinueWithAuthResponse:(NSData *)data
-{
-	// This method should check the response from the Authentication server and check to see if it's valid
-	return YES;
-}
-
-- (void)privateChannelAuthenticationStarted:(PTPusherPrivateChannel *)channel
+- (void)channelAuthenticationStarted:(PTPusherChannel *)channel
 {
 	NSLog(@"Private Channel Authentication Started: %@", channel.name);
 }
-- (void)privateChannelAuthenticated:(PTPusherPrivateChannel *)channel
-{
-	NSLog(@"Private Channel Authenticated: %@", channel.name);
-}
-- (void)privateChannelAuthenticationFailed:(PTPusherPrivateChannel *)channel withError:(NSError *)error
+
+- (void)channelAuthenticationFailed:(PTPusherChannel *)channel withError:(NSError *)error
 {
 	NSLog(@"Private Channel Authentication Failed: %@", channel.name);
-}
-
-#pragma mark -
-#pragma mark Sample Pusher event handlers
-
-// specific alert handler, handle events using target/selector dispatch
-- (void)handleAlertEvent:(PTPusherEvent *)event;
-{
-	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[event.data valueForKey:@"title"] message:[event.data valueForKey:@"message"] delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
-	[alertView show];
-	[alertView release];
-}
-
-// generic alert handler, handle all events using NSNotifications
-- (void)handlePusherEvent:(NSNotification *)note;
-{
-	NSLog(@"Received event: %@", note.object);
-}
-
-#pragma mark -
-#pragma mark UIAlertView delegate methods
-
-- (void)didPresentAlertView:(UIAlertView *)alertView
-{
-	[self performSelector:@selector(dismissAlertView:) withObject:alertView afterDelay:1];
-}
-
-- (void)dismissAlertView:(UIAlertView *)alertView;
-{
-	[alertView dismissWithClickedButtonIndex:0 animated:YES];
 }
 
 #pragma mark -

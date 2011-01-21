@@ -11,8 +11,6 @@
 #import "JSON.h"
 #import "PTPusherEvent.h"
 #import "PTPusherChannel.h"
-#import "PTPusherPrivateChannel.h"
-#import "PTPusherPresenseChannel.h"
 
 NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotification";
 
@@ -22,7 +20,16 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 - (NSString *)URLString;
 - (void)handleEvent:(PTPusherEvent *)event;
 - (void)connect;
+
+- (void)sendEventPayload:(NSDictionary *)payLoad;
+
+- (void)_subscribeToAllChannels;
+- (void)_subscribeChannel:(PTPusherChannel *)channel;
+
 @property (nonatomic, readonly) NSString *URLString;
+@property (nonatomic, readonly) NSMutableDictionary *channels;
+@property (nonatomic, readonly) NSMutableArray *subscribeQueue;
+
 @end
 
 #pragma mark -
@@ -30,24 +37,28 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 @implementation PTPusher
 
 @synthesize APIKey;
-@synthesize channel;
 @synthesize socketID;
 @synthesize host;
 @synthesize port;
 @synthesize delegate;
 @synthesize reconnect;
+@synthesize channels;
+@synthesize subscribeQueue;
+
 @dynamic URLString;
 
-- (id)initWithKey:(NSString *)key channel:(NSString *)channelName;
+- (id)initWithKey:(NSString *)key;
 {
 	if (self = [super init]) {
 		APIKey  = [key copy];
-		channel = [channelName copy];
 		eventListeners = [[NSMutableDictionary alloc] init];
 		host = @"ws.pusherapp.com";
 		port = 80;
 		delegate = nil;
 		reconnect = NO;
+		
+		channels = [[NSMutableDictionary alloc] initWithCapacity:5];
+		subscribeQueue = [[NSMutableArray alloc] initWithCapacity:5];
 
 		socket = [[ZTWebSocket alloc] initWithURLString:self.URLString delegate:self];
 		[self connect];
@@ -59,20 +70,119 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 {
 	[socket close];
 	[socket release];
+	
 	[eventListeners release];
 	[APIKey release];
-	[channel release];
+	
+	[channels release];
+	[subscribeQueue release];
+	
 	[super dealloc];
 }
 
-- (NSString *)description;
+#pragma mark -
+#pragma mark Private
+
+- (void)_subscribeToAllChannels
 {
-	return [NSString stringWithFormat:@"<PTPusher channel:%@>", channel];
+	for (PTPusherChannel *channel in subscribeQueue) {
+		[self _subscribeChannel:channel];
+	}
+	
+	[subscribeQueue removeAllObjects];
 }
+
+- (void)_subscribeChannel:(PTPusherChannel *)channel
+{
+	if (socket.connected) {
+		BOOL shouldContinue = YES;
+		
+		NSMutableDictionary *dataLoad = [NSMutableDictionary dictionary];
+		[dataLoad setObject:channel.name forKey:@"channel"];
+		
+		if (channel.isPrivate || channel.isPresence) {
+			NSData *data = [channel authenticateWithSocketID:self.socketID];
+			
+			if (self.delegate && [self.delegate respondsToSelector:@selector(channel:continueSubscriptionWithAuthResponse:)])
+				shouldContinue = [self.delegate channel:channel continueSubscriptionWithAuthResponse:data];
+			
+			if (shouldContinue) {
+				NSString *dataString = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
+				NSDictionary *messageDict = [dataString JSONValue];
+				
+				[dataLoad addEntriesFromDictionary:messageDict];
+			}
+		}
+		
+		if (shouldContinue) [self sendEvent:@"pusher:subscribe" data:dataLoad];
+	}
+	
+	[channels setObject:channel forKey:channel.name];
+}
+
+- (void)_unsunscribeChannel:(PTPusherChannel *)channel
+{
+	if (socket.connected) {
+		NSDictionary *dataLoad = [NSDictionary dictionaryWithObject:channel.name forKey:@"channel"];
+		
+		[self sendEvent:@"pusher:unsubscribe" data:dataLoad];
+	}
+	
+	[channels removeObjectForKey:channel.name];
+}
+
+#pragma mark -
+#pragma mark Subscription Methods
+
+- (PTPusherChannel *)subscribeToChannel:(NSString *)name withAuthPoint:(NSURL *)authPoint
+{
+	PTPusherChannel *channel = [channels objectForKey:name];
+	if (!channel)
+		channel = [[[PTPusherChannel alloc] initWithName:name pusher:self] autorelease];
+	
+	channel.authPoint = authPoint;
+	channel.delegate = self.delegate;
+	
+	if (socket.connected)
+		[self _subscribeChannel:channel];
+	else
+		[subscribeQueue addObject:channel];
+	
+	return channel;
+}
+
+- (void)unsubscribeFromChannel:(PTPusherChannel	*)channel
+{
+	[self _unsunscribeChannel:channel];
+}
+
+- (PTPusherChannel *)channelWithName:(NSString *)name
+{
+	return [self.channels objectForKey:name];
+}
+
+#pragma mark -
+#pragma mark Socket Messaging
 
 - (void)sendToSocket:(NSString *)message
 {
 	[socket send:message];
+}
+
+- (void)sendEvent:(NSString *)eventName data:(NSDictionary *)dataLoad
+{
+	NSMutableDictionary *payload = [NSMutableDictionary dictionary];
+	[payload setObject:eventName forKey:@"event"];
+	[payload setObject:dataLoad forKey:@"data"];
+	
+	[self sendEventPayload:payload];
+}
+
+- (void)sendEventPayload:(NSDictionary *)payload
+{
+	NSString *plString = [payload JSONRepresentation];
+	
+	[self sendToSocket:plString];
 }
 
 #pragma mark -
@@ -104,6 +214,11 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 	}
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:PTPusherEventReceivedNotification object:event];
+	
+	if (event.channel != nil) {
+		PTPusherChannel *channel = [self channelWithName:event.channel];
+		[channel eventReceived:event];
+	}
 }
 
 #pragma mark -
@@ -139,19 +254,23 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 
 - (void)webSocket:(ZTWebSocket*)webSocket didReceiveMessage:(NSString*)message;
 {
+	NSLog(@"\nReceived Socket Message:\n%@", message);
+	
 	id messageDictionary = [message JSONValue];
 	PTPusherEvent *event = [[PTPusherEvent alloc] initWithDictionary:messageDictionary];
   
 	if ([event.name isEqualToString:@"pusher:connection_established"]) {
 		socketID = [[event.data valueForKey:@"socket_id"] retain];
+		
+		[self _subscribeToAllChannels];
 	}  
 	
 	else if ([event.name isEqualToString:@"pusher:error"]) {
 		NSLog([event description], nil);
 	}
-
 	
 	[self handleEvent:event];
+	
 	[event release];
 }
 
@@ -160,8 +279,8 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 
 - (NSString *)URLString;
 {
-	if (self.channel != nil)
-		return [NSString stringWithFormat:@"ws://%@:%d/app/%@?channel=%@", self.host, self.port, self.APIKey, self.channel];
+//	if (self.channel != nil)
+//		return [NSString stringWithFormat:@"ws://%@:%d/app/%@?channel=%@", self.host, self.port, self.APIKey, self.channel];
 	
 	return [NSString stringWithFormat:@"ws://%@:%d/app/%@", self.host, self.port, self.APIKey];
 }
@@ -175,49 +294,44 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 	[socket open];
 }
 
-@end
-
 #pragma mark -
-
-@implementation PTPusher (SharedFactory)
+#pragma mark Accessor Methods
 
 static NSString *sharedKey = nil;
 static NSString *sharedSecret = nil;
 static NSString *sharedAppID = nil;
 
-+ (void)setKey:(NSString *)apiKey;
++ (NSString *)key
 {
-	[sharedKey autorelease]; sharedKey = [apiKey copy];
+	return sharedKey;
 }
 
-+ (void)setSecret:(NSString *)secret;
++ (void)setKey:(NSString *)apiKey
 {
-	[sharedSecret autorelease]; sharedSecret = [secret copy];
+	[sharedKey release];
+	sharedKey = [apiKey copy];
 }
 
-+ (void)setAppID:(NSString *)appId;
++ (NSString *)secret
 {
-	[sharedAppID autorelease]; sharedAppID = [appId copy];
+	return sharedSecret;
 }
 
-+ (PTPusherChannel *)channel:(NSString *)name;
++ (void)setSecret:(NSString *)secret
 {
-	return [[self newChannel:name] autorelease];
+	[sharedSecret release];
+	sharedSecret = [secret copy];
 }
 
-+ (PTPusherChannel *)newChannel:(NSString *)name;
++ (NSString *)appID
 {
-	return [[PTPusherChannel alloc] initWithName:name appID:sharedAppID key:sharedKey secret:sharedSecret];
+	return sharedAppID;
 }
 
-+ (PTPusherPrivateChannel *)newPrivateChannel:(NSString *)name authPoint:(NSURL *)authPoint authParams:(NSDictionary *)authParams
++ (void)setAppID:(NSString *)appId
 {
-	return [[PTPusherPrivateChannel alloc] initWithName:name appID:sharedAppID key:sharedKey secret:sharedSecret authPoint:authPoint authParams:authParams delegate:nil];
-}
-
-+ (PTPusherPresenseChannel *)newPresenceChannel:(NSString *)name authPoint:(NSURL *)authPoint authParams:(NSDictionary *)authParams
-{
-	return [[PTPusherPresenseChannel alloc] initWithName:name appID:sharedAppID key:sharedKey secret:sharedSecret authPoint:authPoint authParams:authParams delegate:nil];
+	[sharedAppID release];
+	sharedAppID = [appId copy];
 }
 
 @end

@@ -7,44 +7,48 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PTPusherChannelDelegate.h"
+
+#import "PTPusher.h"
 #import "PTPusherDelegate.h"
+#import "PTPusherChannelDelegate.h"
 
 #define kPrivateChannelPrefix @"private-"
 #define kPresenseChannelPrefix @"presence-"
 
-@class PTPusher;
+@interface PTPusherChannel : NSObject <PTPusherChannelProtocol> {
+	NSString *name;
+	NSURL *authPoint;
 
-@interface PTPusherChannel : NSObject <PTPusherDelegate> {
-  NSString *name;
-  NSString *appid;
-  NSString *APIKey;
-  NSString *secret;
-  NSOperationQueue *operationQueue;
-  PTPusher *pusher;
-  id<PTPusherChannelDelegate> delegate;
+	NSOperationQueue *operationQueue;
+	PTPusher *pusher;
+	
+	BOOL isPrivate;
+	BOOL isPresence;
+	
+	id <PTPusherDelegate, PTPusherChannelDelegate> delegate;
 }
-@property (nonatomic, readonly) NSString *name;
-@property (nonatomic, assign) id<PTPusherChannelDelegate> delegate;
+@property (nonatomic, readonly)		NSString *name;
+@property (nonatomic, retain)		NSURL *authPoint;
+@property (nonatomic, readonly)		PTPusher *pusher;
+@property (nonatomic, readonly)		BOOL isPrivate;
+@property (nonatomic, readonly)		BOOL isPresence;
 
-- (id)initWithName:(NSString *)channelName 
-             appID:(NSString *)_id 
-               key:(NSString *)_key 
-            secret:(NSString *)_secret;
+@property (nonatomic, assign)		id <PTPusherDelegate, PTPusherChannelDelegate> delegate;
+
+- (id)initWithName:(NSString *)_name pusher:(PTPusher *)_pusher;
+
+- (NSData *)authenticateWithSocketID:(NSString *)_socketID;
 
 - (void)triggerEvent:(NSString *)name data:(id)data;
-- (void)startListeningForEvents;
-- (void)stopListeningForEvents;
 @end
 
-@interface PTPusherClientOperation : NSOperation
-{
-  NSURL *url;
-  NSString *body;
-  PTPusherChannel *channel;
-  id<PTPusherChannelDelegate> delegate;
+@interface PTPusherClientOperation : NSOperation {
+	NSURL *url;
+	NSString *body;
+	PTPusherChannel *channel;
+	id<PTPusherChannelDelegate> delegate;
 }
-@property (nonatomic, assign) id<PTPusherChannelDelegate> delegate;
+@property (nonatomic, assign) id <PTPusherChannelDelegate> delegate;
 @property (nonatomic, retain) PTPusherChannel *channel;
 
 - (id)initWithURL:(NSURL *)_url JSONString:(NSString *)json;

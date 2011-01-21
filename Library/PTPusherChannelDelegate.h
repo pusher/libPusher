@@ -14,10 +14,21 @@
 @protocol PTPusherChannelDelegate <NSObject>
 
 @optional
-- (void)channelDidConnect:(PTPusherChannel *)channel;
-- (void)channelDidDisconnect:(PTPusherChannel *)channel;
+// Regular Channels
 - (void)channel:(PTPusherChannel *)channel didReceiveEvent:(PTPusherEvent *)event;
 - (void)channelDidTriggerEvent:(PTPusherChannel *)channel;
 - (void)channelFailedToTriggerEvent:(PTPusherChannel *)channel error:(NSError *)error;
+
+// Both Private and Presence
+- (NSDictionary *)extraParamsForChannelAuthentication:(PTPusherChannel *)channel;
+- (BOOL)channel:(PTPusherChannel *)channel continueSubscriptionWithAuthResponse:(NSData *)data;
+
+- (void)channelAuthenticationStarted:(PTPusherChannel *)channel;
+- (void)channelAuthenticationFailed:(PTPusherChannel *)channel withError:(NSError *)error;
+
+// Presence Channels
+- (void)presenceChannelSubscriptionSucceeded:(PTPusherChannel *)channel withUserInfo:(NSDictionary *)userInfo;
+- (void)presenceChannel:(PTPusherChannel *)channel memberAdded:(NSDictionary *)memberInfo;
+- (void)presenceChannel:(PTPusherChannel *)channel memberRemoved:(NSDictionary *)memberInfo;
 
 @end

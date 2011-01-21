@@ -12,20 +12,18 @@
 
 @class PusherEventsViewController;
 @class PTPusher;
-@class PTPusherPrivateChannel;
-@class PTPusherPresenseChannel;
 
 @interface PusherEventsAppDelegate : NSObject <UIApplicationDelegate, PTPusherDelegate, PTPusherChannelDelegate> {
 	UIWindow *window;
 	UINavigationController *navigationController;
 	PTPusher *pusher;
-	
-	PTPusherPrivateChannel *privateEventsChannel;
-	PTPusherPresenseChannel *presenseEventsChannel;
+	IBOutlet PusherEventsViewController *eventsController;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
+@property (nonatomic, retain) IBOutlet PusherEventsViewController *eventsController;
+
 @property (nonatomic, retain) PTPusher *pusher;
 @end
 
