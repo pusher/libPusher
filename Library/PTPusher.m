@@ -196,7 +196,7 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 #pragma mark -
 #pragma mark Event listening
 
-- (void)addEvent:(NSString *)eventName block:(void (^)(PTPusherEvent *event))block
+- (void)addEventListener:(NSString *)eventName block:(void (^)(PTPusherEvent *event))block
 {
 	NSMutableArray *listeners = [eventBlockListeners objectForKey:eventName];
 	

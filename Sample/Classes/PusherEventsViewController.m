@@ -27,7 +27,7 @@
 
 	if (eventsReceived == nil) eventsReceived = [[NSMutableArray alloc] init];
 	
-	[eventsChannel addEvent:@"new-event" block:^(PTPusherEvent *event) {
+	[eventsChannel addEventListener:@"new-event" block:^(PTPusherEvent *event) {
 		[self.tableView beginUpdates];
 		[eventsReceived insertObject:event atIndex:0];
 		[self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationTop];

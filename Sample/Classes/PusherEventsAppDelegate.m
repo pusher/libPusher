@@ -33,7 +33,7 @@
 	pusher.delegate = self;
 	pusher.reconnect = YES;
 	
-	[pusher addEvent:@"test-global-event" block:^(PTPusherEvent *event) {
+	[pusher addEventListener:@"test-global-event" block:^(PTPusherEvent *event) {
 		NSLog(@"Received Block Event!! : %@", [event description]);
 	}];
 	

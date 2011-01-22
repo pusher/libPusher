@@ -40,7 +40,7 @@
 
 - (id)initWithName:(NSString *)_name pusher:(PTPusher *)_pusher;
 
-- (void)addEvent:(NSString *)eventName block:(void (^)(PTPusherEvent *event))block;
+- (void)addEventListener:(NSString *)eventName block:(void (^)(PTPusherEvent *event))block;
 - (void)addEventListener:(NSString *)eventName target:(id)target selector:(SEL)selector;
 
 - (NSData *)authenticateWithSocketID:(NSString *)_socketID;

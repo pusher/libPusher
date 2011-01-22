@@ -40,7 +40,7 @@ extern NSString *const PTPusherEventReceivedNotification;
 
 - (id)initWithKey:(NSString *)key;
 
-- (void)addEvent:(NSString *)eventName block:(void (^)(PTPusherEvent *event))block;
+- (void)addEventListener:(NSString *)eventName block:(void (^)(PTPusherEvent *event))block;
 - (void)addEventListener:(NSString *)event target:(id)target selector:(SEL)selector;
 
 - (PTPusherChannel *)subscribeToChannel:(NSString *)name withAuthPoint:(NSURL *)authPoint;
