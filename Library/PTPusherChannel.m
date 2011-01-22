@@ -9,6 +9,7 @@
 #import "PTPusherChannel.h"
 #import "PTPusher.h"
 #import "PTPusherEvent.h"
+#import "PTEventListener.h"
 #import "JSON.h"
 #import "NSString+Hashing.h"
 #import "NSDictionary+QueryString.h"
@@ -45,6 +46,7 @@ NSString *URLEncodedString(NSString *unencodedString) {
 @synthesize name, authPoint;
 @synthesize pusher;
 @synthesize delegate;
+
 @dynamic isPrivate, isPresence;
 
 - (id)initWithName:(NSString *)_name pusher:(PTPusher *)_pusher
@@ -55,21 +57,80 @@ NSString *URLEncodedString(NSString *unencodedString) {
 		
 		operationQueue = [[NSOperationQueue alloc] init];
 		delegate = nil;
+		
+		eventListeners = [[NSMutableDictionary alloc] init];
+		eventBlockListeners = [[NSMutableDictionary alloc] init];
 	}
 	
 	return self;
 }
 
-- (void)dealloc;
+- (void)dealloc
 {	
 	[name release];
 	[operationQueue release];
 	[authPoint release];
 	
+	[eventListeners release];
+	[eventBlockListeners release];
+	
 	[super dealloc];
 }
 
-- (void)triggerEvent:(NSString *)event data:(id)data;
+#pragma mark -
+#pragma mark Event Listening
+
+- (void)addEvent:(NSString *)eventName block:(void (^)(PTPusherEvent *event))block
+{
+	NSMutableArray *listeners = [eventBlockListeners objectForKey:eventName];
+	
+	if (listeners == nil) {
+		listeners = [NSMutableArray array];
+		[eventBlockListeners setObject:listeners forKey:eventName];
+	}
+	
+	[listeners addObject:[[block copy] autorelease]];
+}
+
+- (void)addEventListener:(NSString *)eventName target:(id)target selector:(SEL)selector
+{
+	NSMutableArray *listeners = [eventListeners objectForKey:eventName];
+	
+	if (listeners == nil) {
+		listeners = [NSMutableArray	array];
+		[eventListeners setValue:listeners forKey:eventName];
+	}
+	
+	PTEventListener *listener = [[[PTEventListener alloc] initWithTarget:target selector:selector] autorelease];
+	[listeners addObject:listener];
+}
+
+#pragma mark -
+#pragma mark Event handling
+
+- (void)handleEvent:(PTPusherEvent *)event
+{
+	if ([self.delegate respondsToSelector:@selector(channel:didReceiveEvent:)]) {
+		[self.delegate channel:self didReceiveEvent:event];
+	}
+	
+	NSArray *listenersForEvent = [eventListeners objectForKey:event.name];
+	
+	for (PTEventListener *listener in listenersForEvent) {
+		[listener dispatch:event];
+	}
+	
+	NSArray *blockListenersForEvent = [eventBlockListeners objectForKey:event.name];
+	
+	for (void (^block)(PTPusherEvent *event) in blockListenersForEvent) {
+		block(event);
+	}
+}
+
+#pragma mark -
+#pragma mark Event Triggering
+
+- (void)triggerEvent:(NSString *)event data:(id)data
 {
 	NSString *path = [NSString stringWithFormat:@"/apps/%@/channels/%@/events", [PTPusher appID], name];
 	NSString *body = [data JSONRepresentation];
@@ -184,9 +245,7 @@ NSString *URLEncodedString(NSString *unencodedString) {
 			[self.delegate performSelector:selector withObject:self withObject:event.data];
 	}
 	
-	else if ([self.delegate respondsToSelector:@selector(channel:didReceiveEvent:)]) {
-		[self.delegate channel:self didReceiveEvent:event];
-	}
+	[self handleEvent:event];
 }
 
 @end
@@ -196,7 +255,7 @@ NSString *URLEncodedString(NSString *unencodedString) {
 @synthesize delegate;
 @synthesize channel;
 
-- (id)initWithURL:(NSURL *)_url JSONString:(NSString *)json;
+- (id)initWithURL:(NSURL *)_url JSONString:(NSString *)json
 {
 	if (self = [super init]) {
 		url = [_url copy];
@@ -205,7 +264,7 @@ NSString *URLEncodedString(NSString *unencodedString) {
 	return self;
 }
 
-- (void)dealloc;
+- (void)dealloc
 {
 	[url release];
 	[body release];

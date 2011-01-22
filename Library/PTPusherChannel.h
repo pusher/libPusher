@@ -26,6 +26,9 @@
 	BOOL isPresence;
 	
 	id <PTPusherDelegate, PTPusherChannelDelegate> delegate;
+	
+	NSMutableDictionary *eventListeners;
+	NSMutableDictionary *eventBlockListeners;
 }
 @property (nonatomic, readonly)		NSString *name;
 @property (nonatomic, retain)		NSURL *authPoint;
@@ -36,6 +39,9 @@
 @property (nonatomic, assign)		id <PTPusherDelegate, PTPusherChannelDelegate> delegate;
 
 - (id)initWithName:(NSString *)_name pusher:(PTPusher *)_pusher;
+
+- (void)addEvent:(NSString *)eventName block:(void (^)(PTPusherEvent *event))block;
+- (void)addEventListener:(NSString *)eventName target:(id)target selector:(SEL)selector;
 
 - (NSData *)authenticateWithSocketID:(NSString *)_socketID;
 

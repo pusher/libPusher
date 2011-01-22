@@ -19,11 +19,14 @@ extern NSString *const PTPusherEventReceivedNotification;
 	NSString *APIKey;	
 	NSString *host;
 	NSUInteger port;
-	NSMutableDictionary *eventListeners;
+	
 	ZTWebSocket *socket;
 	NSString *socketID;
 	id <PTPusherDelegate, PTPusherChannelDelegate> delegate;
 	BOOL reconnect;
+	
+	NSMutableDictionary *eventListeners;
+	NSMutableDictionary *eventBlockListeners;
 	
 	NSMutableDictionary *channels;
 	NSMutableArray *subscribeQueue;
@@ -36,6 +39,8 @@ extern NSString *const PTPusherEventReceivedNotification;
 @property (nonatomic, assign)		BOOL reconnect;
 
 - (id)initWithKey:(NSString *)key;
+
+- (void)addEvent:(NSString *)eventName block:(void (^)(PTPusherEvent *event))block;
 - (void)addEventListener:(NSString *)event target:(id)target selector:(SEL)selector;
 
 - (PTPusherChannel *)subscribeToChannel:(NSString *)name withAuthPoint:(NSURL *)authPoint;

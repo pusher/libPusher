@@ -33,15 +33,22 @@
 	pusher.delegate = self;
 	pusher.reconnect = YES;
 	
-	PTPusherChannel *channel, *privateChannel, *presenceChannel = nil;
+	[pusher addEvent:@"test-global-event" block:^(PTPusherEvent *event) {
+		NSLog(@"Received Block Event!! : %@", [event description]);
+	}];
 	
-	channel = [pusher subscribeToChannel:@"test-channel" withAuthPoint:nil];
-	privateChannel = [pusher subscribeToChannel:@"private-my-channel" withAuthPoint:[NSURL URLWithString:@"http://localhost:3000/pusher/private_auth"]];
-	presenceChannel = [pusher subscribeToChannel:@"presence-my-channel" withAuthPoint:[NSURL URLWithString:@"http://localhost:3000/pusher/presence_auth"]];
+//	PTPusherChannel *channel = [pusher subscribeToChannel:@"test-channel" withAuthPoint:nil];
+//	channel.delegate = self;
+	
+	PTPusherChannel *privateChannel = [pusher subscribeToChannel:@"private-my-channel" withAuthPoint:[NSURL URLWithString:@"http://localhost:3000/pusher/private_auth"]];
+	privateChannel.delegate = self;
+	
+//	PTPusherChannel *presenceChannel = [pusher subscribeToChannel:@"presence-my-channel" withAuthPoint:[NSURL URLWithString:@"http://localhost:3000/pusher/presence_auth"]];
+//	presenceChannel.delegate = self;
+	
+	eventsController.eventsChannel = privateChannel;
 	
 	eventsController.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Unsubscribe" style:UIBarButtonItemStyleBordered target:self action:@selector(unsubscribe:)] autorelease];
-	
-//	[pusher addEventListener:@"alert" target:self selector:@selector(handleAlertEvent:)];
 
 	[window addSubview:navigationController.view];
 	[window makeKeyAndVisible];
@@ -70,7 +77,7 @@
 
 - (void)channel:(PTPusherChannel *)channel didReceiveEvent:(PTPusherEvent *)event
 {
-	NSLog([event description], nil);
+//	NSLog([event description], nil);
 }
 
 #pragma mark -

@@ -47,11 +47,10 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 
 @dynamic URLString;
 
-- (id)initWithKey:(NSString *)key;
+- (id)initWithKey:(NSString *)key
 {
 	if (self = [super init]) {
 		APIKey  = [key copy];
-		eventListeners = [[NSMutableDictionary alloc] init];
 		host = @"ws.pusherapp.com";
 		port = 80;
 		delegate = nil;
@@ -59,6 +58,9 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 		
 		channels = [[NSMutableDictionary alloc] initWithCapacity:5];
 		subscribeQueue = [[NSMutableArray alloc] initWithCapacity:5];
+		
+		eventListeners = [[NSMutableDictionary alloc] init];
+		eventBlockListeners = [[NSMutableDictionary alloc] init];
 
 		socket = [[ZTWebSocket alloc] initWithURLString:self.URLString delegate:self];
 		[self connect];
@@ -66,16 +68,18 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 	return self;
 }
 
-- (void)dealloc;
+- (void)dealloc
 {
 	[socket close];
 	[socket release];
 	
-	[eventListeners release];
 	[APIKey release];
 	
 	[channels release];
 	[subscribeQueue release];
+	
+	[eventListeners release];
+	[eventBlockListeners release];
 	
 	[super dealloc];
 }
@@ -94,41 +98,45 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 
 - (void)_subscribeChannel:(PTPusherChannel *)channel
 {
-	if (socket.connected) {
-		BOOL shouldContinue = YES;
-		
-		NSMutableDictionary *dataLoad = [NSMutableDictionary dictionary];
-		[dataLoad setObject:channel.name forKey:@"channel"];
-		
-		if (channel.isPrivate || channel.isPresence) {
-			NSData *data = [channel authenticateWithSocketID:self.socketID];
+	if (channel != nil) {
+		if (socket.connected) {
+			BOOL shouldContinue = YES;
 			
-			if (self.delegate && [self.delegate respondsToSelector:@selector(channel:continueSubscriptionWithAuthResponse:)])
-				shouldContinue = [self.delegate channel:channel continueSubscriptionWithAuthResponse:data];
+			NSMutableDictionary *dataLoad = [NSMutableDictionary dictionary];
+			[dataLoad setObject:channel.name forKey:@"channel"];
 			
-			if (shouldContinue) {
-				NSString *dataString = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
-				NSDictionary *messageDict = [dataString JSONValue];
+			if (channel.isPrivate || channel.isPresence) {
+				NSData *data = [channel authenticateWithSocketID:self.socketID];
 				
-				[dataLoad addEntriesFromDictionary:messageDict];
+				if (self.delegate && [self.delegate respondsToSelector:@selector(channel:continueSubscriptionWithAuthResponse:)])
+					shouldContinue = [self.delegate channel:channel continueSubscriptionWithAuthResponse:data];
+				
+				if (shouldContinue) {
+					NSString *dataString = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
+					NSDictionary *messageDict = [dataString JSONValue];
+					
+					[dataLoad addEntriesFromDictionary:messageDict];
+				}
 			}
+			
+			if (shouldContinue) [self sendEvent:@"pusher:subscribe" data:dataLoad];
 		}
 		
-		if (shouldContinue) [self sendEvent:@"pusher:subscribe" data:dataLoad];
+		[channels setObject:channel forKey:channel.name];
 	}
-	
-	[channels setObject:channel forKey:channel.name];
 }
 
 - (void)_unsunscribeChannel:(PTPusherChannel *)channel
 {
-	if (socket.connected) {
-		NSDictionary *dataLoad = [NSDictionary dictionaryWithObject:channel.name forKey:@"channel"];
+	if (channel != nil) {
+		if (socket.connected) {
+			NSDictionary *dataLoad = [NSDictionary dictionaryWithObject:channel.name forKey:@"channel"];
+			
+			[self sendEvent:@"pusher:unsubscribe" data:dataLoad];
+		}
 		
-		[self sendEvent:@"pusher:unsubscribe" data:dataLoad];
+		[channels removeObjectForKey:channel.name];
 	}
-	
-	[channels removeObjectForKey:channel.name];
 }
 
 #pragma mark -
@@ -188,24 +196,35 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 #pragma mark -
 #pragma mark Event listening
 
-- (void)addEventListener:(NSString *)eventName target:(id)target selector:(SEL)selector;
+- (void)addEvent:(NSString *)eventName block:(void (^)(PTPusherEvent *event))block
+{
+	NSMutableArray *listeners = [eventBlockListeners objectForKey:eventName];
+	
+	if (listeners == nil) {
+		listeners = [NSMutableArray array];
+		[eventBlockListeners setObject:listeners forKey:eventName];
+	}
+	
+	[listeners addObject:[[block copy] autorelease]];
+}
+
+- (void)addEventListener:(NSString *)eventName target:(id)target selector:(SEL)selector
 {
 	NSMutableArray *listeners = [eventListeners objectForKey:eventName];
 	
 	if (listeners == nil) {
-		listeners = [[[NSMutableArray alloc] init] autorelease];
+		listeners = [NSMutableArray array];
 		[eventListeners setValue:listeners forKey:eventName];
 	}
 	
-	PTEventListener *listener = [[PTEventListener alloc] initWithTarget:target selector:selector];
+	PTEventListener *listener = [[[PTEventListener alloc] initWithTarget:target selector:selector] autorelease];
 	[listeners addObject:listener];
-	[listener release];
 }
 
 #pragma mark -
 #pragma mark Event handling
 
-- (void)handleEvent:(PTPusherEvent *)event;
+- (void)handleEvent:(PTPusherEvent *)event
 {
 	NSArray *listenersForEvent = [eventListeners objectForKey:event.name];
 	
@@ -213,10 +232,16 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 		[listener dispatch:event];
 	}
 	
-	[[NSNotificationCenter defaultCenter] postNotificationName:PTPusherEventReceivedNotification object:event];
+	NSArray *blockListenersForEvent = [eventBlockListeners objectForKey:event.name];
 	
+	for (void (^block)(PTPusherEvent *event) in blockListenersForEvent) {
+		block(event);
+	}
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:PTPusherEventReceivedNotification object:event];
+
 	if (event.channel != nil) {
-		PTPusherChannel *channel = [self channelWithName:event.channel];
+		PTPusherChannel *channel = [self channelWithName:event.channel];		
 		[channel eventReceived:event];
 	}
 }
@@ -224,21 +249,21 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 #pragma mark -
 #pragma mark ZTWebSocketDelegate methods
 
-- (void)webSocket:(ZTWebSocket*)webSocket didFailWithError:(NSError*)error;
+- (void)webSocket:(ZTWebSocket*)webSocket didFailWithError:(NSError*)error
 {
 	if ([delegate respondsToSelector:@selector(pusherDidFailToConnect:withError:)]) {
 		[delegate pusherDidFailToConnect:self withError:error];
 	}
 }
 
-- (void)webSocketDidOpen:(ZTWebSocket*)webSocket;
+- (void)webSocketDidOpen:(ZTWebSocket*)webSocket
 {
 	if ([delegate respondsToSelector:@selector(pusherDidConnect:)]) {
 		[delegate pusherDidConnect:self];
 	}
 }
 
-- (void)webSocketDidClose:(ZTWebSocket*)webSocket;
+- (void)webSocketDidClose:(ZTWebSocket*)webSocket
 {
 	if ([delegate respondsToSelector:@selector(pusherDidDisconnect:)]) {
 		[delegate pusherDidDisconnect:self];
@@ -252,9 +277,9 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 	}
 }
 
-- (void)webSocket:(ZTWebSocket*)webSocket didReceiveMessage:(NSString*)message;
+- (void)webSocket:(ZTWebSocket*)webSocket didReceiveMessage:(NSString*)message
 {
-	NSLog(@"\nReceived Socket Message:\n%@", message);
+//	NSLog(@"\nReceived Socket Message:\n%@", message);
 	
 	id messageDictionary = [message JSONValue];
 	PTPusherEvent *event = [[PTPusherEvent alloc] initWithDictionary:messageDictionary];
@@ -266,7 +291,7 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 	}  
 	
 	else if ([event.name isEqualToString:@"pusher:error"]) {
-		NSLog([event description], nil);
+//		NSLog([event description], nil);
 	}
 	
 	[self handleEvent:event];
@@ -277,7 +302,7 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 #pragma mark -
 #pragma mark Private methods
 
-- (NSString *)URLString;
+- (NSString *)URLString
 {
 //	if (self.channel != nil)
 //		return [NSString stringWithFormat:@"ws://%@:%d/app/%@?channel=%@", self.host, self.port, self.APIKey, self.channel];
@@ -285,7 +310,7 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 	return [NSString stringWithFormat:@"ws://%@:%d/app/%@", self.host, self.port, self.APIKey];
 }
 
-- (void)connect;
+- (void)connect
 {
 	if ([delegate respondsToSelector:@selector(pusherWillConnect:)]) {
 		[delegate pusherWillConnect:self];

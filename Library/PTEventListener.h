@@ -11,8 +11,8 @@
 @class PTPusherEvent;
 
 @interface PTEventListener : NSObject {
-  id target;
-  SEL selector;
+	id target;
+	SEL selector;
 }
 - (id)initWithTarget:(id)_target selector:(SEL)_selector;
 - (void)dispatch:(PTPusherEvent *)eventData;

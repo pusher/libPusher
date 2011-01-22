@@ -16,27 +16,27 @@
 
 - (id)init;
 {
-  return [self initWithNibName:@"NewEventViewController" bundle:nil];
+	return [self initWithNibName:@"NewEventViewController" bundle:nil];
 }
 
 - (void)dealloc 
 {
-  [textView release];
-  [super dealloc];
+	[textView release];
+	[super dealloc];
 }
 
 - (void)viewDidLoad 
 {
-  [super viewDidLoad];
-  
-  [self.textView becomeFirstResponder];
+	[super viewDidLoad];
+
+	[self.textView becomeFirstResponder];
 }
 
 - (void)viewDidUnload 
 {
-  [super viewDidUnload];
-  
-  self.textView = nil;
+	[super viewDidUnload];
+
+	self.textView = nil;
 }
 
 #pragma mark -
@@ -44,7 +44,7 @@
 
 - (IBAction)sendEvent:(id)sender;
 {
-  [self.delegate sendEventWithMessage:self.textView.text];
+	[self.delegate sendEventWithMessage:self.textView.text];
 }
 
 @end
