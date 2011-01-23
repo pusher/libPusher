@@ -7,7 +7,10 @@
 //
 
 #import "PusherEventsAppDelegate.h"
+
 #import "PusherEventsViewController.h"
+#import "PusherPresenceViewController.h"
+
 #import "PTPusher.h"
 #import "PTPusherEvent.h"
 #import "PTPusherChannel.h"
@@ -19,8 +22,8 @@
 @implementation PusherEventsAppDelegate
 
 @synthesize window;
-@synthesize navigationController;
-@synthesize eventsController;
+@synthesize tabController;
+@synthesize eventsController, presenceController;
 @synthesize pusher;
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application 
@@ -29,55 +32,40 @@
 	[PTPusher setSecret:PUSHER_API_SECRET];
 	[PTPusher setAppID:PUSHER_APP_ID];
 	
-	pusher = [[PTPusher alloc] initWithKey:PUSHER_API_KEY];
-	pusher.delegate = self;
+	pusher = [[PTPusher alloc] initWithKey:PUSHER_API_KEY delegate:self];
 	pusher.reconnect = YES;
 	
 	[pusher addEventListener:@"test-global-event" block:^(PTPusherEvent *event) {
-		NSLog(@"Received Block Event!! : %@", [event description]);
+		NSLog(@"Received Global Event!! : %@", [event description]);
 	}];
 	
-//	PTPusherChannel *channel = [pusher subscribeToChannel:@"test-channel" withAuthPoint:nil];
-//	channel.delegate = self;
+	self.eventsController = [PusherEventsViewController controller];
+	self.eventsController.pusher = pusher;
+	self.presenceController = [PusherPresenceViewController controller];
+	self.presenceController.pusher = pusher;
 	
-	PTPusherChannel *privateChannel = [pusher subscribeToChannel:@"private-my-channel" withAuthPoint:[NSURL URLWithString:@"http://localhost:3000/pusher/private_auth"]];
-	privateChannel.delegate = self;
+	UINavigationController *eventsNav = [[[UINavigationController alloc] initWithRootViewController:eventsController] autorelease];
+	UINavigationController *presenceNav = [[[UINavigationController alloc] initWithRootViewController:presenceController] autorelease];
 	
-//	PTPusherChannel *presenceChannel = [pusher subscribeToChannel:@"presence-my-channel" withAuthPoint:[NSURL URLWithString:@"http://localhost:3000/pusher/presence_auth"]];
-//	presenceChannel.delegate = self;
+	NSArray *controllers = [NSArray arrayWithObjects:presenceNav, eventsNav, nil];
 	
-	eventsController.eventsChannel = privateChannel;
+	tabController.viewControllers = controllers;
 	
-	eventsController.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithTitle:@"Unsubscribe" style:UIBarButtonItemStyleBordered target:self action:@selector(unsubscribe:)] autorelease];
-
-	[window addSubview:navigationController.view];
+	[window addSubview:tabController.view];
 	[window makeKeyAndVisible];
 }
 
 - (void)dealloc 
 {
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:PTPusherEventReceivedNotification object:pusher];
-
-	[pusher release];
-	[navigationController release];
+	[tabController release];
 	[window release];
+	
 	[eventsController release];
+	[presenceController release];
+	
+	[pusher release];
 	
 	[super dealloc];
-}
-
-- (void)unsubscribe:(id)sender
-{
-	PTPusherChannel *channel = [pusher channelWithName:@"test-channel"];
-	[pusher unsubscribeFromChannel:channel];
-}
-
-#pragma mark -
-#pragma mark Channel Delegate
-
-- (void)channel:(PTPusherChannel *)channel didReceiveEvent:(PTPusherEvent *)event
-{
-//	NSLog([event description], nil);
 }
 
 #pragma mark -

@@ -10,6 +10,7 @@
 #import "PTPusherChannelDelegate.h"
 #import "PTPusherDelegate.h"
 
+@class PTPusher;
 @class PTPusherChannel;
 
 @protocol PusherEventsDelegate
@@ -17,12 +18,15 @@
 @end
 
 @interface PusherEventsViewController : UITableViewController <PusherEventsDelegate, PTPusherDelegate, PTPusherChannelDelegate> {
+	PTPusher *pusher;
 	PTPusherChannel *eventsChannel;
 	
 	NSMutableArray *eventsReceived;
 }
-
+@property (nonatomic, retain) PTPusher *pusher;
 @property (nonatomic, retain) PTPusherChannel *eventsChannel;
 @property (nonatomic, readonly) NSMutableArray *eventsReceived;
+
++ (PusherEventsViewController *)controller;
 
 @end

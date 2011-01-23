@@ -38,12 +38,12 @@ extern NSString *const PTPusherEventReceivedNotification;
 @property (nonatomic, assign)		id <PTPusherDelegate, PTPusherChannelDelegate> delegate;
 @property (nonatomic, assign)		BOOL reconnect;
 
-- (id)initWithKey:(NSString *)key;
+- (id)initWithKey:(NSString *)key delegate:(id <PTPusherDelegate, PTPusherChannelDelegate>)_delegate;
 
 - (void)addEventListener:(NSString *)eventName block:(void (^)(PTPusherEvent *event))block;
 - (void)addEventListener:(NSString *)event target:(id)target selector:(SEL)selector;
 
-- (PTPusherChannel *)subscribeToChannel:(NSString *)name withAuthPoint:(NSURL *)authPoint;
+- (PTPusherChannel *)subscribeToChannel:(NSString *)name withAuthPoint:(NSURL *)authPoint delegate:(id <PTPusherChannelDelegate>)_delegate;
 - (void)unsubscribeFromChannel:(PTPusherChannel	*)channel;
 - (PTPusherChannel *)channelWithName:(NSString *)name;
 

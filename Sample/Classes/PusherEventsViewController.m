@@ -14,16 +14,25 @@
 
 @implementation PusherEventsViewController
 
-@synthesize eventsChannel;
+@synthesize pusher, eventsChannel;
 @synthesize eventsReceived;
+
++ (PusherEventsViewController *)controller
+{
+	PusherEventsViewController *cont = [[[PusherEventsViewController alloc] initWithNibName:@"PusherEventsViewController" bundle:nil] autorelease];
+	cont.title = @"Events";
+	
+	return cont;
+}
 
 - (void)viewDidLoad 
 {
 	self.tableView.rowHeight = 55;
 	
-	UIBarButtonItem *newEventButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(presentNewEventScreen)];
-	self.toolbarItems = [NSArray arrayWithObject:newEventButtonItem];
-	[newEventButtonItem release];
+	UIBarButtonItem *newEventButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(presentNewEventScreen)] autorelease];
+	self.navigationItem.rightBarButtonItem = newEventButtonItem;
+	
+	self.eventsChannel = [self.pusher subscribeToChannel:@"test-channel" withAuthPoint:nil delegate:self];
 
 	if (eventsReceived == nil) eventsReceived = [[NSMutableArray alloc] init];
 	
@@ -43,6 +52,7 @@
 }
 
 - (void)dealloc {
+	[pusher release];
 	[eventsChannel release];
 	[eventsReceived release];
 	

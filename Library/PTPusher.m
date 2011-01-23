@@ -47,13 +47,13 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 
 @dynamic URLString;
 
-- (id)initWithKey:(NSString *)key
+- (id)initWithKey:(NSString *)key delegate:(id <PTPusherDelegate, PTPusherChannelDelegate>)_delegate
 {
 	if (self = [super init]) {
 		APIKey  = [key copy];
 		host = @"ws.pusherapp.com";
 		port = 80;
-		delegate = nil;
+		delegate = _delegate;
 		reconnect = NO;
 		
 		channels = [[NSMutableDictionary alloc] initWithCapacity:5];
@@ -119,7 +119,8 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 				}
 			}
 			
-			if (shouldContinue) [self sendEvent:@"pusher:subscribe" data:dataLoad];
+			if (shouldContinue) 
+				[self sendEvent:@"pusher:subscribe" data:dataLoad];
 		}
 		
 		[channels setObject:channel forKey:channel.name];
@@ -142,14 +143,14 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 #pragma mark -
 #pragma mark Subscription Methods
 
-- (PTPusherChannel *)subscribeToChannel:(NSString *)name withAuthPoint:(NSURL *)authPoint
+- (PTPusherChannel *)subscribeToChannel:(NSString *)name withAuthPoint:(NSURL *)authPoint delegate:(id <PTPusherDelegate, PTPusherChannelDelegate>)_delegate
 {
 	PTPusherChannel *channel = [channels objectForKey:name];
 	if (!channel)
 		channel = [[[PTPusherChannel alloc] initWithName:name pusher:self] autorelease];
 	
 	channel.authPoint = authPoint;
-	channel.delegate = self.delegate;
+	channel.delegate = _delegate;
 	
 	if (socket.connected)
 		[self _subscribeChannel:channel];

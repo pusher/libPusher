@@ -40,12 +40,25 @@
 
 - (id)initWithName:(NSString *)_name pusher:(PTPusher *)_pusher;
 
+- (NSData *)authenticateWithSocketID:(NSString *)_socketID;
+- (void)triggerEvent:(NSString *)name data:(id)data;
+
+#if NS_BLOCKS_AVAILABLE
 - (void)addEventListener:(NSString *)eventName block:(void (^)(PTPusherEvent *event))block;
+#endif
 - (void)addEventListener:(NSString *)eventName target:(id)target selector:(SEL)selector;
 
-- (NSData *)authenticateWithSocketID:(NSString *)_socketID;
+// For Presence Channels
+#if NS_BLOCKS_AVAILABLE
+- (void)addSubscriptionSucceededEventListener:(void (^)(NSArray *userList))block;
+- (void)addMemberAddedEventListener:(void (^)(NSDictionary *memberInfo))block;
+- (void)addMemberRemovedEventListener:(void (^)(NSDictionary *memberInfo))block;
+#endif
 
-- (void)triggerEvent:(NSString *)name data:(id)data;
+- (void)addSubscriptionSucceededEventListener:(id)target selector:(SEL)selector;
+- (void)addMemberAddedEventListener:(id)target selector:(SEL)selector;
+- (void)addMemberRemovedEventListener:(id)target selector:(SEL)selector;
+
 @end
 
 @interface PTPusherClientOperation : NSOperation {

@@ -18,6 +18,10 @@
 
 #define kPTPusherWebServiceHost @"api.pusherapp.com"
 
+#define kSubscriptionSucceededPresenceKey @"pusher_internal:subscription_succeeded"
+#define kMemberAddedPresenceKey @"pusher_internal:member_added"
+#define kMemberRemovedPresenceKey @"pusher_internal:member_removed"
+
 NSString *generateEncodedHMAC(NSString *string, NSString *secret) {
 	const char *cKey  = [secret cStringUsingEncoding:NSASCIIStringEncoding];
 	const char *cData = [string cStringUsingEncoding:NSASCIIStringEncoding];
@@ -78,9 +82,10 @@ NSString *URLEncodedString(NSString *unencodedString) {
 }
 
 #pragma mark -
-#pragma mark Event Listening
+#pragma mark Private
 
-- (void)addEventListener:(NSString *)eventName block:(void (^)(PTPusherEvent *event))block
+#if NS_BLOCKS_AVAILABLE
+- (void)_addBlockListener:(void (^)())block forEvent:(NSString *)eventName
 {
 	NSMutableArray *listeners = [eventBlockListeners objectForKey:eventName];
 	
@@ -91,8 +96,9 @@ NSString *URLEncodedString(NSString *unencodedString) {
 	
 	[listeners addObject:[[block copy] autorelease]];
 }
+#endif
 
-- (void)addEventListener:(NSString *)eventName target:(id)target selector:(SEL)selector
+- (void)_addEventListener:(NSString *)eventName target:(id)target selector:(SEL)selector
 {
 	NSMutableArray *listeners = [eventListeners objectForKey:eventName];
 	
@@ -106,12 +112,83 @@ NSString *URLEncodedString(NSString *unencodedString) {
 }
 
 #pragma mark -
+#pragma mark Event Listening
+
+#if NS_BLOCKS_AVAILABLE
+- (void)addEventListener:(NSString *)eventName block:(void (^)(PTPusherEvent *event))block
+{
+	[self _addBlockListener:block forEvent:eventName];
+}
+#endif
+
+- (void)addEventListener:(NSString *)eventName target:(id)target selector:(SEL)selector
+{
+	[self _addEventListener:eventName target:target selector:selector];
+}
+
+#pragma mark -
+#pragma mark Presence Channel Listeners
+
+#if NS_BLOCKS_AVAILABLE
+- (void)addSubscriptionSucceededEventListener:(void (^)(NSArray *userList))block
+{
+	[self _addBlockListener:block forEvent:kSubscriptionSucceededPresenceKey];
+}
+
+- (void)addMemberAddedEventListener:(void (^)(NSDictionary *memberInfo))block
+{
+	[self _addBlockListener:block forEvent:kMemberAddedPresenceKey];
+}
+
+- (void)addMemberRemovedEventListener:(void (^)(NSDictionary *memberInfo))block
+{	
+	[self _addBlockListener:block forEvent:kMemberRemovedPresenceKey];
+}
+#endif
+
+- (void)addSubscriptionSucceededEventListener:(id)target selector:(SEL)selector
+{
+	[self _addEventListener:kSubscriptionSucceededPresenceKey target:target selector:selector];
+}
+
+- (void)addMemberAddedEventListener:(id)target selector:(SEL)selector
+{
+	[self _addEventListener:kMemberAddedPresenceKey target:target selector:selector];
+}
+
+- (void)addMemberRemovedEventListener:(id)target selector:(SEL)selector
+{
+	[self _addEventListener:kMemberRemovedPresenceKey target:target selector:selector];
+}
+
+#pragma mark -
 #pragma mark Event handling
 
 - (void)handleEvent:(PTPusherEvent *)event
 {
 	if ([self.delegate respondsToSelector:@selector(channel:didReceiveEvent:)]) {
 		[self.delegate channel:self didReceiveEvent:event];
+	}
+	
+	if ([event.name isEqualToString:kSubscriptionSucceededPresenceKey] || [event.name rangeOfString:@"subscription_succeeded"].location != NSNotFound) {
+		SEL selector = @selector(presenceChannelSubscriptionSucceeded:withUserInfo:);
+		
+		if (self.delegate && [self.delegate respondsToSelector:selector])
+			[self.delegate performSelector:selector withObject:self withObject:event.data];
+	}
+	
+	else if ([event.name isEqualToString:kMemberAddedPresenceKey]) {
+		SEL selector = @selector(presenceChannel:memberAdded:);
+		
+		if (self.delegate && [self.delegate respondsToSelector:selector])
+			[self.delegate performSelector:selector withObject:self withObject:event.data];
+	}
+	
+	else if ([event.name isEqualToString:kMemberRemovedPresenceKey]) {
+		SEL selector = @selector(presenceChannel:memberRemoved:);
+		
+		if (self.delegate && [self.delegate respondsToSelector:selector])
+			[self.delegate performSelector:selector withObject:self withObject:event.data];
 	}
 	
 	NSArray *listenersForEvent = [eventListeners objectForKey:event.name];
@@ -122,8 +199,17 @@ NSString *URLEncodedString(NSString *unencodedString) {
 	
 	NSArray *blockListenersForEvent = [eventBlockListeners objectForKey:event.name];
 	
-	for (void (^block)(PTPusherEvent *event) in blockListenersForEvent) {
-		block(event);
+	for (void (^block)() in blockListenersForEvent) {
+		if ([event.name isEqualToString:kSubscriptionSucceededPresenceKey] ||
+			[event.name isEqualToString:kMemberAddedPresenceKey] ||
+			[event.name isEqualToString:kMemberRemovedPresenceKey])
+		{
+			block(event.data);
+		}
+		else
+		{
+			block(event);
+		}
 	}
 }
 
@@ -224,27 +310,6 @@ NSString *URLEncodedString(NSString *unencodedString) {
 
 - (void)eventReceived:(PTPusherEvent *)event
 {
-	if ([event.name isEqualToString:@"pusher:subscription_succeeded"] || [event.name rangeOfString:@"subscription_succeeded"].location != NSNotFound) {
-		SEL selector = @selector(presenceChannelSubscriptionSucceeded:withUserInfo:);
-		
-		if (self.delegate && [self.delegate respondsToSelector:selector])
-			[self.delegate performSelector:selector withObject:self withObject:event.data];
-	}
-	
-	else if ([event.name isEqualToString:@"pusher:member_added"]) {
-		SEL selector = @selector(presenceChannel:memberAdded:);
-		
-		if (self.delegate && [self.delegate respondsToSelector:selector])
-			[self.delegate performSelector:selector withObject:self withObject:event.data];
-	}
-	
-	else if ([event.name isEqualToString:@"pusher:member_removed"]) {
-		SEL selector = @selector(presenceChannel:memberRemoved:);
-		
-		if (self.delegate && [self.delegate respondsToSelector:selector])
-			[self.delegate performSelector:selector withObject:self withObject:event.data];
-	}
-	
 	[self handleEvent:event];
 }
 
