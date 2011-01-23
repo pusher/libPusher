@@ -86,9 +86,9 @@
 #pragma mark -
 #pragma mark Presence Channel Delegate
 
-- (void)presenceChannelSubscriptionSucceeded:(PTPusherChannel *)channel withUserInfo:(NSDictionary *)userInfo
+- (void)presenceChannelSubscriptionSucceeded:(PTPusherChannel *)channel withUserInfo:(NSArray *)userList
 {
-	NSLog(@"pusher:subscription_succeeded received:\n%@", [userInfo description]);
+	NSLog(@"pusher:subscription_succeeded received:\n%@", [userList description]);
 }
 
 - (void)presenceChannel:(PTPusherChannel *)channel memberAdded:(NSDictionary *)memberInfo

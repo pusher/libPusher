@@ -27,7 +27,7 @@
 - (void)channelAuthenticationFailed:(PTPusherChannel *)channel withError:(NSError *)error;
 
 // Presence Channels
-- (void)presenceChannelSubscriptionSucceeded:(PTPusherChannel *)channel withUserInfo:(NSDictionary *)userInfo;
+- (void)presenceChannelSubscriptionSucceeded:(PTPusherChannel *)channel withUserInfo:(NSArray *)userList;
 - (void)presenceChannel:(PTPusherChannel *)channel memberAdded:(NSDictionary *)memberInfo;
 - (void)presenceChannel:(PTPusherChannel *)channel memberRemoved:(NSDictionary *)memberInfo;
 
