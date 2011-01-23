@@ -289,7 +289,13 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 		socketID = [[event.data valueForKey:@"socket_id"] retain];
 		
 		[self _subscribeToAllChannels];
-	}  
+	}
+	
+	else if ([event.name isEqualToString:@"pusher:connection_disconnected"]) {
+		if ([delegate respondsToSelector:@selector(pusherDidDisconnect:)]) {
+			[delegate pusherDidDisconnect:self];
+		}
+	}
 	
 	else if ([event.name isEqualToString:@"pusher:error"]) {
 //		NSLog([event description], nil);
