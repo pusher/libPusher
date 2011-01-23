@@ -21,6 +21,8 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 - (void)handleEvent:(PTPusherEvent *)event;
 - (void)connect;
 
+- (void)sendToSocket:(NSString *)message;
+- (void)sendEvent:(NSString *)eventName data:(NSDictionary *)dataLoad;
 - (void)sendEventPayload:(NSDictionary *)payLoad;
 
 - (void)_subscribeToAllChannels;
@@ -51,7 +53,7 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 {
 	if (self = [super init]) {
 		APIKey  = [key copy];
-		host = @"ws.pusherapp.com";
+		host = [@"ws.pusherapp.com" copy];
 		port = 80;
 		delegate = _delegate;
 		reconnect = NO;

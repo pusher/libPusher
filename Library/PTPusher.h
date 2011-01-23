@@ -33,8 +33,8 @@ extern NSString *const PTPusherEventReceivedNotification;
 }
 @property (nonatomic, readonly)		NSString *APIKey;
 @property (nonatomic, readonly)		NSString *socketID;
-@property (nonatomic, copy)			NSString *host;
-@property (nonatomic, assign)		NSUInteger port;
+@property (nonatomic, readonly)		NSString *host;
+@property (nonatomic, readonly)		NSUInteger port;
 @property (nonatomic, assign)		id <PTPusherDelegate, PTPusherChannelDelegate> delegate;
 @property (nonatomic, assign)		BOOL reconnect;
 
@@ -45,10 +45,8 @@ extern NSString *const PTPusherEventReceivedNotification;
 
 - (PTPusherChannel *)subscribeToChannel:(NSString *)name withAuthPoint:(NSURL *)authPoint delegate:(id <PTPusherChannelDelegate>)_delegate;
 - (void)unsubscribeFromChannel:(PTPusherChannel	*)channel;
-- (PTPusherChannel *)channelWithName:(NSString *)name;
 
-- (void)sendToSocket:(NSString *)message;
-- (void)sendEvent:(NSString *)eventName data:(NSDictionary *)dataLoad;
+- (PTPusherChannel *)channelWithName:(NSString *)name;
 
 + (NSString *)key;
 + (void)setKey:(NSString *)apiKey;
