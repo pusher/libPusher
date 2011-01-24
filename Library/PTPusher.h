@@ -40,7 +40,9 @@ extern NSString *const PTPusherEventReceivedNotification;
 
 - (id)initWithKey:(NSString *)key delegate:(id <PTPusherDelegate, PTPusherChannelDelegate>)_delegate;
 
+#if NS_BLOCKS_AVAILABLE
 - (void)addEventListener:(NSString *)eventName block:(void (^)(PTPusherEvent *event))block;
+#endif
 - (void)addEventListener:(NSString *)event target:(id)target selector:(SEL)selector;
 
 - (PTPusherChannel *)subscribeToChannel:(NSString *)name withAuthPoint:(NSURL *)authPoint delegate:(id <PTPusherChannelDelegate>)_delegate;
