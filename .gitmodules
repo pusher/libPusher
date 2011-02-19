@@ -1,0 +1,3 @@
+[submodule "Vendor/Zimt"]
+	path = Vendor/Zimt
+	url = git://github.com/lukeredpath/zimt.git
