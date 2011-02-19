@@ -18,6 +18,8 @@
 @interface PTPusherChannel : NSObject <PTPusherChannelProtocol> {
 	NSString *name;
 	NSURL *authPoint;
+    NSString *_user;
+    NSString *_password;
 
 	NSOperationQueue *operationQueue;
 	PTPusher *pusher;
@@ -29,8 +31,12 @@
 	
 	NSMutableDictionary *eventListeners;
 	NSMutableDictionary *eventBlockListeners;
+    
+    NSMutableSet *_transactions;
 }
 @property (nonatomic, readonly)		NSString *name;
+@property (nonatomic, readwrite, copy) NSString *user;
+@property (nonatomic, readwrite, copy) NSString *password;
 @property (nonatomic, retain)		NSURL *authPoint;
 @property (nonatomic, readonly)		PTPusher *pusher;
 @property (nonatomic, readonly)		BOOL isPrivate;
@@ -40,7 +46,7 @@
 
 - (id)initWithName:(NSString *)_name pusher:(PTPusher *)_pusher;
 
-- (NSData *)authenticateWithSocketID:(NSString *)_socketID;
+- (void)authenticateWithSocketID:(NSString *)_socketID;
 - (void)triggerEvent:(NSString *)name data:(id)data;
 
 #if NS_BLOCKS_AVAILABLE

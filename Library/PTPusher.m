@@ -102,31 +102,35 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 {
 	if (channel != nil) {
 		if (socket.connected) {
-			BOOL shouldContinue = YES;
 			
 			NSMutableDictionary *dataLoad = [NSMutableDictionary dictionary];
 			[dataLoad setObject:channel.name forKey:@"channel"];
 			
 			if (channel.isPrivate || channel.isPresence) {
-				NSData *data = [channel authenticateWithSocketID:self.socketID];
-				
-				if (self.delegate && [self.delegate respondsToSelector:@selector(channel:continueSubscriptionWithAuthResponse:)])
-					shouldContinue = [self.delegate channel:channel continueSubscriptionWithAuthResponse:data];
-				
-				if (shouldContinue) {
-					NSString *dataString = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
-					NSDictionary *messageDict = [dataString JSONValue];
-					
-					[dataLoad addEntriesFromDictionary:messageDict];
-				}
-			}
-			
-			if (shouldContinue) 
+				[channel authenticateWithSocketID:self.socketID];
+			} else {
 				[self sendEvent:@"pusher:subscribe" data:dataLoad];
+            }
 		}
 		
 		[channels setObject:channel forKey:channel.name];
 	}
+}
+
+- (void)channelDidAuthenticate:(PTPusherChannel *)channel withReturnData:(NSData *)returnData {
+    NSMutableDictionary *dataLoad = [NSMutableDictionary dictionary];
+    [dataLoad setObject:channel.name forKey:@"channel"];
+    BOOL shouldContinue = YES;
+    if (self.delegate && [self.delegate respondsToSelector:@selector(channel:continueSubscriptionWithAuthResponse:)])
+        shouldContinue = [self.delegate channel:channel continueSubscriptionWithAuthResponse:returnData];
+    
+    if (shouldContinue) {
+        NSString *dataString = [[[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding] autorelease];
+        NSDictionary *messageDict = [dataString JSONValue];
+        
+        [dataLoad addEntriesFromDictionary:messageDict];
+        [self sendEvent:@"pusher:subscribe" data:dataLoad];
+    }
 }
 
 - (void)_unsunscribeChannel:(PTPusherChannel *)channel

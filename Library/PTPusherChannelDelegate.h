@@ -24,6 +24,7 @@
 - (BOOL)channel:(PTPusherChannel *)channel continueSubscriptionWithAuthResponse:(NSData *)data;
 
 - (void)channelAuthenticationStarted:(PTPusherChannel *)channel;
+- (void)channelDidAuthenticate:(PTPusherChannel *)channel withReturnData:(NSData *)returnData;
 - (void)channelAuthenticationFailed:(PTPusherChannel *)channel withError:(NSError *)error;
 
 // Presence Channels

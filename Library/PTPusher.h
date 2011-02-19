@@ -62,6 +62,7 @@ extern NSString *const PTPusherEventReceivedNotification;
 @protocol PTPusherChannelProtocol
 @required
 - (void)eventReceived:(PTPusherEvent *)event;
+- (void)channelDidAuthenticate:(PTPusherChannel *)channel withReturnData:(NSData *)returnData;
 @end
 
 

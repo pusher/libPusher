@@ -13,6 +13,7 @@
 #import "JSON.h"
 #import "NSString+Hashing.h"
 #import "NSDictionary+QueryString.h"
+#import "PTTransaction.h"
 
 #import <CommonCrypto/CommonHMAC.h>
 
@@ -25,37 +26,44 @@
 NSString *generateEncodedHMAC(NSString *string, NSString *secret) {
 	const char *cKey  = [secret cStringUsingEncoding:NSASCIIStringEncoding];
 	const char *cData = [string cStringUsingEncoding:NSASCIIStringEncoding];
-
+    
 	unsigned char cHMAC[CC_SHA256_DIGEST_LENGTH];
-
+    
 	CCHmac(kCCHmacAlgSHA256, cKey, strlen(cKey), cData, strlen(cData), cHMAC);
-
+    
 	NSMutableString *result = [[NSMutableString alloc] init];
 	for (int i = 0; i < sizeof(cHMAC); i++) {
 		[result appendFormat:@"%02x", cHMAC[i] & 0xff];
 	}
 	NSString *digest = [result copy];
 	[result release];
-
+    
 	return [digest autorelease];
 }
 
 NSString *URLEncodedString(NSString *unencodedString) {
 	return (NSString *)CFURLCreateStringByAddingPercentEscapes(
-	 NULL, (CFStringRef)unencodedString, NULL, (CFStringRef)@"!*'();:@&=+$,/?%#[]", kCFStringEncodingUTF8);
+                                                               NULL, (CFStringRef)unencodedString, NULL, (CFStringRef)@"!*'();:@&=+$,/?%#[]", kCFStringEncodingUTF8);
 }
+
+@interface PTPusherChannel ()
+@property (nonatomic, readwrite, retain) NSMutableSet *transactions;
+- (PTTransaction *)_transactionForConnection:(NSURLConnection *)connection;
+@end
 
 @implementation PTPusherChannel
 
 @synthesize name, authPoint;
 @synthesize pusher;
 @synthesize delegate;
+@synthesize transactions = _transactions, user = _user, password = _password;
 
 @dynamic isPrivate, isPresence;
 
 - (id)initWithName:(NSString *)_name pusher:(PTPusher *)_pusher
 {
-	if (self = [super init]) {
+	if ((self = [super init])) {
+        self.transactions = [NSMutableSet set];
 		name = [_name copy];
 		pusher = _pusher;
 		
@@ -71,6 +79,9 @@ NSString *URLEncodedString(NSString *unencodedString) {
 
 - (void)dealloc
 {	
+    self.transactions = nil;
+    self.user = nil;
+    self.password = nil;
 	[name release];
 	[operationQueue release];
 	[authPoint release];
@@ -220,7 +231,7 @@ NSString *URLEncodedString(NSString *unencodedString) {
 {
 	NSString *path = [NSString stringWithFormat:@"/apps/%@/channels/%@/events", [PTPusher appID], name];
 	NSString *body = [data JSONRepresentation];
-
+    
 	NSMutableDictionary *queryParameters = [NSMutableDictionary dictionary];
 	[queryParameters setValue:[[body MD5Hash] lowercaseString] forKey:@"body_md5"];
 	[queryParameters setValue:pusher.APIKey forKey:@"auth_key"];
@@ -230,14 +241,14 @@ NSString *URLEncodedString(NSString *unencodedString) {
 	
 	if (pusher.socketID != nil)
 		[queryParameters setValue:pusher.socketID forKey:@"socket_id"];
-
+    
 	NSString *signatureQuery = [queryParameters sortedQueryString];
 	NSMutableString *signatureString = [NSMutableString stringWithFormat:@"POST\n%@\n%@", path, signatureQuery];
-
+    
 	[queryParameters setValue:generateEncodedHMAC(signatureString, [PTPusher secret]) forKey:@"auth_signature"];
-
+    
 	NSString *resourceString = [NSString stringWithFormat:@"http://%@%@?%@", kPTPusherWebServiceHost, path, [queryParameters sortedQueryString]];
-
+    
 	PTPusherClientOperation *operation = [[PTPusherClientOperation alloc] initWithURL:[NSURL URLWithString:resourceString] JSONString:body];
 	operation.delegate = self.delegate;
 	operation.channel = self;
@@ -248,7 +259,7 @@ NSString *URLEncodedString(NSString *unencodedString) {
 #pragma mark -
 #pragma mark Authentication For Private and Presence Channels
 
-- (NSData *)authenticateWithSocketID:(NSString *)_socketID
+- (void)authenticateWithSocketID:(NSString *)_socketID
 {
 	// TODO: change auth implementation to be more flexible
 	if (self.delegate && [self.delegate respondsToSelector:@selector(channelAuthenticationStarted:)])
@@ -274,20 +285,71 @@ NSString *URLEncodedString(NSString *unencodedString) {
 	
 	// TODO: just temporary to make it work with the current implementation
 	[request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-	
-	NSError *error = nil;
-	NSURLResponse *response = nil;
-	
-	NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-	
-	if (error != nil) {
-		if (self.delegate && [self.delegate respondsToSelector:@selector(channelAuthenticationFailed:)])
-			[self.delegate channelAuthenticationFailed:self withError:error];
-		
-		return nil;
+    
+    PTTransaction *transaction = [PTTransaction transaction];
+    transaction.request = request;
+    
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:NO];
+
+	[connection scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+	transaction.connection = connection;
+	[self.transactions addObject:transaction];
+	[connection start];
+	[connection release];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+	[[self _transactionForConnection:connection].receivedData appendData:data];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
+	if ([challenge previousFailureCount] == 0) {
+		NSURLCredential *credential = [NSURLCredential credentialWithUser:self.user password:self.password persistence:NSURLCredentialPersistenceNone];
+		[[challenge sender] useCredential:credential forAuthenticationChallenge:challenge];
+	} else {
+		[[challenge sender] cancelAuthenticationChallenge:challenge];
 	}
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+	if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+		PTTransaction *transaction = [self _transactionForConnection:connection];
+		transaction.response = (NSHTTPURLResponse *)response;
+	}
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+    NSLog(@"%@:%@:%i: %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd), __LINE__, error);
+	if ([error code] == NSURLErrorUserCancelledAuthentication)
+		error = [NSError errorWithDomain:[error domain] code:[error code] userInfo:[NSDictionary dictionaryWithObject:@"Authentication failed" forKey:NSLocalizedDescriptionKey]];
 	
-	return data;
+	PTTransaction *transaction = [self _transactionForConnection:connection];
+	
+    if (self.delegate && [self.delegate respondsToSelector:@selector(channelAuthenticationFailed:)])
+        [self.delegate channelAuthenticationFailed:self withError:error];
+	
+	if ([self.transactions containsObject:transaction])
+		[self.transactions removeObject:transaction];
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+	PTTransaction *transaction = [self _transactionForConnection:connection];
+	if (transaction.response.statusCode != 200) {
+		[self connection:connection didFailWithError:[NSError errorWithDomain:NSURLErrorDomain code:NSURLErrorBadServerResponse userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"Status code was not 200 (%i)", transaction.response.statusCode] forKey:NSLocalizedDescriptionKey]]];
+		return;
+	}
+
+    if (self.pusher)
+        [self.pusher channelDidAuthenticate:self withReturnData:transaction.receivedData];
+    
+    if ([self.transactions containsObject:transaction])
+		[self.transactions removeObject:transaction];
+}
+
+- (PTTransaction *)_transactionForConnection:(NSURLConnection *)connection {
+	NSPredicate *predicate = [NSPredicate predicateWithFormat:@"connection = %@", connection];
+	NSSet *resultSet = [self.transactions filteredSetUsingPredicate:predicate];
+	return [resultSet anyObject];
 }
 
 #pragma mark -
@@ -326,7 +388,7 @@ NSString *URLEncodedString(NSString *unencodedString) {
 
 - (id)initWithURL:(NSURL *)_url JSONString:(NSString *)json
 {
-	if (self = [super init]) {
+	if ((self = [super init])) {
 		url = [_url copy];
 		body = [json copy];
 	}
@@ -347,13 +409,13 @@ NSString *URLEncodedString(NSString *unencodedString) {
 	[request setHTTPBody:[body dataUsingEncoding:NSUTF8StringEncoding]];
 	[request setHTTPMethod:@"POST"];
 	[request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-
+    
 	NSHTTPURLResponse *response = nil;
 	NSError *error = nil;
-
+    
 	[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
 	[request release];
-
+    
 	if (error != nil) {
 		if (self.channel && [self.delegate respondsToSelector:@selector(channelFailedToTriggerEvent:error:)]) {
 			[self.delegate channelFailedToTriggerEvent:self.channel error:error];
