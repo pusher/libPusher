@@ -15,7 +15,12 @@
 
 extern NSString *const PTPusherEventReceivedNotification;
 
-@interface PTPusher : NSObject <ZTWebSocketDelegate> {
+@protocol PTPusherProtocol
+@required
+- (void)channelDidAuthenticate:(PTPusherChannel *)channel withReturnData:(NSData *)returnData;
+@end
+
+@interface PTPusher : NSObject <ZTWebSocketDelegate, PTPusherProtocol> {
 	NSString *APIKey;	
 	NSString *host;
 	NSUInteger port;
@@ -62,7 +67,6 @@ extern NSString *const PTPusherEventReceivedNotification;
 @protocol PTPusherChannelProtocol
 @required
 - (void)eventReceived:(PTPusherEvent *)event;
-- (void)channelDidAuthenticate:(PTPusherChannel *)channel withReturnData:(NSData *)returnData;
 @end
 
 

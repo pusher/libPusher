@@ -13,7 +13,7 @@
 
 - (id)initWithTarget:(id)_target selector:(SEL)_selector
 {
-	if (self = [super init]) {
+	if ((self = [super init])) {
 		target = [_target retain];
 		selector = _selector;
 	}

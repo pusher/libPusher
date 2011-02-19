@@ -20,7 +20,7 @@
 
 - (id)initWithEventName:(NSString *)eventName data:(id)eventData channel:(NSString *)eventChannel;
 {
-	if (self = [super init]) {
+	if ((self = [super init])) {
 		name = [eventName copy];
 		data = [eventData copy];
 		channel = [eventChannel copy];

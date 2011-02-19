@@ -51,7 +51,7 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 
 - (id)initWithKey:(NSString *)key delegate:(id <PTPusherDelegate, PTPusherChannelDelegate>)_delegate
 {
-	if (self = [super init]) {
+	if ((self = [super init])) {
 		APIKey  = [key copy];
 		host = [@"ws.pusherapp.com" copy];
 		port = 80;
