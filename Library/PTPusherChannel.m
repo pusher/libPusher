@@ -250,6 +250,7 @@ NSString *URLEncodedString(NSString *unencodedString) {
 
 - (NSData *)authenticateWithSocketID:(NSString *)_socketID
 {
+	// TODO: change auth implementation to be more flexible
 	if (self.delegate && [self.delegate respondsToSelector:@selector(channelAuthenticationStarted:)])
 		[self.delegate channelAuthenticationStarted:self];
 	
@@ -270,6 +271,9 @@ NSString *URLEncodedString(NSString *unencodedString) {
 	
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:paramsURL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10];
 	[request setHTTPMethod:@"POST"];
+	
+	// TODO: just temporary to make it work with the current implementation
+	[request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
 	
 	NSError *error = nil;
 	NSURLResponse *response = nil;
