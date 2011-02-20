@@ -303,7 +303,7 @@ NSString *URLEncodedString(NSString *unencodedString) {
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
-	if ([challenge previousFailureCount] == 0) {
+	if ([challenge previousFailureCount] == 0 && self.user != nil && self.password != nil) {
 		NSURLCredential *credential = [NSURLCredential credentialWithUser:self.user password:self.password persistence:NSURLCredentialPersistenceNone];
 		[[challenge sender] useCredential:credential forAuthenticationChallenge:challenge];
 	} else {
