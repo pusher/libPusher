@@ -261,6 +261,13 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 	if ([delegate respondsToSelector:@selector(pusherDidFailToConnect:withError:)]) {
 		[delegate pusherDidFailToConnect:self withError:error];
 	}
+	
+	if (self.reconnect) {
+		if ([delegate respondsToSelector:@selector(pusherWillReconnect:afterDelay:)]) {
+			[delegate pusherWillReconnect:self afterDelay:kPTPusherReconnectDelay];
+		}
+		[self performSelector:@selector(connect) withObject:nil afterDelay:kPTPusherReconnectDelay];
+	}
 }
 
 - (void)webSocketDidOpen:(ZTWebSocket*)webSocket
