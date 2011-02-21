@@ -56,7 +56,7 @@ NSString *URLEncodedString(NSString *unencodedString) {
 @synthesize name, authPoint;
 @synthesize pusher;
 @synthesize delegate;
-@synthesize transactions = _transactions, user = _user, password = _password;
+@synthesize transactions = _transactions;
 
 @dynamic isPrivate, isPresence;
 
@@ -80,8 +80,6 @@ NSString *URLEncodedString(NSString *unencodedString) {
 - (void)dealloc
 {	
     self.transactions = nil;
-    self.user = nil;
-    self.password = nil;
 	[name release];
 	[operationQueue release];
 	[authPoint release];
@@ -299,9 +297,8 @@ NSString *URLEncodedString(NSString *unencodedString) {
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
-	if ([challenge previousFailureCount] == 0 && self.user != nil && self.password != nil) {
-		NSURLCredential *credential = [NSURLCredential credentialWithUser:self.user password:self.password persistence:NSURLCredentialPersistenceNone];
-		[[challenge sender] useCredential:credential forAuthenticationChallenge:challenge];
+	if ([self.delegate respondsToSelector:@selector(channel:didReceiveAuthenticationChallenge:)]) {
+		[self.delegate channel:self didReceiveAuthenticationChallenge:challenge];
 	} else {
 		[[challenge sender] cancelAuthenticationChallenge:challenge];
 	}
@@ -315,11 +312,7 @@ NSString *URLEncodedString(NSString *unencodedString) {
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    NSLog(@"%@:%@:%i: %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd), __LINE__, error);
-	if ([error code] == NSURLErrorUserCancelledAuthentication)
-		error = [NSError errorWithDomain:[error domain] code:[error code] userInfo:[NSDictionary dictionaryWithObject:@"Authentication failed" forKey:NSLocalizedDescriptionKey]];
-	
-	PTTransaction *transaction = [self _transactionForConnection:connection];
+    PTTransaction *transaction = [self _transactionForConnection:connection];
 	
     if (self.delegate && [self.delegate respondsToSelector:@selector(channelAuthenticationFailed:)])
         [self.delegate channelAuthenticationFailed:self withError:error];
@@ -330,11 +323,7 @@ NSString *URLEncodedString(NSString *unencodedString) {
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
 	PTTransaction *transaction = [self _transactionForConnection:connection];
-	if (transaction.response.statusCode != 200) {
-		[self connection:connection didFailWithError:[NSError errorWithDomain:NSURLErrorDomain code:NSURLErrorBadServerResponse userInfo:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"Status code was not 200 (%i)", transaction.response.statusCode] forKey:NSLocalizedDescriptionKey]]];
-		return;
-	}
-
+	
     if (self.pusher)
         [self.pusher channelDidAuthenticate:self withReturnData:transaction.receivedData];
     

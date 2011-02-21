@@ -24,6 +24,7 @@
 - (BOOL)channel:(PTPusherChannel *)channel continueSubscriptionWithAuthResponse:(NSData *)data;
 
 - (void)channel:(PTPusherChannel *)channel authenticationWillStartWithRequest:(NSMutableURLRequest *)request;
+- (void)channel:(PTPusherChannel *)channel didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge;
 - (void)channelDidAuthenticate:(PTPusherChannel *)channel withReturnData:(NSData *)returnData;
 - (void)channelAuthenticationFailed:(PTPusherChannel *)channel withError:(NSError *)error;
 
