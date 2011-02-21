@@ -261,10 +261,6 @@ NSString *URLEncodedString(NSString *unencodedString) {
 
 - (void)authenticateWithSocketID:(NSString *)_socketID
 {
-	// TODO: change auth implementation to be more flexible
-	if (self.delegate && [self.delegate respondsToSelector:@selector(channelAuthenticationStarted:)])
-		[self.delegate channelAuthenticationStarted:self];
-	
 	NSMutableString *queryString = [NSMutableString stringWithFormat:@"%@?", [self.authPoint absoluteString]];
 	[queryString appendFormat:@"channel_name=%@&socket_id=%@", name, _socketID];
 	
@@ -283,8 +279,8 @@ NSString *URLEncodedString(NSString *unencodedString) {
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:paramsURL cachePolicy:NSURLRequestReloadIgnoringLocalCacheData timeoutInterval:10];
 	[request setHTTPMethod:@"POST"];
 	
-	// TODO: just temporary to make it work with the current implementation
-	[request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+	if (self.delegate && [self.delegate respondsToSelector:@selector(channel:authenticationWillStartWithRequest:)])
+		[self.delegate channel:self authenticationWillStartWithRequest:request];
     
     PTTransaction *transaction = [PTTransaction transaction];
     transaction.request = request;
