@@ -267,6 +267,13 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 			[delegate pusherWillReconnect:self afterDelay:kPTPusherReconnectDelay];
 		}
 		[self performSelector:@selector(connect) withObject:nil afterDelay:kPTPusherReconnectDelay];
+		
+		// Move channels to subscribe queue
+		for (NSString *key in channels) {
+			PTPusherChannel *channel = [channels objectForKey:key];
+			[subscribeQueue addObject:channel];
+		}
+		[channels removeAllObjects];
 	}
 }
 
@@ -288,6 +295,13 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 			[delegate pusherWillReconnect:self afterDelay:kPTPusherReconnectDelay];
 		}
 		[self performSelector:@selector(connect) withObject:nil afterDelay:kPTPusherReconnectDelay];
+		
+		// Move channels to subscribe queue
+		for (NSString *key in channels) {
+			PTPusherChannel *channel = [channels objectForKey:key];
+			[subscribeQueue addObject:channel];
+		}
+		[channels removeAllObjects];
 	}
 }
 
