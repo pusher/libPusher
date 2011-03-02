@@ -241,9 +241,9 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 	for (PTEventListener *listener in listenersForEvent) {
 		[listener performSelectorOnMainThread:@selector(dispatch:) withObject:event waitUntilDone:YES];
 	}
-	
+  
 	NSArray *blockListenersForEvent = [eventBlockListeners objectForKey:event.name];
-	
+  
 	for (void (^block)(PTPusherEvent *event) in blockListenersForEvent) {
 		block(event);
 	}
@@ -313,6 +313,7 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 //	NSLog(@"\nReceived Socket Message:\n%@", message);
 	
 	id messageDictionary = [message JSONValue];
+
 	PTPusherEvent *event = [[PTPusherEvent alloc] initWithDictionary:messageDictionary];
   
 	if ([event.name isEqualToString:@"pusher:connection_established"]) {
