@@ -33,7 +33,7 @@
 
 - (void)dispatch:(PTPusherEvent *)event
 {
-	[target performSelectorOnMainThread:selector withObject:event waitUntilDone:NO];
+  [target performSelector:selector withObject:event];
 }
 
 @end

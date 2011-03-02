@@ -152,16 +152,19 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 - (PTPusherChannel *)subscribeToChannel:(NSString *)name withAuthPoint:(NSURL *)authPoint delegate:(id <PTPusherDelegate, PTPusherChannelDelegate>)_delegate
 {
 	PTPusherChannel *channel = [channels objectForKey:name];
-	if (!channel)
-		channel = [[[PTPusherChannel alloc] initWithName:name pusher:self] autorelease];
+	
+  if (!channel) {
+    channel = [[[PTPusherChannel alloc] initWithName:name pusher:self] autorelease];
+  }	
 	
 	channel.authPoint = authPoint;
 	channel.delegate = _delegate;
 	
-	if (socket.connected)
-		[self _subscribeChannel:channel];
-	else
-		[subscribeQueue addObject:channel];
+	if (socket.connected) {
+    [self _subscribeChannel:channel];
+  } else {
+    [subscribeQueue addObject:channel]; 
+  }
 	
 	return channel;
 }
@@ -236,7 +239,7 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 	NSArray *listenersForEvent = [eventListeners objectForKey:event.name];
 	
 	for (PTEventListener *listener in listenersForEvent) {
-		[listener dispatch:event];
+		[listener performSelectorOnMainThread:@selector(dispatch:) withObject:event waitUntilDone:YES];
 	}
 	
 	NSArray *blockListenersForEvent = [eventBlockListeners objectForKey:event.name];

@@ -5,8 +5,5 @@
 #ifdef __OBJC__
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import <SenTestingKit/SenTestingKit.h>
-#define HC_SHORTHAND
-#import <OCHamcrest/OCHamcrest.h>
-#import <OCMock/OCMock.h>
+#import "Kiwi.h"
 #endif
