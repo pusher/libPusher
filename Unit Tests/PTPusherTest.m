@@ -139,6 +139,19 @@ describe(@"PTPusher", ^{
     [pusher performSelector:@selector(webSocket:didReceiveMessage:) withObject:nil withObject:rawJSON];
   });
   
+  it(@"should support block-based event handlers", ^{
+    __block PTPusherEvent *event = nil;
+    
+    [pusher addEventListener:@"test-event" block:^(PTPusherEvent *theEvent) {
+      event = [theEvent retain];
+    }];
+    
+    NSString *rawJSON = @"{\"event\":\"test-event\",\"data\":\"{\\\"foo\\\":\\\"bar\\\"}\"}";
+    [pusher performSelector:@selector(webSocket:didReceiveMessage:) withObject:nil withObject:rawJSON];
+    
+    [[theObject(&event) shouldEventually] match:instanceOf([PTPusherEvent class])];
+  });
+  
   it(@"should parse encoded JSON received in the data key", ^{
     __block PTPusherEvent *event = nil;
     
