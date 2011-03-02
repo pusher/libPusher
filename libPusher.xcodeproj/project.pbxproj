@@ -502,9 +502,9 @@
 			productReference = 1D6058910D05DD3D006BFB54 /* SampleApp.app */;
 			productType = "com.apple.product-type.application";
 		};
-		A3A1A0EA115813E2001EF877 /* UnitTests */ = {
+		A3A1A0EA115813E2001EF877 /* Specs */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A3A1A0EF115813F0001EF877 /* Build configuration list for PBXNativeTarget "UnitTests" */;
+			buildConfigurationList = A3A1A0EF115813F0001EF877 /* Build configuration list for PBXNativeTarget "Specs" */;
 			buildPhases = (
 				A3A1A144115814E9001EF877 /* CopyFiles */,
 				A3A1A0E6115813E2001EF877 /* Resources */,
@@ -519,7 +519,7 @@
 				A3EB7E03131E8FC2001860F5 /* PBXTargetDependency */,
 				A3EB7F51131E9A36001860F5 /* PBXTargetDependency */,
 			);
-			name = UnitTests;
+			name = Specs;
 			productName = UnitTests;
 			productReference = A3A1A0EB115813E2001EF877 /* UnitTests.octest */;
 			productType = "com.apple.product-type.bundle";
@@ -572,7 +572,7 @@
 			targets = (
 				1D6058900D05DD3D006BFB54 /* SampleApp */,
 				A3D1D2B61158013F009A12AD /* libPusher */,
-				A3A1A0EA115813E2001EF877 /* UnitTests */,
+				A3A1A0EA115813E2001EF877 /* Specs */,
 			);
 		};
 /* End PBXProject section */
@@ -885,7 +885,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A3A1A0EF115813F0001EF877 /* Build configuration list for PBXNativeTarget "UnitTests" */ = {
+		A3A1A0EF115813F0001EF877 /* Build configuration list for PBXNativeTarget "Specs" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A3A1A0EC115813E3001EF877 /* Debug */,
