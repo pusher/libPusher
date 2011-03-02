@@ -10,6 +10,7 @@
 #import "ZTWebSocket.h"
 #import "PTPusherDelegate.h"
 #import "PTPusherChannelDelegate.h"
+#import "PTEventListener.h"
 
 @class PTPusherChannel;
 
@@ -30,9 +31,7 @@ extern NSString *const PTPusherEventReceivedNotification;
 	id <PTPusherDelegate, PTPusherChannelDelegate> delegate;
 	BOOL reconnect;
 	
-	NSMutableDictionary *eventListeners;
-	NSMutableDictionary *eventBlockListeners;
-	
+	NSMutableDictionary *eventListeners;	
 	NSMutableDictionary *channels;
 	NSMutableArray *subscribeQueue;
 }
@@ -46,7 +45,7 @@ extern NSString *const PTPusherEventReceivedNotification;
 - (id)initWithKey:(NSString *)key delegate:(id <PTPusherDelegate, PTPusherChannelDelegate>)_delegate;
 
 #if NS_BLOCKS_AVAILABLE
-- (void)addEventListener:(NSString *)eventName block:(void (^)(PTPusherEvent *event))block;
+- (void)addEventListener:(NSString *)eventName block:(PTPusherEventHandlerBlock)block;
 #endif
 - (void)addEventListener:(NSString *)event target:(id)target selector:(SEL)selector;
 

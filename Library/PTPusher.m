@@ -7,7 +7,6 @@
 //
 
 #import "PTPusher.h"
-#import "PTEventListener.h"
 #import "JSON.h"
 #import "PTPusherEvent.h"
 #import "PTPusherChannel.h"
@@ -28,10 +27,11 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 - (void)_subscribeToAllChannels;
 - (void)_subscribeChannel:(PTPusherChannel *)channel;
 
+- (void)addEventListener:(PTEventListener *)listener forEvent:(NSString *)eventName;
+
 @property (nonatomic, readonly) NSString *URLString;
 @property (nonatomic, readonly) NSMutableDictionary *channels;
 @property (nonatomic, readonly) NSMutableArray *subscribeQueue;
-
 @end
 
 #pragma mark -
@@ -62,7 +62,6 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 		subscribeQueue = [[NSMutableArray alloc] initWithCapacity:5];
 		
 		eventListeners = [[NSMutableDictionary alloc] init];
-		eventBlockListeners = [[NSMutableDictionary alloc] init];
 
 		socket = [[ZTWebSocket alloc] initWithURLString:self.URLString delegate:self];
 		[self connect];
@@ -81,7 +80,6 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 	[subscribeQueue release];
 	
 	[eventListeners release];
-	[eventBlockListeners release];
 	
 	[super dealloc];
 }
@@ -208,27 +206,12 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 
 - (void)addEventListener:(NSString *)eventName block:(void (^)(PTPusherEvent *event))block
 {
-	NSMutableArray *listeners = [eventBlockListeners objectForKey:eventName];
-	
-	if (listeners == nil) {
-		listeners = [NSMutableArray array];
-		[eventBlockListeners setObject:listeners forKey:eventName];
-	}
-	
-	[listeners addObject:[[block copy] autorelease]];
+  [self addEventListener:[[[PTEventListener alloc] initWithBlock:block] autorelease] forEvent:eventName];
 }
 
 - (void)addEventListener:(NSString *)eventName target:(id)target selector:(SEL)selector
 {
-	NSMutableArray *listeners = [eventListeners objectForKey:eventName];
-	
-	if (listeners == nil) {
-		listeners = [NSMutableArray array];
-		[eventListeners setValue:listeners forKey:eventName];
-	}
-	
-	PTEventListener *listener = [[[PTEventListener alloc] initWithTarget:target selector:selector] autorelease];
-	[listeners addObject:listener];
+	[self addEventListener:[[[PTEventListener alloc] initWithTarget:target selector:selector] autorelease] forEvent:eventName];
 }
 
 #pragma mark -
@@ -240,12 +223,6 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 	
 	for (PTEventListener *listener in listenersForEvent) {
 		[listener performSelectorOnMainThread:@selector(dispatch:) withObject:event waitUntilDone:YES];
-	}
-  
-	NSArray *blockListenersForEvent = [eventBlockListeners objectForKey:event.name];
-  
-	for (void (^block)(PTPusherEvent *event) in blockListenersForEvent) {
-		block(event);
 	}
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:PTPusherEventReceivedNotification object:event];
@@ -355,6 +332,18 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 	}
 	
 	[socket open];
+}
+
+- (void)addEventListener:(PTEventListener *)listener forEvent:(NSString *)eventName;
+{
+  NSMutableArray *listeners = [eventListeners objectForKey:eventName];
+	
+	if (listeners == nil) {
+		listeners = [NSMutableArray array];
+		[eventListeners setObject:listeners forKey:eventName];
+	}
+
+	[listeners addObject:listener];
 }
 
 #pragma mark -

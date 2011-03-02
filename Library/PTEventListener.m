@@ -20,20 +20,36 @@
 	return self;
 }
 
+- (id)initWithBlock:(PTPusherEventHandlerBlock)aBlock;
+{
+  if ((self = [super init])) {
+    block = [aBlock copy];
+  }
+  return self;
+}
+
 - (void)dealloc
 {
+  [block release];
 	[target release];
 	[super dealloc];
 }
 
 - (NSString *)description
 {
+  if (block) {
+    return @"<PTEventListener block>";
+  }
 	return [NSString stringWithFormat:@"<PTEventListener target:%@ selector:%@>", target, NSStringFromSelector(selector)];
 }
 
 - (void)dispatch:(PTPusherEvent *)event
 {
-  [target performSelector:selector withObject:event];
+  if (block) {
+    block(event);
+  } else {
+    [target performSelector:selector withObject:event];
+  }
 }
 
 @end
