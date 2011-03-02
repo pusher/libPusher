@@ -4,3 +4,6 @@
 [submodule "Vendor/Kiwi"]
 	path = Vendor/Kiwi
 	url = https://github.com/allending/Kiwi.git
+[submodule "Vendor/OCHamcrest"]
+	path = Vendor/OCHamcrest
+	url = https://github.com/pivotal/OCHamcrest.git

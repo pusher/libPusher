@@ -52,6 +52,7 @@
 		A3EB7D88131E8E5C001860F5 /* PTTransaction.h in Headers */ = {isa = PBXBuildFile; fileRef = A3EB7D87131E8E5C001860F5 /* PTTransaction.h */; };
 		A3EB7D9B131E8E9A001860F5 /* PTTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EB7D9A131E8E9A001860F5 /* PTTransaction.m */; };
 		A3EB7E01131E8FBA001860F5 /* libKiwi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3EB7DFE131E8FB4001860F5 /* libKiwi.a */; };
+		A3EB7F52131E9A3F001860F5 /* libOCHamcrest-StaticLib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3EB7F48131E9A19001860F5 /* libOCHamcrest-StaticLib.a */; };
 		A3FE41CB11811161009CF5D7 /* NewEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FE41C911811161009CF5D7 /* NewEventViewController.m */; };
 		A3FE41CC11811161009CF5D7 /* NewEventViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3FE41CA11811161009CF5D7 /* NewEventViewController.xib */; };
 		A3FE429E11811EEE009CF5D7 /* NSString+Hashing.h in Headers */ = {isa = PBXBuildFile; fileRef = A3FE429B11811EE8009CF5D7 /* NSString+Hashing.h */; };
@@ -106,6 +107,34 @@
 			proxyType = 1;
 			remoteGlobalIDString = F5015B9E11583A77002E9A98 /* Kiwi */;
 			remoteInfo = Kiwi;
+		};
+		A3EB7F45131E9A19001860F5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A3EB7F3B131E9A19001860F5 /* OCHamcrest.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216 /* OCHamcrest.framework */;
+			remoteInfo = OCHamcrest;
+		};
+		A3EB7F47131E9A19001860F5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A3EB7F3B131E9A19001860F5 /* OCHamcrest.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 50066DAD1191DDE700A7A86D /* libOCHamcrest-StaticLib.a */;
+			remoteInfo = "OCHamcrest-StaticLib";
+		};
+		A3EB7F49131E9A19001860F5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A3EB7F3B131E9A19001860F5 /* OCHamcrest.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0F2A4B1F0D8B68B400051BCF /* UnitTests.octest */;
+			remoteInfo = UnitTests;
+		};
+		A3EB7F50131E9A36001860F5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A3EB7F3B131E9A19001860F5 /* OCHamcrest.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 50066DAC1191DDE600A7A86D /* OCHamcrest-StaticLib */;
+			remoteInfo = "OCHamcrest-StaticLib";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -173,6 +202,7 @@
 		A3EB7D87131E8E5C001860F5 /* PTTransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTTransaction.h; sourceTree = "<group>"; };
 		A3EB7D9A131E8E9A001860F5 /* PTTransaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTTransaction.m; sourceTree = "<group>"; };
 		A3EB7DF1131E8FB4001860F5 /* Kiwi.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Kiwi.xcodeproj; path = Kiwi/Kiwi.xcodeproj; sourceTree = "<group>"; };
+		A3EB7F3B131E9A19001860F5 /* OCHamcrest.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OCHamcrest.xcodeproj; path = OCHamcrest/Source/OCHamcrest.xcodeproj; sourceTree = "<group>"; };
 		A3FE41C811811161009CF5D7 /* NewEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewEventViewController.h; sourceTree = "<group>"; };
 		A3FE41C911811161009CF5D7 /* NewEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewEventViewController.m; sourceTree = "<group>"; };
 		A3FE41CA11811161009CF5D7 /* NewEventViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = NewEventViewController.xib; path = Sample/Classes/NewEventViewController.xib; sourceTree = "<group>"; };
@@ -209,6 +239,7 @@
 				A3A1A20211581782001EF877 /* Foundation.framework in Frameworks */,
 				A34E740E131E72EE003F7920 /* libPusher.a in Frameworks */,
 				A3EB7E01131E8FBA001860F5 /* libKiwi.a in Frameworks */,
+				A3EB7F52131E9A3F001860F5 /* libOCHamcrest-StaticLib.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,6 +341,7 @@
 		A3D1D0991157CC3F009A12AD /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				A3EB7F3B131E9A19001860F5 /* OCHamcrest.xcodeproj */,
 				A3EB7DF1131E8FB4001860F5 /* Kiwi.xcodeproj */,
 				A3CDE3B811C93E460051777E /* ZTWebSocket */,
 				A3D1D1171157CF2F009A12AD /* JSON */,
@@ -383,6 +415,16 @@
 				A3EB7DFC131E8FB4001860F5 /* KiwiDriver.app */,
 				A3EB7DFE131E8FB4001860F5 /* libKiwi.a */,
 				A3EB7E00131E8FB4001860F5 /* KiwiTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A3EB7F3C131E9A19001860F5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A3EB7F46131E9A19001860F5 /* OCHamcrest.framework */,
+				A3EB7F48131E9A19001860F5 /* libOCHamcrest-StaticLib.a */,
+				A3EB7F4A131E9A19001860F5 /* UnitTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -475,6 +517,7 @@
 			dependencies = (
 				A34E740D131E72E8003F7920 /* PBXTargetDependency */,
 				A3EB7E03131E8FC2001860F5 /* PBXTargetDependency */,
+				A3EB7F51131E9A36001860F5 /* PBXTargetDependency */,
 			);
 			name = UnitTests;
 			productName = UnitTests;
@@ -520,6 +563,10 @@
 					ProductGroup = A3EB7DF2131E8FB4001860F5 /* Products */;
 					ProjectRef = A3EB7DF1131E8FB4001860F5 /* Kiwi.xcodeproj */;
 				},
+				{
+					ProductGroup = A3EB7F3C131E9A19001860F5 /* Products */;
+					ProjectRef = A3EB7F3B131E9A19001860F5 /* OCHamcrest.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -550,6 +597,27 @@
 			fileType = wrapper.cfbundle;
 			path = KiwiTests.octest;
 			remoteRef = A3EB7DFF131E8FB4001860F5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A3EB7F46131E9A19001860F5 /* OCHamcrest.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = OCHamcrest.framework;
+			remoteRef = A3EB7F45131E9A19001860F5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A3EB7F48131E9A19001860F5 /* libOCHamcrest-StaticLib.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libOCHamcrest-StaticLib.a";
+			remoteRef = A3EB7F47131E9A19001860F5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		A3EB7F4A131E9A19001860F5 /* UnitTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = UnitTests.octest;
+			remoteRef = A3EB7F49131E9A19001860F5 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -654,6 +722,11 @@
 			name = Kiwi;
 			targetProxy = A3EB7E02131E8FC2001860F5 /* PBXContainerItemProxy */;
 		};
+		A3EB7F51131E9A36001860F5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "OCHamcrest-StaticLib";
+			targetProxy = A3EB7F50131E9A36001860F5 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -711,6 +784,7 @@
 					UIKit,
 					"-ObjC",
 					"-all_load",
+					"-lstdc++",
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = UnitTests;

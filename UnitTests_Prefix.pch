@@ -6,4 +6,6 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "Kiwi.h"
+#define HC_SHORTHAND
+#import <OCHamcrest/OCHamcrest.h>
 #endif

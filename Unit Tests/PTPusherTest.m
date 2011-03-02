@@ -9,6 +9,10 @@
 #import "PTPusher.h"
 #import "PTPusherEvent.h"
 
+@protocol MockListener <NSObject>
+- (void)handleEvent:(PTPusherEvent *)event;
+@end
+
 SPEC_BEGIN(PTPusherSpec)
 
 describe(@"PTPusher", ^{
@@ -21,20 +25,32 @@ describe(@"PTPusher", ^{
   });
              
   it(@"should dispatch event to target/action listener when event is received", ^{
-    id mockListener = [KWMock mockForClass:[NSObject class]];
+    id mockListener = [KWMock mockForProtocol:@protocol(MockListener)];
     
     SEL callback = @selector(handleEvent:);
     [pusher addEventListener:@"test-event" target:mockListener selector:callback];
     
-    [[mockListener should] receive:callback];
+    [[[mockListener should] receive] handleEvent:instanceOf([PTPusherEvent class])];
     
     NSString *rawJSON = @"{\"event\":\"test-event\",\"data\":\"some data\"}";
     [pusher performSelector:@selector(webSocket:didReceiveMessage:) withObject:nil withObject:rawJSON];
   });
   
-  it(@"should dispatch to multiple target/action listeners when an event is received", ^{
-    
-  });
+//  it(@"should dispatch to multiple target/action listeners when an event is received", ^{
+//    id mockListenerOne = [KWMock mockForProtocol:@protocol(MockListener)];
+//    id mockListenerTwo = [KWMock mockForProtocol:@protocol(MockListener)];
+//    
+//    SEL callback = @selector(handleEvent:);
+//    [pusher addEventListener:@"test-event" target:mockListenerOne selector:callback];
+//    [pusher addEventListener:@"test-event" target:mockListenerTwo selector:callback];
+//    
+//    [[[mockListenerOne should] receive] handleEvent:instanceOf([PTPusherEvent class])];
+//    [[[mockListenerTwo should] receive] handleEvent:instanceOf([PTPusherEvent class])];
+//    
+//    NSString *rawJSON = @"{\"event\":\"test-event\",\"data\":\"some data\"}";
+//    [pusher performSelector:@selector(webSocket:didReceiveMessage:) withObject:nil withObject:rawJSON];
+//    
+//  });
   
   it(@"should pass an event to an event listener when an event is received", ^{
     
