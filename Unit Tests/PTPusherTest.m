@@ -105,13 +105,38 @@ describe(@"PTPusher", ^{
     
     NSString *rawJSON = @"{\"event\":\"test-event\",\"data\":\"some data\"}";
     [pusher performSelector:@selector(webSocket:didReceiveMessage:) withObject:nil withObject:rawJSON];
+  });
+  
+  it(@"it should post a notification when an event is received", ^{
+    __block NSNotification *theNote = nil;
     
+    [[NSNotificationCenter defaultCenter] 
+        addObserverForName:PTPusherEventReceivedNotification 
+                    object:nil queue:nil usingBlock:^(NSNotification *note) {                        
+       
+        theNote = [note retain];
+    }];
+    
+    [[theObject(&theNote) shouldEventually] beNonNil];
+    
+    NSString *rawJSON = @"{\"event\":\"test-event\",\"data\":\"some data\"}";
+    [pusher performSelector:@selector(webSocket:didReceiveMessage:) withObject:nil withObject:rawJSON];
   });
   
-  pending(@"it should post a notification when an event is received", ^{
-  });
-  
-  pending(@"it should post event as the notification object when an event is received", ^{
+  it(@"it should post event as the notification object when an event is received", ^{
+    __block PTPusherEvent *event = nil;
+    
+    [[NSNotificationCenter defaultCenter] 
+     addObserverForName:PTPusherEventReceivedNotification 
+     object:nil queue:nil usingBlock:^(NSNotification *note) {                        
+       
+       event = note.object;
+     }];
+    
+    [[theObject(&event) shouldEventually] match:instanceOf([PTPusherEvent class])];
+    
+    NSString *rawJSON = @"{\"event\":\"test-event\",\"data\":\"some data\"}";
+    [pusher performSelector:@selector(webSocket:didReceiveMessage:) withObject:nil withObject:rawJSON];
   });
   
   it(@"should parse encoded JSON received in the data key", ^{
