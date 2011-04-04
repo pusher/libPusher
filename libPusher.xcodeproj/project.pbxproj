@@ -856,6 +856,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				PREBINDING = NO;
 				SDKROOT = iphoneos;
+				SYMROOT = build;
 			};
 			name = Debug;
 		};
@@ -870,6 +871,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				PREBINDING = NO;
 				SDKROOT = iphoneos;
+				SYMROOT = build;
 			};
 			name = Release;
 		};
