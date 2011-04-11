@@ -1038,6 +1038,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
 				PREBINDING = NO;
+				SKIP_INSTALL = YES;
+				SYMROOT = build;
 			};
 			name = Release;
 		};
