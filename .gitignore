@@ -4,6 +4,8 @@ build/*
 *.mode1v3
 *.mode*
 *.perspectivev*
+*.xcworkspace/ 
+libPusher.xcodeproj/xcuserdata/
 
 # osx noise
 .DS_Store
