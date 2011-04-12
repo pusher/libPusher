@@ -6,6 +6,7 @@ build/*
 *.perspectivev*
 *.xcworkspace/ 
 libPusher.xcodeproj/xcuserdata/
+libPusher.xcodeproj/xcuserdata/juanalvarez.xcuserdatad/xcschemes/xcschememanagement.plist
 
 # osx noise
 .DS_Store
