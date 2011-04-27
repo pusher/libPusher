@@ -80,6 +80,8 @@ NSString *URLEncodedString(NSString *unencodedString) {
 - (void)dealloc
 {	
     self.transactions = nil;
+	pusher = nil;
+	
 	[name release];
 	[operationQueue release];
 	[authPoint release];
