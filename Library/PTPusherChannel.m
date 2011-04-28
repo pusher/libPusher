@@ -87,7 +87,10 @@ NSString *URLEncodedString(NSString *unencodedString) {
 	[authPoint release];
 	
 	[eventListeners release];
+	eventListeners = nil;
+	
 	[eventBlockListeners release];
+	eventBlockListeners = nil;
 	
 	[super dealloc];
 }
@@ -208,18 +211,24 @@ NSString *URLEncodedString(NSString *unencodedString) {
 		[listener dispatch:event];
 	}
 	
-	NSArray *blockListenersForEvent = [eventBlockListeners objectForKey:event.name];
-	
-	for (void (^block)() in blockListenersForEvent) {
-		if ([event.name isEqualToString:kSubscriptionSucceededPresenceKey] ||
-			[event.name isEqualToString:kMemberAddedPresenceKey] ||
-			[event.name isEqualToString:kMemberRemovedPresenceKey])
-		{
-			block(event.data);
-		}
-		else
-		{
-			block(event);
+	if (eventBlockListeners != nil) {
+		NSArray *blockListenersForEvent = [eventBlockListeners objectForKey:event.name];
+		
+		for (void (^block)() in blockListenersForEvent) {
+			if ([event.name isEqualToString:kSubscriptionSucceededPresenceKey] ||
+				[event.name isEqualToString:kMemberAddedPresenceKey] ||
+				[event.name isEqualToString:kMemberRemovedPresenceKey])
+			{
+				dispatch_async(dispatch_get_main_queue(), ^(void) {
+					block(event.data);
+				});
+			}
+			else
+			{
+				dispatch_async(dispatch_get_main_queue(), ^(void) {
+					block(event);
+				});
+			}
 		}
 	}
 }

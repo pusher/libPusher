@@ -71,15 +71,19 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 
 - (void)dealloc
 {
-	[socket close];
-	[socket release];
-	
-	[APIKey release];
-	
 	[channels release];
+	channels = nil;
+	
 	[subscribeQueue release];
 	
 	[eventListeners release];
+	
+	socket.delegate = nil;
+	[socket close];
+	[socket release];
+	socket = nil;
+	
+	[APIKey release];
 	
 	[super dealloc];
 }
@@ -151,9 +155,9 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 {
 	PTPusherChannel *channel = [channels objectForKey:name];
 	
-  if (!channel) {
-    channel = [[[PTPusherChannel alloc] initWithName:name pusher:self] autorelease];
-  }	
+	if (!channel) {
+		channel = [[[PTPusherChannel alloc] initWithName:name pusher:self] autorelease];
+	}	
 	
 	channel.authPoint = authPoint;
 	channel.delegate = _delegate;
@@ -174,7 +178,10 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 
 - (PTPusherChannel *)channelWithName:(NSString *)name
 {
-	return [self.channels objectForKey:name];
+	if (channels != nil)
+		return [self.channels objectForKey:name];
+	
+	return nil;
 }
 
 #pragma mark -
