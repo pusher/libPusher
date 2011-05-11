@@ -10,8 +10,8 @@
 #import "PusherEventsViewController.h"
 
 @interface NewEventViewController : UIViewController {
-  UITextView *textView;
-  id<PusherEventsDelegate> delegate;
+	UITextView *textView;
+	id <PusherEventsDelegate> delegate;
 }
 @property (nonatomic, retain) IBOutlet UITextView *textView;
 @property (nonatomic, assign) id<PusherEventsDelegate> delegate;

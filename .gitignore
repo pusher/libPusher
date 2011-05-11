@@ -4,9 +4,16 @@ build/*
 *.mode1v3
 *.mode*
 *.perspectivev*
+*.xcworkspace/ 
+libPusher.xcodeproj/xcuserdata/
+libPusher.xcodeproj/xcuserdata/juanalvarez.xcuserdatad/xcschemes/xcschememanagement.plist
 
 # osx noise
 .DS_Store
 profile
 
 Constants.h
+/libPusher.xcodeproj/xcshareddata/
+/libPusher.xcodeproj/project.xcworkspace/xcuserdata/juanalvarez.xcuserdatad/UserInterfaceState.xcuserstate
+/libPusher.xcodeproj/xcuserdata/juanalvarez.xcuserdatad/xcschemes/libPusher.xcscheme
+/libPusher.xcodeproj/xcuserdata/juanalvarez.xcuserdatad/xcschemes/xcschememanagement.plist

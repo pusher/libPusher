@@ -8,17 +8,25 @@
 
 #import <UIKit/UIKit.h>
 #import "PTPusherChannelDelegate.h"
+#import "PTPusherDelegate.h"
 
+@class PTPusher;
 @class PTPusherChannel;
 
 @protocol PusherEventsDelegate
 - (void)sendEventWithMessage:(NSString *)message;
 @end
 
-@interface PusherEventsViewController : UITableViewController <PusherEventsDelegate, PTPusherChannelDelegate> {
-  PTPusherChannel *eventsChannel;
-  NSMutableArray *eventsReceived;
+@interface PusherEventsViewController : UITableViewController <PusherEventsDelegate, PTPusherDelegate, PTPusherChannelDelegate> {
+	PTPusher *pusher;
+	PTPusherChannel *eventsChannel;
+	
+	NSMutableArray *eventsReceived;
 }
-@property (nonatomic, readonly) PTPusherChannel *eventsChannel;
+@property (nonatomic, retain) PTPusher *pusher;
+@property (nonatomic, retain) PTPusherChannel *eventsChannel;
 @property (nonatomic, readonly) NSMutableArray *eventsReceived;
+
++ (PusherEventsViewController *)controller;
+
 @end

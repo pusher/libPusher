@@ -8,146 +8,164 @@
 
 #import "PTPusher.h"
 #import "PTPusherEvent.h"
+#import "Kiwi.h"
 
-@interface PTPusherTest : SenTestCase 
-{
-  PTPusher *pusher;
-  id observerMock;
-}
+@protocol MockListener <NSObject>
+- (void)handleEvent:(PTPusherEvent *)event;
 @end
 
-#pragma mark -
+@interface PTEventMatcher : HCBaseMatcher
+{
+  NSString *eventName;
+  NSString *eventData;
+}
+@property (nonatomic, copy) NSString *eventName;
+@property (nonatomic, copy) NSString *eventData;
+@end
 
-@implementation PTPusherTest
+@implementation PTEventMatcher
 
-- (void)setUp;
-{
-  pusher = [[PTPusher alloc] initWithKey:@"api_key" channel:@"my_channel"];
-  observerMock = [[OCMockObject observerMock] retain];
-}
+@synthesize eventName, eventData;
 
-- (void)tearDown;
+- (BOOL)matches:(PTPusherEvent *)event
 {
-  [[NSNotificationCenter defaultCenter] removeObserver:observerMock];
-  [observerMock release];
+  BOOL matches = YES;
+  
+  if (self.eventName) {
+    matches = [self.eventName isEqualToString:event.name];
+  }
+  if (self.eventData) {
+    matches = [self.eventData isEqualToString:event.data];
+  }
+  return matches;
 }
-
-- (void)testShouldDispatchEventToListenerWhenAnEventIsReceived;
-{
-  id mockListener = [OCMockObject mockForClass:[NSObject class]];
-  SEL callback = @selector(handleEvent:);
-  [[mockListener expect] performSelectorOnMainThread:callback withObject:[OCMArg any] waitUntilDone:NO];
-  
-  [pusher addEventListener:@"test-event" target:mockListener selector:callback];
-  
-  NSString *rawJSON = @"{\"event\":\"test-event\",\"data\":\"some data\"}";
-  [pusher performSelector:@selector(webSocket:didReceiveMessage:) withObject:nil withObject:rawJSON];
-  [mockListener verify];
-}
-
-- (void)testShouldDispatchToMultipleListenersWhenAnEventIsReceived;
-{
-  SEL callback = @selector(handleEvent:);
-  
-  id mockListenerOne = [OCMockObject mockForClass:[NSObject class]];
-  [[mockListenerOne expect] performSelectorOnMainThread:callback withObject:[OCMArg any] waitUntilDone:NO];
-  
-  id mockListenerTwo = [OCMockObject mockForClass:[NSObject class]];
-  [[mockListenerTwo expect] performSelectorOnMainThread:callback withObject:[OCMArg any] waitUntilDone:NO];
-  
-  [pusher addEventListener:@"test-event" target:mockListenerOne selector:callback];
-  [pusher addEventListener:@"test-event" target:mockListenerTwo selector:callback];
-  
-  NSString *rawJSON = @"{\"event\":\"test-event\",\"data\":\"some data\"}";
-  [pusher performSelector:@selector(webSocket:didReceiveMessage:) withObject:nil withObject:rawJSON];
-  [mockListenerOne verify];
-  [mockListenerTwo verify];
-}
-
-- (void)testShouldPassAnEventToAnEventListenerWhenAnEventIsReceived;
-{
-  id mockListener = [OCMockObject mockForClass:[NSObject class]];
-  SEL callback = @selector(handleEvent:);
-  [[mockListener expect] performSelectorOnMainThread:callback withObject:[OCMArg checkWithSelector:@selector(verifyBasicEvent:) onObject:self] waitUntilDone:NO];
-  
-  [pusher addEventListener:@"test-event" target:mockListener selector:@selector(handleEvent:)];
-  
-  NSString *rawJSON = @"{\"event\":\"test-event\",\"data\":\"some data\"}";
-  [pusher performSelector:@selector(webSocket:didReceiveMessage:) withObject:nil withObject:rawJSON];
-}
-- (BOOL)verifyBasicEvent:(PTPusherEvent *)event;
-{
-  if (event == nil) return NO;
-  assertThat(event.name, equalTo(@"test-event"));
-  assertThat(event.data, equalTo(@"some data"));
-  return YES;
-}
-
-- (void)testShouldPostNotificationWhenEventIsReceived;
-{
-  [[NSNotificationCenter defaultCenter] addMockObserver:observerMock name:PTPusherEventReceivedNotification object:nil];
-  
-  [[observerMock expect] notificationWithName:PTPusherEventReceivedNotification object:[OCMArg any]];
-  
-  NSString *rawJSON = @"{\"event\":\"test-event\",\"data\":\"some data\"}";
-  [pusher performSelector:@selector(webSocket:didReceiveMessage:) withObject:nil withObject:rawJSON];
-  [observerMock verify];
-}
-
-- (void)testShouldPassEventAsNotificationObjectWhenEventIsReceived;
-{
-  [[NSNotificationCenter defaultCenter] addMockObserver:observerMock name:PTPusherEventReceivedNotification object:nil];
-  
-  [[observerMock expect] notificationWithName:PTPusherEventReceivedNotification object:[OCMArg checkWithSelector:@selector(verifyNotificationEvent:) onObject:self]];
-  
-  NSString *rawJSON = @"{\"event\":\"test-event\",\"data\":\"some data\"}";
-  [pusher performSelector:@selector(webSocket:didReceiveMessage:) withObject:nil withObject:rawJSON];
-  [observerMock verify];
-}
-- (BOOL)verifyNotificationEvent:(PTPusherEvent *)event;
-{
-  if (event == nil) return NO;
-  assertThat(event.name, equalTo(@"test-event"));
-  assertThat(event.data, equalTo(@"some data"));
-  return YES;
-}
-
-- (void)testShouldParseEncodedJsonDataReceivedInDataKey;
-{
-  id mockListener = [OCMockObject mockForClass:[NSObject class]];
-  SEL callback = @selector(handleEvent:);
-  [[mockListener expect] performSelectorOnMainThread:callback withObject:[OCMArg checkWithSelector:@selector(verifyEventEncodedJSON:) onObject:self] waitUntilDone:NO];
-  
-  [pusher addEventListener:@"test-event" target:mockListener selector:@selector(handleEvent:)];
-  
-  NSString *rawJSON = @"{\"event\":\"test-event\",\"data\":{\\\"foo\\\":\\\"bar\\\"}}";
-  [pusher performSelector:@selector(webSocket:didReceiveMessage:) withObject:nil withObject:rawJSON];
-}
-- (BOOL)verifyEventEncodedJSON:(PTPusherEvent *)event;
-{
-  if (event == nil) return NO;
-  assertThat([event.data valueForKey:@"foo"], equalTo(@"bar"));
-  return YES;
-}
-
-- (void)testShouldParseUnencodedJsonDataReceivedInDataKey;
-{
-  id mockListener = [OCMockObject mockForClass:[NSObject class]];
-  SEL callback = @selector(handleEvent:);
-  [[mockListener expect] performSelectorOnMainThread:callback withObject:[OCMArg checkWithSelector:@selector(verifyEventUnencodedJSON:) onObject:self] waitUntilDone:NO];
-  
-  [pusher addEventListener:@"test-event" target:mockListener selector:@selector(handleEvent:)];
-  
-  NSString *rawJSON = @"{\"event\":\"test-event\",\"data\":{\"foo\":\"bar\"}}";
-  [pusher performSelector:@selector(webSocket:didReceiveMessage:) withObject:nil withObject:rawJSON];
-}
-- (BOOL)verifyEventUnencodedJSON:(PTPusherEvent *)event;
-{
-  if (event == nil) return NO;
-  assertThat([event.data valueForKey:@"foo"], equalTo(@"bar"));
-  return YES;
-}
-
-
 
 @end
+
+id anEventWithName(NSString *name)
+{
+  PTEventMatcher *matcher = [[PTEventMatcher alloc] init];
+  matcher.eventName = name;
+  return [matcher autorelease];
+}
+
+id anEventWithNameAndData(NSString *name, NSString *data)
+{
+  PTEventMatcher *matcher = [[PTEventMatcher alloc] init];
+  matcher.eventName = name;
+  matcher.eventData = data;
+  return [matcher autorelease];
+}
+
+SPEC_BEGIN(PTPusherSpec)
+
+describe(@"PTPusher", ^{
+  
+  __block PTPusher *pusher = nil;
+  
+  beforeEach(^{
+    pusher = [[PTPusher alloc] initWithKey:@"api_key" delegate:nil];
+    [pusher subscribeToChannel:@"test_channel" withAuthPoint:nil delegate:nil];
+  });
+             
+  it(@"should dispatch event to target/action listener when event is received", ^{
+    id mockListener = [KWMock mockForProtocol:@protocol(MockListener)];
+    
+    SEL callback = @selector(handleEvent:);
+    [pusher addEventListener:@"test-event" target:mockListener selector:callback];
+    
+    [[[mockListener should] receive] handleEvent:anything()];
+    
+    NSString *rawJSON = @"{\"event\":\"test-event\",\"data\":\"some data\"}";
+    [pusher performSelector:@selector(webSocket:didReceiveMessage:) withObject:nil withObject:rawJSON];
+  });
+  
+  it(@"should dispatch to multiple target/action listeners when an event is received", ^{
+    id mockListenerOne = [KWMock mockForProtocol:@protocol(MockListener)];
+    id mockListenerTwo = [KWMock mockForProtocol:@protocol(MockListener)];
+    
+    SEL callback = @selector(handleEvent:);
+    [pusher addEventListener:@"test-event" target:mockListenerOne selector:callback];
+    [pusher addEventListener:@"test-event" target:mockListenerTwo selector:callback];
+    
+    [[[mockListenerOne should] receive] handleEvent:instanceOf([PTPusherEvent class])];
+    [[[mockListenerTwo should] receive] handleEvent:instanceOf([PTPusherEvent class])];
+    
+    NSString *rawJSON = @"{\"event\":\"test-event\",\"data\":\"some data\"}";
+    [pusher performSelector:@selector(webSocket:didReceiveMessage:) withObject:nil withObject:rawJSON];
+  });
+  
+  it(@"should pass the event to an event listener when an event is received", ^{
+    id mockListener = [KWMock mockForProtocol:@protocol(MockListener)];
+    
+    SEL callback = @selector(handleEvent:);
+    [pusher addEventListener:@"test-event" target:mockListener selector:callback];
+    
+    [[[mockListener should] receive] handleEvent:anEventWithNameAndData(@"test-event", @"some data")];
+    
+    NSString *rawJSON = @"{\"event\":\"test-event\",\"data\":\"some data\"}";
+    [pusher performSelector:@selector(webSocket:didReceiveMessage:) withObject:nil withObject:rawJSON];
+  });
+  
+  it(@"it should post a notification when an event is received", ^{
+    __block NSNotification *theNote = nil;
+    
+    [[NSNotificationCenter defaultCenter] 
+        addObserverForName:PTPusherEventReceivedNotification 
+                    object:nil queue:nil usingBlock:^(NSNotification *note) {                        
+       
+        theNote = [note retain];
+    }];
+    
+    [[theObject(&theNote) shouldEventually] beNonNil];
+    
+    NSString *rawJSON = @"{\"event\":\"test-event\",\"data\":\"some data\"}";
+    [pusher performSelector:@selector(webSocket:didReceiveMessage:) withObject:nil withObject:rawJSON];
+  });
+  
+  it(@"it should post event as the notification object when an event is received", ^{
+    __block PTPusherEvent *event = nil;
+    
+    [[NSNotificationCenter defaultCenter] 
+     addObserverForName:PTPusherEventReceivedNotification 
+     object:nil queue:nil usingBlock:^(NSNotification *note) {                        
+       
+       event = note.object;
+     }];
+    
+    [[theObject(&event) shouldEventually] match:instanceOf([PTPusherEvent class])];
+    
+    NSString *rawJSON = @"{\"event\":\"test-event\",\"data\":\"some data\"}";
+    [pusher performSelector:@selector(webSocket:didReceiveMessage:) withObject:nil withObject:rawJSON];
+  });
+  
+  it(@"should support block-based event handlers", ^{
+    __block PTPusherEvent *event = nil;
+    
+    [pusher addEventListener:@"test-event" block:^(PTPusherEvent *theEvent) {
+      event = [theEvent retain];
+    }];
+    
+    NSString *rawJSON = @"{\"event\":\"test-event\",\"data\":\"{\\\"foo\\\":\\\"bar\\\"}\"}";
+    [pusher performSelector:@selector(webSocket:didReceiveMessage:) withObject:nil withObject:rawJSON];
+    
+    [[theObject(&event) shouldEventually] match:instanceOf([PTPusherEvent class])];
+  });
+  
+  it(@"should parse encoded JSON received in the data key", ^{
+    __block PTPusherEvent *event = nil;
+    
+    [pusher addEventListener:@"test-event" block:^(PTPusherEvent *theEvent) {
+      event = [theEvent retain];
+    }];
+    
+    NSString *rawJSON = @"{\"event\":\"test-event\",\"data\":\"{\\\"foo\\\":\\\"bar\\\"}\"}";
+    [pusher performSelector:@selector(webSocket:didReceiveMessage:) withObject:nil withObject:rawJSON];
+    
+    [[theObject(&event) shouldEventually] beNonNil];
+    [[event.data should] haveValue:@"bar" forKey:@"foo"];
+  });
+             
+});
+
+SPEC_END

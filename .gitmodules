@@ -1,3 +1,9 @@
 [submodule "Vendor/Zimt"]
 	path = Vendor/Zimt
 	url = git://github.com/lukeredpath/zimt.git
+[submodule "Vendor/Kiwi"]
+	path = Vendor/Kiwi
+	url = git@github.com:lukeredpath/Kiwi.git
+[submodule "Vendor/OCHamcrest"]
+	path = Vendor/OCHamcrest
+	url = https://github.com/pivotal/OCHamcrest.git

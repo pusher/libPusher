@@ -11,29 +11,45 @@
 
 @implementation PTEventListener
 
-- (id)initWithTarget:(id)_target selector:(SEL)_selector;
+- (id)initWithTarget:(id)_target selector:(SEL)_selector
 {
-  if (self = [super init]) {
-    target = [_target retain];
-    selector = _selector;
+	if ((self = [super init])) {
+		target = [_target retain];
+		selector = _selector;
+	}
+	return self;
+}
+
+- (id)initWithBlock:(PTPusherEventHandlerBlock)aBlock;
+{
+  if ((self = [super init])) {
+    block = [aBlock copy];
   }
   return self;
 }
 
-- (void)dealloc;
+- (void)dealloc
 {
-  [target release];
-  [super dealloc];
+  [block release];
+	[target release];
+	[super dealloc];
 }
 
-- (NSString *)description;
+- (NSString *)description
 {
-  return [NSString stringWithFormat:@"<PTEventListener target:%@ selector:%@>", target, NSStringFromSelector(selector)];
+  if (block) {
+    return @"<PTEventListener block>";
+  }
+	return [NSString stringWithFormat:@"<PTEventListener target:%@ selector:%@>", target, NSStringFromSelector(selector)];
 }
 
-- (void)dispatch:(PTPusherEvent *)event;
+- (void)dispatch:(PTPusherEvent *)event
 {
-  [target performSelectorOnMainThread:selector withObject:event waitUntilDone:NO];
+  if (block) {
+    block(event);
+  } else {
+    [target performSelector:selector withObject:event];
+  }
 }
 
 @end

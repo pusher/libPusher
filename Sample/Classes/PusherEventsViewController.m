@@ -14,33 +14,49 @@
 
 @implementation PusherEventsViewController
 
-@synthesize eventsChannel;
+@synthesize pusher, eventsChannel;
 @synthesize eventsReceived;
+
++ (PusherEventsViewController *)controller
+{
+	PusherEventsViewController *cont = [[[PusherEventsViewController alloc] initWithNibName:@"PusherEventsViewController" bundle:nil] autorelease];
+	cont.title = @"Events";
+	
+	return cont;
+}
 
 - (void)viewDidLoad 
 {
-  self.tableView.rowHeight = 55;
-  
-  if (eventsReceived == nil) {
-    eventsReceived = [[NSMutableArray alloc] init];
-  }
-  if (eventsChannel == nil) {
-    eventsChannel = [PTPusher newChannel:@"demo"];
-    eventsChannel.delegate = self;
-  }
-  [eventsChannel startListeningForEvents];
-  
-  UIBarButtonItem *newEventButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(presentNewEventScreen)];
-  self.toolbarItems = [NSArray arrayWithObject:newEventButtonItem];
-  [newEventButtonItem release];
-  
-  [super viewDidLoad];
+	self.tableView.rowHeight = 55;
+	
+	UIBarButtonItem *newEventButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(presentNewEventScreen)] autorelease];
+	self.navigationItem.rightBarButtonItem = newEventButtonItem;
+	
+	self.eventsChannel = [self.pusher subscribeToChannel:@"test-channel" withAuthPoint:nil delegate:self];
+
+	if (eventsReceived == nil) eventsReceived = [[NSMutableArray alloc] init];
+	
+	[eventsChannel addEventListener:@"new-event" block:^(PTPusherEvent *event) {
+		[self.tableView beginUpdates];
+		[eventsReceived insertObject:event atIndex:0];
+		[self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
+		[self.tableView endUpdates];
+	}];
+
+	[super viewDidLoad];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
 }
 
 - (void)dealloc {
-  [eventsChannel release];
-  [eventsReceived release];
-  [super dealloc];
+	[pusher release];
+	[eventsChannel release];
+	[eventsReceived release];
+	
+	[super dealloc];
 }
 
 #pragma mark -
@@ -48,47 +64,27 @@
 
 - (void)presentNewEventScreen;
 {
-  NewEventViewController *newEventController = [[NewEventViewController alloc] init];
-  newEventController.delegate = self;
-  [self presentModalViewController:newEventController animated:YES];
-  [newEventController release];
+	NewEventViewController *newEventController = [[[NewEventViewController alloc] init] autorelease];
+	newEventController.delegate = self;
+	
+	[self presentModalViewController:newEventController animated:YES];
 }
 
 - (void)sendEventWithMessage:(NSString *)message;
 {
-  NSDictionary *payload = [NSDictionary dictionaryWithObjectsAndKeys:message, @"title", @"Sent from libPusher", @"description", nil];
+	NSDictionary *payload = [NSDictionary dictionaryWithObjectsAndKeys:message, @"title", @"Sent from libPusher", @"description", nil];
 
-  [self performSelector:@selector(sendEvent:) withObject:payload afterDelay:0.3];
-  [self dismissModalViewControllerAnimated:YES];
+	[self performSelector:@selector(sendEvent:) withObject:payload afterDelay:0.3];
+	[self dismissModalViewControllerAnimated:YES];
 }
 
 - (void)sendEvent:(id)payload;
 {
-  [self.eventsChannel triggerEvent:@"new-event" data:payload];
+	[self.eventsChannel triggerEvent:@"new-event" data:payload];
 }
 
 #pragma mark -
 #pragma mark PTPusherChannel delegate
-
-- (void)channel:(PTPusherChannel *)channel didReceiveEvent:(PTPusherEvent *)event;
-{
-  if ([event.name isEqualToString:@"new-event"]) {
-    [self.tableView beginUpdates];
-    [eventsReceived insertObject:event atIndex:0];
-    [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
-    [self.tableView endUpdates];
-  }
-}
-
-- (void)channelDidConnect:(PTPusherChannel *)channel
-{
-  NSLog(@"Listening on channel %@", channel.name);
-}
-
-- (void)channelDidDisconnect:(PTPusherChannel *)channel
-{
-  NSLog(@"Stopped listening on channel %@", channel.name);
-}
 
 - (void)channelFailedToTriggerEvent:(PTPusherChannel *)channel error:(NSError *)error
 {
@@ -100,22 +96,23 @@
 
 - (NSInteger)tableView:(UITableView *)table numberOfRowsInSection:(NSInteger)section;
 {
-  return eventsReceived.count;
+	return eventsReceived.count;
 }
 
 static NSString *EventCellIdentifier = @"EventCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 {
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:EventCellIdentifier];
-  if (cell == nil) {
-    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:EventCellIdentifier] autorelease];
-  }
-  PTPusherEvent *event = [eventsReceived objectAtIndex:indexPath.row];
-  cell.textLabel.text = [event.data valueForKey:@"title"];
-  cell.detailTextLabel.text = [event.data valueForKey:@"description"];
-  
-  return cell;
+	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:EventCellIdentifier];
+	if (cell == nil) {
+		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:EventCellIdentifier] autorelease];
+	}
+	
+	PTPusherEvent *event = [eventsReceived objectAtIndex:indexPath.row];
+	cell.textLabel.text = [event.data valueForKey:@"title"];
+	cell.detailTextLabel.text = [event.data valueForKey:@"description"];
+
+	return cell;
 }
 
 @end
