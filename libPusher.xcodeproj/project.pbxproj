@@ -29,8 +29,8 @@
 		A3A1A41311582D32001EF877 /* PTPusherTest.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A1A41211582D32001EF877 /* PTPusherTest.m */; };
 		A3A1A42A11582F26001EF877 /* PTPusherDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = A3A1A41611582DC3001EF877 /* PTPusherDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3CDE3BA11C93E4E0051777E /* ZTWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CDE3B911C93E4E0051777E /* ZTWebSocket.m */; };
-		A3CDE3BD11C93E580051777E /* ZTLog.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CDE3BB11C93E580051777E /* ZTLog.h */; };
-		A3CDE3BE11C93E580051777E /* ZTWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CDE3BC11C93E580051777E /* ZTWebSocket.h */; };
+		A3CDE3BD11C93E580051777E /* ZTLog.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CDE3BB11C93E580051777E /* ZTLog.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A3CDE3BE11C93E580051777E /* ZTWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CDE3BC11C93E580051777E /* ZTWebSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3D1D0B61157CCDE009A12AD /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3D1D0B51157CCDE009A12AD /* CFNetwork.framework */; };
 		A3D1D1261157CF2F009A12AD /* CREDITS in Resources */ = {isa = PBXBuildFile; fileRef = A3D1D1181157CF2F009A12AD /* CREDITS */; };
 		A3D1D2861157FA30009A12AD /* PusherEventsAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D27E1157FA30009A12AD /* PusherEventsAppDelegate.m */; };
