@@ -10,3 +10,4 @@ build/*
 profile
 
 Constants.h
+*.xcodeproj/xcuserdata
