@@ -2,7 +2,7 @@
 #import "NSString+Hashing.h"
 #import <CommonCrypto/CommonDigest.h>
 
-NSString* md5( NSString *str )
+NSString *md5(NSString *str)
 {
   const char *cStr = [str UTF8String];
   unsigned char result[CC_MD5_DIGEST_LENGTH];

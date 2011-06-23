@@ -17,6 +17,11 @@
 
 #define kPTPusherWebServiceHost @"api.pusherapp.com"
 
+NSString *generateEncodedHMAC(NSString *string, NSString *secret);
+NSString *URLEncodedString(NSString *unencodedString);
+
+#pragma mark -
+
 NSString *generateEncodedHMAC(NSString *string, NSString *secret) {
   const char *cKey  = [secret cStringUsingEncoding:NSASCIIStringEncoding];
   const char *cData = [string cStringUsingEncoding:NSASCIIStringEncoding];
@@ -39,6 +44,8 @@ NSString *URLEncodedString(NSString *unencodedString) {
   return (NSString *)CFURLCreateStringByAddingPercentEscapes(
      NULL, (CFStringRef)unencodedString, NULL, (CFStringRef)@"!*'();:@&=+$,/?%#[]", kCFStringEncodingUTF8);
 }
+
+#pragma mark -
 
 @implementation PTPusherChannel
 
