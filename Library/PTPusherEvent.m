@@ -11,42 +11,34 @@
 
 @implementation PTPusherEvent
 
-@synthesize name, channel;
-@dynamic data;
+@synthesize name = _name;
+@synthesize data = _data;
 
-- (id)initWithEventName:(NSString *)eventName data:(id)eventData channel:(NSString *)eventChannel;
+- (id)initWithEventName:(NSString *)name data:(id)data
 {
   if (self = [super init]) {
-    name = [eventName copy];
-    data = [eventData copy];
-    channel = [eventChannel copy];
+    _name = [name copy];
+    
+    if ([data respondsToSelector:@selector(JSONValue)]) {
+      _data = [[data JSONValue] copy];
+    }
+    else {
+      _data = [data copy];
+    }
   }
   return self;
 }
 
-- (void)dealloc;
+- (void)dealloc
 {
-  [channel release];
-  [name release];
-  [data release];
+  [_name release];
+  [_data release];
   [super dealloc];
 }
 
-- (NSString *)description;
+- (NSString *)description
 {
-  return [NSString stringWithFormat:@"<PTPusherEvent channel:%@ name:%@ data:%@>", channel, name, data];
-}
-
-- (id)data;
-{
-  id parsedData = nil;
-  if ([data respondsToSelector:@selector(JSONValue)]) {
-    parsedData = [data JSONValue];
-  }
-  if (parsedData == nil) {
-    parsedData = data;
-  }
-  return parsedData;
+  return [NSString stringWithFormat:@"<PTPusherEvent name:%@ data:%@>", self.name, self.data];
 }
 
 @end

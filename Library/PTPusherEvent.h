@@ -10,13 +10,10 @@
 
 
 @interface PTPusherEvent : NSObject {
-  NSString *channel;
-  NSString *name;
-  id data;
+
 }
-@property (nonatomic, readonly) NSString *channel;
 @property (nonatomic, readonly) NSString *name;
 @property (nonatomic, readonly) id data;
 
-- (id)initWithEventName:(NSString *)eventName data:(id)eventData channel:(NSString *)eventChannel;
+- (id)initWithEventName:(NSString *)name data:(id)data;
 @end

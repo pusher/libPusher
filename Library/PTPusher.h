@@ -7,33 +7,22 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ZTWebSocket.h"
 #import "PTPusherDelegate.h"
+#import "PTPusherConnection.h"
 
 extern NSString *const PTPusherDataKey;
 extern NSString *const PTPusherEventKey;
 extern NSString *const PTPusherEventReceivedNotification;
 
-@interface PTPusher : NSObject <ZTWebSocketDelegate> {
-  NSString *APIKey;
-  NSString *channel;
-  NSString *host;
-  NSUInteger port;
+@interface PTPusher : NSObject <PTPusherConnectionDelegate> {
   NSMutableDictionary *eventListeners;
-  ZTWebSocket *socket;
-  NSUInteger socketID;
-  id<PTPusherDelegate> delegate;
-  BOOL reconnect;
 }
-@property (nonatomic, readonly) NSString *APIKey;
-@property (nonatomic, readonly) NSString *channel;
-@property (nonatomic, readonly) NSUInteger socketID;
-@property (nonatomic, copy) NSString *host;
-@property (nonatomic, assign) NSUInteger port;
 @property (nonatomic, assign) id<PTPusherDelegate> delegate;
-@property (nonatomic, assign) BOOL reconnect;
+@property (nonatomic, assign, getter=shouldReconnectAutomatically) BOOL reconnectAutomatically;
+@property (nonatomic, assign) NSTimeInterval reconnectDelay;
+@property (nonatomic, readonly, getter=isConnected) BOOL connected;
 
-- (id)initWithKey:(NSString *)key channel:(NSString *)channelName;
+- (id)initWithConnection:(PTPusherConnection *)connection connectAutomatically:(BOOL)connectAutomatically;
 - (void)addEventListener:(NSString *)event target:(id)target selector:(SEL)selector;
 @end
 

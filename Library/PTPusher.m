@@ -12,62 +12,70 @@
 #import "PTPusherEvent.h"
 #import "PTPusherChannel.h"
 
+NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *clientID);
+
 NSString *const PTPusherDataKey = @"data";
 NSString *const PTPusherEventKey = @"event";
 NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotification";
 
-#define kPTPusherReconnectDelay 5.0
+NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *clientID)
+{
+  NSString *URLString = [NSString stringWithFormat:@"ws://%@:%d/app/%@?client=%@", host, port, key, clientID];
+  return [NSURL URLWithString:URLString];
+}
+
+#define kPTPusherDefaultReconnectDelay 5.0
 
 @interface PTPusher ()
-- (NSString *)URLString;
-- (void)handleEvent:(PTPusherEvent *)event;
-- (void)connect;
-@property (nonatomic, readonly) NSString *URLString;
+@property (nonatomic, retain) PTPusherConnection *connection;
 @end
 
 #pragma mark -
 
 @implementation PTPusher
 
-@synthesize APIKey;
-@synthesize channel;
-@synthesize socketID;
-@synthesize host;
-@synthesize port;
+@synthesize connection = _connection;
 @synthesize delegate;
-@synthesize reconnect;
-@dynamic URLString;
+@synthesize reconnectAutomatically;
+@synthesize reconnectDelay;
 
-- (id)initWithKey:(NSString *)key channel:(NSString *)channelName;
+- (id)initWithConnection:(PTPusherConnection *)connection connectAutomatically:(BOOL)connectAutomatically
 {
   if (self = [super init]) {
-    APIKey  = [key copy];
-    channel = [channelName copy];
     eventListeners = [[NSMutableDictionary alloc] init];
-    host = @"ws.pusherapp.com";
-    port = 80;
-    delegate = nil;
-    reconnect = NO;
+
+    self.connection = connection;
+    self.connection.delegate = self;
     
-    socket = [[ZTWebSocket alloc] initWithURLString:self.URLString delegate:self];
-    [self connect];
+    self.reconnectAutomatically = NO;
+    self.reconnectDelay = kPTPusherDefaultReconnectDelay;
+    
+    if (connectAutomatically) {
+      [self.connection connect];
+    }
   }
   return self;
 }
 
++ (id)clientWithKey:(NSString *)key
+{
+  PTPusherConnection *connection = [[PTPusherConnection alloc] initWithURL:PTPusherConnectionURL(@"ws.pusherapp.com", 80, key, @"libpusher")];
+  PTPusher *pusher = [[self alloc] initWithConnection:connection connectAutomatically:YES];
+  [connection release];
+  return [pusher autorelease];
+}
+
 - (void)dealloc;
 {
-  [socket close];
-  [socket release];
+  [_connection disconnect];
+  [_connection release];
   [eventListeners release];
-  [APIKey release];
-  [channel release];
   [super dealloc];
 }
 
-- (NSString *)description;
+- (BOOL)isConnected
 {
-  return [NSString stringWithFormat:@"<PTPusher channel:%@>", channel];
+  return [self.connection isConnected];
 }
 
 #pragma mark -
@@ -86,76 +94,37 @@ NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotif
 }
 
 #pragma mark -
-#pragma mark Event handling
+#pragma mark PTPusherConnection delegaet methods
 
-- (void)handleEvent:(PTPusherEvent *)event;
+- (void)pusherConnectionDidConnect:(PTPusherConnection *)connection
+{
+  
+}
+
+- (void)pusherConnectionDidDisconnect:(PTPusherConnection *)connection
+{
+  if (self.shouldReconnectAutomatically) {
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, self.reconnectDelay * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+      [connection connect];
+    });
+  }
+}
+
+- (void)pusherConnection:(PTPusherConnection *)connection didFailWithError:(NSError *)error
+{
+  
+}
+
+- (void)pusherConnection:(PTPusherConnection *)connection didReceiveEvent:(PTPusherEvent *)event
 {
   NSArray *listenersForEvent = [eventListeners objectForKey:event.name];
   for (PTEventListener *listener in listenersForEvent) {
     [listener dispatch:event];
   }
   [[NSNotificationCenter defaultCenter] 
-    postNotificationName:PTPusherEventReceivedNotification object:event];
-}
-
-#pragma mark -
-#pragma mark ZTWebSocketDelegate methods
-
-- (void)webSocket:(ZTWebSocket*)webSocket didFailWithError:(NSError*)error;
-{
-  if ([delegate respondsToSelector:@selector(pusherDidFailToConnect:withError:)]) {
-    [delegate pusherDidFailToConnect:self withError:error];
-  }
-}
-
-- (void)webSocketDidOpen:(ZTWebSocket*)webSocket;
-{
-  if ([delegate respondsToSelector:@selector(pusherDidConnect:)]) {
-    [delegate pusherDidConnect:self];
-  }
-}
-
-- (void)webSocketDidClose:(ZTWebSocket*)webSocket;
-{
-  if ([delegate respondsToSelector:@selector(pusherDidDisconnect:)]) {
-    [delegate pusherDidDisconnect:self];
-  }
-  
-  if (self.reconnect) {
-    if ([delegate respondsToSelector:@selector(pusherWillReconnect:afterDelay:)]) {
-      [delegate pusherWillReconnect:self afterDelay:kPTPusherReconnectDelay];
-    }
-    [self performSelector:@selector(connect) withObject:nil afterDelay:kPTPusherReconnectDelay];
-  }
-}
-
-- (void)webSocket:(ZTWebSocket*)webSocket didReceiveMessage:(NSString*)message;
-{
-  id messageDictionary = [message JSONValue];
-  PTPusherEvent *event = [[PTPusherEvent alloc] initWithEventName:[messageDictionary valueForKey:PTPusherEventKey] data:[messageDictionary valueForKey:PTPusherDataKey] channel:self.channel];
-  
-  if ([event.name isEqualToString:@"connection_established"]) {
-    socketID = [[event.data valueForKey:@"socket_id"] intValue];
-  }  
-  [self handleEvent:event];
-  [event release];
-}
-
-#pragma mark -
-#pragma mark Private methods
-
-- (NSString *)URLString;
-{
-  return [NSString stringWithFormat:@"ws://%@:%d/app/%@?channel=%@",
-          self.host, self.port, self.APIKey, self.channel];
-}
-
-- (void)connect;
-{
-  if ([delegate respondsToSelector:@selector(pusherWillConnect:)]) {
-    [delegate pusherWillConnect:self];
-  }
-  [socket open];
+        postNotificationName:PTPusherEventReceivedNotification 
+                      object:event];
 }
 
 @end
