@@ -10,8 +10,7 @@
 #import "PTPusherEvent.h"
 #import "JSON.h"
 
-NSString *const PTPusherDataKey  = @"data";
-NSString *const PTPusherEventKey = @"event";
+NSString *const PTPusherConnectionEstablishedEvent = @"connection_established";
 
 @implementation PTPusherConnection
 
@@ -55,15 +54,14 @@ NSString *const PTPusherEventKey = @"event";
 - (void)webSocket:(ZTWebSocket*)webSocket didReceiveMessage:(NSString*)message;
 {
   id messageDictionary = [message JSONValue];
-  PTPusherEvent *event = [[PTPusherEvent alloc] initWithEventName:[messageDictionary valueForKey:PTPusherEventKey] data:[messageDictionary valueForKey:PTPusherDataKey]];
+  PTPusherEvent *event = [PTPusherEvent eventFromMessageDictionary:messageDictionary];
   
-  if ([event.name isEqualToString:@"connection_established"]) {
+  if ([event.name isEqualToString:PTPusherConnectionEstablishedEvent]) {
     socketID = [[event.data objectForKey:@"socket_id"] integerValue];
     connected = YES;
     [self.delegate pusherConnectionDidConnect:self];
   }  
   [self.delegate pusherConnection:self didReceiveEvent:event];
-  [event release];
 }
 
 @end

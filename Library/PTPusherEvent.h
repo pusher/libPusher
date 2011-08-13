@@ -13,7 +13,9 @@
 
 }
 @property (nonatomic, readonly) NSString *name;
+@property (nonatomic, readonly) NSString *channel;
 @property (nonatomic, readonly) id data;
 
-- (id)initWithEventName:(NSString *)name data:(id)data;
+- (id)initWithEventName:(NSString *)name channel:(NSString *)channel data:(id)data;
++ (id)eventFromMessageDictionary:(NSDictionary *)dictionary;
 @end

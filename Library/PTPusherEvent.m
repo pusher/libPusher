@@ -9,15 +9,26 @@
 #import "PTPusherEvent.h"
 #import "JSON.h"
 
+NSString *const PTPusherDataKey    = @"data";
+NSString *const PTPusherEventKey   = @"event";
+NSString *const PTPusherChannelKey = @"channel";
+
 @implementation PTPusherEvent
 
 @synthesize name = _name;
 @synthesize data = _data;
+@synthesize channel = _channel;
 
-- (id)initWithEventName:(NSString *)name data:(id)data
++ (id)eventFromMessageDictionary:(NSDictionary *)dictionary
+{
+  return [[[self alloc] initWithEventName:[dictionary objectForKey:PTPusherEventKey] channel:[dictionary objectForKey:PTPusherChannelKey] data:[dictionary objectForKey:PTPusherDataKey]] autorelease];
+}
+
+- (id)initWithEventName:(NSString *)name channel:(NSString *)channel data:(id)data
 {
   if (self = [super init]) {
     _name = [name copy];
+    _channel = [channel copy];
     
     if ([data respondsToSelector:@selector(JSONValue)]) {
       _data = [[data JSONValue] copy];
@@ -31,6 +42,7 @@
 
 - (void)dealloc
 {
+  [_channel release];
   [_name release];
   [_data release];
   [super dealloc];
@@ -38,7 +50,7 @@
 
 - (NSString *)description
 {
-  return [NSString stringWithFormat:@"<PTPusherEvent name:%@ data:%@>", self.name, self.data];
+  return [NSString stringWithFormat:@"<PTPusherEvent channel:%@ name:%@ data:%@>", self.channel, self.name, self.data];
 }
 
 @end

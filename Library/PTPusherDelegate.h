@@ -7,13 +7,13 @@
 //
 
 @class PTPusher;
+@class PTPusherConnection;
 
 @protocol PTPusherDelegate <NSObject>
 
 @optional
-- (void)pusherWillConnect:(PTPusher *)pusher;
-- (void)pusherDidConnect:(PTPusher *)pusher;
-- (void)pusherDidDisconnect:(PTPusher *)pusher;
-- (void)pusherDidFailToConnect:(PTPusher *)pusher withError:(NSError *)error;
-- (void)pusherWillReconnect:(PTPusher *)pusher afterDelay:(NSUInteger)delay;
+- (void)pusher:(PTPusher *)pusher connectionDidConnect:(PTPusherConnection *)connection;
+- (void)pusher:(PTPusher *)pusher connectionDidDisconnect:(PTPusherConnection *)connection;
+- (void)pusher:(PTPusher *)pusher connection:(PTPusherConnection *)connection failedWithError:(NSError *)error;
+- (void)pusher:(PTPusher *)pusher connectionWillReconnect:(PTPusherConnection *)connection afterDelay:(NSTimeInterval)delay;
 @end

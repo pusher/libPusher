@@ -9,13 +9,13 @@
 #import "PTEventListener.h"
 
 
-@implementation PTEventListener
+@implementation PTTargetActionEventListener
 
-- (id)initWithTarget:(id)_target selector:(SEL)_selector;
+- (id)initWithTarget:(id)aTarget action:(SEL)aSelector
 {
   if (self = [super init]) {
-    target = [_target retain];
-    selector = _selector;
+    target = [aTarget retain];
+    action = aSelector;
   }
   return self;
 }
@@ -28,12 +28,14 @@
 
 - (NSString *)description;
 {
-  return [NSString stringWithFormat:@"<PTEventListener target:%@ selector:%@>", target, NSStringFromSelector(selector)];
+  return [NSString stringWithFormat:@"<PTEventListener target:%@ selector:%@>", target, NSStringFromSelector(action)];
 }
 
 - (void)dispatch:(PTPusherEvent *)event;
 {
-  [target performSelectorOnMainThread:selector withObject:event waitUntilDone:NO];
+  dispatch_async(dispatch_get_main_queue(), ^{
+    [target performSelector:action withObject:event];
+  });
 }
 
 @end
