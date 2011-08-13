@@ -17,4 +17,5 @@
 @property (nonatomic, assign) id<PusherEventsDelegate> delegate;
 
 - (IBAction)sendEvent:(id)sender;
+- (IBAction)cancel:(id)sender;
 @end

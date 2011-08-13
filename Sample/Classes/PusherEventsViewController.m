@@ -56,7 +56,7 @@
 
 - (void)sendEventWithMessage:(NSString *)message;
 {
-  NSDictionary *payload = [NSDictionary dictionaryWithObjectsAndKeys:message, @"title", @"Sent from libPusher", @"description", nil];
+  NSDictionary *payload = [NSDictionary dictionaryWithObjectsAndKeys:message, @"message", nil];
 
   [self performSelector:@selector(sendEvent:) withObject:payload afterDelay:0.3];
   [self dismissModalViewControllerAnimated:YES];
@@ -64,7 +64,7 @@
 
 - (void)sendEvent:(id)payload;
 {
-  [self.eventsChannel triggerEvent:@"new-event" data:payload];
+  [self.eventsChannel triggerEvent:@"message" data:payload];
 }
 
 #pragma mark -
@@ -72,12 +72,10 @@
 
 - (void)channel:(PTPusherChannel *)channel didReceiveEvent:(PTPusherEvent *)event;
 {
-  if ([event.name isEqualToString:@"new-event"]) {
-    [self.tableView beginUpdates];
-    [eventsReceived insertObject:event atIndex:0];
-    [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
-    [self.tableView endUpdates];
-  }
+  [self.tableView beginUpdates];
+  [eventsReceived insertObject:event atIndex:0];
+  [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
+  [self.tableView endUpdates];
 }
 
 - (void)channelDidConnect:(PTPusherChannel *)channel
@@ -112,8 +110,9 @@ static NSString *EventCellIdentifier = @"EventCell";
     cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:EventCellIdentifier] autorelease];
   }
   PTPusherEvent *event = [eventsReceived objectAtIndex:indexPath.row];
-  cell.textLabel.text = [event.data valueForKey:@"title"];
-  cell.detailTextLabel.text = [event.data valueForKey:@"description"];
+
+  cell.textLabel.text = event.name;
+  cell.detailTextLabel.text = [event.data description];
   
   return cell;
 }

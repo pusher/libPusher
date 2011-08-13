@@ -47,4 +47,9 @@
   [self.delegate sendEventWithMessage:self.textView.text];
 }
 
+- (IBAction)cancel:(id)sender 
+{
+  [self dismissModalViewControllerAnimated:YES];
+}
+
 @end

@@ -27,7 +27,6 @@
   [PTPusher setSecret:PUSHER_API_SECRET];
   [PTPusher setAppID:PUSHER_APP_ID];
   
-  
   pusher = [[PTPusher alloc] initWithKey:PUSHER_API_KEY channel:@"test_channel"];
   pusher.delegate = self;
   
