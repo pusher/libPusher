@@ -53,4 +53,15 @@
 /** Closes the web socket connection */
 - (void)disconnect;
 
+///------------------------------------------------------------------------------------/
+/// @name Sending data
+///------------------------------------------------------------------------------------/
+
+/** Sends an object over the web socket connection.
+ 
+ The object will be serialized to JSON before sending, so the object must be anything
+ that can be converted into JSON (typically, any plist compatible object).
+ */
+- (void)send:(id)object;
+
 @end

@@ -54,7 +54,7 @@ NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *
     self.reconnectDelay = kPTPusherDefaultReconnectDelay;
     
     if (connectAutomatically) {
-      [self.connection connect];
+      [self connect];
     }
   }
   return self;
@@ -74,6 +74,18 @@ NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *
   [_connection disconnect];
   [_connection release];
   [super dealloc];
+}
+
+#pragma mark - Connection management
+
+- (void)connect
+{
+  [self.connection connect];
+}
+
+- (void)disconnect
+{
+  [self.connection disconnect];
 }
 
 - (BOOL)isConnected
@@ -109,6 +121,36 @@ NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *
 - (PTPusherChannel *)subscribeToPresenceChannelNamed:(NSString *)name
 {
   return [self subscribeToChannelNamed:[NSString stringWithFormat:@"presence-%@", name]];
+}
+
+- (PTPusherChannel *)channelNamed:(NSString *)name
+{
+  return [channels objectForKey:name];
+}
+
+- (void)unsubscribeFromChannel:(PTPusherChannel *)channel
+{
+  [channels removeObjectForKey:channel.name];
+}
+
+#pragma mark - Sending events
+
+- (void)sendEventNamed:(NSString *)name data:(id)data
+{
+  [self sendEventNamed:name data:data channel:nil];
+}
+
+- (void)sendEventNamed:(NSString *)name data:(id)data channel:(NSString *)channelName
+{
+  NSMutableDictionary *payload = [NSMutableDictionary dictionary];
+  
+  [payload setObject:name forKey:@"event"];
+  [payload setObject:data forKey:@"data"];
+  
+  if (channelName) {
+    [payload setObject:channelName forKey:@"channel"];
+  }
+  [self.connection send:payload];
 }
 
 #pragma mark - PTPusherConnection delegate methods

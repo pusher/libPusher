@@ -69,6 +69,13 @@ extern NSString *const PTPusherEventReceivedNotification;
 - (void)unsubscribeFromChannel:(PTPusherChannel *)channel;
 - (PTPusherChannel *)channelNamed:(NSString *)name;
 
+///------------------------------------------------------------------------------------/
+/// @name Sending events
+///------------------------------------------------------------------------------------/
+
+- (void)sendEventNamed:(NSString *)name data:(id)data;
+- (void)sendEventNamed:(NSString *)name data:(id)data channel:(NSString *)channelName;
+
 @end
 
 @class PTPusherChannel;

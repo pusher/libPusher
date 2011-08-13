@@ -12,31 +12,27 @@
 #import "PTEventListener.h"
 #import "PTPusherEventDispatcher.h"
 
+
 @class PTPusher;
 
 @interface PTPusherChannel : NSObject <PTPusherEventPublisher, PTEventListener> {
   NSString *name;
   PTPusher *pusher;
   PTPusherEventDispatcher *dispatcher;
-  NSOperationQueue *operationQueue;
   id<PTPusherChannelDelegate> delegate;
 }
 @property (nonatomic, readonly) NSString *name;
 @property (nonatomic, assign) id<PTPusherChannelDelegate> delegate;
 
+///------------------------------------------------------------------------------------/
+/// @name Initialisation
+///------------------------------------------------------------------------------------/
+
 - (id)initWithName:(NSString *)channelName pusher:(PTPusher *)pusher;
+
+///------------------------------------------------------------------------------------/
+/// @name Triggering events
+///------------------------------------------------------------------------------------/
+
+- (void)triggerEventNamed:(NSString *)eventName data:(id)eventData;
 @end
-
-@interface PTPusherClientOperation : NSOperation
-{
-  NSURL *url;
-  NSString *body;
-  PTPusherChannel *channel;
-  id<PTPusherChannelDelegate> delegate;
-}
-@property (nonatomic, assign) id<PTPusherChannelDelegate> delegate;
-@property (nonatomic, retain) PTPusherChannel *channel;
-
-- (id)initWithURL:(NSURL *)_url JSONString:(NSString *)json;
-@end
-

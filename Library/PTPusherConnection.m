@@ -38,6 +38,13 @@ NSString *const PTPusherConnectionEstablishedEvent = @"connection_established";
   [socket close];
 }
 
+#pragma mark - Sending data
+
+- (void)send:(id)object
+{
+  [socket send:[object JSONRepresentation]];
+}
+
 #pragma mark - ZTWebSocket delegate methods
 
 - (void)webSocket:(ZTWebSocket*)webSocket didFailWithError:(NSError*)error;
