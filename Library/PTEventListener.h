@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+
 @class PTPusherEvent;
 
 @protocol PTEventListener <NSObject>
@@ -20,17 +21,4 @@
 
 @end
 
-/** Dispatches events using the standard Cocoa target/action mechanism.
- 
- PTTargetActionEventListener will dispatch events by calling aSelector on
- aTarget. The event will be passed as an argument to the aSelector.
- 
- All events will be dispatched asynchronously using Grand Central Dispatch 
- on the main queue.
- */
-@interface PTTargetActionEventListener : NSObject <PTEventListener> {
-  id target;
-  SEL action;
-}
-- (id)initWithTarget:(id)aTarget action:(SEL)aSelector;
-@end
+

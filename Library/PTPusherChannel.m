@@ -12,6 +12,8 @@
 #import "JSON.h"
 #import "NSString+Hashing.h"
 #import "NSDictionary+QueryString.h"
+#import "PTPusherEventDispatcher.h"
+#import "PTTargetActionEventListener.h"
 
 #import <CommonCrypto/CommonHMAC.h>
 
@@ -52,100 +54,64 @@ NSString *URLEncodedString(NSString *unencodedString) {
 @synthesize name;
 @synthesize delegate;
 
-- (id)initWithName:(NSString *)channelName appID:(NSString *)_id key:(NSString *)_key secret:(NSString *)_secret;
+- (id)initWithName:(NSString *)channelName pusher:(PTPusher *)aPusher
 {
   if (self = [super init]) {
     name = [channelName copy];
-    appid = [_id copy];
-    APIKey = [_key copy];
-    secret = [_secret copy];
+    pusher = aPusher;
     operationQueue = [[NSOperationQueue alloc] init];
-    pusher = nil;
-    delegate = nil;
+    dispatcher = [[PTPusherEventDispatcher alloc] init];
   }
   return self;
 }
 
 - (void)dealloc;
 {
-  if (pusher != nil) {
-    [[NSNotificationCenter defaultCenter] removeObserver:self 
-      name:PTPusherEventReceivedNotification object:nil];
-  }
-  [pusher release];
   [name release];
+  [dispatcher release];
   [operationQueue release];
-  [appid release];
-  [APIKey release];
-  [secret release];
   [super dealloc];
 }
 
-- (void)startListeningForEvents;
+#pragma mark - Binding to events
+
+- (void)bindToEventNamed:(NSString *)eventName target:(id)target action:(SEL)selector
 {
-  [pusher release];
-  pusher = [[PTPusher alloc] initWithKey:APIKey channel:name];
-  pusher.delegate = self;
-  pusher.reconnect = YES;
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedEventNotification:) name:PTPusherEventReceivedNotification object:nil];
+  [dispatcher addEventListenerForEventNamed:eventName target:target action:selector];
 }
 
-- (void)stopListeningForEvents;
+#pragma mark - Dispatching events
+
+- (void)dispatchEvent:(PTPusherEvent *)event
 {
-  [[NSNotificationCenter defaultCenter] removeObserver:self 
-    name:PTPusherEventReceivedNotification object:nil];
-  [pusher release];
-  pusher = nil;
+  [dispatcher dispatchEvent:event];
 }
 
-- (void)triggerEvent:(NSString *)event data:(id)data;
-{
-  NSString *path = [NSString stringWithFormat:@"/apps/%@/channels/%@/events", appid, name];
-  NSString *body = [data JSONRepresentation];
-  
-  NSMutableDictionary *queryParameters = [NSMutableDictionary dictionary];
-  [queryParameters setValue:[[body MD5Hash] lowercaseString] forKey:@"body_md5"];
-  [queryParameters setValue:APIKey forKey:@"auth_key"];
-  [queryParameters setValue:[NSNumber numberWithDouble:time(NULL)] forKey:@"auth_timestamp"];
-  [queryParameters setValue:@"1.0" forKey:@"auth_version"];
-  [queryParameters setValue:event forKey:@"name"];
-
-  NSString *signatureQuery = [queryParameters sortedQueryString];
-  NSMutableString *signatureString = [NSMutableString stringWithFormat:@"POST\n%@\n%@", path, signatureQuery];
-  
-  [queryParameters setValue:generateEncodedHMAC(signatureString, secret) forKey:@"auth_signature"];
-  
-  NSString *resourceString = [NSString stringWithFormat:@"http://%@%@?%@", kPTPusherWebServiceHost, path, [queryParameters sortedQueryString]];
-  
-  PTPusherClientOperation *operation = [[PTPusherClientOperation alloc] initWithURL:[NSURL URLWithString:resourceString] JSONString:body];
-  operation.delegate = self.delegate;
-  operation.channel = self;
-  [operationQueue addOperation:operation];
-  [operation release];
-}
-
-#pragma mark -
-#pragma mark Private
-
-- (void)pusherDidConnect:(PTPusher *)pusher
-{
-  [self.delegate channelDidConnect:self];
-}
-
-- (void)pusherDidDisconnect:(PTPusher *)pusher
-{
-  [self.delegate channelDidDisconnect:self];
-}
-
-- (void)receivedEventNotification:(NSNotification *)note;
-{
-  PTPusherEvent *event = (PTPusherEvent *)note.object;
-  if ([event.channel isEqualToString:name]) {
-    if ([self.delegate respondsToSelector:@selector(channel:didReceiveEvent:)]) {
-      [self.delegate channel:self didReceiveEvent:event];
-    }
-  }
-}
+//- (void)triggerEvent:(NSString *)event data:(id)data;
+//{
+//  NSString *path = [NSString stringWithFormat:@"/apps/%@/channels/%@/events", appid, name];
+//  NSString *body = [data JSONRepresentation];
+//  
+//  NSMutableDictionary *queryParameters = [NSMutableDictionary dictionary];
+//  [queryParameters setValue:[[body MD5Hash] lowercaseString] forKey:@"body_md5"];
+//  [queryParameters setValue:APIKey forKey:@"auth_key"];
+//  [queryParameters setValue:[NSNumber numberWithDouble:time(NULL)] forKey:@"auth_timestamp"];
+//  [queryParameters setValue:@"1.0" forKey:@"auth_version"];
+//  [queryParameters setValue:event forKey:@"name"];
+//
+//  NSString *signatureQuery = [queryParameters sortedQueryString];
+//  NSMutableString *signatureString = [NSMutableString stringWithFormat:@"POST\n%@\n%@", path, signatureQuery];
+//  
+//  [queryParameters setValue:generateEncodedHMAC(signatureString, secret) forKey:@"auth_signature"];
+//  
+//  NSString *resourceString = [NSString stringWithFormat:@"http://%@%@?%@", kPTPusherWebServiceHost, path, [queryParameters sortedQueryString]];
+//  
+//  PTPusherClientOperation *operation = [[PTPusherClientOperation alloc] initWithURL:[NSURL URLWithString:resourceString] JSONString:body];
+//  operation.delegate = self.delegate;
+//  operation.channel = self;
+//  [operationQueue addOperation:operation];
+//  [operation release];
+//}
 
 @end
 

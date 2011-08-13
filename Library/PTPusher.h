@@ -21,6 +21,7 @@ extern NSString *const PTPusherEventReceivedNotification;
 
 @interface PTPusher : NSObject <PTPusherConnectionDelegate, PTPusherEventPublisher> {
   PTPusherEventDispatcher *dispatcher;
+  NSMutableDictionary *channels;
 }
 @property (nonatomic, assign) id<PTPusherDelegate> delegate;
 @property (nonatomic, assign, getter=shouldReconnectAutomatically) BOOL reconnectAutomatically;
@@ -32,6 +33,8 @@ extern NSString *const PTPusherEventReceivedNotification;
 ///------------------------------------------------------------------------------------/
 
 - (id)initWithConnection:(PTPusherConnection *)connection connectAutomatically:(BOOL)connectAutomatically;
+
++ (id)pusherWithKey:(NSString *)key;
 
 ///------------------------------------------------------------------------------------/
 /// @name Managing the connection
@@ -74,7 +77,5 @@ extern NSString *const PTPusherEventReceivedNotification;
 + (void)setKey:(NSString *)apiKey;
 + (void)setSecret:(NSString *)secret;
 + (void)setAppID:(NSString *)appId;
-+ (PTPusherChannel *)channel:(NSString *)name;
-+ (PTPusherChannel *)newChannel:(NSString *)name;
 @end
 

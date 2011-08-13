@@ -17,6 +17,8 @@
 		A35281D313F72E03000687C0 /* PTPusherEventPublisher.h in Headers */ = {isa = PBXBuildFile; fileRef = A35281D213F72E03000687C0 /* PTPusherEventPublisher.h */; };
 		A35281D613F736DF000687C0 /* PTPusherEventDispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = A35281D413F736DF000687C0 /* PTPusherEventDispatcher.h */; };
 		A35281D713F736DF000687C0 /* PTPusherEventDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = A35281D513F736DF000687C0 /* PTPusherEventDispatcher.m */; };
+		A35281DB13F73C54000687C0 /* PTTargetActionEventListener.h in Headers */ = {isa = PBXBuildFile; fileRef = A35281D913F73C54000687C0 /* PTTargetActionEventListener.h */; };
+		A35281DC13F73C54000687C0 /* PTTargetActionEventListener.m in Sources */ = {isa = PBXBuildFile; fileRef = A35281DA13F73C54000687C0 /* PTTargetActionEventListener.m */; };
 		A3A1A112115814D0001EF877 /* OCHamcrest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3A1A111115814D0001EF877 /* OCHamcrest.framework */; };
 		A3A1A149115814F7001EF877 /* OCHamcrest.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = A3A1A111115814D0001EF877 /* OCHamcrest.framework */; };
 		A3A1A19D11581776001EF877 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D11B1157CF2F009A12AD /* NSObject+SBJSON.m */; };
@@ -41,7 +43,6 @@
 		A3D1D2891157FA30009A12AD /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3D1D2831157FA30009A12AD /* MainWindow.xib */; };
 		A3D1D28B1157FA30009A12AD /* PusherEventsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3D1D2851157FA30009A12AD /* PusherEventsViewController.xib */; };
 		A3D1D2C711580162009A12AD /* PTEventListener.h in Headers */ = {isa = PBXBuildFile; fileRef = A3D1D28C1157FA4C009A12AD /* PTEventListener.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		A3D1D2C811580162009A12AD /* PTEventListener.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D28D1157FA4C009A12AD /* PTEventListener.m */; };
 		A3D1D2C911580162009A12AD /* PTPusher.h in Headers */ = {isa = PBXBuildFile; fileRef = A3D1D28E1157FA4C009A12AD /* PTPusher.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3D1D2CA11580162009A12AD /* PTPusher.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D28F1157FA4C009A12AD /* PTPusher.m */; };
 		A3D1D2CB11580162009A12AD /* PTPusherEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = A3D1D2901157FA4C009A12AD /* PTPusherEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -133,6 +134,8 @@
 		A35281D213F72E03000687C0 /* PTPusherEventPublisher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherEventPublisher.h; sourceTree = "<group>"; };
 		A35281D413F736DF000687C0 /* PTPusherEventDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherEventDispatcher.h; sourceTree = "<group>"; };
 		A35281D513F736DF000687C0 /* PTPusherEventDispatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTPusherEventDispatcher.m; sourceTree = "<group>"; };
+		A35281D913F73C54000687C0 /* PTTargetActionEventListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTTargetActionEventListener.h; sourceTree = "<group>"; };
+		A35281DA13F73C54000687C0 /* PTTargetActionEventListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTTargetActionEventListener.m; sourceTree = "<group>"; };
 		A3A19FB911580DD7001EF877 /* UnitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UnitTests-Info.plist"; sourceTree = "<group>"; };
 		A3A19FBF11580DE9001EF877 /* UnitTests_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitTests_Prefix.pch; sourceTree = "<group>"; };
 		A3A1A0EB115813E2001EF877 /* UnitTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -169,7 +172,6 @@
 		A3D1D2831157FA30009A12AD /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainWindow.xib; path = Sample/MainWindow.xib; sourceTree = "<group>"; };
 		A3D1D2851157FA30009A12AD /* PusherEventsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = PusherEventsViewController.xib; path = Sample/PusherEventsViewController.xib; sourceTree = "<group>"; };
 		A3D1D28C1157FA4C009A12AD /* PTEventListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTEventListener.h; sourceTree = "<group>"; };
-		A3D1D28D1157FA4C009A12AD /* PTEventListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTEventListener.m; sourceTree = "<group>"; };
 		A3D1D28E1157FA4C009A12AD /* PTPusher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusher.h; sourceTree = "<group>"; };
 		A3D1D28F1157FA4C009A12AD /* PTPusher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTPusher.m; sourceTree = "<group>"; };
 		A3D1D2901157FA4C009A12AD /* PTPusherEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherEvent.h; sourceTree = "<group>"; };
@@ -226,9 +228,9 @@
 		080E96DDFE201D6D7F000001 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				A35281D813F73C42000687C0 /* Event Listeners */,
 				A3FE429311811ED6009CF5D7 /* Utility */,
 				A3D1D28C1157FA4C009A12AD /* PTEventListener.h */,
-				A3D1D28D1157FA4C009A12AD /* PTEventListener.m */,
 				A3D1D28E1157FA4C009A12AD /* PTPusher.h */,
 				A3D1D28F1157FA4C009A12AD /* PTPusher.m */,
 				A35281D213F72E03000687C0 /* PTPusherEventPublisher.h */,
@@ -301,6 +303,15 @@
 				A35281C013F6E0D8000687C0 /* Example Tests.octest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		A35281D813F73C42000687C0 /* Event Listeners */ = {
+			isa = PBXGroup;
+			children = (
+				A35281D913F73C54000687C0 /* PTTargetActionEventListener.h */,
+				A35281DA13F73C54000687C0 /* PTTargetActionEventListener.m */,
+			);
+			name = "Event Listeners";
 			sourceTree = "<group>";
 		};
 		A3A19FB211580DC8001EF877 /* Unit Tests */ = {
@@ -440,6 +451,7 @@
 				A35281D013F721A8000687C0 /* PTPusherConnection.h in Headers */,
 				A35281D313F72E03000687C0 /* PTPusherEventPublisher.h in Headers */,
 				A35281D613F736DF000687C0 /* PTPusherEventDispatcher.h in Headers */,
+				A35281DB13F73C54000687C0 /* PTTargetActionEventListener.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -626,7 +638,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A3FE44E71181C3C5009CF5D7 /* NSDictionary+QueryString.m in Sources */,
-				A3D1D2C811580162009A12AD /* PTEventListener.m in Sources */,
 				A3D1D2CA11580162009A12AD /* PTPusher.m in Sources */,
 				A3D1D2CC11580162009A12AD /* PTPusherEvent.m in Sources */,
 				A3D1D2CF11580177009A12AD /* NSObject+SBJSON.m in Sources */,
@@ -642,6 +653,7 @@
 				A3CDE3BA11C93E4E0051777E /* ZTWebSocket.m in Sources */,
 				A35281D113F721A8000687C0 /* PTPusherConnection.m in Sources */,
 				A35281D713F736DF000687C0 /* PTPusherEventDispatcher.m in Sources */,
+				A35281DC13F73C54000687C0 /* PTTargetActionEventListener.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

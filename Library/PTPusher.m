@@ -11,6 +11,7 @@
 #import "PTPusherEvent.h"
 #import "PTPusherChannel.h"
 #import "PTPusherEventDispatcher.h"
+#import "PTTargetActionEventListener.h"
 
 
 NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *clientID);
@@ -44,6 +45,7 @@ NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *
 {
   if (self = [super init]) {
     dispatcher = [[PTPusherEventDispatcher alloc] init];
+    channels = [[NSMutableDictionary alloc] init];
 
     self.connection = connection;
     self.connection.delegate = self;
@@ -58,7 +60,7 @@ NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *
   return self;
 }
 
-+ (id)clientWithKey:(NSString *)key
++ (id)pusherWithKey:(NSString *)key
 {
   PTPusherConnection *connection = [[PTPusherConnection alloc] initWithURL:PTPusherConnectionURL(@"ws.pusherapp.com", 80, key, @"libpusher")];
   PTPusher *pusher = [[self alloc] initWithConnection:connection connectAutomatically:YES];
@@ -68,6 +70,7 @@ NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *
 
 - (void)dealloc;
 {
+  [channels release];
   [_connection disconnect];
   [_connection release];
   [super dealloc];
@@ -78,20 +81,24 @@ NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *
   return [self.connection isConnected];
 }
 
-#pragma mark - Handling published events
+#pragma mark - Binding to events
 
 - (void)bindToEventNamed:(NSString *)eventName target:(id)target action:(SEL)selector
 {
-  PTTargetActionEventListener *listener = [[PTTargetActionEventListener alloc] initWithTarget:target action:selector];
-  [dispatcher addEventListener:listener forEventNamed:eventName];
-  [listener release];
+  [dispatcher addEventListenerForEventNamed:eventName target:target action:selector];
 }
 
 #pragma mark - Subscribing to channels
 
 - (PTPusherChannel *)subscribeToChannelNamed:(NSString *)name
 {
+  PTPusherChannel *channel = [channels objectForKey:name];
   
+  if (channel == nil) {
+    channel = [[[PTPusherChannel alloc] initWithName:name pusher:self] autorelease];
+    [channels setObject:channels forKey:name];
+  }
+  return channel;
 }
 
 - (PTPusherChannel *)subscribeToPrivateChannelNamed:(NSString *)name
@@ -140,10 +147,11 @@ NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *
 
 - (void)pusherConnection:(PTPusherConnection *)connection didReceiveEvent:(PTPusherEvent *)event
 {
-  NSArray *listenersForEvent = [eventListeners objectForKey:event.name];
-  for (PTEventListener *listener in listenersForEvent) {
-    [listener dispatch:event];
+  if (event.channel) {
+    [[channels objectForKey:event.channel] dispatchEvent:event];
   }
+  [dispatcher dispatchEvent:event];
+  
   [[NSNotificationCenter defaultCenter] 
         postNotificationName:PTPusherEventReceivedNotification 
                       object:event];
@@ -172,16 +180,6 @@ static NSString *sharedAppID = nil;
 + (void)setAppID:(NSString *)appId;
 {
   [sharedAppID autorelease]; sharedAppID = [appId copy];
-}
-
-+ (PTPusherChannel *)channel:(NSString *)name;
-{
-  return [[self newChannel:name] autorelease];
-}
-
-+ (PTPusherChannel *)newChannel:(NSString *)name;
-{
-  return [[PTPusherChannel alloc] initWithName:name appID:sharedAppID key:sharedKey secret:sharedSecret];
 }
 
 @end
