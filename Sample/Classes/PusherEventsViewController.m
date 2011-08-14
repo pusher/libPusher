@@ -40,9 +40,25 @@
   self.toolbarItems = [NSArray arrayWithObject:newEventButtonItem];
   [newEventButtonItem release];
   
+  // configure the auth URL for private/presence channels
+  self.pusher.authorizationURL = [NSURL URLWithString:@"http://localhost:9292/presence/auth"];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
+  
   [self.pusher onConnectionEstablished:^{
-    [self subscribeToChannel:@"private-messages"];
+    [self subscribeToChannel:@"presence-messages"];
   }];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+  [super viewWillDisappear:animated];
+  
+  // unsubscribe before we go back to the main menu
+  [self.pusher unsubscribeFromChannel:self.currentChannel]; 
 }
 
 - (void)dealloc 
@@ -90,7 +106,7 @@
     [api release];
   }
   // we set the socket ID to nil here as we want to receive the events that we are sending
-  [self.pusherAPI triggetEvent:@"new-message" onChannel:@"private-messages" data:payload socketID:nil];
+  [self.pusherAPI triggetEvent:@"new-message" onChannel:@"presence-messages" data:payload socketID:nil];
 }
 
 #pragma mark - Event handling

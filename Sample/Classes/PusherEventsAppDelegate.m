@@ -28,9 +28,6 @@
   // establish a new pusher instance
   self.pusher = [PTPusher pusherWithKey:PUSHER_API_KEY delegate:self];
   
-  // configure the auth URL for private/presence channels
-  self.pusher.authorizationURL = [NSURL URLWithString:@"http://localhost:9292/pusher/auth"];
-  
   // we want the connection to automatically reconnect if it dies
   self.pusher.reconnectAutomatically = YES;
   
