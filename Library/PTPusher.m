@@ -131,7 +131,7 @@ NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *
   if (channel == nil) {
     channel = [[[PTPusherChannel alloc] initWithName:name pusher:self] autorelease];
     [channel subscribe];
-    [channels setObject:channels forKey:name];
+    [channels setObject:channel forKey:name];
   }
   return channel;
 }
