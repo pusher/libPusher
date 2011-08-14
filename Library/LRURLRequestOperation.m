@@ -61,7 +61,7 @@
   [URLConnection start];
   
   do {
-    [[NSRunLoop currentRunLoop] run];
+    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
   } while (!_isFinished);
 }
 
