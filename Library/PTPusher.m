@@ -18,6 +18,8 @@
 NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *clientID);
 
 NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotification";
+NSString *const PTPusherErrorDomain = @"PTPusherErrorDomain";
+NSString *const PTPusherErrorUnderlyingEventKey = @"PTPusherErrorUnderlyingEventKey";
 
 NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *clientID)
 {

@@ -13,6 +13,7 @@
 #import "PTTargetActionEventListener.h"
 #import "PTBlockEventListener.h"
 #import "PTPusherChannelAuthorizationOperation.h"
+#import "PTPusherErrors.h"
 
 
 @interface PTPusherChannel ()
@@ -110,6 +111,10 @@
                     data:[NSDictionary dictionaryWithObject:self.name forKey:@"channel"]];
   
   self.subscribed = NO;
+  
+  if ([pusher.delegate respondsToSelector:@selector(pusher:didUnsubscribeFromChannel:)]) {
+    [pusher.delegate pusher:pusher didUnsubscribeFromChannel:self];
+  }
 }
 
 @end
@@ -125,7 +130,10 @@
     /* Set up event handlers for pre-defined channel events */
     
     [pusher bindToEventNamed:@"pusher_internal:subscription_succeeded" 
-                      target:self action:@selector(handleSubcribeEvent:)];    
+                      target:self action:@selector(handleSubcribeEvent:)];  
+    
+    [pusher bindToEventNamed:@"subscription_error" 
+                      target:self action:@selector(handleSubcribeErrorEvent:)];
   }
   return self;
 }
@@ -133,6 +141,19 @@
 - (void)handleSubscribeEvent:(PTPusherEvent *)event
 {
   self.subscribed = YES;
+  
+  if ([pusher.delegate respondsToSelector:@selector(pusher:didSubscribeToChannel:)]) {
+    [pusher.delegate pusher:pusher didSubscribeToChannel:self];
+  }
+}
+
+- (void)handleSubcribeErrorEvent:(PTPusherEvent *)event
+{
+  if ([pusher.delegate respondsToSelector:@selector(pusher:didFailToSubscribeToChannel:withError:)]) {
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObject:event forKey:PTPusherErrorUnderlyingEventKey];
+    NSError *error = [NSError errorWithDomain:PTPusherErrorDomain code:PTPusherSubscriptionError userInfo:userInfo];
+    [pusher.delegate pusher:pusher didFailToSubscribeToChannel:self withError:error];
+  }
 }
 
 - (void)authorizeWithCompletionHandler:(void(^)(BOOL, NSDictionary *))completionHandler

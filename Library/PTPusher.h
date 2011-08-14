@@ -11,10 +11,9 @@
 #import "PTPusherConnection.h"
 #import "PTPusherEventPublisher.h"
 
-
-extern NSString *const PTPusherDataKey;
-extern NSString *const PTPusherEventKey;
 extern NSString *const PTPusherEventReceivedNotification;
+extern NSString *const PTPusherErrorDomain;
+extern NSString *const PTPusherErrorUnderlyingEventKey;
 
 @class PTPusherChannel;
 @class PTPusherEventDispatcher;

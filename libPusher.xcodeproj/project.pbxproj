@@ -142,6 +142,8 @@
 		A35281E313F75010000687C0 /* PTBlockEventListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTBlockEventListener.m; sourceTree = "<group>"; };
 		A35281E713F75265000687C0 /* PTPusherAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherAPI.h; sourceTree = "<group>"; };
 		A35281E813F75265000687C0 /* PTPusherAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTPusherAPI.m; sourceTree = "<group>"; };
+		A39E238513F7E15E0083CAD7 /* PTPusherChannelDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherChannelDelegate.h; sourceTree = "<group>"; };
+		A39E238613F7E3FD0083CAD7 /* PTPusherErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherErrors.h; sourceTree = "<group>"; };
 		A3A19FB911580DD7001EF877 /* UnitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UnitTests-Info.plist"; sourceTree = "<group>"; };
 		A3A19FBF11580DE9001EF877 /* UnitTests_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitTests_Prefix.pch; sourceTree = "<group>"; };
 		A3A1A0EB115813E2001EF877 /* UnitTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -252,10 +254,12 @@
 				A3A1A41611582DC3001EF877 /* PTPusherDelegate.h */,
 				A3FE42181181173B009CF5D7 /* PTPusherChannel.h */,
 				A3FE42191181173B009CF5D7 /* PTPusherChannel.m */,
+				A39E238513F7E15E0083CAD7 /* PTPusherChannelDelegate.h */,
 				A3AC28C113F76C50001C4808 /* PTPusherChannelAuthorizationOperation.h */,
 				A3AC28C213F76C50001C4808 /* PTPusherChannelAuthorizationOperation.m */,
 				A35281CE13F721A8000687C0 /* PTPusherConnection.h */,
 				A35281CF13F721A8000687C0 /* PTPusherConnection.m */,
+				A39E238613F7E3FD0083CAD7 /* PTPusherErrors.h */,
 			);
 			path = Library;
 			sourceTree = "<group>";

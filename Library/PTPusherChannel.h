@@ -11,7 +11,6 @@
 #import "PTEventListener.h"
 #import "PTPusherEventDispatcher.h"
 
-
 @class PTPusher;
 
 @interface PTPusherChannel : NSObject <PTPusherEventEmmitter, PTEventListener> {
