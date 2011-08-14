@@ -50,7 +50,7 @@
 - (void)subscribeToChannel:(NSString *)channelName
 {
   self.currentChannel = [self.pusher subscribeToChannelNamed:channelName];
-  [self.currentChannel bindToEventNamed:@"message" target:self action:@selector(receivedMessageEvent:)];
+  [self.currentChannel bindToEventNamed:@"new-message" target:self action:@selector(receivedMessageEvent:)];
 }
 
 #pragma mark - Actions
@@ -75,7 +75,7 @@
 
 - (void)sendEvent:(id)payload;
 {
-  [self.currentChannel triggerEventNamed:@"message" data:payload];
+  [self.currentChannel triggerEventNamed:@"new-message" data:payload];
 }
 
 #pragma mark - Event handling
