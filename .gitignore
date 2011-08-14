@@ -11,3 +11,5 @@ profile
 
 Constants.h
 *.xcodeproj/xcuserdata
+
+log
