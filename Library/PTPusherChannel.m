@@ -15,9 +15,16 @@
 #import "PTPusherChannelAuthorizationOperation.h"
 
 
+@interface PTPusherChannel ()
+@property (nonatomic, assign, readwrite) BOOL subscribed;
+@end
+
+#pragma mark -
+
 @implementation PTPusherChannel
 
 @synthesize name;
+@synthesize subscribed;
 
 + (id)channelWithName:(NSString *)name pusher:(PTPusher *)pusher
 {
@@ -91,12 +98,16 @@
 {
   [pusher sendEventNamed:@"pusher:subscribe" 
                     data:[NSDictionary dictionaryWithObject:self.name forKey:@"channel"]];
+  
+  self.subscribed = YES;
 }
 
 - (void)unsubscribe
 {
   [pusher sendEventNamed:@"pusher:unsubscribe" 
                     data:[NSDictionary dictionaryWithObject:self.name forKey:@"channel"]];
+  
+  self.subscribed = NO;
 }
 
 @end
@@ -104,6 +115,23 @@
 #pragma mark -
 
 @implementation PTPusherPrivateChannel
+
+- (id)initWithName:(NSString *)channelName pusher:(PTPusher *)aPusher
+{
+  if ((self = [super initWithName:channelName pusher:aPusher])) {
+    
+    /* Set up event handlers for pre-defined channel events */
+    
+    [pusher bindToEventNamed:@"pusher_internal:subscription_succeeded" 
+                      target:self action:@selector(handleSubcribeEvent:)];    
+  }
+  return self;
+}
+
+- (void)handleSubscribeEvent:(PTPusherEvent *)event
+{
+  self.subscribed = YES;
+}
 
 - (void)authorizeWithCompletionHandler:(void(^)(BOOL, NSDictionary *))completionHandler
 {
@@ -128,6 +156,41 @@
 #pragma mark -
 
 @implementation PTPusherPresenceChannel
+
+- (id)initWithName:(NSString *)channelName pusher:(PTPusher *)aPusher
+{
+  if ((self = [super initWithName:channelName pusher:aPusher])) {
+    
+    members = [[NSMutableDictionary alloc] init];
+    
+    /* Set up event handlers for pre-defined channel events */
+
+    [pusher bindToEventNamed:@"pusher_internal:member_added" 
+                      target:self action:@selector(handleMemberAddedEvent:)];
+    
+    [pusher bindToEventNamed:@"pusher_internal:member_removed" 
+                      target:self action:@selector(handleMemberRemovedEvent:)];
+    
+  }
+  return self;
+}
+
+- (void)dealloc 
+{
+  [members release];
+  [super dealloc];
+}
+
+- (void)handleMemberAddedEvent:(PTPusherEvent *)event
+{
+  [members setObject:[event.data valueForKey:@"user_info"] 
+              forKey:[event.data valueForKey:@"user_id"]];
+}
+
+- (void)handleMemberRemovedEvent:(PTPusherEvent *)event
+{
+  [members removeObjectForKey:[event.data valueForKey:@"user_id"]]; 
+}
 
 @end
 

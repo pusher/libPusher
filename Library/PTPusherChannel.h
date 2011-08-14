@@ -20,6 +20,7 @@
   PTPusherEventDispatcher *dispatcher;
 }
 @property (nonatomic, readonly) NSString *name;
+@property (nonatomic, readonly, getter=isSubscribed) BOOL subscribed;
 
 ///------------------------------------------------------------------------------------/
 /// @name Initialisation
@@ -45,5 +46,7 @@
 @interface PTPusherPrivateChannel : PTPusherChannel
 @end
 
-@interface PTPusherPresenceChannel : PTPusherPrivateChannel
+@interface PTPusherPresenceChannel : PTPusherPrivateChannel {
+  NSMutableDictionary *members;
+}
 @end
