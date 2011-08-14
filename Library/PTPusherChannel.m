@@ -115,7 +115,8 @@
   if (self.isSubscribed) return;
   
   [pusher sendEventNamed:@"pusher:subscribe" 
-                    data:[NSDictionary dictionaryWithObject:self.name forKey:@"channel"]];
+                    data:[NSDictionary dictionaryWithObject:self.name forKey:@"channel"]
+                 channel:nil];
   
   self.subscribed = YES;
 }
@@ -123,7 +124,8 @@
 - (void)unsubscribe
 {
   [pusher sendEventNamed:@"pusher:unsubscribe" 
-                    data:[NSDictionary dictionaryWithObject:self.name forKey:@"channel"]];
+                    data:[NSDictionary dictionaryWithObject:self.name forKey:@"channel"]
+                 channel:nil];
   
   self.subscribed = NO;
   
@@ -193,7 +195,8 @@
   NSMutableDictionary *eventData = [[authData mutableCopy] autorelease];
   [eventData setObject:self.name forKey:@"channel"];
   [pusher sendEventNamed:@"pusher:subscribe" 
-                    data:eventData];
+                    data:eventData
+                 channel:nil];
 }
 
 @end

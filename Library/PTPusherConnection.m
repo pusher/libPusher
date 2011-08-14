@@ -39,11 +39,17 @@ NSString *const PTPusherConnectionEstablishedEvent = @"connection_established";
 
 - (void)connect;
 {
+  if (self.isConnected)
+    return;
+
   [socket open];
 }
 
 - (void)disconnect;
 {
+  if (!self.isConnected)
+    return;
+  
   [socket close];
 }
 

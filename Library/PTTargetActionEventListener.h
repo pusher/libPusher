@@ -11,11 +11,6 @@
 #import "PTPusherEventDispatcher.h"
 
 
-/** Dispatches events using the standard Cocoa target/action mechanism.
- 
- PTTargetActionEventListener will dispatch events by calling aSelector on
- aTarget. The event will be passed as an argument to the aSelector.
- */
 @interface PTTargetActionEventListener : NSObject <PTEventListener> {
   id target;
   SEL action;
@@ -24,9 +19,5 @@
 @end
 
 @interface PTPusherEventDispatcher (PTTargetActionFactory)
-
-/** A convenience method for adding a new target/action event listener.
- */
 - (void)addEventListenerForEventNamed:(NSString *)eventName target:(id)target action:(SEL)action;
-
 @end

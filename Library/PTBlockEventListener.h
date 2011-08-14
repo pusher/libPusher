@@ -14,11 +14,6 @@
 
 typedef void (^PTBlockEventListenerBlock)(PTPusherEvent *);
 
-/** Dispatches events using block-based callbacks
- 
- As well as specifying a block, a dispatch queue can also be specified. All
- event blocks will be dispatched using GCD on the specified queue.
- */
 @interface PTBlockEventListener : NSObject <PTEventListener> {
   PTBlockEventListenerBlock block;
   dispatch_queue_t queue;
@@ -28,8 +23,6 @@ typedef void (^PTBlockEventListenerBlock)(PTPusherEvent *);
 
 @interface PTPusherEventDispatcher (PTBlockEventFactory)
 
-/** A convenience method for adding a new block-based event listener.
- */
 - (void)addEventListenerForEventNamed:(NSString *)eventName 
                                 block:(PTBlockEventListenerBlock)block 
                                 queue:(dispatch_queue_t)queue;

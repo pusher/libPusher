@@ -13,12 +13,6 @@
 
 @protocol PTEventListener <NSObject>
 
-/** Dispatches the event.
- 
- The mechanism for how the event is dispatched is implementation-specific.
- */
 - (void)dispatchEvent:(PTPusherEvent *)event;
 
 @end
-
-

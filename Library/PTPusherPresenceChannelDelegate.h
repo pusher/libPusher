@@ -12,8 +12,31 @@
 
 @protocol PTPusherPresenceChannelDelegate <NSObject>
 
+/** Notifies the delegate that the presence channel subscribed successfully.
+ 
+ Whenever you subscribe to a presence channel, a list of current subscribers will be returned by Pusher.
+ 
+ @param channel The presence channel that was subscribed to.
+ @param members The current members subscribed to the channel.
+ */
 - (void)presenceChannel:(PTPusherPresenceChannel *)channel didSubscribeWithMemberList:(NSArray *)members;
+
+/** Notifies the delegate that a new member subscribed to the presence channel.
+
+ The member data can contain arbitrary user data returned by the authorization server.
+ 
+ @param channel The presence channel that was subscribed to.
+ @param memberData The custom user data for the new member.
+ */
 - (void)presenceChannel:(PTPusherPresenceChannel *)channel memberAdded:(NSDictionary *)memberData;
+
+/** Notifies the delegate that a member subscribed to the presence channel has unsubscribed.
+ 
+ The member data can contain arbitrary user data returned by the authorization server.
+ 
+ @param channel The presence channel that was subscribed to.
+ @param memberData The custom user data for the new member.
+ */
 - (void)presenceChannel:(PTPusherPresenceChannel *)channel memberRemoved:(NSDictionary *)memberData;
 
 @end
