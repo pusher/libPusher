@@ -14,6 +14,7 @@
 
 
 extern NSString *const PTPusherEventReceivedNotification;
+extern NSString *const PTPusherEventUserInfoKey;
 extern NSString *const PTPusherErrorDomain;
 extern NSString *const PTPusherErrorUnderlyingEventKey;
 

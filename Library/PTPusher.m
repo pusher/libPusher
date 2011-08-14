@@ -19,6 +19,7 @@
 NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *clientID);
 
 NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotification";
+NSString *const PTPusherEventUserInfoKey = @"PTPusherEventUserInfoKey";
 NSString *const PTPusherErrorDomain = @"PTPusherErrorDomain";
 NSString *const PTPusherErrorUnderlyingEventKey = @"PTPusherErrorUnderlyingEventKey";
 
@@ -250,7 +251,8 @@ NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *
   
   [[NSNotificationCenter defaultCenter] 
         postNotificationName:PTPusherEventReceivedNotification 
-                      object:event];
+                      object:self 
+                    userInfo:[NSDictionary dictionaryWithObject:event forKey:PTPusherEventUserInfoKey]];
 }
 
 @end

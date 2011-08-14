@@ -32,7 +32,7 @@
   self.pusher.reconnectAutomatically = YES;
   
   // log all events received, regardless of which channel they come from
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handlePusherEvent:) name:PTPusherEventReceivedNotification object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handlePusherEvent:) name:PTPusherEventReceivedNotification object:self.pusher];
   
   // pass the pusher into the events controller
   self.menuViewController.pusher = self.pusher;
@@ -56,7 +56,8 @@
 
 - (void)handlePusherEvent:(NSNotification *)note
 {
-  NSLog(@"[pusher] Received event %@", note.object);
+  PTPusherEvent *event = [note.userInfo objectForKey:PTPusherEventUserInfoKey];
+  NSLog(@"[pusher] Received event %@", event);
 }
 
 #pragma mark - PTPusherDelegate methods

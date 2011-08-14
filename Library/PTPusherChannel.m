@@ -94,6 +94,11 @@
 - (void)dispatchEvent:(PTPusherEvent *)event
 {
   [dispatcher dispatchEvent:event];
+  
+  [[NSNotificationCenter defaultCenter] 
+       postNotificationName:PTPusherEventReceivedNotification 
+                     object:self 
+                   userInfo:[NSDictionary dictionaryWithObject:event forKey:PTPusherEventUserInfoKey]];
 }
 
 #pragma mark - Triggering events
