@@ -25,17 +25,25 @@
 /// @name Initialisation
 ///------------------------------------------------------------------------------------/
 
++ (id)channelWithName:(NSString *)name pusher:(PTPusher *)pusher;
+
 - (id)initWithName:(NSString *)channelName pusher:(PTPusher *)pusher;
 
 ///------------------------------------------------------------------------------------/
 /// @name Authorization
 ///------------------------------------------------------------------------------------/
 
-- (void)authorizeWithCompletionHandler:(void(^)(NSError *, NSDictionary *))completionHandler;
+- (void)authorizeWithCompletionHandler:(void(^)(BOOL, NSDictionary *))completionHandler;
 
 ///------------------------------------------------------------------------------------/
 /// @name Triggering events
 ///------------------------------------------------------------------------------------/
 
 - (void)triggerEventNamed:(NSString *)eventName data:(id)eventData;
+@end
+
+@interface PTPusherPrivateChannel : PTPusherChannel
+@end
+
+@interface PTPusherPresenceChannel : PTPusherPrivateChannel
 @end

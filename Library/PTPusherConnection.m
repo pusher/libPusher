@@ -27,6 +27,14 @@ NSString *const PTPusherConnectionEstablishedEvent = @"connection_established";
   return self;
 }
 
+- (void)dealloc 
+{
+  [socket close];
+  [socket release];
+  [socketID release];
+  [super dealloc];
+}
+
 #pragma mark - Connection management
 
 - (void)connect;
@@ -68,7 +76,7 @@ NSString *const PTPusherConnectionEstablishedEvent = @"connection_established";
   PTPusherEvent *event = [PTPusherEvent eventFromMessageDictionary:messageDictionary];
   
   if ([event.name isEqualToString:PTPusherConnectionEstablishedEvent]) {
-    socketID = [[event.data objectForKey:@"socket_id"] integerValue];
+    socketID = [[event.data objectForKey:@"socket_id"] copy];
     connected = YES;
     [self.delegate pusherConnectionDidConnect:self];
   }  

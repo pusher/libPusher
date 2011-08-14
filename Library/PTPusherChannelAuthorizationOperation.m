@@ -7,17 +7,44 @@
 //
 
 #import "PTPusherChannelAuthorizationOperation.h"
+#import "NSDictionary+QueryString.h"
+#import "CJSONDeserializer.h"
+
+@interface PTPusherChannelAuthorizationOperation ()
+@property (nonatomic, retain, readwrite) NSDictionary *authorizationData;
+@end
 
 @implementation PTPusherChannelAuthorizationOperation
 
-- (id)init
+@synthesize authorized;
+@synthesize authorizationData;
+@synthesize completionHandler;
+
++ (id)operationWithAuthorizationURL:(NSURL *)URL channelName:(NSString *)channelName socketID:(NSString *)socketID
 {
-    self = [super init];
-    if (self) {
-        // Initialization code here.
-    }
-    
-    return self;
+  NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
+  [request setHTTPMethod:@"POST"];
+  [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+  
+  NSMutableDictionary *requestData = [NSMutableDictionary dictionary];
+  [requestData setObject:socketID forKey:@"socket_id"];
+  [requestData setObject:channelName forKey:@"channel_name"];
+  
+  [request setHTTPBody:[[requestData sortedQueryString] dataUsingEncoding:NSUTF8StringEncoding]];
+  
+  return [[[self alloc] initWithURLRequest:request] autorelease];
+}
+
+- (void)finish
+{
+  [super finish];
+  
+  authorized = ([(NSHTTPURLResponse *)URLResponse statusCode] == 200);
+  authorizationData = [[CJSONDeserializer deserializer] deserialize:responseData error:nil];
+
+  if (self.completionHandler) {
+    self.completionHandler(self);
+  }
 }
 
 @end

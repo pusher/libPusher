@@ -29,7 +29,7 @@
   self.pusher = [PTPusher pusherWithKey:PUSHER_API_KEY delegate:self];
   
   // configure the auth URL for private/presence channels
-  self.pusher.authenticationURL = [NSURL URLWithString:@"http://localhost:9292/pusher/auth"];
+  self.pusher.authorizationURL = [NSURL URLWithString:@"http://localhost:9292/pusher/auth"];
   
   // we want the connection to automatically reconnect if it dies
   self.pusher.reconnectAutomatically = YES;
@@ -66,7 +66,7 @@
 
 - (void)pusher:(PTPusher *)pusher connectionDidConnect:(PTPusherConnection *)connection
 {
-  NSLog(@"[pusher] Connected to Pusher (socket id: %d)", connection.socketID);
+  NSLog(@"[pusher] Connected to Pusher (socket id: %@)", connection.socketID);
 }
 
 - (void)pusher:(PTPusher *)pusher connectionDidDisconnect:(PTPusherConnection *)connection
@@ -81,7 +81,7 @@
 
 - (void)pusher:(PTPusher *)pusher connectionWillReconnect:(PTPusherConnection *)connection afterDelay:(NSTimeInterval)delay
 {
-  NSLog(@"[pusher] Reconnecting after %d seconds...");
+  NSLog(@"[pusher] Reconnecting after %d seconds...", (int)delay);
 }
 
 @end

@@ -12,11 +12,23 @@
 #import "PTPusherEventDispatcher.h"
 #import "PTTargetActionEventListener.h"
 #import "PTBlockEventListener.h"
+#import "PTPusherChannelAuthorizationOperation.h"
 
 
 @implementation PTPusherChannel
 
 @synthesize name;
+
++ (id)channelWithName:(NSString *)name pusher:(PTPusher *)pusher
+{
+  if ([name hasPrefix:@"private-"]) {
+    return [[[PTPusherPrivateChannel alloc] initWithName:name pusher:pusher] autorelease];
+  }
+  if ([name hasPrefix:@"presence-"]) {
+    return [[[PTPusherPresenceChannel alloc] initWithName:name pusher:pusher] autorelease];
+  }
+  return [[[self alloc] initWithName:name pusher:pusher] autorelease];
+}
 
 - (id)initWithName:(NSString *)channelName pusher:(PTPusher *)aPusher
 {
@@ -37,9 +49,9 @@
 
 #pragma mark - Authorization
 
-- (void)authorizeWithCompletionHandler:(void(^)(NSError *, NSDictionary *))completionHandler
+- (void)authorizeWithCompletionHandler:(void(^)(BOOL, NSDictionary *))completionHandler
 {
-  completionHandler(nil, nil); // public channels do not require authorization
+  completionHandler(YES, [NSDictionary dictionary]); // public channels do not require authorization
 }
 
 #pragma mark - Binding to events
@@ -88,3 +100,34 @@
 }
 
 @end
+
+#pragma mark -
+
+@implementation PTPusherPrivateChannel
+
+- (void)authorizeWithCompletionHandler:(void(^)(BOOL, NSDictionary *))completionHandler
+{
+  PTPusherChannelAuthorizationOperation *authOperation = [PTPusherChannelAuthorizationOperation operationWithAuthorizationURL:pusher.authorizationURL channelName:self.name socketID:pusher.connection.socketID];
+  
+  [authOperation setCompletionHandler:^(PTPusherChannelAuthorizationOperation *operation) {
+    completionHandler(operation.isAuthorized, operation.authorizationData);
+  }];
+  [[NSOperationQueue mainQueue] addOperation:authOperation];
+}
+
+- (void)subscribeWithAuthorization:(NSDictionary *)authData
+{
+  NSMutableDictionary *eventData = [[authData mutableCopy] autorelease];
+  [eventData setObject:self.name forKey:@"channel"];
+  [pusher sendEventNamed:@"pusher:subscribe" 
+                    data:eventData];
+}
+
+@end
+
+#pragma mark -
+
+@implementation PTPusherPresenceChannel
+
+@end
+

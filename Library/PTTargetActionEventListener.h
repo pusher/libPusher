@@ -15,9 +15,6 @@
  
  PTTargetActionEventListener will dispatch events by calling aSelector on
  aTarget. The event will be passed as an argument to the aSelector.
- 
- All events will be dispatched asynchronously using Grand Central Dispatch 
- on the main queue.
  */
 @interface PTTargetActionEventListener : NSObject <PTEventListener> {
   id target;

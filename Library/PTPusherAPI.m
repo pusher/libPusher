@@ -37,7 +37,7 @@
   [super dealloc];
 }
 
-- (void)triggetEvent:(NSString *)eventName onChannel:(NSString *)channelName data:(id)eventData socketID:(NSInteger)socketID
+- (void)triggetEvent:(NSString *)eventName onChannel:(NSString *)channelName data:(id)eventData socketID:(NSString *)socketID
 {
   NSString *path = [NSString stringWithFormat:@"/apps/%@/channels/%@/events", appID, channelName];
   NSData *bodyData = [[CJSONSerializer serializer] serializeObject:eventData error:nil];
@@ -53,7 +53,7 @@
   [queryParameters setValue:eventName forKey:@"name"];
   
   if (socketID > 0) {
-    [queryParameters setObject:[NSNumber numberWithInteger:socketID] forKey:@"socket_id"];
+    [queryParameters setObject:socketID forKey:@"socket_id"];
   }
     
   NSString *signatureString = [NSString stringWithFormat:@"POST\n%@\n%@", path, [queryParameters sortedQueryString]];

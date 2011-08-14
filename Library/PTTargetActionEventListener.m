@@ -33,9 +33,7 @@
 
 - (void)dispatchEvent:(PTPusherEvent *)event;
 {
-  dispatch_async(dispatch_get_main_queue(), ^{
-    [target performSelector:action withObject:event];
-  });
+  [target performSelector:action withObject:event];
 }
 
 @end

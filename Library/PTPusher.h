@@ -28,7 +28,7 @@ extern NSString *const PTPusherEventReceivedNotification;
 @property (nonatomic, assign, getter=shouldReconnectAutomatically) BOOL reconnectAutomatically;
 @property (nonatomic, assign) NSTimeInterval reconnectDelay;
 @property (nonatomic, retain, readonly) PTPusherConnection *connection;
-@property (nonatomic, retain) NSURL *authenticationURL;
+@property (nonatomic, retain) NSURL *authorizationURL;
 
 ///------------------------------------------------------------------------------------/
 /// @name Initialisation

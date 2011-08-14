@@ -7,7 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "LRURLRequestOperation.h"
 
-@interface PTPusherChannelAuthorizationOperation : NSObject
+@interface PTPusherChannelAuthorizationOperation : LRURLRequestOperation
 
+@property (nonatomic, copy) void (^completionHandler)(PTPusherChannelAuthorizationOperation *);
+@property (nonatomic, readonly, getter=isAuthorized) BOOL authorized;
+@property (nonatomic, retain, readonly) NSDictionary *authorizationData;
+
++ (id)operationWithAuthorizationURL:(NSURL *)URL channelName:(NSString *)channelName socketID:(NSString *)socketID;
 @end

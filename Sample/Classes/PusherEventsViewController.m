@@ -41,7 +41,7 @@
   [newEventButtonItem release];
   
   [self.pusher onConnectionEstablished:^{
-    [self subscribeToChannel:@"messages"];
+    [self subscribeToChannel:@"private-messages"];
   }];
 }
 
@@ -89,7 +89,8 @@
     self.pusherAPI = api;
     [api release];
   }
-  [self.pusherAPI triggetEvent:@"new-message" onChannel:@"messages" data:payload socketID:self.pusher.connection.socketID];
+  // we set the socket ID to nil here as we want to receive the events that we are sending
+  [self.pusherAPI triggetEvent:@"new-message" onChannel:@"private-messages" data:payload socketID:nil];
 }
 
 #pragma mark - Event handling

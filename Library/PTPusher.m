@@ -45,7 +45,7 @@ NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *
 @synthesize delegate;
 @synthesize reconnectAutomatically;
 @synthesize reconnectDelay;
-@synthesize authenticationURL;
+@synthesize authorizationURL;
 
 - (id)initWithConnection:(PTPusherConnection *)connection connectAutomatically:(BOOL)connectAutomatically
 {
@@ -84,6 +84,7 @@ NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *
 
 - (void)dealloc;
 {
+  [authorizationURL release];
   [channels release];
   [_connection disconnect];
   [_connection release];
@@ -136,15 +137,16 @@ NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *
   PTPusherChannel *channel = [channels objectForKey:name];
   
   if (channel == nil) {
-    channel = [[[PTPusherChannel alloc] initWithName:name pusher:self] autorelease];
+    channel = [PTPusherChannel channelWithName:name pusher:self];
+    
     [channels setObject:channel forKey:name];
     
-    [channel authorizeWithCompletionHandler:^(NSError *error, NSDictionary *authData) {
-      if (error) {
-        // TODO: handle authorization error
+    [channel authorizeWithCompletionHandler:^(BOOL isAuthorized, NSDictionary *authData) {
+      if (isAuthorized) {
+        [channel subscribeWithAuthorization:authData];
       }
       else {
-        [channel subscribeWithAuthorization:authData];
+        // TODO: handle authorization error
       }
     }];
   }
