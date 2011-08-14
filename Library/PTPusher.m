@@ -33,7 +33,7 @@ NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *
 
 @interface PTPusherChannel ()
 /* These methods should only be called internally */
-- (void)subscribe;
+- (void)subscribeWithAuthorization:(NSDictionary *)authData;
 - (void)unsubscribe;
 @end
 
@@ -45,6 +45,7 @@ NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *
 @synthesize delegate;
 @synthesize reconnectAutomatically;
 @synthesize reconnectDelay;
+@synthesize authenticationURL;
 
 - (id)initWithConnection:(PTPusherConnection *)connection connectAutomatically:(BOOL)connectAutomatically
 {
@@ -136,8 +137,16 @@ NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *
   
   if (channel == nil) {
     channel = [[[PTPusherChannel alloc] initWithName:name pusher:self] autorelease];
-    [channel subscribe];
     [channels setObject:channel forKey:name];
+    
+    [channel authorizeWithCompletionHandler:^(NSError *error, NSDictionary *authData) {
+      if (error) {
+        // TODO: handle authorization error
+      }
+      else {
+        [channel subscribeWithAuthorization:authData];
+      }
+    }];
   }
   return channel;
 }

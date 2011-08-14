@@ -35,6 +35,13 @@
   [super dealloc];
 }
 
+#pragma mark - Authorization
+
+- (void)authorizeWithCompletionHandler:(void(^)(NSError *, NSDictionary *))completionHandler
+{
+  completionHandler(nil, nil); // public channels do not require authorization
+}
+
 #pragma mark - Binding to events
 
 - (void)bindToEventNamed:(NSString *)eventName target:(id)target action:(SEL)selector
@@ -68,7 +75,7 @@
 
 #pragma mark - Internal use only
 
-- (void)subscribe
+- (void)subscribeWithAuthorization:(NSDictionary *)authData
 {
   [pusher sendEventNamed:@"pusher:subscribe" 
                     data:[NSDictionary dictionaryWithObject:self.name forKey:@"channel"]];
