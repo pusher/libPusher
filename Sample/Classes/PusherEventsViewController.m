@@ -10,11 +10,14 @@
 #import "PTPusher.h"
 #import "PTPusherEvent.h"
 #import "PTPusherChannel.h"
+#import "PTPusherAPI.h"
+#import "PTPusherConnection.h"
 #import "NewEventViewController.h"
 
 @implementation PusherEventsViewController
 
 @synthesize pusher;
+@synthesize pusherAPI;
 @synthesize currentChannel;
 @synthesize eventsReceived;
 
@@ -40,6 +43,8 @@
 
 - (void)dealloc 
 {
+  [pusher release];
+  [pusherAPI release];
   [currentChannel release];
   [eventsReceived release];
   [super dealloc];
@@ -75,7 +80,12 @@
 
 - (void)sendEvent:(id)payload;
 {
-  [self.currentChannel triggerEventNamed:@"new-message" data:payload];
+  if (self.pusherAPI == nil) {
+    PTPusherAPI *api = [[PTPusherAPI alloc] initWithKey:PUSHER_API_KEY appID:PUSHER_APP_ID secretKey:PUSHER_API_SECRET];
+    self.pusherAPI = api;
+    [api release];
+  }
+  [self.pusherAPI triggetEvent:@"new-message" onChannel:@"messages" data:payload socketID:self.pusher.connection.socketID];
 }
 
 #pragma mark - Event handling

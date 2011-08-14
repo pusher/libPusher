@@ -11,6 +11,7 @@
 
 @class PTPusher;
 @class PTPusherChannel;
+@class PTPusherAPI;
 
 @protocol PusherEventsDelegate
 - (void)sendEventWithMessage:(NSString *)message;
@@ -20,6 +21,7 @@
   NSMutableArray *eventsReceived;
 }
 @property (nonatomic, retain) PTPusher *pusher;
+@property (nonatomic, retain) PTPusherAPI *pusherAPI;
 @property (nonatomic, retain) PTPusherChannel *currentChannel;
 @property (nonatomic, readonly) NSMutableArray *eventsReceived;
 

@@ -27,7 +27,7 @@ extern NSString *const PTPusherEventReceivedNotification;
 @property (nonatomic, assign) id<PTPusherDelegate> delegate;
 @property (nonatomic, assign, getter=shouldReconnectAutomatically) BOOL reconnectAutomatically;
 @property (nonatomic, assign) NSTimeInterval reconnectDelay;
-@property (nonatomic, readonly, getter=isConnected) BOOL connected;
+@property (nonatomic, retain, readonly) PTPusherConnection *connection;
 
 ///------------------------------------------------------------------------------------/
 /// @name Initialisation

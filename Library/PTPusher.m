@@ -28,7 +28,7 @@ NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *
 #define kPTPusherDefaultReconnectDelay 5.0
 
 @interface PTPusher ()
-@property (nonatomic, retain) PTPusherConnection *connection;
+@property (nonatomic, retain, readwrite) PTPusherConnection *connection;
 @end
 
 @interface PTPusherChannel ()
@@ -101,17 +101,12 @@ NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *
   [self.connection disconnect];
 }
 
-- (BOOL)isConnected
-{
-  return [self.connection isConnected];
-}
-
 - (void)onConnectionEstablished:(void (^)(void))block
 {
   [connectionCallback release];
   connectionCallback = [block copy];
 
-  if (connectionCallback && self.isConnected) {
+  if (connectionCallback && self.connection.isConnected) {
     connectionCallback();
   }
 }
