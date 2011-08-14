@@ -19,7 +19,7 @@ extern NSString *const PTPusherEventReceivedNotification;
 @class PTPusherChannel;
 @class PTPusherEventDispatcher;
 
-@interface PTPusher : NSObject <PTPusherConnectionDelegate, PTPusherEventPublisher> {
+@interface PTPusher : NSObject <PTPusherConnectionDelegate, PTPusherEventEmmitter> {
   PTPusherEventDispatcher *dispatcher;
   NSMutableDictionary *channels;
   void (^connectionCallback)(void);

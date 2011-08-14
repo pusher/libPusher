@@ -12,16 +12,12 @@
 
 typedef void (^PTPusherEventBlockHandler) (PTPusherEvent *);
 
-/** Describes an objects that publish events.
+/** Describes an objects that emits events that can be bound to.
  */
-@protocol PTPusherEventPublisher <NSObject>
+@protocol PTPusherEventEmmitter <NSObject>
 
 - (void)bindToEventNamed:(NSString *)eventName target:(id)target action:(SEL)selector;
-
-@optional
-
-// marking this as optional as they will be implemented later
-
 - (void)bindToEventNamed:(NSString *)eventName handleWithBlock:(PTPusherEventBlockHandler)block;
+- (void)bindToEventNamed:(NSString *)eventName handleWithBlock:(PTPusherEventBlockHandler)block queue:(dispatch_queue_t)queue;
 
 @end

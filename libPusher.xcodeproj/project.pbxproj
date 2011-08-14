@@ -19,6 +19,8 @@
 		A35281D713F736DF000687C0 /* PTPusherEventDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = A35281D513F736DF000687C0 /* PTPusherEventDispatcher.m */; };
 		A35281DB13F73C54000687C0 /* PTTargetActionEventListener.h in Headers */ = {isa = PBXBuildFile; fileRef = A35281D913F73C54000687C0 /* PTTargetActionEventListener.h */; };
 		A35281DC13F73C54000687C0 /* PTTargetActionEventListener.m in Sources */ = {isa = PBXBuildFile; fileRef = A35281DA13F73C54000687C0 /* PTTargetActionEventListener.m */; };
+		A35281E413F75010000687C0 /* PTBlockEventListener.h in Headers */ = {isa = PBXBuildFile; fileRef = A35281E213F75010000687C0 /* PTBlockEventListener.h */; };
+		A35281E513F75010000687C0 /* PTBlockEventListener.m in Sources */ = {isa = PBXBuildFile; fileRef = A35281E313F75010000687C0 /* PTBlockEventListener.m */; };
 		A3A1A112115814D0001EF877 /* OCHamcrest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3A1A111115814D0001EF877 /* OCHamcrest.framework */; };
 		A3A1A149115814F7001EF877 /* OCHamcrest.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = A3A1A111115814D0001EF877 /* OCHamcrest.framework */; };
 		A3A1A19D11581776001EF877 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D11B1157CF2F009A12AD /* NSObject+SBJSON.m */; };
@@ -135,6 +137,8 @@
 		A35281D513F736DF000687C0 /* PTPusherEventDispatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTPusherEventDispatcher.m; sourceTree = "<group>"; };
 		A35281D913F73C54000687C0 /* PTTargetActionEventListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTTargetActionEventListener.h; sourceTree = "<group>"; };
 		A35281DA13F73C54000687C0 /* PTTargetActionEventListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTTargetActionEventListener.m; sourceTree = "<group>"; };
+		A35281E213F75010000687C0 /* PTBlockEventListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTBlockEventListener.h; sourceTree = "<group>"; };
+		A35281E313F75010000687C0 /* PTBlockEventListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTBlockEventListener.m; sourceTree = "<group>"; };
 		A3A19FB911580DD7001EF877 /* UnitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UnitTests-Info.plist"; sourceTree = "<group>"; };
 		A3A19FBF11580DE9001EF877 /* UnitTests_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitTests_Prefix.pch; sourceTree = "<group>"; };
 		A3A1A0EB115813E2001EF877 /* UnitTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -307,6 +311,8 @@
 			children = (
 				A35281D913F73C54000687C0 /* PTTargetActionEventListener.h */,
 				A35281DA13F73C54000687C0 /* PTTargetActionEventListener.m */,
+				A35281E213F75010000687C0 /* PTBlockEventListener.h */,
+				A35281E313F75010000687C0 /* PTBlockEventListener.m */,
 			);
 			name = "Event Listeners";
 			sourceTree = "<group>";
@@ -448,6 +454,7 @@
 				A35281D313F72E03000687C0 /* PTPusherEventPublisher.h in Headers */,
 				A35281D613F736DF000687C0 /* PTPusherEventDispatcher.h in Headers */,
 				A35281DB13F73C54000687C0 /* PTTargetActionEventListener.h in Headers */,
+				A35281E413F75010000687C0 /* PTBlockEventListener.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -650,6 +657,7 @@
 				A35281D113F721A8000687C0 /* PTPusherConnection.m in Sources */,
 				A35281D713F736DF000687C0 /* PTPusherEventDispatcher.m in Sources */,
 				A35281DC13F73C54000687C0 /* PTTargetActionEventListener.m in Sources */,
+				A35281E513F75010000687C0 /* PTBlockEventListener.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

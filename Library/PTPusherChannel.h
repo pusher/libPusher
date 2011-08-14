@@ -14,7 +14,7 @@
 
 @class PTPusher;
 
-@interface PTPusherChannel : NSObject <PTPusherEventPublisher, PTEventListener> {
+@interface PTPusherChannel : NSObject <PTPusherEventEmmitter, PTEventListener> {
   NSString *name;
   PTPusher *pusher;
   PTPusherEventDispatcher *dispatcher;

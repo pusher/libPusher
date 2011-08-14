@@ -11,6 +11,7 @@
 #import "PTPusherEvent.h"
 #import "PTPusherEventDispatcher.h"
 #import "PTTargetActionEventListener.h"
+#import "PTBlockEventListener.h"
 
 
 @implementation PTPusherChannel
@@ -39,6 +40,16 @@
 - (void)bindToEventNamed:(NSString *)eventName target:(id)target action:(SEL)selector
 {
   [dispatcher addEventListenerForEventNamed:eventName target:target action:selector];
+}
+
+- (void)bindToEventNamed:(NSString *)eventName handleWithBlock:(PTPusherEventBlockHandler)block
+{
+  [self bindToEventNamed:eventName handleWithBlock:block queue:dispatch_get_main_queue()];
+}
+
+- (void)bindToEventNamed:(NSString *)eventName handleWithBlock:(PTPusherEventBlockHandler)block queue:(dispatch_queue_t)queue
+{
+  [dispatcher addEventListenerForEventNamed:eventName block:block queue:queue];
 }
 
 #pragma mark - Dispatching events

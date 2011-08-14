@@ -12,6 +12,7 @@
 #import "PTPusherChannel.h"
 #import "PTPusherEventDispatcher.h"
 #import "PTTargetActionEventListener.h"
+#import "PTBlockEventListener.h"
 
 
 NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *clientID);
@@ -120,6 +121,16 @@ NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *
 - (void)bindToEventNamed:(NSString *)eventName target:(id)target action:(SEL)selector
 {
   [dispatcher addEventListenerForEventNamed:eventName target:target action:selector];
+}
+
+- (void)bindToEventNamed:(NSString *)eventName handleWithBlock:(PTPusherEventBlockHandler)block
+{
+  [self bindToEventNamed:eventName handleWithBlock:block queue:dispatch_get_main_queue()];
+}
+
+- (void)bindToEventNamed:(NSString *)eventName handleWithBlock:(PTPusherEventBlockHandler)block queue:(dispatch_queue_t)queue
+{
+  [dispatcher addEventListenerForEventNamed:eventName block:block queue:queue];
 }
 
 #pragma mark - Subscribing to channels
