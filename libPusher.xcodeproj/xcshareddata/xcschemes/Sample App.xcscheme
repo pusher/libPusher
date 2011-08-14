@@ -41,7 +41,7 @@
             ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
             <ActionContent
                title = "Run Script"
-               scriptText = "source ~/.profile&#10;cd ${PROJECT_DIR} &amp;&amp; rake start_auth_server">
+               scriptText = "source ~/.profile&#10;cd ${PROJECT_DIR} &amp;&amp; rake restart_auth_server">
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"

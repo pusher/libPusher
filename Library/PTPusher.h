@@ -10,12 +10,16 @@
 #import "PTPusherDelegate.h"
 #import "PTPusherConnection.h"
 #import "PTPusherEventPublisher.h"
+#import "PTPusherPresenceChannelDelegate.h"
+
 
 extern NSString *const PTPusherEventReceivedNotification;
 extern NSString *const PTPusherErrorDomain;
 extern NSString *const PTPusherErrorUnderlyingEventKey;
 
 @class PTPusherChannel;
+@class PTPusherPresenceChannel;
+@class PTPusherPrivateChannel;
 @class PTPusherEventDispatcher;
 
 @interface PTPusher : NSObject <PTPusherConnectionDelegate, PTPusherEventEmmitter> {
@@ -89,13 +93,14 @@ extern NSString *const PTPusherErrorUnderlyingEventKey;
  
  The "private-" prefix should be excluded from the name; it will be added automatically.
  */
-- (PTPusherChannel *)subscribeToPrivateChannelNamed:(NSString *)name;
+- (PTPusherPrivateChannel *)subscribeToPrivateChannelNamed:(NSString *)name;
 
 /** Subscribes to the named presence channel.
  
  The "presence-" prefix should be excluded from the name; it will be added automatically.
  */
-- (PTPusherChannel *)subscribeToPresenceChannelNamed:(NSString *)name;
+- (PTPusherPresenceChannel *)subscribeToPresenceChannelNamed:(NSString *)name;
+- (PTPusherPresenceChannel *)subscribeToPresenceChannelNamed:(NSString *)name delegate:(id<PTPusherPresenceChannelDelegate>)presenceDelegate;
 
 - (void)unsubscribeFromChannel:(PTPusherChannel *)channel;
 - (PTPusherChannel *)channelNamed:(NSString *)name;

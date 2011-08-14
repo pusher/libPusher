@@ -22,6 +22,12 @@
   [exampleOne setObject:@"PusherEventsViewController" forKey:@"controllerClass"];
   [options addObject:exampleOne];
   
+  NSMutableDictionary *exampleTwo = [NSMutableDictionary dictionary];
+  [exampleTwo setObject:@"Presence channels" forKey:@"name"];
+  [exampleTwo setObject:@"Connect multiple clients and see them announced." forKey:@"description"];
+  [exampleTwo setObject:@"PusherPresenceEventsViewController" forKey:@"controllerClass"];
+  [options addObject:exampleTwo];
+  
   menuOptions = [options copy];
 }
 

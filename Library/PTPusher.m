@@ -13,6 +13,7 @@
 #import "PTPusherEventDispatcher.h"
 #import "PTTargetActionEventListener.h"
 #import "PTBlockEventListener.h"
+#import "PTPusherErrors.h"
 
 
 NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *clientID);
@@ -133,18 +134,27 @@ NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *
     channel = [PTPusherChannel channelWithName:name pusher:self]; 
     [channels setObject:channel forKey:name];
   }
-  [self subscribeToChannel:channel];
+  if (self.connection.isConnected) {
+    [self subscribeToChannel:channel];
+  }
   return channel;
 }
 
-- (PTPusherChannel *)subscribeToPrivateChannelNamed:(NSString *)name
+- (PTPusherPrivateChannel *)subscribeToPrivateChannelNamed:(NSString *)name
 {
-  return [self subscribeToChannelNamed:[NSString stringWithFormat:@"private-%@", name]];
+  return (PTPusherPrivateChannel *)[self subscribeToChannelNamed:[NSString stringWithFormat:@"private-%@", name]];
 }
 
-- (PTPusherChannel *)subscribeToPresenceChannelNamed:(NSString *)name
+- (PTPusherPresenceChannel *)subscribeToPresenceChannelNamed:(NSString *)name
 {
-  return [self subscribeToChannelNamed:[NSString stringWithFormat:@"presence-%@", name]];
+  return (PTPusherPresenceChannel *)[self subscribeToChannelNamed:[NSString stringWithFormat:@"presence-%@", name]];
+}
+
+- (PTPusherPresenceChannel *)subscribeToPresenceChannelNamed:(NSString *)name delegate:(id<PTPusherPresenceChannelDelegate>)presenceDelegate
+{
+  PTPusherPresenceChannel *channel = [self subscribeToPresenceChannelNamed:name];
+  channel.presenceDelegate = presenceDelegate;
+  return channel;
 }
 
 - (PTPusherChannel *)channelNamed:(NSString *)name
@@ -165,7 +175,11 @@ NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *
       [channel subscribeWithAuthorization:authData];
     }
     else {
-      // TODO: handle authorization error
+      NSError *error = [NSError errorWithDomain:PTPusherErrorDomain code:PTPusherSubscriptionAuthorisationError userInfo:nil];
+
+      if ([self.delegate respondsToSelector:@selector(pusher:didFailToSubscribeToChannel:withError:)]) {
+        [self.delegate pusher:self didFailToSubscribeToChannel:channel withError:error];
+      }
     }
   }];
 }
@@ -197,7 +211,7 @@ NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *
   if ([self.delegate respondsToSelector:@selector(pusher:connectionDidConnect:)]) {
     [self.delegate pusher:self connectionDidConnect:connection];
   }
-  for (PTPusherChannel *channel in channels) {
+  for (PTPusherChannel *channel in [channels allValues]) {
     [self subscribeToChannel:channel];
   }
 }

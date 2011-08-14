@@ -140,10 +140,10 @@
     /* Set up event handlers for pre-defined channel events */
     
     [pusher bindToEventNamed:@"pusher_internal:subscription_succeeded" 
-                      target:self action:@selector(handleSubcribeEvent:)];  
+                      target:self action:@selector(handleSubscribeEvent:)];  
     
     [pusher bindToEventNamed:@"subscription_error" 
-                      target:self action:@selector(handleSubcribeErrorEvent:)];
+                      target:self action:@selector(handleSubscribeErrorEvent:)];
   }
   return self;
 }
@@ -197,6 +197,9 @@
 
 @implementation PTPusherPresenceChannel
 
+@synthesize presenceDelegate;
+@synthesize members;
+
 - (id)initWithName:(NSString *)channelName pusher:(PTPusher *)aPusher
 {
   if ((self = [super initWithName:channelName pusher:aPusher])) {
@@ -215,6 +218,15 @@
   return self;
 }
 
+- (void)handleSubscribeEvent:(PTPusherEvent *)event
+{
+  [super handleSubscribeEvent:event];
+  for (NSDictionary *memberData in event.data) {
+    [members setObject:[memberData objectForKey:@"user_info"] forKey:[memberData objectForKey:@"user_id"]];
+  }
+  [self.presenceDelegate presenceChannel:self didSubscribeWithMemberList:event.data];
+}
+
 - (BOOL)isPresence
 {
   return YES;
@@ -230,11 +242,15 @@
 {
   [members setObject:[event.data valueForKey:@"user_info"] 
               forKey:[event.data valueForKey:@"user_id"]];
+  
+  [self.presenceDelegate presenceChannel:self memberAdded:event.data];
 }
 
 - (void)handleMemberRemovedEvent:(PTPusherEvent *)event
 {
   [members removeObjectForKey:[event.data valueForKey:@"user_id"]]; 
+
+  [self.presenceDelegate presenceChannel:self memberRemoved:event.data];
 }
 
 @end

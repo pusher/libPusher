@@ -10,6 +10,8 @@
 #import "PTPusherEventPublisher.h"
 #import "PTEventListener.h"
 #import "PTPusherEventDispatcher.h"
+#import "PTPusherPresenceChannelDelegate.h"
+
 
 @class PTPusher;
 
@@ -50,4 +52,6 @@
 @interface PTPusherPresenceChannel : PTPusherPrivateChannel {
   NSMutableDictionary *members;
 }
+@property (nonatomic, assign) id<PTPusherPresenceChannelDelegate> presenceDelegate;
+@property (nonatomic, readonly) NSDictionary *members;
 @end

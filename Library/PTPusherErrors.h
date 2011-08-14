@@ -9,5 +9,6 @@
 #import <Foundation/Foundation.h>
 
 enum {
-  PTPusherSubscriptionError = 0
+  PTPusherSubscriptionError = 0,
+  PTPusherSubscriptionAuthorisationError
 };

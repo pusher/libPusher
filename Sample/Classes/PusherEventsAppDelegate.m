@@ -63,22 +63,27 @@
 
 - (void)pusher:(PTPusher *)pusher connectionDidConnect:(PTPusherConnection *)connection
 {
-  NSLog(@"[pusher] Connected to Pusher (socket id: %@)", connection.socketID);
+  NSLog(@"[pusher-%@] Connected to Pusher (socket id: %@)", pusher.connection.socketID, connection.socketID);
 }
 
 - (void)pusher:(PTPusher *)pusher connectionDidDisconnect:(PTPusherConnection *)connection
 {
-  NSLog(@"[pusher] Disconnected from Pusher");
+  NSLog(@"[pusher-%@] Disconnected from Pusher", pusher.connection.socketID);
 }
 
 - (void)pusher:(PTPusher *)pusher connection:(PTPusherConnection *)connection failedWithError:(NSError *)error
 {
-  NSLog(@"[pusher] Failed to connect to pusher, error: %@", error);
+  NSLog(@"[pusher-%@] Failed to connect to pusher, error: %@", pusher.connection.socketID, error);
 }
 
 - (void)pusher:(PTPusher *)pusher connectionWillReconnect:(PTPusherConnection *)connection afterDelay:(NSTimeInterval)delay
 {
-  NSLog(@"[pusher] Reconnecting after %d seconds...", (int)delay);
+  NSLog(@"[pusher-%@] Reconnecting after %d seconds...", pusher.connection.socketID, (int)delay);
+}
+
+- (void)pusher:(PTPusher *)pusher didFailToSubscribeToChannel:(PTPusherChannel *)channel withError:(NSError *)error
+{
+  NSLog(@"[pusher-%@] Authorization failed for channel %@", pusher.connection.socketID, channel);
 }
 
 @end
