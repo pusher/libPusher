@@ -9,16 +9,13 @@
 #import "PTPusherChannel.h"
 #import "PTPusher.h"
 #import "PTPusherEvent.h"
-#import "JSON.h"
-#import "NSString+Hashing.h"
-#import "NSDictionary+QueryString.h"
 #import "PTPusherEventDispatcher.h"
 #import "PTTargetActionEventListener.h"
+
 
 @implementation PTPusherChannel
 
 @synthesize name;
-@synthesize delegate;
 
 - (id)initWithName:(NSString *)channelName pusher:(PTPusher *)aPusher
 {
@@ -56,6 +53,20 @@
 - (void)triggerEventNamed:(NSString *)eventName data:(id)eventData
 {
   [pusher sendEventNamed:eventName data:eventData channel:self.name];
+}
+
+#pragma mark - Internal use only
+
+- (void)subscribe
+{
+  [pusher sendEventNamed:@"pusher:subscribe" 
+                    data:[NSDictionary dictionaryWithObject:self.name forKey:@"channel"]];
+}
+
+- (void)unsubscribe
+{
+  [pusher sendEventNamed:@"pusher:unsubscribe" 
+                    data:[NSDictionary dictionaryWithObject:self.name forKey:@"channel"]];
 }
 
 @end

@@ -16,8 +16,6 @@
 
 NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *clientID);
 
-NSString *const PTPusherDataKey = @"data";
-NSString *const PTPusherEventKey = @"event";
 NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotification";
 
 NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *clientID)
@@ -30,6 +28,12 @@ NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *
 
 @interface PTPusher ()
 @property (nonatomic, retain) PTPusherConnection *connection;
+@end
+
+@interface PTPusherChannel ()
+/* These methods should only be called internally */
+- (void)subscribe;
+- (void)unsubscribe;
 @end
 
 #pragma mark -
@@ -60,10 +64,18 @@ NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *
   return self;
 }
 
-+ (id)pusherWithKey:(NSString *)key
++ (id)pusherWithKey:(NSString *)key delegate:(id<PTPusherDelegate>)delegate
+{
+  PTPusher *pusher = [self pusherWithKey:key connectAutomatically:NO];
+  pusher.delegate = delegate;
+  [pusher connect];
+  return pusher;
+}
+
++ (id)pusherWithKey:(NSString *)key connectAutomatically:(BOOL)connectAutomatically
 {
   PTPusherConnection *connection = [[PTPusherConnection alloc] initWithURL:PTPusherConnectionURL(@"ws.pusherapp.com", 80, key, @"libpusher")];
-  PTPusher *pusher = [[self alloc] initWithConnection:connection connectAutomatically:YES];
+  PTPusher *pusher = [[self alloc] initWithConnection:connection connectAutomatically:connectAutomatically];
   [connection release];
   return [pusher autorelease];
 }
@@ -93,6 +105,16 @@ NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *
   return [self.connection isConnected];
 }
 
+- (void)onConnectionEstablished:(void (^)(void))block
+{
+  [connectionCallback release];
+  connectionCallback = [block copy];
+
+  if (connectionCallback && self.isConnected) {
+    connectionCallback();
+  }
+}
+
 #pragma mark - Binding to events
 
 - (void)bindToEventNamed:(NSString *)eventName target:(id)target action:(SEL)selector
@@ -108,6 +130,7 @@ NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *
   
   if (channel == nil) {
     channel = [[[PTPusherChannel alloc] initWithName:name pusher:self] autorelease];
+    [channel subscribe];
     [channels setObject:channels forKey:name];
   }
   return channel;
@@ -130,6 +153,7 @@ NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *
 
 - (void)unsubscribeFromChannel:(PTPusherChannel *)channel
 {
+  [channel unsubscribe];
   [channels removeObjectForKey:channel.name];
 }
 
@@ -159,6 +183,9 @@ NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *
 {
   if ([self.delegate respondsToSelector:@selector(pusher:connectionDidConnect:)]) {
     [self.delegate pusher:self connectionDidConnect:connection];
+  }
+  if (connectionCallback) {
+    connectionCallback();
   }
 }
 

@@ -13,13 +13,11 @@
 @class PTPusher;
 
 @interface PusherEventsAppDelegate : NSObject <UIApplicationDelegate, PTPusherDelegate> {
-  UIWindow *window;
-  UINavigationController *navigationController;
-  PTPusher *pusher;
-}
 
+}
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
+@property (nonatomic, retain) IBOutlet PusherEventsViewController *eventsViewController;
 @property (nonatomic, retain) PTPusher *pusher;
 @end
 

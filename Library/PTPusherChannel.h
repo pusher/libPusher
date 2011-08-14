@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PTPusherChannelDelegate.h"
 #import "PTPusherEventPublisher.h"
 #import "PTEventListener.h"
 #import "PTPusherEventDispatcher.h"
@@ -19,10 +18,8 @@
   NSString *name;
   PTPusher *pusher;
   PTPusherEventDispatcher *dispatcher;
-  id<PTPusherChannelDelegate> delegate;
 }
 @property (nonatomic, readonly) NSString *name;
-@property (nonatomic, assign) id<PTPusherChannelDelegate> delegate;
 
 ///------------------------------------------------------------------------------------/
 /// @name Initialisation

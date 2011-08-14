@@ -19,23 +19,23 @@
 
 @synthesize window;
 @synthesize navigationController;
-@synthesize pusher;
+@synthesize eventsViewController;
+@synthesize pusher = _pusher;
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application 
 {    
-  [PTPusher setKey:PUSHER_API_KEY];
-  [PTPusher setSecret:PUSHER_API_SECRET];
-  [PTPusher setAppID:PUSHER_APP_ID];
+  // establish a new pusher instance
+  self.pusher = [PTPusher pusherWithKey:PUSHER_API_KEY delegate:self];
   
-  pusher = [[PTPusher alloc] initWithKey:PUSHER_API_KEY channel:@"test_channel"];
-  pusher.delegate = self;
+  // we want the connection to automatically reconnect if it dies
+  self.pusher.reconnectAutomatically = YES;
   
-  // uncomment to allow reconnections
-  // pusher.reconnect = YES;
-  
+  // log all events received, regardless of which channel they come from
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handlePusherEvent:) name:PTPusherEventReceivedNotification object:nil];
   
-  [pusher addEventListener:@"alert" target:self selector:@selector(handleAlertEvent:)];
+  // pass the pusher into the events controller
+  self.eventsViewController.pusher = self.pusher;
+
   [window addSubview:navigationController.view];
   [window makeKeyAndVisible];
 }
@@ -43,69 +43,40 @@
 - (void)dealloc 
 {
   [[NSNotificationCenter defaultCenter] 
-    removeObserver:self name:PTPusherEventReceivedNotification object:pusher];
-  [pusher release];
+    removeObserver:self name:PTPusherEventReceivedNotification object:self.pusher];
+  [_pusher release];
   [navigationController release];
   [window release];
   [super dealloc];
 }
 
-#pragma mark -
-#pragma mark Sample Pusher event handlers
+#pragma mark - Event notifications
 
-// specific alert handler, handle events using target/selector dispatch
-- (void)handleAlertEvent:(PTPusherEvent *)event;
+- (void)handlePusherEvent:(NSNotification *)note
 {
-  UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[event.data valueForKey:@"title"] message:[event.data valueForKey:@"message"] delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
-  [alertView show];
-  [alertView release];
+  NSLog(@"[pusher] Received event %@", note.object);
 }
 
-// generic alert handler, handle all events using NSNotifications
-- (void)handlePusherEvent:(NSNotification *)note;
+#pragma mark - PTPusherDelegate methods
+
+- (void)pusher:(PTPusher *)pusher connectionDidConnect:(PTPusherConnection *)connection
 {
-  NSLog(@"Received event: %@", note.object);
+  NSLog(@"[pusher] Connected to Pusher (socket id: %d)", connection.socketID);
 }
 
-#pragma mark -
-#pragma mark UIAlertView delegate methods
-
-- (void)didPresentAlertView:(UIAlertView *)alertView
+- (void)pusher:(PTPusher *)pusher connectionDidDisconnect:(PTPusherConnection *)connection
 {
-  [self performSelector:@selector(dismissAlertView:) withObject:alertView afterDelay:1];
+  NSLog(@"[pusher] Disconnected from Pusher");
 }
 
-- (void)dismissAlertView:(UIAlertView *)alertView;
+- (void)pusher:(PTPusher *)pusher connection:(PTPusherConnection *)connection failedWithError:(NSError *)error
 {
-  [alertView dismissWithClickedButtonIndex:0 animated:YES];
+  NSLog(@"[pusher] Failed to connect to pusher, error: %@", error);
 }
 
-#pragma mark -
-#pragma mark PTPusherDelegate methods
-
-- (void)pusherWillConnect:(PTPusher *)_pusher;
+- (void)pusher:(PTPusher *)pusher connectionWillReconnect:(PTPusherConnection *)connection afterDelay:(NSTimeInterval)delay
 {
-  NSLog(@"Pusher %@ connecting...", _pusher);
-}
-
-- (void)pusherDidConnect:(PTPusher *)_pusher;
-{
-  NSLog(@"Pusher %@ connected", _pusher);
-}
-
-- (void)pusherDidDisconnect:(PTPusher *)_pusher;
-{
-  NSLog(@"Pusher %@ disconnected", _pusher);
-}
-
-- (void)pusherDidFailToConnect:(PTPusher *)_pusher withError:(NSError *)error;
-{
-  NSLog(@"Pusher %@ failed with error %@", _pusher, error);
-}
-
-- (void)pusherWillReconnect:(PTPusher *)_pusher afterDelay:(NSUInteger)delay;
-{
-  NSLog(@"Pusher %@ will reconnect after %d seconds", _pusher, delay);
+  NSLog(@"[pusher] Reconnecting after %d seconds...");
 }
 
 @end

@@ -14,37 +14,46 @@
 
 @implementation PusherEventsViewController
 
-@synthesize eventsChannel;
+@synthesize pusher;
+@synthesize currentChannel;
 @synthesize eventsReceived;
+
+- (void)awakeFromNib
+{
+  eventsReceived = [[NSMutableArray alloc] init];
+}
 
 - (void)viewDidLoad 
 {
+  [super viewDidLoad];
+  
   self.tableView.rowHeight = 55;
-  
-  if (eventsReceived == nil) {
-    eventsReceived = [[NSMutableArray alloc] init];
-  }
-  if (eventsChannel == nil) {
-    eventsChannel = [PTPusher newChannel:@"demo"];
-    eventsChannel.delegate = self;
-  }
-  [eventsChannel startListeningForEvents];
-  
+
   UIBarButtonItem *newEventButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(presentNewEventScreen)];
   self.toolbarItems = [NSArray arrayWithObject:newEventButtonItem];
   [newEventButtonItem release];
   
-  [super viewDidLoad];
+  [self.pusher onConnectionEstablished:^{
+    [self subscribeToChannel:@"messages"];
+  }];
 }
 
-- (void)dealloc {
-  [eventsChannel release];
+- (void)dealloc 
+{
+  [currentChannel release];
   [eventsReceived release];
   [super dealloc];
 }
 
-#pragma mark -
-#pragma mark Actions
+#pragma mark - Subscribing
+
+- (void)subscribeToChannel:(NSString *)channelName
+{
+  self.currentChannel = [self.pusher subscribeToChannelNamed:channelName];
+  [self.currentChannel bindToEventNamed:@"message" target:self action:@selector(receivedMessageEvent:)];
+}
+
+#pragma mark - Actions
 
 - (void)presentNewEventScreen;
 {
@@ -56,21 +65,22 @@
 
 - (void)sendEventWithMessage:(NSString *)message;
 {
+  // construct a simple payload for the event
   NSDictionary *payload = [NSDictionary dictionaryWithObjectsAndKeys:message, @"message", nil];
 
+  // send the event after a short delay, wait for modal view to disappear
   [self performSelector:@selector(sendEvent:) withObject:payload afterDelay:0.3];
   [self dismissModalViewControllerAnimated:YES];
 }
 
 - (void)sendEvent:(id)payload;
 {
-  [self.eventsChannel triggerEvent:@"message" data:payload];
+  [self.currentChannel triggerEventNamed:@"message" data:payload];
 }
 
-#pragma mark -
-#pragma mark PTPusherChannel delegate
+#pragma mark - Event handling
 
-- (void)channel:(PTPusherChannel *)channel didReceiveEvent:(PTPusherEvent *)event;
+- (void)receivedMessageEvent:(PTPusherEvent *)event;
 {
   [self.tableView beginUpdates];
   [eventsReceived insertObject:event atIndex:0];
@@ -78,23 +88,7 @@
   [self.tableView endUpdates];
 }
 
-- (void)channelDidConnect:(PTPusherChannel *)channel
-{
-  NSLog(@"Listening on channel %@", channel.name);
-}
-
-- (void)channelDidDisconnect:(PTPusherChannel *)channel
-{
-  NSLog(@"Stopped listening on channel %@", channel.name);
-}
-
-- (void)channelFailedToTriggerEvent:(PTPusherChannel *)channel error:(NSError *)error
-{
-  NSLog(@"Error triggering event on channel %@, error: %@", channel.name, error);
-}
-
-#pragma mark -
-#pragma mark UITableViewDataSource methods
+#pragma mark - UITableViewDataSource methods
 
 - (NSInteger)tableView:(UITableView *)table numberOfRowsInSection:(NSInteger)section;
 {
