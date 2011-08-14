@@ -12,20 +12,17 @@
 
 @synthesize pusher;
 
-- (id)init
+- (void)awakeFromNib
 {
-  if ((self = [super init])) {
-    NSMutableArray *options = [NSMutableArray array];
-    
-    NSMutableDictionary *exampleOne = [NSMutableDictionary dictionary];
-    [exampleOne setObject:@"Subscribe and trigger" forKey:@"name"];
-    [exampleOne setObject:@"Subscribe to and trigger client events" forKey:@"description"];
-    [exampleOne setObject:@"PusherEventsViewController" forKey:@"controllerClass"];
-    [options addObject:exampleOne];
-    
-    menuOptions = [options copy];
-  }
-  return self;
+  NSMutableArray *options = [NSMutableArray array];
+  
+  NSMutableDictionary *exampleOne = [NSMutableDictionary dictionary];
+  [exampleOne setObject:@"Subscribe and trigger" forKey:@"name"];
+  [exampleOne setObject:@"Trigger events using the REST API and see them appear in real-time." forKey:@"description"];
+  [exampleOne setObject:@"PusherEventsViewController" forKey:@"controllerClass"];
+  [options addObject:exampleOne];
+  
+  menuOptions = [options copy];
 }
 
 - (void)dealloc 
@@ -39,6 +36,11 @@
   return [menuOptions count];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  return 70.0;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   static NSString *CellIdentifier = @"CellIdentifier";
@@ -50,6 +52,7 @@
   
   NSDictionary *example = [menuOptions objectAtIndex:indexPath.row];
   cell.textLabel.text = [example objectForKey:@"name"];
+  cell.detailTextLabel.numberOfLines = 2;
   cell.detailTextLabel.text = [example objectForKey:@"description"];
   cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   
@@ -64,6 +67,7 @@
   NSAssert1(controllerClass, @"Controller class %@ does not exist! Typo?", [example objectForKey:@"controllerClass"]);
   
   UIViewController *viewController = [[controllerClass alloc] init];
+  [viewController performSelector:@selector(setPusher:) withObject:self.pusher];
   [self.navigationController pushViewController:viewController animated:YES];
   [viewController release];
 }

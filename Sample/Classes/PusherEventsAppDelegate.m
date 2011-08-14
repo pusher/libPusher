@@ -36,7 +36,7 @@
   
   // pass the pusher into the events controller
   self.menuViewController.pusher = self.pusher;
-
+  
   [window addSubview:navigationController.view];
   [window makeKeyAndVisible];
 }

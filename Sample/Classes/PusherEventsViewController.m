@@ -21,15 +21,19 @@
 @synthesize currentChannel;
 @synthesize eventsReceived;
 
-- (void)awakeFromNib
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-  eventsReceived = [[NSMutableArray alloc] init];
+  if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
+    eventsReceived = [[NSMutableArray alloc] init];
+  }
+  return self;
 }
 
 - (void)viewDidLoad 
 {
   [super viewDidLoad];
   
+  self.title = @"Subscribe/Trigger";
   self.tableView.rowHeight = 55;
 
   UIBarButtonItem *newEventButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(presentNewEventScreen)];
