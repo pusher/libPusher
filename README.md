@@ -157,10 +157,9 @@ Unlike the Javascript client, libPusher does not provide an explicit API for bin
 // bind to all events on a specific channel
 PTPusherChannel *channel = [client channelNamed:@"some-channel"];
 
-// bind to all events received by the client
 [[NSNotificationCenter defaultCenter] 
           addObserver:self 
-             selector:@selector(didReceiveEventNotification:) 
+             selector:@selector(didReceiveChannelEventNotification:) 
                  name:PTPusherEventReceivedNotification 
                object:channel];
 ```
