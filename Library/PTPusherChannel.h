@@ -20,6 +20,8 @@
 }
 @property (nonatomic, readonly) NSString *name;
 @property (nonatomic, readonly, getter=isSubscribed) BOOL subscribed;
+@property (nonatomic, readonly) BOOL isPrivate;
+@property (nonatomic, readonly) BOOL isPresence;
 
 ///------------------------------------------------------------------------------------/
 /// @name Initialisation

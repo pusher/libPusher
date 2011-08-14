@@ -55,6 +55,16 @@
   [super dealloc];
 }
 
+- (BOOL)isPrivate
+{
+  return NO;
+}
+
+- (BOOL)isPresence
+{
+  return NO;
+}
+
 #pragma mark - Authorization
 
 - (void)authorizeWithCompletionHandler:(void(^)(BOOL, NSDictionary *))completionHandler
@@ -138,6 +148,11 @@
   return self;
 }
 
+- (BOOL)isPrivate
+{
+  return YES;
+}
+
 - (void)handleSubscribeEvent:(PTPusherEvent *)event
 {
   self.subscribed = YES;
@@ -198,6 +213,11 @@
     
   }
   return self;
+}
+
+- (BOOL)isPresence
+{
+  return YES;
 }
 
 - (void)dealloc 
