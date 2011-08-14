@@ -13,3 +13,4 @@ Constants.h
 *.xcodeproj/xcuserdata
 
 log
+Scripts/*.pid
