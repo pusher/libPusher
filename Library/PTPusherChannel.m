@@ -101,13 +101,6 @@
                    userInfo:[NSDictionary dictionaryWithObject:event forKey:PTPusherEventUserInfoKey]];
 }
 
-#pragma mark - Triggering events
-
-- (void)triggerEventNamed:(NSString *)eventName data:(id)eventData
-{
-  [pusher sendEventNamed:eventName data:eventData channel:self.name];
-}
-
 #pragma mark - Internal use only
 
 - (void)subscribeWithAuthorization:(NSDictionary *)authData
@@ -197,6 +190,13 @@
   [pusher sendEventNamed:@"pusher:subscribe" 
                     data:eventData
                  channel:nil];
+}
+
+#pragma mark - Triggering events
+
+- (void)triggerEventNamed:(NSString *)eventName data:(id)eventData
+{
+  [pusher sendEventNamed:eventName data:eventData channel:self.name];
 }
 
 @end
