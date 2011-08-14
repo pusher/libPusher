@@ -164,7 +164,7 @@ PTPusherChannel *channel = [client channelNamed:@"some-channel"];
                object:channel];
 ```
 
-The event can be retrieved in your callback from the notification's `userInfo` dictionary:
+The event can be retrieved in your callback from the notification's `userInfo` dictionary. The notification's `object` will be either the client or channel from which the event originated.
 
 ```objc
 - (void)didReceiveEventNotification:(NSNotification *)note
