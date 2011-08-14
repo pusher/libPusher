@@ -1,10 +1,23 @@
 # libPusher, an Objective-C client for Pusher
 
-[Pusher](http://pusherapp.com/) by [New Bamboo](http://new-bamboo.co.uk) is a hosted service that sits between your web application and the browser that lets you deliver events in real-time using HTML5 WebSockets (using Flash as a fallback).
+[Pusher](http://pusherapp.com/) by [New Bamboo](http://new-bamboo.co.uk) is a hosted service that sits between your web application and the browser that lets you deliver events in real-time using HTML5 WebSockets.
 
 This project was borne out of the idea that a web browser doesn't have to be the only client that receives your web app's real-time notifications. Why couldn't your iPhone, iPad or Mac OSX app receive real-time notifications either?
 
 Apple provides its own push notification service which is great for getting alert-type notifications to your app's users whether or not they are using the app, but for real-time updates to data whilst they are using your app, hooking into your web app's existing event-dispatch mechanism is far less hassle (and is great if you want to be able to interact with other web services that might not have access to the APNS).
+
+## Update: August 2011
+
+A large update was made to this library in August 2011 that is not backwards compatible with previous-versions of this library. Users are advised to take the time to update their code to use the new API, which now mirrors more closely the Pusher Javascript API and will be more stable going forwards.
+
+The major changes are:
+
+* Re-architected the core API to bring it in line with the Javascript API.
+* Support multiple channels over a single connection.
+* Added support for private and presence channels.
+* Added block-support for event callbacks.
+* Extracted the wrapper for the Pusher REST API into a standalone component.
+* Dropped support for iOS 3.0
 
 ## Installation instructions
 
@@ -23,102 +36,144 @@ The project includes the Zimt library as a Git submodule; you'll need to init yo
 
     $ git submodule update --init --recursive
     
-To build and run the sample app, you'll need to create a Constants.h file containing your Pusher API key and secret; see the sample application app delegate for instructions.
+To build and run the sample app, you'll need to create a Constants.h file containing your Pusher API key, app ID and secret key; see the sample application app delegate for instructions.
 
-## Getting started using simple event monitors
+## Getting started
 
-To start monitoring events from a channel, you need to create a new `PTPusher` instance. You can then choose to either add specific event listeners that use the Cocoa target/selector idiom for responding to events, or you can subscribe to notifcations using `NSNotificationCenter`. Here is an example of responding to an event using an event listener:
+The libPusher API mirrors the [Pusher Javascript client](http://pusher.com/docs/client_api_guide) as closely as possible, with some allowances for Objective-C conventions. In particular, whilst the Javascript client uses event binding for all event handling, where events are pre-defined, libPusher uses the standard Cocoa delegation pattern.
 
-    PTPusher *pusher = [[PTPusher alloc] initWithKey:@"YOUR_API_KEY" channel:@"CHANNEL_NAME"];
-    [pusher addEventListener:@"event_name" target:self selector:@selector(handleEvent:)];
-    
-And then in your event callback:
+### Creating a new connection
 
-    - (void)handleEvent:(PTPusherEvent *)event;
-    {
-      // just log the event
-      NSLog(@"Received event %@ with data %@", event.name, event.data);
-    }
-    
-To use the notification mechanism, simply register an observer for the `PTPusherEventReceivedNotification` notification.
+Establishing a connection to Pusher is as simple as passing in your API key and a delegate to one of the built-in convenience factory methods:
 
-    [[NSNotificationCenter] defaultCenter] addObserver:self 
-        selector:@selector(handleEvent:) name:PTPusherEventReceivedNotification object:nil]
-        
-Like any Cocoa notification, the notification callback will be passed an `NSNotifcation` instance. The `PTPusherEvent` object can be obtained using the notification's `object` property:
+```objc
+PTPusher *client = [PTPusher pusherWithKey:@"YOUR-API-KEY" delegate:self];
+```
 
-    - (void)handleEvent:(NSNotification *)note;
-    {
-      PTPusherEvent *event = note.object;
-      NSLog(@"I got an event %@ from channel %@", note.name, note.channel);
-    }
-    
-For more information, read [this introductory blog post](http://lukeredpath.co.uk/blog/pushing-events-to-your-iphone-using-websockets-and-pusher.html).
+When calling the above method, the connection will be established immediately. If you want to defer connection, you can do so:
 
-## Using PTPusherChannel for event triggering and delegate-based event handling 
+```objc
+PTPusher *client = [PTPusher pusherWithKey:@"YOUR-API-KEY" connectAutomatically:NO];
+```
 
-`PTPusherChannel` offers a higher level interface for dealing with events on a single channel. By creating an instance of `PTPusherChannel` and assigning a delegate, you can respond to events that arrive on just that channel and also trigger new events (using the Pusher REST API).
+You can then connect when you are ready by calling `connect`.
 
-To simplify the API for creating new channel instances, `PTPusher` provides a shared factory method; to use this you will need to configure your application-wide API key, secret and application ID:
+It is recommend you assign a delegate to the Pusher client as this will enable you to be notified when significant connection events happen such as connection errors, disconnects and retries.
 
-    - (void)applicationDidFinishLaunching:(UIApplication *)application 
-    {    
-      [PTPusher setKey:@"your_api_key"];
-      [PTPusher setSecret:@"your_api_secret"];
-      [PTPusher setAppID:@"your_app_id"];
-      ...
-    }
-    
-Once this has been configured, creating a new channel is easy:
+If you want to have your connection reconnect automatically when it disconnects, you can:
 
-    self.eventsChannel = [PTPusher channel:@"events"];
-    self.eventsChannel.delegate = self; // implement PTPusherChannelDelegate
-    
-Its important to note that the `channel` factory method returns an auto-released instance, so you will need to ensure you retain it. If you want a non-autoreleased instance, you can alternatively call the `newChannel:` method instead.
+```objc
+client.reconnectAutomatically = YES;
 
-Once you have created a channel and assigned a delegate, new events on that channel will trigger the delegate method `channel:didReceiveEvent`, e.g.:
+// optional, defaults to 5 seconds
+client.reconnectDelay = 1.0;
+```
 
-    - (void)channel:(PTPusherChannel *)channel didReceiveEvent:(PTPusherEvent *)event;
-    {
-      if(channel == self.eventsChannel) { // if you're monitoring multiple channels
-        // do something with event
-      }
-    }
+### Binding to events
 
-Instances of `PTPusherChannel` can also be used to trigger new events using the Pusher REST API. Triggering an event is easy; all you need to specify is the event name and the payload, which can be a string or any Objective-C plist object that can be serialized as JSON (e.g. NSDictionary or NSArray):
+Once you have created an instance of the Pusher client, you can set up event bindings; there is no need to wait for the connection to be established.
 
-    - (IBAction)triggerAction:(id)sender
-    {
-      NSDictionary *payload = [NSDictionary dictionaryWithObject:@"foo" forKey:@"bar"];
-      [self.eventsChannel triggerEvent:@"new-event" data:payload];
-    }
-    
-For details of other `PTPusherChannel` delegate methods, take a look at PTPusherChannelDelegate.h and the sample project.
+When you bind to events on the client, you will receive all events with that name, regardless of the channel from which they originated.
 
-## Other options
+There are two ways of binding to individual events; using the standard Cocoa target/action mechanism, or using blocks. Use whatever makes sense within the context of your application.
 
-### Delegate object
+Binding to events using target/action:
 
-PTPusher has a delegate property which can be used to notify the owner of the `PTPusher` instance of certain events in the pusher's life-cycle (such as disconnections etc.). Your delegate must conform to the `PTPusherDelegate` protocol, although all of the delegate methods are optional. To set the delegate:
+```objc
+[client bindToEventNamed:@"something-happened" target:self action:@selector(handleEvent:)];
+```
 
-    // where self conforms to PTPusherDelegate
-    pusher = [[PTPusher alloc] initWithKey:@"YOUR_API_KEY" channel:@"CHANNEL_NAME"];
-    pusher.delegate = self;
-    
-For an overview of the available delegate methods, see PTPusherDelegate.h.
+Binding to events using blocks:
 
-### Reconnections
+```objc
+[client bindToEventNamed:@"something-happened" handleWithBlock:^(PTPusherEvent *event) {
+  // do something with event
+}];
+```
 
-By default, `PTPusher` will not attempt to reconnect if the connection is broken. You can turn reconnection support on using the `reconnect` property:
+## Working with channels
 
-    pusher.reconnect = YES;
-    
-Currently, reconnect support is fairly basic; there is no maximum retry limit and the retry delay is hard-coded to 5 seconds.
+Channels are a way of filtering the events you want your application to receive. In addition, private and presence channels can be used to control access to events and in the case of presence channels, see who else is subscribing to events. For more information on channels, [see the Pusher documentation](http://pusher.com/docs/client_api_guide/client_channels).
 
-## TODO
+### Subscribing and unsubscribing
 
-* Support for Presence
-* Block-based API for iOS4/OSX 10.6 and above
+Channels of any type can be subscribed to using the method `subscribeToChannelNamed:`. When subscribing to private or presence channels, it's important to remember to add the appropriate channel name prefix.
+
+You do not need to wait for the client to establish a connection before subscribing; you can subscribe immediately and any subscriptions will be created once the connection has connected.
+
+```objc
+// subscribe to public channels
+PTPusherChannel *channel = [client subscribeToChannelNamed:@"my-public-channel"];
+
+// subscribe to private or presence channels with the appropriate prefix
+PTPusherChannel *private = [client subscribeToChannelNamed:@"private-channel"];
+PTPusherChannel *presence = [client subscribeToChannelNamed:@"presence-channel"];
+```
+As a convenience, two methods are provided specifically for subscribing to private and presence channels. These methods will add the appropriate prefix to the channel name for you and return a channel casted to the correct PTPusherChannel sub-class. You can also set a presence delegate for presence channels using this API.
+
+```objc
+// subscribe to private channel, private- prefix added automatically
+PTPusherPrivateChannel *private = [client subscribeToPrivateChannelNamed:@"demo"];
+
+// subscribe to presence channel with a delegate, presence- prefix added automatically
+PTPusherPresenceChannel *presence = [client subscribeToPresenceChannelNamed:@"chat" delegate:self];
+```
+Any channel that has been previously subscribed to can be retrieved (without re-subscribing) using the `channelNamed:` method. You can unsubscribe a channel by calling `unsubscribeFromChannel:`.
+
+```objc
+// get a reference to a channel we have already subscribed to
+PTPusherChannel *channel = [client channelNamed:@"my-channel"];
+
+// now unsubscribe from it
+[client unsubscribeFromChannel:channel];
+```
+
+### Binding to channel events
+
+Binding to events on channels works in exactly the same way as binding to client events; the only difference is that you will only receive events with that are associated with that channel.
+
+```objc
+// subscribe to the channel
+PTPusherChannel *channel = [client subscribeToChannelNamed:@"demo"];
+
+// now bind to some events on that channel
+[channel bindToEventNamed:@"channel-event" handleWithBlock:^(PTPusherEvent *channelEvent) {
+  // do something with channel event
+}];
+```
+
+## Binding to all events
+
+Unlike the Javascript client, libPusher does not provide an explicit API for binding to all events from a client or channel. Instead, libPusher will publish a `NSNotification` for every event received. You can subscribe to all events for a client or channel by adding a notification observer.
+
+```objc
+// bind to all events received by the client
+[[NSNotificationCenter defaultCenter] 
+          addObserver:self 
+             selector:@selector(didReceiveEventNotification:) 
+                 name:PTPusherEventReceivedNotification 
+               object:client];
+               
+// bind to all events on a specific channel
+PTPusherChannel *channel = [client channelNamed:@"some-channel"];
+
+// bind to all events received by the client
+[[NSNotificationCenter defaultCenter] 
+          addObserver:self 
+             selector:@selector(didReceiveEventNotification:) 
+                 name:PTPusherEventReceivedNotification 
+               object:channel];
+```
+
+The event can be retrieved in your callback from the notification's `userInfo` dictionary:
+
+```objc
+- (void)didReceiveEventNotification:(NSNotification *)note
+{
+  PTPusherEvent *event = [note.userInfo objectForKey:PTPusherEventUserInfoKey];
+  // do something with event
+}
+```
 
 ## Credits
 
