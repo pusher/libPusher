@@ -22,7 +22,6 @@ extern NSString *const PTPusherEventReceivedNotification;
 @interface PTPusher : NSObject <PTPusherConnectionDelegate, PTPusherEventEmmitter> {
   PTPusherEventDispatcher *dispatcher;
   NSMutableDictionary *channels;
-  void (^connectionCallback)(void);
 }
 @property (nonatomic, assign) id<PTPusherDelegate> delegate;
 @property (nonatomic, assign, getter=shouldReconnectAutomatically) BOOL reconnectAutomatically;
@@ -75,14 +74,6 @@ extern NSString *const PTPusherEventReceivedNotification;
 /** Disconnects from the Pusher server.
  */
 - (void)disconnect;
-
-/** Calls the block callback when the connection is established.
- 
- If already connected when this is called, the callback is called immeditely.
- 
- This block will be called again if the connection is reconnected after a disconnection.
- */
-- (void)onConnectionEstablished:(void (^)(void))block;
 
 ///------------------------------------------------------------------------------------/
 /// @name Subscribing to channels

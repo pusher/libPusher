@@ -29,6 +29,8 @@ NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *
 
 @interface PTPusher ()
 @property (nonatomic, retain, readwrite) PTPusherConnection *connection;
+
+- (void)subscribeToChannel:(PTPusherChannel *)channel;
 @end
 
 @interface PTPusherChannel ()
@@ -103,16 +105,6 @@ NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *
   [self.connection disconnect];
 }
 
-- (void)onConnectionEstablished:(void (^)(void))block
-{
-  [connectionCallback release];
-  connectionCallback = [block copy];
-
-  if (connectionCallback && self.connection.isConnected) {
-    connectionCallback();
-  }
-}
-
 #pragma mark - Binding to events
 
 - (void)bindToEventNamed:(NSString *)eventName target:(id)target action:(SEL)selector
@@ -135,21 +127,11 @@ NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *
 - (PTPusherChannel *)subscribeToChannelNamed:(NSString *)name
 {
   PTPusherChannel *channel = [channels objectForKey:name];
-  
   if (channel == nil) {
-    channel = [PTPusherChannel channelWithName:name pusher:self];
-    
+    channel = [PTPusherChannel channelWithName:name pusher:self]; 
     [channels setObject:channel forKey:name];
-    
-    [channel authorizeWithCompletionHandler:^(BOOL isAuthorized, NSDictionary *authData) {
-      if (isAuthorized) {
-        [channel subscribeWithAuthorization:authData];
-      }
-      else {
-        // TODO: handle authorization error
-      }
-    }];
   }
+  [self subscribeToChannel:channel];
   return channel;
 }
 
@@ -172,6 +154,18 @@ NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *
 {
   [channel unsubscribe];
   [channels removeObjectForKey:channel.name];
+}
+
+- (void)subscribeToChannel:(PTPusherChannel *)channel
+{
+  [channel authorizeWithCompletionHandler:^(BOOL isAuthorized, NSDictionary *authData) {
+    if (isAuthorized) {
+      [channel subscribeWithAuthorization:authData];
+    }
+    else {
+      // TODO: handle authorization error
+    }
+  }];
 }
 
 #pragma mark - Sending events
@@ -201,8 +195,8 @@ NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *
   if ([self.delegate respondsToSelector:@selector(pusher:connectionDidConnect:)]) {
     [self.delegate pusher:self connectionDidConnect:connection];
   }
-  if (connectionCallback) {
-    connectionCallback();
+  for (PTPusherChannel *channel in channels) {
+    [self subscribeToChannel:channel];
   }
 }
 

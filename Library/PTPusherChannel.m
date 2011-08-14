@@ -96,6 +96,8 @@
 
 - (void)subscribeWithAuthorization:(NSDictionary *)authData
 {
+  if (self.isSubscribed) return;
+  
   [pusher sendEventNamed:@"pusher:subscribe" 
                     data:[NSDictionary dictionaryWithObject:self.name forKey:@"channel"]];
   
@@ -145,6 +147,8 @@
 
 - (void)subscribeWithAuthorization:(NSDictionary *)authData
 {
+  if (self.isSubscribed) return;
+  
   NSMutableDictionary *eventData = [[authData mutableCopy] autorelease];
   [eventData setObject:self.name forKey:@"channel"];
   [pusher sendEventNamed:@"pusher:subscribe" 
