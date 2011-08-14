@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "PTPusherDelegate.h"
 
-@class PusherEventsViewController;
+@class PusherExampleMenuViewController;
 @class PTPusher;
 
 @interface PusherEventsAppDelegate : NSObject <UIApplicationDelegate, PTPusherDelegate> {
@@ -17,7 +17,7 @@
 }
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
-@property (nonatomic, retain) IBOutlet PusherEventsViewController *eventsViewController;
+@property (nonatomic, retain) IBOutlet PusherExampleMenuViewController *menuViewController;
 @property (nonatomic, retain) PTPusher *pusher;
 @end
 

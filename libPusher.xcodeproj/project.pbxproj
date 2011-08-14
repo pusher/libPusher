@@ -38,6 +38,8 @@
 		A3A1A42A11582F26001EF877 /* PTPusherDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = A3A1A41611582DC3001EF877 /* PTPusherDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3AC28B613F75530001C4808 /* LRURLRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = A3AC28B413F75530001C4808 /* LRURLRequestOperation.h */; };
 		A3AC28B713F75530001C4808 /* LRURLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AC28B513F75530001C4808 /* LRURLRequestOperation.m */; };
+		A3AC28BF13F75BF1001C4808 /* PusherExampleMenuViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A3AC28BC13F75BF1001C4808 /* PusherExampleMenuViewController.h */; };
+		A3AC28C013F75BF1001C4808 /* PusherExampleMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AC28BD13F75BF1001C4808 /* PusherExampleMenuViewController.m */; };
 		A3CDE3BA11C93E4E0051777E /* ZTWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CDE3B911C93E4E0051777E /* ZTWebSocket.m */; };
 		A3CDE3BD11C93E580051777E /* ZTLog.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CDE3BB11C93E580051777E /* ZTLog.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3CDE3BE11C93E580051777E /* ZTWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CDE3BC11C93E580051777E /* ZTWebSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -153,6 +155,8 @@
 		A3A1A41611582DC3001EF877 /* PTPusherDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherDelegate.h; sourceTree = "<group>"; };
 		A3AC28B413F75530001C4808 /* LRURLRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LRURLRequestOperation.h; sourceTree = "<group>"; };
 		A3AC28B513F75530001C4808 /* LRURLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LRURLRequestOperation.m; sourceTree = "<group>"; };
+		A3AC28BC13F75BF1001C4808 /* PusherExampleMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PusherExampleMenuViewController.h; sourceTree = "<group>"; };
+		A3AC28BD13F75BF1001C4808 /* PusherExampleMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PusherExampleMenuViewController.m; sourceTree = "<group>"; };
 		A3CDE3B911C93E4E0051777E /* ZTWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZTWebSocket.m; path = Zimt/src/ZTWebSocket.m; sourceTree = "<group>"; };
 		A3CDE3BB11C93E580051777E /* ZTLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZTLog.h; path = Zimt/src/Zimt/ZTLog.h; sourceTree = "<group>"; };
 		A3CDE3BC11C93E580051777E /* ZTWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZTWebSocket.h; path = Zimt/src/Zimt/ZTWebSocket.h; sourceTree = "<group>"; };
@@ -419,6 +423,8 @@
 				A3D1D2801157FA30009A12AD /* PusherEventsViewController.m */,
 				A3FE41C811811161009CF5D7 /* NewEventViewController.h */,
 				A3FE41C911811161009CF5D7 /* NewEventViewController.m */,
+				A3AC28BC13F75BF1001C4808 /* PusherExampleMenuViewController.h */,
+				A3AC28BD13F75BF1001C4808 /* PusherExampleMenuViewController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -477,6 +483,7 @@
 				A35281E413F75010000687C0 /* PTBlockEventListener.h in Headers */,
 				A35281E913F75265000687C0 /* PTPusherAPI.h in Headers */,
 				A3AC28B613F75530001C4808 /* LRURLRequestOperation.h in Headers */,
+				A3AC28BF13F75BF1001C4808 /* PusherExampleMenuViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -682,6 +689,7 @@
 				A35281E513F75010000687C0 /* PTBlockEventListener.m in Sources */,
 				A35281EA13F75265000687C0 /* PTPusherAPI.m in Sources */,
 				A3AC28B713F75530001C4808 /* LRURLRequestOperation.m in Sources */,
+				A3AC28C013F75BF1001C4808 /* PusherExampleMenuViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

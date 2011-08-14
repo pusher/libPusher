@@ -7,9 +7,10 @@
 //
 
 #import "PusherEventsAppDelegate.h"
-#import "PusherEventsViewController.h"
+#import "PusherExampleMenuViewController.h"
 #import "PTPusher.h"
 #import "PTPusherEvent.h"
+
 
 // this is not included in the source
 // you must create this yourself and define PUSHER_API_KEY in it
@@ -19,7 +20,7 @@
 
 @synthesize window;
 @synthesize navigationController;
-@synthesize eventsViewController;
+@synthesize menuViewController;
 @synthesize pusher = _pusher;
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application 
@@ -34,7 +35,7 @@
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handlePusherEvent:) name:PTPusherEventReceivedNotification object:nil];
   
   // pass the pusher into the events controller
-  self.eventsViewController.pusher = self.pusher;
+  self.menuViewController.pusher = self.pusher;
 
   [window addSubview:navigationController.view];
   [window makeKeyAndVisible];
@@ -45,6 +46,7 @@
   [[NSNotificationCenter defaultCenter] 
     removeObserver:self name:PTPusherEventReceivedNotification object:self.pusher];
   [_pusher release];
+  [menuViewController release];
   [navigationController release];
   [window release];
   [super dealloc];
