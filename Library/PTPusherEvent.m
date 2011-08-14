@@ -7,7 +7,7 @@
 //
 
 #import "PTPusherEvent.h"
-#import "JSON.h"
+#import "CJSONDeserializer.h"
 
 NSString *const PTPusherDataKey    = @"data";
 NSString *const PTPusherEventKey   = @"event";
@@ -30,8 +30,14 @@ NSString *const PTPusherChannelKey = @"channel";
     _name = [name copy];
     _channel = [channel copy];
     
-    if ([data respondsToSelector:@selector(JSONValue)]) {
-      _data = [[data JSONValue] copy];
+    // try and deserialize the data as JSON if possible
+    if ([data respondsToSelector:@selector(dataUsingEncoding:)]) {
+      NSError *error = nil;
+      
+      _data = [[CJSONDeserializer deserializer] deserialize:[data dataUsingEncoding:NSUTF8StringEncoding] error:&error];
+      if (error) {
+        _data = [data copy];
+      }
     }
     else {
       _data = [data copy];

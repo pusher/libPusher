@@ -8,7 +8,7 @@
 
 #import "PTPusherAPI.h"
 #import "LRURLRequestOperation.h"
-#import "JSON.h"
+#import "CJSONSerializer.h"
 #import "NSString+Hashing.h"
 #import "NSDictionary+QueryString.h"
 
@@ -40,12 +40,13 @@
 - (void)triggetEvent:(NSString *)eventName onChannel:(NSString *)channelName data:(id)eventData socketID:(NSInteger)socketID
 {
   NSString *path = [NSString stringWithFormat:@"/apps/%@/channels/%@/events", appID, channelName];
-  NSString *body = [eventData JSONRepresentation];
+  NSData *bodyData = [[CJSONSerializer serializer] serializeObject:eventData error:nil];
+  NSString *bodyString = [[[NSString alloc] initWithData:bodyData encoding:NSUTF8StringEncoding] autorelease];
   
   NSMutableDictionary *queryParameters = [NSMutableDictionary dictionary];
   
   [queryParameters setObject:eventData forKey:@"name"];
-  [queryParameters setValue:[[body MD5Hash] lowercaseString] forKey:@"body_md5"];
+  [queryParameters setValue:[[bodyString MD5Hash] lowercaseString] forKey:@"body_md5"];
   [queryParameters setValue:key forKey:@"auth_key"];
   [queryParameters setValue:[NSNumber numberWithDouble:time(NULL)] forKey:@"auth_timestamp"];
   [queryParameters setValue:@"1.0" forKey:@"auth_version"];
@@ -62,7 +63,7 @@
   NSString *URLString = [NSString stringWithFormat:@"http://%@%@?%@", kPUSHER_API_DEFAULT_HOST, path, [queryParameters sortedQueryString]];
   
   NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:URLString]];
-  [request setHTTPBody:[body dataUsingEncoding:NSUTF8StringEncoding]];
+  [request setHTTPBody:bodyData];
   [request setHTTPMethod:@"POST"];
   [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
 
