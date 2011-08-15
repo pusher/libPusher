@@ -31,8 +31,8 @@
 		A3A1A20211581782001EF877 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		A3A1A41311582D32001EF877 /* PTPusherTest.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A1A41211582D32001EF877 /* PTPusherTest.m */; };
 		A3A1A42A11582F26001EF877 /* PTPusherDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = A3A1A41611582DC3001EF877 /* PTPusherDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A3AC28B613F75530001C4808 /* LRURLRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = A3AC28B413F75530001C4808 /* LRURLRequestOperation.h */; };
-		A3AC28B713F75530001C4808 /* LRURLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AC28B513F75530001C4808 /* LRURLRequestOperation.m */; };
+		A3AC28B613F75530001C4808 /* PTURLRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = A3AC28B413F75530001C4808 /* PTURLRequestOperation.h */; };
+		A3AC28B713F75530001C4808 /* PTURLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AC28B513F75530001C4808 /* PTURLRequestOperation.m */; };
 		A3AC28BF13F75BF1001C4808 /* PusherExampleMenuViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A3AC28BC13F75BF1001C4808 /* PusherExampleMenuViewController.h */; };
 		A3AC28C013F75BF1001C4808 /* PusherExampleMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AC28BD13F75BF1001C4808 /* PusherExampleMenuViewController.m */; };
 		A3AC28C313F76C51001C4808 /* PTPusherChannelAuthorizationOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = A3AC28C113F76C50001C4808 /* PTPusherChannelAuthorizationOperation.h */; };
@@ -153,8 +153,8 @@
 		A3A1A111115814D0001EF877 /* OCHamcrest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OCHamcrest.framework; path = Frameworks/OCHamcrest.framework; sourceTree = "<group>"; };
 		A3A1A41211582D32001EF877 /* PTPusherTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTPusherTest.m; sourceTree = "<group>"; };
 		A3A1A41611582DC3001EF877 /* PTPusherDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherDelegate.h; sourceTree = "<group>"; };
-		A3AC28B413F75530001C4808 /* LRURLRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LRURLRequestOperation.h; sourceTree = "<group>"; };
-		A3AC28B513F75530001C4808 /* LRURLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LRURLRequestOperation.m; sourceTree = "<group>"; };
+		A3AC28B413F75530001C4808 /* PTURLRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTURLRequestOperation.h; sourceTree = "<group>"; };
+		A3AC28B513F75530001C4808 /* PTURLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTURLRequestOperation.m; sourceTree = "<group>"; };
 		A3AC28BC13F75BF1001C4808 /* PusherExampleMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PusherExampleMenuViewController.h; sourceTree = "<group>"; };
 		A3AC28BD13F75BF1001C4808 /* PusherExampleMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PusherExampleMenuViewController.m; sourceTree = "<group>"; };
 		A3AC28C113F76C50001C4808 /* PTPusherChannelAuthorizationOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherChannelAuthorizationOperation.h; sourceTree = "<group>"; };
@@ -467,8 +467,8 @@
 		A3FE429311811ED6009CF5D7 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				A3AC28B413F75530001C4808 /* LRURLRequestOperation.h */,
-				A3AC28B513F75530001C4808 /* LRURLRequestOperation.m */,
+				A3AC28B413F75530001C4808 /* PTURLRequestOperation.h */,
+				A3AC28B513F75530001C4808 /* PTURLRequestOperation.m */,
 				A3FE429B11811EE8009CF5D7 /* NSString+Hashing.h */,
 				A3FE429C11811EE8009CF5D7 /* NSString+Hashing.m */,
 				A3FE42FF11812541009CF5D7 /* NSDictionary+QueryString.h */,
@@ -499,7 +499,7 @@
 				A35281DB13F73C54000687C0 /* PTTargetActionEventListener.h in Headers */,
 				A35281E413F75010000687C0 /* PTBlockEventListener.h in Headers */,
 				A35281E913F75265000687C0 /* PTPusherAPI.h in Headers */,
-				A3AC28B613F75530001C4808 /* LRURLRequestOperation.h in Headers */,
+				A3AC28B613F75530001C4808 /* PTURLRequestOperation.h in Headers */,
 				A3AC28BF13F75BF1001C4808 /* PusherExampleMenuViewController.h in Headers */,
 				A3AC28C313F76C51001C4808 /* PTPusherChannelAuthorizationOperation.h in Headers */,
 				A3AC28D513F7701B001C4808 /* CDataScanner.h in Headers */,
@@ -701,7 +701,7 @@
 				A35281DC13F73C54000687C0 /* PTTargetActionEventListener.m in Sources */,
 				A35281E513F75010000687C0 /* PTBlockEventListener.m in Sources */,
 				A35281EA13F75265000687C0 /* PTPusherAPI.m in Sources */,
-				A3AC28B713F75530001C4808 /* LRURLRequestOperation.m in Sources */,
+				A3AC28B713F75530001C4808 /* PTURLRequestOperation.m in Sources */,
 				A3AC28C013F75BF1001C4808 /* PusherExampleMenuViewController.m in Sources */,
 				A3AC28C413F76C51001C4808 /* PTPusherChannelAuthorizationOperation.m in Sources */,
 				A3AC28D613F7701B001C4808 /* CDataScanner.m in Sources */,

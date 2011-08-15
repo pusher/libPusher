@@ -6,9 +6,9 @@
 //  Copyright 2010 LJR Software Limited. All rights reserved.
 //
 
-#import "LRURLRequestOperation.h"
+#import "PTURLRequestOperation.h"
 
-@interface LRURLRequestOperation ()
+@interface PTURLRequestOperation ()
 @property (nonatomic, retain, readwrite) NSURLResponse *URLResponse;
 @property (nonatomic, retain, readwrite) NSError *connectionError;
 @property (nonatomic, retain, readwrite) NSData *responseData;
@@ -19,7 +19,7 @@
 
 #pragma mark -
 
-@implementation LRURLRequestOperation
+@implementation PTURLRequestOperation
 
 @synthesize URLRequest;
 @synthesize URLResponse;

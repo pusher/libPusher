@@ -7,7 +7,7 @@
 //
 
 #import "PTPusherAPI.h"
-#import "LRURLRequestOperation.h"
+#import "PTURLRequestOperation.h"
 #import "CJSONSerializer.h"
 #import "NSString+Hashing.h"
 #import "NSDictionary+QueryString.h"
@@ -67,7 +67,7 @@
   [request setHTTPMethod:@"POST"];
   [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
 
-  LRURLRequestOperation *operation = [[LRURLRequestOperation alloc] initWithURLRequest:request];
+  PTURLRequestOperation *operation = [[PTURLRequestOperation alloc] initWithURLRequest:request];
   [operationQueue addOperation:operation];
   [operation release];
 }

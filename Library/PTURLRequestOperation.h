@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface LRURLRequestOperation : NSOperation {
+@interface PTURLRequestOperation : NSOperation {
   BOOL _isExecuting;
   BOOL _isFinished;
   NSURLRequest *URLRequest;
@@ -28,7 +28,7 @@
 - (void)cancelImmediately;
 @end
 
-@interface LRURLRequestOperation (NSURLConnectionDelegate)
+@interface PTURLRequestOperation (NSURLConnectionDelegate)
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)theResponse;
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data;
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection;

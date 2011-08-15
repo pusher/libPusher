@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "LRURLRequestOperation.h"
+#import "PTURLRequestOperation.h"
 
-@interface PTPusherChannelAuthorizationOperation : LRURLRequestOperation
+@interface PTPusherChannelAuthorizationOperation : PTURLRequestOperation
 
 @property (nonatomic, copy) void (^completionHandler)(PTPusherChannelAuthorizationOperation *);
 @property (nonatomic, readonly, getter=isAuthorized) BOOL authorized;
