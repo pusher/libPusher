@@ -235,11 +235,3 @@ extern NSString *const PTPusherErrorUnderlyingEventKey;
 
 @end
 
-@class PTPusherChannel;
-
-@interface PTPusher (SharedFactory)
-+ (void)setKey:(NSString *)apiKey;
-+ (void)setSecret:(NSString *)secret;
-+ (void)setAppID:(NSString *)appId;
-@end
-

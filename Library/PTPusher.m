@@ -256,28 +256,3 @@ NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *
 }
 
 @end
-
-#pragma mark -
-
-@implementation PTPusher (SharedFactory)
-
-static NSString *sharedKey = nil;
-static NSString *sharedSecret = nil;
-static NSString *sharedAppID = nil;
-
-+ (void)setKey:(NSString *)apiKey;
-{
-  [sharedKey autorelease]; sharedKey = [apiKey copy];
-}
-
-+ (void)setSecret:(NSString *)secret;
-{
-  [sharedSecret autorelease]; sharedSecret = [secret copy];
-}
-
-+ (void)setAppID:(NSString *)appId;
-{
-  [sharedAppID autorelease]; sharedAppID = [appId copy];
-}
-
-@end
