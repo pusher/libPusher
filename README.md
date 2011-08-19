@@ -128,6 +128,29 @@ PTPusherChannel *channel = [client channelNamed:@"my-channel"];
 [client unsubscribeFromChannel:channel];
 ```
 
+### Channel authorisation
+
+Private and presence channels require server-side authorisation before they can connect. Because the Javascript client library runs in the browser, it assumes the presence of an existing server-side session and simply makes an AJAX POST to the server. The server then uses the existing server session cookie to authorise the subscription request.
+
+When using libPusher in your iOS apps, there is no existing session, so you will need an alternative means of authenticating a user; possible means of authentication could be HTTP Basic Authentication or some kind of token-based authentication.
+
+In order to connect to a private or presence channel, you first need to configure your server authorisation URL.
+
+```objc
+pusher.authorizationURL = [NSURL URLWithString:@"http://www.yourserver.com/authorise"];
+```
+
+When you attempt to connect to a private or presence channel, libPusher will make a form-encoded POST request to the above URL, passing along the socket ID and channel name as parameters. Prior to sending the request, the Pusher delegate will be notified, passing in the NSMutableURLRequest instance that will be sent.
+
+It's at this point that you can configure the request to handle whatever authentication mechanism you are using. In this example, we simply set a custom header with a token which the server will use to authenticate the user before proceeding with authorisation.
+
+```objc
+- (void)pusher:(PTPusher *)pusher willAuthorizeChannelWithRequest:(NSMutableURLRequest *)request
+{
+  [request setValue:@"some-authentication-token" forHTTPHeaderField:@"X-MyCustom-AuthTokenHeader"];
+}
+```
+
 ### Binding to channel events
 
 Binding to events on channels works in exactly the same way as binding to client events; the only difference is that you will only receive events with that are associated with that channel.
