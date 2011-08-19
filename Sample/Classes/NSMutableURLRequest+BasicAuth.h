@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSObject (NSMutableURLRequest_BasicAuth)
+@interface NSMutableURLRequest (BasicAuth)
+
+- (void)setHTTPBasicAuthUsername:(NSString *)username password:(NSString *)password;
 
 @end

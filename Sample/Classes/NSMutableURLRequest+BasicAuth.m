@@ -7,7 +7,16 @@
 //
 
 #import "NSMutableURLRequest+BasicAuth.h"
+#import "NSData+Base64.h"
 
-@implementation NSObject (NSMutableURLRequest_BasicAuth)
+
+@implementation NSMutableURLRequest (BasicAuth)
+
+- (void)setHTTPBasicAuthUsername:(NSString *)username password:(NSString *)password
+{
+  NSString *authString = [NSString stringWithFormat:@"%@:%@", username, password];
+  NSData *authData = [authString dataUsingEncoding:NSASCIIStringEncoding];
+  [self setValue:[NSString stringWithFormat:@"Basic %@", [authData base64EncodedString]] forHTTPHeaderField:@"Authorization"];
+}
 
 @end

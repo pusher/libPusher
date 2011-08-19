@@ -54,8 +54,10 @@
 {
   [super viewWillDisappear:animated];
   
-  // unsubscribe before we go back to the main menu
-  [self.pusher unsubscribeFromChannel:self.currentChannel]; 
+  if ([self.currentChannel isSubscribed]) {
+    // unsubscribe before we go back to the main menu
+    [self.pusher unsubscribeFromChannel:self.currentChannel];
+  }
 }
 
 - (void)dealloc 

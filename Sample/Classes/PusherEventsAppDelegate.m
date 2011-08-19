@@ -10,6 +10,7 @@
 #import "PusherExampleMenuViewController.h"
 #import "PTPusher.h"
 #import "PTPusherEvent.h"
+#import "NSMutableURLRequest+BasicAuth.h"
 
 
 // this is not included in the source
@@ -85,6 +86,16 @@
 - (void)pusher:(PTPusher *)pusher didFailToSubscribeToChannel:(PTPusherChannel *)channel withError:(NSError *)error
 {
   NSLog(@"[pusher-%@] Authorization failed for channel %@", pusher.connection.socketID, channel);
+}
+
+/* The sample app uses HTTP basic authentication.
+ 
+   This demonstrates how we can intercept the authorization request to configure it for our app's
+   authentication/authorisation needs.
+ */
+- (void)pusher:(PTPusher *)pusher willAuthorizeChannelWithRequest:(NSMutableURLRequest *)request
+{
+  [request setHTTPBasicAuthUsername:CHANNEL_AUTH_USERNAME password:CHANNEL_AUTH_PASSWORD];
 }
 
 @end

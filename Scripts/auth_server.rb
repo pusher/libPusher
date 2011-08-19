@@ -8,6 +8,10 @@ load File.join(File.dirname(__FILE__), *%w[auth_credentials.rb])
 
 module Pusher
   class FakeAuthServer < Sinatra::Base
+    use Rack::Auth::Basic, 'Restricted' do |username, password|
+      [username, password] == ['admin', 'letmein']
+    end
+    
     get "/" do
       [200, {}, "It works!"]
     end
