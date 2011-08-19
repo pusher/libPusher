@@ -23,8 +23,8 @@
 		A35281E513F75010000687C0 /* PTBlockEventListener.m in Sources */ = {isa = PBXBuildFile; fileRef = A35281E313F75010000687C0 /* PTBlockEventListener.m */; };
 		A35281E913F75265000687C0 /* PTPusherAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = A35281E713F75265000687C0 /* PTPusherAPI.h */; };
 		A35281EA13F75265000687C0 /* PTPusherAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = A35281E813F75265000687C0 /* PTPusherAPI.m */; };
-		A3698FF113FF0985005CF130 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = A3698FF013FF0985005CF130 /* NSData+Base64.m */; };
 		A3698FF213FF0A7A005CF130 /* NSMutableURLRequest+BasicAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = A3698FED13FF0868005CF130 /* NSMutableURLRequest+BasicAuth.m */; };
+		A3698FFF13FF200C005CF130 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = A3698FFE13FF200C005CF130 /* NSData+Base64.m */; };
 		A39E238913F7E6AB0083CAD7 /* PusherPresenceEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A39E238813F7E6AB0083CAD7 /* PusherPresenceEventsViewController.m */; };
 		A3A1A112115814D0001EF877 /* OCHamcrest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3A1A111115814D0001EF877 /* OCHamcrest.framework */; };
 		A3A1A149115814F7001EF877 /* OCHamcrest.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = A3A1A111115814D0001EF877 /* OCHamcrest.framework */; };
@@ -147,8 +147,8 @@
 		A35281E813F75265000687C0 /* PTPusherAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTPusherAPI.m; sourceTree = "<group>"; };
 		A3698FEC13FF0868005CF130 /* NSMutableURLRequest+BasicAuth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableURLRequest+BasicAuth.h"; sourceTree = "<group>"; };
 		A3698FED13FF0868005CF130 /* NSMutableURLRequest+BasicAuth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableURLRequest+BasicAuth.m"; sourceTree = "<group>"; };
-		A3698FEF13FF0985005CF130 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+Base64.h"; path = "../../../../../Downloads/NSData_Base64/NSData+Base64.h"; sourceTree = "<group>"; };
-		A3698FF013FF0985005CF130 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+Base64.m"; path = "../../../../../Downloads/NSData_Base64/NSData+Base64.m"; sourceTree = "<group>"; };
+		A3698FFD13FF200C005CF130 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
+		A3698FFE13FF200C005CF130 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
 		A39E238613F7E3FD0083CAD7 /* PTPusherErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherErrors.h; sourceTree = "<group>"; };
 		A39E238713F7E6AB0083CAD7 /* PusherPresenceEventsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PusherPresenceEventsViewController.h; sourceTree = "<group>"; };
 		A39E238813F7E6AB0083CAD7 /* PusherPresenceEventsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PusherPresenceEventsViewController.m; sourceTree = "<group>"; };
@@ -457,8 +457,8 @@
 				A3AC28BD13F75BF1001C4808 /* PusherExampleMenuViewController.m */,
 				A3698FEC13FF0868005CF130 /* NSMutableURLRequest+BasicAuth.h */,
 				A3698FED13FF0868005CF130 /* NSMutableURLRequest+BasicAuth.m */,
-				A3698FEF13FF0985005CF130 /* NSData+Base64.h */,
-				A3698FF013FF0985005CF130 /* NSData+Base64.m */,
+				A3698FFD13FF200C005CF130 /* NSData+Base64.h */,
+				A3698FFE13FF200C005CF130 /* NSData+Base64.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -681,8 +681,8 @@
 				A3D1D2881157FA30009A12AD /* main.m in Sources */,
 				A3FE41CB11811161009CF5D7 /* NewEventViewController.m in Sources */,
 				A39E238913F7E6AB0083CAD7 /* PusherPresenceEventsViewController.m in Sources */,
-				A3698FF113FF0985005CF130 /* NSData+Base64.m in Sources */,
 				A3698FF213FF0A7A005CF130 /* NSMutableURLRequest+BasicAuth.m in Sources */,
+				A3698FFF13FF200C005CF130 /* NSData+Base64.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
