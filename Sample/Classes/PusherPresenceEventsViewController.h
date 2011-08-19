@@ -8,12 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "PTPusherPresenceChannelDelegate.h"
+#import "PTPusherDelegate.h"
 
 @class PTPusher;
 @class PTPusherPresenceChannel;
 
 
-@interface PusherPresenceEventsViewController : UITableViewController <PTPusherPresenceChannelDelegate> {
+@interface PusherPresenceEventsViewController : UITableViewController <PTPusherDelegate, PTPusherPresenceChannelDelegate> {
   NSMutableArray *connectedClients;
   NSMutableArray *memberIDs;
 }

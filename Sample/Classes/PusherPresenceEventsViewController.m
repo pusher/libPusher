@@ -13,11 +13,13 @@
 #import "PTPusherAPI.h"
 #import "PTPusherConnection.h"
 #import "NewEventViewController.h"
+#import "NSMutableURLRequest+BasicAuth.h"
+#import "Constants.h"
 
 
 @implementation PusherPresenceEventsViewController
 
-@synthesize pusher;
+@synthesize pusher = _pusher;
 @synthesize currentChannel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -64,7 +66,7 @@
 {
   [memberIDs release];
   [connectedClients release];
-  [pusher release];
+  [_pusher release];
   [currentChannel release];
   [super dealloc];
 }
@@ -81,7 +83,8 @@
 - (void)connectClient
 {
   PTPusher *client = [PTPusher pusherWithKey:PUSHER_API_KEY connectAutomatically:YES];
-  client.authorizationURL = pusher.authorizationURL;
+  client.authorizationURL = self.pusher.authorizationURL;
+  client.delegate = self;
   [connectedClients addObject:client];
   [client subscribeToPresenceChannelNamed:@"demo"];
 }
@@ -91,6 +94,28 @@
   PTPusher *client = [connectedClients lastObject];
   [client disconnect];
   [connectedClients removeObject:client];
+}
+
+#pragma mark - Pusher delegate (authentication)
+
+- (void)pusher:(PTPusher *)pusher connectionDidConnect:(PTPusherConnection *)connection
+{
+  NSLog(@"Client %@ connected.", pusher);
+}
+
+- (void)pusher:(PTPusher *)pusher didSubscribeToChannel:(PTPusherChannel *)channel
+{
+  NSLog(@"Client %@ subscribed to channel %@.", pusher, channel);
+}
+
+- (void)pusher:(PTPusher *)pusher didFailToSubscribeToChannel:(PTPusherChannel *)channel withError:(NSError *)error
+{
+  NSLog(@"Client %@ could not subscribe to channel %@", pusher, channel);
+}
+
+- (void)pusher:(PTPusher *)pusher willAuthorizeChannelWithRequest:(NSMutableURLRequest *)request
+{
+  [request setHTTPBasicAuthUsername:CHANNEL_AUTH_USERNAME password:CHANNEL_AUTH_PASSWORD];
 }
 
 #pragma mark - Presence channel events
