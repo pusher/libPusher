@@ -20,6 +20,12 @@
 @synthesize authorizationData;
 @synthesize completionHandler;
 
+- (NSMutableURLRequest *)mutableURLRequest
+{
+  // we can be sure this is always mutable
+  return (NSMutableURLRequest *)URLRequest;
+}
+
 + (id)operationWithAuthorizationURL:(NSURL *)URL channelName:(NSString *)channelName socketID:(NSString *)socketID
 {
   NSAssert(URL, @"URL is required for authorization! (Did you set PTPusher.authorizationURL?)");

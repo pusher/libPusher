@@ -14,6 +14,7 @@
 @property (nonatomic, copy) void (^completionHandler)(PTPusherChannelAuthorizationOperation *);
 @property (nonatomic, readonly, getter=isAuthorized) BOOL authorized;
 @property (nonatomic, retain, readonly) NSDictionary *authorizationData;
+@property (nonatomic, readonly) NSMutableURLRequest *mutableURLRequest;
 
 + (id)operationWithAuthorizationURL:(NSURL *)URL channelName:(NSString *)channelName socketID:(NSString *)socketID;
 @end

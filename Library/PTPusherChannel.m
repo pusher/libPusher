@@ -178,6 +178,11 @@
   [authOperation setCompletionHandler:^(PTPusherChannelAuthorizationOperation *operation) {
     completionHandler(operation.isAuthorized, operation.authorizationData);
   }];
+  
+  if ([pusher.delegate respondsToSelector:@selector(pusher:willAuthorizeChannelWithRequest:)]) {
+    [pusher.delegate pusher:pusher willAuthorizeChannelWithRequest:authOperation.mutableURLRequest];
+  }
+  
   [[NSOperationQueue mainQueue] addOperation:authOperation];
 }
 
