@@ -223,6 +223,7 @@ What you don't want to do is keep on blindly trying to reconnect if there is no 
     [reachability startNotifier];
   }
 }
+```
 
 The implementation of `pusher:connection:didFailWithError:` will look similar to the above although you may wish to do some further checking of the error.
 
