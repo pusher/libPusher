@@ -60,15 +60,6 @@ You can then connect when you are ready by calling `connect`.
 
 It is recommend you assign a delegate to the Pusher client as this will enable you to be notified when significant connection events happen such as connection errors, disconnects and retries.
 
-If you want to have your connection reconnect automatically when it disconnects, you can:
-
-```objc
-client.reconnectAutomatically = YES;
-
-// optional, defaults to 5 seconds
-client.reconnectDelay = 1.0;
-```
-
 ### Binding to events
 
 Once you have created an instance of the Pusher client, you can set up event bindings; there is no need to wait for the connection to be established.
@@ -196,6 +187,76 @@ The event can be retrieved in your callback from the notification's `userInfo` d
   // do something with event
 }
 ```
+
+## Handling network connectivity errors and disconnects
+
+The nature of a mobile device is that connections will come and go. There are a number of things you can do do ensure that your Pusher connection remains active for as long as you have a network connection and reconnects after network connectivity has been re-established.
+
+The following examples use Apple's Reachability class (version 2.2) to check the network reachability status. Apple recommends that in most circumstances, you do not do any pre-flight checks and simply try and open a connection. This example follows this advice.
+
+You can configure libPusher to automatically try and re-connect if it disconnects or it initially fails to connect.
+
+```objc
+PTPusher *client = [PTPusher pusherWithKey:@"YOUR-API-KEY" delegate:self];
+client.reconnectAutomatically = YES;
+client.reconnectDelay = 30; // defaults to 5 seconds
+```
+
+What you don't want to do is keep on blindly trying to reconnect if there is no available network and therefore no possible way a connection could be successful. You should implement the `PTPusherDelegate` methods `pusher:connectionDidDisconnect:` and `pusher:connection:didFailWithError:`.
+
+```objc
+- (void)pusher:(PTPusher *)client connectionDidDisconnect:(PTPusherConnection *)connection
+{
+  Reachability *reachability = [Reachability reachabilityForInternetConnection];
+  
+  if ([reachability currentReachabilityStatus] == NotReachable) {
+    // there is no point in trying to reconnect at this point
+    client.reconnectAutomatically = NO;
+    
+    // start observing the reachability status to see when we come back online
+    [[NSNotificationCenter defaultCenter] 
+          addObserver:self 
+             selector:@selector(reachabilityChanged:) 
+                 name:kReachabilityChangedNotification]
+               object:reachability];
+               
+    [reachability startNotifier];
+  }
+}
+
+The implementation of `pusher:connection:didFailWithError:` will look similar to the above although you may wish to do some further checking of the error.
+
+Now you simply need to wait for the network to become reachable again; it's no guarantee that you will be able to establish a connection but it is an indicator that it would be reasonable to try again.
+
+```objc
+- (void)reachabilityChanged:(NSNotification *)note
+{
+  Reachability *reachability = note.object;
+  
+  if ([reachability currentReachabilityStatus] != NotReachable) {
+    // we seem to have some kind of network reachability, so try again
+    PTPusher *pusher = <# get the pusher instance #>
+    [pusher connect];
+    
+    // we can stop observing reachability changes now
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [reachability stopNotifier];
+    
+    // re-enable auto-reconnect
+    pusher.reconnectAutomatically = YES;
+  }
+}
+```
+Finally, you may prefer to not turn on automatic reconnection immediately, but instead wait until you've successfully connected. You could do this by implementing the `pusher:connectionDidConnect:` delegate method:
+
+```objc
+- (void)pusher:(PTPusher *)client connectionDidConnect:(PTPusherConnection *)connection
+{
+  client.reconnectAutomatically = YES;
+}
+```
+
+Doing it this way means you do not need to re-enable auto-reconnect in your Reachability notification handler as it will happen automatically once you have connected.
 
 ## Credits
 
