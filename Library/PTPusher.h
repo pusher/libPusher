@@ -71,7 +71,8 @@ extern NSString *const PTPusherErrorUnderlyingEventKey;
 @property (nonatomic, assign) id<PTPusherDelegate> delegate;
 
 
-/** Indicates whether the client should attempt to reconnect automatically when disconnected.
+/** Indicates whether the client should attempt to reconnect automatically when disconnected
+ or if the connection failed.
  
  When YES, the client will automatically attempt to re-establish a connection after a set delay.
  

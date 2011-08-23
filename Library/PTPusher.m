@@ -35,6 +35,7 @@ NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *
 @property (nonatomic, retain, readwrite) PTPusherConnection *connection;
 
 - (void)subscribeToChannel:(PTPusherChannel *)channel;
+- (void)reconnectAfterDelay;
 @end
 
 @interface PTPusherChannel ()
@@ -222,23 +223,18 @@ NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *
   if ([self.delegate respondsToSelector:@selector(pusher:connectionDidDisconnect:)]) {
     [self.delegate pusher:self connectionDidDisconnect:connection];
   }
-  
   if (self.shouldReconnectAutomatically) {
-    if ([self.delegate respondsToSelector:@selector(pusher:connectionWillReconnect:afterDelay:)]) {
-      [self.delegate pusher:self connectionWillReconnect:connection afterDelay:self.reconnectDelay];
-    }
-    
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, self.reconnectDelay * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-      [connection connect];
-    });
+    [self reconnectAfterDelay]; 
   }
 }
 
 - (void)pusherConnection:(PTPusherConnection *)connection didFailWithError:(NSError *)error
 {
   if ([self.delegate respondsToSelector:@selector(pusher:connectionDidDisconnect:)]) {
-    [self.delegate pusher:self connectionDidDisconnect:connection];
+    [self.delegate pusher:self connection:connection failedWithError:error];
+  }
+  if ([error.domain isEqualToString:ZTWebSocketErrorDomain] && self.shouldReconnectAutomatically) {
+    [self reconnectAfterDelay];
   }
 }
 
@@ -253,6 +249,20 @@ NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *
         postNotificationName:PTPusherEventReceivedNotification 
                       object:self 
                     userInfo:[NSDictionary dictionaryWithObject:event forKey:PTPusherEventUserInfoKey]];
+}
+
+#pragma mark - Private
+
+- (void)reconnectAfterDelay
+{
+  if ([self.delegate respondsToSelector:@selector(pusher:connectionWillReconnect:afterDelay:)]) {
+    [self.delegate pusher:self connectionWillReconnect:_connection afterDelay:self.reconnectDelay];
+  }
+  
+  dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, self.reconnectDelay * NSEC_PER_SEC);
+  dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+    [_connection connect];
+  });
 }
 
 @end

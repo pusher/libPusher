@@ -37,6 +37,12 @@
 
 /** Notifies the delegate that the PTPusher instance failed to connect to the Pusher service.
  
+ If reconnectAutomatically is YES, PTPusher will attempt to reconnect if the initial connection failed.
+ 
+ This reconnect attempt will happen after this message is sent to the delegate, giving the delegate
+ a chance to inspect the connection error and disable automatic reconnection if it thinks the reconnection
+ attempt is likely to fail, depending on the error.
+ 
  @param pusher The PTPusher instance that has connected.
  @param connection The connection for the pusher instance.
  @param error The connection error.
