@@ -230,7 +230,7 @@ NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *
 
 - (void)pusherConnection:(PTPusherConnection *)connection didFailWithError:(NSError *)error
 {
-  if ([self.delegate respondsToSelector:@selector(pusher:connectionDidDisconnect:)]) {
+  if ([self.delegate respondsToSelector:@selector(pusher:connection:failedWithError:)]) {
     [self.delegate pusher:self connection:connection failedWithError:error];
   }
   if ([error.domain isEqualToString:ZTWebSocketErrorDomain] && self.shouldReconnectAutomatically) {
