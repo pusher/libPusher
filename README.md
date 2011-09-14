@@ -31,10 +31,6 @@ Alternatively, you can simply copy the relevant files (all the files in the Libr
 In addition to the above instructions, you will need to add `-all_load` to your build settings under "Other linker flags", to ensure the categories defined by the library are loaded.
 
 ### Building notes
-
-The project includes the Zimt library as a Git submodule; you'll need to init your Git submodules before you are able to build. 
-
-    $ git submodule update --init --recursive
     
 To build and run the sample app, you'll need to create a Constants.h file containing your Pusher API key, app ID and secret key; see the sample application app delegate for instructions.
 
