@@ -24,7 +24,7 @@
 }
 @property (nonatomic, assign) id<PTPusherConnectionDelegate> delegate;
 @property (nonatomic, readonly, getter=isConnected) BOOL connected;
-@property (nonatomic, readonly) NSString *socketID;
+@property (nonatomic, copy, readonly) NSString *socketID;
 
 ///------------------------------------------------------------------------------------/
 /// @name Initialisation

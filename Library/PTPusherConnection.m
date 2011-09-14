@@ -13,6 +13,11 @@
 
 NSString *const PTPusherConnectionEstablishedEvent = @"connection_established";
 
+@interface PTPusherConnection ()
+@property (nonatomic, copy) NSString *socketID;
+@property (nonatomic, assign, readwrite) BOOL connected;
+@end
+
 @implementation PTPusherConnection
 
 @synthesize delegate = _delegate;
@@ -72,7 +77,9 @@ NSString *const PTPusherConnectionEstablishedEvent = @"connection_established";
 
 - (void)webSocketDidClose:(ZTWebSocket*)webSocket;
 {
-  connected = NO;
+  self.connected = NO;
+  self.socketID = nil;
+
   [self.delegate pusherConnectionDidDisconnect:self];
 }
 
@@ -82,8 +89,9 @@ NSString *const PTPusherConnectionEstablishedEvent = @"connection_established";
   PTPusherEvent *event = [PTPusherEvent eventFromMessageDictionary:messageDictionary];
   
   if ([event.name isEqualToString:PTPusherConnectionEstablishedEvent]) {
-    socketID = [[event.data objectForKey:@"socket_id"] copy];
-    connected = YES;
+    self.socketID = [event.data objectForKey:@"socket_id"];
+    self.connected = YES;
+
     [self.delegate pusherConnectionDidConnect:self];
   }  
   [self.delegate pusherConnection:self didReceiveEvent:event];
