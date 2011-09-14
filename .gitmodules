@@ -1,6 +1,3 @@
-[submodule "Vendor/Zimt"]
-	path = Vendor/Zimt
-	url = git://github.com/lukeredpath/zimt.git
 [submodule "Vendor/Mocky"]
 	path = Vendor/Mocky
 	url = git@github.com:lukeredpath/LRMocky.git
