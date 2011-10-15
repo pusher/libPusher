@@ -28,6 +28,11 @@
     NSString* origin;
     
     NSArray* runLoopModes;
+  
+    // Whether to secure the socket. Event though by convension port 80 is used for unsecure connections while 443 is used for 
+    // secure connections, ZTWebSocket doesn't make any assumptions based on the port number and requests that you 
+    // specifically configure it to enable or disable secure sockets. 
+    BOOL secureSocket;
 }
 
 @property(nonatomic,assign) id<ZTWebSocketDelegate> delegate;
@@ -36,8 +41,8 @@
 @property(nonatomic,readonly) BOOL connected;
 @property(nonatomic,retain) NSArray* runLoopModes;
 
-+ (id)webSocketWithURLString:(NSString*)urlString delegate:(id<ZTWebSocketDelegate>)delegate;
-- (id)initWithURLString:(NSString*)urlString delegate:(id<ZTWebSocketDelegate>)delegate;
++ (id)webSocketWithURLString:(NSString*)urlString delegate:(id<ZTWebSocketDelegate>)delegate secure:(BOOL)secure;
+- (id)initWithURLString:(NSString*)urlString delegate:(id<ZTWebSocketDelegate>)delegate secure:(BOOL)secure;
 
 - (void)open;
 - (void)close;

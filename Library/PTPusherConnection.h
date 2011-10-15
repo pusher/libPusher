@@ -36,8 +36,9 @@
  
  @param aURL      The websocket endpoint
  @param delegate  The delegate for this connection
+ @param secure    Whether this connection should be secure (TLS)
  */
-- (id)initWithURL:(NSURL *)aURL;
+- (id)initWithURL:(NSURL *)aURL secure:(BOOL)secure;
 
 ///------------------------------------------------------------------------------------/
 /// @name Managing connections

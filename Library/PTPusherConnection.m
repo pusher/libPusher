@@ -24,10 +24,10 @@ NSString *const PTPusherConnectionEstablishedEvent = @"connection_established";
 @synthesize connected;
 @synthesize socketID;
 
-- (id)initWithURL:(NSURL *)aURL
+- (id)initWithURL:(NSURL *)aURL secure:(BOOL)secure
 {
   if ((self = [super init])) {
-    socket = [[ZTWebSocket alloc] initWithURLString:[aURL absoluteString] delegate:self];
+    socket = [[ZTWebSocket alloc] initWithURLString:[aURL absoluteString] delegate:self secure:secure];
   }
   return self;
 }

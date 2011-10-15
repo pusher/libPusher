@@ -83,7 +83,7 @@ NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *
 
 + (id)pusherWithKey:(NSString *)key connectAutomatically:(BOOL)connectAutomatically
 {
-  PTPusherConnection *connection = [[PTPusherConnection alloc] initWithURL:PTPusherConnectionURL(@"ws.pusherapp.com", 80, key, @"libpusher")];
+  PTPusherConnection *connection = [[PTPusherConnection alloc] initWithURL:PTPusherConnectionURL(@"ws.pusherapp.com", 443, key, @"libpusher") secure:YES];
   PTPusher *pusher = [[self alloc] initWithConnection:connection connectAutomatically:connectAutomatically];
   [connection release];
   return [pusher autorelease];

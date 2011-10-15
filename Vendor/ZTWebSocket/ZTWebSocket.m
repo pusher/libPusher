@@ -24,13 +24,14 @@ enum {
 
 #pragma mark Initializers
 
-+ (id)webSocketWithURLString:(NSString*)urlString delegate:(id<ZTWebSocketDelegate>)aDelegate {
-    return [[[ZTWebSocket alloc] initWithURLString:urlString delegate:aDelegate] autorelease];
++ (id)webSocketWithURLString:(NSString*)urlString delegate:(id<ZTWebSocketDelegate>)aDelegate  secure:(BOOL)secure{
+    return [[[ZTWebSocket alloc] initWithURLString:urlString delegate:aDelegate secure:secure] autorelease];
 }
 
--(id)initWithURLString:(NSString *)urlString delegate:(id<ZTWebSocketDelegate>)aDelegate {
+-(id)initWithURLString:(NSString *)urlString delegate:(id<ZTWebSocketDelegate>)aDelegate  secure:(BOOL)secure{
     if (self=[super init]) {
         self.delegate = aDelegate;
+        secureSocket = secure;
         url = [[NSURL URLWithString:urlString] retain];
         if (![url.scheme isEqualToString:@"ws"]) {
             [NSException raise:ZTWebSocketException format:[NSString stringWithFormat:@"Unsupported protocol %@",url.scheme]];
@@ -89,6 +90,7 @@ enum {
     if (!connected) {
         [socket connectToHost:url.host onPort:[url.port intValue] withTimeout:5 error:nil];
         if (runLoopModes) [socket setRunLoopModes:runLoopModes];
+        if (secureSocket) [socket startTLS:nil];
     }
 }
 
