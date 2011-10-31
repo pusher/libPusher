@@ -12,6 +12,8 @@
 #import "PTPusherEvent.h"
 #import "NSMutableURLRequest+BasicAuth.h"
 
+// change this to switch between secure/non-secure connections
+#define kUSE_ENCRYPTED_CHANNELS YES
 
 // this is not included in the source
 // you must create this yourself and define PUSHER_API_KEY in it
@@ -27,7 +29,7 @@
 - (void)applicationDidFinishLaunching:(UIApplication *)application 
 {    
   // establish a new pusher instance
-  self.pusher = [PTPusher pusherWithKey:PUSHER_API_KEY delegate:self];
+  self.pusher = [PTPusher pusherWithKey:PUSHER_API_KEY delegate:self encrypted:kUSE_ENCRYPTED_CHANNELS];
   
   // we want the connection to automatically reconnect if it dies
   self.pusher.reconnectAutomatically = YES;

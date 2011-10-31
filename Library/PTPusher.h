@@ -123,10 +123,35 @@ extern NSString *const PTPusherErrorUnderlyingEventKey;
  a delegate using the delegate property after this method returns, it may not be notified
  of connection events.
  
+ @deprecated
  @param key       Your application's API key. It can be found in the API Access section of your application within the Pusher user dashboard.
  @param delegate  The delegate for this instance
  */
 + (id)pusherWithKey:(NSString *)key delegate:(id<PTPusherDelegate>)delegate;
+
+/** Returns a new PTPusher instance with a connection configured with the given key.
+ 
+ Instances created using this method will connect automatically. Specify the delegate here
+ to ensure that it is notified about the connection status during connection. If you assign 
+ a delegate using the delegate property after this method returns, it may not be notified
+ of connection events.
+ 
+ @param key         Your application's API key. It can be found in the API Access section of your application within the Pusher user dashboard.
+ @param delegate    The delegate for this instance
+ @param isEncrypted If yes, a secure connection over SSL will be established.
+ */
++ (id)pusherWithKey:(NSString *)key delegate:(id<PTPusherDelegate>)delegate encrypted:(BOOL)isEncrypted;
+
+/** Initialises a new PTPusher instance with a connection configured with the given key.
+ 
+ If you intend to set a delegate for this instance, you are recommended to set connectAutomatically
+ to NO, set the delegate then manually call connect.
+ 
+ @deprecated
+ @param key       Your application's API key. It can be found in the API Access section of your application within the Pusher user dashboard.
+ @param connectAutomatically If YES, the connection will be connected on initialisation.
+ */
++ (id)pusherWithKey:(NSString *)key connectAutomatically:(BOOL)connectAutomatically;
 
 /** Initialises a new PTPusher instance with a connection configured with the given key.
  
@@ -135,8 +160,9 @@ extern NSString *const PTPusherErrorUnderlyingEventKey;
  
  @param key       Your application's API key. It can be found in the API Access section of your application within the Pusher user dashboard.
  @param connectAutomatically If YES, the connection will be connected on initialisation.
+ @param isEncrypted If yes, a secure connection over SSL will be established.
  */
-+ (id)pusherWithKey:(NSString *)key connectAutomatically:(BOOL)connectAutomatically;
++ (id)pusherWithKey:(NSString *)key connectAutomatically:(BOOL)connectAutomatically encrypted:(BOOL)isEncrypted;
 
 ///------------------------------------------------------------------------------------/
 /// @name Managing the connection

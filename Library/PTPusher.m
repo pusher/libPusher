@@ -16,16 +16,18 @@
 #import "PTPusherErrors.h"
 
 
-NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *clientID);
+NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, BOOL secure);
 
 NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotification";
 NSString *const PTPusherEventUserInfoKey = @"PTPusherEventUserInfoKey";
 NSString *const PTPusherErrorDomain = @"PTPusherErrorDomain";
 NSString *const PTPusherErrorUnderlyingEventKey = @"PTPusherErrorUnderlyingEventKey";
 
-NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *clientID)
+NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, BOOL secure)
 {
-  NSString *URLString = [NSString stringWithFormat:@"ws://%@:%d/app/%@?client=%@", host, port, key, clientID];
+  int port = ((secure == YES) ? 443 : 80);
+  NSString *scheme = ((secure == YES) ? @"wss" : @"ws");
+  NSString *URLString = [NSString stringWithFormat:@"%@://%@:%d/app/%@?client=%@", scheme, host, port, key, clientID];
   return [NSURL URLWithString:URLString];
 }
 
@@ -75,7 +77,12 @@ NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *
 
 + (id)pusherWithKey:(NSString *)key delegate:(id<PTPusherDelegate>)delegate
 {
-  PTPusher *pusher = [self pusherWithKey:key connectAutomatically:NO];
+  return [self pusherWithKey:key delegate:delegate encrypted:NO];
+}
+
++ (id)pusherWithKey:(NSString *)key delegate:(id<PTPusherDelegate>)delegate encrypted:(BOOL)isEncrypted
+{
+  PTPusher *pusher = [self pusherWithKey:key connectAutomatically:NO encrypted:isEncrypted];
   pusher.delegate = delegate;
   [pusher connect];
   return pusher;
@@ -83,7 +90,12 @@ NSURL *PTPusherConnectionURL(NSString *host, int port, NSString *key, NSString *
 
 + (id)pusherWithKey:(NSString *)key connectAutomatically:(BOOL)connectAutomatically
 {
-  PTPusherConnection *connection = [[PTPusherConnection alloc] initWithURL:PTPusherConnectionURL(@"ws.pusherapp.com", 443, key, @"libpusher") secure:YES];
+  return [self pusherWithKey:key connectAutomatically:connectAutomatically encrypted:NO];
+}
+
++ (id)pusherWithKey:(NSString *)key connectAutomatically:(BOOL)connectAutomatically encrypted:(BOOL)isEncrypted
+{
+  PTPusherConnection *connection = [[PTPusherConnection alloc] initWithURL:PTPusherConnectionURL(@"ws.pusherapp.com", key, @"libPusher", isEncrypted) secure:isEncrypted];
   PTPusher *pusher = [[self alloc] initWithConnection:connection connectAutomatically:connectAutomatically];
   [connection release];
   return [pusher autorelease];

@@ -33,7 +33,7 @@ enum {
         self.delegate = aDelegate;
         secureSocket = secure;
         url = [[NSURL URLWithString:urlString] retain];
-        if (![url.scheme isEqualToString:@"ws"]) {
+        if (![url.scheme hasPrefix:@"ws"]) {
             [NSException raise:ZTWebSocketException format:[NSString stringWithFormat:@"Unsupported protocol %@",url.scheme]];
         }
         socket = [[AsyncSocket alloc] initWithDelegate:self];
