@@ -1,6 +1,3 @@
-[submodule "Vendor/Mocky"]
-	path = Vendor/Mocky
-	url = git@github.com:lukeredpath/LRMocky.git
 [submodule "Vendor/TouchJSON"]
 	path = Vendor/TouchJSON
 	url = https://github.com/TouchCode/TouchJSON.git
