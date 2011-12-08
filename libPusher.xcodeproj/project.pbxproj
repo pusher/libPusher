@@ -62,9 +62,8 @@
 		A3FE429F11811EEE009CF5D7 /* NSString+Hashing.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FE429C11811EE8009CF5D7 /* NSString+Hashing.m */; };
 		A3FE44761181B7FE009CF5D7 /* PTPusherChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FE42191181173B009CF5D7 /* PTPusherChannel.m */; };
 		A3FE44E71181C3C5009CF5D7 /* NSDictionary+QueryString.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FE430011812541009CF5D7 /* NSDictionary+QueryString.m */; };
-		B292B1A61491448700A2AC6F /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = B292B1A21491448700A2AC6F /* CHANGELOG.md */; };
-		B292B1A71491448700A2AC6F /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = B292B1A41491448700A2AC6F /* JSONKit.m */; };
-		B292B1A81491448700A2AC6F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = B292B1A51491448700A2AC6F /* README.md */; };
+		B2C31DBD1491677F006355BF /* JSONKit.h in Headers */ = {isa = PBXBuildFile; fileRef = B292B1A31491448700A2AC6F /* JSONKit.h */; };
+		B2C31DBE14916782006355BF /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = B292B1A41491448700A2AC6F /* JSONKit.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -179,10 +178,8 @@
 		A3FE429C11811EE8009CF5D7 /* NSString+Hashing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Hashing.m"; sourceTree = "<group>"; };
 		A3FE42FF11812541009CF5D7 /* NSDictionary+QueryString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+QueryString.h"; sourceTree = "<group>"; };
 		A3FE430011812541009CF5D7 /* NSDictionary+QueryString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+QueryString.m"; sourceTree = "<group>"; };
-		B292B1A21491448700A2AC6F /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG.md; sourceTree = "<group>"; };
 		B292B1A31491448700A2AC6F /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		B292B1A41491448700A2AC6F /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
-		B292B1A51491448700A2AC6F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		B292B1A91491455C00A2AC6F /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -424,10 +421,8 @@
 		B292B1A11491448700A2AC6F /* JSONKit */ = {
 			isa = PBXGroup;
 			children = (
-				B292B1A21491448700A2AC6F /* CHANGELOG.md */,
 				B292B1A31491448700A2AC6F /* JSONKit.h */,
 				B292B1A41491448700A2AC6F /* JSONKit.m */,
-				B292B1A51491448700A2AC6F /* README.md */,
 			);
 			path = JSONKit;
 			sourceTree = "<group>";
@@ -455,6 +450,7 @@
 				A3AC28BF13F75BF1001C4808 /* PusherExampleMenuViewController.h in Headers */,
 				A3AC28C313F76C51001C4808 /* PTPusherChannelAuthorizationOperation.h in Headers */,
 				A3C8EA1114216EF1000E4D81 /* ZTWebSocket.h in Headers */,
+				B2C31DBD1491677F006355BF /* JSONKit.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -579,8 +575,6 @@
 				A3D1D2891157FA30009A12AD /* MainWindow.xib in Resources */,
 				A3D1D28B1157FA30009A12AD /* PusherEventsViewController.xib in Resources */,
 				A3FE41CC11811161009CF5D7 /* NewEventViewController.xib in Resources */,
-				B292B1A61491448700A2AC6F /* CHANGELOG.md in Resources */,
-				B292B1A81491448700A2AC6F /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -621,7 +615,6 @@
 				A39E238913F7E6AB0083CAD7 /* PusherPresenceEventsViewController.m in Sources */,
 				A3698FF213FF0A7A005CF130 /* NSMutableURLRequest+BasicAuth.m in Sources */,
 				A3698FFF13FF200C005CF130 /* NSData+Base64.m in Sources */,
-				B292B1A71491448700A2AC6F /* JSONKit.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -654,6 +647,7 @@
 				A3AC28C013F75BF1001C4808 /* PusherExampleMenuViewController.m in Sources */,
 				A3AC28C413F76C51001C4808 /* PTPusherChannelAuthorizationOperation.m in Sources */,
 				A3C8EA1214216EF1000E4D81 /* ZTWebSocket.m in Sources */,
+				B2C31DBE14916782006355BF /* JSONKit.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
