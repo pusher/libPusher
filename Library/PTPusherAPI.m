@@ -52,7 +52,7 @@
   [queryParameters setValue:@"1.0" forKey:@"auth_version"];
   [queryParameters setValue:eventName forKey:@"name"];
   
-  if (socketID > 0) {
+  if (socketID) {
     [queryParameters setObject:socketID forKey:@"socket_id"];
   }
     
