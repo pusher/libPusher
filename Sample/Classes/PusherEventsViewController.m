@@ -103,7 +103,7 @@
     [api release];
   }
   // we set the socket ID to nil here as we want to receive the events that we are sending
-  [self.pusherAPI triggetEvent:@"new-message" onChannel:@"messages" data:payload socketID:nil];
+  [self.pusherAPI triggerEvent:@"new-message" onChannel:@"messages" data:payload socketID:nil];
 }
 
 #pragma mark - Event handling

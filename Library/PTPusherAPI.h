@@ -43,6 +43,6 @@
  @param channelName The channel the event should be triggered on.
  @param eventData   The JSON-compatible data object for the event.
  */
-- (void)triggetEvent:(NSString *)eventName onChannel:(NSString *)channelName data:(id)eventData socketID:(NSString *)socketID;
+- (void)triggerEvent:(NSString *)eventName onChannel:(NSString *)channelName data:(id)eventData socketID:(NSString *)socketID;
 
 @end

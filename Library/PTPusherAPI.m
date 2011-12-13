@@ -37,7 +37,7 @@
   [super dealloc];
 }
 
-- (void)triggetEvent:(NSString *)eventName onChannel:(NSString *)channelName data:(id)eventData socketID:(NSString *)socketID
+- (void)triggerEvent:(NSString *)eventName onChannel:(NSString *)channelName data:(id)eventData socketID:(NSString *)socketID
 {
   NSString *path = [NSString stringWithFormat:@"/apps/%@/channels/%@/events", appID, channelName];
   NSData *bodyData = [[CJSONSerializer serializer] serializeObject:eventData error:nil];
