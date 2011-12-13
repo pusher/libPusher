@@ -108,25 +108,14 @@
 		A3A9FA4D1496EEB300F83617 /* SpecHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A9F96D1496E9E500F83617 /* SpecHelper.m */; };
 		A3A9FA4E1496EECE00F83617 /* libPusher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3D1D2B71158013F009A12AD /* libPusher.a */; };
 		A3A9FA4F1496EEE000F83617 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3D1D0B51157CCDE009A12AD /* CFNetwork.framework */; };
+		A3A9FA73149709ED00F83617 /* JSONKit.h in Headers */ = {isa = PBXBuildFile; fileRef = A3A9FA70149709ED00F83617 /* JSONKit.h */; };
+		A3A9FA74149709ED00F83617 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A9FA71149709ED00F83617 /* JSONKit.m */; };
 		A3AC28B613F75530001C4808 /* PTURLRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = A3AC28B413F75530001C4808 /* PTURLRequestOperation.h */; };
 		A3AC28B713F75530001C4808 /* PTURLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AC28B513F75530001C4808 /* PTURLRequestOperation.m */; };
 		A3AC28BF13F75BF1001C4808 /* PusherExampleMenuViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A3AC28BC13F75BF1001C4808 /* PusherExampleMenuViewController.h */; };
 		A3AC28C013F75BF1001C4808 /* PusherExampleMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AC28BD13F75BF1001C4808 /* PusherExampleMenuViewController.m */; };
 		A3AC28C313F76C51001C4808 /* PTPusherChannelAuthorizationOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = A3AC28C113F76C50001C4808 /* PTPusherChannelAuthorizationOperation.h */; };
 		A3AC28C413F76C51001C4808 /* PTPusherChannelAuthorizationOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AC28C213F76C50001C4808 /* PTPusherChannelAuthorizationOperation.m */; };
-		A3AC28D513F7701B001C4808 /* CDataScanner.h in Headers */ = {isa = PBXBuildFile; fileRef = A3AC28C613F7701B001C4808 /* CDataScanner.h */; };
-		A3AC28D613F7701B001C4808 /* CDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AC28C713F7701B001C4808 /* CDataScanner.m */; };
-		A3AC28D713F7701B001C4808 /* CDataScanner_Extensions.h in Headers */ = {isa = PBXBuildFile; fileRef = A3AC28C913F7701B001C4808 /* CDataScanner_Extensions.h */; };
-		A3AC28D813F7701B001C4808 /* CDataScanner_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AC28CA13F7701B001C4808 /* CDataScanner_Extensions.m */; };
-		A3AC28D913F7701B001C4808 /* NSDictionary_JSONExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = A3AC28CB13F7701B001C4808 /* NSDictionary_JSONExtensions.h */; };
-		A3AC28DA13F7701B001C4808 /* NSDictionary_JSONExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AC28CC13F7701B001C4808 /* NSDictionary_JSONExtensions.m */; };
-		A3AC28DB13F7701B001C4808 /* CJSONDeserializer.h in Headers */ = {isa = PBXBuildFile; fileRef = A3AC28CE13F7701B001C4808 /* CJSONDeserializer.h */; };
-		A3AC28DC13F7701B001C4808 /* CJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AC28CF13F7701B001C4808 /* CJSONDeserializer.m */; };
-		A3AC28DD13F7701B001C4808 /* CJSONScanner.h in Headers */ = {isa = PBXBuildFile; fileRef = A3AC28D013F7701B001C4808 /* CJSONScanner.h */; };
-		A3AC28DE13F7701B001C4808 /* CJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AC28D113F7701B001C4808 /* CJSONScanner.m */; };
-		A3AC28DF13F7701B001C4808 /* CJSONSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = A3AC28D213F7701B001C4808 /* CJSONSerializer.h */; };
-		A3AC28E013F7701B001C4808 /* CJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AC28D313F7701B001C4808 /* CJSONSerializer.m */; };
-		A3AC28E113F7701B001C4808 /* JSONRepresentation.h in Headers */ = {isa = PBXBuildFile; fileRef = A3AC28D413F7701B001C4808 /* JSONRepresentation.h */; };
 		A3C8EA1114216EF1000E4D81 /* ZTWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A3C8EA0F14216EF1000E4D81 /* ZTWebSocket.h */; };
 		A3C8EA1214216EF1000E4D81 /* ZTWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C8EA1014216EF1000E4D81 /* ZTWebSocket.m */; };
 		A3D1D0B61157CCDE009A12AD /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3D1D0B51157CCDE009A12AD /* CFNetwork.framework */; };
@@ -389,25 +378,16 @@
 		A3A9FA031496EA0C00F83617 /* NSObject+KiwiVerifierAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+KiwiVerifierAdditions.m"; sourceTree = "<group>"; };
 		A3A9FA041496EA0C00F83617 /* NSValue+KiwiAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSValue+KiwiAdditions.h"; sourceTree = "<group>"; };
 		A3A9FA051496EA0C00F83617 /* NSValue+KiwiAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSValue+KiwiAdditions.m"; sourceTree = "<group>"; };
+		A3A9FA6F149709ED00F83617 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG.md; sourceTree = "<group>"; };
+		A3A9FA70149709ED00F83617 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
+		A3A9FA71149709ED00F83617 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
+		A3A9FA72149709ED00F83617 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		A3AC28B413F75530001C4808 /* PTURLRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTURLRequestOperation.h; sourceTree = "<group>"; };
 		A3AC28B513F75530001C4808 /* PTURLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTURLRequestOperation.m; sourceTree = "<group>"; };
 		A3AC28BC13F75BF1001C4808 /* PusherExampleMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PusherExampleMenuViewController.h; sourceTree = "<group>"; };
 		A3AC28BD13F75BF1001C4808 /* PusherExampleMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PusherExampleMenuViewController.m; sourceTree = "<group>"; };
 		A3AC28C113F76C50001C4808 /* PTPusherChannelAuthorizationOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherChannelAuthorizationOperation.h; sourceTree = "<group>"; };
 		A3AC28C213F76C50001C4808 /* PTPusherChannelAuthorizationOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTPusherChannelAuthorizationOperation.m; sourceTree = "<group>"; };
-		A3AC28C613F7701B001C4808 /* CDataScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDataScanner.h; path = TouchJSON/Source/CDataScanner.h; sourceTree = "<group>"; };
-		A3AC28C713F7701B001C4808 /* CDataScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDataScanner.m; path = TouchJSON/Source/CDataScanner.m; sourceTree = "<group>"; };
-		A3AC28C913F7701B001C4808 /* CDataScanner_Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDataScanner_Extensions.h; sourceTree = "<group>"; };
-		A3AC28CA13F7701B001C4808 /* CDataScanner_Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDataScanner_Extensions.m; sourceTree = "<group>"; };
-		A3AC28CB13F7701B001C4808 /* NSDictionary_JSONExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDictionary_JSONExtensions.h; sourceTree = "<group>"; };
-		A3AC28CC13F7701B001C4808 /* NSDictionary_JSONExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDictionary_JSONExtensions.m; sourceTree = "<group>"; };
-		A3AC28CE13F7701B001C4808 /* CJSONDeserializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONDeserializer.h; sourceTree = "<group>"; };
-		A3AC28CF13F7701B001C4808 /* CJSONDeserializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONDeserializer.m; sourceTree = "<group>"; };
-		A3AC28D013F7701B001C4808 /* CJSONScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONScanner.h; sourceTree = "<group>"; };
-		A3AC28D113F7701B001C4808 /* CJSONScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONScanner.m; sourceTree = "<group>"; };
-		A3AC28D213F7701B001C4808 /* CJSONSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONSerializer.h; sourceTree = "<group>"; };
-		A3AC28D313F7701B001C4808 /* CJSONSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONSerializer.m; sourceTree = "<group>"; };
-		A3AC28D413F7701B001C4808 /* JSONRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONRepresentation.h; sourceTree = "<group>"; };
 		A3C8EA0F14216EF1000E4D81 /* ZTWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZTWebSocket.h; path = ZTWebSocket/ZTWebSocket.h; sourceTree = "<group>"; };
 		A3C8EA1014216EF1000E4D81 /* ZTWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZTWebSocket.m; path = ZTWebSocket/ZTWebSocket.m; sourceTree = "<group>"; };
 		A3D1D0A21157CC68009A12AD /* AsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncSocket.h; sourceTree = "<group>"; };
@@ -781,42 +761,15 @@
 			path = Kiwi/Kiwi;
 			sourceTree = "<group>";
 		};
-		A3AC28C513F77000001C4808 /* TouchJSON */ = {
+		A3A9FA6E149709ED00F83617 /* JSONKit */ = {
 			isa = PBXGroup;
 			children = (
-				A3AC28C613F7701B001C4808 /* CDataScanner.h */,
-				A3AC28C713F7701B001C4808 /* CDataScanner.m */,
-				A3AC28C813F7701B001C4808 /* Extensions */,
-				A3AC28CD13F7701B001C4808 /* JSON */,
+				A3A9FA6F149709ED00F83617 /* CHANGELOG.md */,
+				A3A9FA70149709ED00F83617 /* JSONKit.h */,
+				A3A9FA71149709ED00F83617 /* JSONKit.m */,
+				A3A9FA72149709ED00F83617 /* README.md */,
 			);
-			name = TouchJSON;
-			sourceTree = "<group>";
-		};
-		A3AC28C813F7701B001C4808 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				A3AC28C913F7701B001C4808 /* CDataScanner_Extensions.h */,
-				A3AC28CA13F7701B001C4808 /* CDataScanner_Extensions.m */,
-				A3AC28CB13F7701B001C4808 /* NSDictionary_JSONExtensions.h */,
-				A3AC28CC13F7701B001C4808 /* NSDictionary_JSONExtensions.m */,
-			);
-			name = Extensions;
-			path = TouchJSON/Source/Extensions;
-			sourceTree = "<group>";
-		};
-		A3AC28CD13F7701B001C4808 /* JSON */ = {
-			isa = PBXGroup;
-			children = (
-				A3AC28CE13F7701B001C4808 /* CJSONDeserializer.h */,
-				A3AC28CF13F7701B001C4808 /* CJSONDeserializer.m */,
-				A3AC28D013F7701B001C4808 /* CJSONScanner.h */,
-				A3AC28D113F7701B001C4808 /* CJSONScanner.m */,
-				A3AC28D213F7701B001C4808 /* CJSONSerializer.h */,
-				A3AC28D313F7701B001C4808 /* CJSONSerializer.m */,
-				A3AC28D413F7701B001C4808 /* JSONRepresentation.h */,
-			);
-			name = JSON;
-			path = TouchJSON/Source/JSON;
+			path = JSONKit;
 			sourceTree = "<group>";
 		};
 		A3CDE3B811C93E460051777E /* ZTWebSocket */ = {
@@ -831,8 +784,8 @@
 		A3D1D0991157CC3F009A12AD /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				A3A9FA6E149709ED00F83617 /* JSONKit */,
 				A3A9F96F1496EA0C00F83617 /* Kiwi */,
-				A3AC28C513F77000001C4808 /* TouchJSON */,
 				A35281B213F6E0D8000687C0 /* Mocky.xcodeproj */,
 				A3CDE3B811C93E460051777E /* ZTWebSocket */,
 				A3D1D0A01157CC68009A12AD /* AsyncSocket */,
@@ -928,14 +881,8 @@
 				A3AC28B613F75530001C4808 /* PTURLRequestOperation.h in Headers */,
 				A3AC28BF13F75BF1001C4808 /* PusherExampleMenuViewController.h in Headers */,
 				A3AC28C313F76C51001C4808 /* PTPusherChannelAuthorizationOperation.h in Headers */,
-				A3AC28D513F7701B001C4808 /* CDataScanner.h in Headers */,
-				A3AC28D713F7701B001C4808 /* CDataScanner_Extensions.h in Headers */,
-				A3AC28D913F7701B001C4808 /* NSDictionary_JSONExtensions.h in Headers */,
-				A3AC28DB13F7701B001C4808 /* CJSONDeserializer.h in Headers */,
-				A3AC28DD13F7701B001C4808 /* CJSONScanner.h in Headers */,
-				A3AC28DF13F7701B001C4808 /* CJSONSerializer.h in Headers */,
-				A3AC28E113F7701B001C4808 /* JSONRepresentation.h in Headers */,
 				A3C8EA1114216EF1000E4D81 /* ZTWebSocket.h in Headers */,
+				A3A9FA73149709ED00F83617 /* JSONKit.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1247,13 +1194,8 @@
 				A3AC28B713F75530001C4808 /* PTURLRequestOperation.m in Sources */,
 				A3AC28C013F75BF1001C4808 /* PusherExampleMenuViewController.m in Sources */,
 				A3AC28C413F76C51001C4808 /* PTPusherChannelAuthorizationOperation.m in Sources */,
-				A3AC28D613F7701B001C4808 /* CDataScanner.m in Sources */,
-				A3AC28D813F7701B001C4808 /* CDataScanner_Extensions.m in Sources */,
-				A3AC28DA13F7701B001C4808 /* NSDictionary_JSONExtensions.m in Sources */,
-				A3AC28DC13F7701B001C4808 /* CJSONDeserializer.m in Sources */,
-				A3AC28DE13F7701B001C4808 /* CJSONScanner.m in Sources */,
-				A3AC28E013F7701B001C4808 /* CJSONSerializer.m in Sources */,
 				A3C8EA1214216EF1000E4D81 /* ZTWebSocket.m in Sources */,
+				A3A9FA74149709ED00F83617 /* JSONKit.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1502,6 +1444,7 @@
 				A3A9F9691496E96100F83617 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A3D1D2C411580144009A12AD /* Build configuration list for PBXNativeTarget "libPusher" */ = {
 			isa = XCConfigurationList;

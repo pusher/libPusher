@@ -8,8 +8,7 @@
 
 #import "PTPusherConnection.h"
 #import "PTPusherEvent.h"
-#import "CJSONDeserializer.h"
-#import "CJSONSerializer.h"
+#import "JSONKit.h"
 
 NSString *const PTPusherConnectionEstablishedEvent = @"connection_established";
 
@@ -62,7 +61,7 @@ NSString *const PTPusherConnectionEstablishedEvent = @"connection_established";
 
 - (void)send:(id)object
 {
-  NSData *JSONData = [[CJSONSerializer serializer] serializeObject:object error:nil];
+  NSData *JSONData = [object JSONData];
   NSString *message = [[NSString alloc] initWithData:JSONData encoding:NSUTF8StringEncoding];
   [socket send:message];
   [message release];
@@ -85,7 +84,7 @@ NSString *const PTPusherConnectionEstablishedEvent = @"connection_established";
 
 - (void)webSocket:(ZTWebSocket*)webSocket didReceiveMessage:(NSString*)message;
 {
-  NSDictionary *messageDictionary = [[CJSONDeserializer deserializer] deserialize:[message dataUsingEncoding:NSUTF8StringEncoding] error:nil];
+  NSDictionary *messageDictionary = [message objectFromJSONString];
   PTPusherEvent *event = [PTPusherEvent eventFromMessageDictionary:messageDictionary];
   
   if ([event.name isEqualToString:PTPusherConnectionEstablishedEvent]) {
