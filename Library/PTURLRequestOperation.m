@@ -60,9 +60,7 @@
   [URLConnection scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
   [URLConnection start];
   
-  do {
-    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
-  } while (!_isFinished);
+  [[NSRunLoop currentRunLoop] run];
 }
 
 - (void)finish;
