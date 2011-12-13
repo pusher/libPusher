@@ -207,10 +207,15 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 
 - (void)sendEventNamed:(NSString *)name data:(id)data channel:(NSString *)channelName
 {
+  NSParameterAssert(name);
+  
   NSMutableDictionary *payload = [NSMutableDictionary dictionary];
   
   [payload setObject:name forKey:@"event"];
-  [payload setObject:data forKey:@"data"];
+  
+  if (data) {
+    [payload setObject:data forKey:@"data"];
+  }
   
   if (channelName) {
     [payload setObject:channelName forKey:@"channel"];
