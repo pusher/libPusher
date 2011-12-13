@@ -127,6 +127,11 @@
   }
 }
 
+- (void)markAsUnsubscribed
+{
+  self.subscribed = NO;
+}
+
 @end
 
 #pragma mark -
