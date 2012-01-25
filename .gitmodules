@@ -4,7 +4,3 @@
 [submodule "Vendor/JSONKit"]
 	path = Vendor/JSONKit
 	url = https://github.com/johnezang/JSONKit.git
-[submodule "Vendor/Kiwi"]
-	path = Vendor/Kiwi
-	url = https://github.com/allending/Kiwi.git
-	
