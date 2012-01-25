@@ -1,6 +1,0 @@
-[submodule "Vendor/Mocky"]
-	path = Vendor/Mocky
-	url = git@github.com:lukeredpath/LRMocky.git
-[submodule "Vendor/JSONKit"]
-	path = Vendor/JSONKit
-	url = https://github.com/johnezang/JSONKit.git
