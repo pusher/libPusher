@@ -13,23 +13,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F090EC2ECCD04DDC897D7762"
-               BuildableName = "libPods-specs.a"
-               BlueprintName = "Pods-specs"
-               ReferencedContainer = "container:Pods/Pods.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A3D1D2B61158013F009A12AD"
-               BuildableName = "libPusher.a"
-               BlueprintName = "libPusher"
+               BlueprintIdentifier = "ABC6DECD134235B500AC1026"
+               BuildableName = "libPusherMac.a"
+               BlueprintName = "libPusherMac"
                ReferencedContainer = "container:libPusher.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -41,16 +27,6 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A3A1A0EA115813E2001EF877"
-               BuildableName = "UnitTests.octest"
-               BlueprintName = "UnitTests"
-               ReferencedContainer = "container:libPusher.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

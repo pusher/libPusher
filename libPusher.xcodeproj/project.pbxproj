@@ -10,6 +10,9 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
+		A31577D314D070E2000136A9 /* AardvarkSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = A31577D214D070E2000136A9 /* AardvarkSpec.m */; };
+		A31577F614D071BC000136A9 /* libPods-specs.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A31577F514D071BC000136A9 /* libPods-specs.a */; };
+		A31577F914D07358000136A9 /* libPods-specs.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A31577F814D07358000136A9 /* libPods-specs.a */; };
 		A35281C113F6E0E8000687C0 /* libMocky.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A35281BC13F6E0D8000687C0 /* libMocky.a */; };
 		A35281C413F6E179000687C0 /* TestHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A35281C313F6E179000687C0 /* TestHelper.m */; };
 		A35281D013F721A8000687C0 /* PTPusherConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = A35281CE13F721A8000687C0 /* PTPusherConnection.h */; };
@@ -28,10 +31,8 @@
 		A39E238913F7E6AB0083CAD7 /* PusherPresenceEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A39E238813F7E6AB0083CAD7 /* PusherPresenceEventsViewController.m */; };
 		A3A1A112115814D0001EF877 /* OCHamcrest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3A1A111115814D0001EF877 /* OCHamcrest.framework */; };
 		A3A1A149115814F7001EF877 /* OCHamcrest.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = A3A1A111115814D0001EF877 /* OCHamcrest.framework */; };
-		A3A1A1A311581776001EF877 /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D0A31157CC68009A12AD /* AsyncSocket.m */; };
 		A3A1A20111581782001EF877 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3D1D0B51157CCDE009A12AD /* CFNetwork.framework */; };
 		A3A1A20211581782001EF877 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
-		A3A1A41311582D32001EF877 /* PTPusherTest.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A1A41211582D32001EF877 /* PTPusherTest.m */; };
 		A3A1A42A11582F26001EF877 /* PTPusherDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = A3A1A41611582DC3001EF877 /* PTPusherDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3A9F95A1496E96100F83617 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3A9F9591496E96100F83617 /* SenTestingKit.framework */; };
 		A3A9F95B1496E96100F83617 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
@@ -124,7 +125,12 @@
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		32CA4F630368D1EE00C91783 /* libPusher_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libPusher_Prefix.pch; sourceTree = "<group>"; };
+		60F66883BF0E4A3096938A8A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A30790D911583B7200EBFFF8 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		A31577D214D070E2000136A9 /* AardvarkSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AardvarkSpec.m; sourceTree = "<group>"; };
+		A31577F514D071BC000136A9 /* libPods-specs.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-specs.a"; path = "Pods/build/Release-iphoneos/libPods-specs.a"; sourceTree = "<group>"; };
+		A31577F714D0731B000136A9 /* Pods-specs.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Pods-specs.xcconfig"; path = "Pods/Pods-specs.xcconfig"; sourceTree = "<group>"; };
+		A31577F814D07358000136A9 /* libPods-specs.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-specs.a"; path = "Pods/build/Release-iphoneos/libPods-specs.a"; sourceTree = "<group>"; };
 		A35281B213F6E0D8000687C0 /* Mocky.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Mocky.xcodeproj; path = Mocky/Mocky.xcodeproj; sourceTree = "<group>"; };
 		A35281C213F6E179000687C0 /* TestHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestHelper.h; sourceTree = "<group>"; };
 		A35281C313F6E179000687C0 /* TestHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestHelper.m; sourceTree = "<group>"; };
@@ -218,6 +224,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A31577F914D07358000136A9 /* libPods-specs.a in Frameworks */,
 				A35281C113F6E0E8000687C0 /* libMocky.a in Frameworks */,
 				A3A1A112115814D0001EF877 /* OCHamcrest.framework in Frameworks */,
 				A3A1A20111581782001EF877 /* CFNetwork.framework in Frameworks */,
@@ -230,6 +237,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A31577F614D071BC000136A9 /* libPods-specs.a in Frameworks */,
 				A3A9FA4E1496EECE00F83617 /* libPusher.a in Frameworks */,
 				A3A9F95A1496E96100F83617 /* SenTestingKit.framework in Frameworks */,
 				A3A9F95B1496E96100F83617 /* UIKit.framework in Frameworks */,
@@ -298,6 +306,9 @@
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				A3A19FB911580DD7001EF877 /* UnitTests-Info.plist */,
+				A31577F714D0731B000136A9 /* Pods-specs.xcconfig */,
+				A31577F814D07358000136A9 /* libPods-specs.a */,
+				A31577F514D071BC000136A9 /* libPods-specs.a */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -321,6 +332,7 @@
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765A40DF7441C002DB57D /* CoreGraphics.framework */,
 				A3A9F9591496E96100F83617 /* SenTestingKit.framework */,
+				60F66883BF0E4A3096938A8A /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -358,6 +370,7 @@
 		A3A19FB211580DC8001EF877 /* Specs */ = {
 			isa = PBXGroup;
 			children = (
+				A31577D214D070E2000136A9 /* AardvarkSpec.m */,
 				A3A1A41211582D32001EF877 /* PTPusherTest.m */,
 				A35281C213F6E179000687C0 /* TestHelper.h */,
 				A35281C313F6E179000687C0 /* TestHelper.m */,
@@ -521,6 +534,7 @@
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+				7AC8136E21754BFEB4029864 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -541,6 +555,7 @@
 				A3A1A0E7115813E2001EF877 /* Sources */,
 				A3A1A0E8115813E2001EF877 /* Frameworks */,
 				A3A1A0E9115813E2001EF877 /* ShellScript */,
+				7AC8136E21754BFEB4029864 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -559,6 +574,7 @@
 				A3A9F9541496E96100F83617 /* Frameworks */,
 				A3A9F9551496E96100F83617 /* Resources */,
 				A3A9F9561496E96100F83617 /* ShellScript */,
+				7AC8136E21754BFEB4029864 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -576,6 +592,7 @@
 				A3D1D2B31158013F009A12AD /* Headers */,
 				A3D1D2B41158013F009A12AD /* Sources */,
 				A3D1D2B51158013F009A12AD /* Frameworks */,
+				7AC8136E21754BFEB4029864 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -672,6 +689,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		7AC8136E21754BFEB4029864 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+		};
 		A3A1A0E9115813E2001EF877 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -719,9 +750,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A3A1A1A311581776001EF877 /* AsyncSocket.m in Sources */,
-				A3A1A41311582D32001EF877 /* PTPusherTest.m in Sources */,
 				A35281C413F6E179000687C0 /* TestHelper.m in Sources */,
+				A31577D314D070E2000136A9 /* AardvarkSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -784,13 +814,16 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/xcodeproj.dst;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = libPusher_Prefix.pch;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "libPusher-Info.plist";
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = SampleApp;
+				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -799,19 +832,24 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/xcodeproj.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = libPusher_Prefix.pch;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "libPusher-Info.plist";
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = SampleApp;
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
 		A3A1A0EC115813E3001EF877 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A31577F714D0731B000136A9 /* Pods-specs.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/xcodeproj.dst;
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
@@ -820,6 +858,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = UnitTests_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "UnitTests-Info.plist";
@@ -830,9 +869,11 @@
 					SenTestingKit,
 					"-framework",
 					UIKit,
+					"$(inherited)",
 				);
 				PRODUCT_NAME = UnitTests;
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/Vendor/Mocky/Classes/**";
 				WRAPPER_EXTENSION = octest;
 			};
@@ -844,12 +885,14 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DSTROOT = /tmp/xcodeproj.dst;
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
 					"\"$(SRCROOT)/Frameworks\"",
 				);
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "UnitTests-Info.plist";
 				OTHER_LDFLAGS = (
@@ -859,9 +902,11 @@
 					SenTestingKit,
 					"-framework",
 					UIKit,
+					"$(inherited)",
 				);
 				PRODUCT_NAME = UnitTests;
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "${SRCROOT}/Vendor/Mocky/Classes/**";
 				WRAPPER_EXTENSION = octest;
 				ZERO_LINK = NO;
@@ -870,10 +915,12 @@
 		};
 		A3A9F9681496E96100F83617 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A31577F714D0731B000136A9 /* Pods-specs.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/xcodeproj.dst;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
@@ -893,6 +940,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
@@ -903,6 +951,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/xcodeproj.dst;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
@@ -915,6 +964,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = octest;
 			};
@@ -925,11 +975,14 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/xcodeproj.dst;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				PRODUCT_NAME = Pusher;
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
@@ -939,9 +992,12 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				PRODUCT_NAME = Pusher;
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 				ZERO_LINK = NO;
 			};
 			name = Release;
