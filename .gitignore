@@ -12,6 +12,7 @@ profile
 Constants.h
 *.xcodeproj/xcuserdata
 *.xcodeproj/*.xcworkspace/xcuserdata
+*.xcworkspace/xcuserdata
 
 log
 Scripts/*.pid
