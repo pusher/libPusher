@@ -1,5 +1,7 @@
 platform :ios
 
-target :specs do
+dependency 'JSONKit', '1.4'
+
+target :specs, :exclusive => true do
   dependency 'Kiwi'
 end

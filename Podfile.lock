@@ -1,5 +1,7 @@
 PODS:
+  - JSONKit (1.4)
   - Kiwi (1.0.0)
 
 DEPENDENCIES:
+  - JSONKit (= 1.4)
   - Kiwi
