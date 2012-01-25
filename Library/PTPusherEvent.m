@@ -35,7 +35,7 @@ NSString *const PTPusherChannelKey = @"channel";
       _data = [[data objectFromJSONString] copy];
 
       if (_data == nil) {
-        NSLog(@"Error parsing event data (not JSON?)");
+        NSLog(@"[pusher] Error parsing event data (not JSON?)");
         _data = [data copy];
       }
     }
