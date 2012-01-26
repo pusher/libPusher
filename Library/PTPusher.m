@@ -15,10 +15,10 @@
 #import "PTBlockEventListener.h"
 #import "PTPusherErrors.h"
 
-//#define kPUSHER_HOST @"ws.pusher.app"
-//#define kPUSHER_PORT 80
-#define kPUSHER_HOST @"192.168.1.123"
-#define kPUSHER_PORT 8090
+#define kPUSHER_HOST @"ws.pusherapp.com"
+#define kPUSHER_PORT 80
+//#define kPUSHER_HOST @"192.168.1.123"
+//#define kPUSHER_PORT 8090
 
 NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, BOOL secure);
 
