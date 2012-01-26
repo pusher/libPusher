@@ -10,7 +10,7 @@
 #import "PTPusherEvent.h"
 #import "JSONKit.h"
 
-NSString *const PTPusherConnectionEstablishedEvent = @"connection_established";
+NSString *const PTPusherConnectionEstablishedEvent = @"pusher:connection_established";
 
 @interface PTPusherConnection ()
 @property (nonatomic, copy) NSString *socketID;
