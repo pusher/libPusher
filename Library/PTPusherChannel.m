@@ -221,8 +221,8 @@
 - (id)initWithName:(NSString *)channelName pusher:(PTPusher *)aPusher
 {
   if ((self = [super initWithName:channelName pusher:aPusher])) {
-    
     members = [[NSMutableDictionary alloc] init];
+    memberIDs = [[NSMutableArray alloc] init];
     
     /* Set up event handlers for pre-defined channel events */
 
@@ -241,7 +241,8 @@
   NSDictionary *presenceData = [event.data objectForKey:@"presence"];
   [super handleSubscribeEvent:event];
   [members setDictionary:[presenceData objectForKey:@"hash"]];
-  [self.presenceDelegate presenceChannel:self didSubscribeWithMemberList:[presenceData objectForKey:@"ids"]];
+  [memberIDs setArray:[presenceData objectForKey:@"ids"]];
+  [self.presenceDelegate presenceChannel:self didSubscribeWithMemberList:memberIDs];
 }
 
 - (BOOL)isPresence
@@ -256,32 +257,33 @@
 
 - (NSArray *)memberIDs
 {
-  return [members allKeys];
+  return [[memberIDs copy] autorelease];
 }
 
 - (NSInteger)memberCount
 {
-  return [members count];
+  return [memberIDs count];
 }
 
 - (void)dealloc 
 {
   [members release];
+  [memberIDs release];
   [super dealloc];
 }
 
 - (void)handleMemberAddedEvent:(PTPusherEvent *)event
 {
-  [members setObject:[event.data valueForKey:@"user_info"] 
-              forKey:[event.data valueForKey:@"user_id"]];
-  
+  [memberIDs addObject:[event.data objectForKey:@"user_id"]];
+  [members setObject:[event.data objectForKey:@"user_info"] 
+              forKey:[event.data objectForKey:@"user_id"]];
   [self.presenceDelegate presenceChannel:self memberAdded:event.data];
 }
 
 - (void)handleMemberRemovedEvent:(PTPusherEvent *)event
 {
+  [memberIDs removeObject:[event.data valueForKey:@"user_id"]];
   [members removeObjectForKey:[event.data valueForKey:@"user_id"]]; 
-
   [self.presenceDelegate presenceChannel:self memberRemoved:event.data];
 }
 

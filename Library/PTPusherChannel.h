@@ -137,6 +137,7 @@
  */
 @interface PTPusherPresenceChannel : PTPusherPrivateChannel {
   NSMutableDictionary *members;
+  NSMutableArray *memberIDs; // store these separately to preserve order
 }
 
 ///------------------------------------------------------------------------------------/
