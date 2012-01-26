@@ -16,7 +16,7 @@
 #import "PTPusherErrors.h"
 
 
-@interface PTPusherChannel ()
+@interface PTPusherChannel () 
 @property (nonatomic, assign, readwrite) BOOL subscribed;
 @end
 
@@ -44,6 +44,14 @@
     name = [channelName copy];
     pusher = aPusher;
     dispatcher = [[PTPusherEventDispatcher alloc] init];
+    
+    /* Set up event handlers for pre-defined channel events */
+    
+    [pusher bindToEventNamed:@"pusher_internal:subscription_succeeded" 
+                      target:self action:@selector(handleSubscribeEvent:)];  
+    
+    [pusher bindToEventNamed:@"subscription_error" 
+                      target:self action:@selector(handleSubscribeErrorEvent:)];
   }
   return self;
 }
@@ -63,6 +71,26 @@
 - (BOOL)isPresence
 {
   return NO;
+}
+
+#pragma mark - Subscription events
+
+- (void)handleSubscribeEvent:(PTPusherEvent *)event
+{
+  self.subscribed = YES;
+  
+  if ([pusher.delegate respondsToSelector:@selector(pusher:didSubscribeToChannel:)]) {
+    [pusher.delegate pusher:pusher didSubscribeToChannel:self];
+  }
+}
+
+- (void)handleSubcribeErrorEvent:(PTPusherEvent *)event
+{
+  if ([pusher.delegate respondsToSelector:@selector(pusher:didFailToSubscribeToChannel:withError:)]) {
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObject:event forKey:PTPusherErrorUnderlyingEventKey];
+    NSError *error = [NSError errorWithDomain:PTPusherErrorDomain code:PTPusherSubscriptionError userInfo:userInfo];
+    [pusher.delegate pusher:pusher didFailToSubscribeToChannel:self withError:error];
+  }
 }
 
 #pragma mark - Authorization
@@ -110,8 +138,6 @@
   [pusher sendEventNamed:@"pusher:subscribe" 
                     data:[NSDictionary dictionaryWithObject:self.name forKey:@"channel"]
                  channel:nil];
-  
-  self.subscribed = YES;
 }
 
 - (void)unsubscribe
@@ -138,42 +164,9 @@
 
 @implementation PTPusherPrivateChannel
 
-- (id)initWithName:(NSString *)channelName pusher:(PTPusher *)aPusher
-{
-  if ((self = [super initWithName:channelName pusher:aPusher])) {
-    
-    /* Set up event handlers for pre-defined channel events */
-    
-    [pusher bindToEventNamed:@"pusher_internal:subscription_succeeded" 
-                      target:self action:@selector(handleSubscribeEvent:)];  
-    
-    [pusher bindToEventNamed:@"subscription_error" 
-                      target:self action:@selector(handleSubscribeErrorEvent:)];
-  }
-  return self;
-}
-
 - (BOOL)isPrivate
 {
   return YES;
-}
-
-- (void)handleSubscribeEvent:(PTPusherEvent *)event
-{
-  self.subscribed = YES;
-  
-  if ([pusher.delegate respondsToSelector:@selector(pusher:didSubscribeToChannel:)]) {
-    [pusher.delegate pusher:pusher didSubscribeToChannel:self];
-  }
-}
-
-- (void)handleSubcribeErrorEvent:(PTPusherEvent *)event
-{
-  if ([pusher.delegate respondsToSelector:@selector(pusher:didFailToSubscribeToChannel:withError:)]) {
-    NSDictionary *userInfo = [NSDictionary dictionaryWithObject:event forKey:PTPusherErrorUnderlyingEventKey];
-    NSError *error = [NSError errorWithDomain:PTPusherErrorDomain code:PTPusherSubscriptionError userInfo:userInfo];
-    [pusher.delegate pusher:pusher didFailToSubscribeToChannel:self withError:error];
-  }
 }
 
 - (void)authorizeWithCompletionHandler:(void(^)(BOOL, NSDictionary *))completionHandler

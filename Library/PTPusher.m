@@ -185,7 +185,6 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 - (void)unsubscribeFromChannel:(PTPusherChannel *)channel
 {
   [channel unsubscribe];
-  [channels removeObjectForKey:channel.name];
 }
 
 - (void)subscribeToChannel:(PTPusherChannel *)channel
