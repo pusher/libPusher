@@ -13,6 +13,9 @@
 #import "PTPusherChannel.h"
 #import "NSMutableURLRequest+BasicAuth.h"
 
+// All events will be logged
+#define kLOG_ALL_EVENTS
+
 // change this to switch between secure/non-secure connections
 #define kUSE_ENCRYPTED_CHANNELS NO
 
