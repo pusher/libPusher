@@ -26,14 +26,6 @@
 @synthesize pusher = _pusher;
 @synthesize currentChannel;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-  if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-    memberIDs = [[NSMutableArray alloc] init];
-  }
-  return self;
-}
-
 - (PusherEventsAppDelegate *)clientManager
 {
   return (PusherEventsAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -74,7 +66,6 @@
 
 - (void)dealloc 
 {
-  [memberIDs release];
   [_pusher release];
   [currentChannel release];
   [super dealloc];
@@ -106,8 +97,6 @@
 - (void)presenceChannel:(PTPusherPresenceChannel *)channel didSubscribeWithMemberList:(NSArray *)members
 {
   NSLog(@"[pusher] Channel members: %@", members);
-  
-  [memberIDs addObjectsFromArray:[members valueForKey:@"user_id"]];
   [self.tableView reloadData];
 }
 
@@ -116,7 +105,6 @@
   NSLog(@"[pusher] Member joined channel: %@", memberData);
   
   [self.tableView beginUpdates];
-  [memberIDs insertObject:[memberData objectForKey:@"user_id"] atIndex:0];
   [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:0]]
                         withRowAnimation:UITableViewRowAnimationTop];
   [self.tableView endUpdates];
@@ -127,10 +115,9 @@
   NSLog(@"[pusher] Member left channel: %@", memberData);
   
   NSString *memberID = [memberData objectForKey:@"user_id"];
-  NSInteger indexOfMember = [memberIDs indexOfObject:memberID];
+  NSInteger indexOfMember = [self.currentChannel.memberIDs indexOfObject:memberID];
   
   [self.tableView beginUpdates];
-  [memberIDs removeObject:memberID];
   [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:indexOfMember inSection:0]] 
                         withRowAnimation:UITableViewRowAnimationTop];
   [self.tableView endUpdates];
@@ -140,7 +127,7 @@
 
 - (NSInteger)tableView:(UITableView *)table numberOfRowsInSection:(NSInteger)section;
 {
-  return memberIDs.count;
+  return self.currentChannel.memberCount;
 }
 
 static NSString *EventCellIdentifier = @"EventCell";
@@ -151,11 +138,11 @@ static NSString *EventCellIdentifier = @"EventCell";
   if (cell == nil) {
     cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:EventCellIdentifier] autorelease];
   }
-  NSString *memberID = [memberIDs objectAtIndex:indexPath.row];
-  NSDictionary *memberData = [self.currentChannel.members objectForKey:memberID];
+  NSString *memberID = [self.currentChannel.memberIDs objectAtIndex:indexPath.row];
+  NSDictionary *memberInfo = [self.currentChannel infoForMemberWithID:memberID];
 
   cell.textLabel.text = [NSString stringWithFormat:@"Member: %@", memberID];
-  cell.detailTextLabel.text = [NSString stringWithFormat:@"Name: %@ Email: %@", [memberData objectForKey:@"name"], [memberData objectForKey:@"email"]];
+  cell.detailTextLabel.text = [NSString stringWithFormat:@"Name: %@ Email: %@", [memberInfo objectForKey:@"name"], [memberInfo objectForKey:@"email"]];
   
   return cell;
 }
