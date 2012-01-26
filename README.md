@@ -1,6 +1,6 @@
 # libPusher, an Objective-C client for Pusher
 
-[Pusher](http://pusherapp.com/) by [New Bamboo](http://new-bamboo.co.uk) is a hosted service that sits between your web application and the browser that lets you deliver events in real-time using HTML5 WebSockets.
+[Pusher](http://pusherapp.com/) is a hosted service that sits between your web application and the browser that lets you deliver events in real-time using HTML5 WebSockets.
 
 This project was borne out of the idea that a web browser doesn't have to be the only client that receives your web app's real-time notifications. Why couldn't your iPhone, iPad or Mac OSX app receive real-time notifications either?
 
@@ -262,7 +262,8 @@ You may want to implement the `pusher:connectionWillReconnect:afterDelay:` deleg
 ## Credits
 
 PusherTouch uses the [ZTWebSocket](http://github.com/openresearch/zimt) library by [OpenResearch](http://github.com/openresearch), without which I probably wouldn't have got anywhere.
-[Pusher](http://pusherapp.com) is a [New Bamboo](http://new-bamboo.co.uk) product.
+
+For more information about Pusher, visit [the website](http://pusherapp.com).
 
 ## License
 
