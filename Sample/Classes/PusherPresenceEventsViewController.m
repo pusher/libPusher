@@ -100,25 +100,22 @@
   [self.tableView reloadData];
 }
 
-- (void)presenceChannel:(PTPusherPresenceChannel *)channel memberAdded:(NSDictionary *)memberData
+- (void)presenceChannel:(PTPusherPresenceChannel *)channel memberAddedWithID:(NSString *)memberID memberInfo:(NSDictionary *)memberInfo
 {
-  NSLog(@"[pusher] Member joined channel: %@", memberData);
+  NSLog(@"[pusher] Member joined channel: %@", memberInfo);
   
   [self.tableView beginUpdates];
-  [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:0]]
+  [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[channel.memberIDs indexOfObject:memberID] inSection:0]]
                         withRowAnimation:UITableViewRowAnimationTop];
   [self.tableView endUpdates];
 }
 
-- (void)presenceChannel:(PTPusherPresenceChannel *)channel memberRemoved:(NSDictionary *)memberData
+- (void)presenceChannel:(PTPusherPresenceChannel *)channel memberRemovedWithID:(NSString *)memberID atIndex:(NSInteger)index
 {
-  NSLog(@"[pusher] Member left channel: %@", memberData);
-  
-  NSString *memberID = [memberData objectForKey:@"user_id"];
-  NSInteger indexOfMember = [self.currentChannel.memberIDs indexOfObject:memberID];
-  
+  NSLog(@"[pusher] Member left channel: %@", memberID);
+
   [self.tableView beginUpdates];
-  [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:indexOfMember inSection:0]] 
+  [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:index inSection:0]] 
                         withRowAnimation:UITableViewRowAnimationTop];
   [self.tableView endUpdates];
 }

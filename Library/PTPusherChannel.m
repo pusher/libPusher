@@ -274,17 +274,20 @@
 
 - (void)handleMemberAddedEvent:(PTPusherEvent *)event
 {
-  [memberIDs addObject:[event.data objectForKey:@"user_id"]];
-  [members setObject:[event.data objectForKey:@"user_info"] 
-              forKey:[event.data objectForKey:@"user_id"]];
-  [self.presenceDelegate presenceChannel:self memberAdded:event.data];
+  NSString *memberID = [event.data objectForKey:@"user_id"];
+  NSDictionary *memberInfo = [event.data objectForKey:@"user_info"];
+  [memberIDs addObject:memberID];
+  [members setObject:memberInfo forKey:memberID];
+  [self.presenceDelegate presenceChannel:self memberAddedWithID:memberID memberInfo:memberInfo];
 }
 
 - (void)handleMemberRemovedEvent:(PTPusherEvent *)event
 {
-  [memberIDs removeObject:[event.data valueForKey:@"user_id"]];
-  [members removeObjectForKey:[event.data valueForKey:@"user_id"]]; 
-  [self.presenceDelegate presenceChannel:self memberRemoved:event.data];
+  NSString *memberID = [event.data valueForKey:@"user_id"];
+  NSInteger memberIndex = [memberIDs indexOfObject:memberID];
+  [memberIDs removeObject:memberID];
+  [members removeObjectForKey:memberID]; 
+  [self.presenceDelegate presenceChannel:self memberRemovedWithID:memberID atIndex:memberIndex];
 }
 
 @end
