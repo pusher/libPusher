@@ -14,6 +14,7 @@
 
 @interface PusherEventsAppDelegate : NSObject <UIApplicationDelegate, PTPusherDelegate> {
   NSMutableArray *connectedClients;
+  NSMutableArray *clientsAwaitingConnection;
 }
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UINavigationController *navigationController;

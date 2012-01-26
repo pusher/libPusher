@@ -29,6 +29,7 @@
 - (void)applicationDidFinishLaunching:(UIApplication *)application 
 {    
   connectedClients = [[NSMutableArray alloc] init];
+  clientsAwaitingConnection = [[NSMutableArray alloc] init];
   
   // create our primary Pusher client instance
   self.pusher = [self createClientWithAutomaticConnection:YES];
@@ -79,6 +80,7 @@
 {
   PTPusher *client = [PTPusher pusherWithKey:PUSHER_API_KEY connectAutomatically:YES encrypted:kUSE_ENCRYPTED_CHANNELS];
   client.delegate = self;
+  [clientsAwaitingConnection addObject:client];
   return client;
 }
 
@@ -88,6 +90,7 @@
 {
   NSLog(@"[pusher-%@] Connected to Pusher (socket id: %@)", pusher.connection.socketID, connection.socketID);
   [connectedClients addObject:pusher];
+  [clientsAwaitingConnection removeObject:pusher];
 }
 
 - (void)pusher:(PTPusher *)pusher connectionDidDisconnect:(PTPusherConnection *)connection
@@ -99,6 +102,7 @@
 - (void)pusher:(PTPusher *)pusher connection:(PTPusherConnection *)connection failedWithError:(NSError *)error
 {
   NSLog(@"[pusher-%@] Failed to connect to pusher, error: %@", pusher.connection.socketID, error);
+  [clientsAwaitingConnection removeObject:pusher];
 }
 
 - (void)pusher:(PTPusher *)pusher connectionWillReconnect:(PTPusherConnection *)connection afterDelay:(NSTimeInterval)delay
