@@ -153,6 +153,20 @@
 /** Returns the current list of channel members.
  
  Members are stored as a dictionary of dictionaries, keyed on the member's "user_id" field.
+ 
+ @deprecated Use the methods below for accessing member data.
  */
 @property (nonatomic, readonly) NSDictionary *members;
+
+/** Returns a dictionary of member metadata (email, name etc.) for the given member ID.
+ */
+- (NSDictionary *)infoForMemberWithID:(NSString *)memberID;
+
+/** Returns an array of available member IDs 
+ */
+- (NSArray *)memberIDs;
+
+/** Returns the number of members currently connected to this channel.
+ */
+- (NSInteger)memberCount;
 @end

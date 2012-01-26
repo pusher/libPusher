@@ -15,7 +15,7 @@
 
 
 @interface PusherPresenceEventsViewController : UITableViewController <PTPusherDelegate, PTPusherPresenceChannelDelegate> {
-  NSMutableArray *memberIDs;
+
 }
 @property (nonatomic, retain) PTPusher *pusher;
 @property (nonatomic, retain) PTPusherPresenceChannel *currentChannel;

@@ -16,6 +16,9 @@
  
  Whenever you subscribe to a presence channel, a list of current subscribers will be returned by Pusher.
  
+ The list will be an array of member IDs. Further metadata can be obtained by asking the channel object
+ for information about a particular member using `-[PTPusherChannel infoForMemberWithID:]`.
+ 
  @param channel The presence channel that was subscribed to.
  @param members The current members subscribed to the channel.
  */

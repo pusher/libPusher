@@ -238,17 +238,30 @@
 
 - (void)handleSubscribeEvent:(PTPusherEvent *)event
 {
+  NSDictionary *presenceData = [event.data objectForKey:@"presence"];
   [super handleSubscribeEvent:event];
-  
-  for (NSDictionary *memberData in event.data) {
-    [members setObject:[memberData objectForKey:@"user_info"] forKey:[memberData objectForKey:@"user_id"]];
-  }
-  [self.presenceDelegate presenceChannel:self didSubscribeWithMemberList:event.data];
+  [members setDictionary:[presenceData objectForKey:@"hash"]];
+  [self.presenceDelegate presenceChannel:self didSubscribeWithMemberList:[presenceData objectForKey:@"ids"]];
 }
 
 - (BOOL)isPresence
 {
   return YES;
+}
+
+- (NSDictionary *)infoForMemberWithID:(NSString *)memberID
+{
+  return [members objectForKey:memberID];
+}
+
+- (NSArray *)memberIDs
+{
+  return [members allKeys];
+}
+
+- (NSInteger)memberCount
+{
+  return [members count];
 }
 
 - (void)dealloc 
