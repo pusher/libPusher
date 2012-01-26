@@ -132,6 +132,16 @@
   }
 }
 
+- (void)pusher:(PTPusher *)pusher didReceiveHeartbeatEvent:(PTPusherEvent *)heartbeatEvent
+{
+  NSLog(@"[pusher-%@] Received heartbeat", pusher.connection.socketID);
+}
+
+- (void)pusher:(PTPusher *)pusher didReceiveErrorEvent:(PTPusherEvent *)errorEvent
+{
+  NSLog(@"[pusher-%@] Received error event %@", pusher.connection.socketID, errorEvent);
+}
+
 /* The sample app uses HTTP basic authentication.
  
    This demonstrates how we can intercept the authorization request to configure it for our app's

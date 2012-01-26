@@ -9,6 +9,7 @@
 @class PTPusher;
 @class PTPusherConnection;
 @class PTPusherChannel;
+@class PTPusherEvent;
 
 /** The PTPusherDelegate protocol can be implemented to receive important events in a PTPusher object's lifetime.
  
@@ -102,4 +103,24 @@
  @param error The error returned when attempting to subscribe.
  */
 - (void)pusher:(PTPusher *)pusher didFailToSubscribeToChannel:(PTPusherChannel *)channel withError:(NSError *)error;
+
+/** Notifies the delegate that a heartbeat event has been received.
+ 
+ If a client is binding to all events, either through the client or using NSNotificationCentre, they will also
+ receive notification of this event like any other.
+ 
+ @param pusher The PTPusher instance that received the event.
+ @param heartbeatEvent The heartbeat event.
+ */
+- (void)pusher:(PTPusher *)pusher didReceiveHeartbeatEvent:(PTPusherEvent *)heartbeatEvent;
+
+/** Notifies the delegate that an error event has been received.
+ 
+ If a client is binding to all events, either through the client or using NSNotificationCentre, they will also
+ receive notification of this event like any other.
+ 
+ @param pusher The PTPusher instance that received the event.
+ @param errorEvent The error event.
+ */
+- (void)pusher:(PTPusher *)pusher didReceiveErrorEvent:(PTPusherEvent *)errorEvent;
 @end
