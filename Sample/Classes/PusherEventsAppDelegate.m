@@ -10,6 +10,7 @@
 #import "PusherExampleMenuViewController.h"
 #import "PTPusher.h"
 #import "PTPusherEvent.h"
+#import "PTPusherChannel.h"
 #import "NSMutableURLRequest+BasicAuth.h"
 
 // change this to switch between secure/non-secure connections
@@ -118,6 +119,10 @@
 - (void)pusher:(PTPusher *)pusher didFailToSubscribeToChannel:(PTPusherChannel *)channel withError:(NSError *)error
 {
   NSLog(@"[pusher-%@] Authorization failed for channel %@", pusher.connection.socketID, channel);
+  
+  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Authorization Failed" message:[NSString stringWithFormat:@"Client with socket ID %@ could not be authorized to join channel %@", pusher.connection.socketID, channel.name] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+  [alert show];
+  [alert autorelease];
 }
 
 /* The sample app uses HTTP basic authentication.
