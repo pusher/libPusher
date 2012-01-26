@@ -15,6 +15,11 @@
 #import "PTBlockEventListener.h"
 #import "PTPusherErrors.h"
 
+//#define kPUSHER_HOST @"ws.pusher.app"
+//#define kPUSHER_PORT 80
+#define kPUSHER_HOST @"192.168.1.123"
+#define kPUSHER_PORT 8090
+
 NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, BOOL secure);
 
 NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotification";
@@ -24,7 +29,7 @@ NSString *const PTPusherErrorUnderlyingEventKey = @"PTPusherErrorUnderlyingEvent
 
 NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, BOOL secure)
 {
-  int port = ((secure == YES) ? 443 : 80);
+  int port = ((secure == YES) ? 443 : kPUSHER_PORT);
   NSString *scheme = ((secure == YES) ? @"wss" : @"ws");
   NSString *URLString = [NSString stringWithFormat:@"%@://%@:%d/app/%@?client=%@&version=%@", 
         scheme, host, port, key, clientID, kPTPusherClientLibraryVersion];
@@ -96,7 +101,7 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 
 + (id)pusherWithKey:(NSString *)key connectAutomatically:(BOOL)connectAutomatically encrypted:(BOOL)isEncrypted
 {
-  PTPusherConnection *connection = [[PTPusherConnection alloc] initWithURL:PTPusherConnectionURL(@"ws.pusherapp.com", key, @"libPusher", isEncrypted) secure:isEncrypted];
+  PTPusherConnection *connection = [[PTPusherConnection alloc] initWithURL:PTPusherConnectionURL(kPUSHER_HOST, key, @"libPusher", isEncrypted) secure:isEncrypted];
   PTPusher *pusher = [[self alloc] initWithConnection:connection connectAutomatically:connectAutomatically];
   [connection release];
   return [pusher autorelease];

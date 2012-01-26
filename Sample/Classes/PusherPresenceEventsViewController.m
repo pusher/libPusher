@@ -15,7 +15,11 @@
 #import "NewEventViewController.h"
 #import "NSMutableURLRequest+BasicAuth.h"
 #import "Constants.h"
+#import "PusherEventsAppDelegate.h"
 
+@interface PusherPresenceEventsViewController ()
+- (PusherEventsAppDelegate *)clientManager;
+@end
 
 @implementation PusherPresenceEventsViewController
 
@@ -25,10 +29,14 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
   if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-    connectedClients = [[NSMutableArray alloc] init];
     memberIDs = [[NSMutableArray alloc] init];
   }
   return self;
+}
+
+- (PusherEventsAppDelegate *)clientManager
+{
+  return (PusherEventsAppDelegate *)[[UIApplication sharedApplication] delegate];
 }
 
 - (void)viewDidLoad 
@@ -39,8 +47,10 @@
   self.tableView.rowHeight = 55;
 
   UIBarButtonItem *newClientButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Add Client" style:UIBarButtonItemStyleBordered target:self action:@selector(connectClient)];
-  self.toolbarItems = [NSArray arrayWithObject:newClientButtonItem];
+  UIBarButtonItem *disconnectClientButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Remove Client" style:UIBarButtonItemStyleBordered target:self action:@selector(disconnectLastClient)];
+  self.toolbarItems = [NSArray arrayWithObjects:newClientButtonItem, disconnectClientButtonItem, nil];
   [newClientButtonItem release];
+  [disconnectClientButtonItem release];
   
   // configure the auth URL for private/presence channels
   self.pusher.authorizationURL = [NSURL URLWithString:@"http://localhost:9292/presence/auth"];
@@ -65,7 +75,6 @@
 - (void)dealloc 
 {
   [memberIDs release];
-  [connectedClients release];
   [_pusher release];
   [currentChannel release];
   [super dealloc];
@@ -82,52 +91,30 @@
 
 - (void)connectClient
 {
-  PTPusher *client = [PTPusher pusherWithKey:PUSHER_API_KEY connectAutomatically:YES];
+  PTPusher *client = [[self clientManager] createClientWithAutomaticConnection:YES];
   client.authorizationURL = self.pusher.authorizationURL;
-  client.delegate = self;
-  [connectedClients addObject:client];
   [client subscribeToPresenceChannelNamed:@"demo"];
 }
 
 - (void)disconnectLastClient
 {
-  PTPusher *client = [connectedClients lastObject];
-  [client disconnect];
-  [connectedClients removeObject:client];
-}
-
-#pragma mark - Pusher delegate (authentication)
-
-- (void)pusher:(PTPusher *)pusher connectionDidConnect:(PTPusherConnection *)connection
-{
-  NSLog(@"Client %@ connected.", pusher);
-}
-
-- (void)pusher:(PTPusher *)pusher didSubscribeToChannel:(PTPusherChannel *)channel
-{
-  NSLog(@"Client %@ subscribed to channel %@.", pusher, channel);
-}
-
-- (void)pusher:(PTPusher *)pusher didFailToSubscribeToChannel:(PTPusherChannel *)channel withError:(NSError *)error
-{
-  NSLog(@"Client %@ could not subscribe to channel %@", pusher, channel);
-}
-
-- (void)pusher:(PTPusher *)pusher willAuthorizeChannelWithRequest:(NSMutableURLRequest *)request
-{
-  [request setHTTPBasicAuthUsername:CHANNEL_AUTH_USERNAME password:CHANNEL_AUTH_PASSWORD];
+  [[[self clientManager] lastConnectedClient] disconnect];
 }
 
 #pragma mark - Presence channel events
 
 - (void)presenceChannel:(PTPusherPresenceChannel *)channel didSubscribeWithMemberList:(NSArray *)members
 {
+  NSLog(@"[pusher] Channel members: %@", members);
+  
   [memberIDs addObjectsFromArray:[members valueForKey:@"user_id"]];
   [self.tableView reloadData];
 }
 
 - (void)presenceChannel:(PTPusherPresenceChannel *)channel memberAdded:(NSDictionary *)memberData
 {
+  NSLog(@"[pusher] Member joined channel: %@", memberData);
+  
   [self.tableView beginUpdates];
   [memberIDs insertObject:[memberData objectForKey:@"user_id"] atIndex:0];
   [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:0]]
@@ -137,6 +124,8 @@
 
 - (void)presenceChannel:(PTPusherPresenceChannel *)channel memberRemoved:(NSDictionary *)memberData
 {
+  NSLog(@"[pusher] Member left channel: %@", memberData);
+  
   NSString *memberID = [memberData objectForKey:@"user_id"];
   NSInteger indexOfMember = [memberIDs indexOfObject:memberID];
   

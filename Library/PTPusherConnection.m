@@ -92,7 +92,8 @@ NSString *const PTPusherConnectionEstablishedEvent = @"pusher:connection_establi
     self.connected = YES;
 
     [self.delegate pusherConnectionDidConnect:self];
-  }  
+  }
+  
   [self.delegate pusherConnection:self didReceiveEvent:event];
 }
 

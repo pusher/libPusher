@@ -13,7 +13,7 @@
 #import "NSMutableURLRequest+BasicAuth.h"
 
 // change this to switch between secure/non-secure connections
-#define kUSE_ENCRYPTED_CHANNELS YES
+#define kUSE_ENCRYPTED_CHANNELS NO
 
 // this is not included in the source
 // you must create this yourself and define PUSHER_API_KEY in it
@@ -28,8 +28,10 @@
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application 
 {    
-  // establish a new pusher instance
-  self.pusher = [PTPusher pusherWithKey:PUSHER_API_KEY delegate:self encrypted:kUSE_ENCRYPTED_CHANNELS];
+  connectedClients = [[NSMutableArray alloc] init];
+  
+  // create our primary Pusher client instance
+  self.pusher = [self createClientWithAutomaticConnection:YES];
   
   // we want the connection to automatically reconnect if it dies
   self.pusher.reconnectAutomatically = YES;
@@ -49,6 +51,7 @@
   [[NSNotificationCenter defaultCenter] 
     removeObserver:self name:PTPusherEventReceivedNotification object:self.pusher];
   [_pusher release];
+  [connectedClients release];
   [menuViewController release];
   [navigationController release];
   [window release];
@@ -59,8 +62,24 @@
 
 - (void)handlePusherEvent:(NSNotification *)note
 {
+#ifdef kLOG_ALL_EVENTS
   PTPusherEvent *event = [note.userInfo objectForKey:PTPusherEventUserInfoKey];
   NSLog(@"[pusher] Received event %@", event);
+#endif
+}
+
+#pragma mark - Client management
+
+- (PTPusher *)lastConnectedClient
+{
+  return [connectedClients lastObject];
+}
+
+- (PTPusher *)createClientWithAutomaticConnection:(BOOL)connectAutomatically
+{
+  PTPusher *client = [PTPusher pusherWithKey:PUSHER_API_KEY connectAutomatically:YES encrypted:kUSE_ENCRYPTED_CHANNELS];
+  client.delegate = self;
+  return client;
 }
 
 #pragma mark - PTPusherDelegate methods
@@ -68,11 +87,13 @@
 - (void)pusher:(PTPusher *)pusher connectionDidConnect:(PTPusherConnection *)connection
 {
   NSLog(@"[pusher-%@] Connected to Pusher (socket id: %@)", pusher.connection.socketID, connection.socketID);
+  [connectedClients addObject:pusher];
 }
 
 - (void)pusher:(PTPusher *)pusher connectionDidDisconnect:(PTPusherConnection *)connection
 {
   NSLog(@"[pusher-%@] Disconnected from Pusher", pusher.connection.socketID);
+  [connectedClients removeObject:pusher];
 }
 
 - (void)pusher:(PTPusher *)pusher connection:(PTPusherConnection *)connection failedWithError:(NSError *)error
@@ -83,6 +104,11 @@
 - (void)pusher:(PTPusher *)pusher connectionWillReconnect:(PTPusherConnection *)connection afterDelay:(NSTimeInterval)delay
 {
   NSLog(@"[pusher-%@] Reconnecting after %d seconds...", pusher.connection.socketID, (int)delay);
+}
+
+- (void)pusher:(PTPusher *)pusher didSubscribeToChannel:(PTPusherChannel *)channel
+{
+  NSLog(@"[pusher-%@] Subscribed to channel %@", pusher.connection.socketID, channel);
 }
 
 - (void)pusher:(PTPusher *)pusher didFailToSubscribeToChannel:(PTPusherChannel *)channel withError:(NSError *)error
@@ -97,6 +123,7 @@
  */
 - (void)pusher:(PTPusher *)pusher willAuthorizeChannelWithRequest:(NSMutableURLRequest *)request
 {
+  NSLog(@"[pusher-%@] Authorizing channel access...", pusher.connection.socketID);
   [request setHTTPBasicAuthUsername:CHANNEL_AUTH_USERNAME password:CHANNEL_AUTH_PASSWORD];
 }
 

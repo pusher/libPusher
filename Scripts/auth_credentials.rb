@@ -1,3 +1,3 @@
-Pusher.app_id = '40'
-Pusher.key    = 'a268702a0e3d26d8d038'
-Pusher.secret = '501598d538fe2800f279'
+Pusher.app_id = '13'
+Pusher.key    = '7c238caaa7f2209b550a'
+Pusher.secret = 'aae7733739fa8e553df1'

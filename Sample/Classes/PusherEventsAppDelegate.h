@@ -13,11 +13,14 @@
 @class PTPusher;
 
 @interface PusherEventsAppDelegate : NSObject <UIApplicationDelegate, PTPusherDelegate> {
-
+  NSMutableArray *connectedClients;
 }
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
 @property (nonatomic, retain) IBOutlet PusherExampleMenuViewController *menuViewController;
 @property (nonatomic, retain) PTPusher *pusher;
+
+- (PTPusher *)lastConnectedClient;
+- (PTPusher *)createClientWithAutomaticConnection:(BOOL)connectAutomatically;
 @end
 
