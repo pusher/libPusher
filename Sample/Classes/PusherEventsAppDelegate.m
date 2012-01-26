@@ -126,6 +126,10 @@
   UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Authorization Failed" message:[NSString stringWithFormat:@"Client with socket ID %@ could not be authorized to join channel %@", pusher.connection.socketID, channel.name] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
   [alert show];
   [alert autorelease];
+  
+  if (pusher != self.pusher) {
+    [pusher disconnect];
+  }
 }
 
 /* The sample app uses HTTP basic authentication.
