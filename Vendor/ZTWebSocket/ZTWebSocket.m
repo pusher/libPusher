@@ -106,7 +106,6 @@ enum {
 
 -(void)onSocketDidDisconnect:(AsyncSocket *)sock {
     connected = NO;
-    [self _dispatchClosed];
 }
 
 -(void)onSocket:(AsyncSocket *)sock willDisconnectWithError:(NSError *)err {
