@@ -16,7 +16,7 @@
  determines which version of the protocol is being used. 
  */
 #define kPTPusherClientProtocolVersion @"1.4"
-
+#define kPTPusherClientLibraryVersion  @"1.0"
 
 /** The name of the notification posted when PTPusher receives an event.
  */

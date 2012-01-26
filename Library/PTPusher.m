@@ -31,8 +31,8 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 {
   int port = ((secure == YES) ? 443 : kPUSHER_PORT);
   NSString *scheme = ((secure == YES) ? @"wss" : @"ws");
-  NSString *URLString = [NSString stringWithFormat:@"%@://%@:%d/app/%@?client=%@&protocol=%@", 
-        scheme, host, port, key, clientID, kPTPusherClientProtocolVersion];
+  NSString *URLString = [NSString stringWithFormat:@"%@://%@:%d/app/%@?client=%@&protocol=%@&version=%@", 
+        scheme, host, port, key, clientID, kPTPusherClientProtocolVersion, kPTPusherClientLibraryVersion];
   return [NSURL URLWithString:URLString];
 }
 
