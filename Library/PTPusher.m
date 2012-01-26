@@ -83,7 +83,7 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 
 + (id)pusherWithKey:(NSString *)key delegate:(id<PTPusherDelegate>)delegate
 {
-  return [self pusherWithKey:key delegate:delegate encrypted:NO];
+  return [self pusherWithKey:key delegate:delegate encrypted:YES];
 }
 
 + (id)pusherWithKey:(NSString *)key delegate:(id<PTPusherDelegate>)delegate encrypted:(BOOL)isEncrypted
@@ -96,7 +96,7 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 
 + (id)pusherWithKey:(NSString *)key connectAutomatically:(BOOL)connectAutomatically
 {
-  return [self pusherWithKey:key connectAutomatically:connectAutomatically encrypted:NO];
+  return [self pusherWithKey:key connectAutomatically:connectAutomatically encrypted:YES];
 }
 
 + (id)pusherWithKey:(NSString *)key connectAutomatically:(BOOL)connectAutomatically encrypted:(BOOL)isEncrypted

@@ -59,6 +59,9 @@ extern NSString *const PTPusherErrorUnderlyingEventKey;
  Javascript API uses event binding for any interesting events - not just server or other client events -
  libPusher uses standard Cocoa and Objective-C patterns such as delegation and notification where
  it makes sense to do so.
+ 
+ Note: due to various problems people have had connecting to Pusher without SSL over a 3G connection,
+ it is highly recommend that you use SSL. For this reason, SSL is enabled by default.
  */
 @interface PTPusher : NSObject <PTPusherConnectionDelegate, PTPusherEventBindings> {
   PTPusherEventDispatcher *dispatcher;
@@ -154,7 +157,7 @@ extern NSString *const PTPusherErrorUnderlyingEventKey;
  
  @deprecated
  @param key       Your application's API key. It can be found in the API Access section of your application within the Pusher user dashboard.
- @param connectAutomatically If YES, the connection will be connected on initialisation.
+ @param connect   Automatically If YES, the connection will be connected on initialisation.
  */
 + (id)pusherWithKey:(NSString *)key connectAutomatically:(BOOL)connectAutomatically;
 
