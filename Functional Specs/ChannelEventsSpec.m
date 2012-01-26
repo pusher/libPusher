@@ -13,7 +13,7 @@
 
 SPEC_BEGIN(BasicEventHandling)
 
-describe(@"Basic Event Handling", ^{
+describe(@"Channels", ^{
   
   __block PTPusher *client = nil;
   
@@ -28,7 +28,7 @@ describe(@"Basic Event Handling", ^{
     [client disconnect];
   });
   
-  it(@"will yield channel events bound to a block when published", ^{
+  it(@"will yield events bound to a block when published", ^{
     __block PTPusherEvent *theEvent = nil;
     
     PTPusherChannel *channel = [client subscribeToChannelNamed:kTEST_CHANNEL];
