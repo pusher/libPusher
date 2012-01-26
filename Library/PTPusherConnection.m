@@ -11,10 +11,13 @@
 #import "JSONKit.h"
 
 NSString *const PTPusherConnectionEstablishedEvent = @"pusher:connection_established";
+NSString *const PTPusherConnectionPingEvent        = @"pusher:ping";
 
 @interface PTPusherConnection ()
 @property (nonatomic, copy) NSString *socketID;
 @property (nonatomic, assign, readwrite) BOOL connected;
+
+- (void)respondToPingEvent;
 @end
 
 @implementation PTPusherConnection
@@ -86,6 +89,12 @@ NSString *const PTPusherConnectionEstablishedEvent = @"pusher:connection_establi
   NSDictionary *messageDictionary = [message objectFromJSONString];
   PTPusherEvent *event = [PTPusherEvent eventFromMessageDictionary:messageDictionary];
   
+  if ([event.name isEqualToString:PTPusherConnectionPingEvent]) {
+    // don't forward on ping events, just handle them and return
+    [self respondToPingEvent];
+    return;
+  }
+  
   if ([event.name isEqualToString:PTPusherConnectionEstablishedEvent]) {
     self.socketID = [event.data objectForKey:@"socket_id"];
     self.connected = YES;
@@ -94,6 +103,17 @@ NSString *const PTPusherConnectionEstablishedEvent = @"pusher:connection_establi
   }
   
   [self.delegate pusherConnection:self didReceiveEvent:event];
+}
+
+#pragma mark -
+
+- (void)respondToPingEvent
+{
+#ifdef DEBUG
+  NSLog(@"[pusher] Responding to ping (pong!)");
+#endif
+  
+  [self send:[NSDictionary dictionaryWithObject:@"pusher:pong" forKey:@"event"]];
 }
 
 @end
