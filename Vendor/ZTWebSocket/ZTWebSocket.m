@@ -83,7 +83,7 @@ enum {
 #pragma mark Public interface
 
 -(void)close {
-    [socket disconnectAfterReadingAndWriting];
+    [socket disconnectAfterWriting];
 }
 
 -(void)open {
@@ -106,6 +106,7 @@ enum {
 
 -(void)onSocketDidDisconnect:(AsyncSocket *)sock {
     connected = NO;
+    [self _dispatchClosed];
 }
 
 -(void)onSocket:(AsyncSocket *)sock willDisconnectWithError:(NSError *)err {
