@@ -266,12 +266,6 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 
 - (void)pusherConnection:(PTPusherConnection *)connection didReceiveEvent:(PTPusherEvent *)event
 {
-  if ([event.name isEqualToString:@"pusher:heartbeat"]) {
-    if ([self.delegate respondsToSelector:@selector(pusher:didReceiveHeartbeatEvent:)]) {
-      [self.delegate pusher:self didReceiveHeartbeatEvent:event];
-    }
-  }
-  
   if ([event isKindOfClass:[PTPusherErrorEvent class]]) {
     if ([self.delegate respondsToSelector:@selector(pusher:didReceiveErrorEvent::)]) {
       [self.delegate pusher:self didReceiveErrorEvent:(PTPusherErrorEvent *)event];

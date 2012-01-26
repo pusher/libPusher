@@ -132,11 +132,6 @@
   }
 }
 
-- (void)pusher:(PTPusher *)pusher didReceiveHeartbeatEvent:(PTPusherEvent *)heartbeatEvent
-{
-  NSLog(@"[pusher-%@] Received heartbeat", pusher.connection.socketID);
-}
-
 - (void)pusher:(PTPusher *)pusher didReceiveErrorEvent:(PTPusherErrorEvent *)errorEvent
 {
   NSLog(@"[pusher-%@] Received error event %@", pusher.connection.socketID, errorEvent);
