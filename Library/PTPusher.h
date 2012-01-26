@@ -15,7 +15,7 @@
 /** The version number ties in with the Javascript client library version and
  determines which version of the protocol is being used. 
  */
-#define kPTPusherClientLibraryVersion @"1.8.0"
+#define kPTPusherClientProtocolVersion @"1.10.0"
 
 
 /** The name of the notification posted when PTPusher receives an event.
