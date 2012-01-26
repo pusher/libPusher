@@ -1,11 +1,24 @@
+require 'restclient'
+require 'tempfile'
+
+desc "Starts the auth server on port 9292"
 task :start_auth_server do
   system "bundle exec thin -p9292 -P Scripts/auth_server.pid -R Scripts/auth_server.ru -d start"
 end
 
+desc "Starts the auth server"
 task :stop_auth_server do
   system "bundle exec thin -P Scripts/auth_server.pid -f stop"
 end
 
+desc "Resets the available users on the auth server"
+task :reset_auth_server do
+  if RestClient.post("http://admin:letmein@localhost:9292/reset", "") == "OK"
+    puts "Users reset."
+  end
+end
+
+desc "Restarts the auth server (and therefore resets it)"
 task :restart_auth_server => [:stop_auth_server, :start_auth_server]
 
 task :docs do

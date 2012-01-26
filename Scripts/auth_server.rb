@@ -28,17 +28,24 @@ module Pusher
       {:user_id => 3, :user_info => {:name => "User 3", :email => "user3@example.com"}},
       {:user_id => 4, :user_info => {:name => "User 4", :email => "user4@example.com"}},
       {:user_id => 5, :user_info => {:name => "User 5", :email => "user5@example.com"}}
-    ]
+    ].freeze
     
     post "/presence/auth" do
       puts ">> Authenticating presence channel:#{params[:channel_name]} socket:#{params[:socket_id]}"
       
-      if (user = AVAILABLE_USERS.pop)
+      @users ||= AVAILABLE_USERS.dup
+      
+      if (user = @users.pop)
         response = Pusher[params[:channel_name]].authenticate(params[:socket_id], user)
         [200, {"Content-Type" => "application/json"}, response.to_json]
       else
         [403, {'Content-Type' => "text/plain"}, "Not authorized"]
       end
+    end
+    
+    post "/reset" do
+      @users = AVAILABLE_USERS.dup
+      [200, {}, "OK"]
     end
   end
 end
