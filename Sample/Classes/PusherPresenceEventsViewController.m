@@ -152,7 +152,7 @@ static NSString *EventCellIdentifier = @"EventCell";
     cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:EventCellIdentifier] autorelease];
   }
   NSString *memberID = [memberIDs objectAtIndex:indexPath.row];
-  NSDictionary *memberData = [self.currentChannel.members objectForKey:memberID];
+  NSDictionary *memberData = [[self.currentChannel.members objectForKey:memberID] objectForKey:@"user_info"];
 
   cell.textLabel.text = [NSString stringWithFormat:@"Member: %@", memberID];
   cell.detailTextLabel.text = [NSString stringWithFormat:@"Name: %@ Email: %@", [memberData objectForKey:@"name"], [memberData objectForKey:@"email"]];

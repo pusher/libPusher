@@ -239,6 +239,7 @@
 - (void)handleSubscribeEvent:(PTPusherEvent *)event
 {
   [super handleSubscribeEvent:event];
+  
   for (NSDictionary *memberData in event.data) {
     [members setObject:memberData forKey:[memberData objectForKey:@"user_id"]];
   }
