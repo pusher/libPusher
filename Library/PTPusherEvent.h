@@ -13,7 +13,9 @@
  All events dispatched by libPusher (via either bindings or notifications) will be represented
  by instances of this class.
  */
-@interface PTPusherEvent : NSObject
+@interface PTPusherEvent : NSObject {
+  NSString *_name;
+}
 
 ///------------------------------------------------------------------------------------/
 /// @name Properties
@@ -36,4 +38,29 @@
 
 - (id)initWithEventName:(NSString *)name channel:(NSString *)channel data:(id)data;
 + (id)eventFromMessageDictionary:(NSDictionary *)dictionary;
+@end
+
+typedef enum {
+  PTPusherErrorSSLRequired = 4000,
+  PTPusherErrorApplicationUnknown = 4001,
+  PTPusherErrorApplicationDisabled = 4002
+} PTPusherServerErrorCodes;
+
+/** A special sub-class of Pusher event, representing pusher:error events.
+ 
+ This will be yielded to the Pusher client delegate as well as through the normal event
+ dispatch mechanism.
+ 
+ This class adds some convenient properties for accessing error details.
+ */
+@interface PTPusherErrorEvent : PTPusherEvent
+
+/** A textual description of the error.
+ */
+@property (nonatomic, readonly) NSString *message;
+
+/** The error code. See PTPusherServerErrorCodes for available errors.
+ */
+@property (nonatomic, readonly) NSInteger code;
+
 @end

@@ -13,6 +13,10 @@ NSString *const PTPusherDataKey    = @"data";
 NSString *const PTPusherEventKey   = @"event";
 NSString *const PTPusherChannelKey = @"channel";
 
+@interface PTPusherErrorEvent ()
+- (id)initWithDictionary:(NSDictionary *)dictionary;
+@end
+
 @implementation PTPusherEvent
 
 @synthesize name = _name;
@@ -21,6 +25,9 @@ NSString *const PTPusherChannelKey = @"channel";
 
 + (id)eventFromMessageDictionary:(NSDictionary *)dictionary
 {
+  if ([[dictionary objectForKey:PTPusherEventKey] isEqualToString:@"pusher:error"]) {
+    return [[[PTPusherErrorEvent alloc] initWithDictionary:dictionary] autorelease];
+  }
   return [[[self alloc] initWithEventName:[dictionary objectForKey:PTPusherEventKey] channel:[dictionary objectForKey:PTPusherChannelKey] data:[dictionary objectForKey:PTPusherDataKey]] autorelease];
 }
 
@@ -57,6 +64,30 @@ NSString *const PTPusherChannelKey = @"channel";
 - (NSString *)description
 {
   return [NSString stringWithFormat:@"<PTPusherEvent channel:%@ name:%@ data:%@>", self.channel, self.name, self.data];
+}
+
+@end
+
+#pragma mark -
+
+@implementation PTPusherErrorEvent
+
+@synthesize message = _message;
+@synthesize code = _code;
+
+- (id)initWithDictionary:(NSDictionary *)dictionary
+{
+  if (self = [super init]) {
+    _name = [dictionary objectForKey:@"event"];
+    _message = [dictionary objectForKey:@"message"];
+    _code = [[dictionary objectForKey:@"code"] integerValue];
+  }
+  return self;
+}
+
+- (NSString *)description
+{
+  return [NSString stringWithFormat:@"<PTPusherErrorEvent code:%d message:%@>", self.code, self.message];
 }
 
 @end

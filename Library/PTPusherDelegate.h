@@ -10,6 +10,7 @@
 @class PTPusherConnection;
 @class PTPusherChannel;
 @class PTPusherEvent;
+@class PTPusherErrorEvent;
 
 /** The PTPusherDelegate protocol can be implemented to receive important events in a PTPusher object's lifetime.
  
@@ -122,5 +123,5 @@
  @param pusher The PTPusher instance that received the event.
  @param errorEvent The error event.
  */
-- (void)pusher:(PTPusher *)pusher didReceiveErrorEvent:(PTPusherEvent *)errorEvent;
+- (void)pusher:(PTPusher *)pusher didReceiveErrorEvent:(PTPusherErrorEvent *)errorEvent;
 @end

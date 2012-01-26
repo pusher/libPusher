@@ -272,9 +272,9 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
     }
   }
   
-  if ([event.name isEqualToString:@"pusher:error"]) {
+  if ([event isKindOfClass:[PTPusherErrorEvent class]]) {
     if ([self.delegate respondsToSelector:@selector(pusher:didReceiveErrorEvent::)]) {
-      [self.delegate pusher:self didReceiveErrorEvent:event];
+      [self.delegate pusher:self didReceiveErrorEvent:(PTPusherErrorEvent *)event];
     }
   }
   
