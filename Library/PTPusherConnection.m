@@ -77,9 +77,8 @@ NSString *const PTPusherConnectionEstablishedEvent = @"pusher:connection_establi
 - (void)webSocketDidClose:(ZTWebSocket*)webSocket;
 {
   self.connected = NO;
-  self.socketID = nil;
-
   [self.delegate pusherConnectionDidDisconnect:self];
+  self.socketID = nil;
 }
 
 - (void)webSocket:(ZTWebSocket*)webSocket didReceiveMessage:(NSString*)message;
