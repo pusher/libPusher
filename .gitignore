@@ -19,3 +19,4 @@ Scripts/*.pid
 Documentation
 Pods
 .pusheropts
+Scripts/auth_credentials.rb
