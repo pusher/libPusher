@@ -241,7 +241,7 @@
   [super handleSubscribeEvent:event];
   
   for (NSDictionary *memberData in event.data) {
-    [members setObject:memberData forKey:[memberData objectForKey:@"user_id"]];
+    [members setObject:[memberData objectForKey:@"user_info"] forKey:[memberData objectForKey:@"user_id"]];
   }
   [self.presenceDelegate presenceChannel:self didSubscribeWithMemberList:event.data];
 }
