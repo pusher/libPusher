@@ -1,5 +1,9 @@
+require 'bundler/setup'
 require 'restclient'
 require 'tempfile'
+require 'xcode_build'
+require 'xcode_build/tasks/build_task'
+require 'xcode_build/formatters/progress_formatter'
 
 namespace :authserver do
   desc "Starts the auth server on port 9292"
@@ -25,4 +29,11 @@ end
 
 task :docs do
   system("appledoc --no-search-undocumented-doc --keep-intermediate-files --verbose 1 --output Documentation/generated --project-name libPusher Library/PT*")  
+end
+
+XcodeBuild::Tasks::BuildTask.new(:debug) do |t|
+  t.workspace = "libPusher.xcworkspace"
+  t.scheme = "libPusher"
+  t.configuration = "Debug"
+  t.formatter = XcodeBuild::Formatters::ProgressFormatter.new
 end
