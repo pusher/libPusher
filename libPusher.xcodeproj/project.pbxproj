@@ -613,6 +613,7 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 		A3A1A0E9115813E2001EF877 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -896,6 +897,7 @@
 		};
 		A3D1D2B911580140009A12AD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A315780A14D0751C000136A9 /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
