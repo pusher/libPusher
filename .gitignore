@@ -16,7 +16,7 @@ Constants.h
 
 log
 Scripts/*.pid
-Documentation
+Docs
 Pods
 .pusheropts
 Scripts/auth_credentials.rb

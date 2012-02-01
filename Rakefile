@@ -5,6 +5,8 @@ require 'xcode_build'
 require 'xcode_build/tasks/build_task'
 require 'xcode_build/formatters/progress_formatter'
 
+LIBRARY_VERSION = "1.0"
+
 namespace :authserver do
   desc "Starts the auth server on port 9292"
   task :start do
@@ -27,8 +29,29 @@ namespace :authserver do
   task :restart => [:stop, :start]
 end
 
-task :docs do
-  system("appledoc --no-search-undocumented-doc --keep-intermediate-files --verbose 1 --output Documentation/generated --project-name libPusher Library/PT*")  
+task :docs => "docs:generate"
+
+namespace :docs do
+  def appledoc_cmd
+    "appledoc \
+      -t /usr/local/Cellar/appledoc/2.0.4/Templates \
+      --no-search-undocumented-doc \
+      --keep-intermediate-files \
+      --verbose 1 \
+      --project-company 'Luke Redpath' \
+      --company-id 'co.uk.lukeredpath' \
+      --output Docs/API \
+      --project-name libPusher \
+      -v #{LIBRARY_VERSION}"
+  end
+  
+  task :generate do
+    system appledoc_cmd << "Library/PT*"
+  end
+  
+  task :install do
+    system appledoc_cmd << " --install-docset Library/PT*"
+  end
 end
 
 XcodeBuild::Tasks::BuildTask.new(:debug) do |t|
