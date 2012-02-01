@@ -1,4 +1,4 @@
-#!/bin/sh 
+#!/bin/sh
 echo "*****************************"
 echo "UPDATING PROJECT DEPENDENCIES "
 echo "*****************************"
@@ -18,7 +18,7 @@ echo "*****************************"
 
 echo "* Updating gems for MRI"
 rvm use default
-bundle install --without macruby 
+bundle install --without macruby
 echo ""
 
-bundle exec rake release:nightly
+bundle exec rake release:stable

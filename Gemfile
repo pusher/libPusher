@@ -1,5 +1,7 @@
 source :rubygems
 
+gem "rake"
+
 group :scripts do
   gem "sinatra"
   gem "pusher"
@@ -14,7 +16,6 @@ end
 
 group :building do
   gem "rest-client"
-  gem "rake"
   gem "xcodebuild-rb", git: "git://github.com/lukeredpath/xcodebuild-rb.git"
   gem "net-github-upload"
 end
