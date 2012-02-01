@@ -78,7 +78,7 @@ def upload_package_to_github(file)
   upload.replace(
            repos: "libPusher",
             file: file,
-     description: "Nightly automated build (#{Time.now.strftime("%d/%m/%Y")})"
+     description: "Nightly automated build, SHA #{current_git_commit_sha} (#{Time.now.strftime("%d/%m/%Y")})"
   )
 end
 
@@ -114,7 +114,7 @@ namespace :release do
   desc "Build and package for nightly distribution"
   task :nightly => :combined do
     puts "Crreating package for nightly distribution..."
-    package_fie = prepare_distribution_package(current_git_commit_sha)
+    package_fie = prepare_distribution_package("nightly")
     puts "Uploading package to Github..."
     upload_package_to_github(package_fie)
     puts "Finished."
