@@ -207,12 +207,7 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 {
   NSParameterAssert(name);
   
-  NSMutableDictionary *payload = [NSMutableDictionary dictionary];
-  
-  if (![name hasPrefix:@"client-"]) {
-    name = [@"client-" stringByAppendingString:name];
-  }
-  
+  NSMutableDictionary *payload = [NSMutableDictionary dictionary];  
   [payload setObject:name forKey:@"event"];
   
   if (data) {
