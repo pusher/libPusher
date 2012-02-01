@@ -534,6 +534,7 @@
 				A3D1D2B41158013F009A12AD /* Sources */,
 				A3D1D2B51158013F009A12AD /* Frameworks */,
 				7AC8136E21754BFEB4029864 /* Copy Pods Resources */,
+				A3B2931814D8D04B00C6B79F /* Just here to export ENV for Rake */,
 			);
 			buildRules = (
 			);
@@ -640,6 +641,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+		A3B2931814D8D04B00C6B79F /* Just here to export ENV for Rake */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Just here to export ENV for Rake";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "";
 		};
 /* End PBXShellScriptBuildPhase section */
 

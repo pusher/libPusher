@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: git://github.com/lukeredpath/xcodebuild-rb.git
-  revision: 5655eddc15678e3157f9a120b1fbb10230bccc06
+  revision: 88d8eb6d8ca3846b9c958b5ca798e95dcfface97
   specs:
     xcodebuild-rb (0.1.0)
       state_machine (~> 1.1.2)

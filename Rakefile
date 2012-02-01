@@ -37,3 +37,48 @@ XcodeBuild::Tasks::BuildTask.new(:debug) do |t|
   t.configuration = "Debug"
   t.formatter = XcodeBuild::Formatters::ProgressFormatter.new
 end
+
+def copy_artefacts_from_build(build)
+  FileUtils.mkdir_p("dist")
+  target = File.join(build.target_build_directory, "libPusher.a")
+  destination = File.join("dist", "libPusher-#{build.environment["SDK_NAME"]}.a")
+  FileUtils.mv(target, destination)
+end
+
+def combine_libraries(lib_paths, target)
+  system "lipo -create #{lib_paths.map { |p| "\"#{p}\"" }.join(" ")} -output #{target}"
+end
+
+namespace :release do
+  XcodeBuild::Tasks::BuildTask.new(:device) do |t|
+    t.workspace = "libPusher.xcworkspace"
+    t.scheme = "libPusher"
+    t.configuration = "Release"
+    t.sdk = "iphoneos"
+    t.formatter = XcodeBuild::Formatters::ProgressFormatter.new
+    t.after_build { |build| copy_artefacts_from_build(build) }
+  end
+  
+  XcodeBuild::Tasks::BuildTask.new(:simulator) do |t|
+    t.workspace = "libPusher.xcworkspace"
+    t.scheme = "libPusher"
+    t.configuration = "Release"
+    t.sdk = "iphonesimulator"
+    t.formatter = XcodeBuild::Formatters::ProgressFormatter.new
+    t.after_build { |build| copy_artefacts_from_build(build) }
+  end
+  
+  desc "Build release libraries for both device and simulator."
+  task :combined => ["release:device:cleanbuild", "release:simulator:cleanbuild"]
+  
+  task :prepare_distribution do
+    FileUtils.rm_rf("dist")
+  end
+  
+  desc "Build and package for distribution"
+  task :distribution => [:prepare_distribution, :combined] do
+    puts "Creating fat binary from simulator and device builds..."
+    combine_libraries(Dir["dist/*.a"], "dist/libPusher-combined.a")
+    puts "Done."
+  end
+end
