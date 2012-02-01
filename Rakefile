@@ -38,15 +38,32 @@ XcodeBuild::Tasks::BuildTask.new(:debug) do |t|
   t.formatter = XcodeBuild::Formatters::ProgressFormatter.new
 end
 
-def copy_artefacts_from_build(build)
-  FileUtils.mkdir_p("dist")
+ARTEFACT_DIR = File.join("dist", "libPusher")
+
+def copy_artefacts_from_build(build, options={})
+  FileUtils.mkdir_p(ARTEFACT_DIR)
   target = File.join(build.target_build_directory, "libPusher.a")
-  destination = File.join("dist", "libPusher-#{build.environment["SDK_NAME"]}.a")
+  destination = File.join(ARTEFACT_DIR, "libPusher-#{build.environment["SDK_NAME"]}.a")
   FileUtils.mv(target, destination)
+  
+  if options[:include_headers]
+    header_dir = File.join(build.target_build_directory, "usr", "local", "include")
+    FileUtils.mv(header_dir, File.join(ARTEFACT_DIR, "headers"))
+  end
 end
 
 def combine_libraries(lib_paths, target)
   system "lipo -create #{lib_paths.map { |p| "\"#{p}\"" }.join(" ")} -output #{target}"
+end
+
+def current_git_commit_sha
+  `git log --pretty=format:'%h' -n 1`.strip
+end
+
+def prepare_distribution_package(file_suffix)
+  Dir.chdir("dist") do
+    system "zip -r libPusher-#{file_suffix}.zip libPusher"
+  end
 end
 
 namespace :release do
@@ -56,7 +73,7 @@ namespace :release do
     t.configuration = "Release"
     t.sdk = "iphoneos"
     t.formatter = XcodeBuild::Formatters::ProgressFormatter.new
-    t.after_build { |build| copy_artefacts_from_build(build) }
+    t.after_build { |build| copy_artefacts_from_build(build, include_headers: true) }
   end
   
   XcodeBuild::Tasks::BuildTask.new(:simulator) do |t|
@@ -68,17 +85,21 @@ namespace :release do
     t.after_build { |build| copy_artefacts_from_build(build) }
   end
   
-  desc "Build release libraries for both device and simulator."
-  task :combined => ["release:device:cleanbuild", "release:simulator:cleanbuild"]
+  desc "Build combined release libraries for both device and simulator."
+  task :combined => [:prepare_distribution, "release:device:cleanbuild", "release:simulator:cleanbuild"] do
+    puts "Creating fat binary from simulator and device builds..."
+    combine_libraries(Dir[File.join(ARTEFACT_DIR, "*.a")], File.join(ARTEFACT_DIR, "libPusher-combined.a"))
+    puts "Done."
+  end
   
   task :prepare_distribution do
     FileUtils.rm_rf("dist")
   end
   
-  desc "Build and package for distribution"
-  task :distribution => [:prepare_distribution, :combined] do
-    puts "Creating fat binary from simulator and device builds..."
-    combine_libraries(Dir["dist/*.a"], "dist/libPusher-combined.a")
+  desc "Build and package for nightly distribution"
+  task :nightly => :combined do
+    puts "Crreating package for nightly distribution..."
+    prepare_distribution_package(current_git_commit_sha)
     puts "Done."
   end
 end
