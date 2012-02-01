@@ -233,7 +233,7 @@
 		080E96DDFE201D6D7F000001 /* Library */ = {
 			isa = PBXGroup;
 			children = (
-				A35281E613F7524C000687C0 /* REST Client */,
+				A35281E613F7524C000687C0 /* REST API Client */,
 				A35281D813F73C42000687C0 /* Event Listeners */,
 				A3FE429311811ED6009CF5D7 /* Utility */,
 				A3D1D28C1157FA4C009A12AD /* PTEventListener.h */,
@@ -324,13 +324,13 @@
 			name = "Event Listeners";
 			sourceTree = "<group>";
 		};
-		A35281E613F7524C000687C0 /* REST Client */ = {
+		A35281E613F7524C000687C0 /* REST API Client */ = {
 			isa = PBXGroup;
 			children = (
 				A35281E713F75265000687C0 /* PTPusherAPI.h */,
 				A35281E813F75265000687C0 /* PTPusherAPI.m */,
 			);
-			name = "REST Client";
+			name = "REST API Client";
 			sourceTree = "<group>";
 		};
 		A3A19FB211580DC8001EF877 /* Specs */ = {

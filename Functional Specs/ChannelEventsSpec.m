@@ -8,8 +8,8 @@
 
 #import "SpecHelper.h"
 
-#define kTEST_EVENT_NAME @"pusher-specs-test-event"
-#define kTEST_CHANNEL    @"pusher-specs-test-channel"
+#define kTEST_EVENT_NAME @"libpusher-specs-test-event"
+#define kTEST_CHANNEL    @"libpusher-specs-test-channel"
 
 SPEC_BEGIN(BasicEventHandling)
 
