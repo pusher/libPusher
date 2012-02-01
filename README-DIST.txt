@@ -32,5 +32,14 @@ These instructions use the combined library:
 
 5. You should now be able to #import "PTPusher.h" and compile.
 
+===============================================================================
+Notes
+===============================================================================
+
+libPusher uses the JSONKit library and the static library contains a compiled version of JSONKit.m.
+
+If you are using JSONKit in your project already, you will need to remove JSONKit.m otherwise you will get linker errors when you build due to the duplicate symbols. You MUST however keep JSONKit.h in your project in order to use it in your own source code.
+
 For more information, see:
 https://github.com/lukeredpath/libPusher/
+
