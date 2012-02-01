@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/PTPusherAPI.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/PTPusherAPI</TokenIdentifier>
+			<Abstract>A simple interface to the Pusher REST API.</Abstract>
+			<DeclaredIn>PTPusherAPI.h</DeclaredIn>
+			
+			<NodeRef refid="2"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/PTPusherAPI/triggerEvent:onChannel:data:socketID:</TokenIdentifier>
+			<Abstract>Triggers an event on the specified channel.</Abstract>
+			<DeclaredIn>PTPusherAPI.h</DeclaredIn>			
+			
+			<Declaration>- (void)triggerEvent:(NSString *)eventName onChannel:(NSString *)channelName data:(id)eventData socketID:(NSString *)socketID</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>eventName</Name>
+					<Abstract>The name of the event to trigger.</Abstract>
+				</Parameter><Parameter>
+					<Name>channelName</Name>
+					<Abstract>The channel the event should be triggered on.</Abstract>
+				</Parameter><Parameter>
+					<Name>eventData</Name>
+					<Abstract>The JSON-compatible data object for the event.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/triggerEvent:onChannel:data:socketID:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

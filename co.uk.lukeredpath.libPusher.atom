@@ -1,0 +1,20 @@
+<?xml version="1.0" standalone="no"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:docset="http://developer.apple.com/rss/docset_extensions" xml:lang="en">
+    <id>http://lukeredpath.github.com/libPusher/co.uk.lukeredpath.libPusher.atom/20120201140126</id>
+    <title type="text">libPusher Documentation</title>
+    <rights>Copyright © 2012 Luke Redpath. All rights reserved.</rights>
+    <link rel="self" href="http://lukeredpath.github.com/libPusher/co.uk.lukeredpath.libPusher.atom"></link>
+    <docset:publisherName>Luke Redpath</docset:publisherName>
+    <docset:publisherID>co.uk.lukeredpath.documentation</docset:publisherID>
+    <updated>2012-02-01T14:01:26+00:00</updated>
+    <entry>
+        <id>tag:lukeredpath.github.com,2012-02-01:co.uk.lukeredpath.libPusher/1.0.0</id>
+        <title type="text">libPusher Documentation</title>
+        <updated>2012-02-01T14:01:26+00:00</updated>
+        <content type="text">libPusher Documentation (v1.0.0)</content>
+        <link rel="enclosure" type="application/octet-stream" href="http://lukeredpath.github.com/libPusher/co.uk.lukeredpath.libPusher-1.0.xar" length="92453"></link>
+        <docset:identifier>co.uk.lukeredpath.libPusher</docset:identifier>
+        <docset:version>1.0.0</docset:version>
+        <docset:minimumXcodeVersion>3.0.0</docset:minimumXcodeVersion>
+    </entry>
+</feed>

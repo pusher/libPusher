@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/PTPusherPresenceChannel.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/PTPusherPresenceChannel</TokenIdentifier>
+			<Abstract>A PTPusherPresenceChannel object represents a Pusher presence channel.</Abstract>
+			<DeclaredIn>PTPusherChannel.h</DeclaredIn>
+			
+	<RelatedTokens>
+		<TokenIdentifier>//apple_ref/occ/intf/PTPusherPresenceChannelDelegate</TokenIdentifier>
+		
+	</RelatedTokens>
+	
+			<NodeRef refid="7"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/PTPusherPresenceChannel/presenceDelegate</TokenIdentifier>
+			<Abstract>The presence delegate for the receiver.</Abstract>
+			<DeclaredIn>PTPusherChannel.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) id&lt;PTPusherPresenceChannelDelegate&gt; presenceDelegate</Declaration>
+			
+			
+			<Anchor>//api/name/presenceDelegate</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/PTPusherPresenceChannel/members</TokenIdentifier>
+			<Abstract>Returns the current list of channel members.</Abstract>
+			<DeclaredIn>PTPusherChannel.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly) NSDictionary *members</Declaration>
+			
+			
+			<Anchor>//api/name/members</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/PTPusherPresenceChannel/infoForMemberWithID:</TokenIdentifier>
+			<Abstract>Returns a dictionary of member metadata (email, name etc.) for the given member ID.</Abstract>
+			<DeclaredIn>PTPusherChannel.h</DeclaredIn>			
+			
+			<Declaration>- (NSDictionary *)infoForMemberWithID:(NSString *)memberID</Declaration>
+			
+			
+			<Anchor>//api/name/infoForMemberWithID:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/PTPusherPresenceChannel/memberIDs</TokenIdentifier>
+			<Abstract>Returns an array of available member IDs</Abstract>
+			<DeclaredIn>PTPusherChannel.h</DeclaredIn>			
+			
+			<Declaration>- (NSArray *)memberIDs</Declaration>
+			
+			
+			<Anchor>//api/name/memberIDs</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/PTPusherPresenceChannel/memberCount</TokenIdentifier>
+			<Abstract>Returns the number of members currently connected to this channel.</Abstract>
+			<DeclaredIn>PTPusherChannel.h</DeclaredIn>			
+			
+			<Declaration>- (NSInteger)memberCount</Declaration>
+			
+			
+			<Anchor>//api/name/memberCount</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

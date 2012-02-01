@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DocSetNodes version="1.0">
+    <TOC>
+        <Node type="folder">
+            <Name>libPusher</Name>
+            <Path>index.html</Path>
+			<Subnodes>
+				
+				<Node type="folder">
+					<Name>Classes</Name>
+					<Path>index.html</Path>
+					<Subnodes>
+						<NodeRef refid="1"/>
+						<NodeRef refid="2"/>
+						<NodeRef refid="3"/>
+						<NodeRef refid="4"/>
+						<NodeRef refid="5"/>
+						<NodeRef refid="6"/>
+						<NodeRef refid="7"/>
+						<NodeRef refid="8"/>
+						
+					</Subnodes>
+				</Node>
+				
+				
+				
+				<Node type="folder">
+					<Name>Protocols</Name>
+					<Path>index.html</Path>
+					<Subnodes>
+						<NodeRef refid="9"/>
+						<NodeRef refid="10"/>
+						<NodeRef refid="11"/>
+						
+					</Subnodes>
+				</Node>
+				
+			</Subnodes>
+        </Node>
+    </TOC>
+	<Library>
+		<Node id="1">
+			<Name>PTPusher</Name>
+			<Path>Classes/PTPusher.html</Path>
+		</Node>
+		<Node id="2">
+			<Name>PTPusherAPI</Name>
+			<Path>Classes/PTPusherAPI.html</Path>
+		</Node>
+		<Node id="3">
+			<Name>PTPusherChannel</Name>
+			<Path>Classes/PTPusherChannel.html</Path>
+		</Node>
+		<Node id="4">
+			<Name>PTPusherConnection</Name>
+			<Path>Classes/PTPusherConnection.html</Path>
+		</Node>
+		<Node id="5">
+			<Name>PTPusherErrorEvent</Name>
+			<Path>Classes/PTPusherErrorEvent.html</Path>
+		</Node>
+		<Node id="6">
+			<Name>PTPusherEvent</Name>
+			<Path>Classes/PTPusherEvent.html</Path>
+		</Node>
+		<Node id="7">
+			<Name>PTPusherPresenceChannel</Name>
+			<Path>Classes/PTPusherPresenceChannel.html</Path>
+		</Node>
+		<Node id="8">
+			<Name>PTPusherPrivateChannel</Name>
+			<Path>Classes/PTPusherPrivateChannel.html</Path>
+		</Node>
+		
+		
+		<Node id="9">
+			<Name>PTPusherDelegate</Name>
+			<Path>Protocols/PTPusherDelegate.html</Path>
+		</Node>
+		<Node id="10">
+			<Name>PTPusherEventBindings</Name>
+			<Path>Protocols/PTPusherEventBindings.html</Path>
+		</Node>
+		<Node id="11">
+			<Name>PTPusherPresenceChannelDelegate</Name>
+			<Path>Protocols/PTPusherPresenceChannelDelegate.html</Path>
+		</Node>
+		
+	</Library>
+</DocSetNodes>

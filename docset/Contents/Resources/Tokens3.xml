@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/PTPusherChannel.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/PTPusherChannel</TokenIdentifier>
+			<Abstract>A PTPusherChannel object represents a single Pusher channel.</Abstract>
+			<DeclaredIn>PTPusherChannel.h</DeclaredIn>
+			
+			<NodeRef refid="3"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/PTPusherChannel/name</TokenIdentifier>
+			<Abstract>The channel name.</Abstract>
+			<DeclaredIn>PTPusherChannel.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly) NSString *name</Declaration>
+			
+			
+			<Anchor>//api/name/name</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/PTPusherChannel/subscribed</TokenIdentifier>
+			<Abstract>Indicates that this channel has been subscribed to.</Abstract>
+			<DeclaredIn>PTPusherChannel.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly, getter=isSubscribed) BOOL subscribed</Declaration>
+			
+			
+			<Anchor>//api/name/subscribed</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/PTPusherChannel/isPrivate</TokenIdentifier>
+			<Abstract>Indicates whether or not this is a private channel.</Abstract>
+			<DeclaredIn>PTPusherChannel.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly) BOOL isPrivate</Declaration>
+			
+			
+			<Anchor>//api/name/isPrivate</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/PTPusherChannel/isPresence</TokenIdentifier>
+			<Abstract>Indicates whether or not this is a presence channel.</Abstract>
+			<DeclaredIn>PTPusherChannel.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, readonly) BOOL isPresence</Declaration>
+			
+			
+			<Anchor>//api/name/isPresence</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>
