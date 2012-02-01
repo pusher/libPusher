@@ -61,6 +61,8 @@ def current_git_commit_sha
 end
 
 def prepare_distribution_package(file_suffix)
+  FileUtils.cp("README-DIST.txt", "dist/libPusher/README.txt")
+  
   Dir.chdir("dist") do
     system "zip -r libPusher-#{file_suffix}.zip libPusher"
   end
