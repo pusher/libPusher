@@ -42,19 +42,13 @@
   
   // configure the auth URL for private/presence channels
   self.pusher.authorizationURL = [NSURL URLWithString:@"http://localhost:9292/presence/auth"];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-  [super viewWillAppear:animated];
+  
   [self subscribeToChannel:@"messages"];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
+- (void)viewDidUnload
 {
-  [super viewWillDisappear:animated];
-  
-  // unsubscribe before we go back to the main menu
+  [super viewDidUnload];
   [self.pusher unsubscribeFromChannel:self.currentChannel]; 
 }
 
