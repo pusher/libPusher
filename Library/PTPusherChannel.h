@@ -112,7 +112,7 @@
  
  If you attempt to trigger event on a channel while isSubscribed is NO, the event will not be sent.
  
- The name of the event should not include the 'client-' prefix - it will be added automatically.
+ If the event name does not have a prefix of "client-", it will be added automatically.
  
  The event data must be an object that can be serialized as JSON, typically an NSArray or NSDictionary although
  it could be a simple string.

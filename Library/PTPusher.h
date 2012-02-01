@@ -264,7 +264,9 @@ extern NSString *const PTPusherErrorUnderlyingEventKey;
  
  + Client events must be prefixed by client-. Events with any other prefix will be rejected by the Pusher server, as will events sent to channels to which the client is not subscribed.
  
- This method does nothing to enforce the above restrictions. It is instead recommended that
+ If the event name given does not have a prefix of "client-", it will be added automatically.
+ 
+ This method does nothing to enforce the first two restrictions. It is instead recommended that
  you use the `PTPusherChannel` event triggering API rather than calling this method directly.
  
  @warning Note: This Pusher feature is currently in beta and requires enabling on your account.
