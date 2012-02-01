@@ -63,10 +63,10 @@ namespace :docs do
     system "git checkout gh-pages"
     system "cp -r #{tempdir}/* ."
     system "cp publish/* . && rm -r publish"
-    #system "git add ."
-    #system "git commit -m 'Updated published docs'"
-    #system "git push origin gh-pages"
-    #system "git checkout master"
+    system "git add ."
+    system "git commit -m 'Updated published docs'"
+    system "git push origin gh-pages"
+    system "git checkout master"
   end
 end
 

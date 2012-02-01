@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/PTPusherConnection.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/PTPusherConnection</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>PTPusherConnection.h</DeclaredIn>
+			
+			<NodeRef refid="4"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/PTPusherConnection/initWithURL:secure:</TokenIdentifier>
+			<Abstract>Creates a new PTPusherConnection instance.</Abstract>
+			<DeclaredIn>PTPusherConnection.h</DeclaredIn>			
+			
+			<Declaration>- (id)initWithURL:(NSURL *)aURL secure:(BOOL)secure</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>aURL</Name>
+					<Abstract>The websocket endpoint</Abstract>
+				</Parameter><Parameter>
+					<Name>secure</Name>
+					<Abstract>Whether this connection should be secure (TLS)</Abstract>
+				</Parameter><Parameter>
+					<Name>delegate</Name>
+					<Abstract>The delegate for this connection</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/initWithURL:secure:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/PTPusherConnection/connect</TokenIdentifier>
+			<Abstract>Establishes a web socket connection to the Pusher server.</Abstract>
+			<DeclaredIn>PTPusherConnection.h</DeclaredIn>			
+			
+			<Declaration>- (void)connect</Declaration>
+			
+			
+			<Anchor>//api/name/connect</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/PTPusherConnection/disconnect</TokenIdentifier>
+			<Abstract>Closes the web socket connection</Abstract>
+			<DeclaredIn>PTPusherConnection.h</DeclaredIn>			
+			
+			<Declaration>- (void)disconnect</Declaration>
+			
+			
+			<Anchor>//api/name/disconnect</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/PTPusherConnection/send:</TokenIdentifier>
+			<Abstract>Sends an object over the web socket connection.</Abstract>
+			<DeclaredIn>PTPusherConnection.h</DeclaredIn>			
+			
+			<Declaration>- (void)send:(id)object</Declaration>
+			
+			
+			<Anchor>//api/name/send:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>
