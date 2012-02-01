@@ -72,7 +72,13 @@
 - (void)subscribeToChannel:(NSString *)channelName
 {
   self.currentChannel = [self.pusher subscribeToChannelNamed:channelName];
-  [self.currentChannel bindToEventNamed:@"new-message" target:self action:@selector(receivedMessageEvent:)];
+  
+  [self.currentChannel bindToEventNamed:@"new-message" handleWithBlock:^(PTPusherEvent *event) {
+    [self.tableView beginUpdates];
+    [eventsReceived insertObject:event atIndex:0];
+    [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
+    [self.tableView endUpdates];
+  }];
 }
 
 #pragma mark - Actions
@@ -104,16 +110,6 @@
   }
   // we set the socket ID to nil here as we want to receive the events that we are sending
   [self.pusherAPI triggerEvent:@"new-message" onChannel:@"messages" data:payload socketID:nil];
-}
-
-#pragma mark - Event handling
-
-- (void)receivedMessageEvent:(PTPusherEvent *)event;
-{
-  [self.tableView beginUpdates];
-  [eventsReceived insertObject:event atIndex:0];
-  [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:0]] withRowAnimation:UITableViewRowAnimationTop];
-  [self.tableView endUpdates];
 }
 
 #pragma mark - UITableViewDataSource methods
