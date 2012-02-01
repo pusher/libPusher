@@ -64,6 +64,22 @@ def prepare_distribution_package(file_suffix)
   Dir.chdir("dist") do
     system "zip -r libPusher-#{file_suffix}.zip libPusher"
   end
+
+  "dist/libPusher-#{file_suffix}.zip"
+end
+
+require 'net/github-upload'
+
+def upload_package_to_github(file)
+  login = `git config github.user`.chomp
+  token = `git config github.token`.chomp 
+  
+  upload = Net::GitHub::Upload.new(login: login, token: token)
+  upload.replace(
+           repos: "libPusher",
+            file: file,
+     description: "Nightly automated build (#{Time.now.strftime("%d/%m/%Y")})"
+  )
 end
 
 namespace :release do
@@ -89,7 +105,6 @@ namespace :release do
   task :combined => [:prepare_distribution, "release:device:cleanbuild", "release:simulator:cleanbuild"] do
     puts "Creating fat binary from simulator and device builds..."
     combine_libraries(Dir[File.join(ARTEFACT_DIR, "*.a")], File.join(ARTEFACT_DIR, "libPusher-combined.a"))
-    puts "Done."
   end
   
   task :prepare_distribution do
@@ -99,7 +114,9 @@ namespace :release do
   desc "Build and package for nightly distribution"
   task :nightly => :combined do
     puts "Crreating package for nightly distribution..."
-    prepare_distribution_package(current_git_commit_sha)
-    puts "Done."
+    package_fie = prepare_distribution_package(current_git_commit_sha)
+    puts "Uploading package to Github..."
+    upload_package_to_github(package_fie)
+    puts "Finished."
   end
 end
