@@ -12,11 +12,14 @@
 #import "PTPusherEventPublisher.h"
 #import "PTPusherPresenceChannelDelegate.h"
 
-/** The version number ties in with the Javascript client library version and
- determines which version of the protocol is being used. 
+/** The Pusher protocol version, used to determined which features
+ are supported.
  */
-#define kPTPusherClientProtocolVersion @"1.4"
-#define kPTPusherClientLibraryVersion  @"1.0"
+#define kPTPusherClientProtocolVersion 5
+
+/** The version number of the libPusher library.
+ */
+#define kPTPusherClientLibraryVersion  1.0
 
 /** The name of the notification posted when PTPusher receives an event.
  */
