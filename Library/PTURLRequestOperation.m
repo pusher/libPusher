@@ -9,9 +9,9 @@
 #import "PTURLRequestOperation.h"
 
 @interface PTURLRequestOperation ()
-@property (nonatomic, retain, readwrite) NSURLResponse *URLResponse;
-@property (nonatomic, retain, readwrite) NSError *connectionError;
-@property (nonatomic, retain, readwrite) NSData *responseData;
+@property (nonatomic, strong, readwrite) NSURLResponse *URLResponse;
+@property (nonatomic, strong, readwrite) NSError *connectionError;
+@property (nonatomic, strong, readwrite) NSData *responseData;
 
 - (void)setExecuting:(BOOL)isExecuting;
 - (void)setFinished:(BOOL)isFinished;

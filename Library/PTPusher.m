@@ -37,7 +37,7 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 #define kPTPusherDefaultReconnectDelay 5.0
 
 @interface PTPusher ()
-@property (nonatomic, retain, readwrite) PTPusherConnection *connection;
+@property (nonatomic, strong, readwrite) PTPusherConnection *connection;
 
 - (void)subscribeToChannel:(PTPusherChannel *)channel;
 - (void)reconnectAfterDelay;

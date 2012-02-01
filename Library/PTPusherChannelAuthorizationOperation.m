@@ -11,7 +11,7 @@
 #import "JSONKit.h"
 
 @interface PTPusherChannelAuthorizationOperation ()
-@property (nonatomic, retain, readwrite) NSDictionary *authorizationData;
+@property (nonatomic, strong, readwrite) NSDictionary *authorizationData;
 @end
 
 @implementation PTPusherChannelAuthorizationOperation
