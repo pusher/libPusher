@@ -17,11 +17,21 @@ GEM
   specs:
     daemons (1.1.6)
     eventmachine (0.12.10)
+    faster_xml_simple (0.5.0)
+      libxml-ruby (>= 0.3.8.4)
+    httpclient (2.2.4)
     json (1.6.5)
+    libxml-ruby (2.2.2)
     macaddr (1.5.0)
       systemu (>= 2.4.0)
     mime-types (1.17.2)
     multi_json (1.0.4)
+    net-github-upload (0.0.8)
+      faster_xml_simple
+      httpclient
+      json
+      nokogiri (>= 1.4.0)
+    nokogiri (1.5.0)
     pusher (0.9.2)
       multi_json (~> 1.0)
       ruby-hmac (~> 0.4.0)
@@ -56,6 +66,7 @@ PLATFORMS
 DEPENDENCIES
   cocoapods!
   json
+  net-github-upload
   pusher
   rake
   rest-client
