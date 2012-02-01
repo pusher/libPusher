@@ -22,7 +22,7 @@
 
 @interface ZTWebSocket : NSObject {
     id<ZTWebSocketDelegate> __unsafe_unretained delegate;
-    NSURL* __unsafe_unretained url;
+    NSURL* url;
     AsyncSocket* socket;
     BOOL connected;
     NSString* origin;
