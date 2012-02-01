@@ -2,6 +2,8 @@
 
 [Pusher](http://pusherapp.com/) is a hosted service that sits between your web application and the browser that lets you deliver events in real-time using HTML5 WebSockets.
 
+[Online API Documentation](http://lukeredpath.github.com/libPusher/)
+
 This project was borne out of the idea that a web browser doesn't have to be the only client that receives your web app's real-time notifications. Why couldn't your iPhone, iPad or Mac OSX app receive real-time notifications either?
 
 Apple provides its own push notification service which is great for getting alert-type notifications to your app's users whether or not they are using the app, but for real-time updates to data whilst they are using your app, hooking into your web app's existing event-dispatch mechanism is far less hassle (and is great if you want to be able to interact with other web services that might not have access to the APNS).
