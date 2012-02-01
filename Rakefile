@@ -160,4 +160,13 @@ namespace :release do
     upload_package_to_github(package_fie)
     puts "Finished."
   end
+  
+  desc "Build and package for nightly distribution"
+  task :stable => :combined do
+    puts "Crreating package for #{LIBRARY_VERSION} distribution..."
+    package_fie = prepare_distribution_package("v#{LIBRARY_VERSION}")
+    puts "Uploading package to Github..."
+    upload_package_to_github(package_fie)
+    puts "Finished."
+  end
 end
