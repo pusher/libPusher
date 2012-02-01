@@ -25,14 +25,14 @@ enum {
 #pragma mark Initializers
 
 + (id)webSocketWithURLString:(NSString*)urlString delegate:(id<ZTWebSocketDelegate>)aDelegate  secure:(BOOL)secure{
-    return [[[ZTWebSocket alloc] initWithURLString:urlString delegate:aDelegate secure:secure] autorelease];
+    return [[ZTWebSocket alloc] initWithURLString:urlString delegate:aDelegate secure:secure];
 }
 
 -(id)initWithURLString:(NSString *)urlString delegate:(id<ZTWebSocketDelegate>)aDelegate  secure:(BOOL)secure{
     if (self=[super init]) {
         self.delegate = aDelegate;
         secureSocket = secure;
-        url = [[NSURL URLWithString:urlString] retain];
+        url = [NSURL URLWithString:urlString];
         if (![url.scheme hasPrefix:@"ws"]) {
             [NSException raise:ZTWebSocketException format:[NSString stringWithFormat:@"Unsupported protocol %@",url.scheme]];
         }
@@ -144,7 +144,7 @@ enum {
 
 -(void)onSocket:(AsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
     if (tag == ZTWebSocketTagHandshake) {
-        NSString* response = [[[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding] autorelease];
+        NSString* response = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
         if ([response hasPrefix:@"HTTP/1.1 101 Web Socket Protocol Handshake\r\nUpgrade: WebSocket\r\nConnection: Upgrade\r\n"]) {
             connected = YES;
             [self _dispatchOpened];
@@ -157,7 +157,7 @@ enum {
         char firstByte = 0xFF;
         [data getBytes:&firstByte length:1];
         if (firstByte != 0x00) return; // Discard message
-        NSString* message = [[[NSString alloc] initWithData:[data subdataWithRange:NSMakeRange(1, [data length]-2)] encoding:NSUTF8StringEncoding] autorelease];
+        NSString* message = [[NSString alloc] initWithData:[data subdataWithRange:NSMakeRange(1, [data length]-2)] encoding:NSUTF8StringEncoding];
     
         [self _dispatchMessageReceived:message];
         [self _readNextMessage];
@@ -169,10 +169,6 @@ enum {
 -(void)dealloc {
     socket.delegate = nil;
     [socket disconnect];
-    [socket release];
-    [runLoopModes release];
-    [url release];
-    [super dealloc];
 }
 
 @end

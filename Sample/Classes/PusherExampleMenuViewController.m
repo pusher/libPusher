@@ -31,11 +31,6 @@
   menuOptions = [options copy];
 }
 
-- (void)dealloc 
-{
-  [menuOptions release];
-  [super dealloc];
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -53,7 +48,7 @@
   
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
   if (cell == nil) {
-    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
   }
   
   NSDictionary *example = [menuOptions objectAtIndex:indexPath.row];
@@ -75,7 +70,6 @@
   UIViewController *viewController = [[controllerClass alloc] init];
   [viewController performSelector:@selector(setPusher:) withObject:self.pusher];
   [self.navigationController pushViewController:viewController animated:YES];
-  [viewController release];
 }
 
 @end

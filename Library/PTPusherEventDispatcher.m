@@ -20,11 +20,6 @@
   return self;
 }
 
-- (void)dealloc 
-{
-  [eventListeners release];
-  [super dealloc];
-}
 
 #pragma mark - Managing event listeners
 

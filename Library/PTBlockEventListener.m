@@ -28,8 +28,6 @@
 {
   dispatch_release(queue);
   
-  [block release];
-  [super dealloc];
 }
 
 - (void)dispatchEvent:(PTPusherEvent *)event
@@ -49,7 +47,6 @@
 {
   PTBlockEventListener *listener = [[PTBlockEventListener alloc] initWithBlock:block dispatchQueue:queue];
   [self addEventListener:listener forEventNamed:eventName];
-  [listener release];
 }
 
 @end

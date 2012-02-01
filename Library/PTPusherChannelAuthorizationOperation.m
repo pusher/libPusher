@@ -40,7 +40,7 @@
   
   [request setHTTPBody:[[requestData sortedQueryString] dataUsingEncoding:NSUTF8StringEncoding]];
   
-  return [[[self alloc] initWithURLRequest:request] autorelease];
+  return [[self alloc] initWithURLRequest:request];
 }
 
 - (void)finish

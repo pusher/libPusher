@@ -37,9 +37,6 @@ NSString *const PTPusherConnectionPingEvent        = @"pusher:ping";
 - (void)dealloc 
 {
   [socket close];
-  [socket release];
-  [socketID release];
-  [super dealloc];
 }
 
 #pragma mark - Connection management
@@ -67,7 +64,6 @@ NSString *const PTPusherConnectionPingEvent        = @"pusher:ping";
   NSData *JSONData = [object JSONData];
   NSString *message = [[NSString alloc] initWithData:JSONData encoding:NSUTF8StringEncoding];
   [socket send:message];
-  [message release];
 }
 
 #pragma mark - ZTWebSocket delegate methods

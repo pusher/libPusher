@@ -13,5 +13,5 @@
 @interface PusherExampleMenuViewController : UITableViewController {
   NSArray *menuOptions; 
 }
-@property (nonatomic, retain) PTPusher *pusher;
+@property (nonatomic, strong) PTPusher *pusher;
 @end

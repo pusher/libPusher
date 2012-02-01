@@ -29,20 +29,11 @@
 - (id)initWithURLRequest:(NSURLRequest *)request;
 {
   if ((self = [super init])) {
-    URLRequest = [request retain];
+    URLRequest = request;
   }
   return self;
 }
 
-- (void)dealloc
-{
-  [responseData release];
-  [connectionError release];
-  [URLConnection release];
-  [URLResponse release];
-  [URLRequest release];
-  [super dealloc];
-}
 
 - (void)start 
 {

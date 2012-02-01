@@ -33,9 +33,8 @@
     [result appendFormat:@"%02x", cHMAC[i] & 0xff];
   }
   NSString *digest = [result copy];
-  [result release];
   
-  return [digest autorelease];
+  return digest;
 }
 
 @end

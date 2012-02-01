@@ -30,12 +30,12 @@
 + (id)channelWithName:(NSString *)name pusher:(PTPusher *)pusher
 {
   if ([name hasPrefix:@"private-"]) {
-    return [[[PTPusherPrivateChannel alloc] initWithName:name pusher:pusher] autorelease];
+    return [[PTPusherPrivateChannel alloc] initWithName:name pusher:pusher];
   }
   if ([name hasPrefix:@"presence-"]) {
-    return [[[PTPusherPresenceChannel alloc] initWithName:name pusher:pusher] autorelease];
+    return [[PTPusherPresenceChannel alloc] initWithName:name pusher:pusher];
   }
-  return [[[self alloc] initWithName:name pusher:pusher] autorelease];
+  return [[self alloc] initWithName:name pusher:pusher];
 }
 
 - (id)initWithName:(NSString *)channelName pusher:(PTPusher *)aPusher
@@ -56,12 +56,6 @@
   return self;
 }
 
-- (void)dealloc;
-{
-  [name release];
-  [dispatcher release];
-  [super dealloc];
-}
 
 - (BOOL)isPrivate
 {
@@ -188,7 +182,7 @@
 {
   if (self.isSubscribed) return;
   
-  NSMutableDictionary *eventData = [[authData mutableCopy] autorelease];
+  NSMutableDictionary *eventData = [authData mutableCopy];
   [eventData setObject:self.name forKey:@"channel"];
   [pusher sendEventNamed:@"pusher:subscribe" 
                     data:eventData
@@ -250,7 +244,7 @@
 
 - (NSArray *)memberIDs
 {
-  return [[memberIDs copy] autorelease];
+  return [memberIDs copy];
 }
 
 - (NSInteger)memberCount
@@ -258,12 +252,6 @@
   return [memberIDs count];
 }
 
-- (void)dealloc 
-{
-  [members release];
-  [memberIDs release];
-  [super dealloc];
-}
 
 - (void)handleMemberAddedEvent:(PTPusherEvent *)event
 {

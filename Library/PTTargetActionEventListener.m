@@ -14,17 +14,12 @@
 - (id)initWithTarget:(id)aTarget action:(SEL)aSelector
 {
   if (self = [super init]) {
-    target = [aTarget retain];
+    target = aTarget;
     action = aSelector;
   }
   return self;
 }
 
-- (void)dealloc;
-{
-  [target release];
-  [super dealloc];
-}
 
 - (NSString *)description;
 {
@@ -44,7 +39,6 @@
 {
   PTTargetActionEventListener *listener = [[PTTargetActionEventListener alloc] initWithTarget:target action:action];
   [self addEventListener:listener forEventNamed:eventName];
-  [listener release];
 }
 
 @end

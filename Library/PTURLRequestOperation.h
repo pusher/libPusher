@@ -18,10 +18,10 @@
   NSError *connectionError;
   NSMutableData *responseData;
 }
-@property (nonatomic, retain) NSURLRequest *URLRequest;
-@property (nonatomic, retain, readonly) NSURLResponse *URLResponse;
-@property (nonatomic, retain, readonly) NSError *connectionError;
-@property (nonatomic, retain, readonly) NSData *responseData;
+@property (nonatomic, strong) NSURLRequest *URLRequest;
+@property (nonatomic, strong, readonly) NSURLResponse *URLResponse;
+@property (nonatomic, strong, readonly) NSError *connectionError;
+@property (nonatomic, strong, readonly) NSData *responseData;
 
 - (id)initWithURLRequest:(NSURLRequest *)request;
 - (void)finish;

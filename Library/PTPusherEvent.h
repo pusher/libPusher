@@ -27,14 +27,14 @@
 
 /** The channel that this event originated from.
  */
-@property (nonatomic, readonly) NSString *channel;
+@property (strong, nonatomic, readonly) NSString *channel;
 
 /** The event data.
  
  Event data will typically be any kind of object that can be represented as JSON, often
  an NSArray or NSDictionary but can be a simple string.
  */
-@property (nonatomic, readonly) id data;
+@property (strong, nonatomic, readonly) id data;
 
 - (id)initWithEventName:(NSString *)name channel:(NSString *)channel data:(id)data;
 + (id)eventFromMessageDictionary:(NSDictionary *)dictionary;
@@ -57,7 +57,7 @@ typedef enum {
 
 /** A textual description of the error.
  */
-@property (nonatomic, readonly) NSString *message;
+@property (unsafe_unretained, nonatomic, readonly) NSString *message;
 
 /** The error code. See PTPusherServerErrorCodes for available errors.
  */

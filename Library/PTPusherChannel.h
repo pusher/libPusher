@@ -149,7 +149,7 @@
  The presence delegate will be notified of presence channel-specific events, such as the initial
  member list on subscription and member added/removed events.
  */
-@property (nonatomic, assign) id<PTPusherPresenceChannelDelegate> presenceDelegate;
+@property (nonatomic, unsafe_unretained) id<PTPusherPresenceChannelDelegate> presenceDelegate;
 
 /** Returns the current list of channel members.
  

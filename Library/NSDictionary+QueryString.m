@@ -18,10 +18,8 @@
   for (NSString *key in sortedKeys) {
     NSString *part = [[NSString alloc] initWithFormat:@"%@=%@", key, [self valueForKey:key]];
     [parts addObject:part];
-    [part release];
   }
   NSString *queryString = [parts componentsJoinedByString:@"&"];
-  [parts release];
 
   return queryString;
 }

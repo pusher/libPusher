@@ -28,20 +28,12 @@
   return self;
 }
 
-- (void)dealloc 
-{
-  [operationQueue release];
-  [key release];
-  [appID release];
-  [secretKey release];
-  [super dealloc];
-}
 
 - (void)triggerEvent:(NSString *)eventName onChannel:(NSString *)channelName data:(id)eventData socketID:(NSString *)socketID
 {
   NSString *path = [NSString stringWithFormat:@"/apps/%@/channels/%@/events", appID, channelName];
   NSData *bodyData = [eventData JSONData];
-  NSString *bodyString = [[[NSString alloc] initWithData:bodyData encoding:NSUTF8StringEncoding] autorelease];
+  NSString *bodyString = [[NSString alloc] initWithData:bodyData encoding:NSUTF8StringEncoding];
   
   NSMutableDictionary *queryParameters = [NSMutableDictionary dictionary];
   
@@ -69,7 +61,6 @@
 
   PTURLRequestOperation *operation = [[PTURLRequestOperation alloc] initWithURLRequest:request];
   [operationQueue addOperation:operation];
-  [operation release];
 }
 
 @end

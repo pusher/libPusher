@@ -22,9 +22,9 @@ NSString *const PTPusherChannelKey = @"channel";
 + (id)eventFromMessageDictionary:(NSDictionary *)dictionary
 {
   if ([[dictionary objectForKey:PTPusherEventKey] isEqualToString:@"pusher:error"]) {
-    return [[[PTPusherErrorEvent alloc] initWithEventName:[dictionary objectForKey:PTPusherEventKey] channel:nil data:[dictionary objectForKey:PTPusherDataKey]] autorelease];
+    return [[PTPusherErrorEvent alloc] initWithEventName:[dictionary objectForKey:PTPusherEventKey] channel:nil data:[dictionary objectForKey:PTPusherDataKey]];
   }
-  return [[[self alloc] initWithEventName:[dictionary objectForKey:PTPusherEventKey] channel:[dictionary objectForKey:PTPusherChannelKey] data:[dictionary objectForKey:PTPusherDataKey]] autorelease];
+  return [[self alloc] initWithEventName:[dictionary objectForKey:PTPusherEventKey] channel:[dictionary objectForKey:PTPusherChannelKey] data:[dictionary objectForKey:PTPusherDataKey]];
 }
 
 - (id)initWithEventName:(NSString *)name channel:(NSString *)channel data:(id)data
@@ -49,13 +49,6 @@ NSString *const PTPusherChannelKey = @"channel";
   return self;
 }
 
-- (void)dealloc
-{
-  [_channel release];
-  [_name release];
-  [_data release];
-  [super dealloc];
-}
 
 - (NSString *)description
 {

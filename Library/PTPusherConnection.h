@@ -22,7 +22,7 @@
 @interface PTPusherConnection : NSObject <ZTWebSocketDelegate> {
   ZTWebSocket *socket;
 }
-@property (nonatomic, assign) id<PTPusherConnectionDelegate> delegate;
+@property (nonatomic, unsafe_unretained) id<PTPusherConnectionDelegate> delegate;
 @property (nonatomic, readonly, getter=isConnected) BOOL connected;
 @property (nonatomic, copy, readonly) NSString *socketID;
 

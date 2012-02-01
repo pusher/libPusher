@@ -101,17 +101,12 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 {
   PTPusherConnection *connection = [[PTPusherConnection alloc] initWithURL:PTPusherConnectionURL(kPUSHER_HOST, key, @"libPusher", isEncrypted) secure:isEncrypted];
   PTPusher *pusher = [[self alloc] initWithConnection:connection connectAutomatically:connectAutomatically];
-  [connection release];
-  return [pusher autorelease];
+  return pusher;
 }
 
 - (void)dealloc;
 {
-  [authorizationURL release];
-  [channels release];
   [_connection disconnect];
-  [_connection release];
-  [super dealloc];
 }
 
 #pragma mark - Connection management

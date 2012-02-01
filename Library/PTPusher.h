@@ -79,7 +79,7 @@ extern NSString *const PTPusherErrorUnderlyingEventKey;
  
  The delegate must implement the PTPusherDelegate protocol. The delegate is not retained.
  */
-@property (nonatomic, assign) id<PTPusherDelegate> delegate;
+@property (nonatomic, unsafe_unretained) id<PTPusherDelegate> delegate;
 
 
 /** Indicates whether the client should attempt to reconnect automatically when disconnected
@@ -105,7 +105,7 @@ extern NSString *const PTPusherErrorUnderlyingEventKey;
  The connection is exposed to provide access to it's socketID and connection state. Clients
  should not attempt to manage this connection directly.
  */
-@property (nonatomic, retain, readonly) PTPusherConnection *connection;
+@property (nonatomic, strong, readonly) PTPusherConnection *connection;
 
 /** The authorization URL for private subscriptions.
  
@@ -119,7 +119,7 @@ extern NSString *const PTPusherErrorUnderlyingEventKey;
  
  For more information on channel authorization, [see the Pusher documentation website](http://pusher.com/docs/authenticating_users).
  */
-@property (nonatomic, retain) NSURL *authorizationURL;
+@property (nonatomic, strong) NSURL *authorizationURL;
 
 ///------------------------------------------------------------------------------------/
 /// @name Creating new instances

@@ -21,8 +21,8 @@
 @end
 
 @interface ZTWebSocket : NSObject {
-    id<ZTWebSocketDelegate> delegate;
-    NSURL* url;
+    id<ZTWebSocketDelegate> __unsafe_unretained delegate;
+    NSURL* __unsafe_unretained url;
     AsyncSocket* socket;
     BOOL connected;
     NSString* origin;
@@ -35,11 +35,11 @@
     BOOL secureSocket;
 }
 
-@property(nonatomic,assign) id<ZTWebSocketDelegate> delegate;
+@property(nonatomic,unsafe_unretained) id<ZTWebSocketDelegate> delegate;
 @property(nonatomic,readonly) NSURL* url;
-@property(nonatomic,retain) NSString* origin;
+@property(nonatomic,strong) NSString* origin;
 @property(nonatomic,readonly) BOOL connected;
-@property(nonatomic,retain) NSArray* runLoopModes;
+@property(nonatomic,strong) NSArray* runLoopModes;
 
 + (id)webSocketWithURLString:(NSString*)urlString delegate:(id<ZTWebSocketDelegate>)delegate secure:(BOOL)secure;
 - (id)initWithURLString:(NSString*)urlString delegate:(id<ZTWebSocketDelegate>)delegate secure:(BOOL)secure;
