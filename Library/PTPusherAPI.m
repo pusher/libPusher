@@ -37,12 +37,11 @@
   
   NSMutableDictionary *queryParameters = [NSMutableDictionary dictionary];
   
-  [queryParameters setObject:eventData forKey:@"name"];
-  [queryParameters setValue:[[bodyString MD5Hash] lowercaseString] forKey:@"body_md5"];
-  [queryParameters setValue:key forKey:@"auth_key"];
-  [queryParameters setValue:[NSNumber numberWithDouble:time(NULL)] forKey:@"auth_timestamp"];
-  [queryParameters setValue:@"1.0" forKey:@"auth_version"];
-  [queryParameters setValue:eventName forKey:@"name"];
+  [queryParameters setObject:[[bodyString MD5Hash] lowercaseString] forKey:@"body_md5"];
+  [queryParameters setObject:key forKey:@"auth_key"];
+  [queryParameters setObject:[NSNumber numberWithDouble:time(NULL)] forKey:@"auth_timestamp"];
+  [queryParameters setObject:@"1.0" forKey:@"auth_version"];
+  [queryParameters setObject:eventName forKey:@"name"];
   
   if (socketID) {
     [queryParameters setObject:socketID forKey:@"socket_id"];
