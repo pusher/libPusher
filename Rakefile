@@ -4,6 +4,7 @@ require 'tempfile'
 require 'xcode_build'
 require 'xcode_build/tasks/build_task'
 require 'xcode_build/formatters/progress_formatter'
+require 'tmpdir'
 
 LIBRARY_VERSION = "1.0"
 
@@ -32,25 +33,40 @@ end
 task :docs => "docs:generate"
 
 namespace :docs do
-  def appledoc_cmd
+  def appledoc_cmd(output_dir)
     "appledoc \
       -t /usr/local/Cellar/appledoc/2.0.4/Templates \
       --no-search-undocumented-doc \
       --keep-intermediate-files \
       --verbose 1 \
+      --docset-feed-url http://lukeredpath.github.com/libPusher/%DOCSETATOMFILENAME \
+      --docset-package-url http://lukeredpath.github.com/libPusher/%DOCSETPACKAGEFILENAME \
+      --publish-docset \
       --project-company 'Luke Redpath' \
       --company-id 'co.uk.lukeredpath' \
-      --output Docs/API \
+      --output #{output_dir} \
       --project-name libPusher \
       -v #{LIBRARY_VERSION}"
   end
   
   task :generate do
-    system appledoc_cmd << "Library/PT*"
+    system appledoc_cmd("Docs/API") << " Library/PT*"
   end
   
   task :install do
-    system appledoc_cmd << " --install-docset Library/PT*"
+    system appledoc_cmd("Docs/API") << " --install-docset Library/PT*"
+  end
+  
+  task :publish do
+    tempdir = Dir.tmpdir + "/libPusherDocs"
+    system appledoc_cmd(tempdir) << " Library/PT*"
+    system "git checkout gh-pages"
+    system "cp -r #{tempdir}/* ."
+    system "cp publish/* . && rm -r publish"
+    #system "git add ."
+    #system "git commit -m 'Updated published docs'"
+    #system "git push origin gh-pages"
+    #system "git checkout master"
   end
 end
 
