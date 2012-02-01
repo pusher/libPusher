@@ -21,5 +21,4 @@ rvm use default
 bundle install
 echo ""
 
-bundle exec rake debug:build
-
+bundle exec rake release:nightly
