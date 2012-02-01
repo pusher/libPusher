@@ -38,3 +38,12 @@ void onConnect(dispatch_block_t);
 + (id)sharedInstance;
 - (void)onConnect:(dispatch_block_t)block;
 @end
+
+@interface PTPusherNotificationHandler : NSObject {
+  NSMutableDictionary *observers;
+}
+@end
+
+@interface NSNotificationCenter (BlockHandler)
+- (void)addObserver:(NSString *)noteName object:(id)object usingBlock:(void (^)(NSNotification *))block;
+@end

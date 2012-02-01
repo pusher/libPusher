@@ -106,6 +106,7 @@ void onConnect(dispatch_block_t block)
 
     [connectedBlock release]; connectedBlock = nil;
   }
+  connected = YES;
 }
 
 - (void)pusher:(PTPusher *)pusher connectionDidDisconnect:(PTPusherConnection *)connection
@@ -120,6 +121,59 @@ void onConnect(dispatch_block_t block)
   if (self.debugEnabled) {
      NSLog(@"[DEBUG] Client connection failed with error %@", error);
   }
+}
+
+@end
+
+@implementation PTPusherNotificationHandler
+
++ (id)sharedInstance
+{
+  static dispatch_once_t pred = 0;
+  __strong static id _sharedObject = nil;
+  dispatch_once(&pred, ^{
+    _sharedObject = [[self alloc] init];
+  });
+  return _sharedObject;
+}
+
+- (id)init {
+  if ((self = [super init])) {
+    observers = [[NSMutableDictionary alloc] init];
+  }
+  return self;
+}
+
+- (void)dealloc 
+{
+  [observers release];
+  [super dealloc];
+}
+
+- (void)addObserverForNotificationName:(NSString *)notificationName object:(id)object notificationCentre:(NSNotificationCenter *)notificationCenter withBlock:(void (^)(NSNotification *))block
+{
+  [observers setObject:block forKey:notificationName];
+  [notificationCenter addObserver:self selector:@selector(handleNotification:) name:notificationName object:object];
+}
+
+- (void)handleNotification:(NSNotification *)note
+{
+  
+  
+  void (^block)(NSNotification *) = [observers objectForKey:note.name];
+  
+  if (block) {
+    block(note);
+  }
+}
+
+@end
+
+@implementation NSNotificationCenter (BlockHandler)
+
+- (void)addObserver:(NSString *)noteName object:(id)object usingBlock:(void (^)(NSNotification *))block
+{
+  [[PTPusherNotificationHandler sharedInstance] addObserverForNotificationName:noteName object:object notificationCentre:self withBlock:block];
 }
 
 @end

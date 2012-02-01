@@ -11,7 +11,7 @@
 
 SPEC_BEGIN(PTPusherEventSpec)
 
-describe(@"PTPusherEventSpec", ^{
+describe(@"Pusher Events", ^{
   
   context(@"with a JSON payload", ^{
     __block PTPusherEvent *event = [[PTPusherEvent alloc] 
