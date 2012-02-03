@@ -8,6 +8,7 @@ group :scripts do
   gem "json"
   gem "thin"
   gem "uuid"
+  gem "rest-client"
 end
 
 group :macruby do

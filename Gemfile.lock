@@ -1,13 +1,13 @@
 GIT
   remote: git://github.com/CocoaPods/CocoaPods.git
-  revision: bfac25504f4613929a2e81d602c329731b704279
+  revision: b85b9bdfb08e798aa6b48c74b8b3ac22e39182d2
   specs:
     cocoapods (0.3.9)
       xcodeproj (~> 0.0.2)
 
 GIT
   remote: git://github.com/lukeredpath/xcodebuild-rb.git
-  revision: 88d8eb6d8ca3846b9c958b5ca798e95dcfface97
+  revision: 9032a173fd53c4e1f5296a286273242b5d76583a
   specs:
     xcodebuild-rb (0.1.0)
       state_machine (~> 1.1.2)

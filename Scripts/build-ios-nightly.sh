@@ -21,4 +21,4 @@ rvm use default
 bundle install --without macruby 
 echo ""
 
-bundle exec rake release:nightly
+bundle exec rake release:nightly_ios

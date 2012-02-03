@@ -219,20 +219,21 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		A3CA675414DBCB2D003E2F1E /* libPusher-OSX */ = {
+		A3CA675414DBCB2D003E2F1E /* libPusher */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A3CA676A14DBCB2D003E2F1E /* Build configuration list for PBXNativeTarget "libPusher-OSX" */;
+			buildConfigurationList = A3CA676A14DBCB2D003E2F1E /* Build configuration list for PBXNativeTarget "libPusher" */;
 			buildPhases = (
 				A3CA675014DBCB2D003E2F1E /* Sources */,
 				A3CA675114DBCB2D003E2F1E /* Frameworks */,
 				A3CA675214DBCB2D003E2F1E /* Headers */,
 				A3CA675314DBCB2D003E2F1E /* Resources */,
+				A3CA67B714DBD1CC003E2F1E /* Export Environment For xcodebuild-rb */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "libPusher-OSX";
+			name = libPusher;
 			productName = "libPusher-OSX";
 			productReference = A3CA675514DBCB2D003E2F1E /* libPusher-OSX.framework */;
 			productType = "com.apple.product-type.framework";
@@ -258,7 +259,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A3CA675414DBCB2D003E2F1E /* libPusher-OSX */,
+				A3CA675414DBCB2D003E2F1E /* libPusher */,
 			);
 		};
 /* End PBXProject section */
@@ -273,6 +274,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A3CA67B714DBD1CC003E2F1E /* Export Environment For xcodebuild-rb */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Export Environment For xcodebuild-rb";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A3CA675014DBCB2D003E2F1E /* Sources */ = {
@@ -397,7 +415,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A3CA676A14DBCB2D003E2F1E /* Build configuration list for PBXNativeTarget "libPusher-OSX" */ = {
+		A3CA676A14DBCB2D003E2F1E /* Build configuration list for PBXNativeTarget "libPusher" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A3CA676B14DBCB2D003E2F1E /* Debug */,

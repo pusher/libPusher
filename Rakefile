@@ -80,7 +80,6 @@ end
 ARTEFACT_DIR = File.join("dist", "libPusher")
 
 def copy_artefacts_from_build(build, options={})
-  FileUtils.mkdir_p(ARTEFACT_DIR)
   target = File.join(build.target_build_directory, "libPusher.a")
   destination = File.join(ARTEFACT_DIR, "libPusher-#{build.environment["SDK_NAME"]}.a")
   FileUtils.mv(target, destination)
@@ -142,6 +141,18 @@ namespace :release do
     t.after_build { |build| copy_artefacts_from_build(build) }
   end
   
+  XcodeBuild::Tasks::BuildTask.new(:osx) do |t|
+    t.project_name = "libPusher-OSX/libPusher-OSX.xcodeproj"
+    t.target = "libPusher"
+    t.configuration = "Release"
+    t.formatter = XcodeBuild::Formatters::ProgressFormatter.new
+    t.after_build do |build| 
+      Dir["#{build.target_build_directory}/*.*"].each do |product|
+        system "cp -r #{product} #{ARTEFACT_DIR}"
+      end
+    end
+  end
+  
   desc "Build combined release libraries for both device and simulator."
   task :combined => [:prepare_distribution, "release:device:cleanbuild", "release:simulator:cleanbuild"] do
     puts "Creating fat binary from simulator and device builds..."
@@ -150,18 +161,28 @@ namespace :release do
   
   task :prepare_distribution do
     FileUtils.rm_rf("dist")
+    FileUtils.mkdir_p(ARTEFACT_DIR)
   end
   
-  desc "Build and package for nightly distribution"
-  task :nightly => :combined do
-    puts "Crreating package for nightly distribution..."
-    package_fie = prepare_distribution_package("nightly")
+  desc "Build and package the iOS library for nightly distribution"
+  task :nightly_ios => :combined do
+    puts "Crreating iOS package for nightly distribution..."
+    package_fie = prepare_distribution_package("iOS-nightly")
     puts "Uploading package to Github..."
     upload_package_to_github(package_fie)
     puts "Finished."
   end
   
-  desc "Build and package for nightly distribution"
+  desc "Build and package the OSX framework for nightly distribution"
+  task :nightly_osx => [:prepare_distribution, "osx:cleanbuild"] do
+    puts "Crreating OSX package for nightly distribution..."
+    package_fie = prepare_distribution_package("OSX-nightly")
+    puts "Uploading package to Github..."
+    upload_package_to_github(package_fie)
+    puts "Finished."
+  end
+  
+  desc "Build and package for stable distribution"
   task :stable => :combined do
     puts "Crreating package for #{LIBRARY_VERSION} distribution..."
     package_fie = prepare_distribution_package("v#{LIBRARY_VERSION}")
