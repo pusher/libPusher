@@ -98,8 +98,8 @@ def current_git_commit_sha
   `git log --pretty=format:'%h' -n 1`.strip
 end
 
-def prepare_distribution_package(file_suffix)
-  FileUtils.cp("README-DIST.txt", "dist/libPusher/README.txt")
+def prepare_distribution_package(file_suffix, copy_readme = true)
+  FileUtils.cp("README-DIST.txt", "dist/libPusher/README.txt") if copy_readme
   
   Dir.chdir("dist") do
     system "zip -r libPusher-#{file_suffix}.zip libPusher"
@@ -176,7 +176,7 @@ namespace :release do
   desc "Build and package the OSX framework for nightly distribution"
   task :nightly_osx => [:prepare_distribution, "osx:cleanbuild"] do
     puts "Crreating OSX package for nightly distribution..."
-    package_fie = prepare_distribution_package("OSX-nightly")
+    package_fie = prepare_distribution_package("OSX-nightly", false)
     puts "Uploading package to Github..."
     upload_package_to_github(package_fie)
     puts "Finished."
