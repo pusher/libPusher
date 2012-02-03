@@ -9,11 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "PTPusherEventPublisher.h"
 #import "PTEventListener.h"
-#import "PTPusherEventDispatcher.h"
 #import "PTPusherPresenceChannelDelegate.h"
 
 
 @class PTPusher;
+@class PTPusherEventDispatcher;
 
 /** A PTPusherChannel object represents a single Pusher channel.
  
