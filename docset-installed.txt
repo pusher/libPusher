@@ -1,4 +1,0 @@
-Documentation set was installed to Xcode!
-
-Path: /Users/luke/Library/Developer/Shared/Documentation/DocSets/co.uk.lukeredpath.libPusher.docset
-Time: 2012-02-01 14:06:14 +0000
