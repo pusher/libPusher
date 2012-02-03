@@ -15,27 +15,27 @@
 		A3CA678F14DBCB95003E2F1E /* NSString+Hashing.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CA677014DBCB94003E2F1E /* NSString+Hashing.m */; };
 		A3CA679014DBCB95003E2F1E /* PTBlockEventListener.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA677114DBCB94003E2F1E /* PTBlockEventListener.h */; };
 		A3CA679114DBCB95003E2F1E /* PTBlockEventListener.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CA677214DBCB94003E2F1E /* PTBlockEventListener.m */; };
-		A3CA679214DBCB95003E2F1E /* PTEventListener.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA677314DBCB95003E2F1E /* PTEventListener.h */; };
-		A3CA679314DBCB95003E2F1E /* PTPusher.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA677414DBCB95003E2F1E /* PTPusher.h */; };
+		A3CA679214DBCB95003E2F1E /* PTEventListener.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA677314DBCB95003E2F1E /* PTEventListener.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A3CA679314DBCB95003E2F1E /* PTPusher.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA677414DBCB95003E2F1E /* PTPusher.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3CA679414DBCB95003E2F1E /* PTPusher.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CA677514DBCB95003E2F1E /* PTPusher.m */; };
-		A3CA679514DBCB95003E2F1E /* PTPusherAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA677614DBCB95003E2F1E /* PTPusherAPI.h */; };
+		A3CA679514DBCB95003E2F1E /* PTPusherAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA677614DBCB95003E2F1E /* PTPusherAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3CA679614DBCB95003E2F1E /* PTPusherAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CA677714DBCB95003E2F1E /* PTPusherAPI.m */; };
-		A3CA679714DBCB95003E2F1E /* PTPusherChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA677814DBCB95003E2F1E /* PTPusherChannel.h */; };
+		A3CA679714DBCB95003E2F1E /* PTPusherChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA677814DBCB95003E2F1E /* PTPusherChannel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3CA679814DBCB95003E2F1E /* PTPusherChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CA677914DBCB95003E2F1E /* PTPusherChannel.m */; };
 		A3CA679914DBCB95003E2F1E /* PTPusherChannelAuthorizationOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA677A14DBCB95003E2F1E /* PTPusherChannelAuthorizationOperation.h */; };
 		A3CA679A14DBCB95003E2F1E /* PTPusherChannelAuthorizationOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CA677B14DBCB95003E2F1E /* PTPusherChannelAuthorizationOperation.m */; };
-		A3CA679B14DBCB95003E2F1E /* PTPusherConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA677C14DBCB95003E2F1E /* PTPusherConnection.h */; };
+		A3CA679B14DBCB95003E2F1E /* PTPusherConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA677C14DBCB95003E2F1E /* PTPusherConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3CA679C14DBCB95003E2F1E /* PTPusherConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CA677D14DBCB95003E2F1E /* PTPusherConnection.m */; };
 		A3CA679D14DBCB95003E2F1E /* PTPusherConnectionMonitor.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA677E14DBCB95003E2F1E /* PTPusherConnectionMonitor.h */; };
 		A3CA679E14DBCB95003E2F1E /* PTPusherConnectionMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CA677F14DBCB95003E2F1E /* PTPusherConnectionMonitor.m */; };
-		A3CA679F14DBCB95003E2F1E /* PTPusherDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA678014DBCB95003E2F1E /* PTPusherDelegate.h */; };
-		A3CA67A014DBCB95003E2F1E /* PTPusherErrors.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA678114DBCB95003E2F1E /* PTPusherErrors.h */; };
-		A3CA67A114DBCB95003E2F1E /* PTPusherEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA678214DBCB95003E2F1E /* PTPusherEvent.h */; };
+		A3CA679F14DBCB95003E2F1E /* PTPusherDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA678014DBCB95003E2F1E /* PTPusherDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A3CA67A014DBCB95003E2F1E /* PTPusherErrors.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA678114DBCB95003E2F1E /* PTPusherErrors.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A3CA67A114DBCB95003E2F1E /* PTPusherEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA678214DBCB95003E2F1E /* PTPusherEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3CA67A214DBCB95003E2F1E /* PTPusherEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CA678314DBCB95003E2F1E /* PTPusherEvent.m */; };
-		A3CA67A314DBCB95003E2F1E /* PTPusherEventDispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA678414DBCB95003E2F1E /* PTPusherEventDispatcher.h */; };
+		A3CA67A314DBCB95003E2F1E /* PTPusherEventDispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA678414DBCB95003E2F1E /* PTPusherEventDispatcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3CA67A414DBCB95003E2F1E /* PTPusherEventDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CA678514DBCB95003E2F1E /* PTPusherEventDispatcher.m */; };
 		A3CA67A514DBCB95003E2F1E /* PTPusherEventPublisher.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA678614DBCB95003E2F1E /* PTPusherEventPublisher.h */; };
-		A3CA67A614DBCB95003E2F1E /* PTPusherPresenceChannelDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA678714DBCB95003E2F1E /* PTPusherPresenceChannelDelegate.h */; };
+		A3CA67A614DBCB95003E2F1E /* PTPusherPresenceChannelDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA678714DBCB95003E2F1E /* PTPusherPresenceChannelDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3CA67A714DBCB95003E2F1E /* PTTargetActionEventListener.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA678814DBCB95003E2F1E /* PTTargetActionEventListener.h */; };
 		A3CA67A814DBCB95003E2F1E /* PTTargetActionEventListener.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CA678914DBCB95003E2F1E /* PTTargetActionEventListener.m */; };
 		A3CA67A914DBCB95003E2F1E /* PTURLRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA678A14DBCB95003E2F1E /* PTURLRequestOperation.h */; };
@@ -44,16 +44,13 @@
 		A3CA67AF14DBCBB0003E2F1E /* JSONKit.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA67AD14DBCBB0003E2F1E /* JSONKit.h */; };
 		A3CA67B014DBCBB0003E2F1E /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CA67AE14DBCBB0003E2F1E /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A3CA67B214DBCBBE003E2F1E /* AsyncSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA67B114DBCBBE003E2F1E /* AsyncSocket.h */; };
-		A3CA67B514DBCBCD003E2F1E /* ZTWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA67B314DBCBCD003E2F1E /* ZTWebSocket.h */; };
+		A3CA67B514DBCBCD003E2F1E /* ZTWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA67B314DBCBCD003E2F1E /* ZTWebSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3CA67B614DBCBCD003E2F1E /* ZTWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CA67B414DBCBCD003E2F1E /* ZTWebSocket.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A3CA675514DBCB2D003E2F1E /* libPusher-OSX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "libPusher-OSX.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3CA675814DBCB2D003E2F1E /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
-		A3CA675B14DBCB2D003E2F1E /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
-		A3CA675C14DBCB2D003E2F1E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		A3CA675D14DBCB2D003E2F1E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		A3CA676014DBCB2D003E2F1E /* libPusher-OSX-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "libPusher-OSX-Info.plist"; sourceTree = "<group>"; };
 		A3CA676214DBCB2D003E2F1E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		A3CA676414DBCB2D003E2F1E /* libPusher-OSX-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "libPusher-OSX-Prefix.pch"; sourceTree = "<group>"; };
@@ -129,19 +126,8 @@
 			isa = PBXGroup;
 			children = (
 				A3CA675814DBCB2D003E2F1E /* Cocoa.framework */,
-				A3CA675A14DBCB2D003E2F1E /* Other Frameworks */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		A3CA675A14DBCB2D003E2F1E /* Other Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				A3CA675B14DBCB2D003E2F1E /* AppKit.framework */,
-				A3CA675C14DBCB2D003E2F1E /* CoreData.framework */,
-				A3CA675D14DBCB2D003E2F1E /* Foundation.framework */,
-			);
-			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
 		A3CA675E14DBCB2D003E2F1E /* libPusher-OSX */ = {
