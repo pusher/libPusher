@@ -16,7 +16,7 @@
 		A315780C14D07529000136A9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A315780B14D07529000136A9 /* libPods.a */; };
 		A35281D013F721A8000687C0 /* PTPusherConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = A35281CE13F721A8000687C0 /* PTPusherConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A35281D113F721A8000687C0 /* PTPusherConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = A35281CF13F721A8000687C0 /* PTPusherConnection.m */; };
-		A35281D313F72E03000687C0 /* PTPusherEventPublisher.h in Headers */ = {isa = PBXBuildFile; fileRef = A35281D213F72E03000687C0 /* PTPusherEventPublisher.h */; settings = {ATTRIBUTES = (); }; };
+		A35281D313F72E03000687C0 /* PTPusherEventPublisher.h in Headers */ = {isa = PBXBuildFile; fileRef = A35281D213F72E03000687C0 /* PTPusherEventPublisher.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A35281D613F736DF000687C0 /* PTPusherEventDispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = A35281D413F736DF000687C0 /* PTPusherEventDispatcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A35281D713F736DF000687C0 /* PTPusherEventDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = A35281D513F736DF000687C0 /* PTPusherEventDispatcher.m */; };
 		A35281DB13F73C54000687C0 /* PTTargetActionEventListener.h in Headers */ = {isa = PBXBuildFile; fileRef = A35281D913F73C54000687C0 /* PTTargetActionEventListener.h */; };

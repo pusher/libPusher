@@ -34,7 +34,7 @@
 		A3CA67A214DBCB95003E2F1E /* PTPusherEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CA678314DBCB95003E2F1E /* PTPusherEvent.m */; };
 		A3CA67A314DBCB95003E2F1E /* PTPusherEventDispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA678414DBCB95003E2F1E /* PTPusherEventDispatcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3CA67A414DBCB95003E2F1E /* PTPusherEventDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CA678514DBCB95003E2F1E /* PTPusherEventDispatcher.m */; };
-		A3CA67A514DBCB95003E2F1E /* PTPusherEventPublisher.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA678614DBCB95003E2F1E /* PTPusherEventPublisher.h */; };
+		A3CA67A514DBCB95003E2F1E /* PTPusherEventPublisher.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA678614DBCB95003E2F1E /* PTPusherEventPublisher.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3CA67A614DBCB95003E2F1E /* PTPusherPresenceChannelDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA678714DBCB95003E2F1E /* PTPusherPresenceChannelDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3CA67A714DBCB95003E2F1E /* PTTargetActionEventListener.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA678814DBCB95003E2F1E /* PTTargetActionEventListener.h */; };
 		A3CA67A814DBCB95003E2F1E /* PTTargetActionEventListener.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CA678914DBCB95003E2F1E /* PTTargetActionEventListener.m */; };
@@ -49,7 +49,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A3CA675514DBCB2D003E2F1E /* libPusher-OSX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "libPusher-OSX.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A3CA675514DBCB2D003E2F1E /* libPusher-OSX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "libPusher-OSX.framework"; path = libPusher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3CA675814DBCB2D003E2F1E /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		A3CA676014DBCB2D003E2F1E /* libPusher-OSX-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "libPusher-OSX-Info.plist"; sourceTree = "<group>"; };
 		A3CA676214DBCB2D003E2F1E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -422,6 +422,7 @@
 				A3CA676C14DBCB2D003E2F1E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
