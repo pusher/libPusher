@@ -182,12 +182,24 @@ namespace :release do
     puts "Finished."
   end
   
-  desc "Build and package for stable distribution"
-  task :stable => :combined do
+  desc "Build and package for stable iOS distribution"
+  task :stable_ios => :combined do
     puts "Crreating package for #{LIBRARY_VERSION} distribution..."
-    package_fie = prepare_distribution_package("v#{LIBRARY_VERSION}")
+    package_fie = prepare_distribution_package("iOS-v#{LIBRARY_VERSION}")
     puts "Uploading package to Github..."
     upload_package_to_github(package_fie)
     puts "Finished."
   end
+  
+  desc "Build and package for stable OSX distribution"
+  task :stable_osx => [:prepare_distribution, "osx:cleanbuild"] do
+    puts "Crreating package for #{LIBRARY_VERSION} distribution..."
+    package_fie = prepare_distribution_package("OSX-v#{LIBRARY_VERSION}")
+    puts "Uploading package to Github..."
+    upload_package_to_github(package_fie)
+    puts "Finished."
+  end
+  
+  desc "Build, package and release iOS and OSX distribution"
+  task :stable => [:stable_ios, :stable_osx]
 end
