@@ -2387,6 +2387,14 @@
 					<int key="connectionID">604</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">connectionStatus</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="893907143"/>
+					</object>
+					<int key="connectionID">605</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
 						<string key="label">content: arrangedObjects</string>
 						<reference key="source" ref="254240122"/>
@@ -2421,7 +2429,7 @@
 										<int key="NSCellFlags2">-1874851840</int>
 										<string key="NSContents">Table View Cell</string>
 										<reference key="NSSupport" ref="878989113"/>
-										<object class="NSDateFormatter" key="NSFormatter" id="1013842511">
+										<object class="NSDateFormatter" key="NSFormatter" id="478424702">
 											<dictionary class="NSMutableDictionary" key="NS.attributes">
 												<integer value="0" key="dateStyle"/>
 												<integer value="1040" key="formatterBehavior"/>
@@ -3762,7 +3770,7 @@
 						<int key="objectID">559</int>
 						<reference key="object" ref="364049603"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="1013842511"/>
+							<reference ref="478424702"/>
 						</array>
 						<reference key="parent" ref="1026437996"/>
 					</object>
@@ -3855,7 +3863,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">603</int>
-						<reference key="object" ref="1013842511"/>
+						<reference key="object" ref="478424702"/>
 						<reference key="parent" ref="364049603"/>
 					</object>
 				</array>
@@ -4071,7 +4079,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">604</int>
+			<int key="maxID">605</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -4079,11 +4087,16 @@
 					<string key="className">LRAppDelegate</string>
 					<string key="superclassName">NSObject</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="connectionStatus">NSTextField</string>
 						<string key="eventsController">NSArrayController</string>
 						<string key="eventsTableView">NSTableView</string>
 						<string key="window">NSWindow</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="connectionStatus">
+							<string key="name">connectionStatus</string>
+							<string key="candidateClassName">NSTextField</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="eventsController">
 							<string key="name">eventsController</string>
 							<string key="candidateClassName">NSArrayController</string>

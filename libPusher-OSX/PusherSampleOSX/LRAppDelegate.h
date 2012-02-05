@@ -16,6 +16,7 @@
 @property (assign) IBOutlet NSWindow *window;
 @property (weak) IBOutlet NSTableView *eventsTableView;
 @property (weak) IBOutlet NSArrayController *eventsController;
+@property (weak) IBOutlet NSTextField *connectionStatus;
 
 @property (nonatomic, strong) NSMutableArray *events;
 @property (nonatomic, strong) PTPusher *pusher;
