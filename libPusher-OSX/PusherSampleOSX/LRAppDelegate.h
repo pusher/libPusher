@@ -7,13 +7,17 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import <libPusher/PTPusherDelegate.h>
 
-@interface LRAppDelegate : NSObject <NSApplicationDelegate>
+@class PTPusher;
+
+@interface LRAppDelegate : NSObject <NSApplicationDelegate, PTPusherDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
 @property (weak) IBOutlet NSTableView *eventsTableView;
-@property (nonatomic, strong) NSMutableArray *events;
 @property (weak) IBOutlet NSArrayController *eventsController;
 
+@property (nonatomic, strong) NSMutableArray *events;
+@property (nonatomic, strong) PTPusher *pusher;
 
 @end

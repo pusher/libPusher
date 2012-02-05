@@ -7,6 +7,9 @@
 //
 
 #import "LRAppDelegate.h"
+#import "Constants.h"
+#import <libPusher/PTPusher.h>
+#import <libPusher/PTPusherChannel.h>
 #import <libPusher/PTPusherEvent.h>
 
 @implementation LRAppDelegate
@@ -15,10 +18,37 @@
 @synthesize eventsTableView = _eventsTableView;
 @synthesize events = _events;
 @synthesize eventsController = _eventsController;
+@synthesize pusher;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
   _events = [[NSMutableArray alloc] init];
+}
+
+- (IBAction)connect:(id)sender 
+{
+  self.pusher = [PTPusher pusherWithKey:PUSHER_API_KEY delegate:self];
+
+  [[self.pusher subscribeToChannelNamed:@"test-channel"] bindToEventNamed:@"test-event" handleWithBlock:^(PTPusherEvent *event) {
+    [self.eventsController addObject:event];
+  }];
+}
+
+#pragma mark - PTPusherEventDelegate methods
+
+- (void)pusher:(PTPusher *)pusher connectionDidConnect:(PTPusherConnection *)connection
+{
+  NSLog(@"Connected!");
+}
+
+- (void)pusher:(PTPusher *)pusher connectionDidDisconnect:(PTPusherConnection *)connection
+{
+  NSLog(@"Disconnected!");
+}
+
+- (void)pusher:(PTPusher *)pusher connection:(PTPusherConnection *)connection failedWithError:(NSError *)error
+{
+  NSLog(@"Connection Failed! %@", error);
 }
 
 @end

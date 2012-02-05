@@ -45,7 +45,6 @@
 		A3CA67B014DBCBB0003E2F1E /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CA67AE14DBCBB0003E2F1E /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A3CA67B214DBCBBE003E2F1E /* AsyncSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA67B114DBCBBE003E2F1E /* AsyncSocket.h */; };
 		A3CA67B514DBCBCD003E2F1E /* ZTWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA67B314DBCBCD003E2F1E /* ZTWebSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A3CA67B614DBCBCD003E2F1E /* ZTWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CA67B414DBCBCD003E2F1E /* ZTWebSocket.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A3F203C814DEF36C0093C793 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3CA675814DBCB2D003E2F1E /* Cocoa.framework */; };
 		A3F203D214DEF36C0093C793 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A3F203D014DEF36C0093C793 /* InfoPlist.strings */; };
 		A3F203D414DEF36C0093C793 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F203D314DEF36C0093C793 /* main.m */; };
@@ -53,6 +52,7 @@
 		A3F203DB14DEF36C0093C793 /* LRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F203DA14DEF36C0093C793 /* LRAppDelegate.m */; };
 		A3F203DE14DEF36C0093C793 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3F203DC14DEF36C0093C793 /* MainMenu.xib */; };
 		A3F203E314DEF37A0093C793 /* libPusher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3CA675514DBCB2D003E2F1E /* libPusher.framework */; };
+		A3F203E614DF063E0093C793 /* ZTWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CA67B414DBCBCD003E2F1E /* ZTWebSocket.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -110,6 +110,7 @@
 		A3F203D914DEF36C0093C793 /* LRAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LRAppDelegate.h; sourceTree = "<group>"; };
 		A3F203DA14DEF36C0093C793 /* LRAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LRAppDelegate.m; sourceTree = "<group>"; };
 		A3F203DD14DEF36C0093C793 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		A3F203E514DF05410093C793 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = ../../Sample/Constants.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -229,6 +230,7 @@
 		A3F203CD14DEF36C0093C793 /* PusherSampleOSX */ = {
 			isa = PBXGroup;
 			children = (
+				A3F203E514DF05410093C793 /* Constants.h */,
 				A3F203D914DEF36C0093C793 /* LRAppDelegate.h */,
 				A3F203DA14DEF36C0093C793 /* LRAppDelegate.m */,
 				A3F203DC14DEF36C0093C793 /* MainMenu.xib */,
@@ -404,7 +406,7 @@
 				A3CA67AA14DBCB95003E2F1E /* PTURLRequestOperation.m in Sources */,
 				A3CA67AC14DBCBA4003E2F1E /* AsyncSocket.m in Sources */,
 				A3CA67B014DBCBB0003E2F1E /* JSONKit.m in Sources */,
-				A3CA67B614DBCBCD003E2F1E /* ZTWebSocket.m in Sources */,
+				A3F203E614DF063E0093C793 /* ZTWebSocket.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
