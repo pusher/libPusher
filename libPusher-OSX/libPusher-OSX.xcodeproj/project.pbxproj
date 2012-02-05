@@ -46,6 +46,13 @@
 		A3CA67B214DBCBBE003E2F1E /* AsyncSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA67B114DBCBBE003E2F1E /* AsyncSocket.h */; };
 		A3CA67B514DBCBCD003E2F1E /* ZTWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA67B314DBCBCD003E2F1E /* ZTWebSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3CA67B614DBCBCD003E2F1E /* ZTWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CA67B414DBCBCD003E2F1E /* ZTWebSocket.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		A3F203C814DEF36C0093C793 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3CA675814DBCB2D003E2F1E /* Cocoa.framework */; };
+		A3F203D214DEF36C0093C793 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A3F203D014DEF36C0093C793 /* InfoPlist.strings */; };
+		A3F203D414DEF36C0093C793 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F203D314DEF36C0093C793 /* main.m */; };
+		A3F203D814DEF36C0093C793 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A3F203D614DEF36C0093C793 /* Credits.rtf */; };
+		A3F203DB14DEF36C0093C793 /* LRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F203DA14DEF36C0093C793 /* LRAppDelegate.m */; };
+		A3F203DE14DEF36C0093C793 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3F203DC14DEF36C0093C793 /* MainMenu.xib */; };
+		A3F203E314DEF37A0093C793 /* libPusher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3CA675514DBCB2D003E2F1E /* libPusher.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,6 +98,18 @@
 		A3CA67B114DBCBBE003E2F1E /* AsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AsyncSocket.h; path = ../../Pods/CocoaAsyncSocket/RunLoop/AsyncSocket.h; sourceTree = "<group>"; };
 		A3CA67B314DBCBCD003E2F1E /* ZTWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZTWebSocket.h; path = ../../Vendor/ZTWebSocket/ZTWebSocket.h; sourceTree = "<group>"; };
 		A3CA67B414DBCBCD003E2F1E /* ZTWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZTWebSocket.m; path = ../../Vendor/ZTWebSocket/ZTWebSocket.m; sourceTree = "<group>"; };
+		A3F203C614DEF36C0093C793 /* PusherSampleOSX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PusherSampleOSX.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A3F203CA14DEF36C0093C793 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		A3F203CB14DEF36C0093C793 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		A3F203CC14DEF36C0093C793 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		A3F203CF14DEF36C0093C793 /* PusherSampleOSX-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PusherSampleOSX-Info.plist"; sourceTree = "<group>"; };
+		A3F203D114DEF36C0093C793 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A3F203D314DEF36C0093C793 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A3F203D514DEF36C0093C793 /* PusherSampleOSX-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PusherSampleOSX-Prefix.pch"; sourceTree = "<group>"; };
+		A3F203D714DEF36C0093C793 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		A3F203D914DEF36C0093C793 /* LRAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LRAppDelegate.h; sourceTree = "<group>"; };
+		A3F203DA14DEF36C0093C793 /* LRAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LRAppDelegate.m; sourceTree = "<group>"; };
+		A3F203DD14DEF36C0093C793 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +121,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A3F203C314DEF36C0093C793 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A3F203E314DEF37A0093C793 /* libPusher.framework in Frameworks */,
+				A3F203C814DEF36C0093C793 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -109,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				A3CA675E14DBCB2D003E2F1E /* libPusher-OSX */,
+				A3F203CD14DEF36C0093C793 /* PusherSampleOSX */,
 				A3CA675714DBCB2D003E2F1E /* Frameworks */,
 				A3CA675614DBCB2D003E2F1E /* Products */,
 			);
@@ -118,6 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				A3CA675514DBCB2D003E2F1E /* libPusher.framework */,
+				A3F203C614DEF36C0093C793 /* PusherSampleOSX.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -126,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				A3CA675814DBCB2D003E2F1E /* Cocoa.framework */,
+				A3F203C914DEF36C0093C793 /* Other Frameworks */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -185,6 +216,39 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		A3F203C914DEF36C0093C793 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A3F203CA14DEF36C0093C793 /* AppKit.framework */,
+				A3F203CB14DEF36C0093C793 /* CoreData.framework */,
+				A3F203CC14DEF36C0093C793 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		A3F203CD14DEF36C0093C793 /* PusherSampleOSX */ = {
+			isa = PBXGroup;
+			children = (
+				A3F203D914DEF36C0093C793 /* LRAppDelegate.h */,
+				A3F203DA14DEF36C0093C793 /* LRAppDelegate.m */,
+				A3F203DC14DEF36C0093C793 /* MainMenu.xib */,
+				A3F203CE14DEF36C0093C793 /* Supporting Files */,
+			);
+			path = PusherSampleOSX;
+			sourceTree = "<group>";
+		};
+		A3F203CE14DEF36C0093C793 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A3F203CF14DEF36C0093C793 /* PusherSampleOSX-Info.plist */,
+				A3F203D014DEF36C0093C793 /* InfoPlist.strings */,
+				A3F203D314DEF36C0093C793 /* main.m */,
+				A3F203D514DEF36C0093C793 /* PusherSampleOSX-Prefix.pch */,
+				A3F203D614DEF36C0093C793 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -238,6 +302,23 @@
 			productReference = A3CA675514DBCB2D003E2F1E /* libPusher.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		A3F203C514DEF36C0093C793 /* PusherSampleOSX */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A3F203E114DEF36C0093C793 /* Build configuration list for PBXNativeTarget "PusherSampleOSX" */;
+			buildPhases = (
+				A3F203C214DEF36C0093C793 /* Sources */,
+				A3F203C314DEF36C0093C793 /* Frameworks */,
+				A3F203C414DEF36C0093C793 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PusherSampleOSX;
+			productName = PusherSampleOSX;
+			productReference = A3F203C614DEF36C0093C793 /* PusherSampleOSX.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -260,6 +341,7 @@
 			projectRoot = "";
 			targets = (
 				A3CA675414DBCB2D003E2F1E /* libPusher */,
+				A3F203C514DEF36C0093C793 /* PusherSampleOSX */,
 			);
 		};
 /* End PBXProject section */
@@ -270,6 +352,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				A3CA676314DBCB2D003E2F1E /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A3F203C414DEF36C0093C793 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A3F203D214DEF36C0093C793 /* InfoPlist.strings in Resources */,
+				A3F203D814DEF36C0093C793 /* Credits.rtf in Resources */,
+				A3F203DE14DEF36C0093C793 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,6 +408,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A3F203C214DEF36C0093C793 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A3F203D414DEF36C0093C793 /* main.m in Sources */,
+				A3F203DB14DEF36C0093C793 /* LRAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
@@ -325,6 +426,30 @@
 				A3CA676214DBCB2D003E2F1E /* en */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		A3F203D014DEF36C0093C793 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A3F203D114DEF36C0093C793 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		A3F203D614DEF36C0093C793 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A3F203D714DEF36C0093C793 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		A3F203DC14DEF36C0093C793 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A3F203DD14DEF36C0093C793 /* en */,
+			);
+			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -407,6 +532,30 @@
 			};
 			name = Release;
 		};
+		A3F203DF14DEF36C0093C793 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PusherSampleOSX/PusherSampleOSX-Prefix.pch";
+				INFOPLIST_FILE = "PusherSampleOSX/PusherSampleOSX-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		A3F203E014DEF36C0093C793 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PusherSampleOSX/PusherSampleOSX-Prefix.pch";
+				INFOPLIST_FILE = "PusherSampleOSX/PusherSampleOSX-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -427,6 +576,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		A3F203E114DEF36C0093C793 /* Build configuration list for PBXNativeTarget "PusherSampleOSX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A3F203DF14DEF36C0093C793 /* Debug */,
+				A3F203E014DEF36C0093C793 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
