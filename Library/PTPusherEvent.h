@@ -36,6 +36,10 @@
  */
 @property (strong, nonatomic, readonly) id data;
 
+/** The time the event was received.
+ */
+@property (nonatomic, readonly, strong) NSDate *timeReceived;
+
 - (id)initWithEventName:(NSString *)name channel:(NSString *)channel data:(id)data;
 + (id)eventFromMessageDictionary:(NSDictionary *)dictionary;
 @end

@@ -18,6 +18,7 @@ NSString *const PTPusherChannelKey = @"channel";
 @synthesize name = _name;
 @synthesize data = _data;
 @synthesize channel = _channel;
+@synthesize timeReceived = _timeReceived;
 
 + (id)eventFromMessageDictionary:(NSDictionary *)dictionary
 {
@@ -32,6 +33,7 @@ NSString *const PTPusherChannelKey = @"channel";
   if (self = [super init]) {
     _name = [name copy];
     _channel = [channel copy];
+    _timeReceived = [NSDate date];
     
     // try and deserialize the data as JSON if possible
     if ([data respondsToSelector:@selector(dataUsingEncoding:)]) {
