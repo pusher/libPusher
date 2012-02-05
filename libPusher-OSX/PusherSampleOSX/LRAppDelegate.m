@@ -7,14 +7,18 @@
 //
 
 #import "LRAppDelegate.h"
+#import <libPusher/PTPusherEvent.h>
 
 @implementation LRAppDelegate
 
 @synthesize window = _window;
+@synthesize eventsTableView = _eventsTableView;
+@synthesize events = _events;
+@synthesize eventsController = _eventsController;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-  // Insert code here to initialize your application
+  _events = [[NSMutableArray alloc] init];
 }
 
 @end
