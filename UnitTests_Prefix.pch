@@ -10,3 +10,5 @@
 #import <OCHamcrest/OCHamcrest.h>
 #import <OCMock/OCMock.h>
 #endif
+
+#define __DEPRECATED__ __attribute__((deprecated))

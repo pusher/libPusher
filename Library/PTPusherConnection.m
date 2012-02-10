@@ -29,7 +29,13 @@ NSString *const PTPusherConnectionPingEvent        = @"pusher:ping";
 @synthesize connected;
 @synthesize socketID;
 
+
 - (id)initWithURL:(NSURL *)aURL secure:(BOOL)secure
+{
+  return [self initWithURL:aURL secure:NO];
+}
+
+- (id)initWithURL:(NSURL *)aURL
 {
   if ((self = [super init])) {
     socket = [[SRWebSocket alloc] initWithURLRequest:[NSURLRequest requestWithURL:aURL]];
