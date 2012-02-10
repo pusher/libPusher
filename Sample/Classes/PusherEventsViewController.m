@@ -7,6 +7,7 @@
 //
 
 #import "PusherEventsViewController.h"
+#import "Constants.h"
 #import "PTPusher.h"
 #import "PTPusherEvent.h"
 #import "PTPusherChannel.h"
