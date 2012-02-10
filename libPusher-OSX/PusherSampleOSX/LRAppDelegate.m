@@ -30,7 +30,7 @@
 {
   [sender setEnabled:NO];
   
-  self.pusher = [PTPusher pusherWithKey:PUSHER_API_KEY delegate:self];
+  self.pusher = [PTPusher pusherWithKey:PUSHER_API_KEY delegate:self encrypted:NO];
 
   [[self.pusher subscribeToChannelNamed:@"test-channel"] bindToEventNamed:@"test-event" handleWithBlock:^(PTPusherEvent *event) {
     [self.eventsController addObject:event];

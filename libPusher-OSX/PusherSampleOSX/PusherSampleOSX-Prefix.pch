@@ -5,3 +5,5 @@
 #ifdef __OBJC__
   #import <Cocoa/Cocoa.h>
 #endif
+
+#define __DEPRECATED__ __attribute__((deprecated))

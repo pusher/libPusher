@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A37E161214E4C95C00DCA3A6 /* base64.c in Sources */ = {isa = PBXBuildFile; fileRef = A37E160B14E4C95B00DCA3A6 /* base64.c */; };
+		A37E161314E4C95C00DCA3A6 /* base64.h in Headers */ = {isa = PBXBuildFile; fileRef = A37E160C14E4C95B00DCA3A6 /* base64.h */; };
+		A37E161414E4C95C00DCA3A6 /* NSData+SRB64Additions.h in Headers */ = {isa = PBXBuildFile; fileRef = A37E160D14E4C95B00DCA3A6 /* NSData+SRB64Additions.h */; };
+		A37E161514E4C95C00DCA3A6 /* NSData+SRB64Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = A37E160E14E4C95C00DCA3A6 /* NSData+SRB64Additions.m */; };
+		A37E161614E4C95C00DCA3A6 /* SocketRocket-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = A37E160F14E4C95C00DCA3A6 /* SocketRocket-Prefix.pch */; };
+		A37E161714E4C95C00DCA3A6 /* SRWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A37E161014E4C95C00DCA3A6 /* SRWebSocket.h */; };
+		A37E161814E4C95C00DCA3A6 /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A37E161114E4C95C00DCA3A6 /* SRWebSocket.m */; };
+		A37E161C14E4C9CC00DCA3A6 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A37E161B14E4C9CC00DCA3A6 /* Security.framework */; };
+		A37E162014E4CA6400DCA3A6 /* libicucore.A.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A37E161F14E4CA6400DCA3A6 /* libicucore.A.dylib */; };
+		A37E162214E4CC0000DCA3A6 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A37E162114E4CBFF00DCA3A6 /* CoreServices.framework */; };
 		A3CA675914DBCB2D003E2F1E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3CA675814DBCB2D003E2F1E /* Cocoa.framework */; };
 		A3CA676314DBCB2D003E2F1E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A3CA676114DBCB2D003E2F1E /* InfoPlist.strings */; };
 		A3CA678C14DBCB95003E2F1E /* NSDictionary+QueryString.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA676D14DBCB94003E2F1E /* NSDictionary+QueryString.h */; };
@@ -40,11 +50,8 @@
 		A3CA67A814DBCB95003E2F1E /* PTTargetActionEventListener.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CA678914DBCB95003E2F1E /* PTTargetActionEventListener.m */; };
 		A3CA67A914DBCB95003E2F1E /* PTURLRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA678A14DBCB95003E2F1E /* PTURLRequestOperation.h */; };
 		A3CA67AA14DBCB95003E2F1E /* PTURLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CA678B14DBCB95003E2F1E /* PTURLRequestOperation.m */; };
-		A3CA67AC14DBCBA4003E2F1E /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CA67AB14DBCBA4003E2F1E /* AsyncSocket.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		A3CA67AF14DBCBB0003E2F1E /* JSONKit.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA67AD14DBCBB0003E2F1E /* JSONKit.h */; };
 		A3CA67B014DBCBB0003E2F1E /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CA67AE14DBCBB0003E2F1E /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		A3CA67B214DBCBBE003E2F1E /* AsyncSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA67B114DBCBBE003E2F1E /* AsyncSocket.h */; };
-		A3CA67B514DBCBCD003E2F1E /* ZTWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA67B314DBCBCD003E2F1E /* ZTWebSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3F203C814DEF36C0093C793 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3CA675814DBCB2D003E2F1E /* Cocoa.framework */; };
 		A3F203D214DEF36C0093C793 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A3F203D014DEF36C0093C793 /* InfoPlist.strings */; };
 		A3F203D414DEF36C0093C793 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F203D314DEF36C0093C793 /* main.m */; };
@@ -52,10 +59,19 @@
 		A3F203DB14DEF36C0093C793 /* LRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F203DA14DEF36C0093C793 /* LRAppDelegate.m */; };
 		A3F203DE14DEF36C0093C793 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3F203DC14DEF36C0093C793 /* MainMenu.xib */; };
 		A3F203E314DEF37A0093C793 /* libPusher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3CA675514DBCB2D003E2F1E /* libPusher.framework */; };
-		A3F203E614DF063E0093C793 /* ZTWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CA67B414DBCBCD003E2F1E /* ZTWebSocket.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A37E160B14E4C95B00DCA3A6 /* base64.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = base64.c; path = ../../Pods/SocketRocket/SocketRocket/base64.c; sourceTree = "<group>"; };
+		A37E160C14E4C95B00DCA3A6 /* base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = base64.h; path = ../../Pods/SocketRocket/SocketRocket/base64.h; sourceTree = "<group>"; };
+		A37E160D14E4C95B00DCA3A6 /* NSData+SRB64Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+SRB64Additions.h"; path = "../../Pods/SocketRocket/SocketRocket/NSData+SRB64Additions.h"; sourceTree = "<group>"; };
+		A37E160E14E4C95C00DCA3A6 /* NSData+SRB64Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+SRB64Additions.m"; path = "../../Pods/SocketRocket/SocketRocket/NSData+SRB64Additions.m"; sourceTree = "<group>"; };
+		A37E160F14E4C95C00DCA3A6 /* SocketRocket-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SocketRocket-Prefix.pch"; path = "../../Pods/SocketRocket/SocketRocket/SocketRocket-Prefix.pch"; sourceTree = "<group>"; };
+		A37E161014E4C95C00DCA3A6 /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SRWebSocket.h; path = ../../Pods/SocketRocket/SocketRocket/SRWebSocket.h; sourceTree = "<group>"; };
+		A37E161114E4C95C00DCA3A6 /* SRWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SRWebSocket.m; path = ../../Pods/SocketRocket/SocketRocket/SRWebSocket.m; sourceTree = "<group>"; };
+		A37E161B14E4C9CC00DCA3A6 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		A37E161F14E4CA6400DCA3A6 /* libicucore.A.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.A.dylib; path = usr/lib/libicucore.A.dylib; sourceTree = SDKROOT; };
+		A37E162114E4CBFF00DCA3A6 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		A3CA675514DBCB2D003E2F1E /* libPusher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = libPusher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3CA675814DBCB2D003E2F1E /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		A3CA676014DBCB2D003E2F1E /* libPusher-OSX-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "libPusher-OSX-Info.plist"; sourceTree = "<group>"; };
@@ -92,12 +108,8 @@
 		A3CA678914DBCB95003E2F1E /* PTTargetActionEventListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PTTargetActionEventListener.m; path = ../../Library/PTTargetActionEventListener.m; sourceTree = "<group>"; };
 		A3CA678A14DBCB95003E2F1E /* PTURLRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PTURLRequestOperation.h; path = ../../Library/PTURLRequestOperation.h; sourceTree = "<group>"; };
 		A3CA678B14DBCB95003E2F1E /* PTURLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PTURLRequestOperation.m; path = ../../Library/PTURLRequestOperation.m; sourceTree = "<group>"; };
-		A3CA67AB14DBCBA4003E2F1E /* AsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AsyncSocket.m; path = ../../Pods/CocoaAsyncSocket/RunLoop/AsyncSocket.m; sourceTree = "<group>"; };
 		A3CA67AD14DBCBB0003E2F1E /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONKit.h; path = ../../Pods/JSONKit/JSONKit.h; sourceTree = "<group>"; };
 		A3CA67AE14DBCBB0003E2F1E /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JSONKit.m; path = ../../Pods/JSONKit/JSONKit.m; sourceTree = "<group>"; };
-		A3CA67B114DBCBBE003E2F1E /* AsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AsyncSocket.h; path = ../../Pods/CocoaAsyncSocket/RunLoop/AsyncSocket.h; sourceTree = "<group>"; };
-		A3CA67B314DBCBCD003E2F1E /* ZTWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZTWebSocket.h; path = ../../Vendor/ZTWebSocket/ZTWebSocket.h; sourceTree = "<group>"; };
-		A3CA67B414DBCBCD003E2F1E /* ZTWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZTWebSocket.m; path = ../../Vendor/ZTWebSocket/ZTWebSocket.m; sourceTree = "<group>"; };
 		A3F203C614DEF36C0093C793 /* PusherSampleOSX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PusherSampleOSX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3F203CA14DEF36C0093C793 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		A3F203CB14DEF36C0093C793 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -118,6 +130,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A37E162214E4CC0000DCA3A6 /* CoreServices.framework in Frameworks */,
+				A37E162014E4CA6400DCA3A6 /* libicucore.A.dylib in Frameworks */,
+				A37E161C14E4C9CC00DCA3A6 /* Security.framework in Frameworks */,
 				A3CA675914DBCB2D003E2F1E /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -137,6 +152,7 @@
 		A3CA674914DBCB2D003E2F1E = {
 			isa = PBXGroup;
 			children = (
+				A37E161F14E4CA6400DCA3A6 /* libicucore.A.dylib */,
 				A3CA675E14DBCB2D003E2F1E /* libPusher-OSX */,
 				A3F203CD14DEF36C0093C793 /* PusherSampleOSX */,
 				A3CA675714DBCB2D003E2F1E /* Frameworks */,
@@ -156,6 +172,8 @@
 		A3CA675714DBCB2D003E2F1E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A37E162114E4CBFF00DCA3A6 /* CoreServices.framework */,
+				A37E161B14E4C9CC00DCA3A6 /* Security.framework */,
 				A3CA675814DBCB2D003E2F1E /* Cocoa.framework */,
 				A3F203C914DEF36C0093C793 /* Other Frameworks */,
 			);
@@ -165,12 +183,15 @@
 		A3CA675E14DBCB2D003E2F1E /* libPusher-OSX */ = {
 			isa = PBXGroup;
 			children = (
-				A3CA67B314DBCBCD003E2F1E /* ZTWebSocket.h */,
-				A3CA67B414DBCBCD003E2F1E /* ZTWebSocket.m */,
+				A37E160B14E4C95B00DCA3A6 /* base64.c */,
+				A37E160C14E4C95B00DCA3A6 /* base64.h */,
+				A37E160D14E4C95B00DCA3A6 /* NSData+SRB64Additions.h */,
+				A37E160E14E4C95C00DCA3A6 /* NSData+SRB64Additions.m */,
+				A37E160F14E4C95C00DCA3A6 /* SocketRocket-Prefix.pch */,
+				A37E161014E4C95C00DCA3A6 /* SRWebSocket.h */,
+				A37E161114E4C95C00DCA3A6 /* SRWebSocket.m */,
 				A3CA67AD14DBCBB0003E2F1E /* JSONKit.h */,
 				A3CA67AE14DBCBB0003E2F1E /* JSONKit.m */,
-				A3CA67B114DBCBBE003E2F1E /* AsyncSocket.h */,
-				A3CA67AB14DBCBA4003E2F1E /* AsyncSocket.m */,
 				A3CA676D14DBCB94003E2F1E /* NSDictionary+QueryString.h */,
 				A3CA676E14DBCB94003E2F1E /* NSDictionary+QueryString.m */,
 				A3CA676F14DBCB94003E2F1E /* NSString+Hashing.h */,
@@ -277,8 +298,10 @@
 				A3CA67A714DBCB95003E2F1E /* PTTargetActionEventListener.h in Headers */,
 				A3CA67A914DBCB95003E2F1E /* PTURLRequestOperation.h in Headers */,
 				A3CA67AF14DBCBB0003E2F1E /* JSONKit.h in Headers */,
-				A3CA67B214DBCBBE003E2F1E /* AsyncSocket.h in Headers */,
-				A3CA67B514DBCBCD003E2F1E /* ZTWebSocket.h in Headers */,
+				A37E161314E4C95C00DCA3A6 /* base64.h in Headers */,
+				A37E161414E4C95C00DCA3A6 /* NSData+SRB64Additions.h in Headers */,
+				A37E161614E4C95C00DCA3A6 /* SocketRocket-Prefix.pch in Headers */,
+				A37E161714E4C95C00DCA3A6 /* SRWebSocket.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,9 +427,10 @@
 				A3CA67A414DBCB95003E2F1E /* PTPusherEventDispatcher.m in Sources */,
 				A3CA67A814DBCB95003E2F1E /* PTTargetActionEventListener.m in Sources */,
 				A3CA67AA14DBCB95003E2F1E /* PTURLRequestOperation.m in Sources */,
-				A3CA67AC14DBCBA4003E2F1E /* AsyncSocket.m in Sources */,
 				A3CA67B014DBCBB0003E2F1E /* JSONKit.m in Sources */,
-				A3F203E614DF063E0093C793 /* ZTWebSocket.m in Sources */,
+				A37E161214E4C95C00DCA3A6 /* base64.c in Sources */,
+				A37E161514E4C95C00DCA3A6 /* NSData+SRB64Additions.m in Sources */,
+				A37E161814E4C95C00DCA3A6 /* SRWebSocket.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,6 +540,7 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "libPusher-OSX/libPusher-OSX-Prefix.pch";
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/usr/include";
 				INFOPLIST_FILE = "libPusher-OSX/libPusher-OSX-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = framework;
@@ -528,6 +553,7 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "libPusher-OSX/libPusher-OSX-Prefix.pch";
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/usr/include";
 				INFOPLIST_FILE = "libPusher-OSX/libPusher-OSX-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = framework;
@@ -586,6 +612,7 @@
 				A3F203E014DEF36C0093C793 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

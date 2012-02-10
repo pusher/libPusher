@@ -4,4 +4,7 @@
 
 #ifdef __OBJC__
   #import <Cocoa/Cocoa.h>
+  #import <Security/SecRandom.h>
 #endif
+
+#define __DEPRECATED__ __attribute__((deprecated))
