@@ -1,9 +1,9 @@
 PODS:
-  - JSONKit (1.4)
+  - JSONKit (1.5b)
   - Kiwi (1.0.1)
   - SocketRocket (0.1)
 
 DEPENDENCIES:
-  - JSONKit (= 1.4)
+  - JSONKit (defined in Podfile)
   - Kiwi (from `git://github.com/allending/Kiwi.git')
   - SocketRocket (= 0.1)
