@@ -134,11 +134,11 @@ extern NSString *const PTPusherErrorUnderlyingEventKey;
  a delegate using the delegate property after this method returns, it may not be notified
  of connection events.
  
- @deprecated
+ @deprecated      Use pusherWithKey:delegate:encrypted:
  @param key       Your application's API key. It can be found in the API Access section of your application within the Pusher user dashboard.
  @param delegate  The delegate for this instance
  */
-+ (id)pusherWithKey:(NSString *)key delegate:(id<PTPusherDelegate>)delegate;
++ (id)pusherWithKey:(NSString *)key delegate:(id<PTPusherDelegate>)delegate __DEPRECATED__;
 
 /** Returns a new PTPusher instance with a connection configured with the given key.
  
@@ -158,11 +158,11 @@ extern NSString *const PTPusherErrorUnderlyingEventKey;
  If you intend to set a delegate for this instance, you are recommended to set connectAutomatically
  to NO, set the delegate then manually call connect.
  
- @deprecated
+ @deprecated      Use pusherWithKey:connectAutomatically:encrypted:
  @param key       Your application's API key. It can be found in the API Access section of your application within the Pusher user dashboard.
  @param connect   Automatically If YES, the connection will be connected on initialisation.
  */
-+ (id)pusherWithKey:(NSString *)key connectAutomatically:(BOOL)connectAutomatically;
++ (id)pusherWithKey:(NSString *)key connectAutomatically:(BOOL)connectAutomatically __DEPRECATED__;
 
 /** Initialises a new PTPusher instance with a connection configured with the given key.
  
