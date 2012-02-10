@@ -227,6 +227,10 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
   if ([self.delegate respondsToSelector:@selector(pusher:connectionDidConnect:)]) {
     [self.delegate pusher:self connectionDidConnect:connection];
   }
+}
+
+- (void)pusherConnection:(PTPusherConnection *)connection didReceiveHandshakeEvent:(PTPusherEvent *)event
+{
   for (PTPusherChannel *channel in [channels allValues]) {
     [self subscribeToChannel:channel];
   }
@@ -250,7 +254,7 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
   if ([self.delegate respondsToSelector:@selector(pusher:connection:failedWithError:)]) {
     [self.delegate pusher:self connection:connection failedWithError:error];
   }
-  if ([error.domain isEqualToString:ZTWebSocketErrorDomain] && self.shouldReconnectAutomatically) {
+  if ([error.domain isEqualToString:@"ZTWebSocketErrorDomain"] && self.shouldReconnectAutomatically) {
     [self reconnectAfterDelay];
   }
 }

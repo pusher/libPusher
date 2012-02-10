@@ -8,6 +8,7 @@
 
 #import "PTPusherConnection.h"
 #import "PTPusherEvent.h"
+#import "SRWebSocket.h"
 #import "JSONKit.h"
 
 NSString *const PTPusherConnectionEstablishedEvent = @"pusher:connection_established";
@@ -20,7 +21,9 @@ NSString *const PTPusherConnectionPingEvent        = @"pusher:ping";
 - (void)respondToPingEvent;
 @end
 
-@implementation PTPusherConnection
+@implementation PTPusherConnection {
+  SRWebSocket *socket;
+}
 
 @synthesize delegate = _delegate;
 @synthesize connected;
@@ -29,7 +32,8 @@ NSString *const PTPusherConnectionPingEvent        = @"pusher:ping";
 - (id)initWithURL:(NSURL *)aURL secure:(BOOL)secure
 {
   if ((self = [super init])) {
-    socket = [[ZTWebSocket alloc] initWithURLString:[aURL absoluteString] delegate:self secure:secure];
+    socket = [[SRWebSocket alloc] initWithURLRequest:[NSURLRequest requestWithURL:aURL]];
+    socket.delegate = self;
   }
   return self;
 }
@@ -68,19 +72,25 @@ NSString *const PTPusherConnectionPingEvent        = @"pusher:ping";
 
 #pragma mark - ZTWebSocket delegate methods
 
-- (void)webSocket:(ZTWebSocket*)webSocket didFailWithError:(NSError*)error;
+- (void)webSocketDidOpen:(SRWebSocket *)webSocket
+{
+  self.connected = YES;
+  [self.delegate pusherConnectionDidConnect:self];
+}
+
+- (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error;
 {
   [self.delegate pusherConnection:self didFailWithError:error];
 }
 
-- (void)webSocketDidClose:(ZTWebSocket*)webSocket;
+- (void)webSocketDidClose:(SRWebSocket *)webSocket;
 {
   self.connected = NO;
   [self.delegate pusherConnectionDidDisconnect:self];
   self.socketID = nil;
 }
 
-- (void)webSocket:(ZTWebSocket*)webSocket didReceiveMessage:(NSString*)message;
+- (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(NSString *)message
 {
   NSDictionary *messageDictionary = [message objectFromJSONString];
   PTPusherEvent *event = [PTPusherEvent eventFromMessageDictionary:messageDictionary];
@@ -93,9 +103,8 @@ NSString *const PTPusherConnectionPingEvent        = @"pusher:ping";
   
   if ([event.name isEqualToString:PTPusherConnectionEstablishedEvent]) {
     self.socketID = [event.data objectForKey:@"socket_id"];
-    self.connected = YES;
-
-    [self.delegate pusherConnectionDidConnect:self];
+    
+    [self.delegate pusherConnection:self didReceiveHandshakeEvent:event];
   }
   
   [self.delegate pusherConnection:self didReceiveEvent:event];

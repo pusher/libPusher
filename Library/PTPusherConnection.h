@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ZTWebSocket.h"
+#import "SRWebSocket.h"
 
 @class PTPusherConnection;
 @class PTPusherEvent;
@@ -16,12 +16,12 @@
 - (void)pusherConnectionDidConnect:(PTPusherConnection *)connection;
 - (void)pusherConnectionDidDisconnect:(PTPusherConnection *)connection;
 - (void)pusherConnection:(PTPusherConnection *)connection didFailWithError:(NSError *)error;
+- (void)pusherConnection:(PTPusherConnection *)connection didReceiveHandshakeEvent:(PTPusherEvent *)event;
 - (void)pusherConnection:(PTPusherConnection *)connection didReceiveEvent:(PTPusherEvent *)event;
 @end
 
-@interface PTPusherConnection : NSObject <ZTWebSocketDelegate> {
-  ZTWebSocket *socket;
-}
+@interface PTPusherConnection : NSObject <SRWebSocketDelegate>
+
 @property (nonatomic, unsafe_unretained) id<PTPusherConnectionDelegate> delegate;
 @property (nonatomic, readonly, getter=isConnected) BOOL connected;
 @property (nonatomic, copy, readonly) NSString *socketID;

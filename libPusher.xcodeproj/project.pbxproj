@@ -27,6 +27,11 @@
 		A35281EA13F75265000687C0 /* PTPusherAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = A35281E813F75265000687C0 /* PTPusherAPI.m */; };
 		A3698FF213FF0A7A005CF130 /* NSMutableURLRequest+BasicAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = A3698FED13FF0868005CF130 /* NSMutableURLRequest+BasicAuth.m */; };
 		A3698FFF13FF200C005CF130 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = A3698FFE13FF200C005CF130 /* NSData+Base64.m */; };
+		A37E158914E4997700DCA3A6 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A37E158814E4997700DCA3A6 /* Security.framework */; };
+		A37E158B14E4998800DCA3A6 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A37E158A14E4998800DCA3A6 /* libicucore.dylib */; };
+		A37E158C14E499DD00DCA3A6 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A37E158A14E4998800DCA3A6 /* libicucore.dylib */; };
+		A37E158D14E499E000DCA3A6 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A37E158814E4997700DCA3A6 /* Security.framework */; };
+		A37E158F14E49F2D00DCA3A6 /* SRWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A37E158E14E49F2D00DCA3A6 /* SRWebSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A39E238913F7E6AB0083CAD7 /* PusherPresenceEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A39E238813F7E6AB0083CAD7 /* PusherPresenceEventsViewController.m */; };
 		A3A1A112115814D0001EF877 /* OCHamcrest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3A1A111115814D0001EF877 /* OCHamcrest.framework */; };
 		A3A1A149115814F7001EF877 /* OCHamcrest.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = A3A1A111115814D0001EF877 /* OCHamcrest.framework */; };
@@ -48,7 +53,6 @@
 		A3AC28C413F76C51001C4808 /* PTPusherChannelAuthorizationOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AC28C213F76C50001C4808 /* PTPusherChannelAuthorizationOperation.m */; };
 		A3B2931F14D8D96900C6B79F /* PTPusherPresenceChannelDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = A39E238A13F7E85C0083CAD7 /* PTPusherPresenceChannelDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3C32D9B14D083C10017FAED /* PTPusherEventSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C32D9A14D083C10017FAED /* PTPusherEventSpec.m */; };
-		A3C8EA1114216EF1000E4D81 /* ZTWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A3C8EA0F14216EF1000E4D81 /* ZTWebSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3C8EA1214216EF1000E4D81 /* ZTWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C8EA1014216EF1000E4D81 /* ZTWebSocket.m */; };
 		A3CA666914D96814003E2F1E /* PTPusherChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = A3FE42181181173B009CF5D7 /* PTPusherChannel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3CA670E14DBBAA1003E2F1E /* PTPusherErrors.h in Headers */ = {isa = PBXBuildFile; fileRef = A39E238613F7E3FD0083CAD7 /* PTPusherErrors.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -128,6 +132,9 @@
 		A3698FED13FF0868005CF130 /* NSMutableURLRequest+BasicAuth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableURLRequest+BasicAuth.m"; sourceTree = "<group>"; };
 		A3698FFD13FF200C005CF130 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
 		A3698FFE13FF200C005CF130 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
+		A37E158814E4997700DCA3A6 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		A37E158A14E4998800DCA3A6 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		A37E158E14E49F2D00DCA3A6 /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SRWebSocket.h; path = Pods/Headers/SocketRocket/SRWebSocket.h; sourceTree = SOURCE_ROOT; };
 		A39E238613F7E3FD0083CAD7 /* PTPusherErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherErrors.h; sourceTree = "<group>"; };
 		A39E238713F7E6AB0083CAD7 /* PusherPresenceEventsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PusherPresenceEventsViewController.h; sourceTree = "<group>"; };
 		A39E238813F7E6AB0083CAD7 /* PusherPresenceEventsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PusherPresenceEventsViewController.m; sourceTree = "<group>"; };
@@ -200,6 +207,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A37E158914E4997700DCA3A6 /* Security.framework in Frameworks */,
+				A37E158B14E4998800DCA3A6 /* libicucore.dylib in Frameworks */,
 				A31577F914D07358000136A9 /* libPods-specs.a in Frameworks */,
 				A3A1A112115814D0001EF877 /* OCHamcrest.framework in Frameworks */,
 				A3A1A20111581782001EF877 /* CFNetwork.framework in Frameworks */,
@@ -218,6 +227,8 @@
 				A3A9F95B1496E96100F83617 /* UIKit.framework in Frameworks */,
 				A3A9F95C1496E96100F83617 /* Foundation.framework in Frameworks */,
 				A3A9FA4F1496EEE000F83617 /* CFNetwork.framework in Frameworks */,
+				A37E158C14E499DD00DCA3A6 /* libicucore.dylib in Frameworks */,
+				A37E158D14E499E000DCA3A6 /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,6 +315,8 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A37E158A14E4998800DCA3A6 /* libicucore.dylib */,
+				A37E158814E4997700DCA3A6 /* Security.framework */,
 				A3CA673514DBBE0C003E2F1E /* CoreServices.framework */,
 				A3A1A111115814D0001EF877 /* OCHamcrest.framework */,
 				A3D1D0B51157CCDE009A12AD /* CFNetwork.framework */,
@@ -383,6 +396,7 @@
 		A3D1D0991157CC3F009A12AD /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				A37E158E14E49F2D00DCA3A6 /* SRWebSocket.h */,
 				A3CDE3B811C93E460051777E /* ZTWebSocket */,
 			);
 			path = Vendor;
@@ -466,11 +480,11 @@
 				A3AC28B613F75530001C4808 /* PTURLRequestOperation.h in Headers */,
 				A3AC28BF13F75BF1001C4808 /* PusherExampleMenuViewController.h in Headers */,
 				A3AC28C313F76C51001C4808 /* PTPusherChannelAuthorizationOperation.h in Headers */,
-				A3C8EA1114216EF1000E4D81 /* ZTWebSocket.h in Headers */,
 				A3B2931F14D8D96900C6B79F /* PTPusherPresenceChannelDelegate.h in Headers */,
 				A3CA666914D96814003E2F1E /* PTPusherChannel.h in Headers */,
 				A3CA670E14DBBAA1003E2F1E /* PTPusherErrors.h in Headers */,
 				A3CA671514DBBAE1003E2F1E /* NSDictionary+QueryString.h in Headers */,
+				A37E158F14E49F2D00DCA3A6 /* SRWebSocket.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
