@@ -1,21 +1,21 @@
 GIT
   remote: git://github.com/CocoaPods/CocoaPods.git
-  revision: b85b9bdfb08e798aa6b48c74b8b3ac22e39182d2
+  revision: c821caafdea1666c8a13e176e0e00f7556349d11
   specs:
-    cocoapods (0.3.9)
+    cocoapods (0.3.10)
       xcodeproj (~> 0.0.2)
 
 GIT
   remote: git://github.com/lukeredpath/xcodebuild-rb.git
-  revision: 9032a173fd53c4e1f5296a286273242b5d76583a
+  revision: 913bf70dfb72a7f85e0c176f9586c6a72c353e16
   specs:
-    xcodebuild-rb (0.1.0)
+    xcodebuild-rb (0.2.0)
       state_machine (~> 1.1.2)
 
 GEM
   remote: http://rubygems.org/
   specs:
-    daemons (1.1.6)
+    daemons (1.1.8)
     eventmachine (0.12.10)
     faster_xml_simple (0.5.0)
       libxml-ruby (>= 0.3.8.4)
