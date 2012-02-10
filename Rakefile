@@ -143,7 +143,7 @@ namespace :release do
   
   XcodeBuild::Tasks::BuildTask.new(:osx) do |t|
     t.project_name = "libPusher-OSX/libPusher-OSX.xcodeproj"
-    t.target = "libPusher"
+    t.target = "Pusher"
     t.configuration = "Release"
     t.formatter = XcodeBuild::Formatters::ProgressFormatter.new
     t.after_build do |build| 
