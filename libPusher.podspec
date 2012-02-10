@@ -10,5 +10,5 @@ Pod::Spec.new do |s|
   s.frameworks = "CFNetwork"
   
   s.dependency "JSONKit", "1.4"
-  s.dependency 'CocoaAsyncSocket', '0.0.1'
+  s.dependency 'SocketRocket', '0.1'
 end
