@@ -6,5 +6,3 @@
     #import <Foundation/Foundation.h>
     #import <UIKit/UIKit.h>
 #endif
-
-#define __DEPRECATED__ __attribute__((deprecated))

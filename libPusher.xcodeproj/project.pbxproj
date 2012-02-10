@@ -32,6 +32,7 @@
 		A37E158F14E49F2D00DCA3A6 /* SRWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A37E158E14E49F2D00DCA3A6 /* SRWebSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A37E15EA14E4BBBA00DCA3A6 /* PusherExampleMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AC28BD13F75BF1001C4808 /* PusherExampleMenuViewController.m */; };
 		A37E160814E4C87500DCA3A6 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A37E160714E4C87500DCA3A6 /* libicucore.dylib */; };
+		A37E167414E572C900DCA3A6 /* PTPusherMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = A37E167314E572C900DCA3A6 /* PTPusherMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A39E238913F7E6AB0083CAD7 /* PusherPresenceEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A39E238813F7E6AB0083CAD7 /* PusherPresenceEventsViewController.m */; };
 		A3A1A112115814D0001EF877 /* OCHamcrest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3A1A111115814D0001EF877 /* OCHamcrest.framework */; };
 		A3A1A149115814F7001EF877 /* OCHamcrest.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = A3A1A111115814D0001EF877 /* OCHamcrest.framework */; };
@@ -134,6 +135,7 @@
 		A37E158814E4997700DCA3A6 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		A37E158E14E49F2D00DCA3A6 /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SRWebSocket.h; path = Pods/Headers/SocketRocket/SRWebSocket.h; sourceTree = SOURCE_ROOT; };
 		A37E160714E4C87500DCA3A6 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		A37E167314E572C900DCA3A6 /* PTPusherMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherMacros.h; sourceTree = "<group>"; };
 		A39E238613F7E3FD0083CAD7 /* PTPusherErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherErrors.h; sourceTree = "<group>"; };
 		A39E238713F7E6AB0083CAD7 /* PusherPresenceEventsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PusherPresenceEventsViewController.h; sourceTree = "<group>"; };
 		A39E238813F7E6AB0083CAD7 /* PusherPresenceEventsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PusherPresenceEventsViewController.m; sourceTree = "<group>"; };
@@ -242,6 +244,7 @@
 		080E96DDFE201D6D7F000001 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				A37E167314E572C900DCA3A6 /* PTPusherMacros.h */,
 				A35281E613F7524C000687C0 /* REST API Client */,
 				A35281D813F73C42000687C0 /* Event Listeners */,
 				A3FE429311811ED6009CF5D7 /* Utility */,
@@ -471,6 +474,7 @@
 				A3CA670E14DBBAA1003E2F1E /* PTPusherErrors.h in Headers */,
 				A3CA671514DBBAE1003E2F1E /* NSDictionary+QueryString.h in Headers */,
 				A37E158F14E49F2D00DCA3A6 /* SRWebSocket.h in Headers */,
+				A37E167414E572C900DCA3A6 /* PTPusherMacros.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

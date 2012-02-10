@@ -14,7 +14,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A3CA675414DBCB2D003E2F1E"
-               BuildableName = "libPusher.framework"
+               BuildableName = "Pusher.framework"
                BlueprintName = "Pusher"
                ReferencedContainer = "container:libPusher-OSX.xcodeproj">
             </BuildableReference>

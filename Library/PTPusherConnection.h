@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "SRWebSocket.h"
+#import "PTPusherMacros.h"
 
 @class PTPusherConnection;
 @class PTPusherEvent;
@@ -50,7 +51,7 @@
  @param delegate  The delegate for this connection
  @param secure    Whether this connection should be secure (TLS)
  */
-- (id)initWithURL:(NSURL *)aURL secure:(BOOL)secure __DEPRECATED__;
+- (id)initWithURL:(NSURL *)aURL secure:(BOOL)secure __PUSHER_DEPRECATED__;
 
 ///------------------------------------------------------------------------------------/
 /// @name Managing connections
