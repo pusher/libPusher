@@ -47,7 +47,7 @@
 {
   [super finish];
   
-  authorized = ([(NSHTTPURLResponse *)URLResponse statusCode] == 200);
+  authorized = ([(NSHTTPURLResponse *)URLResponse statusCode] == 200 || [(NSHTTPURLResponse *)URLResponse statusCode] == 201);
   authorizationData = [responseData objectFromJSONData];
 
   if (self.completionHandler) {
