@@ -1,4 +1,4 @@
-platform :ios
+platform :ios, :deployment_target => '4.0'
 
 dependency do |s|
   s.name     = 'JSONKit'
