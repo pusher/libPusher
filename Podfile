@@ -7,6 +7,7 @@ dependency do |s|
   s.source_files = 'JSONKit.*'
 end
 
+dependency 'Reachability'
 dependency 'SocketRocket', '0.1'
 
 post_install do |installer|
