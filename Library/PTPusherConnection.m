@@ -8,6 +8,7 @@
 
 #import "PTPusherConnection.h"
 #import "PTPusherEvent.h"
+#define SR_ENABLE_LOG
 #import "SRWebSocket.h"
 #import "JSONKit.h"
 
@@ -89,11 +90,15 @@ NSString *const PTPusherConnectionPingEvent        = @"pusher:ping";
   [self.delegate pusherConnection:self didFailWithError:error];
 }
 
-- (void)webSocketDidClose:(SRWebSocket *)webSocket;
+- (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean
 {
   self.connected = NO;
-  [self.delegate pusherConnectionDidDisconnect:self];
+  [self.delegate pusherConnection:self didDisconnectWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean];
   self.socketID = nil;
+  
+  // re-opening an old socket doesn't seem to work, so create a new one instead
+  socket = [[SRWebSocket alloc] initWithURLRequest:[NSURLRequest requestWithURL:socket.url]];
+  socket.delegate = self;
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(NSString *)message

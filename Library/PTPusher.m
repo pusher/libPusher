@@ -235,13 +235,20 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
   }
 }
 
-- (void)pusherConnectionDidDisconnect:(PTPusherConnection *)connection
+- (void)pusherConnection:(PTPusherConnection *)connection didDisconnectWithCode:(NSInteger)errorCode reason:(NSString *)reason wasClean:(BOOL)wasClean
 {
   for (PTPusherChannel *channel in [channels allValues]) {
     [channel markAsUnsubscribed];
-  }  
+  }
   if ([self.delegate respondsToSelector:@selector(pusher:connectionDidDisconnect:)]) {
     [self.delegate pusher:self connectionDidDisconnect:connection];
+  }
+  if ([self.delegate respondsToSelector:@selector(pusher:connection:didDisconnectWithError:)]) {
+    NSError *error = nil;
+    if (errorCode > 0) {
+      error = [NSError errorWithDomain:PTPusherErrorDomain code:errorCode userInfo:[NSDictionary dictionaryWithObject:reason forKey:@"reason"]];
+    }
+    [self.delegate pusher:self connection:connection didDisconnectWithError:error];
   }
   if (self.shouldReconnectAutomatically) {
     [self reconnectAfterDelay]; 

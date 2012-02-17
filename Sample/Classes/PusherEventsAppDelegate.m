@@ -150,14 +150,18 @@
   }
 }
 
-- (void)pusher:(PTPusher *)pusher connectionDidDisconnect:(PTPusherConnection *)connection
+- (void)pusher:(PTPusher *)pusher connection:(PTPusherConnection *)connection didDisconnectWithError:(NSError *)error
 {
   NSLog(@"[pusher-%@] Disconnected from Pusher", pusher.connection.socketID);
   [connectedClients removeObject:pusher];
   
   if (pusher == self.pusher) {
     self.pusher.reconnectAutomatically = NO;
-    [self handlePusherConnectionFailure];
+    
+    if (error) {
+      NSLog(@"[pusher-%@] Disconnection error: %@", pusher.connection.socketID, error);
+      [self handlePusherConnectionFailure];
+    }
   }
 }
 

@@ -6,6 +6,8 @@
 //  Copyright 2010 LJR Software Limited. All rights reserved.
 //
 
+#import "PTPusherMacros.h"
+
 @class PTPusher;
 @class PTPusherConnection;
 @class PTPusherChannel;
@@ -32,10 +34,19 @@
 
 /** Notifies the delegate that the PTPusher instance has disconnected from the Pusher service.
  
+ @deprecated Use pusher:connection:didDisconnectWithError:
  @param pusher The PTPusher instance that has connected.
  @param connection The connection for the pusher instance.
  */
-- (void)pusher:(PTPusher *)pusher connectionDidDisconnect:(PTPusherConnection *)connection;
+- (void)pusher:(PTPusher *)pusher connectionDidDisconnect:(PTPusherConnection *)connection __PUSHER_DEPRECATED__;
+
+/** Notifies the delegate that the PTPusher instance has disconnected from the Pusher service.
+ 
+ @param pusher The PTPusher instance that has connected.
+ @param connection The connection for the pusher instance.
+ @param error If the connection disconnected abnormally, error will be non-nil.
+ */
+- (void)pusher:(PTPusher *)pusher connection:(PTPusherConnection *)connection didDisconnectWithError:(NSError *)error;
 
 /** Notifies the delegate that the PTPusher instance failed to connect to the Pusher service.
  
