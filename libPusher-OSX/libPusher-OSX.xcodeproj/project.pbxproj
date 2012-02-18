@@ -37,8 +37,6 @@
 		A3CA679A14DBCB95003E2F1E /* PTPusherChannelAuthorizationOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CA677B14DBCB95003E2F1E /* PTPusherChannelAuthorizationOperation.m */; };
 		A3CA679B14DBCB95003E2F1E /* PTPusherConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA677C14DBCB95003E2F1E /* PTPusherConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3CA679C14DBCB95003E2F1E /* PTPusherConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CA677D14DBCB95003E2F1E /* PTPusherConnection.m */; };
-		A3CA679D14DBCB95003E2F1E /* PTPusherConnectionMonitor.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA677E14DBCB95003E2F1E /* PTPusherConnectionMonitor.h */; };
-		A3CA679E14DBCB95003E2F1E /* PTPusherConnectionMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CA677F14DBCB95003E2F1E /* PTPusherConnectionMonitor.m */; };
 		A3CA679F14DBCB95003E2F1E /* PTPusherDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA678014DBCB95003E2F1E /* PTPusherDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3CA67A014DBCB95003E2F1E /* PTPusherErrors.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA678114DBCB95003E2F1E /* PTPusherErrors.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3CA67A114DBCB95003E2F1E /* PTPusherEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = A3CA678214DBCB95003E2F1E /* PTPusherEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -96,8 +94,6 @@
 		A3CA677B14DBCB95003E2F1E /* PTPusherChannelAuthorizationOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PTPusherChannelAuthorizationOperation.m; path = ../../Library/PTPusherChannelAuthorizationOperation.m; sourceTree = "<group>"; };
 		A3CA677C14DBCB95003E2F1E /* PTPusherConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PTPusherConnection.h; path = ../../Library/PTPusherConnection.h; sourceTree = "<group>"; };
 		A3CA677D14DBCB95003E2F1E /* PTPusherConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PTPusherConnection.m; path = ../../Library/PTPusherConnection.m; sourceTree = "<group>"; };
-		A3CA677E14DBCB95003E2F1E /* PTPusherConnectionMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PTPusherConnectionMonitor.h; path = ../../Library/PTPusherConnectionMonitor.h; sourceTree = "<group>"; };
-		A3CA677F14DBCB95003E2F1E /* PTPusherConnectionMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PTPusherConnectionMonitor.m; path = ../../Library/PTPusherConnectionMonitor.m; sourceTree = "<group>"; };
 		A3CA678014DBCB95003E2F1E /* PTPusherDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PTPusherDelegate.h; path = ../../Library/PTPusherDelegate.h; sourceTree = "<group>"; };
 		A3CA678114DBCB95003E2F1E /* PTPusherErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PTPusherErrors.h; path = ../../Library/PTPusherErrors.h; sourceTree = "<group>"; };
 		A3CA678214DBCB95003E2F1E /* PTPusherEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PTPusherEvent.h; path = ../../Library/PTPusherEvent.h; sourceTree = "<group>"; };
@@ -212,8 +208,6 @@
 				A3CA677B14DBCB95003E2F1E /* PTPusherChannelAuthorizationOperation.m */,
 				A3CA677C14DBCB95003E2F1E /* PTPusherConnection.h */,
 				A3CA677D14DBCB95003E2F1E /* PTPusherConnection.m */,
-				A3CA677E14DBCB95003E2F1E /* PTPusherConnectionMonitor.h */,
-				A3CA677F14DBCB95003E2F1E /* PTPusherConnectionMonitor.m */,
 				A3CA678014DBCB95003E2F1E /* PTPusherDelegate.h */,
 				A3CA678114DBCB95003E2F1E /* PTPusherErrors.h */,
 				A3CA678214DBCB95003E2F1E /* PTPusherEvent.h */,
@@ -291,7 +285,6 @@
 				A3CA679714DBCB95003E2F1E /* PTPusherChannel.h in Headers */,
 				A3CA679914DBCB95003E2F1E /* PTPusherChannelAuthorizationOperation.h in Headers */,
 				A3CA679B14DBCB95003E2F1E /* PTPusherConnection.h in Headers */,
-				A3CA679D14DBCB95003E2F1E /* PTPusherConnectionMonitor.h in Headers */,
 				A3CA679F14DBCB95003E2F1E /* PTPusherDelegate.h in Headers */,
 				A3CA67A014DBCB95003E2F1E /* PTPusherErrors.h in Headers */,
 				A3CA67A114DBCB95003E2F1E /* PTPusherEvent.h in Headers */,
@@ -426,7 +419,6 @@
 				A3CA679814DBCB95003E2F1E /* PTPusherChannel.m in Sources */,
 				A3CA679A14DBCB95003E2F1E /* PTPusherChannelAuthorizationOperation.m in Sources */,
 				A3CA679C14DBCB95003E2F1E /* PTPusherConnection.m in Sources */,
-				A3CA679E14DBCB95003E2F1E /* PTPusherConnectionMonitor.m in Sources */,
 				A3CA67A214DBCB95003E2F1E /* PTPusherEvent.m in Sources */,
 				A3CA67A414DBCB95003E2F1E /* PTPusherEventDispatcher.m in Sources */,
 				A3CA67A814DBCB95003E2F1E /* PTTargetActionEventListener.m in Sources */,

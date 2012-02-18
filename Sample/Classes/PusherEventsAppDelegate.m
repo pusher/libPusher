@@ -11,6 +11,7 @@
 #import "PTPusher.h"
 #import "PTPusherEvent.h"
 #import "PTPusherChannel.h"
+#import "PTPusherConnectionMonitor.h"
 #import "NSMutableURLRequest+BasicAuth.h"
 #import "Reachability.h"
 
@@ -30,11 +31,14 @@
 @synthesize navigationController;
 @synthesize menuViewController;
 @synthesize pusher = _pusher;
+@synthesize connectionMonitor;
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application 
 {    
   connectedClients = [[NSMutableArray alloc] init];
   clientsAwaitingConnection = [[NSMutableArray alloc] init];
+  
+  self.connectionMonitor = [[PTPusherConnectionMonitor alloc] init];
   
   // create our primary Pusher client instance
   self.pusher = [self createClientWithAutomaticConnection:YES];
@@ -83,96 +87,30 @@
 
 - (PTPusher *)createClientWithAutomaticConnection:(BOOL)connectAutomatically
 {
-  PTPusher *client = [PTPusher pusherWithKey:PUSHER_API_KEY connectAutomatically:YES encrypted:kUSE_ENCRYPTED_CHANNELS];
+  PTPusher *client = [PTPusher pusherWithKey:PUSHER_API_KEY connectAutomatically:NO encrypted:kUSE_ENCRYPTED_CHANNELS];
   client.delegate = self;
+  [self.connectionMonitor startMonitoringClient:client];
   [clientsAwaitingConnection addObject:client];
+  if (connectAutomatically) {
+    [client connect];
+  }
   return client;
 }
 
 #pragma mark - PTPusherDelegate methods
 
-- (void)handlePusherConnectionFailure
-{
-  Reachability *reachability = [Reachability reachabilityForInternetConnection];
-  
-  if ([reachability isReachable]) {
-    NSLog(@"Connection available, possible Pusher server issue. Waiting before retrying.");
-    
-    // this might have been a temporary issue, so let's try again in after a short delay
-    double delayInSeconds = 10.0;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-      [self.pusher connect];
-    });
-  }
-  else {
-    NSLog(@"Connection unavailable, waiting before re-attempting to connect to Pusher.");
-    
-    // we'll have to wait until we're back online
-    [[NSNotificationCenter defaultCenter] 
-     addObserver:self 
-     selector:@selector(reachabilityForPusherChanged:) 
-     name:kReachabilityChangedNotification object:reachability];
-    
-    [reachability startNotifier];
-    
-  }
-}
-
-- (void)reachabilityForPusherChanged:(NSNotification *)note
-{
-  Reachability *reachability = note.object;
-  
-  if ([reachability isReachable]) {
-    NSLog(@"Connection re-established, re-connecting to Pusher.");
-    // once we've re-established a connection, we can try an connect to Pusher again
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:kReachabilityChangedNotification object:reachability];
-    [reachability stopNotifier];
-    [self.pusher connect];
-  }
-}
-
 - (void)pusher:(PTPusher *)pusher connectionDidConnect:(PTPusherConnection *)connection
 {
-  NSLog(@"[pusher-%@] Connected to Pusher (socket id: %@)", pusher.connection.socketID, connection.socketID);
+  NSLog(@"[pusher] Pusher client connected");
+
   [connectedClients addObject:pusher];
   [clientsAwaitingConnection removeObject:pusher];
-  
-  pusher.reconnectAutomatically = YES;
-  
-  Reachability *reachability = [Reachability reachabilityForInternetConnection];
-  
-  if ([reachability isReachableViaWiFi]) {
-    pusher.reconnectDelay = 3.0;
-  }
-  else {
-    pusher.reconnectDelay = 15.0;
-  }
-}
-
-- (void)pusher:(PTPusher *)pusher connection:(PTPusherConnection *)connection didDisconnectWithError:(NSError *)error
-{
-  NSLog(@"[pusher-%@] Disconnected from Pusher", pusher.connection.socketID);
-  [connectedClients removeObject:pusher];
-  
-  if (pusher == self.pusher) {
-    self.pusher.reconnectAutomatically = NO;
-    
-    if (error) {
-      NSLog(@"[pusher-%@] Disconnection error: %@", pusher.connection.socketID, error);
-      [self handlePusherConnectionFailure];
-    }
-  }
 }
 
 - (void)pusher:(PTPusher *)pusher connection:(PTPusherConnection *)connection failedWithError:(NSError *)error
 {
   NSLog(@"[pusher-%@] Failed to connect to pusher, error: %@", pusher.connection.socketID, error);
   [clientsAwaitingConnection removeObject:pusher];
-  
-  if (pusher == self.pusher) {
-    [self handlePusherConnectionFailure];
-  }
 }
 
 - (void)pusher:(PTPusher *)pusher connectionWillReconnect:(PTPusherConnection *)connection afterDelay:(NSTimeInterval)delay
