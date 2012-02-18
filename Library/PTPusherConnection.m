@@ -24,6 +24,7 @@ NSString *const PTPusherConnectionPingEvent        = @"pusher:ping";
 
 @implementation PTPusherConnection {
   SRWebSocket *socket;
+  NSURLRequest *request;
 }
 
 @synthesize delegate = _delegate;
@@ -39,8 +40,7 @@ NSString *const PTPusherConnectionPingEvent        = @"pusher:ping";
 - (id)initWithURL:(NSURL *)aURL
 {
   if ((self = [super init])) {
-    socket = [[SRWebSocket alloc] initWithURLRequest:[NSURLRequest requestWithURL:aURL]];
-    socket.delegate = self;
+    request = [NSURLRequest requestWithURL:aURL];
   }
   return self;
 }
@@ -57,6 +57,9 @@ NSString *const PTPusherConnectionPingEvent        = @"pusher:ping";
   if (self.isConnected)
     return;
 
+  socket = [[SRWebSocket alloc] initWithURLRequest:request];
+  socket.delegate = self;
+  
   [socket open];
 }
 
@@ -95,10 +98,7 @@ NSString *const PTPusherConnectionPingEvent        = @"pusher:ping";
   self.connected = NO;
   [self.delegate pusherConnection:self didDisconnectWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean];
   self.socketID = nil;
-  
-  // re-opening an old socket doesn't seem to work, so create a new one instead
-  socket = [[SRWebSocket alloc] initWithURLRequest:[NSURLRequest requestWithURL:socket.url]];
-  socket.delegate = self;
+  socket = nil;
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(NSString *)message
