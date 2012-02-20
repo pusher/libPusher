@@ -38,7 +38,7 @@
  */
 @interface PTPusherChannel : NSObject <PTPusherEventBindings, PTEventListener> {
   NSString *name;
-  PTPusher *pusher;
+  __unsafe_unretained PTPusher *pusher;
   PTPusherEventDispatcher *dispatcher;
 }
 
@@ -94,7 +94,9 @@
  
  Only private and presence channels support the triggering client events.
  */
-@interface PTPusherPrivateChannel : PTPusherChannel
+@interface PTPusherPrivateChannel : PTPusherChannel {
+  NSMutableArray *clientEventBuffer;
+}
 
 ///------------------------------------------------------------------------------------/
 /// @name Triggering events
