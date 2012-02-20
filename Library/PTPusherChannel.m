@@ -194,7 +194,7 @@
 - (void)triggerEventNamed:(NSString *)eventName data:(id)eventData
 {
   if (![eventName hasPrefix:@"client-"]) {
-    eventName = [@"client-" stringByAppendingString:name];
+    eventName = [@"client-" stringByAppendingString:eventName];
   }
   [pusher sendEventNamed:eventName data:eventData channel:self.name];
 }
