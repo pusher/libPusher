@@ -38,7 +38,7 @@
  */
 @interface PTPusherChannel : NSObject <PTPusherEventBindings, PTEventListener> {
   NSString *name;
-  PTPusher *pusher;
+  __unsafe_unretained PTPusher *pusher;
   PTPusherEventDispatcher *dispatcher;
 }
 
