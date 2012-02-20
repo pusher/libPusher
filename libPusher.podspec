@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   s.source_files = 'Library/*'
   s.frameworks   = "CFNetwork"
   s.clean_paths  = ["Frameworks", "Functional Specs", "Sample", "Scripts", "Unit Tests", "*.xcodeproj", "*.xcworkspace"]
-  
+  s.requires_arc = true
   s.dependency "JSONKit", "1.4"
   s.dependency 'SocketRocket', '0.1'
 end
