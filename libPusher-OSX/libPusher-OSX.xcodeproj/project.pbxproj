@@ -51,12 +51,12 @@
 		A3F203D814DEF36C0093C793 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A3F203D614DEF36C0093C793 /* Credits.rtf */; };
 		A3F203DB14DEF36C0093C793 /* LRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F203DA14DEF36C0093C793 /* LRAppDelegate.m */; };
 		A3F203DE14DEF36C0093C793 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3F203DC14DEF36C0093C793 /* MainMenu.xib */; };
-		A3F203E314DEF37A0093C793 /* libPusher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3CA675514DBCB2D003E2F1E /* libPusher.framework */; };
+		A3F203E314DEF37A0093C793 /* Pusher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3CA675514DBCB2D003E2F1E /* Pusher.framework */; };
 		A3F203E614DF063E0093C793 /* ZTWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CA67B414DBCBCD003E2F1E /* ZTWebSocket.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A3CA675514DBCB2D003E2F1E /* libPusher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = libPusher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A3CA675514DBCB2D003E2F1E /* Pusher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pusher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3CA675814DBCB2D003E2F1E /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		A3CA676014DBCB2D003E2F1E /* libPusher-OSX-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "libPusher-OSX-Info.plist"; sourceTree = "<group>"; };
 		A3CA676214DBCB2D003E2F1E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -126,7 +126,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A3F203E314DEF37A0093C793 /* libPusher.framework in Frameworks */,
+				A3F203E314DEF37A0093C793 /* Pusher.framework in Frameworks */,
 				A3F203C814DEF36C0093C793 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -147,7 +147,7 @@
 		A3CA675614DBCB2D003E2F1E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A3CA675514DBCB2D003E2F1E /* libPusher.framework */,
+				A3CA675514DBCB2D003E2F1E /* Pusher.framework */,
 				A3F203C614DEF36C0093C793 /* PusherSampleOSX.app */,
 			);
 			name = Products;
@@ -285,9 +285,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		A3CA675414DBCB2D003E2F1E /* libPusher */ = {
+		A3CA675414DBCB2D003E2F1E /* Pusher */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A3CA676A14DBCB2D003E2F1E /* Build configuration list for PBXNativeTarget "libPusher" */;
+			buildConfigurationList = A3CA676A14DBCB2D003E2F1E /* Build configuration list for PBXNativeTarget "Pusher" */;
 			buildPhases = (
 				A3CA675014DBCB2D003E2F1E /* Sources */,
 				A3CA675114DBCB2D003E2F1E /* Frameworks */,
@@ -299,9 +299,9 @@
 			);
 			dependencies = (
 			);
-			name = libPusher;
+			name = Pusher;
 			productName = "libPusher-OSX";
-			productReference = A3CA675514DBCB2D003E2F1E /* libPusher.framework */;
+			productReference = A3CA675514DBCB2D003E2F1E /* Pusher.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		A3F203C514DEF36C0093C793 /* PusherSampleOSX */ = {
@@ -342,7 +342,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				A3CA675414DBCB2D003E2F1E /* libPusher */,
+				A3CA675414DBCB2D003E2F1E /* Pusher */,
 				A3F203C514DEF36C0093C793 /* PusherSampleOSX */,
 			);
 		};
@@ -517,7 +517,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "libPusher-OSX/libPusher-OSX-Prefix.pch";
 				INFOPLIST_FILE = "libPusher-OSX/libPusher-OSX-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Pusher;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Debug;
@@ -529,7 +529,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "libPusher-OSX/libPusher-OSX-Prefix.pch";
 				INFOPLIST_FILE = "libPusher-OSX/libPusher-OSX-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Pusher;
 				WRAPPER_EXTENSION = framework;
 			};
 			name = Release;
@@ -570,7 +570,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A3CA676A14DBCB2D003E2F1E /* Build configuration list for PBXNativeTarget "libPusher" */ = {
+		A3CA676A14DBCB2D003E2F1E /* Build configuration list for PBXNativeTarget "Pusher" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				A3CA676B14DBCB2D003E2F1E /* Debug */,
@@ -586,6 +586,7 @@
 				A3F203E014DEF36C0093C793 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
