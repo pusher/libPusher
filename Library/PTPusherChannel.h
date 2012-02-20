@@ -94,7 +94,9 @@
  
  Only private and presence channels support the triggering client events.
  */
-@interface PTPusherPrivateChannel : PTPusherChannel
+@interface PTPusherPrivateChannel : PTPusherChannel {
+  NSMutableArray *clientEventBuffer;
+}
 
 ///------------------------------------------------------------------------------------/
 /// @name Triggering events
