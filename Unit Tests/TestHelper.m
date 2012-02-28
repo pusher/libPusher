@@ -7,36 +7,3 @@
 //
 
 #import "TestHelper.h"
-
-@implementation LRBlockMatcher
-
-- (id)initWithMatcherBlock:(BOOL (^)(id))block
-{
-  if ((self = [super init])) {
-    matcherBlock = [block copy];
-  }
-  return self;
-}
-
-- (void)dealloc 
-{
-  [matcherBlock release];
-  [super dealloc];
-}
-
-- (BOOL)matches:(id)object
-{
-  return matcherBlock(object);
-}
-
-- (void)describeTo:(id<HCDescription>)description
-{
-
-}
-
-@end
-
-id<HCMatcher> passesBlock(BOOL (^block)(id))
-{
-  return [[[LRBlockMatcher alloc] initWithMatcherBlock:block] autorelease];
-}

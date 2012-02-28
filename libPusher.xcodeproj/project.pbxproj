@@ -26,6 +26,8 @@
 		A35281E513F75010000687C0 /* PTBlockEventListener.m in Sources */ = {isa = PBXBuildFile; fileRef = A35281E313F75010000687C0 /* PTBlockEventListener.m */; };
 		A35281E913F75265000687C0 /* PTPusherAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = A35281E713F75265000687C0 /* PTPusherAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A35281EA13F75265000687C0 /* PTPusherAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = A35281E813F75265000687C0 /* PTPusherAPI.m */; };
+		A366E53114FD85EB002F0C39 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A366E53014FD85EB002F0C39 /* SystemConfiguration.framework */; };
+		A366E53514FD863D002F0C39 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A37E160714E4C87500DCA3A6 /* libicucore.dylib */; };
 		A3698FF213FF0A7A005CF130 /* NSMutableURLRequest+BasicAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = A3698FED13FF0868005CF130 /* NSMutableURLRequest+BasicAuth.m */; };
 		A3698FFF13FF200C005CF130 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = A3698FFE13FF200C005CF130 /* NSData+Base64.m */; };
 		A37E158914E4997700DCA3A6 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A37E158814E4997700DCA3A6 /* Security.framework */; };
@@ -35,7 +37,6 @@
 		A37E160814E4C87500DCA3A6 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A37E160714E4C87500DCA3A6 /* libicucore.dylib */; };
 		A37E167414E572C900DCA3A6 /* PTPusherMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = A37E167314E572C900DCA3A6 /* PTPusherMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A39E238913F7E6AB0083CAD7 /* PusherPresenceEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A39E238813F7E6AB0083CAD7 /* PusherPresenceEventsViewController.m */; };
-		A3A1A112115814D0001EF877 /* OCHamcrest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3A1A111115814D0001EF877 /* OCHamcrest.framework */; };
 		A3A1A149115814F7001EF877 /* OCHamcrest.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = A3A1A111115814D0001EF877 /* OCHamcrest.framework */; };
 		A3A1A20111581782001EF877 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3D1D0B51157CCDE009A12AD /* CFNetwork.framework */; };
 		A3A1A20211581782001EF877 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -117,7 +118,7 @@
 		A31577F714D0731B000136A9 /* Pods-specs.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Pods-specs.xcconfig"; path = "Pods/Pods-specs.xcconfig"; sourceTree = "<group>"; };
 		A31577F814D07358000136A9 /* libPods-specs.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-specs.a"; path = "Pods/build/Release-iphoneos/libPods-specs.a"; sourceTree = "<group>"; };
 		A315780A14D0751C000136A9 /* Pods.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
-		A315780B14D07529000136A9 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Release-iphoneos/libPods.a"; sourceTree = "<group>"; };
+		A315780B14D07529000136A9 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Release-iphoneos/libPods.a"; sourceTree = SOURCE_ROOT; };
 		A35281C213F6E179000687C0 /* TestHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestHelper.h; sourceTree = "<group>"; };
 		A35281C313F6E179000687C0 /* TestHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestHelper.m; sourceTree = "<group>"; };
 		A35281CE13F721A8000687C0 /* PTPusherConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherConnection.h; sourceTree = "<group>"; };
@@ -131,6 +132,8 @@
 		A35281E313F75010000687C0 /* PTBlockEventListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTBlockEventListener.m; sourceTree = "<group>"; };
 		A35281E713F75265000687C0 /* PTPusherAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherAPI.h; sourceTree = "<group>"; };
 		A35281E813F75265000687C0 /* PTPusherAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTPusherAPI.m; sourceTree = "<group>"; };
+		A366E53014FD85EB002F0C39 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		A366E53314FD8604002F0C39 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		A3698FEC13FF0868005CF130 /* NSMutableURLRequest+BasicAuth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableURLRequest+BasicAuth.h"; sourceTree = "<group>"; };
 		A3698FED13FF0868005CF130 /* NSMutableURLRequest+BasicAuth.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableURLRequest+BasicAuth.m"; sourceTree = "<group>"; };
 		A3698FFD13FF200C005CF130 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
@@ -165,7 +168,6 @@
 		A3AC28C213F76C50001C4808 /* PTPusherChannelAuthorizationOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTPusherChannelAuthorizationOperation.m; sourceTree = "<group>"; };
 		A3C32D9A14D083C10017FAED /* PTPusherEventSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTPusherEventSpec.m; sourceTree = "<group>"; };
 		A3C32D9C14D083D60017FAED /* SpecHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecHelper.h; sourceTree = "<group>"; };
-		A3CA673514DBBE0C003E2F1E /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = SDKs/MacOSX10.7.sdk/System/Library/Frameworks/CoreServices.framework; sourceTree = DEVELOPER_DIR; };
 		A3D1D0B51157CCDE009A12AD /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		A3D1D27D1157FA30009A12AD /* PusherEventsAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PusherEventsAppDelegate.h; sourceTree = "<group>"; };
 		A3D1D27E1157FA30009A12AD /* PusherEventsAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PusherEventsAppDelegate.m; sourceTree = "<group>"; };
@@ -210,9 +212,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A366E53514FD863D002F0C39 /* libicucore.dylib in Frameworks */,
+				A366E53114FD85EB002F0C39 /* SystemConfiguration.framework in Frameworks */,
 				A37E158914E4997700DCA3A6 /* Security.framework in Frameworks */,
 				A31577F914D07358000136A9 /* libPods-specs.a in Frameworks */,
-				A3A1A112115814D0001EF877 /* OCHamcrest.framework in Frameworks */,
 				A3A1A20111581782001EF877 /* CFNetwork.framework in Frameworks */,
 				A3A1A20211581782001EF877 /* Foundation.framework in Frameworks */,
 				A3DF2D6D13B3CD5700EE4349 /* libPusher.a in Frameworks */,
@@ -317,9 +320,10 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A366E53314FD8604002F0C39 /* libz.dylib */,
+				A366E53014FD85EB002F0C39 /* SystemConfiguration.framework */,
 				A37E160714E4C87500DCA3A6 /* libicucore.dylib */,
 				A37E158814E4997700DCA3A6 /* Security.framework */,
-				A3CA673514DBBE0C003E2F1E /* CoreServices.framework */,
 				A3A1A111115814D0001EF877 /* OCHamcrest.framework */,
 				A3D1D0B51157CCDE009A12AD /* CFNetwork.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,

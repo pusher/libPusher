@@ -7,15 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <OCHamcrest/HCBaseMatcher.h>
 
 #define LRMOCKY_SUGAR
 #import "LRMocky.h"
-
-@interface LRBlockMatcher : HCBaseMatcher {
-  BOOL (^matcherBlock)(id);
-}
-- (id)initWithMatcherBlock:(BOOL (^)(id))block;
-@end
-
-id<HCMatcher> passesBlock(BOOL (^block)(id));
