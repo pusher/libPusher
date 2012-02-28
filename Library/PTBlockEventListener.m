@@ -41,12 +41,12 @@
 
 @implementation PTPusherEventDispatcher (PTBlockEventFactory)
 
-- (void)addEventListenerForEventNamed:(NSString *)eventName 
+- (PTPusherEventBinding *)addEventListenerForEventNamed:(NSString *)eventName 
                                 block:(PTBlockEventListenerBlock)block 
                                 queue:(dispatch_queue_t)queue
 {
   PTBlockEventListener *listener = [[PTBlockEventListener alloc] initWithBlock:block dispatchQueue:queue];
-  [self addEventListener:listener forEventNamed:eventName];
+  return [self addEventListener:listener forEventNamed:eventName];
 }
 
 @end

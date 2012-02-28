@@ -40,6 +40,7 @@
   NSString *name;
   __unsafe_unretained PTPusher *pusher;
   PTPusherEventDispatcher *dispatcher;
+  NSMutableArray *internalBindings;
 }
 
 ///------------------------------------------------------------------------------------/

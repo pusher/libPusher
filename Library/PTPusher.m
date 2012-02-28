@@ -122,19 +122,24 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 
 #pragma mark - Binding to events
 
-- (void)bindToEventNamed:(NSString *)eventName target:(id)target action:(SEL)selector
+- (PTPusherEventBinding *)bindToEventNamed:(NSString *)eventName target:(id)target action:(SEL)selector
 {
-  [dispatcher addEventListenerForEventNamed:eventName target:target action:selector];
+  return [dispatcher addEventListenerForEventNamed:eventName target:target action:selector];
 }
 
-- (void)bindToEventNamed:(NSString *)eventName handleWithBlock:(PTPusherEventBlockHandler)block
+- (PTPusherEventBinding *)bindToEventNamed:(NSString *)eventName handleWithBlock:(PTPusherEventBlockHandler)block
 {
-  [self bindToEventNamed:eventName handleWithBlock:block queue:dispatch_get_main_queue()];
+  return [self bindToEventNamed:eventName handleWithBlock:block queue:dispatch_get_main_queue()];
 }
 
-- (void)bindToEventNamed:(NSString *)eventName handleWithBlock:(PTPusherEventBlockHandler)block queue:(dispatch_queue_t)queue
+- (PTPusherEventBinding *)bindToEventNamed:(NSString *)eventName handleWithBlock:(PTPusherEventBlockHandler)block queue:(dispatch_queue_t)queue
 {
-  [dispatcher addEventListenerForEventNamed:eventName block:block queue:queue];
+  return [dispatcher addEventListenerForEventNamed:eventName block:block queue:queue];
+}
+
+- (void)removeBinding:(PTPusherEventBinding *)binding
+{
+  [dispatcher removeBinding:binding];
 }
 
 #pragma mark - Subscribing to channels

@@ -35,26 +35,13 @@ describe(@"PTPusherEventDispatcher", ^{
     [dispatcher dispatchEvent:event];
   });
 
-  it(@"allows listeners to unregister for any event", ^{
+  it(@"allows listeners to unregister for an event by removing it's binding", ^{
     id mockListener = [KWMock mockForProtocol:@protocol(PTEventListener)];
-    [dispatcher addEventListener:mockListener forEventNamed:@"test-event"];
-    [dispatcher removeEventListener:mockListener];
-    PTPusherEvent *event = anEventNamed(@"test-event");
-    [[[mockListener shouldNot] receive] dispatchEvent:event];
-    [dispatcher dispatchEvent:event];
-  });
-
-  it(@"allows listeners to unregister for a specific event", ^{
-    id mockListener = [KWMock mockForProtocol:@protocol(PTEventListener)];
-    [dispatcher addEventListener:mockListener forEventNamed:@"test-event"];
-    [dispatcher addEventListener:mockListener forEventNamed:@"another-event"];
-    [dispatcher removeEventListener:mockListener forEventNamed:@"test-event"];
+    PTPusherEventBinding *binding = [dispatcher addEventListener:mockListener forEventNamed:@"test-event"];
+    [dispatcher removeBinding:binding];
     PTPusherEvent *eventOne = anEventNamed(@"test-event");
     [[[mockListener shouldNot] receive] dispatchEvent:eventOne];
-    PTPusherEvent *eventTwo = anEventNamed(@"another-event");
-    [[[mockListener should] receive] dispatchEvent:eventTwo];
     [dispatcher dispatchEvent:eventOne];
-    [dispatcher dispatchEvent:eventTwo];
   });
   
 });

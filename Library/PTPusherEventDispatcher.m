@@ -9,56 +9,72 @@
 #import "PTPusherEventDispatcher.h"
 #import "PTPusherEvent.h"
 
-
-@implementation PTPusherEventDispatcher
+@implementation PTPusherEventDispatcher {
+  NSMutableDictionary *bindings;
+}
 
 - (id)init
 {
   if ((self = [super init])) {
-    eventListeners = [[NSMutableDictionary alloc] init];
+    bindings = [[NSMutableDictionary alloc] init];
   }
   return self;
 }
 
-
 #pragma mark - Managing event listeners
 
-- (void)addEventListener:(id<PTEventListener>)listener forEventNamed:(NSString *)eventName
+- (PTPusherEventBinding *)addEventListener:(id<PTEventListener>)listener forEventNamed:(NSString *)eventName
 {
-  NSMutableArray *listenersForEvent = [eventListeners objectForKey:eventName];
+  NSMutableArray *bindingsForEvent = [bindings objectForKey:eventName];
   
-  if (listenersForEvent == nil) {
-    listenersForEvent = [NSMutableArray array];
-    [eventListeners setObject:listenersForEvent forKey:eventName];
+  if (bindingsForEvent == nil) {
+    bindingsForEvent = [NSMutableArray array];
+    [bindings setObject:bindingsForEvent forKey:eventName];
   }
-  [listenersForEvent addObject:listener];
+  PTPusherEventBinding *binding = [[PTPusherEventBinding alloc] initWithEventListener:listener eventName:eventName];
+  [bindingsForEvent addObject:binding];
+
+  return binding;
 }
 
-- (void)removeEventListener:(id<PTEventListener>)listener forEventNamed:(NSString *)eventName
+- (void)removeBinding:(PTPusherEventBinding *)binding
 {
-  NSMutableArray *listenersForEvent = [eventListeners objectForKey:eventName];
+  NSMutableArray *bindingsForEvent = [bindings objectForKey:binding.eventName];
   
-  if (listenersForEvent && [listenersForEvent containsObject:listener]) {
-    [listenersForEvent removeObject:listener];
+  if ([bindingsForEvent containsObject:binding]) {
+    [bindingsForEvent removeObject:binding];
   }
-}
-
-- (void)removeEventListener:(id<PTEventListener>)listener
-{
-  [eventListeners enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-    if ([obj containsObject:listener]) {
-      [obj removeObject:listener];
-    }
-  }];
 }
 
 #pragma mark - Dispatching events
 
 - (void)dispatchEvent:(PTPusherEvent *)event
 {
-  for (id<PTEventListener> eventListener in [eventListeners objectForKey:event.name]) {
-    [eventListener dispatchEvent:event];
+  for (PTPusherEventBinding *binding in [bindings objectForKey:event.name]) {
+    [binding dispatchEvent:event];
   }
+}
+
+@end
+
+@implementation PTPusherEventBinding {
+  id<PTEventListener> _eventListener;
+}
+
+@synthesize eventName = _eventName;
+
+- (id)initWithEventListener:(id<PTEventListener>)eventListener eventName:(NSString *)eventName
+{
+  if ((self = [super init])) {
+    _eventName = [eventName copy];
+    _eventListener = eventListener;
+  }
+  return self;
+}
+
+- (void)dispatchEvent:(PTPusherEvent *)event
+{
+  [_eventListener dispatchEvent:event];
 }
 
 @end

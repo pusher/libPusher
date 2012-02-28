@@ -9,11 +9,16 @@
 #import <Foundation/Foundation.h>
 #import "PTEventListener.h"
 
-@interface PTPusherEventDispatcher : NSObject <PTEventListener> {
-  NSMutableDictionary *eventListeners;
-}
+@class PTPusherEventBinding;
 
-- (void)addEventListener:(id<PTEventListener>)listener forEventNamed:(NSString *)eventName;
-- (void)removeEventListener:(id<PTEventListener>)listener forEventNamed:(NSString *)eventName;
-- (void)removeEventListener:(id<PTEventListener>)listener;
+@interface PTPusherEventDispatcher : NSObject <PTEventListener> 
+- (PTPusherEventBinding *)addEventListener:(id<PTEventListener>)listener forEventNamed:(NSString *)eventName;
+- (void)removeBinding:(PTPusherEventBinding *)binding;
+@end
+
+@interface PTPusherEventBinding : NSObject <PTEventListener>
+
+@property (nonatomic, readonly) NSString *eventName;
+
+- (id)initWithEventListener:(id<PTEventListener>)eventListener eventName:(NSString *)eventName;
 @end

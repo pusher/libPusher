@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @class PTPusherEvent;
+@class PTPusherEventBinding;
 
 typedef void (^PTPusherEventBlockHandler) (PTPusherEvent *);
 
@@ -42,7 +43,7 @@ typedef void (^PTPusherEventBlockHandler) (PTPusherEvent *);
       // do something with event
     }
  */
-- (void)bindToEventNamed:(NSString *)eventName target:(id)target action:(SEL)selector;
+- (PTPusherEventBinding *)bindToEventNamed:(NSString *)eventName target:(id)target action:(SEL)selector;
 
 /** Binds to the named event using a block callback.
  
@@ -57,7 +58,7 @@ typedef void (^PTPusherEventBlockHandler) (PTPusherEvent *);
  
  The callback blocks will be dispatched asynchronously using Grand Central Dispatch on the main queue.
  */
-- (void)bindToEventNamed:(NSString *)eventName handleWithBlock:(PTPusherEventBlockHandler)block;
+- (PTPusherEventBinding *)bindToEventNamed:(NSString *)eventName handleWithBlock:(PTPusherEventBlockHandler)block;
 
 /** Binds to the named event using a block callback.
  
@@ -66,6 +67,8 @@ typedef void (^PTPusherEventBlockHandler) (PTPusherEvent *);
  
  You can use this method if you wish to handle events in a background or custom priority queue.
  */
-- (void)bindToEventNamed:(NSString *)eventName handleWithBlock:(PTPusherEventBlockHandler)block queue:(dispatch_queue_t)queue;
+- (PTPusherEventBinding *)bindToEventNamed:(NSString *)eventName handleWithBlock:(PTPusherEventBlockHandler)block queue:(dispatch_queue_t)queue;
+
+- (void)removeBinding:(PTPusherEventBinding *)binding;
 
 @end

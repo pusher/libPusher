@@ -35,10 +35,10 @@
 
 @implementation PTPusherEventDispatcher (PTTargetActionFactory)
 
-- (void)addEventListenerForEventNamed:(NSString *)eventName target:(id)target action:(SEL)action
+- (PTPusherEventBinding *)addEventListenerForEventNamed:(NSString *)eventName target:(id)target action:(SEL)action
 {
   PTTargetActionEventListener *listener = [[PTTargetActionEventListener alloc] initWithTarget:target action:action];
-  [self addEventListener:listener forEventNamed:eventName];
+  return [self addEventListener:listener forEventNamed:eventName];
 }
 
 @end

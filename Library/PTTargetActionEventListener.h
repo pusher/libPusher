@@ -19,5 +19,5 @@
 @end
 
 @interface PTPusherEventDispatcher (PTTargetActionFactory)
-- (void)addEventListenerForEventNamed:(NSString *)eventName target:(id)target action:(SEL)action;
+- (PTPusherEventBinding *)addEventListenerForEventNamed:(NSString *)eventName target:(id)target action:(SEL)action;
 @end

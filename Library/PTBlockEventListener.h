@@ -23,7 +23,7 @@ typedef void (^PTBlockEventListenerBlock)(PTPusherEvent *);
 
 @interface PTPusherEventDispatcher (PTBlockEventFactory)
 
-- (void)addEventListenerForEventNamed:(NSString *)eventName 
+- (PTPusherEventBinding *)addEventListenerForEventNamed:(NSString *)eventName 
                                 block:(PTBlockEventListenerBlock)block 
                                 queue:(dispatch_queue_t)queue;
 
