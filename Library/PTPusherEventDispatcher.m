@@ -34,6 +34,24 @@
   [listenersForEvent addObject:listener];
 }
 
+- (void)removeEventListener:(id<PTEventListener>)listener forEventNamed:(NSString *)eventName
+{
+  NSMutableArray *listenersForEvent = [eventListeners objectForKey:eventName];
+  
+  if (listenersForEvent && [listenersForEvent containsObject:listener]) {
+    [listenersForEvent removeObject:listener];
+  }
+}
+
+- (void)removeEventListener:(id<PTEventListener>)listener
+{
+  [eventListeners enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+    if ([obj containsObject:listener]) {
+      [obj removeObject:listener];
+    }
+  }];
+}
+
 #pragma mark - Dispatching events
 
 - (void)dispatchEvent:(PTPusherEvent *)event

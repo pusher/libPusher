@@ -14,4 +14,6 @@
 }
 
 - (void)addEventListener:(id<PTEventListener>)listener forEventNamed:(NSString *)eventName;
+- (void)removeEventListener:(id<PTEventListener>)listener forEventNamed:(NSString *)eventName;
+- (void)removeEventListener:(id<PTEventListener>)listener;
 @end

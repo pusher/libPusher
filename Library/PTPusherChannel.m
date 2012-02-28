@@ -56,6 +56,10 @@
   return self;
 }
 
+- (void)dealloc 
+{
+  [dispatcher removeEventListener:self];
+}
 
 - (BOOL)isPrivate
 {

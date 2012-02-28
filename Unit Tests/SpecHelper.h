@@ -8,3 +8,7 @@
 
 #import "Kiwi.h"
 #import "PTPusher.h"
+
+@class PTPusherEvent;
+
+PTPusherEvent *anEventNamed(NSString *name);
