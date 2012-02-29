@@ -150,7 +150,6 @@
 		A3CA674914DBCB2D003E2F1E = {
 			isa = PBXGroup;
 			children = (
-				A37E161F14E4CA6400DCA3A6 /* libicucore.A.dylib */,
 				A3CA675E14DBCB2D003E2F1E /* libPusher-OSX */,
 				A3F203CD14DEF36C0093C793 /* PusherSampleOSX */,
 				A3CA675714DBCB2D003E2F1E /* Frameworks */,
@@ -170,6 +169,7 @@
 		A3CA675714DBCB2D003E2F1E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A37E161F14E4CA6400DCA3A6 /* libicucore.A.dylib */,
 				A37E162114E4CBFF00DCA3A6 /* CoreServices.framework */,
 				A37E161B14E4C9CC00DCA3A6 /* Security.framework */,
 				A3CA675814DBCB2D003E2F1E /* Cocoa.framework */,
