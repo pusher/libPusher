@@ -8,7 +8,7 @@ dependency do |s|
 end
 
 dependency 'Reachability'
-dependency 'SocketRocket', '0.1'
+dependency 'SocketRocket', git: 'git://github.com/square/SocketRocket.git'
 
 post_install do |installer|
   # we don't want to link static lib to the icucore dylib or it will fail to build

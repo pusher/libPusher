@@ -20,6 +20,7 @@ void enableClientDebugging(void);
 void sendTestEvent(NSString *eventName);
 void sendTestEventOnChannel(NSString *channelName, NSString *eventName);
 void onConnect(dispatch_block_t);
+void waitForClientToDisconnect(PTPusher *client);
 
 // helper classes
 

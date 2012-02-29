@@ -45,6 +45,16 @@ void onConnect(dispatch_block_t block)
   [[PTPusherClientTestHelperDelegate sharedInstance] onConnect:block];
 }
 
+void waitForClientToDisconnect(PTPusher *client)
+{
+  if (!client.connection.isConnected) return;
+
+  while (client.connection.isConnected) {
+    NSLog(@"Waiting for client to disconnect...");
+    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
+  }
+}
+
 @implementation PTPusherEventMatcher
 
 + (NSArray *)matcherStrings {
@@ -114,6 +124,7 @@ void onConnect(dispatch_block_t block)
   if (self.debugEnabled) {
     NSLog(@"[DEBUG] Client disconnected");
   }
+  connected = NO;
 }
 
 - (void)pusher:(PTPusher *)pusher connection:(PTPusherConnection *)connection failedWithError:(NSError *)error
@@ -121,6 +132,7 @@ void onConnect(dispatch_block_t block)
   if (self.debugEnabled) {
      NSLog(@"[DEBUG] Client connection failed with error %@", error);
   }
+  connected = NO;
 }
 
 @end

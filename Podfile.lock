@@ -8,4 +8,4 @@ DEPENDENCIES:
   - JSONKit (defined in Podfile)
   - Kiwi (from `git://github.com/allending/Kiwi.git')
   - Reachability
-  - SocketRocket (= 0.1)
+  - SocketRocket (from `git://github.com/square/SocketRocket.git')
