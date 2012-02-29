@@ -20,6 +20,9 @@ void enableClientDebugging(void);
 void sendTestEvent(NSString *eventName);
 void sendTestEventOnChannel(NSString *channelName, NSString *eventName);
 void onConnect(dispatch_block_t);
+void onAuthorizationRequired(void (^authBlock)(NSMutableURLRequest *));
+void onFailedToSubscribe(void (^failedToSubscribeBlock)(PTPusherChannel *));
+void onSubscribe(void (^subscribeBlock)(PTPusherChannel *));
 void waitForClientToDisconnect(PTPusher *client);
 
 // helper classes
@@ -33,11 +36,17 @@ void waitForClientToDisconnect(PTPusher *client);
 @interface PTPusherClientTestHelperDelegate : NSObject <PTPusherDelegate> {
   BOOL connected;
   dispatch_block_t connectedBlock;
+  void (^onAuthorizationBlock)(NSMutableURLRequest *);
+  void (^onFailedToSubscribeBlock)(PTPusherChannel *);
+  void (^onSubscribeBlock)(PTPusherChannel *);
 }
 @property (nonatomic, assign) BOOL debugEnabled;
 
 + (id)sharedInstance;
 - (void)onConnect:(dispatch_block_t)block;
+- (void)onAuthorizationRequired:(void (^)(NSMutableURLRequest *))authBlock;
+- (void)onFailedToSubscribe:(void (^)(PTPusherChannel *))failedToSubscribeBlock;
+- (void)onSubscribe:(void (^)(PTPusherChannel *))subscribeBlock;
 @end
 
 @interface PTPusherNotificationHandler : NSObject {

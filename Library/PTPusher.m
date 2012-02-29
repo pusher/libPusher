@@ -151,7 +151,8 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
     channel = [PTPusherChannel channelWithName:name pusher:self]; 
     [channels setObject:channel forKey:name];
   }
-  if (self.connection.isConnected) {
+  // private/presence channels require a socketID to authenticate
+  if (self.connection.isConnected && self.connection.socketID) {
     [self subscribeToChannel:channel];
   }
   return channel;

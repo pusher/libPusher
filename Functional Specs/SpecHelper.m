@@ -45,6 +45,21 @@ void onConnect(dispatch_block_t block)
   [[PTPusherClientTestHelperDelegate sharedInstance] onConnect:block];
 }
 
+void onAuthorizationRequired(void (^authBlock)(NSMutableURLRequest *))
+{
+  [[PTPusherClientTestHelperDelegate sharedInstance] onAuthorizationRequired:authBlock];
+}
+
+void onFailedToSubscribe(void (^failedToSubscribeBlock)(PTPusherChannel *))
+{
+  [[PTPusherClientTestHelperDelegate sharedInstance] onFailedToSubscribe:failedToSubscribeBlock];
+}
+
+void onSubscribe(void (^subscribeBlock)(PTPusherChannel *))
+{
+  [[PTPusherClientTestHelperDelegate sharedInstance] onSubscribe:subscribeBlock];
+}
+
 void waitForClientToDisconnect(PTPusher *client)
 {
   if (!client.connection.isConnected) return;
@@ -104,6 +119,21 @@ void waitForClientToDisconnect(PTPusher *client)
   }
 }
 
+- (void)onAuthorizationRequired:(void (^)(NSMutableURLRequest *))authBlock
+{
+  onAuthorizationBlock = [authBlock copy];
+}
+
+- (void)onFailedToSubscribe:(void (^)(PTPusherChannel *))failedToSubscribeBlock
+{
+  onFailedToSubscribeBlock = [failedToSubscribeBlock copy];
+}
+
+- (void)onSubscribe:(void (^)(PTPusherChannel *))subscribeBlock
+{
+  onSubscribeBlock = [subscribeBlock copy];
+}
+
 #pragma mark - Delegate methods
 
 - (void)pusher:(PTPusher *)pusher connectionDidConnect:(PTPusherConnection *)connection
@@ -125,6 +155,9 @@ void waitForClientToDisconnect(PTPusher *client)
     NSLog(@"[DEBUG] Client disconnected");
   }
   connected = NO;
+  connectedBlock = nil;
+  onAuthorizationBlock = nil;
+  onSubscribeBlock = nil;
 }
 
 - (void)pusher:(PTPusher *)pusher connection:(PTPusherConnection *)connection failedWithError:(NSError *)error
@@ -133,6 +166,30 @@ void waitForClientToDisconnect(PTPusher *client)
      NSLog(@"[DEBUG] Client connection failed with error %@", error);
   }
   connected = NO;
+  connectedBlock = nil;
+  onAuthorizationBlock = nil;
+  onSubscribeBlock = nil;
+}
+
+- (void)pusher:(PTPusher *)pusher willAuthorizeChannelWithRequest:(NSMutableURLRequest *)request
+{
+  if (onAuthorizationBlock) {
+    onAuthorizationBlock(request);
+  }
+}
+
+- (void)pusher:(PTPusher *)pusher didFailToSubscribeToChannel:(PTPusherChannel *)channel withError:(NSError *)error
+{
+  if (onFailedToSubscribeBlock) {
+    onFailedToSubscribeBlock(channel);
+  }
+}
+
+- (void)pusher:(PTPusher *)pusher didSubscribeToChannel:(PTPusherChannel *)channel
+{
+  if (onSubscribeBlock) {
+    onSubscribeBlock(channel);
+  }
 }
 
 @end
