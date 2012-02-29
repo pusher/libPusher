@@ -6,7 +6,7 @@ require 'xcode_build/tasks/build_task'
 require 'xcode_build/formatters/progress_formatter'
 require 'tmpdir'
 
-LIBRARY_VERSION = "1.1"
+LIBRARY_VERSION = "1.2"
 
 namespace :authserver do
   desc "Starts the auth server on port 9292"
