@@ -14,7 +14,9 @@ end
 group :building do
   gem "rest-client"
   gem "xcodebuild-rb", git: "git://github.com/lukeredpath/xcodebuild-rb.git"
-  gem "xcodeproj", git: "git://github.com/CocoaPods/Xcodeproj.git"
-  gem "cocoapods", git: "git://github.com/CocoaPods/CocoaPods.git"
+  gem "xcodeproj"
+  gem "cocoapods"
+  #gem "xcodeproj", path: File.expand_path("~/Code/repos/cocoapods/external/Xcodeproj")
+  #gem "cocoapods", path: File.expand_path("~/Code/repos/cocoapods")
   gem "net-github-upload"
 end

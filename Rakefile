@@ -7,6 +7,7 @@ require 'xcode_build/formatters/progress_formatter'
 require 'tmpdir'
 
 LIBRARY_VERSION = "1.2"
+XCODEBUILD_LOG  = File.join(File.dirname(__FILE__), "xcodebuild.log")
 
 namespace :authserver do
   desc "Starts the auth server on port 9292"
@@ -75,6 +76,7 @@ XcodeBuild::Tasks::BuildTask.new(:debug) do |t|
   t.scheme = "libPusher"
   t.configuration = "Debug"
   t.formatter = XcodeBuild::Formatters::ProgressFormatter.new
+  t.xcodebuild_log_path = XCODEBUILD_LOG
 end
 
 ARTEFACT_DIR = File.join("dist", "libPusher")
@@ -131,6 +133,7 @@ namespace :release do
     t.formatter = XcodeBuild::Formatters::ProgressFormatter.new
     t.arch = "'armv6 armv7'"
     t.after_build { |build| copy_artefacts_from_build(build, include_headers: true) }
+    t.xcodebuild_log_path = XCODEBUILD_LOG
   end
   
   XcodeBuild::Tasks::BuildTask.new(:simulator) do |t|
@@ -141,6 +144,7 @@ namespace :release do
     t.arch = "i386"
     t.formatter = XcodeBuild::Formatters::ProgressFormatter.new
     t.after_build { |build| copy_artefacts_from_build(build) }
+    t.xcodebuild_log_path = XCODEBUILD_LOG
   end
   
   XcodeBuild::Tasks::BuildTask.new(:osx) do |t|
@@ -153,6 +157,7 @@ namespace :release do
         system "cp -r #{product} #{ARTEFACT_DIR}"
       end
     end
+    t.xcodebuild_log_path = XCODEBUILD_LOG
   end
   
   desc "Build combined release libraries for both device and simulator."
