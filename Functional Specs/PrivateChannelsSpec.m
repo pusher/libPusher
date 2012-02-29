@@ -8,6 +8,7 @@
 
 #import "SpecHelper.h"
 #import "NSMutableURLRequest+BasicAuth.h"
+#import "PTPusherChannel.h"
 
 SPEC_BEGIN(PrivateChannelsSpec)
 
@@ -96,7 +97,6 @@ describe(@"Subscribing to multiple private channels with delays (see issue #26)"
   
   it(@"should be successful", ^{
     onAuthorizationRequired(^(NSMutableURLRequest *authRequest) {
-      NSLog(@"AUTHORIZING REQUEST");
       [authRequest setHTTPBasicAuthUsername:@"admin" password:@"letmein"];
     });
     

@@ -49,12 +49,12 @@
     /* Set up event handlers for pre-defined channel events */
     
     [internalBindings addObject:
-     [pusher bindToEventNamed:@"pusher_internal:subscription_succeeded" 
-                       target:self action:@selector(handleSubscribeEvent:)]];
+     [self bindToEventNamed:@"pusher_internal:subscription_succeeded" 
+                     target:self action:@selector(handleSubscribeEvent:)]];
     
     [internalBindings addObject:
-     [pusher bindToEventNamed:@"subscription_error" 
-                       target:self action:@selector(handleSubscribeErrorEvent:)]];
+     [self bindToEventNamed:@"subscription_error" 
+                     target:self action:@selector(handleSubscribeErrorEvent:)]];
   }
   return self;
 }
@@ -260,12 +260,12 @@
     /* Set up event handlers for pre-defined channel events */
 
     [internalBindings addObject:
-     [pusher bindToEventNamed:@"pusher_internal:member_added" 
-                       target:self action:@selector(handleMemberAddedEvent:)]];
+     [self bindToEventNamed:@"pusher_internal:member_added" 
+                     target:self action:@selector(handleMemberAddedEvent:)]];
     
     [internalBindings addObject:
-     [pusher bindToEventNamed:@"pusher_internal:member_removed" 
-                       target:self action:@selector(handleMemberRemovedEvent:)]];
+     [self bindToEventNamed:@"pusher_internal:member_removed" 
+                     target:self action:@selector(handleMemberRemovedEvent:)]];
     
   }
   return self;

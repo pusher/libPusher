@@ -45,14 +45,14 @@
 
 - (void)finish
 {
-  [super finish];
-  
   authorized = ([(NSHTTPURLResponse *)URLResponse statusCode] == 200 || [(NSHTTPURLResponse *)URLResponse statusCode] == 201);
   authorizationData = [responseData objectFromJSONData];
 
   if (self.completionHandler) {
     self.completionHandler(self);
   }
+  
+  [super finish];
 }
 
 @end
