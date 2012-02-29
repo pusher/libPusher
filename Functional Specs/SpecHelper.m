@@ -150,16 +150,16 @@ void onConnect(dispatch_block_t block)
   [super dealloc];
 }
 
-- (void)addObserverForNotificationName:(NSString *)notificationName object:(id)object notificationCentre:(NSNotificationCenter *)notificationCenter withBlock:(void (^)(NSNotification *))block
+- (void)addObserverForNotificationName:(NSString *)notificationName object:(id)object 
+                    notificationCentre:(NSNotificationCenter *)notificationCenter 
+                             withBlock:(void (^)(NSNotification *))block
 {
-  [observers setObject:block forKey:notificationName];
+  [observers setObject:[block copy] forKey:notificationName];
   [notificationCenter addObserver:self selector:@selector(handleNotification:) name:notificationName object:object];
 }
 
 - (void)handleNotification:(NSNotification *)note
 {
-  
-  
   void (^block)(NSNotification *) = [observers objectForKey:note.name];
   
   if (block) {

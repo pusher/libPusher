@@ -29,6 +29,8 @@
 		A366E53514FD863D002F0C39 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A37E160714E4C87500DCA3A6 /* libicucore.dylib */; };
 		A366E53814FD87F5002F0C39 /* PTPusherEventDispatcherSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = A366E53714FD87F5002F0C39 /* PTPusherEventDispatcherSpec.m */; };
 		A366E53A14FD88B3002F0C39 /* SpecHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A366E53914FD88B3002F0C39 /* SpecHelper.m */; };
+		A366E53B14FDA232002F0C39 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A366E53014FD85EB002F0C39 /* SystemConfiguration.framework */; };
+		A366E53C14FDA236002F0C39 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A37E160714E4C87500DCA3A6 /* libicucore.dylib */; };
 		A3698FF213FF0A7A005CF130 /* NSMutableURLRequest+BasicAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = A3698FED13FF0868005CF130 /* NSMutableURLRequest+BasicAuth.m */; };
 		A3698FFF13FF200C005CF130 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = A3698FFE13FF200C005CF130 /* NSData+Base64.m */; };
 		A37E158914E4997700DCA3A6 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A37E158814E4997700DCA3A6 /* Security.framework */; };
@@ -225,6 +227,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A366E53C14FDA236002F0C39 /* libicucore.dylib in Frameworks */,
+				A366E53B14FDA232002F0C39 /* SystemConfiguration.framework in Frameworks */,
 				A31577F614D071BC000136A9 /* libPods-specs.a in Frameworks */,
 				A3A9FA4E1496EECE00F83617 /* libPusher.a in Frameworks */,
 				A3A9F95A1496E96100F83617 /* SenTestingKit.framework in Frameworks */,
