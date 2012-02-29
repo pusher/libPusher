@@ -41,6 +41,13 @@ module Pusher
       [200, {"Content-Type" => "application/json"}, response.to_json]
     end
     
+    post "/private/slowauth" do
+      puts ">> Authenticating private channel:#{params[:channel_name]} socket:#{params[:socket_id]}"
+      response = Pusher[params[:channel_name]].authenticate(params[:socket_id])
+      sleep(1)
+      [200, {"Content-Type" => "application/json"}, response.to_json]
+    end
+    
     post "/presence/auth" do
       puts ">> Authenticating presence channel:#{params[:channel_name]} socket:#{params[:socket_id]}"
       

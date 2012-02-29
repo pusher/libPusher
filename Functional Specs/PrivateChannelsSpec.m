@@ -72,7 +72,55 @@ describe(@"Subscribing to a private channel", ^{
     });
     
     [[expectFutureValue(theValue(failedToSubscribe)) shouldEventuallyBeforeTimingOutAfter(3)] beYes];
-	});  
+	});
+});
+
+describe(@"Subscribing to multiple private channels with delays (see issue #26)", ^{
+  
+  __block PTPusher *client = nil;
+  
+  registerMatchers(@"PT");
+  enableClientDebugging();
+  
+  beforeAll(^{
+    client = newTestClient();
+    
+    // this requires the auth server to be running (rake authserver:start)
+    client.authorizationURL = [NSURL URLWithString:@"http://localhost:9292/private/slowauth"];
+  });
+  
+  afterAll(^{
+    [client disconnect];
+    waitForClientToDisconnect(client);
+  });
+  
+  it(@"should be successful", ^{
+    onAuthorizationRequired(^(NSMutableURLRequest *authRequest) {
+      NSLog(@"AUTHORIZING REQUEST");
+      [authRequest setHTTPBasicAuthUsername:@"admin" password:@"letmein"];
+    });
+    
+    NSInteger numberToConnect = 5;
+    
+    onConnect(^{
+      for (int i = 0; i < numberToConnect; i++) {
+        [client subscribeToPrivateChannelNamed:[NSString stringWithFormat:@"secret-channel-%d", i]]; 
+      }
+    });
+    
+    __block NSInteger numberOfSubscribedChannels = 0;
+    __block BOOL allSubscribed = NO;
+    
+    onSubscribe(^(PTPusherChannel *subscribedChannel) {
+      numberOfSubscribedChannels++;
+      
+      if (numberOfSubscribedChannels == numberToConnect) {
+        allSubscribed = YES;
+      }
+    });
+
+    [[expectFutureValue(theValue(allSubscribed)) shouldEventuallyBeforeTimingOutAfter(10)] beYes];
+	});
 });
 
 SPEC_END
