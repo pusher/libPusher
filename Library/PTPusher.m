@@ -105,6 +105,7 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 
 - (void)dealloc;
 {
+  [_connection setDelegate:nil];
   [_connection disconnect];
 }
 
