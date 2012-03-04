@@ -120,7 +120,7 @@ def upload_package_to_github(file)
   upload.replace(
            repos: "libPusher",
             file: file,
-     description: "SHA #{current_git_commit_sha} (#{Time.now.strftime("%d/%m/%Y")})"
+     description: "Built from #{current_git_commit_sha} at #{Time.now.strftime("%d/%m/%Y")}"
   )
 end
 
