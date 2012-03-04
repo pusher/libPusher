@@ -4,5 +4,5 @@ if [ -f "$HOME/.rvm/scripts/rvm" ]
   source "$HOME/.rvm/scripts/rvm"
 fi
 bundle install
-rm -fr Pods
+# rm -fr Pods
 bundle exec pod install
