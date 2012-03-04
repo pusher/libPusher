@@ -538,7 +538,7 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "libPusher-OSX/libPusher-OSX-Prefix.pch";
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/usr/include";
+				HEADER_SEARCH_PATHS = "\"$(PROJECT_DIR)/usr/include\"";
 				INFOPLIST_FILE = "libPusher-OSX/libPusher-OSX-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = framework;
@@ -551,7 +551,7 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "libPusher-OSX/libPusher-OSX-Prefix.pch";
-				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/usr/include";
+				HEADER_SEARCH_PATHS = "\"$(PROJECT_DIR)/usr/include\"";
 				INFOPLIST_FILE = "libPusher-OSX/libPusher-OSX-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = framework;
