@@ -3,12 +3,12 @@ platform :ios, :deployment_target => '4.0'
 dependency do |s|
   s.name     = 'JSONKit'
   s.version  = '1.5b'
-  s.source   = { :git => 'https://github.com/johnezang/JSONKit.git', :commit => '0aff3deb5e' }
+  s.source   = { :git => 'https://github.com/johnezang/JSONKit.git', :commit => '0aff3deb5e', :download_only => true }
   s.source_files = 'JSONKit.*'
 end
 
 dependency 'Reachability'
-dependency 'SocketRocket', git: 'git://github.com/square/SocketRocket.git'
+dependency 'SocketRocket', git: 'git://github.com/square/SocketRocket.git', :download_only => true
 
 post_install do |installer|
   # we don't want to link static lib to the icucore dylib or it will fail to build
@@ -23,5 +23,5 @@ post_install do |installer|
 end
 
 target :specs, :exclusive => true do
-  dependency 'Kiwi', git: "git://github.com/allending/Kiwi.git"
+  dependency 'Kiwi', git: "git://github.com/allending/Kiwi.git", :download_only => true
 end
