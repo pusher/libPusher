@@ -183,36 +183,36 @@ namespace :release do
   desc "Build and package the iOS library for nightly distribution"
   task :nightly_ios => :combined do
     puts "Crreating iOS package for nightly distribution..."
-    package_fie = prepare_distribution_package("iOS-nightly")
+    package_file = prepare_distribution_package("iOS-nightly")
     puts "Uploading package to Github..."
-    upload_package_to_github(package_fie)
+    upload_package_to_github(package_file)
     puts "Finished."
   end
   
   desc "Build and package the OSX framework for nightly distribution"
   task :nightly_osx => [:prepare_distribution, "osx:cleanbuild"] do
     puts "Crreating OSX package for nightly distribution..."
-    package_fie = prepare_distribution_package("OSX-nightly", false)
+    package_file = prepare_distribution_package("OSX-nightly", false)
     puts "Uploading package to Github..."
-    upload_package_to_github(package_fie)
+    upload_package_to_github(package_file)
     puts "Finished."
   end
   
   desc "Build and package for stable iOS distribution"
   task :stable_ios => :combined do
     puts "Crreating package for #{LIBRARY_VERSION} distribution..."
-    package_fie = prepare_distribution_package("iOS-v#{LIBRARY_VERSION}")
+    package_file = prepare_distribution_package("iOS-v#{LIBRARY_VERSION}")
     puts "Uploading package to Github..."
-    upload_package_to_github(package_fie)
+    upload_package_to_github(package_file)
     puts "Finished."
   end
   
   desc "Build and package for stable OSX distribution"
   task :stable_osx => [:prepare_distribution, "osx:cleanbuild"] do
     puts "Crreating package for #{LIBRARY_VERSION} distribution..."
-    package_fie = prepare_distribution_package("OSX-v#{LIBRARY_VERSION}")
+    package_file = prepare_distribution_package("OSX-v#{LIBRARY_VERSION}")
     puts "Uploading package to Github..."
-    upload_package_to_github(package_fie)
+    upload_package_to_github(package_file)
     puts "Finished."
   end
   
