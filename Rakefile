@@ -177,7 +177,7 @@ namespace :release do
   end
   
   desc "Build and package the iOS library for nightly distribution"
-  task :nightly_ios do# => :combined do
+  task :nightly_ios => :combined do
     puts "Crreating iOS package for nightly distribution..."
     package_fie = prepare_distribution_package("iOS-nightly")
     puts "Uploading package to Github..."
