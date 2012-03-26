@@ -18,5 +18,6 @@ group :building do
   gem "cocoapods", git: "git://github.com/CocoaPods/CocoaPods"
   #gem "xcodeproj", path: File.expand_path("~/Code/repos/cocoapods/external/Xcodeproj")
   #gem "cocoapods", path: File.expand_path("~/Code/repos/cocoapods")
-  gem "net-github-upload"
+  gem "github-downloads", git: "git://github.com/lukeredpath/github-downloads.git"
+  gem "osx_keychain"
 end

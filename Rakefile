@@ -8,6 +8,8 @@ require 'tmpdir'
 
 LIBRARY_VERSION = "1.2"
 XCODEBUILD_LOG  = File.join(File.dirname(__FILE__), "xcodebuild.log")
+GITHUB_USER     = 'lukeredpath'
+GITHUB_REPO     = 'libPusher'
 
 namespace :authserver do
   desc "Starts the auth server on port 9292"
@@ -110,18 +112,21 @@ def prepare_distribution_package(file_suffix, copy_readme = true)
   "dist/libPusher-#{file_suffix}.zip"
 end
 
-require 'net/github-upload'
+require 'github/downloads'
+require 'osx_keychain'
 
 def upload_package_to_github(file)
-  login = `git config github.user`.chomp
-  token = `git config github.token`.chomp 
+  keychain = OSXKeychain.new
+  password = keychain['api.github.com', GITHUB_USER]
+  uploader = Github::Downloads.connect(GITHUB_USER, password, GITHUB_REPO)
   
-  upload = Net::GitHub::Upload.new(login: login, token: token)
-  upload.replace(
-           repos: "libPusher",
-            file: file,
-     description: "Built from #{current_git_commit_sha} at #{Time.now.strftime("%d/%m/%Y")}"
-  )
+  begin
+    uploader.create(file, "Built from #{current_git_commit_sha} at #{Time.now.strftime("%d/%m/%Y")}", overwrite: true)
+  rescue Github::Downloads::UnexpectedResponse => e
+    puts "Unexpected response #{e}"
+    puts "Error: #{e.error_message}"
+    exit 1
+  end
 end
 
 namespace :release do
@@ -172,7 +177,7 @@ namespace :release do
   end
   
   desc "Build and package the iOS library for nightly distribution"
-  task :nightly_ios => :combined do
+  task :nightly_ios do# => :combined do
     puts "Crreating iOS package for nightly distribution..."
     package_fie = prepare_distribution_package("iOS-nightly")
     puts "Uploading package to Github..."
