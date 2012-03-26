@@ -112,6 +112,10 @@ def prepare_distribution_package(file_suffix, copy_readme = true)
   "dist/libPusher-#{file_suffix}.zip"
 end
 
+def unquote(string)
+  string.gsub(/"/, '')
+end
+
 require 'github/downloads'
 require 'osx_keychain'
 
@@ -158,7 +162,7 @@ namespace :release do
     t.configuration = "Release"
     t.formatter = XcodeBuild::Formatters::ProgressFormatter.new
     t.after_build do |build| 
-      Dir["#{build.target_build_directory}/*.*"].each do |product|
+      Dir["#{unquote(build.target_build_directory)}/*.*"].each do |product|
         system "cp -r #{product} #{ARTEFACT_DIR}"
       end
     end
