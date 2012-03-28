@@ -305,6 +305,9 @@
 {
   NSString *memberID = [event.data objectForKey:@"user_id"];
   NSDictionary *memberInfo = [event.data objectForKey:@"user_info"];
+  if (memberInfo == nil) {
+    memberInfo = [NSDictionary dictionary];
+  }
   [memberIDs addObject:memberID];
   [members setObject:memberInfo forKey:memberID];
   [self.presenceDelegate presenceChannel:self memberAddedWithID:memberID memberInfo:memberInfo];
