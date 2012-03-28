@@ -112,7 +112,7 @@
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
   self.connectionError = error;
-  [self setFinished:YES];
+  [self finish];
 }
 
 - (void)cancelImmediately
