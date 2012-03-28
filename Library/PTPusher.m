@@ -189,12 +189,18 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 
 - (void)subscribeToChannel:(PTPusherChannel *)channel
 {
-  [channel authorizeWithCompletionHandler:^(BOOL isAuthorized, NSDictionary *authData) {
+  [channel authorizeWithCompletionHandler:^(BOOL isAuthorized, NSDictionary *authData, NSError *underlyingError) {
     if (isAuthorized) {
       [channel subscribeWithAuthorization:authData];
     }
     else {
-      NSError *error = [NSError errorWithDomain:PTPusherErrorDomain code:PTPusherSubscriptionAuthorisationError userInfo:nil];
+      NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
+      
+      if (underlyingError) {
+        [userInfo setObject:underlyingError forKey:NSUnderlyingErrorKey];
+      }
+      
+      NSError *error = [NSError errorWithDomain:PTPusherErrorDomain code:PTPusherSubscriptionAuthorisationError userInfo:userInfo];
 
       if ([self.delegate respondsToSelector:@selector(pusher:didFailToSubscribeToChannel:withError:)]) {
         [self.delegate pusher:self didFailToSubscribeToChannel:channel withError:error];

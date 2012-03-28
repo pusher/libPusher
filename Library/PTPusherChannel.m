@@ -98,9 +98,9 @@
 
 #pragma mark - Authorization
 
-- (void)authorizeWithCompletionHandler:(void(^)(BOOL, NSDictionary *))completionHandler
+- (void)authorizeWithCompletionHandler:(void(^)(BOOL, NSDictionary *, NSError *))completionHandler
 {
-  completionHandler(YES, [NSDictionary dictionary]); // public channels do not require authorization
+  completionHandler(YES, [NSDictionary dictionary], nil); // public channels do not require authorization
 }
 
 #pragma mark - Binding to events
@@ -190,12 +190,12 @@
   return YES;
 }
 
-- (void)authorizeWithCompletionHandler:(void(^)(BOOL, NSDictionary *))completionHandler
+- (void)authorizeWithCompletionHandler:(void(^)(BOOL, NSDictionary *, NSError *))completionHandler
 {
   PTPusherChannelAuthorizationOperation *authOperation = [PTPusherChannelAuthorizationOperation operationWithAuthorizationURL:pusher.authorizationURL channelName:self.name socketID:pusher.connection.socketID];
   
   [authOperation setCompletionHandler:^(PTPusherChannelAuthorizationOperation *operation) {
-    completionHandler(operation.isAuthorized, operation.authorizationData);
+    completionHandler(operation.isAuthorized, operation.authorizationData, operation.connectionError);
   }];
   
   if ([pusher.delegate respondsToSelector:@selector(pusher:willAuthorizeChannelWithRequest:)]) {

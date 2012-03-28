@@ -82,7 +82,7 @@
 /// @name Authorization
 ///------------------------------------------------------------------------------------/
 
-- (void)authorizeWithCompletionHandler:(void(^)(BOOL, NSDictionary *))completionHandler;
+- (void)authorizeWithCompletionHandler:(void(^)(BOOL, NSDictionary *, NSError *))completionHandler;
 
 @end
 
