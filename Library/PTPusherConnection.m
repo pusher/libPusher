@@ -90,7 +90,10 @@ NSString *const PTPusherConnectionPingEvent        = @"pusher:ping";
 
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error;
 {
+  self.connected = NO;
   [self.delegate pusherConnection:self didFailWithError:error];
+  self.socketID = nil;
+  socket = nil;
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean
