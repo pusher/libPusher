@@ -163,7 +163,7 @@ namespace :release do
     t.formatter = XcodeBuild::Formatters::ProgressFormatter.new
     t.after_build do |build| 
       Dir["#{unquote(build.target_build_directory)}/*.*"].each do |product|
-        system "cp -r #{product} #{ARTEFACT_DIR}"
+        system %{cp -r "#{product}" "#{ARTEFACT_DIR}"}
       end
     end
     t.xcodebuild_log_path = XCODEBUILD_LOG
