@@ -9,6 +9,5 @@ Pod::Spec.new do |s|
   s.source_files = 'Library/*'
   s.clean_paths  = ["Frameworks", "Functional Specs", "Sample", "Scripts", "Unit Tests", "*.xcodeproj", "*.xcworkspace"]
   s.requires_arc = true
-  s.dependency "JSONKit", "1.4"
   s.dependency 'SocketRocket', :git => "git://github.com/square/SocketRocket", :commit => "ec6c145f4a"
 end
