@@ -18,6 +18,7 @@
 		A3382DE31525C3F70025550D /* PTJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = A30950121525C272008F695B /* PTJSON.m */; };
 		A3382DE41525C3FA0025550D /* PTJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = A30950111525C272008F695B /* PTJSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3382DF61525D06C0025550D /* JSONKit.h in Headers */ = {isa = PBXBuildFile; fileRef = A3382DEA1525D01B0025550D /* JSONKit.h */; };
+		A3382E011525D0D50025550D /* PTJSONParser.h in Headers */ = {isa = PBXBuildFile; fileRef = A309500F1525C236008F695B /* PTJSONParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A35281D013F721A8000687C0 /* PTPusherConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = A35281CE13F721A8000687C0 /* PTPusherConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A35281D113F721A8000687C0 /* PTPusherConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = A35281CF13F721A8000687C0 /* PTPusherConnection.m */; };
 		A35281D313F72E03000687C0 /* PTPusherEventPublisher.h in Headers */ = {isa = PBXBuildFile; fileRef = A35281D213F72E03000687C0 /* PTPusherEventPublisher.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -506,6 +507,7 @@
 				A37E167414E572C900DCA3A6 /* PTPusherMacros.h in Headers */,
 				A3382DE41525C3FA0025550D /* PTJSON.h in Headers */,
 				A3382DF61525D06C0025550D /* JSONKit.h in Headers */,
+				A3382E011525D0D50025550D /* PTJSONParser.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
