@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "PTJSONParser.h"
 
+extern NSString *const PTJSONParserNotAvailable;
+
 @interface PTJSON : NSObject
 
 /**

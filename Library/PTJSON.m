@@ -10,11 +10,17 @@
 #import "JSONKit.h"
 #import "PTPusherMacros.h"
 
+NSString *const PTJSONParserNotAvailable = @"PTJSONParserNotAvailable";
+
 @implementation PTJSON
 
 + (id<PTJSONParser>)JSONParser
 {
   if (![NSJSONSerialization class]) {
+    if (NSClassFromString(@"JSONDecoder") == nil) {
+      [NSException raise:PTJSONParserNotAvailable 
+                  format:@"No JSON parser available. To support iOS4, you should link JSONKit to your project."];
+    }
     return [PTJSONKitParser JSONKitParser];
   }
   return [PTNSJSONParser NSJSONParser];
