@@ -17,6 +17,7 @@
 		A315780C14D07529000136A9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A315780B14D07529000136A9 /* libPods.a */; };
 		A3382DE31525C3F70025550D /* PTJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = A30950121525C272008F695B /* PTJSON.m */; };
 		A3382DE41525C3FA0025550D /* PTJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = A30950111525C272008F695B /* PTJSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A3382DF61525D06C0025550D /* JSONKit.h in Headers */ = {isa = PBXBuildFile; fileRef = A3382DEA1525D01B0025550D /* JSONKit.h */; };
 		A35281D013F721A8000687C0 /* PTPusherConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = A35281CE13F721A8000687C0 /* PTPusherConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A35281D113F721A8000687C0 /* PTPusherConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = A35281CF13F721A8000687C0 /* PTPusherConnection.m */; };
 		A35281D313F72E03000687C0 /* PTPusherEventPublisher.h in Headers */ = {isa = PBXBuildFile; fileRef = A35281D213F72E03000687C0 /* PTPusherEventPublisher.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -131,6 +132,7 @@
 		A31577F814D07358000136A9 /* libPods-specs.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-specs.a"; path = "Pods/build/Release-iphoneos/libPods-specs.a"; sourceTree = "<group>"; };
 		A315780A14D0751C000136A9 /* Pods.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		A315780B14D07529000136A9 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Release-iphoneos/libPods.a"; sourceTree = SOURCE_ROOT; };
+		A3382DEA1525D01B0025550D /* JSONKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = JSONKit.h; path = Library/JSONKit.h; sourceTree = SOURCE_ROOT; };
 		A35281CE13F721A8000687C0 /* PTPusherConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherConnection.h; sourceTree = "<group>"; };
 		A35281CF13F721A8000687C0 /* PTPusherConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTPusherConnection.m; sourceTree = "<group>"; };
 		A35281D213F72E03000687C0 /* PTPusherEventPublisher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherEventPublisher.h; sourceTree = "<group>"; };
@@ -407,6 +409,7 @@
 		A3D1D0991157CC3F009A12AD /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				A3382DEA1525D01B0025550D /* JSONKit.h */,
 				A37E158E14E49F2D00DCA3A6 /* SRWebSocket.h */,
 			);
 			path = Vendor;
@@ -502,6 +505,7 @@
 				A37E158F14E49F2D00DCA3A6 /* SRWebSocket.h in Headers */,
 				A37E167414E572C900DCA3A6 /* PTPusherMacros.h in Headers */,
 				A3382DE41525C3FA0025550D /* PTJSON.h in Headers */,
+				A3382DF61525D06C0025550D /* JSONKit.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
