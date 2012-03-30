@@ -32,7 +32,7 @@
   
   self.pusher = [PTPusher pusherWithKey:PUSHER_API_KEY delegate:self encrypted:NO];
 
-  [[self.pusher subscribeToChannelNamed:@"test-channel"] bindToEventNamed:@"test-event" handleWithBlock:^(PTPusherEvent *event) {
+  [[self.pusher subscribeToChannelNamed:@"messages"] bindToEventNamed:@"new-message" handleWithBlock:^(PTPusherEvent *event) {
     [self.eventsController addObject:event];
   }];
 }
