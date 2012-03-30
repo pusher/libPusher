@@ -8,9 +8,9 @@
 
 #import "LRAppDelegate.h"
 #import "Constants.h"
-#import <libPusher/PTPusher.h>
-#import <libPusher/PTPusherChannel.h>
-#import <libPusher/PTPusherEvent.h>
+#import <Pusher/PTPusher.h>
+#import <Pusher/PTPusherChannel.h>
+#import <Pusher/PTPusherEvent.h>
 
 @implementation LRAppDelegate
 

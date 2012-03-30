@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import <libPusher/PTPusherDelegate.h>
+#import <Pusher/PTPusherDelegate.h>
 
 @class PTPusher;
 
