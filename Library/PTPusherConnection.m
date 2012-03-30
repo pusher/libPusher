@@ -10,7 +10,7 @@
 #import "PTPusherEvent.h"
 #define SR_ENABLE_LOG
 #import "SRWebSocket.h"
-#import "JSONKit.h"
+#import "PTJSON.h"
 
 NSString *const PTPusherConnectionEstablishedEvent = @"pusher:connection_established";
 NSString *const PTPusherConnectionPingEvent        = @"pusher:ping";
@@ -75,7 +75,7 @@ NSString *const PTPusherConnectionPingEvent        = @"pusher:ping";
 
 - (void)send:(id)object
 {
-  NSData *JSONData = [object JSONData];
+  NSData *JSONData = [[PTJSON JSONParser] JSONDataFromObject:object];
   NSString *message = [[NSString alloc] initWithData:JSONData encoding:NSUTF8StringEncoding];
   [socket send:message];
 }
@@ -106,7 +106,7 @@ NSString *const PTPusherConnectionPingEvent        = @"pusher:ping";
 
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(NSString *)message
 {
-  NSDictionary *messageDictionary = [message objectFromJSONString];
+  NSDictionary *messageDictionary = [[PTJSON JSONParser] objectFromJSONString:message];
   PTPusherEvent *event = [PTPusherEvent eventFromMessageDictionary:messageDictionary];
   
   if ([event.name isEqualToString:PTPusherConnectionPingEvent]) {

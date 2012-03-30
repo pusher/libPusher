@@ -15,6 +15,8 @@
 		A31577F614D071BC000136A9 /* libPods-specs.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A31577F514D071BC000136A9 /* libPods-specs.a */; };
 		A31577F914D07358000136A9 /* libPods-specs.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A31577F814D07358000136A9 /* libPods-specs.a */; };
 		A315780C14D07529000136A9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A315780B14D07529000136A9 /* libPods.a */; };
+		A3382DE31525C3F70025550D /* PTJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = A30950121525C272008F695B /* PTJSON.m */; };
+		A3382DE41525C3FA0025550D /* PTJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = A30950111525C272008F695B /* PTJSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A35281D013F721A8000687C0 /* PTPusherConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = A35281CE13F721A8000687C0 /* PTPusherConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A35281D113F721A8000687C0 /* PTPusherConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = A35281CF13F721A8000687C0 /* PTPusherConnection.m */; };
 		A35281D313F72E03000687C0 /* PTPusherEventPublisher.h in Headers */ = {isa = PBXBuildFile; fileRef = A35281D213F72E03000687C0 /* PTPusherEventPublisher.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -119,6 +121,9 @@
 		60F66883BF0E4A3096938A8A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A30575CE15233C1200DA19BD /* PTPusherPresenceChannelSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTPusherPresenceChannelSpec.m; sourceTree = "<group>"; };
 		A30790D911583B7200EBFFF8 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		A309500F1525C236008F695B /* PTJSONParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PTJSONParser.h; sourceTree = "<group>"; };
+		A30950111525C272008F695B /* PTJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTJSON.h; sourceTree = "<group>"; };
+		A30950121525C272008F695B /* PTJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTJSON.m; sourceTree = "<group>"; };
 		A314A2B314EFFF0400918BEA /* PTPusherConnectionMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PTPusherConnectionMonitor.h; path = Sample/PTPusherConnectionMonitor.h; sourceTree = SOURCE_ROOT; };
 		A314A2B414EFFF0400918BEA /* PTPusherConnectionMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PTPusherConnectionMonitor.m; path = Sample/PTPusherConnectionMonitor.m; sourceTree = SOURCE_ROOT; };
 		A31577F514D071BC000136A9 /* libPods-specs.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libPods-specs.a"; path = "Pods/build/Release-iphoneos/libPods-specs.a"; sourceTree = "<group>"; };
@@ -458,6 +463,9 @@
 			children = (
 				A3AC28B413F75530001C4808 /* PTURLRequestOperation.h */,
 				A3AC28B513F75530001C4808 /* PTURLRequestOperation.m */,
+				A30950111525C272008F695B /* PTJSON.h */,
+				A30950121525C272008F695B /* PTJSON.m */,
+				A309500F1525C236008F695B /* PTJSONParser.h */,
 				A3FE429B11811EE8009CF5D7 /* NSString+Hashing.h */,
 				A3FE429C11811EE8009CF5D7 /* NSString+Hashing.m */,
 				A3FE42FF11812541009CF5D7 /* NSDictionary+QueryString.h */,
@@ -493,6 +501,7 @@
 				A3CA671514DBBAE1003E2F1E /* NSDictionary+QueryString.h in Headers */,
 				A37E158F14E49F2D00DCA3A6 /* SRWebSocket.h in Headers */,
 				A37E167414E572C900DCA3A6 /* PTPusherMacros.h in Headers */,
+				A3382DE41525C3FA0025550D /* PTJSON.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -582,7 +591,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0430;
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "libPusher" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -745,6 +754,7 @@
 				A35281EA13F75265000687C0 /* PTPusherAPI.m in Sources */,
 				A3AC28B713F75530001C4808 /* PTURLRequestOperation.m in Sources */,
 				A3AC28C413F76C51001C4808 /* PTPusherChannelAuthorizationOperation.m in Sources */,
+				A3382DE31525C3F70025550D /* PTJSON.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
