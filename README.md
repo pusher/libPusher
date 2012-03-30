@@ -10,6 +10,12 @@ Apple provides its own push notification service which is great for getting aler
 
 The latest release is 1.2. A list of changes can be found in the [CHANGELOG](CHANGELOG.md).
 
+Important note: As of 1.3, libPusher no longer includes the JSONKit JSON parsing library. By default, libPusher now uses the native `NSJSONSerialization` class, only available on iOS 5.0 or OSX 10.7 and above. 
+
+libPusher retains runtime support for JSONKit for those who still need to support older platforms - in order for this to work, you must manually link JSONKit yourself. 
+
+If you are using CocoaPods, this is as simple as explicitly adding JSONKit to your Podfile (previously, it would have been installed by CocoaPods as a libPusher dependency).
+
 Detailed installation instructions can be found [in the wiki](https://github.com/lukeredpath/libPusher/wiki/Adding-libPusher-to-your-project).
 
 ## Getting started
