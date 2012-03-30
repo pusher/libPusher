@@ -41,8 +41,6 @@
   UIBarButtonItem *newClientButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Add Client" style:UIBarButtonItemStyleBordered target:self action:@selector(connectClient)];
   UIBarButtonItem *disconnectClientButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Remove Client" style:UIBarButtonItemStyleBordered target:self action:@selector(disconnectLastClient)];
   self.toolbarItems = [NSArray arrayWithObjects:newClientButtonItem, disconnectClientButtonItem, nil];
-  [newClientButtonItem release];
-  [disconnectClientButtonItem release];
   
   // configure the auth URL for private/presence channels
   self.pusher.authorizationURL = [NSURL URLWithString:@"http://localhost:9292/presence/auth"];
@@ -64,12 +62,6 @@
   }
 }
 
-- (void)dealloc 
-{
-  [_pusher release];
-  [currentChannel release];
-  [super dealloc];
-}
 
 #pragma mark - Subscribing
 
@@ -133,7 +125,7 @@ static NSString *EventCellIdentifier = @"EventCell";
 {
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:EventCellIdentifier];
   if (cell == nil) {
-    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:EventCellIdentifier] autorelease];
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:EventCellIdentifier];
   }
   NSString *memberID = [self.currentChannel.memberIDs objectAtIndex:indexPath.row];
   NSDictionary *memberInfo = [self.currentChannel infoForMemberWithID:memberID];

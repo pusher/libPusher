@@ -20,9 +20,9 @@
 @interface PusherEventsViewController : UITableViewController <PusherEventsDelegate> {
   NSMutableArray *eventsReceived;
 }
-@property (nonatomic, retain) PTPusher *pusher;
-@property (nonatomic, retain) PTPusherAPI *pusherAPI;
-@property (nonatomic, retain) PTPusherChannel *currentChannel;
+@property (nonatomic) PTPusher *pusher;
+@property (nonatomic) PTPusherAPI *pusherAPI;
+@property (nonatomic) PTPusherChannel *currentChannel;
 @property (nonatomic, readonly) NSMutableArray *eventsReceived;
 
 - (void)subscribeToChannel:(NSString *)channelName;

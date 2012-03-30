@@ -17,8 +17,8 @@
 @interface PusherPresenceEventsViewController : UITableViewController <PTPusherDelegate, PTPusherPresenceChannelDelegate> {
 
 }
-@property (nonatomic, retain) PTPusher *pusher;
-@property (nonatomic, retain) PTPusherPresenceChannel *currentChannel;
+@property (nonatomic) PTPusher *pusher;
+@property (nonatomic) PTPusherPresenceChannel *currentChannel;
 
 - (void)subscribeToPresenceChannel:(NSString *)channelName;
 @end

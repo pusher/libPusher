@@ -39,7 +39,6 @@
 
   UIBarButtonItem *newEventButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(presentNewEventScreen)];
   self.toolbarItems = [NSArray arrayWithObject:newEventButtonItem];
-  [newEventButtonItem release];
   
   // configure the auth URL for private/presence channels
   self.pusher.authorizationURL = [NSURL URLWithString:@"http://localhost:9292/presence/auth"];
@@ -53,14 +52,6 @@
   [self.pusher unsubscribeFromChannel:self.currentChannel]; 
 }
 
-- (void)dealloc 
-{
-  [pusher release];
-  [pusherAPI release];
-  [currentChannel release];
-  [eventsReceived release];
-  [super dealloc];
-}
 
 #pragma mark - Subscribing
 
@@ -83,7 +74,6 @@
   NewEventViewController *newEventController = [[NewEventViewController alloc] init];
   newEventController.delegate = self;
   [self presentModalViewController:newEventController animated:YES];
-  [newEventController release];
 }
 
 - (void)sendEventWithMessage:(NSString *)message;
@@ -101,7 +91,6 @@
   if (self.pusherAPI == nil) {
     PTPusherAPI *api = [[PTPusherAPI alloc] initWithKey:PUSHER_API_KEY appID:PUSHER_APP_ID secretKey:PUSHER_API_SECRET];
     self.pusherAPI = api;
-    [api release];
   }
   // we set the socket ID to nil here as we want to receive the events that we are sending
   [self.pusherAPI triggerEvent:@"new-message" onChannel:@"messages" data:payload socketID:nil];
@@ -120,7 +109,7 @@ static NSString *EventCellIdentifier = @"EventCell";
 {
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:EventCellIdentifier];
   if (cell == nil) {
-    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:EventCellIdentifier] autorelease];
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:EventCellIdentifier];
   }
   PTPusherEvent *event = [eventsReceived objectAtIndex:indexPath.row];
 

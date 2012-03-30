@@ -11,10 +11,10 @@
 
 @interface NewEventViewController : UIViewController {
   UITextView *textView;
-  id<PusherEventsDelegate> delegate;
+  id<PusherEventsDelegate> __unsafe_unretained delegate;
 }
-@property (nonatomic, retain) IBOutlet UITextView *textView;
-@property (nonatomic, assign) id<PusherEventsDelegate> delegate;
+@property (nonatomic) IBOutlet UITextView *textView;
+@property (nonatomic, unsafe_unretained) id<PusherEventsDelegate> delegate;
 
 - (IBAction)sendEvent:(id)sender;
 - (IBAction)cancel:(id)sender;

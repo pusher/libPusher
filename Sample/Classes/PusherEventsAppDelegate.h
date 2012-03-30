@@ -17,11 +17,11 @@
   NSMutableArray *connectedClients;
   NSMutableArray *clientsAwaitingConnection;
 }
-@property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
-@property (nonatomic, retain) IBOutlet PusherExampleMenuViewController *menuViewController;
-@property (nonatomic, retain) PTPusher *pusher;
-@property (nonatomic, retain) PTPusherConnectionMonitor *connectionMonitor;
+@property (nonatomic) IBOutlet UIWindow *window;
+@property (nonatomic) IBOutlet UINavigationController *navigationController;
+@property (nonatomic) IBOutlet PusherExampleMenuViewController *menuViewController;
+@property (nonatomic, strong) PTPusher *pusher;
+@property (nonatomic, strong) PTPusherConnectionMonitor *connectionMonitor;
 
 - (PTPusher *)lastConnectedClient;
 - (PTPusher *)createClientWithAutomaticConnection:(BOOL)connectAutomatically;

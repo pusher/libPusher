@@ -19,11 +19,6 @@
   return [self initWithNibName:@"NewEventViewController" bundle:nil];
 }
 
-- (void)dealloc 
-{
-  [textView release];
-  [super dealloc];
-}
 
 - (void)viewDidLoad 
 {

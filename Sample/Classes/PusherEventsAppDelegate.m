@@ -60,12 +60,6 @@
 {
   [[NSNotificationCenter defaultCenter] 
     removeObserver:self name:PTPusherEventReceivedNotification object:self.pusher];
-  [_pusher release];
-  [connectedClients release];
-  [menuViewController release];
-  [navigationController release];
-  [window release];
-  [super dealloc];
 }
 
 #pragma mark - Event notifications
@@ -129,7 +123,6 @@
   
   UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Authorization Failed" message:[NSString stringWithFormat:@"Client with socket ID %@ could not be authorized to join channel %@", pusher.connection.socketID, channel.name] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
   [alert show];
-  [alert autorelease];
   
   if (pusher != self.pusher) {
     [pusher disconnect];
