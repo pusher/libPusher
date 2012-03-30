@@ -6,36 +6,9 @@ This project was borne out of the idea that a web browser doesn't have to be the
 
 Apple provides its own push notification service which is great for getting alert-type notifications to your app's users whether or not they are using the app, but for real-time updates to data whilst they are using your app, hooking into your web app's existing event-dispatch mechanism is far less hassle (and is great if you want to be able to interact with other web services that might not have access to the APNS).
 
-## Latest Release: 1.2 (29 Feb 2012)
-
-* Changed backend socket library to [SocketRocket](http://github.com/square/SocketRocket)
-* PTPusherEvent objects have a `timeReceived` property.
-* Updated to the latest version of JSONKit.
-* Re-added armv6 archicture for iOS 4.0 - 4.2 support.
-* HTTP authorization for private/presence channels now accepts a HTTP 201 status as well as 200 (#23).
-* Fixed triggering of client events (would previously send the channel name as the event name).
-* Fixed retain cycle between PTPusher and PTPusherChannel.
-* OSX framework is now called Pusher.framework.
-* Project has been converted to use ARC (Automatic Reference Counting).
-* All event binding methods return a PTPusherEventBinding object, which can be used to remove bindings (see "Removing Bindings" below).
-* Channels should be removed from the cache when they are unsubscribed (#25).
-* Subscribing to multiple private channels would fail as only the first channel would send the authorization request (#26).
-* Wait for handshake and socket ID to be received before attempting to connect to channels as the socket ID is required for private/presence channel authorization.
-
-## Update Note: 1.0 (August 2011)
-
-A large update was made to this library in August 2011 that is not backwards compatible with previous-versions of this library. Users are advised to take the time to update their code to use the new API, which now mirrors more closely the Pusher Javascript API and will be more stable going forwards.
-
-The major changes are:
-
-* Re-architected the core API to bring it in line with the Javascript API.
-* Support multiple channels over a single connection.
-* Added support for private and presence channels.
-* Added block-support for event callbacks.
-* Extracted the wrapper for the Pusher REST API into a standalone component.
-* Dropped support for iOS 3.0
-
 ## Installation instructions
+
+The latest release is 1.2. A list of changes can be found in the [CHANGELOG](CHANGELOG.md).
 
 Detailed installation instructions can be found [in the wiki](https://github.com/lukeredpath/libPusher/wiki/Adding-libPusher-to-your-project).
 
