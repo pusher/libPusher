@@ -1,3 +1,11 @@
+# 1.3 - April 2012
+
+* Switched to using NSJSONSerialization by default for JSON parsing ([see JSON notes](https://github.com/lukeredpath/libPusher/wiki/Adding-libPusher-to-your-project)).
+* Bubble up any authorization connection errors to the Pusher delegate (#30)
+* Ensure channel auth delegate methods are fired when authorization fails. (#30)
+* Ensure connections can always be re-opened after a failure. (#32)
+* Handle members added to a presence channel that have no user info. (#31)
+
 # 1.2 - February 2012
 
 * Changed backend socket library to [SocketRocket](http://github.com/square/SocketRocket)
