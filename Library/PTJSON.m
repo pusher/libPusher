@@ -14,7 +14,10 @@
 
 + (id<PTJSONParser>)JSONParser
 {
-  return [PTJSONKitParser JSONKitParser];
+  if (![NSJSONSerialization class]) {
+    return [PTJSONKitParser JSONKitParser];
+  }
+  return [PTNSJSONParser NSJSONParser];
 }
 
 @end
@@ -41,6 +44,33 @@
 - (id)objectFromJSONString:(NSString *)string
 {
   return [string objectFromJSONString];
+}
+
+@end
+
+
+@implementation PTNSJSONParser 
+
++ (id)NSJSONParser
+{
+  PT_DEFINE_SHARED_INSTANCE_USING_BLOCK(^{
+    return [[self alloc] init];
+  });
+}
+
+- (NSData *)JSONDataFromObject:(id)object
+{
+  return [NSJSONSerialization dataWithJSONObject:object options:0 error:nil];
+}
+
+- (id)objectFromJSONData:(NSData *)data
+{
+  return [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+}
+
+- (id)objectFromJSONString:(NSString *)string
+{
+  return [self objectFromJSONData:[string dataUsingEncoding:NSUTF8StringEncoding]];
 }
 
 @end
