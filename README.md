@@ -281,12 +281,6 @@ If Pusher disconnects but Reachability indicates that the network is reachable, 
 
 You may want to implement the `pusher:connectionWillReconnect:afterDelay:` delegate method and keep track of the number of retry attempts and gradually back off your retry attempts by increasing the reconnect delay after a number of retry attempts have failed. This stops you from constantly trying to connect to Pusher while it is experience issues.
 
-## Credits
-
-PusherTouch uses the [ZTWebSocket](http://github.com/openresearch/zimt) library by [OpenResearch](http://github.com/openresearch), without which I probably wouldn't have got anywhere.
-
-For more information about Pusher, visit [the website](http://pusherapp.com).
-
 ## License
 
 All code is licensed under the MIT license. See the LICENSE file for more details.
