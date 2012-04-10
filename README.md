@@ -27,13 +27,13 @@ The libPusher API mirrors the [Pusher Javascript client](http://pusher.com/docs/
 ### Creating a new connection
 
 ```objc
-PTPusher *client = [PTPusher pusherWithKey:@"YOUR-API-KEY" delegate:self];
+client = [PTPusher pusherWithKey:@"YOUR-API-KEY" delegate:self];
 ```
 
 When calling the above method, the connection will be established immediately. If you want to defer connection, you can do so:
 
 ```objc
-PTPusher *client = [PTPusher pusherWithKey:@"YOUR-API-KEY" connectAutomatically:NO];
+client = [PTPusher pusherWithKey:@"YOUR-API-KEY" connectAutomatically:NO];
 ```
 
 When you are ready to connect:
@@ -41,6 +41,8 @@ When you are ready to connect:
 ```objc
 [client connect]
 ```
+
+Note: in the above examples, `client` is a `strong` instance variable. The instance returned by `pusherWithKey:*:` factory methods will be auto-released, according to standard Objective-C return conventions. You *must* retain the client otherwise it will be auto-released before anything useful happens causing silent failures and unexpected behaviour.
 
 It is recommend you assign a delegate to the Pusher client as this will enable you to be notified when significant connection events happen such as connection errors, disconnects and retries.
 
