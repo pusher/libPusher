@@ -30,7 +30,14 @@ These instructions use the combined library:
 
 4. Drag the contents of the headers directory into your project.
 
-5. You should now be able to #import "PTPusher.h" and compile.
+5. Link with the following libraries/frameworks:
+
+* libicucore.dylib
+* CFNetwork.framework
+* Security.framework
+* SystemConfiguration.framework
+
+6. You should now be able to #import "PTPusher.h" and compile.
 
 ===============================================================================
 Notes
