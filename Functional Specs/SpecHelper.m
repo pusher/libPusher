@@ -37,7 +37,7 @@ void sendTestEventOnChannel(NSString *channelName, NSString *eventName)
     _sharedAPI = [[PTPusherAPI alloc] initWithKey:PUSHER_API_KEY appID:PUSHER_APP_ID secretKey:PUSHER_API_SECRET];
   });
   
-  [_sharedAPI triggerEvent:eventName onChannel:channelName data:@"dummy data" socketID:@"99999"];
+  [_sharedAPI triggerEvent:eventName onChannel:channelName data:[NSArray arrayWithObject:@"dummy data"] socketID:@"99999"];
 }
 
 void onConnect(dispatch_block_t block)
