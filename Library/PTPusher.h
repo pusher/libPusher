@@ -235,9 +235,11 @@ extern NSString *const PTPusherErrorUnderlyingEventKey;
 
 /** Unsubscribes from the specified channel.
  
+ This method is deprecated. You should use -[PTPusherChannel unsubscribe] instead.
+ 
  @param channel The channel to unsubscribe from.
  */
-- (void)unsubscribeFromChannel:(PTPusherChannel *)channel;
+- (void)unsubscribeFromChannel:(PTPusherChannel *)channel __PUSHER_DEPRECATED__;
 
 /** Returns a previously subscribed channel with the given name.
  

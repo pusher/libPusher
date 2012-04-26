@@ -84,6 +84,14 @@
 
 - (void)authorizeWithCompletionHandler:(void(^)(BOOL, NSDictionary *, NSError *))completionHandler;
 
+///------------------------------------------------------------------------------------/
+/// @name Unsubscribing
+///------------------------------------------------------------------------------------/
+
+/** Unsubscribes from the channel. 
+ */
+- (void)unsubscribe;
+
 @end
 
 /** A PTPusherPrivateChannel object represents a private Pusher channel.

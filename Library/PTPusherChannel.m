@@ -15,6 +15,9 @@
 #import "PTPusherChannelAuthorizationOperation.h"
 #import "PTPusherErrors.h"
 
+@interface PTPusher ()
+- (void)__unsubscribeFromChannel:(PTPusherChannel *)channel;
+@end
 
 @interface PTPusherChannel () 
 @property (nonatomic, assign, readwrite) BOOL subscribed;
@@ -150,15 +153,7 @@
 
 - (void)unsubscribe
 {
-  [pusher sendEventNamed:@"pusher:unsubscribe" 
-                    data:[NSDictionary dictionaryWithObject:self.name forKey:@"channel"]
-                 channel:nil];
-  
-  self.subscribed = NO;
-  
-  if ([pusher.delegate respondsToSelector:@selector(pusher:didUnsubscribeFromChannel:)]) {
-    [pusher.delegate pusher:pusher didUnsubscribeFromChannel:self];
-  }
+  [pusher __unsubscribeFromChannel:self];
 }
 
 - (void)markAsUnsubscribed
@@ -211,6 +206,7 @@
   
   NSMutableDictionary *eventData = [authData mutableCopy];
   [eventData setObject:self.name forKey:@"channel"];
+
   [pusher sendEventNamed:@"pusher:subscribe" 
                     data:eventData
                  channel:nil];

@@ -181,12 +181,25 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
   return [channels objectForKey:name];
 }
 
-- (void)unsubscribeFromChannel:(PTPusherChannel *)channel
+- (void)__unsubscribeFromChannel:(PTPusherChannel *)channel
 {
   NSParameterAssert(channel != nil);
   
-  [channel unsubscribe];
+  [self sendEventNamed:@"pusher:unsubscribe" 
+                  data:[NSDictionary dictionaryWithObject:channel.name forKey:@"channel"]];
+  
+  [channel markAsUnsubscribed];
+  
+  if ([self.delegate respondsToSelector:@selector(pusher:didUnsubscribeFromChannel:)]) {
+    [self.delegate pusher:self didUnsubscribeFromChannel:channel];
+  }
+  
   [channels removeObjectForKey:channel.name];
+}
+
+- (void)unsubscribeFromChannel:(PTPusherChannel *)channel
+{
+  [self __unsubscribeFromChannel:channel];
 }
 
 - (void)subscribeToChannel:(PTPusherChannel *)channel
