@@ -58,7 +58,7 @@
   
   if ([self.currentChannel isSubscribed]) {
     // unsubscribe before we go back to the main menu
-    [self.pusher unsubscribeFromChannel:self.currentChannel];
+    [self.currentChannel unsubscribe];
   }
 }
 

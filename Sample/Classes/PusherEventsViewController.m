@@ -49,7 +49,7 @@
 - (void)viewDidUnload
 {
   [super viewDidUnload];
-  [self.pusher unsubscribeFromChannel:self.currentChannel]; 
+  [self.currentChannel unsubscribe];
 }
 
 
