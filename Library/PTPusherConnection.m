@@ -75,6 +75,8 @@ NSString *const PTPusherConnectionPingEvent        = @"pusher:ping";
 
 - (void)send:(id)object
 {
+  NSAssert(self.isConnected, @"Cannot send data unless connected.");
+  
   NSData *JSONData = [[PTJSON JSONParser] JSONDataFromObject:object];
   NSString *message = [[NSString alloc] initWithData:JSONData encoding:NSUTF8StringEncoding];
   [socket send:message];
