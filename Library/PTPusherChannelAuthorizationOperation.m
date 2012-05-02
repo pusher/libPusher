@@ -46,11 +46,14 @@
 - (void)finish
 {
   authorized = ([(NSHTTPURLResponse *)URLResponse statusCode] == 200 || [(NSHTTPURLResponse *)URLResponse statusCode] == 201);
-  authorizationData = [[PTJSON JSONParser] objectFromJSONData:responseData];
   
-  NSAssert2([authorizationData isKindOfClass:[NSDictionary class]], 
+  if (authorized) {
+    authorizationData = [[PTJSON JSONParser] objectFromJSONData:responseData];
+    
+    NSAssert2([authorizationData isKindOfClass:[NSDictionary class]], 
     @"Expected server to return authorization response as a dictionary, but received %@: %@", 
             NSStringFromClass([authorizationData class]), authorizationData);
+  }
 
   if (self.completionHandler) {
     self.completionHandler(self);
