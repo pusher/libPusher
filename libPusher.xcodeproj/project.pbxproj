@@ -19,6 +19,7 @@
 		A317375C155D2E82007E4BBA /* PTPusherMockConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = A3173759155D2D21007E4BBA /* PTPusherMockConnection.m */; };
 		A317375F155D38C4007E4BBA /* PTPusher+Testing.h in Headers */ = {isa = PBXBuildFile; fileRef = A317375D155D38C4007E4BBA /* PTPusher+Testing.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3173760155D38C4007E4BBA /* PTPusher+Testing.m in Sources */ = {isa = PBXBuildFile; fileRef = A317375E155D38C4007E4BBA /* PTPusher+Testing.m */; };
+		A3226317155D481C00A46067 /* PTPusherMockConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = A3173758155D2D21007E4BBA /* PTPusherMockConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3382DE31525C3F70025550D /* PTJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = A30950121525C272008F695B /* PTJSON.m */; };
 		A3382DE41525C3FA0025550D /* PTJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = A30950111525C272008F695B /* PTJSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3382DF61525D06C0025550D /* JSONKit.h in Headers */ = {isa = PBXBuildFile; fileRef = A3382DEA1525D01B0025550D /* JSONKit.h */; };
@@ -531,6 +532,7 @@
 				A3382DF61525D06C0025550D /* JSONKit.h in Headers */,
 				A3382E011525D0D50025550D /* PTJSONParser.h in Headers */,
 				A317375F155D38C4007E4BBA /* PTPusher+Testing.h in Headers */,
+				A3226317155D481C00A46067 /* PTPusherMockConnection.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
