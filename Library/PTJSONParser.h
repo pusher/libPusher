@@ -11,6 +11,7 @@
 @protocol PTJSONParser <NSObject>
 
 - (NSData *)JSONDataFromObject:(id)object;
+- (NSString *)JSONStringFromObject:(id)object;
 - (id)objectFromJSONData:(NSData *)data;
 - (id)objectFromJSONString:(NSString *)string;
 

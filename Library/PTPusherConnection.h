@@ -21,6 +21,9 @@
 - (void)pusherConnection:(PTPusherConnection *)connection didReceiveEvent:(PTPusherEvent *)event;
 @end
 
+extern NSString *const PTPusherConnectionEstablishedEvent;
+extern NSString *const PTPusherConnectionPingEvent;
+
 @interface PTPusherConnection : NSObject <SRWebSocketDelegate>
 
 @property (nonatomic, unsafe_unretained) id<PTPusherConnectionDelegate> delegate;

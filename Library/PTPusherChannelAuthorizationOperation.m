@@ -9,6 +9,10 @@
 #import "PTPusherChannelAuthorizationOperation.h"
 #import "NSDictionary+QueryString.h"
 #import "PTJSON.h"
+#import "PTPusher+Testing.h"
+
+@interface PTPusherChannelAuthorizationBypassOperation : NSOperation
+@end
 
 @interface PTPusherChannelAuthorizationOperation ()
 @property (nonatomic, strong, readwrite) NSDictionary *authorizationData;
@@ -29,6 +33,11 @@
 + (id)operationWithAuthorizationURL:(NSURL *)URL channelName:(NSString *)channelName socketID:(NSString *)socketID
 {
   NSAssert(URL, @"URL is required for authorization! (Did you set PTPusher.authorizationURL?)");
+  
+  // a short-circuit for testing, using a special URL
+  if ([[URL absoluteString] isEqualToString:PTPusherAuthorizationBypassURL]) {
+    return [[PTPusherChannelAuthorizationBypassOperation alloc] init];
+  }
   
   NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
   [request setHTTPMethod:@"POST"];
@@ -60,6 +69,42 @@
   }
   
   [super finish];
+}
+
+@end
+
+@implementation PTPusherChannelAuthorizationBypassOperation {
+  void (^_completionHandler)(id);
+}
+
+- (void)setCompletionHandler:(void (^)(id))completionHandler
+{
+  _completionHandler = completionHandler;
+}
+
+- (void)main
+{
+  _completionHandler(self);
+}
+
+- (BOOL)isAuthorized
+{
+  return YES;
+}
+
+- (NSDictionary *)authorizationData
+{
+  return [NSDictionary dictionary];
+}
+
+- (NSMutableURLRequest *)mutableURLRequest
+{
+  return [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:PTPusherAuthorizationBypassURL]];
+}
+
+- (NSError *)connectionError
+{
+  return nil;
 }
 
 @end

@@ -42,6 +42,11 @@ NSString *const PTJSONParserNotAvailable = @"PTJSONParserNotAvailable";
   return [object JSONData];
 }
 
+- (NSString *)JSONStringFromObject:(id)object
+{
+  return [object JSONString];
+}
+
 - (id)objectFromJSONData:(NSData *)data
 {
   return [data objectFromJSONData];
@@ -67,6 +72,11 @@ NSString *const PTJSONParserNotAvailable = @"PTJSONParserNotAvailable";
 - (NSData *)JSONDataFromObject:(id)object
 {
   return [NSJSONSerialization dataWithJSONObject:object options:0 error:nil];
+}
+
+- (NSString *)JSONStringFromObject:(id)object
+{
+  return [[NSString alloc] initWithData:[self JSONDataFromObject:object] encoding:NSUTF8StringEncoding];
 }
 
 - (id)objectFromJSONData:(NSData *)data

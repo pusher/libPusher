@@ -236,14 +236,14 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
   NSParameterAssert(name);
   
   NSMutableDictionary *payload = [NSMutableDictionary dictionary];  
-  [payload setObject:name forKey:@"event"];
+  [payload setObject:name forKey:PTPusherEventKey];
   
   if (data) {
-    [payload setObject:data forKey:@"data"];
+    [payload setObject:data forKey:PTPusherDataKey];
   }
   
   if (channelName) {
-    [payload setObject:channelName forKey:@"channel"];
+    [payload setObject:channelName forKey:PTPusherChannelKey];
   }
   [self.connection send:payload];
 }
@@ -297,7 +297,7 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 - (void)pusherConnection:(PTPusherConnection *)connection didReceiveEvent:(PTPusherEvent *)event
 {
   if ([event isKindOfClass:[PTPusherErrorEvent class]]) {
-    if ([self.delegate respondsToSelector:@selector(pusher:didReceiveErrorEvent::)]) {
+    if ([self.delegate respondsToSelector:@selector(pusher:didReceiveErrorEvent:)]) {
       [self.delegate pusher:self didReceiveErrorEvent:(PTPusherErrorEvent *)event];
     }
   }
