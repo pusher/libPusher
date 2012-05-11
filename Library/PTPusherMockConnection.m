@@ -59,6 +59,11 @@
   [self webSocket:nil didReceiveMessage:message];
 }
 
+- (void)simulateUnexpectedDisconnection
+{
+  [self webSocket:nil didCloseWithCode:kPTPusherSimulatedDisconnectionErrorCode reason:nil wasClean:NO];
+}
+
 #pragma mark - Client event handling
 
 - (void)handleClientEvent:(NSDictionary *)eventData
