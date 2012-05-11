@@ -11,8 +11,6 @@
 
 @interface PTPusherMockConnection : PTPusherConnection
 
-@property (nonatomic, readonly, getter=isConnected) BOOL connected;
-
 - (void)simulateServerEventNamed:(NSString *)name data:(id)data channel:(NSString *)channelName;
 - (void)simulateServerEventNamed:(NSString *)name data:(id)data;
 

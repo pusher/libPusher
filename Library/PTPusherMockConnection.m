@@ -10,17 +10,12 @@
 #import "PTJSON.h"
 #import "PTPusherEvent.h"
 
-@interface PTPusherMockConnection ()
-- (void)simulateEventNamed:(NSString *)name data:(id)data;
-@end
 
 @implementation PTPusherMockConnection
 
-@synthesize connected = _connected;
-
 - (void)connect
 {
-  _connected = YES;
+  [self webSocketDidOpen:nil];
   
   NSInteger socketID = (NSInteger)[NSDate timeIntervalSinceReferenceDate];
 
@@ -30,7 +25,7 @@
 
 - (void)disconnect
 {
-  _connected = NO;
+  [self webSocket:nil didCloseWithCode:0 reason:nil wasClean:YES];
 }
 
 - (void)send:(id)object
