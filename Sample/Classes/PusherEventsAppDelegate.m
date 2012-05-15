@@ -103,7 +103,7 @@
 
 - (void)pusher:(PTPusher *)pusher connection:(PTPusherConnection *)connection failedWithError:(NSError *)error
 {
-  NSLog(@"[pusher-%@] Failed to connect to pusher, error: %@", pusher.connection.socketID, error);
+  NSLog(@"[pusher-%@] Pusher Connection failed, error: %@", pusher.connection.socketID, error);
   [clientsAwaitingConnection removeObject:pusher];
 }
 

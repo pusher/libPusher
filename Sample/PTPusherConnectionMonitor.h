@@ -32,12 +32,16 @@
     * The monitor will assign itself as the delegate of the client and so will be notified of
       any disconnection or connection failure events.
  
-    * When the client fails to connect, or it disconnects with an error (i.e. a non-clean 
-      disconnection that resulted from anything other than a `disconnect` call, it first
-      checks if the network is reachable.
+    * If the client fails to connect at all, and the network is reachable, we assume there
+      is an issue with the Pusher service, and fall back to using the automatic reconnect
+      functionality with a sensible delay (currently 5 seconds).
  
-    * If the network is reachable, it assumes that everything is OK and waits for the Pusher
-      client to reconnect automatically (see below).
+    * If the client disconnects with an error (i.e. a non-clean 
+      disconnection that resulted from anything other than a `disconnect` call, we check
+      if the network is reachable.
+ 
+    * If the network is reachable, it assumes that everything is OK on the client side and waits 
+      for the Pusher client to reconnect automatically (see below).
  
     * If the network is not reachable, auto-reconnect is disabled and Reachability notifications
       will be turned on. Once the network becomes reachable again, notifications are disabled

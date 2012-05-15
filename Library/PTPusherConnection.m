@@ -92,8 +92,9 @@ NSString *const PTPusherConnectionPingEvent        = @"pusher:ping";
 
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error;
 {
+  BOOL wasConnected = self.connected;
   self.connected = NO;
-  [self.delegate pusherConnection:self didFailWithError:error];
+  [self.delegate pusherConnection:self didFailWithError:error wasConnected:wasConnected];
   self.socketID = nil;
   socket = nil;
 }

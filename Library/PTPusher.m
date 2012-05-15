@@ -266,30 +266,24 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 
 - (void)pusherConnection:(PTPusherConnection *)connection didDisconnectWithCode:(NSInteger)errorCode reason:(NSString *)reason wasClean:(BOOL)wasClean
 {
-  for (PTPusherChannel *channel in [channels allValues]) {
-    [channel markAsUnsubscribed];
+  NSError *error = nil;
+  
+  if (errorCode > 0) {
+    error = [NSError errorWithDomain:PTPusherErrorDomain code:errorCode userInfo:[NSDictionary dictionaryWithObject:reason forKey:@"reason"]];
   }
-  if ([self.delegate respondsToSelector:@selector(pusher:connectionDidDisconnect:)]) {
-    [self.delegate pusher:self connectionDidDisconnect:connection];
-  }
-  if ([self.delegate respondsToSelector:@selector(pusher:connection:didDisconnectWithError:)]) {
-    NSError *error = nil;
-    if (errorCode > 0) {
-      error = [NSError errorWithDomain:PTPusherErrorDomain code:errorCode userInfo:[NSDictionary dictionaryWithObject:reason forKey:@"reason"]];
-    }
-    [self.delegate pusher:self connection:connection didDisconnectWithError:error];
-  }
-  if (self.shouldReconnectAutomatically) {
-    [self reconnectAfterDelay]; 
-  }
+  
+  [self handleDisconnection:connection error:error];
 }
 
-- (void)pusherConnection:(PTPusherConnection *)connection didFailWithError:(NSError *)error
+- (void)pusherConnection:(PTPusherConnection *)connection didFailWithError:(NSError *)error wasConnected:(BOOL)wasConnected
 {
   if ([self.delegate respondsToSelector:@selector(pusher:connection:failedWithError:)]) {
     [self.delegate pusher:self connection:connection failedWithError:error];
   }
-  if ([error.domain isEqualToString:@"ZTWebSocketErrorDomain"] && self.shouldReconnectAutomatically) {
+  if (wasConnected) {
+    [self handleDisconnection:connection error:error];
+  }
+  else if(self.shouldReconnectAutomatically) {
     [self reconnectAfterDelay];
   }
 }
@@ -311,6 +305,22 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
         postNotificationName:PTPusherEventReceivedNotification 
                       object:self 
                     userInfo:[NSDictionary dictionaryWithObject:event forKey:PTPusherEventUserInfoKey]];
+}
+
+- (void)handleDisconnection:(PTPusherConnection *)connection error:(NSError *)error
+{
+  for (PTPusherChannel *channel in [channels allValues]) {
+    [channel markAsUnsubscribed];
+  }
+  if ([self.delegate respondsToSelector:@selector(pusher:connectionDidDisconnect:)]) { // deprecated call
+    [self.delegate pusher:self connectionDidDisconnect:connection];
+  }
+  if ([self.delegate respondsToSelector:@selector(pusher:connection:didDisconnectWithError:)]) {
+    [self.delegate pusher:self connection:connection didDisconnectWithError:error];
+  }
+  if (self.shouldReconnectAutomatically) {
+    [self reconnectAfterDelay]; 
+  }
 }
 
 #pragma mark - Private

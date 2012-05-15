@@ -22,6 +22,7 @@
 
 @implementation PTPusherConnectionMonitor {
   NSMutableSet *monitoredClients;
+  BOOL isConnected;
 }
 
 - (id)init 
@@ -43,6 +44,10 @@
   
   // the monitor needs to be come the delegate so it can handle failures
   client.delegate = self;
+  
+  // set a reasonable auto-reconnect delay as default, in case of Pusher server problems
+  client.reconnectAutomatically = YES;
+  client.reconnectDelay = 5.0;
   
   // give each individual connection it's own reachability monitor
   Reachability *reachability = [Reachability reachabilityForInternetConnection];
@@ -80,6 +85,8 @@
 
 - (void)pusher:(PTPusher *)pusher connectionDidConnect:(PTPusherConnection *)connection
 {
+  isConnected = YES;
+  
   pusher.reconnectAutomatically = YES;
   
   Reachability *reachability = [self reachabilityForClient:pusher];
@@ -98,6 +105,8 @@
 
 - (void)pusher:(PTPusher *)pusher connection:(PTPusherConnection *)connection didDisconnectWithError:(NSError *)error
 {
+  isConnected = NO;
+  
   pusher.reconnectAutomatically = NO;
   
   if (error) {
@@ -111,7 +120,11 @@
 
 - (void)pusher:(PTPusher *)pusher connection:(PTPusherConnection *)connection failedWithError:(NSError *)error
 {
-  [self handlePusherConnectionFailure:pusher];
+  if (isConnected == NO) {
+    [self handlePusherConnectionFailure:pusher];
+  }
+  
+  isConnected = NO;
   
   if ([[self originalDelegateFor:pusher] respondsToSelector:@selector(pusher:connection:failedWithError:)]) {
     [[self originalDelegateFor:pusher] pusher:pusher connection:connection failedWithError:error];
