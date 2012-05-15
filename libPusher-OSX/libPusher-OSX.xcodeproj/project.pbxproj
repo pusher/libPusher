@@ -11,6 +11,8 @@
 		A3382DFE1525D0C90025550D /* PTJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = A3382DFB1525D0C90025550D /* PTJSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3382DFF1525D0C90025550D /* PTJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = A3382DFC1525D0C90025550D /* PTJSON.m */; };
 		A3382E001525D0C90025550D /* PTJSONParser.h in Headers */ = {isa = PBXBuildFile; fileRef = A3382DFD1525D0C90025550D /* PTJSONParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A373A2831562D3B000BFAECE /* PTPusher+Testing.h in Headers */ = {isa = PBXBuildFile; fileRef = A373A2811562D3B000BFAECE /* PTPusher+Testing.h */; };
+		A373A2841562D3B000BFAECE /* PTPusher+Testing.m in Sources */ = {isa = PBXBuildFile; fileRef = A373A2821562D3B000BFAECE /* PTPusher+Testing.m */; };
 		A37E161214E4C95C00DCA3A6 /* base64.c in Sources */ = {isa = PBXBuildFile; fileRef = A37E160B14E4C95B00DCA3A6 /* base64.c */; };
 		A37E161314E4C95C00DCA3A6 /* base64.h in Headers */ = {isa = PBXBuildFile; fileRef = A37E160C14E4C95B00DCA3A6 /* base64.h */; };
 		A37E161414E4C95C00DCA3A6 /* NSData+SRB64Additions.h in Headers */ = {isa = PBXBuildFile; fileRef = A37E160D14E4C95B00DCA3A6 /* NSData+SRB64Additions.h */; };
@@ -67,6 +69,8 @@
 		A3382DFB1525D0C90025550D /* PTJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PTJSON.h; path = ../../Library/PTJSON.h; sourceTree = "<group>"; };
 		A3382DFC1525D0C90025550D /* PTJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PTJSON.m; path = ../../Library/PTJSON.m; sourceTree = "<group>"; };
 		A3382DFD1525D0C90025550D /* PTJSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PTJSONParser.h; path = ../../Library/PTJSONParser.h; sourceTree = "<group>"; };
+		A373A2811562D3B000BFAECE /* PTPusher+Testing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "PTPusher+Testing.h"; path = "../../Library/PTPusher+Testing.h"; sourceTree = "<group>"; };
+		A373A2821562D3B000BFAECE /* PTPusher+Testing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "PTPusher+Testing.m"; path = "../../Library/PTPusher+Testing.m"; sourceTree = "<group>"; };
 		A37E160B14E4C95B00DCA3A6 /* base64.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = base64.c; path = ../../Pods/SocketRocket/SocketRocket/base64.c; sourceTree = "<group>"; };
 		A37E160C14E4C95B00DCA3A6 /* base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = base64.h; path = ../../Pods/SocketRocket/SocketRocket/base64.h; sourceTree = "<group>"; };
 		A37E160D14E4C95B00DCA3A6 /* NSData+SRB64Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+SRB64Additions.h"; path = "../../Pods/SocketRocket/SocketRocket/NSData+SRB64Additions.h"; sourceTree = "<group>"; };
@@ -186,6 +190,8 @@
 		A3CA675E14DBCB2D003E2F1E /* libPusher-OSX */ = {
 			isa = PBXGroup;
 			children = (
+				A373A2811562D3B000BFAECE /* PTPusher+Testing.h */,
+				A373A2821562D3B000BFAECE /* PTPusher+Testing.m */,
 				A3382DFB1525D0C90025550D /* PTJSON.h */,
 				A3382DFC1525D0C90025550D /* PTJSON.m */,
 				A3382DFD1525D0C90025550D /* PTJSONParser.h */,
@@ -307,6 +313,7 @@
 				A3382DFA1525D0AF0025550D /* JSONKit.h in Headers */,
 				A3382DFE1525D0C90025550D /* PTJSON.h in Headers */,
 				A3382E001525D0C90025550D /* PTJSONParser.h in Headers */,
+				A373A2831562D3B000BFAECE /* PTPusher+Testing.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -435,6 +442,7 @@
 				A37E161514E4C95C00DCA3A6 /* NSData+SRB64Additions.m in Sources */,
 				A37E161814E4C95C00DCA3A6 /* SRWebSocket.m in Sources */,
 				A3382DFF1525D0C90025550D /* PTJSON.m in Sources */,
+				A373A2841562D3B000BFAECE /* PTPusher+Testing.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
