@@ -38,7 +38,7 @@
   // create an association to the original delgate so it still works
   id<PTPusherDelegate> originalDelegate = client.delegate;
   
-  if (originalDelegate) {
+  if (originalDelegate && originalDelegate != self) {
     objc_setAssociatedObject(client, kPTOriginalClientDelegateRefKey, originalDelegate, OBJC_ASSOCIATION_ASSIGN);
   }
   
