@@ -257,10 +257,7 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
   if ([self.delegate respondsToSelector:@selector(pusher:connectionDidConnect:)]) {
     [self.delegate pusher:self connectionDidConnect:connection];
   }
-}
-
-- (void)pusherConnection:(PTPusherConnection *)connection didReceiveHandshakeEvent:(PTPusherEvent *)event
-{
+  
   for (PTPusherChannel *channel in [channels allValues]) {
     [self subscribeToChannel:channel];
   }

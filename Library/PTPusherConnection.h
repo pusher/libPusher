@@ -17,12 +17,17 @@
 - (void)pusherConnectionDidConnect:(PTPusherConnection *)connection;
 - (void)pusherConnection:(PTPusherConnection *)connection didDisconnectWithCode:(NSInteger)errorCode reason:(NSString *)reason wasClean:(BOOL)wasClean;
 - (void)pusherConnection:(PTPusherConnection *)connection didFailWithError:(NSError *)error wasConnected:(BOOL)wasConnected;
-- (void)pusherConnection:(PTPusherConnection *)connection didReceiveHandshakeEvent:(PTPusherEvent *)event;
 - (void)pusherConnection:(PTPusherConnection *)connection didReceiveEvent:(PTPusherEvent *)event;
 @end
 
 extern NSString *const PTPusherConnectionEstablishedEvent;
 extern NSString *const PTPusherConnectionPingEvent;
+
+typedef enum {
+  PTPusherConnectionClosed = 0,
+  PTPusherConnectionOpenAwaitingHandshake,
+  PTPusherConnectionOpenHandshakeReceived
+} PTPusherConnectionState;
 
 @interface PTPusherConnection : NSObject <SRWebSocketDelegate>
 

@@ -95,7 +95,7 @@
 
 - (void)pusher:(PTPusher *)pusher connectionDidConnect:(PTPusherConnection *)connection
 {
-  NSLog(@"[pusher] Pusher client connected");
+  NSLog(@"[pusher-%@] Pusher client connected", connection.socketID);
 
   [connectedClients addObject:pusher];
   [clientsAwaitingConnection removeObject:pusher];

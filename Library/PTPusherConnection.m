@@ -17,7 +17,7 @@ NSString *const PTPusherConnectionPingEvent        = @"pusher:ping";
 
 @interface PTPusherConnection ()
 @property (nonatomic, copy) NSString *socketID;
-@property (nonatomic, assign, readwrite) BOOL connected;
+@property (nonatomic, assign) PTPusherConnectionState state;
 
 - (void)respondToPingEvent;
 @end
@@ -28,9 +28,8 @@ NSString *const PTPusherConnectionPingEvent        = @"pusher:ping";
 }
 
 @synthesize delegate = _delegate;
-@synthesize connected;
+@synthesize state;
 @synthesize socketID;
-
 
 - (id)initWithURL:(NSURL *)aURL secure:(BOOL)secure
 {
@@ -50,11 +49,16 @@ NSString *const PTPusherConnectionPingEvent        = @"pusher:ping";
   [socket close];
 }
 
+- (BOOL)isConnected
+{
+  return (self.state == PTPusherConnectionOpenHandshakeReceived);
+}
+
 #pragma mark - Connection management
 
 - (void)connect;
 {
-  if (self.isConnected)
+  if (self.state > PTPusherConnectionClosed)
     return;
 
   socket = [[SRWebSocket alloc] initWithURLRequest:request];
@@ -65,7 +69,7 @@ NSString *const PTPusherConnectionPingEvent        = @"pusher:ping";
 
 - (void)disconnect;
 {
-  if (!self.isConnected)
+  if (self.state == PTPusherConnectionClosed)
     return;
   
   [socket close];
@@ -86,14 +90,13 @@ NSString *const PTPusherConnectionPingEvent        = @"pusher:ping";
 
 - (void)webSocketDidOpen:(SRWebSocket *)webSocket
 {
-  self.connected = YES;
-  [self.delegate pusherConnectionDidConnect:self];
+  self.state = PTPusherConnectionOpenAwaitingHandshake;
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error;
 {
-  BOOL wasConnected = self.connected;
-  self.connected = NO;
+  BOOL wasConnected = self.isConnected;
+  self.state = PTPusherConnectionClosed;
   [self.delegate pusherConnection:self didFailWithError:error wasConnected:wasConnected];
   self.socketID = nil;
   socket = nil;
@@ -101,7 +104,7 @@ NSString *const PTPusherConnectionPingEvent        = @"pusher:ping";
 
 - (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean
 {
-  self.connected = NO;
+  self.state = PTPusherConnectionClosed;
   [self.delegate pusherConnection:self didDisconnectWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean];
   self.socketID = nil;
   socket = nil;
@@ -120,8 +123,9 @@ NSString *const PTPusherConnectionPingEvent        = @"pusher:ping";
   
   if ([event.name isEqualToString:PTPusherConnectionEstablishedEvent]) {
     self.socketID = [event.data objectForKey:@"socket_id"];
+    self.state = PTPusherConnectionOpenHandshakeReceived;
     
-    [self.delegate pusherConnection:self didReceiveHandshakeEvent:event];
+    [self.delegate pusherConnectionDidConnect:self];
   }
   
   [self.delegate pusherConnection:self didReceiveEvent:event];
