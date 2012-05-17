@@ -7,8 +7,11 @@
       buildImplicitDependencies = "YES">
       <BuildActionEntries>
          <BuildActionEntry
+            buildForTesting = "YES"
             buildForRunning = "YES"
-            buildForTesting = "YES">
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A3A9F9571496E96100F83617"
@@ -34,6 +37,14 @@
                BlueprintName = "Functional Specs"
                ReferencedContainer = "container:libPusher.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "BasicEventHandling">
+               </Test>
+               <Test
+                  Identifier = "PrivateChannelsSpec">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
    </TestAction>

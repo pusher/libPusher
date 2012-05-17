@@ -16,10 +16,12 @@
 // helper methods
 
 PTPusher *newTestClient(void);
+PTPusher *newTestClientDisconnected(void);
 void enableClientDebugging(void);
 void sendTestEvent(NSString *eventName);
 void sendTestEventOnChannel(NSString *channelName, NSString *eventName);
 void onConnect(dispatch_block_t);
+void onDisconnect(dispatch_block_t);
 void onAuthorizationRequired(void (^authBlock)(NSMutableURLRequest *));
 void onFailedToSubscribe(void (^failedToSubscribeBlock)(PTPusherChannel *));
 void onSubscribe(void (^subscribeBlock)(PTPusherChannel *));
@@ -36,6 +38,7 @@ void waitForClientToDisconnect(PTPusher *client);
 @interface PTPusherClientTestHelperDelegate : NSObject <PTPusherDelegate> {
   BOOL connected;
   dispatch_block_t connectedBlock;
+  dispatch_block_t disconnectedBlock;
   void (^onAuthorizationBlock)(NSMutableURLRequest *);
   void (^onFailedToSubscribeBlock)(PTPusherChannel *);
   void (^onSubscribeBlock)(PTPusherChannel *);

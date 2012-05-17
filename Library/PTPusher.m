@@ -185,6 +185,8 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 {
   NSParameterAssert(channel != nil);
   
+  if (channel.isSubscribed == NO) return;
+  
   [self sendEventNamed:@"pusher:unsubscribe" 
                   data:[NSDictionary dictionaryWithObject:channel.name forKey:@"channel"]];
   

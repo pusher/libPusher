@@ -11,11 +11,14 @@
 #import "PTPusherAPI.h"
 
 PTPusher *newTestClient(void) {
+  PTPusher *client = newTestClientDisconnected();
+  [client connect];
+  return client;
+}
+
+PTPusher *newTestClientDisconnected(void) {
   PTPusher *client = [PTPusher pusherWithKey:PUSHER_API_KEY connectAutomatically:NO encrypted:kUSE_ENCRYPTED_CONNECTION];
   client.delegate = [PTPusherClientTestHelperDelegate sharedInstance];
-
-  [client connect];
-  
   return [client retain];
 }
 
@@ -43,6 +46,11 @@ void sendTestEventOnChannel(NSString *channelName, NSString *eventName)
 void onConnect(dispatch_block_t block)
 {
   [[PTPusherClientTestHelperDelegate sharedInstance] onConnect:block];
+}
+
+void onDisconnect(dispatch_block_t block)
+{
+  [[PTPusherClientTestHelperDelegate sharedInstance] onDisconnect:block];
 }
 
 void onAuthorizationRequired(void (^authBlock)(NSMutableURLRequest *))
@@ -115,8 +123,13 @@ void waitForClientToDisconnect(PTPusher *client)
   }
   else {
     [connectedBlock release];
-    connectedBlock = [block retain];
+    connectedBlock = [block copy];
   }
+}
+
+- (void)onDisconnect:(dispatch_block_t)block
+{
+  disconnectedBlock = [block copy];
 }
 
 - (void)onAuthorizationRequired:(void (^)(NSMutableURLRequest *))authBlock
@@ -153,6 +166,11 @@ void waitForClientToDisconnect(PTPusher *client)
 {
   if (self.debugEnabled) {
     NSLog(@"[DEBUG] Client disconnected");
+  }
+  if (disconnectedBlock) {
+    disconnectedBlock();
+    
+    [disconnectedBlock release]; disconnectedBlock = nil;
   }
   connected = NO;
   connectedBlock = nil;

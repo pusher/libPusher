@@ -47,6 +47,7 @@
 		A369CFE214FDAD9200A8D56B /* PrivateChannelsSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = A369CFE114FDAD9200A8D56B /* PrivateChannelsSpec.m */; };
 		A369CFE314FDAEE700A8D56B /* NSMutableURLRequest+BasicAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = A3698FED13FF0868005CF130 /* NSMutableURLRequest+BasicAuth.m */; };
 		A369CFE414FDB1DC00A8D56B /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = A3698FFE13FF200C005CF130 /* NSData+Base64.m */; };
+		A373A2CA1565248C00BFAECE /* PusherClientSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = A373A2C91565248C00BFAECE /* PusherClientSpec.m */; };
 		A37E158914E4997700DCA3A6 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A37E158814E4997700DCA3A6 /* Security.framework */; };
 		A37E158D14E499E000DCA3A6 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A37E158814E4997700DCA3A6 /* Security.framework */; };
 		A37E158F14E49F2D00DCA3A6 /* SRWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A37E158E14E49F2D00DCA3A6 /* SRWebSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -164,6 +165,7 @@
 		A3698FFD13FF200C005CF130 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
 		A3698FFE13FF200C005CF130 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
 		A369CFE114FDAD9200A8D56B /* PrivateChannelsSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivateChannelsSpec.m; sourceTree = "<group>"; };
+		A373A2C91565248C00BFAECE /* PusherClientSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PusherClientSpec.m; sourceTree = "<group>"; };
 		A37E158814E4997700DCA3A6 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		A37E158E14E49F2D00DCA3A6 /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SRWebSocket.h; path = Pods/Headers/SocketRocket/SRWebSocket.h; sourceTree = SOURCE_ROOT; };
 		A37E160714E4C87500DCA3A6 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
@@ -413,6 +415,7 @@
 			children = (
 				A3A9F96A1496E9C300F83617 /* BasicEventHandlingSpec.m */,
 				A369CFE114FDAD9200A8D56B /* PrivateChannelsSpec.m */,
+				A373A2C91565248C00BFAECE /* PusherClientSpec.m */,
 				A3A9F95E1496E96100F83617 /* Supporting Files */,
 			);
 			path = "Functional Specs";
@@ -767,6 +770,7 @@
 				A369CFE214FDAD9200A8D56B /* PrivateChannelsSpec.m in Sources */,
 				A369CFE314FDAEE700A8D56B /* NSMutableURLRequest+BasicAuth.m in Sources */,
 				A369CFE414FDB1DC00A8D56B /* NSData+Base64.m in Sources */,
+				A373A2CA1565248C00BFAECE /* PusherClientSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
