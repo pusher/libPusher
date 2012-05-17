@@ -212,7 +212,7 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 - (void)subscribeToChannel:(PTPusherChannel *)channel
 {
   [channel authorizeWithCompletionHandler:^(BOOL isAuthorized, NSDictionary *authData, NSError *underlyingError) {
-    if (isAuthorized) {
+    if (isAuthorized && self.connection.isConnected) {
       [channel subscribeWithAuthorization:authData];
     }
     else {
