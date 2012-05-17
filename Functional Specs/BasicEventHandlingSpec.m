@@ -87,6 +87,31 @@ describe(@"A pusher channel", ^{
       [[theReturnValueOfBlock(^{ return theEventFromUnboundBlock; }) should] beNil];
     });
     
+    it(@"will not yield events to handlers after all bindings have been removed", ^{
+	    __block PTPusherEvent *theEvent = nil;
+      __block PTPusherEvent *theEventFromUnboundBlock = nil;
+      
+      [client subscribeToChannelNamed:kTEST_CHANNEL];
+      
+      [client bindToEventNamed:kTEST_EVENT_NAME handleWithBlock:^(PTPusherEvent *event) {
+        theEventFromUnboundBlock = event;
+      }];
+      
+      [client removeAllBindings];
+      
+      // we'll use this one to confirm the event has been dispatched
+      [client bindToEventNamed:kTEST_EVENT_NAME handleWithBlock:^(PTPusherEvent *event) {
+        theEvent = [event retain];
+      }];
+      
+      onConnect(^{
+        sendTestEventOnChannel(kTEST_CHANNEL, kTEST_EVENT_NAME);
+      });
+      
+      [[expectFutureValue(theEvent) shouldEventuallyBeforeTimingOutAfter(5)] beEventNamed:kTEST_EVENT_NAME];
+      [[theReturnValueOfBlock(^{ return theEventFromUnboundBlock; }) should] beNil];
+    });
+    
     it(@"will notify observers of channel events using NSNotification", ^{
       __block PTPusherEvent *theEvent = nil;
       

@@ -143,6 +143,11 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
   [dispatcher removeBinding:binding];
 }
 
+- (void)removeAllBindings
+{
+  [dispatcher removeAllBindings];
+}
+
 #pragma mark - Subscribing to channels
 
 - (PTPusherChannel *)subscribeToChannelNamed:(NSString *)name

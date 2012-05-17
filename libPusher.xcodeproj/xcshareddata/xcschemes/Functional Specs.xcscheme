@@ -37,14 +37,6 @@
                BlueprintName = "Functional Specs"
                ReferencedContainer = "container:libPusher.xcodeproj">
             </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "BasicEventHandling">
-               </Test>
-               <Test
-                  Identifier = "PrivateChannelsSpec">
-               </Test>
-            </SkippedTests>
          </TestableReference>
       </Testables>
    </TestAction>

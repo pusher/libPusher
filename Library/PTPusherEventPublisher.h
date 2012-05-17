@@ -69,6 +69,16 @@ typedef void (^PTPusherEventBlockHandler) (PTPusherEvent *);
  */
 - (PTPusherEventBinding *)bindToEventNamed:(NSString *)eventName handleWithBlock:(PTPusherEventBlockHandler)block queue:(dispatch_queue_t)queue;
 
+/** Removes the specified binding.
+ 
+ Any further events will not trigger any callbacks after the binding has been removed.
+ */
 - (void)removeBinding:(PTPusherEventBinding *)binding;
+
+/** Removes all bindings that have been set up.
+ 
+  Any retained references to PTPusherEventBinding objects will become invalid.
+ */
+- (void)removeAllBindings;
 
 @end

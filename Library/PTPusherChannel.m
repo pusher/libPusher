@@ -128,6 +128,11 @@
   [dispatcher removeBinding:binding];
 }
 
+- (void)removeAllBindings
+{
+  [dispatcher removeAllBindings];
+}
+
 #pragma mark - Dispatching events
 
 - (void)dispatchEvent:(PTPusherEvent *)event
