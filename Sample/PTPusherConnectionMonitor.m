@@ -98,7 +98,7 @@
     pusher.reconnectDelay = 15.0;
   }
   
-  if ([[self originalDelegateFor:pusher] respondsToSelector:@selector(pusherConnectionDidConnect:)]) {
+  if ([[self originalDelegateFor:pusher] respondsToSelector:@selector(pusher:connectionDidConnect:)]) {
     [[self originalDelegateFor:pusher] pusher:pusher connectionDidConnect:connection];
   }
 }
