@@ -24,7 +24,9 @@ extern NSString *const PTPusherConnectionEstablishedEvent;
 extern NSString *const PTPusherConnectionPingEvent;
 
 typedef enum {
-  PTPusherConnectionClosed = 0,
+  PTPusherConnectionClosing = 0,
+  PTPusherConnectionClosed,
+  PTPusherConnectionOpening,
   PTPusherConnectionOpenAwaitingHandshake,
   PTPusherConnectionOpenHandshakeReceived
 } PTPusherConnectionState;

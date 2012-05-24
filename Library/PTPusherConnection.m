@@ -60,19 +60,23 @@ NSString *const PTPusherConnectionPingEvent        = @"pusher:ping";
 {
   if (self.state > PTPusherConnectionClosed)
     return;
-
+  
   socket = [[SRWebSocket alloc] initWithURLRequest:request];
   socket.delegate = self;
   
   [socket open];
+  
+  self.state = PTPusherConnectionOpening;
 }
 
 - (void)disconnect;
 {
-  if (self.state == PTPusherConnectionClosed)
+  if (self.state <= PTPusherConnectionClosed)
     return;
   
   [socket close];
+  
+  self.state = PTPusherConnectionClosing;
 }
 
 #pragma mark - Sending data
