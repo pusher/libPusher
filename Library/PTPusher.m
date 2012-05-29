@@ -351,7 +351,9 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
   
   dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, self.reconnectDelay * NSEC_PER_SEC);
   dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-    [_connection connect];
+    if (self.reconnectAutomatically) { // check this hasn't been changed since we queued this block
+      [_connection connect];
+    }
   });
 }
 
