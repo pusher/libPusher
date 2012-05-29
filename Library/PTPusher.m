@@ -69,6 +69,7 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 
     authorizationQueue = [[NSOperationQueue alloc] init];
     authorizationQueue.maxConcurrentOperationCount = 5;
+    authorizationQueue.name = @"com.pusher.libPusher.authorizationQueue";
 
     self.connection = connection;
     self.connection.delegate = self;
