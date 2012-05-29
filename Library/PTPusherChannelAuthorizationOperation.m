@@ -54,6 +54,8 @@
 
 - (void)finish
 {
+  if (self.isCancelled) return; // don't do anything if cancelled
+  
   authorized = ([(NSHTTPURLResponse *)URLResponse statusCode] == 200 || [(NSHTTPURLResponse *)URLResponse statusCode] == 201);
   
   if (authorized) {

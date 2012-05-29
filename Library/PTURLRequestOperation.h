@@ -26,6 +26,7 @@
 - (id)initWithURLRequest:(NSURLRequest *)request;
 - (void)finish;
 - (void)cancelImmediately;
+- (void)checkForCancellation;
 @end
 
 @interface PTURLRequestOperation (NSURLConnectionDelegate)

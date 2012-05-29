@@ -43,6 +43,11 @@
     return [self performSelector:@selector(start) onThread:[NSThread mainThread] withObject:nil waitUntilDone:NO];
   }
   
+  if ([self isCancelled]) {
+    [self finish];
+    return;
+  }
+  
   [self setExecuting:YES];
   
   URLConnection = [[NSURLConnection alloc] initWithRequest:URLRequest delegate:self startImmediately:NO];
@@ -84,10 +89,7 @@
   self.URLResponse = theResponse;
   self.responseData = [NSMutableData data];
   
-  if ([self isCancelled]) {
-    [connection cancel];
-    [self finish];
-  }
+  [self checkForCancellation];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
@@ -98,10 +100,7 @@
   
   [responseData appendData:data];
   
-  if ([self isCancelled]) {
-    [connection cancel];
-    [self finish];
-  }
+  [self checkForCancellation];
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
@@ -119,6 +118,13 @@
 {
   [URLConnection cancel];
   [self finish];
+}
+
+- (void)checkForCancellation
+{
+  if ([self isCancelled]) {
+    [self cancelImmediately];
+  }
 }
 
 #pragma mark -
