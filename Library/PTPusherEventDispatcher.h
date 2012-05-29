@@ -12,6 +12,9 @@
 @class PTPusherEventBinding;
 
 @interface PTPusherEventDispatcher : NSObject <PTEventListener> 
+
+@property (nonatomic, readonly) NSDictionary *bindings;
+
 - (PTPusherEventBinding *)addEventListener:(id<PTEventListener>)listener forEventNamed:(NSString *)eventName;
 - (void)removeBinding:(PTPusherEventBinding *)binding;
 - (void)removeAllBindings;

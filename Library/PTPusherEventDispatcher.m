@@ -17,6 +17,8 @@
   NSMutableDictionary *bindings;
 }
 
+@synthesize bindings;
+
 - (id)init
 {
   if ((self = [super init])) {
