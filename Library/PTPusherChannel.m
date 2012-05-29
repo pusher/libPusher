@@ -17,6 +17,7 @@
 
 @interface PTPusher ()
 - (void)__unsubscribeFromChannel:(PTPusherChannel *)channel;
+- (void)beginAuthorizationOperation:(PTPusherChannelAuthorizationOperation *)operation;
 @end
 
 @interface PTPusherChannel () 
@@ -202,7 +203,7 @@
     [pusher.delegate pusher:pusher willAuthorizeChannelWithRequest:authOperation.mutableURLRequest];
   }
   
-  [[NSOperationQueue mainQueue] addOperation:authOperation];
+  [pusher beginAuthorizationOperation:authOperation];
 }
 
 - (void)subscribeWithAuthorization:(NSDictionary *)authData

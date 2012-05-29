@@ -14,6 +14,7 @@
 #import "PTTargetActionEventListener.h"
 #import "PTBlockEventListener.h"
 #import "PTPusherErrors.h"
+#import "PTPusherChannelAuthorizationOperation.h"
 
 #define kPUSHER_HOST @"ws.pusherapp.com"
 
@@ -50,7 +51,9 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 
 #pragma mark -
 
-@implementation PTPusher
+@implementation PTPusher {
+  NSOperationQueue *authorizationQueue;
+}
 
 @synthesize connection = _connection;
 @synthesize delegate;
@@ -63,6 +66,9 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
   if (self = [super init]) {
     dispatcher = [[PTPusherEventDispatcher alloc] init];
     channels = [[NSMutableDictionary alloc] init];
+
+    authorizationQueue = [[NSOperationQueue alloc] init];
+    authorizationQueue.maxConcurrentOperationCount = 5;
 
     self.connection = connection;
     self.connection.delegate = self;
@@ -328,6 +334,11 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 }
 
 #pragma mark - Private
+
+- (void)beginAuthorizationOperation:(PTPusherChannelAuthorizationOperation *)operation
+{
+  [authorizationQueue addOperation:operation];
+}
 
 - (void)reconnectAfterDelay
 {
