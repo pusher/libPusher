@@ -320,6 +320,8 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 
 - (void)handleDisconnection:(PTPusherConnection *)connection error:(NSError *)error
 {
+  [authorizationQueue cancelAllOperations];
+  
   for (PTPusherChannel *channel in [channels allValues]) {
     [channel markAsUnsubscribed];
   }
