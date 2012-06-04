@@ -171,7 +171,9 @@
 
 #pragma mark -
 
-@implementation PTPusherPrivateChannel
+@implementation PTPusherPrivateChannel {
+  NSDictionary *_cachedAuthData;
+}
 
 - (void)handleSubscribeEvent:(PTPusherEvent *)event
 {
@@ -193,10 +195,18 @@
 
 - (void)authorizeWithCompletionHandler:(void(^)(BOOL, NSDictionary *, NSError *))completionHandler
 {
+  if (_cachedAuthData) {
+    return completionHandler(YES, _cachedAuthData, nil);
+  }
+  
   PTPusherChannelAuthorizationOperation *authOperation = [PTPusherChannelAuthorizationOperation operationWithAuthorizationURL:pusher.authorizationURL channelName:self.name socketID:pusher.connection.socketID];
   
   [authOperation setCompletionHandler:^(PTPusherChannelAuthorizationOperation *operation) {
     completionHandler(operation.isAuthorized, operation.authorizationData, operation.connectionError);
+    
+    if (operation.isAuthorized) {
+      _cachedAuthData = operation.authorizationData;
+    }
   }];
   
   if ([pusher.delegate respondsToSelector:@selector(pusher:willAuthorizeChannelWithRequest:)]) {
