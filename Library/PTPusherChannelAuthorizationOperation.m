@@ -54,21 +54,21 @@
 
 - (void)finish
 {
-  if (self.isCancelled) return; // don't do anything if cancelled
-  
-  authorized = ([(NSHTTPURLResponse *)URLResponse statusCode] == 200 || [(NSHTTPURLResponse *)URLResponse statusCode] == 201);
-  
-  if (authorized) {
-    authorizationData = [[PTJSON JSONParser] objectFromJSONData:responseData];
+  if (!self.isCancelled) { // don't do anything if cancelled
+    authorized = ([(NSHTTPURLResponse *)URLResponse statusCode] == 200 || [(NSHTTPURLResponse *)URLResponse statusCode] == 201);
     
-    NSAssert2([authorizationData isKindOfClass:[NSDictionary class]], 
-    @"Expected server to return authorization response as a dictionary, but received %@: %@", 
-            NSStringFromClass([authorizationData class]), authorizationData);
-  }
-
-  if (self.completionHandler) {
-    self.completionHandler(self);
-  }
+    if (authorized) {
+      authorizationData = [[PTJSON JSONParser] objectFromJSONData:responseData];
+      
+      NSAssert2([authorizationData isKindOfClass:[NSDictionary class]], 
+                @"Expected server to return authorization response as a dictionary, but received %@: %@", 
+                NSStringFromClass([authorizationData class]), authorizationData);
+    }
+    
+    if (self.completionHandler) {
+      self.completionHandler(self);
+    }
+  }; 
   
   [super finish];
 }
