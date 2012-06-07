@@ -35,7 +35,7 @@ describe(@"Client events", ^{
     
     [client connect];
     
-    [[expectFutureValue([connection.sentClientEvents lastObject]) shouldEventually] beKindOfClass:[PTPusherEvent class]];
+    [[expectFutureValue([connection.sentClientEvents lastObject]) shouldEventually] beEventNamed:@"client-test-event"];
     
     PTPusherEvent *lastEvent = [connection.sentClientEvents lastObject];
     [[lastEvent.name should] equal:@"client-test-event"];
@@ -53,7 +53,7 @@ describe(@"Client events", ^{
     
     [client connect];
     
-    [[expectFutureValue([connection.sentClientEvents lastObject]) shouldEventually] beKindOfClass:[PTPusherEvent class]];
+    [[expectFutureValue([connection.sentClientEvents lastObject]) shouldEventually] beEventNamed:@"client-test-event"];
     
     PTPusherEvent *lastEvent = [connection.sentClientEvents lastObject];
     [[lastEvent.name should] equal:@"client-test-event"];
@@ -72,7 +72,7 @@ describe(@"Client events", ^{
     
     [client connect];
     
-    [[expectFutureValue([connection.sentClientEvents lastObject]) shouldEventually] beKindOfClass:[PTPusherEvent class]];
+    [[expectFutureValue([connection.sentClientEvents lastObject]) shouldEventually] beEventNamed:@"client-test-event"];
     
     PTPusherEvent *lastEvent = [connection.sentClientEvents lastObject];
     [[lastEvent.name should] equal:@"client-test-event"];
