@@ -9,11 +9,20 @@
 #import "SpecHelper.h"
 #import "Constants.h"
 #import "PTPusherAPI.h"
+#import "PTPusherMockConnection.h"
 
 PTPusher *newTestClient(void) {
   PTPusher *client = newTestClientDisconnected();
   [client connect];
   return client;
+}
+
+PTPusher *newTestClientWithMockConnection(void)
+{
+  PTPusherMockConnection *mockConnection = [[PTPusherMockConnection alloc] init];
+  PTPusher *client = [[PTPusher alloc] initWithConnection:mockConnection connectAutomatically:NO];
+  client.delegate = [PTPusherClientTestHelperDelegate sharedInstance];
+  return [client retain];
 }
 
 PTPusher *newTestClientDisconnected(void) {

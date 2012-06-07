@@ -73,6 +73,7 @@
 		A3AC28C313F76C51001C4808 /* PTPusherChannelAuthorizationOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = A3AC28C113F76C50001C4808 /* PTPusherChannelAuthorizationOperation.h */; };
 		A3AC28C413F76C51001C4808 /* PTPusherChannelAuthorizationOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AC28C213F76C50001C4808 /* PTPusherChannelAuthorizationOperation.m */; };
 		A3B2931F14D8D96900C6B79F /* PTPusherPresenceChannelDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = A39E238A13F7E85C0083CAD7 /* PTPusherPresenceChannelDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A3B7E4EB1581672A00CDA6DA /* ClientEventsSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B7E4EA1581672A00CDA6DA /* ClientEventsSpec.m */; };
 		A3C32D9B14D083C10017FAED /* PTPusherEventSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C32D9A14D083C10017FAED /* PTPusherEventSpec.m */; };
 		A3CA666914D96814003E2F1E /* PTPusherChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = A3FE42181181173B009CF5D7 /* PTPusherChannel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3CA670E14DBBAA1003E2F1E /* PTPusherErrors.h in Headers */ = {isa = PBXBuildFile; fileRef = A39E238613F7E3FD0083CAD7 /* PTPusherErrors.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -193,6 +194,7 @@
 		A3AC28BD13F75BF1001C4808 /* PusherExampleMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PusherExampleMenuViewController.m; sourceTree = "<group>"; };
 		A3AC28C113F76C50001C4808 /* PTPusherChannelAuthorizationOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherChannelAuthorizationOperation.h; sourceTree = "<group>"; };
 		A3AC28C213F76C50001C4808 /* PTPusherChannelAuthorizationOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTPusherChannelAuthorizationOperation.m; sourceTree = "<group>"; };
+		A3B7E4EA1581672A00CDA6DA /* ClientEventsSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientEventsSpec.m; sourceTree = "<group>"; };
 		A3C32D9A14D083C10017FAED /* PTPusherEventSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTPusherEventSpec.m; sourceTree = "<group>"; };
 		A3C32D9C14D083D60017FAED /* SpecHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecHelper.h; sourceTree = "<group>"; };
 		A3D1D0B51157CCDE009A12AD /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -416,6 +418,7 @@
 				A3A9F96A1496E9C300F83617 /* BasicEventHandlingSpec.m */,
 				A369CFE114FDAD9200A8D56B /* PrivateChannelsSpec.m */,
 				A373A2C91565248C00BFAECE /* PusherClientSpec.m */,
+				A3B7E4EA1581672A00CDA6DA /* ClientEventsSpec.m */,
 				A3A9F95E1496E96100F83617 /* Supporting Files */,
 			);
 			path = "Functional Specs";
@@ -771,6 +774,7 @@
 				A369CFE314FDAEE700A8D56B /* NSMutableURLRequest+BasicAuth.m in Sources */,
 				A369CFE414FDB1DC00A8D56B /* NSData+Base64.m in Sources */,
 				A373A2CA1565248C00BFAECE /* PusherClientSpec.m in Sources */,
+				A3B7E4EB1581672A00CDA6DA /* ClientEventsSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

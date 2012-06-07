@@ -9,13 +9,17 @@
 #import <Foundation/Foundation.h>
 #import "Kiwi.h"
 #import "PTPusher.h"
+#import "PTPusherChannel.h"
 #import "PTPusherEvent.h"
+#import "PTPusher+Testing.h"
+#import "PTPusherMockConnection.h"
 
 #define kUSE_ENCRYPTED_CONNECTION YES
 
 // helper methods
 
 PTPusher *newTestClient(void);
+PTPusher *newTestClientWithMockConnection(void);
 PTPusher *newTestClientDisconnected(void);
 void enableClientDebugging(void);
 void sendTestEvent(NSString *eventName);

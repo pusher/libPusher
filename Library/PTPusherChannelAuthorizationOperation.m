@@ -86,7 +86,15 @@
 
 - (void)main
 {
-  _completionHandler(self);
+  // we complete after a tiny delay, to simulate the asynchronous nature
+  // of channel authorization. The low priorty queue ensures any polling
+  // in the test (which probably use the main queue/thread is not broken.
+  
+  double delayInSeconds = 0.1;
+  dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+  dispatch_after(popTime, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^(void){
+    _completionHandler(self);
+  });
 }
 
 - (BOOL)isAuthorized

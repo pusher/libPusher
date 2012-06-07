@@ -10,8 +10,19 @@
 #import "PTJSON.h"
 #import "PTPusherEvent.h"
 
+@implementation PTPusherMockConnection {
+  NSMutableArray *sentClientEvents;
+}
 
-@implementation PTPusherMockConnection
+@synthesize sentClientEvents;
+
+- (id)init
+{
+  if ((self = [super init])) {
+    sentClientEvents = [[NSMutableArray alloc] init];
+  }
+  return self;
+}
 
 - (void)connect
 {
@@ -69,6 +80,8 @@
 - (void)handleClientEvent:(NSDictionary *)eventData
 {
   PTPusherEvent *event = [PTPusherEvent eventFromMessageDictionary:eventData];
+  
+  [sentClientEvents addObject:event];
   
   if ([event.name isEqualToString:@"pusher:subscribe"]) {
     [self handleSubscribeEvent:event];
