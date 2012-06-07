@@ -202,6 +202,7 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
   [self sendEventNamed:@"pusher:unsubscribe" 
                   data:[NSDictionary dictionaryWithObject:channel.name forKey:@"channel"]];
   
+  [channel removeAllBindings];
   [channel markAsUnsubscribed];
   
   if ([self.delegate respondsToSelector:@selector(pusher:didUnsubscribeFromChannel:)]) {
