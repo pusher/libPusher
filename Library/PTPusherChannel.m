@@ -50,15 +50,27 @@
     dispatcher = [[PTPusherEventDispatcher alloc] init];
     internalBindings = [[NSMutableArray alloc] init];
     
-    /* Set up event handlers for pre-defined channel events */
+    /*
+     Set up event handlers for pre-defined channel events
+     
+     We *must* use block-based bindings with a weak reference to the channel.
+     Using a target-action binding will create a retain cycle between the channel
+     and the target/action binding object.
+     */
+    
+    __unsafe_unretained PTPusherChannel *weakChannel = self;
     
     [internalBindings addObject:
      [self bindToEventNamed:@"pusher_internal:subscription_succeeded" 
-                     target:self action:@selector(handleSubscribeEvent:)]];
+            handleWithBlock:^(PTPusherEvent *event) {
+              [weakChannel handleSubscribeEvent:event];
+            }]];
     
     [internalBindings addObject:
      [self bindToEventNamed:@"subscription_error" 
-                     target:self action:@selector(handleSubscribeErrorEvent:)]];
+            handleWithBlock:^(PTPusherEvent *event) {
+              [weakChannel handleSubcribeErrorEvent:event];
+            }]];
   }
   return self;
 }
@@ -131,7 +143,15 @@
 
 - (void)removeAllBindings
 {
-  [dispatcher removeAllBindings];
+  NSArray *allBindings = [[dispatcher.bindings allValues] copy];
+  
+  for (NSArray *bindings in allBindings) {
+    for (PTPusherEventBinding *binding in bindings) {
+	    if (![internalBindings containsObject:binding]) {
+        [dispatcher removeBinding:binding];
+      }
+	  }
+  }
 }
 
 #pragma mark - Dispatching events
@@ -141,9 +161,9 @@
   [dispatcher dispatchEvent:event];
   
   [[NSNotificationCenter defaultCenter] 
-       postNotificationName:PTPusherEventReceivedNotification 
-                     object:self 
-                   userInfo:[NSDictionary dictionaryWithObject:event forKey:PTPusherEventUserInfoKey]];
+   postNotificationName:PTPusherEventReceivedNotification 
+   object:self 
+   userInfo:[NSDictionary dictionaryWithObject:event forKey:PTPusherEventUserInfoKey]];
 }
 
 #pragma mark - Internal use only
@@ -212,7 +232,7 @@
   
   NSMutableDictionary *eventData = [authData mutableCopy];
   [eventData setObject:self.name forKey:@"channel"];
-
+  
   [pusher sendEventNamed:@"pusher:subscribe" 
                     data:eventData
                  channel:nil];
@@ -223,9 +243,9 @@
 - (void)triggerEventNamed:(NSString *)eventName data:(id)eventData
 {
   /** Because subscribing to a private (or presence) channel happens asynchronously
-    and can be delayed by the authorization process, we should buffer any client events
-    that have been triggered if subscription hasn't completed, so we can send them when
-    we do finish subscribing.
+   and can be delayed by the authorization process, we should buffer any client events
+   that have been triggered if subscription hasn't completed, so we can send them when
+   we do finish subscribing.
    */
   if (self.subscribed == NO) {
     if (clientEventBuffer == nil) {
@@ -234,7 +254,7 @@
     
     NSDictionary *clientEvent = [NSDictionary dictionaryWithObjectsAndKeys:eventName, @"eventName", eventData, @"eventData", nil];
     [clientEventBuffer addObject:clientEvent];
-
+    
     return;
   }
   
@@ -259,15 +279,23 @@
     members = [[NSMutableDictionary alloc] init];
     memberIDs = [[NSMutableArray alloc] init];
     
-    /* Set up event handlers for pre-defined channel events */
-
+    /* Set up event handlers for pre-defined channel events.
+     As above, use blocks as proxies to a weak channel reference to avoid retain cycles.
+     */
+    
+    __unsafe_unretained PTPusherPresenceChannel *weakChannel = self;
+    
     [internalBindings addObject:
      [self bindToEventNamed:@"pusher_internal:member_added" 
-                     target:self action:@selector(handleMemberAddedEvent:)]];
+            handleWithBlock:^(PTPusherEvent *event) {
+              [weakChannel handleMemberAddedEvent:event];
+            }]];
     
     [internalBindings addObject:
      [self bindToEventNamed:@"pusher_internal:member_removed" 
-                     target:self action:@selector(handleMemberRemovedEvent:)]];
+            handleWithBlock:^(PTPusherEvent *event) {
+              [weakChannel handleMemberRemovedEvent:event];
+            }]];
     
   }
   return self;
@@ -325,4 +353,3 @@
 }
 
 @end
-
