@@ -44,9 +44,11 @@ void waitForClientToDisconnect(PTPusher *client);
   void (^onSubscribeBlock)(PTPusherChannel *);
 }
 @property (nonatomic, assign) BOOL debugEnabled;
+@property (nonatomic, readonly) BOOL connected;
 
 + (id)sharedInstance;
 - (void)onConnect:(dispatch_block_t)block;
+- (void)onDisconnect:(dispatch_block_t)block;
 - (void)onAuthorizationRequired:(void (^)(NSMutableURLRequest *))authBlock;
 - (void)onFailedToSubscribe:(void (^)(PTPusherChannel *))failedToSubscribeBlock;
 - (void)onSubscribe:(void (^)(PTPusherChannel *))subscribeBlock;

@@ -70,9 +70,9 @@ void onSubscribe(void (^subscribeBlock)(PTPusherChannel *))
 
 void waitForClientToDisconnect(PTPusher *client)
 {
-  if (!client.connection.isConnected) return;
+  if (![[PTPusherClientTestHelperDelegate sharedInstance] connected]) return;
 
-  while (client.connection.isConnected) {
+  while ([[PTPusherClientTestHelperDelegate sharedInstance] connected]) {
     NSLog(@"Waiting for client to disconnect...");
     [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
   }
@@ -104,6 +104,7 @@ void waitForClientToDisconnect(PTPusher *client)
 
 @implementation PTPusherClientTestHelperDelegate
 
+@synthesize connected;
 @synthesize debugEnabled;
 
 + (id)sharedInstance

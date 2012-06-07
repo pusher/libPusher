@@ -34,6 +34,7 @@ describe(@"Pusher client", ^{
     
     onSubscribe(^(PTPusherChannel *channel) {
       subscribedChannel = channel;
+      [channel unsubscribe]; // clean-up
     });
     
     [client connect];
@@ -41,9 +42,9 @@ describe(@"Pusher client", ^{
     [[expectFutureValue(subscribedChannel) shouldEventually] equal:channel];
 	});
   
-  it(@"allows you to call unsubscribe without an exception if disconnected", ^{    
+  it(@"allows you to call unsubscribe without an exception if disconnected", ^{  
     __block PTPusherChannel *channel = nil;
-    
+
     onSubscribe(^(PTPusherChannel *subscribedChannel) {
       channel = subscribedChannel;
       [client disconnect];
