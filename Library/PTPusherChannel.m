@@ -191,19 +191,31 @@
 
 #pragma mark -
 
-@implementation PTPusherPrivateChannel
+@implementation PTPusherPrivateChannel {
+  NSOperationQueue *clientEventQueue;
+}
+
+- (id)initWithName:(NSString *)channelName pusher:(PTPusher *)aPusher
+{
+  if ((self = [super initWithName:channelName pusher:aPusher])) {
+    clientEventQueue = [[NSOperationQueue alloc] init];
+    clientEventQueue.maxConcurrentOperationCount = 1;
+    clientEventQueue.name = @"com.pusher.libPusher.clientEventQueue";
+    clientEventQueue.suspended = YES;
+  }
+  return self;
+}
 
 - (void)handleSubscribeEvent:(PTPusherEvent *)event
 {
   [super handleSubscribeEvent:event];
-  
-  for (NSDictionary *bufferedClientEvent in clientEventBuffer) {
-    NSString *eventName = [bufferedClientEvent objectForKey:@"eventName"];
-    id eventData = [bufferedClientEvent objectForKey:@"eventData"];
-    [self triggerEventNamed:eventName data:eventData];
-  }
-  
-  clientEventBuffer = nil;
+  [clientEventQueue setSuspended:NO];
+}
+
+- (void)markAsUnSubscribed
+{
+  [super markAsUnsubscribed];
+  [clientEventQueue setSuspended:YES];
 }
 
 - (BOOL)isPrivate
@@ -242,26 +254,16 @@
 
 - (void)triggerEventNamed:(NSString *)eventName data:(id)eventData
 {
-  /** Because subscribing to a private (or presence) channel happens asynchronously
-   and can be delayed by the authorization process, we should buffer any client events
-   that have been triggered if subscription hasn't completed, so we can send them when
-   we do finish subscribing.
-   */
-  if (self.subscribed == NO) {
-    if (clientEventBuffer == nil) {
-      clientEventBuffer = [[NSMutableArray alloc] init];
-    }
-    
-    NSDictionary *clientEvent = [NSDictionary dictionaryWithObjectsAndKeys:eventName, @"eventName", eventData, @"eventData", nil];
-    [clientEventBuffer addObject:clientEvent];
-    
-    return;
-  }
-  
   if (![eventName hasPrefix:@"client-"]) {
     eventName = [@"client-" stringByAppendingString:eventName];
   }
-  [pusher sendEventNamed:eventName data:eventData channel:self.name];
+  
+  __unsafe_unretained PTPusherChannel *weakSelf = self;
+  __unsafe_unretained PTPusher *weakPusher = pusher;
+  
+  [clientEventQueue addOperationWithBlock:^{
+    [weakPusher sendEventNamed:eventName data:eventData channel:weakSelf.name];
+  }];
 }
 
 @end
@@ -329,7 +331,6 @@
 {
   return [memberIDs count];
 }
-
 
 - (void)handleMemberAddedEvent:(PTPusherEvent *)event
 {
