@@ -90,7 +90,7 @@ NSString *const PTPusherConnectionPingEvent        = @"pusher:ping";
   [socket send:message];
 }
 
-#pragma mark - ZTWebSocket delegate methods
+#pragma mark - SRWebSocket delegate methods
 
 - (void)webSocketDidOpen:(SRWebSocket *)webSocket
 {
