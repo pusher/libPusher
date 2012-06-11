@@ -228,7 +228,7 @@
   PTPusherChannelAuthorizationOperation *authOperation = [PTPusherChannelAuthorizationOperation operationWithAuthorizationURL:pusher.authorizationURL channelName:self.name socketID:pusher.connection.socketID];
   
   [authOperation setCompletionHandler:^(PTPusherChannelAuthorizationOperation *operation) {
-    completionHandler(operation.isAuthorized, operation.authorizationData, operation.connectionError);
+    completionHandler(operation.isAuthorized, operation.authorizationData, operation.error);
   }];
   
   if ([pusher.delegate respondsToSelector:@selector(pusher:willAuthorizeChannelWithRequest:)]) {
