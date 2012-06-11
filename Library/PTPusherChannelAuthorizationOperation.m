@@ -16,6 +16,7 @@
 
 @interface PTPusherChannelAuthorizationOperation ()
 @property (nonatomic, strong, readwrite) NSDictionary *authorizationData;
+@property (nonatomic, readwrite) NSError *error;
 @end
 
 @implementation PTPusherChannelAuthorizationOperation
@@ -23,6 +24,7 @@
 @synthesize authorized;
 @synthesize authorizationData;
 @synthesize completionHandler;
+@synthesize error;
 
 - (NSMutableURLRequest *)mutableURLRequest
 {
@@ -54,15 +56,19 @@
 
 - (void)finish
 {
+  if (self.connectionError) {
+    self.error = [NSError errorWithDomain:PTPusherErrorDomain code:PTPusherChannelAuthorizationConnectionError userInfo:[NSDictionary dictionaryWithObject:self.connectionError forKey:NSUnderlyingErrorKey]];
+  }
+  
   if (!self.isCancelled) { // don't do anything if cancelled
     authorized = ([(NSHTTPURLResponse *)URLResponse statusCode] == 200 || [(NSHTTPURLResponse *)URLResponse statusCode] == 201);
     
     if (authorized) {
       authorizationData = [[PTJSON JSONParser] objectFromJSONData:responseData];
       
-      NSAssert2([authorizationData isKindOfClass:[NSDictionary class]], 
-                @"Expected server to return authorization response as a dictionary, but received %@: %@", 
-                NSStringFromClass([authorizationData class]), authorizationData);
+      if (![authorizationData isKindOfClass:[NSDictionary class]]) {
+        self.error = [NSError errorWithDomain:PTPusherErrorDomain code:PTPusherChannelAuthorizationBadResponseError userInfo:authorizationData];
+      }
     }
     
     if (self.completionHandler) {
