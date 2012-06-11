@@ -10,5 +10,5 @@
 
 enum {
   PTPusherSubscriptionError = 0,
-  PTPusherSubscriptionAuthorisationError
+  PTPusherSubscriptionUnknownAuthorisationError
 };
