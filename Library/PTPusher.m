@@ -29,7 +29,7 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 {
   NSString *scheme = ((encrypted == YES) ? @"wss" : @"ws");
   NSString *URLString = [NSString stringWithFormat:@"%@://%@/app/%@?client=%@&protocol=%d&version=%f", 
-        scheme, host, key, clientID, kPTPusherClientProtocolVersion, kPTPusherClientLibraryVersion];
+                         scheme, host, key, clientID, kPTPusherClientProtocolVersion, kPTPusherClientLibraryVersion];
   return [NSURL URLWithString:URLString];
 }
 
@@ -66,11 +66,11 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
   if (self = [super init]) {
     dispatcher = [[PTPusherEventDispatcher alloc] init];
     channels = [[NSMutableDictionary alloc] init];
-
+    
     authorizationQueue = [[NSOperationQueue alloc] init];
     authorizationQueue.maxConcurrentOperationCount = 5;
     authorizationQueue.name = @"com.pusher.libPusher.authorizationQueue";
-
+    
     self.connection = connection;
     self.connection.delegate = self;
     
@@ -219,19 +219,15 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 
 - (void)subscribeToChannel:(PTPusherChannel *)channel
 {
-  [channel authorizeWithCompletionHandler:^(BOOL isAuthorized, NSDictionary *authData, NSError *underlyingError) {
+  [channel authorizeWithCompletionHandler:^(BOOL isAuthorized, NSDictionary *authData, NSError *error) {
     if (isAuthorized && self.connection.isConnected) {
       [channel subscribeWithAuthorization:authData];
     }
     else {
-      NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
-      
-      if (underlyingError) {
-        [userInfo setObject:underlyingError forKey:NSUnderlyingErrorKey];
+      if (error == nil) {
+        error = [NSError errorWithDomain:PTPusherErrorDomain code:PTPusherSubscriptionUnknownAuthorisationError userInfo:nil];
       }
       
-      NSError *error = [NSError errorWithDomain:PTPusherErrorDomain code:PTPusherSubscriptionAuthorisationError userInfo:userInfo];
-
       if ([self.delegate respondsToSelector:@selector(pusher:didFailToSubscribeToChannel:withError:)]) {
         [self.delegate pusher:self didFailToSubscribeToChannel:channel withError:error];
       }
@@ -314,9 +310,9 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
   [dispatcher dispatchEvent:event];
   
   [[NSNotificationCenter defaultCenter] 
-        postNotificationName:PTPusherEventReceivedNotification 
-                      object:self 
-                    userInfo:[NSDictionary dictionaryWithObject:event forKey:PTPusherEventUserInfoKey]];
+   postNotificationName:PTPusherEventReceivedNotification 
+   object:self 
+   userInfo:[NSDictionary dictionaryWithObject:event forKey:PTPusherEventUserInfoKey]];
 }
 
 - (void)handleDisconnection:(PTPusherConnection *)connection error:(NSError *)error
