@@ -143,14 +143,20 @@
 
 - (void)removeAllBindings
 {
-  NSArray *allBindings = [[dispatcher.bindings allValues] copy];
+  NSMutableArray *bindingsToRemove = [NSMutableArray array];
   
-  for (NSArray *bindings in allBindings) {
-    for (PTPusherEventBinding *binding in bindings) {
+  // need to unpack the bindings from the nested arrays, so we can
+  // iterate over them safely whilst removing them from the dispatcher
+  for (NSArray *bindingsArray in [dispatcher.bindings allValues]) {
+    for (PTPusherEventBinding *binding in bindingsArray) {
 	    if (![internalBindings containsObject:binding]) {
-        [dispatcher removeBinding:binding];
+        [bindingsToRemove addObject:binding];
       }
 	  }
+  }
+  
+  for (PTPusherEventBinding *binding in bindingsToRemove) {
+    [dispatcher removeBinding:binding];
   }
 }
 
