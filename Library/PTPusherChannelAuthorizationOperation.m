@@ -61,7 +61,10 @@
   }
   
   if (!self.isCancelled) { // don't do anything if cancelled
-    authorized = ([(NSHTTPURLResponse *)URLResponse statusCode] == 200 || [(NSHTTPURLResponse *)URLResponse statusCode] == 201);
+    authorized = YES;
+    if ([URLResponse isKindOfClass:[NSHTTPURLResponse class]]){
+      authorized = ([(NSHTTPURLResponse *)URLResponse statusCode] == 200 || [(NSHTTPURLResponse *)URLResponse statusCode] == 201);
+	}
     
     if (authorized) {
       authorizationData = [[PTJSON JSONParser] objectFromJSONData:responseData];
