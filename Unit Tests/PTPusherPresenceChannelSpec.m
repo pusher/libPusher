@@ -12,7 +12,7 @@
 
 SPEC_BEGIN(PTPusherPresenceChannelSpec)
 
-describe(@"PTPusherPresenceChannelSpec", ^{
+describe(@"PTPusherPresenceChannel", ^{
   __block PTPusherPresenceChannel *channel;
   
   beforeEach(^{
@@ -31,7 +31,8 @@ describe(@"PTPusherPresenceChannelSpec", ^{
       
       [channel dispatchEvent:event];
       
-      [[theValue(channel.memberCount) should] equal:theValue(1)];
+      [[theReturnValueOfBlock(^{ return theValue(channel.memberCount); }) shouldEventually] equal:[NSNumber numberWithInt:1]];
+
       [[channel.memberIDs should] contain:@"123"];
       [[[[channel infoForMemberWithID:@"123"] objectForKey:@"name"] should] equal:@"Joe Bloggs"];
     });
@@ -43,7 +44,7 @@ describe(@"PTPusherPresenceChannelSpec", ^{
       
       [channel dispatchEvent:event];
       
-      [[[channel infoForMemberWithID:@"123"] should] equal:[NSDictionary dictionary]];
+      [[[channel infoForMemberWithID:@"123"] shouldEventually] equal:[NSDictionary dictionary]];
     });
   });
 });
