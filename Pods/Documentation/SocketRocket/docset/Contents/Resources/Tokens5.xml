@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Protocols/SRWebSocketDelegate.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intf/SRWebSocketDelegate</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>SRWebSocket.h</DeclaredIn>
+			
+			<NodeRef refid="5"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/SRWebSocketDelegate/webSocket:didReceiveMessage:</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>SRWebSocket.h</DeclaredIn>			
+			
+			<Declaration>- (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message</Declaration>
+			
+			
+			<Anchor>//api/name/webSocket:didReceiveMessage:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/SRWebSocketDelegate/webSocketDidOpen:</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>SRWebSocket.h</DeclaredIn>			
+			
+			<Declaration>- (void)webSocketDidOpen:(SRWebSocket *)webSocket</Declaration>
+			
+			
+			<Anchor>//api/name/webSocketDidOpen:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/SRWebSocketDelegate/webSocket:didFailWithError:</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>SRWebSocket.h</DeclaredIn>			
+			
+			<Declaration>- (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error</Declaration>
+			
+			
+			<Anchor>//api/name/webSocket:didFailWithError:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/SRWebSocketDelegate/webSocket:didCloseWithCode:reason:wasClean:</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>SRWebSocket.h</DeclaredIn>			
+			
+			<Declaration>- (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean</Declaration>
+			
+			
+			<Anchor>//api/name/webSocket:didCloseWithCode:reason:wasClean:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

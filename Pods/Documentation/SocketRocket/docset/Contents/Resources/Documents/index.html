@@ -1,0 +1,348 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>SocketRocket 0.1 Reference</title>
+		<link rel="stylesheet" type="text/css" href="css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.0.5 (build 737)" />
+	</head>
+	<body>
+		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="index.html">SocketRocket 0.1 </a></h1>
+				<a id="developerHome" href="index.html">Square</a>
+			</div>
+			
+			<div id="title" role="banner">
+				<h1 class="hideInXcode">SocketRocket 0.1 Reference</h1>
+			</div>
+			<ul id="headerButtons" role="toolbar"></ul>
+		</header>
+		<article>
+			<div id="overview_contents" role="main">
+				<div class="main-navigation navigation-top">
+					<a href="hierarchy.html">Next</a>
+				</div>
+				<div id="header">
+					<div class="section-header">
+						<h1 class="title title-header">SocketRocket 0.1 Reference</h1>
+					</div>		
+				</div>
+				<div id="container">
+					
+					<div class="section section-overview index-overview">
+						
+						
+						<h1>SocketRocket Objective-C WebSocket Client (beta)</h1>
+
+<p>A conforming WebSocket (<code>RFC 6455 </code>http://tools.ietf.org/html/rfc6455<code></code>_)
+client library.</p>
+
+<p><code>Test results for SocketRocket here http://square.github.com/SocketRocket/results/</code><em>.
+You can compare to what <code>modern browsers look like here
+</code>http://www.tavendo.de/autobahn/testsuite/report/clients/index.html<code></code></em>.</p>
+
+<p>SocketRocket currently conforms to all ~300 of <code>Autobahn
+http://www.tavendo.de/autobahn/testsuite.html</code>_&rsquo;s fuzzing tests (aside from
+two UTF-8 ones where it is merely <em>non-strict</em>. tests 6.4.2 and 6.4.4)</p>
+
+<h2>Features/Design</h2>
+
+<ul>
+<li>TLS (wss) support.  It uses CFStream so we get this for <em>free</em></li>
+<li>Uses NSStream/CFNetworking.  Earlier implementations used <code>dispatch_io</code>,
+however, this proved to be make TLS nearly impossible.  Also I wanted this to
+work in iOS 4.x.</li>
+<li>Uses ARC.  It uses the 4.0 compatible subset (no weak refs).</li>
+<li>Seems to perform quite well</li>
+<li>Parallel architecture. Most of the work is done in background worker queues.</li>
+<li>Delegate-based. Had older versions that could use blocks too, but I felt it
+didn&rsquo;t blend well with retain cycles and just objective C in general.</li>
+</ul>
+
+
+<h2>Installing (iOS)</h2>
+
+<p>There&rsquo;s a few options. Choose one, or just figure it out</p>
+
+<ul>
+<li>You can copy all the files in the SocketRocket group into your app.</li>
+<li><p>Include SocketRocket as a subproject and use libSocketRocket</p>
+
+<p>If you do this, you must add -ObjC to your &ldquo;other linker flags&rdquo; option</p></li>
+<li><p>For OS X you will have to repackage make a .framework target.  I will take
+contributions. Message me if you are interested.</p></li>
+</ul>
+
+
+<p>Depending on how you configure your project you may need to <code>#import</code> either
+<code>&lt;SocketRocket/SRSocketRocket.h&gt;</code> or <code>"SRSocketRocket.h"</code></p>
+
+<p>Framework Dependencies
+``````````````````````
+Your .app must be linked against the following frameworks/dylibs</p>
+
+<ul>
+<li>libicucore.dylib</li>
+<li>CFNetwork.framework</li>
+<li>Security.framework</li>
+<li>Foundation.framework</li>
+</ul>
+
+
+<h2>Installing (OS X)</h2>
+
+<p>SocketRocket now has (64-bit only) OS X support.  <code>SocketRocket.framework</code>
+inside Xcode project is for OS X only.  It should be identical in function aside
+from the unicode validation.  ICU isn&rsquo;t shipped with OS X which is what the
+original implementation used for unicode validation.  The workaround is much
+more rhudimentary and less robust.</p>
+
+<ol>
+<li>Add SocketRocket.xcodeproj as either a subproject of your app or in your workspace.</li>
+<li>Add <code>SocketRocket.framework</code> to the link libraries</li>
+<li>If you don&rsquo;t have a &ldquo;copy files&rdquo; step for <code>Framework</code>, create one</li>
+<li>Add <code>SocketRocket.framework</code> to the &ldquo;copy files&rdquo; step.</li>
+</ol>
+
+
+<h2>API</h2>
+
+<p>The classes</p>
+
+<p><code></code>SRWebSocket<code></code>
+```````````````
+The Web Socket.</p>
+
+<p>.. note:: <code></code>SRWebSocket<code></code> will retain itself between <code>-(void)open</code> and when it
+  closes, errors, or fails.  This is similar to how <code>NSURLConnection</code> behaves.
+  (unlike <code>NSURLConnection</code>, <code></code>SRWebSocket<code></code> won&rsquo;t retain the delegate)</p>
+
+<p>What you need to know::</p>
+
+<p>  @interface <a href="Classes/SRWebSocket.html"><code>SRWebSocket</code></a> : NSObject</p>
+
+<p>  // Make it with this
+  &ndash; (id)initWithURLRequest:(NSURLRequest *)request;</p>
+
+<p>  // Set this before opening
+  @property (nonatomic, assign) id <a href="Protocols/SRWebSocketDelegate.html"><code>SRWebSocketDelegate</code></a> delegate;</p>
+
+<ul>
+<li>(void)open;</li>
+</ul>
+
+
+<p>  // Close it with this
+  &ndash; (void)close;</p>
+
+<p>  // Send a UTF8 String or Data
+  &ndash; (void)send:(id)data;</p>
+
+<p>  @end</p>
+
+<p><code></code>SRWebSocketDelegate<code></code>
+```````````````````````
+You implement this ::</p>
+
+<p>  @protocol <a href="Protocols/SRWebSocketDelegate.html"><code>SRWebSocketDelegate</code></a> <NSObject></p>
+
+<ul>
+<li>(void)webSocket:(<a href="Classes/SRWebSocket.html"><code>SRWebSocket</code></a> *)webSocket didReceiveMessage:(id)message;</li>
+</ul>
+
+
+<p>  @optional</p>
+
+<ul>
+<li>(void)webSocketDidOpen:(<a href="Classes/SRWebSocket.html"><code>SRWebSocket</code></a> *)webSocket;</li>
+<li>(void)webSocket:(<a href="Classes/SRWebSocket.html"><code>SRWebSocket</code></a> <em>)webSocket didFailWithError:(NSError </em>)error;</li>
+<li>(void)webSocket:(<a href="Classes/SRWebSocket.html"><code>SRWebSocket</code></a> <em>)webSocket didCloseWithCode:(NSInteger)code reason:(NSString </em>)reason wasClean:(BOOL)wasClean;</li>
+</ul>
+
+
+<p>  @end</p>
+
+<h2>Known Issues/Server Todo&rsquo;s</h2>
+
+<ul>
+<li>Needs auth delegates (like in NSURLConnection)</li>
+<li>Move the streams off the main runloop (most of the work is backgrounded uses
+GCD, but I just haven&rsquo;t gotten around to moving it off the main loop since I
+converted it from dispatch_io)</li>
+<li>Re-implement server. I removed an existing implementation as well because it
+wasn&rsquo;t being used and I wasn&rsquo;t super happy with the interface.  Will revisit
+this.</li>
+<li>Separate framer and client logic. This will make it nicer when having a
+server.</li>
+</ul>
+
+
+<h2>Testing</h2>
+
+<p>Included are setup scripts for the python testing environment.  It comes
+packaged with vitualenv so all the dependencies are installed in userland.</p>
+
+<p>To run the short test from the command line, run::</p>
+
+<p>  make test</p>
+
+<p>To run all the tests, run::</p>
+
+<p>  make test_all</p>
+
+<p>The short tests don&rsquo;t include the performance tests.  (the test harness is
+actually the bottleneck, not SocketRocket).</p>
+
+<p>The first time this is run, it may take a while to install the dependencies.  It
+will be smooth sailing after that.  After the test runs the makefile will open
+the results page in your browser.  If nothing comes up, you failed.  Working on
+making this interface a bit nicer.</p>
+
+<p>To run from the app, choose the <code>SocketRocket</code> target and run the test action
+(<code>cmd+u</code>). It runs the same thing, but makes it easier to debug.  There is
+some serious pre/post hooks in the Test action.  You can edit it to customize
+behavior.</p>
+
+<h2>TestChat Demo Application</h2>
+
+<p>SocketRocket includes a demo app, TestChat.  It will &ldquo;chat&rdquo; with a listening
+websocket on port 9900.</p>
+
+<p>It&rsquo;s a simple project.  Uses storyboard.  Storyboard is sweet.</p>
+
+<p>TestChat Server
+```````````````
+We&rsquo;ve included a small server for the chat app.  It has a simple function.
+It will take a message and broadcast it to all other connected clients.</p>
+
+<p>We have to get some dependencies.  We also want to reuse the virtualenv we made
+when we ran the tests. If you haven&rsquo;t run the tests yet, go into the
+SocketRocket root directory and type::</p>
+
+<p>  make test</p>
+
+<p>This will set up your <code>virtualenv http://pypi.python.org/pypi/virtualenv</code>_.
+Now, in your terminal::</p>
+
+<p>  source .env/bin/activate
+  pip install git+<a href="https://github.com/facebook/tornado.git"><code>https://github.com/facebook/tornado.git</code></a></p>
+
+<p>In the same terminal session, start the chatroom server::</p>
+
+<p>  python TestChatServer/py/chatroom.py</p>
+
+<p>There&rsquo;s also a Go implementation (with the latest weekly) where you can::</p>
+
+<p>  cd TestChatServer/go
+  go run chatroom.go</p>
+
+<p>Chatting
+````````
+Now, start TestChat.app (just run the target in the XCode project).  If you had
+it started already you can hit the refresh button to reconnect.  It should say
+&ldquo;Connected!&rdquo; on top.</p>
+
+<p>To talk with the app, open up your browser to <code>http://localhost:9000 http://localhost:9000</code>_ and
+start chatting.</p>
+
+<h2>WebSocket Server Implementation Recommendations</h2>
+
+<p>SocketRocket has been used with the following libraries:</p>
+
+<ul>
+<li><code>Tornado https://github.com/facebook/tornado</code>_</li>
+<li>Go&rsquo;s <code>weekly build http://weekly.golang.org</code><em> (the official release has an
+outdated protocol, so you may have to use weekly until <code>Go 1
+http://blog.golang.org/2011/10/preview-of-go-version-1.html</code></em> is released)</li>
+<li><code>Autobahn http://www.tavendo.de/autobahn/testsuite.html</code>_ (using its fuzzing
+client)</li>
+</ul>
+
+
+<p>The Tornado one is dirt simple and works like a charm.  (<code>IPython notebook
+http://ipython.org/ipython-doc/dev/interactive/htmlnotebook.html</code>_ uses it
+too).  It&rsquo;s much easier to configure handlers and routes than in
+Autobahn/twisted.</p>
+
+<p>As far as Go&rsquo;s goes, it works in my limited testing. I much prefer go&rsquo;s
+concurrency model as well. Try it! You may like it.
+It could use some more control over things such as pings, etc., but I
+am sure it will come in time.</p>
+
+<p>Autobahn is a great test suite.  The Python server code is good, and conforms
+well (obviously).  Hovever, for me, twisted would be a deal-breaker for writing
+something new.  I find it a bit too complex and heavy for a simple service. If
+you are already using twisted though, Autobahn is probably for you.</p>
+
+<h2>Contributing</h2>
+
+<p>Any contributors to the master SocketRocket repository must sign the <code>Individual
+Contributor License Agreement
+(CLA)
+https://spreadsheets.google.com/spreadsheet/viewform?formkey=dDViT2xzUHAwRkI3X3k5Z0lQM091OGc6MQ&amp;ndplr=1</code>_.
+It&rsquo;s a short form that covers our bases and makes sure you&rsquo;re eligible to
+contribute.</p>
+
+<p>When you have a change you&rsquo;d like to see in the master repository, <code>send a pull
+request https://github.com/square/SocketRocket/pulls</code>_. Before we merge your
+request, we&rsquo;ll make sure you&rsquo;re in the list of people who have signed a CLA.</p>
+						
+						
+					</div>
+					
+					
+					
+					<div class="index-column">
+						<h2 class="index-title">Class References</h2>
+						<ul>
+							
+							<li><a href="Classes/SRWebSocket.html">SRWebSocket</a></li>
+							
+						</ul>
+					</div>
+					
+					
+						
+					<div class="index-column">
+						
+						<h2 class="index-title">Protocol References</h2>
+						<ul>
+							
+							<li><a href="Protocols/SRWebSocketDelegate.html">SRWebSocketDelegate</a></li>
+							
+						</ul>
+						
+						
+						<h2 class="index-title">Category References</h2>
+						<ul>
+							
+							<li><a href="Categories/NSData(SRB64Additions).html">NSData(SRB64Additions)</a></li>
+							
+							<li><a href="Categories/NSMutableURLRequest(CertificateAdditions).html">NSMutableURLRequest(CertificateAdditions)</a></li>
+							
+							<li><a href="Categories/NSURLRequest(CertificateAdditions).html">NSURLRequest(CertificateAdditions)</a></li>
+							
+						</ul>
+						
+					</div>
+					
+				</div>
+				<div class="main-navigation navigation-bottom">
+					<a href="hierarchy.html">Next</a>
+				</div>
+				<div id="footer">
+					<hr />
+					<div class="footer-copyright">
+						<p><span class="copyright">&copy; 2012 Square. All rights reserved. (Last updated: 2012-08-13)</span><br />
+						
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 737)</a>.</span></p>
+						
+	
+					</div>
+				</div>
+			</div>
+		</article>		
+	</body>
+</html>

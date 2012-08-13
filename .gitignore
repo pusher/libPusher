@@ -17,7 +17,6 @@ Constants.h
 log
 Scripts/*.pid
 Docs
-Pods
 .pusheropts
 Scripts/auth_credentials.rb
 xcodebuild
