@@ -12,6 +12,7 @@
 #import "PTPusher+Testing.h"
 
 @interface PTPusherChannelAuthorizationBypassOperation : NSOperation
+@property (nonatomic, readwrite) NSError *error;
 @end
 
 @interface PTPusherChannelAuthorizationOperation ()
@@ -95,6 +96,8 @@
 @implementation PTPusherChannelAuthorizationBypassOperation {
   void (^_completionHandler)(id);
 }
+
+@synthesize error;
 
 - (void)setCompletionHandler:(void (^)(id))completionHandler
 {
