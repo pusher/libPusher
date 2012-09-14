@@ -1,7 +1,7 @@
 PODS:
   - Kiwi (1.1.0)
   - Reachability (3.0.0)
-  - SocketRocket (0.1)
+  - SocketRocket (0.2.0)
 
 DEPENDENCIES:
   - Kiwi (from `git://github.com/allending/Kiwi.git')

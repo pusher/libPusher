@@ -15,5 +15,7 @@ post_install do |installer|
 end
 
 target :specs, :exclusive => true do
+  link_with 'Functional Specs'
+  
   pod 'Kiwi', git: "git://github.com/allending/Kiwi.git", :download_only => true
 end
