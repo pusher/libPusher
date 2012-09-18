@@ -140,7 +140,7 @@ namespace :release do
     t.configuration = "Release"
     t.sdk = "iphoneos"
     t.formatter = XcodeBuild::Formatters::ProgressFormatter.new
-    t.arch = "'armv6 armv7'"
+    t.arch = "'armv7 armv7s'"
     t.after_build { |build| copy_artefacts_from_build(build, include_headers: true) }
     t.xcodebuild_log_path = XCODEBUILD_LOG
   end
