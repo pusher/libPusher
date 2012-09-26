@@ -46,6 +46,7 @@ NSString *const PTPusherConnectionPingEvent        = @"pusher:ping";
 
 - (void)dealloc 
 {
+  [socket setDelegate:nil];
   [socket close];
 }
 
