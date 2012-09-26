@@ -78,7 +78,7 @@
 - (void)dealloc 
 {
   [internalBindings enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL *stop) {
-    [pusher removeBinding:object];
+    [dispatcher removeBinding:object];
   }];
 }
 
