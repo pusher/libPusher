@@ -8,7 +8,9 @@ Apple provides its own push notification service which is great for getting aler
 
 ## Installation instructions
 
-The latest release is 1.3. A list of changes can be found in the [CHANGELOG](CHANGELOG.md).
+The latest release is 1.4. A list of changes can be found in the [CHANGELOG](CHANGELOG.md).
+
+1.4 will be the final release of Pusher to support iOS 4.
 
 Important note: As of 1.3, libPusher no longer includes the JSONKit JSON parsing library. By default, libPusher now uses the native `NSJSONSerialization` class, only available on iOS 5.0 or OSX 10.7 and above. 
 
