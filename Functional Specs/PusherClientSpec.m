@@ -39,7 +39,7 @@ describe(@"Pusher client", ^{
     
     [client connect];
     
-    [[expectFutureValue(subscribedChannel) shouldEventually] equal:channel];
+    [[expectFutureValue(subscribedChannel) shouldEventuallyBeforeTimingOutAfter(3)] equal:channel];
 	});
   
   it(@"allows you to call unsubscribe without an exception if disconnected", ^{  
@@ -61,7 +61,7 @@ describe(@"Pusher client", ^{
     [client connect];
     
     // we need to wait for the channel so we know we are subscribed
-    [[expectFutureValue(channel) shouldEventually] beNonNil];
+    [[expectFutureValue(channel) shouldEventuallyBeforeTimingOutAfter(3)] beNonNil];
     
     // without the above expectation, this will pass immediately, before the channel has subscribed
     [[expectFutureValue([NSNumber numberWithBool:channel.isSubscribed]) shouldEventually] equal:[NSNumber numberWithBool:NO]];
