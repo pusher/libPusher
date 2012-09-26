@@ -277,6 +277,9 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
   NSError *error = nil;
   
   if (errorCode > 0) {
+    if (reason == nil) {
+      reason = @"Unknown error"; // not sure what could cause this to be nil, but just playing it safe
+    }
     error = [NSError errorWithDomain:PTPusherErrorDomain code:errorCode userInfo:[NSDictionary dictionaryWithObject:reason forKey:@"reason"]];
   }
   
