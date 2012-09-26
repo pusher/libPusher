@@ -10,4 +10,5 @@ Pod::Spec.new do |s|
   s.clean_paths  = ["Frameworks", "Functional Specs", "Sample", "Scripts", "Unit Tests", "*.xcodeproj", "*.xcworkspace"]
   s.requires_arc = true
   s.dependency 'SocketRocket', "0.2"
+  s.compiler_flags = '-Wno-arc-performSelector-leaks', '-Wno-format'
 end
