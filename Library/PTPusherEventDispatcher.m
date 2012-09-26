@@ -10,7 +10,7 @@
 #import "PTPusherEvent.h"
 
 @interface PTPusherEventBinding ()
-@property (nonatomic, readwrite) BOOL valid;
+- (void)invalidate;
 @end
 
 @implementation PTPusherEventDispatcher {
@@ -39,7 +39,7 @@
   }
   PTPusherEventBinding *binding = [[PTPusherEventBinding alloc] initWithEventListener:listener eventName:eventName];
   [bindingsForEvent addObject:binding];
-
+  
   return binding;
 }
 
@@ -48,7 +48,7 @@
   NSMutableArray *bindingsForEvent = [bindings objectForKey:binding.eventName];
   
   if ([bindingsForEvent containsObject:binding]) {
-    [binding setValid:NO];
+    [binding invalidate];
     [bindingsForEvent removeObject:binding];
   }
 }
@@ -57,7 +57,7 @@
 {
   for (NSArray *eventBindings in [bindings allValues]) {
     for (PTPusherEventBinding *binding in eventBindings) {
-	    [binding setValid:NO];
+	    [binding invalidate];
 	  }
   }
   [bindings removeAllObjects];
@@ -79,23 +79,26 @@
 }
 
 @synthesize eventName = _eventName;
-@synthesize valid = _valid;
 
 - (id)initWithEventListener:(id<PTEventListener>)eventListener eventName:(NSString *)eventName
 {
   if ((self = [super init])) {
     _eventName = [eventName copy];
     _eventListener = eventListener;
-    _valid = YES;
   }
   return self;
 }
 
+- (void)invalidate
+{
+  if ([_eventListener respondsToSelector:@selector(invalidate)]) {
+    [_eventListener invalidate];
+  }
+}
+
 - (void)dispatchEvent:(PTPusherEvent *)event
 {
-  if (_valid) {
-    [_eventListener dispatchEvent:event];
-  }
+  [_eventListener dispatchEvent:event];
 }
 
 @end

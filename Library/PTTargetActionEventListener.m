@@ -9,17 +9,24 @@
 #import "PTTargetActionEventListener.h"
 
 
-@implementation PTTargetActionEventListener
+@implementation PTTargetActionEventListener {
+  BOOL _invalid;
+}
 
 - (id)initWithTarget:(id)aTarget action:(SEL)aSelector
 {
   if (self = [super init]) {
     target = aTarget;
     action = aSelector;
+    _invalid = NO;
   }
   return self;
 }
 
+- (void)invalidate
+{
+  _invalid = YES;
+}
 
 - (NSString *)description;
 {
@@ -28,7 +35,12 @@
 
 - (void)dispatchEvent:(PTPusherEvent *)event;
 {
-  [target performSelector:action withObject:event];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+  if (!_invalid) {
+    [target performSelector:action withObject:event];
+  }
+#pragma clang diagnostic pop
 }
 
 @end

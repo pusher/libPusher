@@ -15,4 +15,8 @@
 
 - (void)dispatchEvent:(PTPusherEvent *)event;
 
+@optional
+
+- (void)invalidate;
+
 @end
