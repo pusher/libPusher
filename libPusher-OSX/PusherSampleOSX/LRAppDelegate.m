@@ -31,9 +31,12 @@
   [sender setEnabled:NO];
   
   self.pusher = [PTPusher pusherWithKey:PUSHER_API_KEY delegate:self encrypted:NO];
-
-  [[self.pusher subscribeToChannelNamed:@"messages"] bindToEventNamed:@"new-message" handleWithBlock:^(PTPusherEvent *event) {
-    [self.eventsController addObject:event];
+  
+  PTPusherChannel *channel = [self.pusher subscribeToChannelNamed:@"messages"];
+  
+  [[NSNotificationCenter defaultCenter] addObserverForName:PTPusherEventReceivedNotification object:channel queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+    
+    [self.eventsController addObject:[note.userInfo objectForKey:PTPusherEventUserInfoKey]];
   }];
 }
 
