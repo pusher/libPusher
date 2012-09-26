@@ -6,4 +6,4 @@ PODS:
 DEPENDENCIES:
   - Kiwi (from `git://github.com/allending/Kiwi.git')
   - Reachability
-  - SocketRocket
+  - SocketRocket (= 0.2)

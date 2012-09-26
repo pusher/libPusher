@@ -1,7 +1,7 @@
 platform :ios, :deployment_target => '4.0'
 
 pod 'Reachability'
-pod 'SocketRocket'
+pod 'SocketRocket', '0.2'
 
 post_install do |installer|
   # we don't want to link static lib to the icucore dylib or it will fail to build
