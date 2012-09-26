@@ -1,3 +1,16 @@
+# 1.4 - October 2012
+
+* This will be the final release to support iOS4.
+* Support for ARMV6 has been removed.
+* An authentication error delegate message will be called if your auth server does not return an NSDictionary. (#40)
+* Generally improved error handling and notification for private channel authentication.
+* Deprecated -[PTPusher unsubscribeFromChannel] in favour of -[PTPusherChannel unsubscribe]. (#43)
+* Added some utilities to make unit testing against Pusher easier (such as a mock connection class).
+* Reverted subtle change in behaviour introduced in 1.3, where delegate would be notified that the connection was open *before* the handshake event was received, meaning the socket ID would no longer be available at this point. (#47)
+* Allow all bindings to be removed from the client/channel with a single method call. (#28)
+* Fixed numerous bugs around SocketRocket callbacks and integration.
+* Fixed various memory management issues.
+
 # 1.3 - April 2012
 
 * Switched to using NSJSONSerialization by default for JSON parsing ([see JSON notes](https://github.com/lukeredpath/libPusher/wiki/Adding-libPusher-to-your-project)).
