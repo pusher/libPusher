@@ -49,6 +49,7 @@ extern NSString *const PTPusherChannelKey;
 @end
 
 typedef enum {
+  PTPusherErrorUnknown = -1,
   PTPusherErrorSSLRequired = 4000,
   PTPusherErrorApplicationUnknown = 4001,
   PTPusherErrorApplicationDisabled = 4002

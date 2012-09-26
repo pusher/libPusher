@@ -70,7 +70,12 @@ NSString *const PTPusherChannelKey = @"channel";
 
 - (NSInteger)code
 {
-  return [[self.data objectForKey:@"code"] integerValue];
+  id eventCode = [self.data objectForKey:@"code"];
+
+  if (eventCode == nil || eventCode == [NSNull null]) {
+    return PTPusherErrorUnknown;
+  }
+  return [eventCode integerValue];
 }
 
 - (NSString *)description
