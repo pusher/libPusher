@@ -17,7 +17,6 @@
 		A37E161314E4C95C00DCA3A6 /* base64.h in Headers */ = {isa = PBXBuildFile; fileRef = A37E160C14E4C95B00DCA3A6 /* base64.h */; };
 		A37E161414E4C95C00DCA3A6 /* NSData+SRB64Additions.h in Headers */ = {isa = PBXBuildFile; fileRef = A37E160D14E4C95B00DCA3A6 /* NSData+SRB64Additions.h */; };
 		A37E161514E4C95C00DCA3A6 /* NSData+SRB64Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = A37E160E14E4C95C00DCA3A6 /* NSData+SRB64Additions.m */; };
-		A37E161614E4C95C00DCA3A6 /* SocketRocket-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = A37E160F14E4C95C00DCA3A6 /* SocketRocket-Prefix.pch */; };
 		A37E161714E4C95C00DCA3A6 /* SRWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A37E161014E4C95C00DCA3A6 /* SRWebSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A37E161814E4C95C00DCA3A6 /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A37E161114E4C95C00DCA3A6 /* SRWebSocket.m */; };
 		A37E161C14E4C9CC00DCA3A6 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A37E161B14E4C9CC00DCA3A6 /* Security.framework */; };
@@ -75,7 +74,6 @@
 		A37E160C14E4C95B00DCA3A6 /* base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = base64.h; path = ../../Pods/SocketRocket/SocketRocket/base64.h; sourceTree = "<group>"; };
 		A37E160D14E4C95B00DCA3A6 /* NSData+SRB64Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+SRB64Additions.h"; path = "../../Pods/SocketRocket/SocketRocket/NSData+SRB64Additions.h"; sourceTree = "<group>"; };
 		A37E160E14E4C95C00DCA3A6 /* NSData+SRB64Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+SRB64Additions.m"; path = "../../Pods/SocketRocket/SocketRocket/NSData+SRB64Additions.m"; sourceTree = "<group>"; };
-		A37E160F14E4C95C00DCA3A6 /* SocketRocket-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SocketRocket-Prefix.pch"; path = "../../Pods/SocketRocket/SocketRocket/SocketRocket-Prefix.pch"; sourceTree = "<group>"; };
 		A37E161014E4C95C00DCA3A6 /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SRWebSocket.h; path = ../../Pods/SocketRocket/SocketRocket/SRWebSocket.h; sourceTree = "<group>"; };
 		A37E161114E4C95C00DCA3A6 /* SRWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SRWebSocket.m; path = ../../Pods/SocketRocket/SocketRocket/SRWebSocket.m; sourceTree = "<group>"; };
 		A37E161B14E4C9CC00DCA3A6 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -200,7 +198,6 @@
 				A37E160C14E4C95B00DCA3A6 /* base64.h */,
 				A37E160D14E4C95B00DCA3A6 /* NSData+SRB64Additions.h */,
 				A37E160E14E4C95C00DCA3A6 /* NSData+SRB64Additions.m */,
-				A37E160F14E4C95C00DCA3A6 /* SocketRocket-Prefix.pch */,
 				A37E161014E4C95C00DCA3A6 /* SRWebSocket.h */,
 				A37E161114E4C95C00DCA3A6 /* SRWebSocket.m */,
 				A3CA676D14DBCB94003E2F1E /* NSDictionary+QueryString.h */,
@@ -307,7 +304,6 @@
 				A3CA67A914DBCB95003E2F1E /* PTURLRequestOperation.h in Headers */,
 				A37E161314E4C95C00DCA3A6 /* base64.h in Headers */,
 				A37E161414E4C95C00DCA3A6 /* NSData+SRB64Additions.h in Headers */,
-				A37E161614E4C95C00DCA3A6 /* SocketRocket-Prefix.pch in Headers */,
 				A37E161714E4C95C00DCA3A6 /* SRWebSocket.h in Headers */,
 				A37E168214E5736300DCA3A6 /* PTPusherMacros.h in Headers */,
 				A3382DFA1525D0AF0025550D /* JSONKit.h in Headers */,

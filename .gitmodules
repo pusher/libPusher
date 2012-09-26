@@ -1,0 +1,3 @@
+[submodule "Pods/SocketRocket"]
+	path = Pods/SocketRocket
+	url = git://github.com/square/SocketRocket.git
