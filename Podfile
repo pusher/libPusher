@@ -1,7 +1,7 @@
 platform :ios, :deployment_target => '4.0'
 
 pod 'Reachability'
-pod 'SocketRocket', '0.2'
+pod 'SocketRocket', :head
 
 post_install do |installer|
   # we don't want to link static lib to the icucore dylib or it will fail to build
@@ -17,5 +17,5 @@ end
 target :specs, :exclusive => true do
   link_with ['Functional Specs', 'UnitTests']
   
-  pod 'Kiwi', git: "git://github.com/allending/Kiwi.git", :download_only => true
+  pod 'Kiwi', git: "git://github.com/allending/Kiwi.git", download_only: true
 end
