@@ -24,7 +24,7 @@ describe(@"PTPusherChannelAuthorizationOperation", ^{
       [OHHTTPStubs addRequestHandler:^OHHTTPStubsResponse *(NSURLRequest *request, BOOL onlyCheck) {
         return [OHHTTPStubsResponse responseWithData:[NSJSONSerialization dataWithJSONObject:@{@"channel": @"test-channel"} options:0 error:nil]
                                           statusCode:200
-                                        responseTime:OHHTTPStubsDownloadSpeedWifi
+                                        responseTime:0
                                              headers:nil];
       }];
       
@@ -61,7 +61,7 @@ describe(@"PTPusherChannelAuthorizationOperation", ^{
       [OHHTTPStubs addRequestHandler:^OHHTTPStubsResponse *(NSURLRequest *request, BOOL onlyCheck) {
         return [OHHTTPStubsResponse responseWithData:nil
                                           statusCode:400
-                                        responseTime:OHHTTPStubsDownloadSpeedWifi
+                                        responseTime:0
                                              headers:nil];
       }];
       
@@ -98,7 +98,48 @@ describe(@"PTPusherChannelAuthorizationOperation", ^{
       [OHHTTPStubs addRequestHandler:^OHHTTPStubsResponse *(NSURLRequest *request, BOOL onlyCheck) {
         return [OHHTTPStubsResponse responseWithData:nil
                                           statusCode:200
-                                        responseTime:OHHTTPStubsDownloadSpeedWifi
+                                        responseTime:0
+                                             headers:nil];
+      }];
+      
+      theOperation = [PTPusherChannelAuthorizationOperation operationWithAuthorizationURL:authURL channelName:@"test-channel" socketID:@"test-socket"];
+      theOperation.completionHandler = ^(PTPusherChannelAuthorizationOperation *operation) {
+        completionHandlerWasCalled = YES;
+      };
+      
+      [[NSOperationQueue mainQueue] addOperation:theOperation];
+      
+      [[theReturnValueOfBlock(^{ return @(theOperation.isFinished); }) shouldEventually] beTrue];
+    });
+    
+    it(@"has no authorization data", ^{
+	    [[theReturnValueOfBlock(^{ return theOperation.authorizationData; }) should] beNil];
+    });
+    
+    it(@"is flagged as not authorized", ^{
+	    [[@(theOperation.isAuthorized) should] beFalse];
+    });
+    
+    it(@"has a PTPusherChannelAuthorizationBadResponseError error", ^{
+	    [[@(theOperation.error.code) should] equal:@(PTPusherChannelAuthorizationBadResponseError)];
+    });
+    
+    it(@"calls the completion handler", ^{
+	    [[@(completionHandlerWasCalled) should] beTrue];
+    });
+  });
+  
+  context(@"when a successful response is returned from the server with malformed JSON data", ^{
+    __block PTPusherChannelAuthorizationOperation *theOperation;
+    __block BOOL completionHandlerWasCalled = NO;
+    
+    beforeEach(^{
+      NSURL *authURL = [NSURL URLWithString:@"http://example.com/authorize"];
+      
+      [OHHTTPStubs addRequestHandler:^OHHTTPStubsResponse *(NSURLRequest *request, BOOL onlyCheck) {
+        return [OHHTTPStubsResponse responseWithData:[@"{malformed json" dataUsingEncoding:NSUTF8StringEncoding]
+                                          statusCode:200
+                                        responseTime:0
                                              headers:nil];
       }];
       
