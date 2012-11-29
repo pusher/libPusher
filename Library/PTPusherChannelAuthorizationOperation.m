@@ -57,15 +57,20 @@
 
 - (void)finish
 {
+  if (self.isCancelled) {
+    [super finish];
+    return;
+  }
+  
   if (self.connectionError) {
     self.error = [NSError errorWithDomain:PTPusherErrorDomain code:PTPusherChannelAuthorizationConnectionError userInfo:[NSDictionary dictionaryWithObject:self.connectionError forKey:NSUnderlyingErrorKey]];
   }
-  
-  if (!self.isCancelled) { // don't do anything if cancelled
+  else {
     authorized = YES;
-    if ([URLResponse isKindOfClass:[NSHTTPURLResponse class]]){
+    
+    if ([URLResponse isKindOfClass:[NSHTTPURLResponse class]]) {
       authorized = ([(NSHTTPURLResponse *)URLResponse statusCode] == 200 || [(NSHTTPURLResponse *)URLResponse statusCode] == 201);
-	}
+    }
     
     if (authorized) {
       authorizationData = [[PTJSON JSONParser] objectFromJSONData:responseData];
@@ -85,11 +90,11 @@
         authorized = NO;
       }
     }
+  }
     
-    if (self.completionHandler) {
-      self.completionHandler(self);
-    }
-  }; 
+  if (self.completionHandler) {
+    self.completionHandler(self);
+  }
   
   [super finish];
 }
