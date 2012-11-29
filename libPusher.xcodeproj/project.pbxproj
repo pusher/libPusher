@@ -12,7 +12,7 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		6D926C9364F64493B0A7BE5A /* libPods-specs.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 34CD0B6EB8B94D28B0AEC265 /* libPods-specs.a */; };
-		A304895F1667A8A6009511CB /* PTPusherChannelAuthorizationOperationSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = A304895E1667A8A6009511CB /* PTPusherChannelAuthorizationOperationSpec.m */; };
+		A304896C1667AAB4009511CB /* PTPusherChannelAuthorizationOperationSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = A304895E1667A8A6009511CB /* PTPusherChannelAuthorizationOperationSpec.m */; };
 		A30575D115233CC800DA19BD /* PTPusherPresenceChannelSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = A30575CE15233C1200DA19BD /* PTPusherPresenceChannelSpec.m */; };
 		A314A2B514EFFF0400918BEA /* PTPusherConnectionMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = A314A2B414EFFF0400918BEA /* PTPusherConnectionMonitor.m */; };
 		A317375B155D2D7D007E4BBA /* PTPusherMockConnectionSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = A3173754155D2CDF007E4BBA /* PTPusherMockConnectionSpec.m */; };
@@ -829,7 +829,6 @@
 				A3698FFF13FF200C005CF130 /* NSData+Base64.m in Sources */,
 				A37E15EA14E4BBBA00DCA3A6 /* PusherExampleMenuViewController.m in Sources */,
 				A314A2B514EFFF0400918BEA /* PTPusherConnectionMonitor.m in Sources */,
-				A304895F1667A8A6009511CB /* PTPusherChannelAuthorizationOperationSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -842,6 +841,7 @@
 				A366E53A14FD88B3002F0C39 /* SpecHelper.m in Sources */,
 				A30575D115233CC800DA19BD /* PTPusherPresenceChannelSpec.m in Sources */,
 				A317375B155D2D7D007E4BBA /* PTPusherMockConnectionSpec.m in Sources */,
+				A304896C1667AAB4009511CB /* PTPusherChannelAuthorizationOperationSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
