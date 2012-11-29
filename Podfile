@@ -18,4 +18,5 @@ target :specs, :exclusive => true do
   link_with ['Functional Specs', 'UnitTests']
   
   pod 'Kiwi', git: "git://github.com/allending/Kiwi.git", download_only: true
+  pod 'OHHTTPStubs'
 end

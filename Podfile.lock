@@ -1,9 +1,25 @@
+
 PODS:
-  - Kiwi (1.1.0)
-  - Reachability (3.0.0)
-  - SocketRocket (0.2.0)
+- Kiwi (1.1.0)
+- OHHTTPStubs (1.0.1)
+- Reachability (3.0.0)
+- SocketRocket (HEAD based on 0.2.0)
 
 DEPENDENCIES:
-  - Kiwi (from `git://github.com/allending/Kiwi.git')
-  - Reachability
-  - SocketRocket (= 0.2)
+- Kiwi (from `git://github.com/allending/Kiwi.git')
+- OHHTTPStubs
+- Reachability
+- SocketRocket (HEAD)
+
+EXTERNAL SOURCES:
+  Kiwi:
+    :git: git://github.com/allending/Kiwi.git
+    :download_only: true
+
+SPEC CHECKSUMS:
+  Reachability: 500bd76bf6cd8ff2c6fb715fc5f44ef6e4c024f2
+  SocketRocket: a0529878e3c4c200196fa3a7e2ac1ef34aa33ffe
+  Kiwi: 4a3f2e71a7d6509d013341dff10ac4d50fec19ad
+  OHHTTPStubs: 25b40f0c39ce8dab25b3fc4b52d630e7a665f3fb
+
+COCOAPODS: 0.16.0
