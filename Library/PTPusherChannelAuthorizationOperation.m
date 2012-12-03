@@ -73,8 +73,11 @@
     }
     
     if (authorized) {
-      authorizationData = [[PTJSON JSONParser] objectFromJSONData:responseData];
-      
+      authorizationData = nil;
+      if (responseData != nil) {
+        authorizationData = [[PTJSON JSONParser] objectFromJSONData:responseData];
+      }
+            
       if (![authorizationData isKindOfClass:[NSDictionary class]]) {
         NSDictionary *userInfo = nil;
         
