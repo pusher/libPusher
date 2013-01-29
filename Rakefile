@@ -125,7 +125,7 @@ def upload_package_to_github(file)
   uploader = Github::Downloads.connect(GITHUB_USER, password, GITHUB_REPO)
   
   begin
-    uploader.create(file, "Built from #{current_git_commit_sha} at #{Time.now.strftime("%d/%m/%Y")}", overwrite: true)
+    uploader.create(file, "Built from #{current_git_commit_sha} at #{Time.now.strftime("%d/%m/%Y")}", :overwrite => true)
   rescue Github::Downloads::UnexpectedResponse => e
     puts "Unexpected response #{e}"
     puts "Error: #{e.error_message}"
@@ -141,7 +141,7 @@ namespace :release do
     t.sdk = "iphoneos"
     t.formatter = XcodeBuild::Formatters::ProgressFormatter.new
     t.arch = "'armv7 armv7s'"
-    t.after_build { |build| copy_artefacts_from_build(build, include_headers: true) }
+    t.after_build { |build| copy_artefacts_from_build(build, :include_headers => true) }
     t.xcodebuild_log_path = XCODEBUILD_LOG
   end
   
@@ -219,3 +219,22 @@ namespace :release do
   desc "Build, package and release iOS and OSX distribution"
   task :stable => [:stable_ios, :stable_osx]
 end
+
+namespace :test do
+  XcodeBuild::Tasks::BuildTask.new do |t|
+    t.workspace = "libPusher.xcworkspace"
+    t.scheme = "UnitTests"
+    t.configuration = "Debug"
+    t.sdk = "iphonesimulator"
+    t.arch = "i386"
+    t.formatter = XcodeBuild::Formatters::ProgressFormatter.new
+    t.xcodebuild_log_path = XCODEBUILD_LOG
+  end
+
+  desc "Run unit tests"
+  task :run => 'xcode:build' do
+    sh "bundle exec ios-sim-test logic --workspace=libPusher.xcworkspace --scheme=UnitTests"
+  end
+end
+
+task :test => 'test:run'
