@@ -86,7 +86,21 @@
  By implementing this delegate method, you will be able to set any credentials as necessary by
  modifying the request as required (such as setting POST parameters or headers).
  */
-- (void)pusher:(PTPusher *)pusher willAuthorizeChannelWithRequest:(NSMutableURLRequest *)request;
+- (void)pusher:(PTPusher *)pusher willAuthorizeChannelWithRequest:(NSMutableURLRequest *)request __PUSHER_DEPRECATED__;
+
+/** Notifies the delegate of the request that will be used to authorize access to a channel.
+ 
+ When using the Pusher Javascript client, authorization typically relies on an existing session cookie
+ on the server; when the Javascript client makes an AJAX POST to the server, the server can return
+ the user's credentials based on their current session.
+ 
+ When using libPusher, there will likely be no existing server-side session; authorization will
+ need to happen by some other means (e.g. an authorization token or HTTP basic auth).
+ 
+ By implementing this delegate method, you will be able to set any credentials as necessary by
+ modifying the request as required (such as setting POST parameters or headers).
+ */
+- (void)pusher:(PTPusher *)pusher willAuthorizeChannel:(PTPusherChannel *)channel withRequest:(NSMutableURLRequest *)request;
 
 /** Notifies the delegate that the PTPusher instance has subscribed to the specified channel.
  
