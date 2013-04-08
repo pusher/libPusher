@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D8159811712C6ED0013A485 /* libPusher.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D8159801712C6ED0013A485 /* libPusher.h */; };
 		A3382DFA1525D0AF0025550D /* JSONKit.h in Headers */ = {isa = PBXBuildFile; fileRef = A3382DF91525D0AB0025550D /* JSONKit.h */; };
 		A3382DFE1525D0C90025550D /* PTJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = A3382DFB1525D0C90025550D /* PTJSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3382DFF1525D0C90025550D /* PTJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = A3382DFC1525D0C90025550D /* PTJSON.m */; };
@@ -65,6 +66,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4D8159801712C6ED0013A485 /* libPusher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = libPusher.h; path = ../../Library/libPusher.h; sourceTree = "<group>"; };
 		A3382DF91525D0AB0025550D /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JSONKit.h; path = ../../Library/JSONKit.h; sourceTree = "<group>"; };
 		A3382DFB1525D0C90025550D /* PTJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PTJSON.h; path = ../../Library/PTJSON.h; sourceTree = "<group>"; };
 		A3382DFC1525D0C90025550D /* PTJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PTJSON.m; path = ../../Library/PTJSON.m; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 		A3CA675E14DBCB2D003E2F1E /* libPusher-OSX */ = {
 			isa = PBXGroup;
 			children = (
+				4D8159801712C6ED0013A485 /* libPusher.h */,
 				A373A2811562D3B000BFAECE /* PTPusher+Testing.h */,
 				A373A2821562D3B000BFAECE /* PTPusher+Testing.m */,
 				A3382DFB1525D0C90025550D /* PTJSON.h */,
@@ -314,6 +317,7 @@
 				A3382DFE1525D0C90025550D /* PTJSON.h in Headers */,
 				A3382E001525D0C90025550D /* PTJSONParser.h in Headers */,
 				A373A2831562D3B000BFAECE /* PTPusher+Testing.h in Headers */,
+				4D8159811712C6ED0013A485 /* libPusher.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
