@@ -74,7 +74,7 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
     self.connection = connection;
     self.connection.delegate = self;
     
-    self.reconnectAutomatically = NO;
+    self.reconnectAutomatically = YES;
     self.reconnectDelay = kPTPusherDefaultReconnectDelay;
     
     if (connectAutomatically) {
