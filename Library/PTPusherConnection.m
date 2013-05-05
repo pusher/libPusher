@@ -61,6 +61,8 @@ NSString *const PTPusherConnectionPingEvent        = @"pusher:ping";
 {
   if (self.state > PTPusherConnectionClosed)
     return;
+    
+  [self.delegate pusherConnectionWillConnect:self];
   
   socket = [[SRWebSocket alloc] initWithURLRequest:request];
   socket.delegate = self;
