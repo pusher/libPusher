@@ -14,7 +14,7 @@
 @class PTPusherEvent;
 
 @protocol PTPusherConnectionDelegate <NSObject>
-- (void)pusherConnectionWillConnect:(PTPusherConnection *)connection;
+- (BOOL)pusherConnectionWillConnect:(PTPusherConnection *)connection;
 - (void)pusherConnectionDidConnect:(PTPusherConnection *)connection;
 - (void)pusherConnection:(PTPusherConnection *)connection didDisconnectWithCode:(NSInteger)errorCode reason:(NSString *)reason wasClean:(BOOL)wasClean;
 - (void)pusherConnection:(PTPusherConnection *)connection didFailWithError:(NSError *)error wasConnected:(BOOL)wasConnected;

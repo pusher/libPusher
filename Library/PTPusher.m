@@ -37,9 +37,6 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 
 @interface PTPusher ()
 @property (nonatomic, strong, readwrite) PTPusherConnection *connection;
-
-- (void)subscribeToChannel:(PTPusherChannel *)channel;
-- (void)reconnectAfterDelay;
 @end
 
 @interface PTPusherChannel ()
@@ -73,8 +70,6 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
     
     self.connection = connection;
     self.connection.delegate = self;
-    
-    self.reconnectAutomatically = NO;
     self.reconnectDelay = kPTPusherDefaultReconnectDelay;
     
     if (connectAutomatically) {
@@ -261,11 +256,12 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 
 #pragma mark - PTPusherConnection delegate methods
 
-- (void)pusherConnectionWillConnect:(PTPusherConnection *)connection
+- (BOOL)pusherConnectionWillConnect:(PTPusherConnection *)connection
 {
-    if ([self.delegate respondsToSelector:@selector(pusher:connectionWillConnect:)]) {
-        [self.delegate pusher:self connectionWillConnect:connection];
-    }
+  if ([self.delegate respondsToSelector:@selector(pusher:connectionWillConnect:)]) {
+    return [self.delegate pusher:self connectionWillConnect:connection];
+  }
+  return YES;
 }
 
 - (void)pusherConnectionDidConnect:(PTPusherConnection *)connection
@@ -281,53 +277,41 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 
 - (void)pusherConnection:(PTPusherConnection *)connection didDisconnectWithCode:(NSInteger)errorCode reason:(NSString *)reason wasClean:(BOOL)wasClean
 {
-    NSError *error = nil;
-    
-    if (errorCode > 0) {
-        if (reason == nil) {
-            reason = @"Unknown error"; // not sure what could cause this to be nil, but just playing it safe
-        }
-        
-        // check for error codes based on the Pusher Websocket protocol
-        // see http://pusher.com/docs/pusher_protocol
-        error = [NSError errorWithDomain:PTPusherErrorDomain code:errorCode userInfo:[NSDictionary dictionaryWithObject:reason forKey:@"reason"]];
-        
-        // 4000-4099 -> The connection SHOULD NOT be re-established unchanged.
-        if (errorCode >= 4000 && errorCode <= 4099) {
-            // do not reconnect
-            [self handleDisconnection:connection error:error reconnectAfterDelay:NO];
-        }
-        
-        // 4200-4299 -> The connection SHOULD be re-established immediately.
-        else if(errorCode >= 4200 && errorCode <= 4299) {
-            // connect immediately
-            [self handleDisconnection:connection error:error reconnectAfterDelay:NO];
-            if (self.reconnectAutomatically) {
-                [_connection connect];
-            }
-        }
-        
-        else {
-            // handle all other error codes
-            // i.e. 4100-4199 -> The connection SHOULD be re-established after backing off.
-            [self handleDisconnection:connection error:error reconnectAfterDelay:YES];
-        }
-    } else {
-        // handle default
-        [self handleDisconnection:connection error:error reconnectAfterDelay:YES];
+  NSError *error = nil;
+  
+  if (errorCode > 0) {
+    if (reason == nil) {
+        reason = @"Unknown error"; // not sure what could cause this to be nil, but just playing it safe
     }
+    
+    // check for error codes based on the Pusher Websocket protocol see http://pusher.com/docs/pusher_protocol
+    error = [NSError errorWithDomain:PTPusherErrorDomain code:errorCode userInfo:[NSDictionary dictionaryWithObject:reason forKey:@"reason"]];
+    
+    // 4000-4099 -> The connection SHOULD NOT be re-established unchanged.
+    if (errorCode >= 4000 && errorCode <= 4099) {
+      [self handleDisconnection:connection error:error willReconnect:NO];
+    } else
+    // 4200-4299 -> The connection SHOULD be re-established immediately.
+    if(errorCode >= 4200 && errorCode <= 4299) {
+      [self handleDisconnection:connection error:error willReconnect:YES];
+      [self reconnectAfterDelay:0];
+    }
+    
+    else {
+      // i.e. 4100-4199 -> The connection SHOULD be re-established after backing off.
+      [self handleDisconnection:connection error:error willReconnect:YES];
+      [self reconnectAfterDelay:self.reconnectDelay];
+    }
+  }
+  else {
+    [self handleDisconnection:connection error:error willReconnect:NO];
+  }
 }
 
 - (void)pusherConnection:(PTPusherConnection *)connection didFailWithError:(NSError *)error wasConnected:(BOOL)wasConnected
 {
   if ([self.delegate respondsToSelector:@selector(pusher:connection:failedWithError:)]) {
     [self.delegate pusher:self connection:connection failedWithError:error];
-  }
-  if (wasConnected) {
-    [self handleDisconnection:connection error:error reconnectAfterDelay:YES];
-  }
-  else if(self.shouldReconnectAutomatically) {
-    [self reconnectAfterDelay];
   }
 }
 
@@ -345,29 +329,28 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
   [dispatcher dispatchEvent:event];
   
   [[NSNotificationCenter defaultCenter] 
-   postNotificationName:PTPusherEventReceivedNotification 
-   object:self 
-   userInfo:[NSDictionary dictionaryWithObject:event forKey:PTPusherEventUserInfoKey]];
+     postNotificationName:PTPusherEventReceivedNotification
+     object:self 
+     userInfo:[NSDictionary dictionaryWithObject:event forKey:PTPusherEventUserInfoKey]];
 }
 
-- (void)handleDisconnection:(PTPusherConnection *)connection error:(NSError *)error reconnectAfterDelay:(BOOL)reconnect
+- (void)handleDisconnection:(PTPusherConnection *)connection error:(NSError *)error willReconnect:(BOOL)willReconnect
 {
   [authorizationQueue cancelAllOperations];
   
   for (PTPusherChannel *channel in [channels allValues]) {
     [channel markAsUnsubscribed];
   }
-    
+  
   if ([self.delegate respondsToSelector:@selector(pusher:connectionDidDisconnect:)]) { // deprecated call
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     [self.delegate pusher:self connectionDidDisconnect:connection];
+#pragma clang diagnostic pop
   }
     
   if ([self.delegate respondsToSelector:@selector(pusher:connection:didDisconnectWithError:)]) {
-    [self.delegate pusher:self connection:connection didDisconnectWithError:error];
-  }
-    
-  if(reconnect && self.shouldReconnectAutomatically) {
-    [self reconnectAfterDelay];
+    [self.delegate pusher:self connection:connection didDisconnectWithError:error willAttemptReconnect:willReconnect];
   }
 }
 
@@ -378,17 +361,17 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
   [authorizationQueue addOperation:operation];
 }
 
-- (void)reconnectAfterDelay
+- (void)reconnectAfterDelay:(NSUInteger)delay
 {
-  if ([self.delegate respondsToSelector:@selector(pusher:connectionWillReconnect:afterDelay:)]) {
-    [self.delegate pusher:self connectionWillReconnect:_connection afterDelay:self.reconnectDelay];
+  if ([self.delegate respondsToSelector:@selector(pusher:connectionWillAutomaticallyReconnect:afterDelay:)]) {
+    BOOL shouldProceed = [self.delegate pusher:self connectionWillAutomaticallyReconnect:_connection afterDelay:delay];
+    
+    if (!shouldProceed) return;
   }
   
-  dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, self.reconnectDelay * NSEC_PER_SEC);
+  dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delay * NSEC_PER_SEC);
   dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-    if (self.reconnectAutomatically) { // check this hasn't been changed since we queued this block
-      [_connection connect];
-    }
+    [_connection connect];
   });
 }
 

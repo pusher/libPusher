@@ -63,6 +63,13 @@ extern NSString *const PTPusherErrorUnderlyingEventKey;
  libPusher uses standard Cocoa and Objective-C patterns such as delegation and notification where
  it makes sense to do so.
  
+ PTPusher will attempt to try and remain connected whenever possible. If the connection disconnects,
+ then depending on the error code returned, it will either try to reconnect immediately, reconnect after
+ a configured delay or not reconnect at all.
+ 
+ If the connection fails to connect for some reason, PTPusher will notify its delegate without trying
+ to reconnect - it is up to you to evaluate the error and decide whether or not to reconnect.
+ 
  Note: due to various problems people have had connecting to Pusher without SSL over a 3G connection,
  it is highly recommend that you use SSL. For this reason, SSL is enabled by default.
  */
@@ -82,16 +89,16 @@ extern NSString *const PTPusherErrorUnderlyingEventKey;
 @property (nonatomic, unsafe_unretained) id<PTPusherDelegate> delegate;
 
 
-/** Indicates whether the client should attempt to reconnect automatically when disconnected
- or if the connection failed.
- 
- When YES, the client will automatically attempt to re-establish a connection after a set delay.
- 
- If the reconnection attempt fails, the client will continue to attempt to reconnect until this
- property is set to NO. The delegate will be notified of each reconnection attempt; you could use
- this method to disable reconnection after a number of attempts.
+/** This property is deprecated and will be ignored.
+ *
+ * The client will always attempt to reconnect when it disconnects as long as the error 
+ * code it disconnected with permits automatic reconnection (see the Pusher protocol documentation
+ * for an overview of error codes: http://pusher.com/docs/pusher_protocol).
+ *
+ * If you want to prevent the client from automatically reconnecting, you can do so by returning
+ * NO from the delegate method pusher:connectionWillConnect:.
  */
-@property (nonatomic, assign, getter=shouldReconnectAutomatically) BOOL reconnectAutomatically;
+@property (nonatomic, assign, getter=shouldReconnectAutomatically) BOOL reconnectAutomatically __PUSHER_DEPRECATED__;
 
 /** Specifies the delay between reconnection attempts. Defaults to 5 seconds.
  */
