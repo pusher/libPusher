@@ -354,7 +354,7 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 #pragma clang diagnostic pop
   }
     
-  if ([self.delegate respondsToSelector:@selector(pusher:connection:didDisconnectWithError:)]) {
+  if ([self.delegate respondsToSelector:@selector(pusher:connection:didDisconnectWithError:willAttemptReconnect:)]) {
     [self.delegate pusher:self connection:connection didDisconnectWithError:error willAttemptReconnect:willReconnect];
   }
 }
