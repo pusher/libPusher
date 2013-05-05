@@ -25,11 +25,11 @@ extern NSString *const PTPusherConnectionEstablishedEvent;
 extern NSString *const PTPusherConnectionPingEvent;
 
 typedef enum {
-  PTPusherConnectionClosing = 0,
-  PTPusherConnectionClosed,
-  PTPusherConnectionOpening,
-  PTPusherConnectionOpenAwaitingHandshake,
-  PTPusherConnectionOpenHandshakeReceived
+  PTPusherConnectionDisconnecting = 0,
+  PTPusherConnectionDisconnected,
+  PTPusherConnectionConnecting,
+  PTPusherConnectionAwaitingHandshake,
+  PTPusherConnectionConnected
 } PTPusherConnectionState;
 
 @interface PTPusherConnection : NSObject <SRWebSocketDelegate>

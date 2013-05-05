@@ -52,15 +52,14 @@ NSString *const PTPusherConnectionPingEvent        = @"pusher:ping";
 
 - (BOOL)isConnected
 {
-  return (self.state == PTPusherConnectionOpenHandshakeReceived);
+  return (self.state == PTPusherConnectionConnected);
 }
 
 #pragma mark - Connection management
 
 - (void)connect;
 {
-  if (self.state > PTPusherConnectionClosed)
-    return;
+  if (self.state >= PTPusherConnectionConnecting) return;
     
   [self.delegate pusherConnectionWillConnect:self];
   
@@ -69,17 +68,16 @@ NSString *const PTPusherConnectionPingEvent        = @"pusher:ping";
   
   [socket open];
   
-  self.state = PTPusherConnectionOpening;
+  self.state = PTPusherConnectionConnecting;
 }
 
 - (void)disconnect;
 {
-  if (self.state <= PTPusherConnectionClosed)
-    return;
+  if (self.state <= PTPusherConnectionDisconnected) return;
   
   [socket close];
   
-  self.state = PTPusherConnectionClosing;
+  self.state = PTPusherConnectionDisconnecting;
 }
 
 #pragma mark - Sending data
@@ -97,13 +95,13 @@ NSString *const PTPusherConnectionPingEvent        = @"pusher:ping";
 
 - (void)webSocketDidOpen:(SRWebSocket *)webSocket
 {
-  self.state = PTPusherConnectionOpenAwaitingHandshake;
+  self.state = PTPusherConnectionAwaitingHandshake;
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error;
 {
   BOOL wasConnected = self.isConnected;
-  self.state = PTPusherConnectionClosed;
+  self.state = PTPusherConnectionDisconnected;
   [self.delegate pusherConnection:self didFailWithError:error wasConnected:wasConnected];
   self.socketID = nil;
   socket = nil;
@@ -111,7 +109,7 @@ NSString *const PTPusherConnectionPingEvent        = @"pusher:ping";
 
 - (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean
 {
-  self.state = PTPusherConnectionClosed;
+  self.state = PTPusherConnectionDisconnected;
   [self.delegate pusherConnection:self didDisconnectWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean];
   self.socketID = nil;
   socket = nil;
@@ -130,7 +128,7 @@ NSString *const PTPusherConnectionPingEvent        = @"pusher:ping";
   
   if ([event.name isEqualToString:PTPusherConnectionEstablishedEvent]) {
     self.socketID = [event.data objectForKey:@"socket_id"];
-    self.state = PTPusherConnectionOpenHandshakeReceived;
+    self.state = PTPusherConnectionConnected;
     
     [self.delegate pusherConnectionDidConnect:self];
   }
