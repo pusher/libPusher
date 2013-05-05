@@ -22,5 +22,5 @@ typedef enum {
 @property (unsafe_unretained, nonatomic, readonly) NSMutableURLRequest *mutableURLRequest;
 @property (nonatomic, readonly) NSError *error;
 
-+ (id)operationWithAuthorizationURL:(NSURL *)URL channelName:(NSString *)channelName socketID:(NSString *)socketID;
++ (id)operationWithAuthorizationURL:(NSURL *)URL channelName:(NSString *)channelName socketID:(NSString *)socketID userId:(NSString *)userId userInfo:(NSDictionary *)userInfo;
 @end

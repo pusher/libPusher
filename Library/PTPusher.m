@@ -62,6 +62,8 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 @synthesize reconnectAutomatically;
 @synthesize reconnectDelay;
 @synthesize authorizationURL;
+@synthesize userId;
+@synthesize userInfo;
 
 - (id)initWithConnection:(PTPusherConnection *)connection connectAutomatically:(BOOL)connectAutomatically
 {

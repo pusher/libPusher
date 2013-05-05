@@ -33,7 +33,7 @@
   return (NSMutableURLRequest *)URLRequest;
 }
 
-+ (id)operationWithAuthorizationURL:(NSURL *)URL channelName:(NSString *)channelName socketID:(NSString *)socketID
++ (id)operationWithAuthorizationURL:(NSURL *)URL channelName:(NSString *)channelName socketID:(NSString *)socketID userId:(NSString *)userId userInfo:(NSDictionary *)userInfo
 {
   NSAssert(URL, @"URL is required for authorization! (Did you set PTPusher.authorizationURL?)");
   
@@ -50,6 +50,9 @@
   [requestData setObject:socketID forKey:@"socket_id"];
   [requestData setObject:channelName forKey:@"channel_name"];
   
+  if(userId != nil)     [requestData setObject:userId forKey:@"user_id"];
+  if(userInfo != nil)   [requestData setObject:userInfo forKey:@"user_info"];
+    
   [request setHTTPBody:[[requestData sortedQueryString] dataUsingEncoding:NSUTF8StringEncoding]];
   
   return [[self alloc] initWithURLRequest:request];

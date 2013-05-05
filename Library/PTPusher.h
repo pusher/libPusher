@@ -119,6 +119,18 @@ extern NSString *const PTPusherErrorUnderlyingEventKey;
  */
 @property (nonatomic, strong) NSURL *authorizationURL;
 
+/** The userId of the user subscribing to the prescence channel when authenticating
+ 
+ For more information on channel authorization, [see the Pusher documentation website](http://pusher.com/docs/authenticating_users).
+ */
+@property (nonatomic, strong) NSString *userId;
+
+/** The userInfo of the user subscribing to the prescence channel  when authenticating
+ 
+ For more information on channel authorization, [see the Pusher documentation website](http://pusher.com/docs/authenticating_users).
+ */
+@property (nonatomic, strong) NSDictionary *userInfo;
+
 ///------------------------------------------------------------------------------------/
 /// @name Creating new instances
 ///------------------------------------------------------------------------------------/
