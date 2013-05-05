@@ -24,14 +24,9 @@
 
 @implementation PusherEventsAppDelegate
 
-@synthesize window;
-@synthesize navigationController;
-@synthesize menuViewController;
-@synthesize pusherClient;
-
 - (void)applicationDidFinishLaunching:(UIApplication *)application 
 {
-  self.pusherClient = [PTPusher pusherWithKey:PUSHER_API_KEY connectAutomatically:YES encrypted:YES];
+  self.pusherClient = [PTPusher pusherWithKey:PUSHER_API_KEY delegate:self encrypted:YES];
   
   // log all events received, regardless of which channel they come from
   [[NSNotificationCenter defaultCenter]
@@ -40,11 +35,12 @@
               name:PTPusherEventReceivedNotification
             object:self.pusherClient];
   
-  // pass the pusher into the events controller
   self.menuViewController.pusher = self.pusherClient;
+  self.window.rootViewController = self.navigationController;
   
-  [window addSubview:navigationController.view];
-  [window makeKeyAndVisible];
+  [self.window makeKeyAndVisible];
+  
+  [self.pusherClient connect];
 }
 
 #pragma mark - Event notifications
@@ -72,7 +68,31 @@
 
 - (void)pusher:(PTPusher *)pusher connection:(PTPusherConnection *)connection failedWithError:(NSError *)error
 {
-  NSLog(@"[pusher-%@] Pusher Connection failed with error: %@", pusher.connection.socketID, error);
+  NSLog(@"[pusher] Pusher Connection failed with error: %@", error);
+  
+  if ([error.domain isEqualToString:(NSString *)kCFErrorDomainCFNetwork]) {
+    // we probably have no internet connection, so lets check with Reachability
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    
+    if ([reachability isReachable]) {
+      // we appear to have a connection, so something else must have gone wrong
+      NSLog(@"Internet reachable, is Pusher down?");
+    }
+    else {
+      NSLog(@"Waiting for reachability");
+      
+      [reachability setReachableBlock:^(Reachability *reachability) {
+        if ([reachability isReachable]) {
+          NSLog(@"Internet is now reachable");
+          
+          [reachability stopNotifier];
+          [pusher connect];
+        }
+      }];
+      
+      [reachability startNotifier];
+    }
+  }
 }
 
 
