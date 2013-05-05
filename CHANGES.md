@@ -1,3 +1,14 @@
+# 1.5 - May 2013
+
+* Deprecated `reconnectAutomatically`, which is now ignored. Pusher will now try and reconnect automatically whenever possible by default, based on the error code returned by Pusher as defined in the latest Pusher protocol.
+* Generally improved reconnection strategy.
+* Added a global Pusher.h header file to reduce the number of imports needed
+* Added `pusher:connectionWillConnect:` delegate method.
+* Deprecated `pusher:willAuthorizeChannelWithRequest:` delegate method, replaced with pusher:willAuthorizeChannel:withRequest:.
+* Bumped Pusher protocol to version 6.
+* Removed support for iOS4.
+* Switched to latest SocketRocket backend, improved threading issues
+
 # 1.4 - October 2012
 
 * This will be the final release to support iOS4.
