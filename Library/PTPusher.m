@@ -310,8 +310,13 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 
 - (void)pusherConnection:(PTPusherConnection *)connection didFailWithError:(NSError *)error wasConnected:(BOOL)wasConnected
 {
-  if ([self.delegate respondsToSelector:@selector(pusher:connection:failedWithError:)]) {
-    [self.delegate pusher:self connection:connection failedWithError:error];
+  if (wasConnected) {
+    [self handleDisconnection:connection error:error willReconnect:NO];
+  }
+  else {
+    if ([self.delegate respondsToSelector:@selector(pusher:connection:failedWithError:)]) {
+      [self.delegate pusher:self connection:connection failedWithError:error];
+    }
   }
 }
 
