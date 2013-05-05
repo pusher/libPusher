@@ -15,7 +15,6 @@
 		6D926C9364F64493B0A7BE5A /* libPods-specs.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 34CD0B6EB8B94D28B0AEC265 /* libPods-specs.a */; };
 		A304896C1667AAB4009511CB /* PTPusherChannelAuthorizationOperationSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = A304895E1667A8A6009511CB /* PTPusherChannelAuthorizationOperationSpec.m */; };
 		A30575D115233CC800DA19BD /* PTPusherPresenceChannelSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = A30575CE15233C1200DA19BD /* PTPusherPresenceChannelSpec.m */; };
-		A314A2B514EFFF0400918BEA /* PTPusherConnectionMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = A314A2B414EFFF0400918BEA /* PTPusherConnectionMonitor.m */; };
 		A317375B155D2D7D007E4BBA /* PTPusherMockConnectionSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = A3173754155D2CDF007E4BBA /* PTPusherMockConnectionSpec.m */; };
 		A317375C155D2E82007E4BBA /* PTPusherMockConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = A3173759155D2D21007E4BBA /* PTPusherMockConnection.m */; };
 		A317375F155D38C4007E4BBA /* PTPusher+Testing.h in Headers */ = {isa = PBXBuildFile; fileRef = A317375D155D38C4007E4BBA /* PTPusher+Testing.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -139,8 +138,6 @@
 		A309500F1525C236008F695B /* PTJSONParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PTJSONParser.h; sourceTree = "<group>"; };
 		A30950111525C272008F695B /* PTJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTJSON.h; sourceTree = "<group>"; };
 		A30950121525C272008F695B /* PTJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTJSON.m; sourceTree = "<group>"; };
-		A314A2B314EFFF0400918BEA /* PTPusherConnectionMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PTPusherConnectionMonitor.h; path = Sample/PTPusherConnectionMonitor.h; sourceTree = SOURCE_ROOT; };
-		A314A2B414EFFF0400918BEA /* PTPusherConnectionMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PTPusherConnectionMonitor.m; path = Sample/PTPusherConnectionMonitor.m; sourceTree = SOURCE_ROOT; };
 		A31577F714D0731B000136A9 /* Pods-specs.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = "Pods-specs.xcconfig"; path = "Pods/Pods-specs.xcconfig"; sourceTree = "<group>"; };
 		A315780A14D0751C000136A9 /* Pods.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		A3173754155D2CDF007E4BBA /* PTPusherMockConnectionSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTPusherMockConnectionSpec.m; sourceTree = "<group>"; };
@@ -465,8 +462,6 @@
 		A3D1D27C1157FA30009A12AD /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				A314A2B314EFFF0400918BEA /* PTPusherConnectionMonitor.h */,
-				A314A2B414EFFF0400918BEA /* PTPusherConnectionMonitor.m */,
 				A3D1D27D1157FA30009A12AD /* PusherEventsAppDelegate.h */,
 				A3D1D27E1157FA30009A12AD /* PusherEventsAppDelegate.m */,
 				A3D1D27F1157FA30009A12AD /* PusherEventsViewController.h */,
@@ -830,7 +825,6 @@
 				A3698FF213FF0A7A005CF130 /* NSMutableURLRequest+BasicAuth.m in Sources */,
 				A3698FFF13FF200C005CF130 /* NSData+Base64.m in Sources */,
 				A37E15EA14E4BBBA00DCA3A6 /* PusherExampleMenuViewController.m in Sources */,
-				A314A2B514EFFF0400918BEA /* PTPusherConnectionMonitor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

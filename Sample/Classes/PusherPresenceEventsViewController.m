@@ -18,18 +18,12 @@
 #import "PusherEventsAppDelegate.h"
 
 @interface PusherPresenceEventsViewController ()
-- (PusherEventsAppDelegate *)clientManager;
 @end
 
 @implementation PusherPresenceEventsViewController
 
 @synthesize pusher = _pusher;
 @synthesize currentChannel;
-
-- (PusherEventsAppDelegate *)clientManager
-{
-  return (PusherEventsAppDelegate *)[[UIApplication sharedApplication] delegate];
-}
 
 - (void)viewDidLoad 
 {
@@ -68,20 +62,6 @@
 - (void)subscribeToPresenceChannel:(NSString *)channelName
 {
   self.currentChannel = [self.pusher subscribeToPresenceChannelNamed:channelName delegate:self];
-}
-
-#pragma mark - Actions
-
-- (void)connectClient
-{
-  PTPusher *client = [[self clientManager] createClientWithAutomaticConnection:YES];
-  client.authorizationURL = self.pusher.authorizationURL;
-  [client subscribeToPresenceChannelNamed:@"demo"];
-}
-
-- (void)disconnectLastClient
-{
-  [[[self clientManager] lastConnectedClient] disconnect];
 }
 
 #pragma mark - Presence channel events

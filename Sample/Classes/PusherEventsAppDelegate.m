@@ -9,7 +9,6 @@
 #import "PusherEventsAppDelegate.h"
 #import "PusherExampleMenuViewController.h"
 #import "Pusher.h"
-#import "PTPusherConnectionMonitor.h"
 #import "NSMutableURLRequest+BasicAuth.h"
 #import "Reachability.h"
 
@@ -28,36 +27,24 @@
 @synthesize window;
 @synthesize navigationController;
 @synthesize menuViewController;
-@synthesize pusher = _pusher;
-@synthesize connectionMonitor;
+@synthesize pusherClient;
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application 
-{    
-  connectedClients = [[NSMutableArray alloc] init];
-  clientsAwaitingConnection = [[NSMutableArray alloc] init];
-  
-  self.connectionMonitor = [[PTPusherConnectionMonitor alloc] init];
-  
-  // create our primary Pusher client instance
-  self.pusher = [self createClientWithAutomaticConnection:YES];
-  
-  // we want the connection to automatically reconnect if it dies
-  self.pusher.reconnectAutomatically = YES;
+{
+  self.pusherClient = [PTPusher pusherWithKey:PUSHER_API_KEY connectAutomatically:YES encrypted:YES];
   
   // log all events received, regardless of which channel they come from
-  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handlePusherEvent:) name:PTPusherEventReceivedNotification object:self.pusher];
+  [[NSNotificationCenter defaultCenter]
+       addObserver:self
+          selector:@selector(handlePusherEvent:)
+              name:PTPusherEventReceivedNotification
+            object:self.pusherClient];
   
   // pass the pusher into the events controller
-  self.menuViewController.pusher = self.pusher;
+  self.menuViewController.pusher = self.pusherClient;
   
   [window addSubview:navigationController.view];
   [window makeKeyAndVisible];
-}
-
-- (void)dealloc 
-{
-  [[NSNotificationCenter defaultCenter] 
-    removeObserver:self name:PTPusherEventReceivedNotification object:self.pusher];
 }
 
 #pragma mark - Event notifications
@@ -70,44 +57,38 @@
 #endif
 }
 
-#pragma mark - Client management
-
-- (PTPusher *)lastConnectedClient
-{
-  return [connectedClients lastObject];
-}
-
-- (PTPusher *)createClientWithAutomaticConnection:(BOOL)connectAutomatically
-{
-  PTPusher *client = [PTPusher pusherWithKey:PUSHER_API_KEY connectAutomatically:NO encrypted:kUSE_ENCRYPTED_CHANNELS];
-  client.delegate = self;
-  [self.connectionMonitor startMonitoringClient:client];
-  [clientsAwaitingConnection addObject:client];
-  if (connectAutomatically) {
-    [client connect];
-  }
-  return client;
-}
-
 #pragma mark - PTPusherDelegate methods
+
+- (BOOL)pusher:(PTPusher *)pusher connectionWillConnect:(PTPusherConnection *)connection
+{
+  NSLog(@"[pusher] Pusher client connecting...");
+  return YES;
+}
 
 - (void)pusher:(PTPusher *)pusher connectionDidConnect:(PTPusherConnection *)connection
 {
   NSLog(@"[pusher-%@] Pusher client connected", connection.socketID);
-
-  [connectedClients addObject:pusher];
-  [clientsAwaitingConnection removeObject:pusher];
 }
 
 - (void)pusher:(PTPusher *)pusher connection:(PTPusherConnection *)connection failedWithError:(NSError *)error
 {
-  NSLog(@"[pusher-%@] Pusher Connection failed, error: %@", pusher.connection.socketID, error);
-  [clientsAwaitingConnection removeObject:pusher];
+  NSLog(@"[pusher-%@] Pusher Connection failed with error: %@", pusher.connection.socketID, error);
 }
 
-- (void)pusher:(PTPusher *)pusher connectionWillReconnect:(PTPusherConnection *)connection afterDelay:(NSTimeInterval)delay
+
+- (void)pusher:(PTPusher *)pusher connection:(PTPusherConnection *)connection didDisconnectWithError:(NSError *)error willAttemptReconnect:(BOOL)willAttemptReconnect
 {
-  NSLog(@"[pusher-%@] Reconnecting after %d seconds...", pusher.connection.socketID, (int)delay);
+  NSLog(@"[pusher-%@] Pusher Connection disconnected with error: %@", pusher.connection.socketID, error);
+  
+  if (willAttemptReconnect) {
+    NSLog(@"[pusher-%@] Client will attempt to reconnect automatically", pusher.connection.socketID);
+  }
+}
+
+- (BOOL)pusher:(PTPusher *)pusher connectionWillAutomaticallyReconnect:(PTPusherConnection *)connection afterDelay:(NSTimeInterval)delay
+{
+  NSLog(@"[pusher-%@] Client automatically reconnecting after %d seconds...", pusher.connection.socketID, (int)delay);
+  return YES;
 }
 
 - (void)pusher:(PTPusher *)pusher didSubscribeToChannel:(PTPusherChannel *)channel
@@ -121,10 +102,6 @@
   
   UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Authorization Failed" message:[NSString stringWithFormat:@"Client with socket ID %@ could not be authorized to join channel %@", pusher.connection.socketID, channel.name] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
   [alert show];
-  
-  if (pusher != self.pusher) {
-    [pusher disconnect];
-  }
 }
 
 - (void)pusher:(PTPusher *)pusher didReceiveErrorEvent:(PTPusherErrorEvent *)errorEvent

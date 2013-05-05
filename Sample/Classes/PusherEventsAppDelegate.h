@@ -11,19 +11,13 @@
 
 @class PusherExampleMenuViewController;
 @class PTPusher;
-@class PTPusherConnectionMonitor;
 
-@interface PusherEventsAppDelegate : NSObject <UIApplicationDelegate, PTPusherDelegate> {
-  NSMutableArray *connectedClients;
-  NSMutableArray *clientsAwaitingConnection;
-}
+@interface PusherEventsAppDelegate : NSObject <UIApplicationDelegate, PTPusherDelegate>
+
 @property (nonatomic) IBOutlet UIWindow *window;
 @property (nonatomic) IBOutlet UINavigationController *navigationController;
 @property (nonatomic) IBOutlet PusherExampleMenuViewController *menuViewController;
-@property (nonatomic, strong) PTPusher *pusher;
-@property (nonatomic, strong) PTPusherConnectionMonitor *connectionMonitor;
+@property (nonatomic, strong) PTPusher *pusherClient;
 
-- (PTPusher *)lastConnectedClient;
-- (PTPusher *)createClientWithAutomaticConnection:(BOOL)connectAutomatically;
 @end
 
