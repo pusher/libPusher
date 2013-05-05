@@ -14,7 +14,8 @@
 #import "PTTargetActionEventListener.h"
 #import "PTBlockEventListener.h"
 #import "PTPusherErrors.h"
-#import "PTPusherChannelAuthorizationOperation.h"
+#import "PTPusherChannelAuthorization.h"
+#import "PTPusherChannelServerBasedAuthorization.h"
 
 #define kPUSHER_HOST @"ws.pusherapp.com"
 
@@ -54,24 +55,19 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 #pragma mark -
 
 @implementation PTPusher {
-  NSOperationQueue *authorizationQueue;
+  id<PTPusherChannelAuthorization> authorizationStrategy;
 }
 
 @synthesize connection = _connection;
 @synthesize delegate;
 @synthesize reconnectAutomatically;
 @synthesize reconnectDelay;
-@synthesize authorizationURL;
 
 - (id)initWithConnection:(PTPusherConnection *)connection connectAutomatically:(BOOL)connectAutomatically
 {
   if (self = [super init]) {
     dispatcher = [[PTPusherEventDispatcher alloc] init];
     channels = [[NSMutableDictionary alloc] init];
-    
-    authorizationQueue = [[NSOperationQueue alloc] init];
-    authorizationQueue.maxConcurrentOperationCount = 5;
-    authorizationQueue.name = @"com.pusher.libPusher.authorizationQueue";
     
     self.connection = connection;
     self.connection.delegate = self;
@@ -114,6 +110,38 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 {
   [_connection setDelegate:nil];
   [_connection disconnect];
+}
+
+#pragma mark - Authorization strategy
+
+- (void)setAuthorizationURL:(NSURL *)authorizationURL
+{
+  PTPusherChannelServerBasedAuthorization *serverAuthStrategy = [[PTPusherChannelServerBasedAuthorization alloc] initWithAuthorizationURL:authorizationURL];
+  
+  __weak PTPusher *weakSelf = self;
+  
+  // use this to support our current delegate-based API for HTTP authorization
+  [serverAuthStrategy customizeRequestsWithBlock:^(NSMutableURLRequest *request, PTPusherChannel *channel) {
+    __strong PTPusher *strongSelf = weakSelf;
+    
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+    if ([strongSelf.delegate respondsToSelector:@selector(pusher:willAuthorizeChannelWithRequest:)]) { // deprecated call
+      [strongSelf.delegate pusher:strongSelf willAuthorizeChannelWithRequest:request];
+    }
+#pragma clang diagnostic pop
+    
+    if ([strongSelf.delegate respondsToSelector:@selector(pusher:willAuthorizeChannel:withRequest:)]) {
+      [strongSelf.delegate pusher:strongSelf willAuthorizeChannel:channel withRequest:request];
+    }
+  }];
+  
+  authorizationStrategy = serverAuthStrategy;
+}
+
+- (NSURL *)authorizationURL
+{
+  return [(PTPusherChannelServerBasedAuthorization *)authorizationStrategy authorizationURL];
 }
 
 #pragma mark - Connection management
@@ -219,20 +247,25 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 
 - (void)subscribeToChannel:(PTPusherChannel *)channel
 {
-  [channel authorizeWithCompletionHandler:^(BOOL isAuthorized, NSDictionary *authData, NSError *error) {
-    if (isAuthorized && self.connection.isConnected) {
-      [channel subscribeWithAuthorization:authData];
-    }
-    else {
-      if (error == nil) {
-        error = [NSError errorWithDomain:PTPusherErrorDomain code:PTPusherSubscriptionUnknownAuthorisationError userInfo:nil];
+  if (channel.isPrivate) {
+    [authorizationStrategy authorizeChannel:channel socketID:self.connection.socketID completionHandler:^(BOOL isAuthorized, NSDictionary *authData, NSError *error) {
+      if (isAuthorized && self.connection.isConnected) {
+        [channel subscribeWithAuthorization:authData];
       }
-      
-      if ([self.delegate respondsToSelector:@selector(pusher:didFailToSubscribeToChannel:withError:)]) {
-        [self.delegate pusher:self didFailToSubscribeToChannel:channel withError:error];
+      else {
+        if (error == nil) {
+          error = [NSError errorWithDomain:PTPusherErrorDomain code:PTPusherSubscriptionUnknownAuthorisationError userInfo:nil];
+        }
+        
+        if ([self.delegate respondsToSelector:@selector(pusher:didFailToSubscribeToChannel:withError:)]) {
+          [self.delegate pusher:self didFailToSubscribeToChannel:channel withError:error];
+        }
       }
-    }
-  }];
+    }];
+  }
+  else {
+    [channel subscribeWithAuthorization:nil];
+  }
 }
 
 #pragma mark - Sending events
@@ -346,7 +379,9 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 
 - (void)handleDisconnection:(PTPusherConnection *)connection error:(NSError *)error willReconnect:(BOOL)willReconnect
 {
-  [authorizationQueue cancelAllOperations];
+  if ([authorizationStrategy respondsToSelector:@selector(cancelAuthorization)]) {
+    [authorizationStrategy cancelAuthorization];
+  }
   
   for (PTPusherChannel *channel in [channels allValues]) {
     [channel markAsUnsubscribed];
@@ -365,11 +400,6 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 }
 
 #pragma mark - Private
-
-- (void)beginAuthorizationOperation:(PTPusherChannelAuthorizationOperation *)operation
-{
-  [authorizationQueue addOperation:operation];
-}
 
 - (void)reconnectAfterDelay:(NSUInteger)delay
 {

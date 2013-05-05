@@ -72,8 +72,8 @@
 		A3AC28B613F75530001C4808 /* PTURLRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = A3AC28B413F75530001C4808 /* PTURLRequestOperation.h */; };
 		A3AC28B713F75530001C4808 /* PTURLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AC28B513F75530001C4808 /* PTURLRequestOperation.m */; };
 		A3AC28BF13F75BF1001C4808 /* PusherExampleMenuViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = A3AC28BC13F75BF1001C4808 /* PusherExampleMenuViewController.h */; };
-		A3AC28C313F76C51001C4808 /* PTPusherChannelAuthorizationOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = A3AC28C113F76C50001C4808 /* PTPusherChannelAuthorizationOperation.h */; };
-		A3AC28C413F76C51001C4808 /* PTPusherChannelAuthorizationOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AC28C213F76C50001C4808 /* PTPusherChannelAuthorizationOperation.m */; };
+		A3AC28C313F76C51001C4808 /* PTPusherChannelServerBasedAuthorization.h in Headers */ = {isa = PBXBuildFile; fileRef = A3AC28C113F76C50001C4808 /* PTPusherChannelServerBasedAuthorization.h */; };
+		A3AC28C413F76C51001C4808 /* PTPusherChannelServerBasedAuthorization.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AC28C213F76C50001C4808 /* PTPusherChannelServerBasedAuthorization.m */; };
 		A3B2931F14D8D96900C6B79F /* PTPusherPresenceChannelDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = A39E238A13F7E85C0083CAD7 /* PTPusherPresenceChannelDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3B7E4EB1581672A00CDA6DA /* ClientEventsSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = A3B7E4EA1581672A00CDA6DA /* ClientEventsSpec.m */; };
 		A3C32D9B14D083C10017FAED /* PTPusherEventSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C32D9A14D083C10017FAED /* PTPusherEventSpec.m */; };
@@ -180,6 +180,7 @@
 		A3A1A0EB115813E2001EF877 /* UnitTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3A1A111115814D0001EF877 /* OCHamcrest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OCHamcrest.framework; path = Frameworks/OCHamcrest.framework; sourceTree = "<group>"; };
 		A3A1A41611582DC3001EF877 /* PTPusherDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherDelegate.h; sourceTree = "<group>"; };
+		A3A297DF1736EA5700BD956D /* PTPusherChannelAuthorization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PTPusherChannelAuthorization.h; sourceTree = "<group>"; };
 		A3A9F9581496E96100F83617 /* Functional Specs.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Functional Specs.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3A9F9591496E96100F83617 /* SenTestingKit.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		A3A9F95F1496E96100F83617 /* Functional Specs-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Functional Specs-Info.plist"; sourceTree = "<group>"; };
@@ -192,8 +193,8 @@
 		A3AC28B513F75530001C4808 /* PTURLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTURLRequestOperation.m; sourceTree = "<group>"; };
 		A3AC28BC13F75BF1001C4808 /* PusherExampleMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PusherExampleMenuViewController.h; sourceTree = "<group>"; };
 		A3AC28BD13F75BF1001C4808 /* PusherExampleMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PusherExampleMenuViewController.m; sourceTree = "<group>"; };
-		A3AC28C113F76C50001C4808 /* PTPusherChannelAuthorizationOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherChannelAuthorizationOperation.h; sourceTree = "<group>"; };
-		A3AC28C213F76C50001C4808 /* PTPusherChannelAuthorizationOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTPusherChannelAuthorizationOperation.m; sourceTree = "<group>"; };
+		A3AC28C113F76C50001C4808 /* PTPusherChannelServerBasedAuthorization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherChannelServerBasedAuthorization.h; sourceTree = "<group>"; };
+		A3AC28C213F76C50001C4808 /* PTPusherChannelServerBasedAuthorization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTPusherChannelServerBasedAuthorization.m; sourceTree = "<group>"; };
 		A3B7E4EA1581672A00CDA6DA /* ClientEventsSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientEventsSpec.m; sourceTree = "<group>"; };
 		A3C32D9A14D083C10017FAED /* PTPusherEventSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTPusherEventSpec.m; sourceTree = "<group>"; };
 		A3C32D9C14D083D60017FAED /* SpecHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpecHelper.h; sourceTree = "<group>"; };
@@ -296,10 +297,11 @@
 				A35281D413F736DF000687C0 /* PTPusherEventDispatcher.h */,
 				A35281D513F736DF000687C0 /* PTPusherEventDispatcher.m */,
 				A3A1A41611582DC3001EF877 /* PTPusherDelegate.h */,
+				A3A297DF1736EA5700BD956D /* PTPusherChannelAuthorization.h */,
 				A3FE42181181173B009CF5D7 /* PTPusherChannel.h */,
 				A3FE42191181173B009CF5D7 /* PTPusherChannel.m */,
-				A3AC28C113F76C50001C4808 /* PTPusherChannelAuthorizationOperation.h */,
-				A3AC28C213F76C50001C4808 /* PTPusherChannelAuthorizationOperation.m */,
+				A3AC28C113F76C50001C4808 /* PTPusherChannelServerBasedAuthorization.h */,
+				A3AC28C213F76C50001C4808 /* PTPusherChannelServerBasedAuthorization.m */,
 				A35281CE13F721A8000687C0 /* PTPusherConnection.h */,
 				A35281CF13F721A8000687C0 /* PTPusherConnection.m */,
 				A39E238613F7E3FD0083CAD7 /* PTPusherErrors.h */,
@@ -528,7 +530,7 @@
 				A3D1D2C711580162009A12AD /* PTEventListener.h in Headers */,
 				A3AC28B613F75530001C4808 /* PTURLRequestOperation.h in Headers */,
 				A3AC28BF13F75BF1001C4808 /* PusherExampleMenuViewController.h in Headers */,
-				A3AC28C313F76C51001C4808 /* PTPusherChannelAuthorizationOperation.h in Headers */,
+				A3AC28C313F76C51001C4808 /* PTPusherChannelServerBasedAuthorization.h in Headers */,
 				A3B2931F14D8D96900C6B79F /* PTPusherPresenceChannelDelegate.h in Headers */,
 				A3CA666914D96814003E2F1E /* PTPusherChannel.h in Headers */,
 				A3CA670E14DBBAA1003E2F1E /* PTPusherErrors.h in Headers */,
@@ -870,7 +872,7 @@
 				A35281E513F75010000687C0 /* PTBlockEventListener.m in Sources */,
 				A35281EA13F75265000687C0 /* PTPusherAPI.m in Sources */,
 				A3AC28B713F75530001C4808 /* PTURLRequestOperation.m in Sources */,
-				A3AC28C413F76C51001C4808 /* PTPusherChannelAuthorizationOperation.m in Sources */,
+				A3AC28C413F76C51001C4808 /* PTPusherChannelServerBasedAuthorization.m in Sources */,
 				A3382DE31525C3F70025550D /* PTJSON.m in Sources */,
 				A317375C155D2E82007E4BBA /* PTPusherMockConnection.m in Sources */,
 				A3173760155D38C4007E4BBA /* PTPusher+Testing.m in Sources */,
@@ -1112,7 +1114,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-Wno-arc-performSelector-leaks";
 			};
@@ -1130,7 +1132,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-Wno-arc-performSelector-leaks";
 			};

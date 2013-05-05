@@ -12,12 +12,10 @@
 #import "PTPusherEventDispatcher.h"
 #import "PTTargetActionEventListener.h"
 #import "PTBlockEventListener.h"
-#import "PTPusherChannelAuthorizationOperation.h"
 #import "PTPusherErrors.h"
 
 @interface PTPusher ()
 - (void)__unsubscribeFromChannel:(PTPusherChannel *)channel;
-- (void)beginAuthorizationOperation:(PTPusherChannelAuthorizationOperation *)operation;
 @end
 
 @interface PTPusherChannel () 
@@ -110,13 +108,6 @@
     NSError *error = [NSError errorWithDomain:PTPusherErrorDomain code:PTPusherSubscriptionError userInfo:userInfo];
     [pusher.delegate pusher:pusher didFailToSubscribeToChannel:self withError:error];
   }
-}
-
-#pragma mark - Authorization
-
-- (void)authorizeWithCompletionHandler:(void(^)(BOOL, NSDictionary *, NSError *))completionHandler
-{
-  completionHandler(YES, [NSDictionary dictionary], nil); // public channels do not require authorization
 }
 
 #pragma mark - Binding to events
@@ -227,28 +218,6 @@
 - (BOOL)isPrivate
 {
   return YES;
-}
-
-- (void)authorizeWithCompletionHandler:(void(^)(BOOL, NSDictionary *, NSError *))completionHandler
-{
-  PTPusherChannelAuthorizationOperation *authOperation = [PTPusherChannelAuthorizationOperation operationWithAuthorizationURL:pusher.authorizationURL channelName:self.name socketID:pusher.connection.socketID];
-  
-  [authOperation setCompletionHandler:^(PTPusherChannelAuthorizationOperation *operation) {
-    completionHandler(operation.isAuthorized, operation.authorizationData, operation.error);
-  }];
-  
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-  if ([pusher.delegate respondsToSelector:@selector(pusher:willAuthorizeChannelWithRequest:)]) { // deprecated call
-    [pusher.delegate pusher:pusher willAuthorizeChannelWithRequest:authOperation.mutableURLRequest];
-  }
-#pragma clang diagnostic pop
-    
-  if ([pusher.delegate respondsToSelector:@selector(pusher:willAuthorizeChannel:withRequest:)]) {
-    [pusher.delegate pusher:pusher willAuthorizeChannel:self withRequest:authOperation.mutableURLRequest];
-  }
-  
-  [pusher beginAuthorizationOperation:authOperation];
 }
 
 - (void)subscribeWithAuthorization:(NSDictionary *)authData
