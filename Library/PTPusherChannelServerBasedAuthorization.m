@@ -6,10 +6,57 @@
 //  Copyright 2011 LJR Software Limited. All rights reserved.
 //
 
-#import "PTPusherChannelAuthorizationOperation.h"
+#import "PTPusherChannelServerBasedAuthorization.h"
 #import "NSDictionary+QueryString.h"
 #import "PTJSON.h"
+#import "PTPusherChannel.h"
 #import "PTPusher+Testing.h"
+
+@implementation PTPusherChannelServerBasedAuthorization {
+  NSOperationQueue *authorizationQueue;
+  void (^_requestBlock)(NSMutableURLRequest *, PTPusherChannel *);
+}
+
+- (id)initWithAuthorizationURL:(NSURL *)URL
+{
+  if ((self = [super init])) {
+    _authorizationURL = URL;
+    
+    authorizationQueue = [[NSOperationQueue alloc] init];
+    authorizationQueue.maxConcurrentOperationCount = 5;
+    authorizationQueue.name = @"com.pusher.libPusher.authorizationQueue";
+  }
+  return self;
+}
+
+- (void)customizeRequestsWithBlock:(void (^)(NSMutableURLRequest *request, PTPusherChannel *))requestBlock
+{
+  _requestBlock = [requestBlock copy];
+}
+
+- (void)authorizeChannel:(PTPusherChannel *)channel socketID:(NSString *)socketID completionHandler:(void(^)(BOOL, NSDictionary *, NSError *))completionHandler
+{
+  PTPusherChannelAuthorizationOperation *authOperation = [PTPusherChannelAuthorizationOperation operationWithAuthorizationURL:self.authorizationURL channelName:channel.name socketID:socketID];
+  
+  [authOperation setCompletionHandler:^(PTPusherChannelAuthorizationOperation *operation) {
+    completionHandler(operation.isAuthorized, operation.authorizationData, operation.error);
+  }];
+  
+  if (_requestBlock) {
+    _requestBlock(authOperation.mutableURLRequest, channel);
+  }
+  
+  [authorizationQueue addOperation:authOperation];
+}
+
+- (void)cancelAuthorization
+{
+  [authorizationQueue cancelAllOperations];
+}
+
+@end
+
+#pragma mark -
 
 @interface PTPusherChannelAuthorizationBypassOperation : NSOperation
 @property (nonatomic, readwrite) NSError *error;
