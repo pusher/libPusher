@@ -25,6 +25,15 @@ NSString *const PTPusherEventUserInfoKey          = @"PTPusherEventUserInfoKey";
 NSString *const PTPusherErrorDomain               = @"PTPusherErrorDomain";
 NSString *const PTPusherErrorUnderlyingEventKey   = @"PTPusherErrorUnderlyingEventKey";
 
+/** The Pusher protocol version, used to determined which features
+ are supported.
+ */
+#define kPTPusherClientProtocolVersion 5
+
+/** The version number of the libPusher library.
+ */
+#define kPTPusherClientLibraryVersion  1.0
+
 NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, BOOL encrypted)
 {
   NSString *scheme = ((encrypted == YES) ? @"wss" : @"ws");

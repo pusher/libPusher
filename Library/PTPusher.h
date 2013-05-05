@@ -12,15 +12,6 @@
 #import "PTPusherEventPublisher.h"
 #import "PTPusherPresenceChannelDelegate.h"
 
-/** The Pusher protocol version, used to determined which features
- are supported.
- */
-#define kPTPusherClientProtocolVersion 5
-
-/** The version number of the libPusher library.
- */
-#define kPTPusherClientLibraryVersion  1.0
-
 /** The name of the notification posted when PTPusher receives an event.
  */
 extern NSString *const PTPusherEventReceivedNotification;
