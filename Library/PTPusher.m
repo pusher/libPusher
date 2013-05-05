@@ -28,7 +28,7 @@ NSString *const PTPusherErrorUnderlyingEventKey   = @"PTPusherErrorUnderlyingEve
 /** The Pusher protocol version, used to determined which features
  are supported.
  */
-#define kPTPusherClientProtocolVersion 5
+#define kPTPusherClientProtocolVersion 6
 
 /** The version number of the libPusher library.
  */
