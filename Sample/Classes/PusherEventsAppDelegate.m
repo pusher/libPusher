@@ -84,9 +84,11 @@
       [reachability setReachableBlock:^(Reachability *reachability) {
         if ([reachability isReachable]) {
           NSLog(@"Internet is now reachable");
-          
           [reachability stopNotifier];
-          [pusher connect];
+          
+          dispatch_async(dispatch_get_main_queue(), ^{
+            [pusher connect];
+          });
         }
       }];
       
