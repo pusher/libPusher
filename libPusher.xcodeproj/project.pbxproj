@@ -1065,13 +1065,14 @@
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1.4;
+				CURRENT_PROJECT_VERSION = 1.5;
 				DSTROOT = /tmp/xcodeproj.dst;
-				DYLIB_CURRENT_VERSION = 1.4;
+				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = libPusher_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "kPTPusherClientLibraryVersion=@\"$(CURRENT_PROJECT_VERSION)\"";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				PRODUCT_NAME = Pusher;
 				SDKROOT = iphoneos;
@@ -1084,12 +1085,13 @@
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = YES;
-				CURRENT_PROJECT_VERSION = 1.4;
+				CURRENT_PROJECT_VERSION = 1.5;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DSTROOT = /tmp/xcodeproj.dst;
-				DYLIB_CURRENT_VERSION = 1.4;
+				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = libPusher_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "kPTPusherClientLibraryVersion=@\"$(CURRENT_PROJECT_VERSION)\"";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				PRODUCT_NAME = Pusher;
 				SDKROOT = iphoneos;

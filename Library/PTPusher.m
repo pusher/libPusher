@@ -30,14 +30,10 @@ NSString *const PTPusherErrorUnderlyingEventKey   = @"PTPusherErrorUnderlyingEve
  */
 #define kPTPusherClientProtocolVersion 6
 
-/** The version number of the libPusher library.
- */
-#define kPTPusherClientLibraryVersion  1.0
-
 NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, BOOL encrypted)
 {
   NSString *scheme = ((encrypted == YES) ? @"wss" : @"ws");
-  NSString *URLString = [NSString stringWithFormat:@"%@://%@/app/%@?client=%@&protocol=%d&version=%f", 
+  NSString *URLString = [NSString stringWithFormat:@"%@://%@/app/%@?client=%@&protocol=%d&version=%@", 
                          scheme, host, key, clientID, kPTPusherClientProtocolVersion, kPTPusherClientLibraryVersion];
   return [NSURL URLWithString:URLString];
 }
