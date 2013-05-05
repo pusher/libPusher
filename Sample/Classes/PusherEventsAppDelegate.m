@@ -8,9 +8,7 @@
 
 #import "PusherEventsAppDelegate.h"
 #import "PusherExampleMenuViewController.h"
-#import "PTPusher.h"
-#import "PTPusherEvent.h"
-#import "PTPusherChannel.h"
+#import "Pusher.h"
 #import "PTPusherConnectionMonitor.h"
 #import "NSMutableURLRequest+BasicAuth.h"
 #import "Reachability.h"
