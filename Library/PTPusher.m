@@ -261,6 +261,13 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 
 #pragma mark - PTPusherConnection delegate methods
 
+- (void)pusherConnectionWillConnect:(PTPusherConnection *)connection
+{
+    if ([self.delegate respondsToSelector:@selector(pusher:connectionWillConnect:)]) {
+        [self.delegate pusher:self connectionWillConnect:connection];
+    }
+}
+
 - (void)pusherConnectionDidConnect:(PTPusherConnection *)connection
 {
   if ([self.delegate respondsToSelector:@selector(pusher:connectionDidConnect:)]) {

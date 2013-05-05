@@ -25,6 +25,13 @@
 
 @optional
 
+/** Notifies the delegate that the PTPusher instance is about to connect to the Pusher service.
+ 
+ @param pusher The PTPusher instance that is connecting.
+ @param connection The connection for the pusher instance.
+ */
+- (void)pusher:(PTPusher *)pusher connectionWillConnect:(PTPusherConnection *)connection;
+
 /** Notifies the delegate that the PTPusher instance has connected to the Pusher service successfully.
  
  @param pusher The PTPusher instance that has connected.
