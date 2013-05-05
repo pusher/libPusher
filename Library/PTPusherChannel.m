@@ -237,8 +237,12 @@
     completionHandler(operation.isAuthorized, operation.authorizationData, operation.error);
   }];
   
-  if ([pusher.delegate respondsToSelector:@selector(pusher:willAuthorizeChannelWithRequest:)]) {
+  if ([pusher.delegate respondsToSelector:@selector(pusher:willAuthorizeChannelWithRequest:)]) { // deprecated call
     [pusher.delegate pusher:pusher willAuthorizeChannelWithRequest:authOperation.mutableURLRequest];
+  }
+    
+  if ([pusher.delegate respondsToSelector:@selector(pusher:willAuthorizeChannel:withRequest:)]) {
+    [pusher.delegate pusher:pusher willAuthorizeChannel:self withRequest:authOperation.mutableURLRequest];
   }
   
   [pusher beginAuthorizationOperation:authOperation];
