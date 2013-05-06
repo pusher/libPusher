@@ -10,7 +10,7 @@
 #import "PTPusherChannelAuthorization.h"
 #import "PTURLRequestOperation.h"
 
-@interface PTPusherChannelServerBasedAuthorization : NSObject <PTPusherChannelAuthorization>
+@interface PTPusherChannelServerBasedAuthorization : NSObject <PTPusherChannelAuthorizationDelegate>
 
 @property (nonatomic, readonly) NSURL *authorizationURL;
 

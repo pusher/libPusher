@@ -43,6 +43,7 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 
 @interface PTPusher ()
 @property (nonatomic, strong, readwrite) PTPusherConnection *connection;
+@property (nonatomic, weak) id<PTPusherChannelAuthorizationDelegate> channelAuthorizationDelegate;
 @end
 
 @interface PTPusherChannel ()
@@ -55,7 +56,7 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 #pragma mark -
 
 @implementation PTPusher {
-  id<PTPusherChannelAuthorization> authorizationStrategy;
+  PTPusherChannelServerBasedAuthorization *serverAuthorizationStrategy;
 }
 
 @synthesize connection = _connection;
@@ -116,12 +117,12 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 
 - (void)setAuthorizationURL:(NSURL *)authorizationURL
 {
-  PTPusherChannelServerBasedAuthorization *serverAuthStrategy = [[PTPusherChannelServerBasedAuthorization alloc] initWithAuthorizationURL:authorizationURL];
+  serverAuthorizationStrategy = [[PTPusherChannelServerBasedAuthorization alloc] initWithAuthorizationURL:authorizationURL];
   
   __weak PTPusher *weakSelf = self;
   
   // use this to support our current delegate-based API for HTTP authorization
-  [serverAuthStrategy customizeRequestsWithBlock:^(NSMutableURLRequest *request, PTPusherChannel *channel) {
+  [serverAuthorizationStrategy customizeRequestsWithBlock:^(NSMutableURLRequest *request, PTPusherChannel *channel) {
     __strong PTPusher *strongSelf = weakSelf;
     
 #pragma clang diagnostic push
@@ -136,12 +137,12 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
     }
   }];
   
-  authorizationStrategy = serverAuthStrategy;
+  self.channelAuthorizationDelegate = serverAuthorizationStrategy;
 }
 
 - (NSURL *)authorizationURL
 {
-  return [(PTPusherChannelServerBasedAuthorization *)authorizationStrategy authorizationURL];
+  return serverAuthorizationStrategy.authorizationURL;
 }
 
 #pragma mark - Connection management
@@ -248,8 +249,11 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 - (void)subscribeToChannel:(PTPusherChannel *)channel
 {
   if (channel.isPrivate) {
-    [authorizationStrategy authorizeChannel:channel socketID:self.connection.socketID completionHandler:^(BOOL isAuthorized, NSDictionary *authData, NSError *error) {
-      if (isAuthorized && self.connection.isConnected) {
+    [self.channelAuthorizationDelegate pusherChannel:channel requiresAuthorizationForSocketID:self.connection.socketID completionHandler:^(BOOL isAuthorized, NSDictionary *authData, NSError *error) {
+
+      if (!self.connection.isConnected) return;
+      
+      if (isAuthorized) {
         [channel subscribeWithAuthorization:authData];
       }
       else {
@@ -379,10 +383,6 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 
 - (void)handleDisconnection:(PTPusherConnection *)connection error:(NSError *)error willReconnect:(BOOL)willReconnect
 {
-  if ([authorizationStrategy respondsToSelector:@selector(cancelAuthorization)]) {
-    [authorizationStrategy cancelAuthorization];
-  }
-  
   for (PTPusherChannel *channel in [channels allValues]) {
     [channel markAsUnsubscribed];
   }

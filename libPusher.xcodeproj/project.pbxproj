@@ -180,7 +180,7 @@
 		A3A1A0EB115813E2001EF877 /* UnitTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3A1A111115814D0001EF877 /* OCHamcrest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OCHamcrest.framework; path = Frameworks/OCHamcrest.framework; sourceTree = "<group>"; };
 		A3A1A41611582DC3001EF877 /* PTPusherDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherDelegate.h; sourceTree = "<group>"; };
-		A3A297DF1736EA5700BD956D /* PTPusherChannelAuthorization.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PTPusherChannelAuthorization.h; sourceTree = "<group>"; };
+		A3A297DF1736EA5700BD956D /* PTPusherChannelAuthorizationDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PTPusherChannelAuthorizationDelegate.h; sourceTree = "<group>"; };
 		A3A9F9581496E96100F83617 /* Functional Specs.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Functional Specs.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3A9F9591496E96100F83617 /* SenTestingKit.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		A3A9F95F1496E96100F83617 /* Functional Specs-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Functional Specs-Info.plist"; sourceTree = "<group>"; };
@@ -297,7 +297,7 @@
 				A35281D413F736DF000687C0 /* PTPusherEventDispatcher.h */,
 				A35281D513F736DF000687C0 /* PTPusherEventDispatcher.m */,
 				A3A1A41611582DC3001EF877 /* PTPusherDelegate.h */,
-				A3A297DF1736EA5700BD956D /* PTPusherChannelAuthorization.h */,
+				A3A297DF1736EA5700BD956D /* PTPusherChannelAuthorizationDelegate.h */,
 				A3FE42181181173B009CF5D7 /* PTPusherChannel.h */,
 				A3FE42191181173B009CF5D7 /* PTPusherChannel.m */,
 				A3AC28C113F76C50001C4808 /* PTPusherChannelServerBasedAuthorization.h */,
