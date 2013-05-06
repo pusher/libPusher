@@ -16,7 +16,7 @@
  * You can implement your own authorization strategy by creating a
  * class that conforms to this protocol.
  */
-@protocol PTPusherChannelAuthorization <NSObject>
+@protocol PTPusherChannelAuthorizationDelegate <NSObject>
 
 /* Called when a channel requires authorization.
  *
@@ -25,15 +25,6 @@
  * data) and then call the completion handler, indicating whether or not authorization
  * was successful and passing the authorization data or an error as necessary.
  */
-- (void)authorizeChannel:(PTPusherChannel *)channel socketID:(NSString *)socketID completionHandler:(void(^)(BOOL isAuthorized, NSDictionary *authData, NSError *error))completionHandler;
-
-@optional
-
-/* This will be called by the Pusher client when it disconnects.
- *
- * Asynchronous authorization strategies can implement this method to cancel any
- * outstanding authorization attempts when the client disconnects.
- */
-- (void)cancelAuthorization;
+- (void)pusherChannel:(PTPusherChannel *)channel requiresAuthorizationForSocketID:(NSString *)socketID completionHandler:(void(^)(BOOL isAuthorized, NSDictionary *authData, NSError *error))completionHandler;
 
 @end
