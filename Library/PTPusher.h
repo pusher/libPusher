@@ -11,6 +11,7 @@
 #import "PTPusherConnection.h"
 #import "PTPusherEventPublisher.h"
 #import "PTPusherPresenceChannelDelegate.h"
+#import "PTPusherChannelAuthorizationDelegate.h"
 
 /** The name of the notification posted when PTPusher receives an event.
  *
@@ -123,6 +124,19 @@ extern NSString *const PTPusherErrorUnderlyingEventKey;
  For more information on channel authorization, [see the Pusher documentation website](http://pusher.com/docs/authenticating_users).
  */
 @property (nonatomic, strong) NSURL *authorizationURL;
+
+/** Used to authorize access to private and presence channels.
+ *
+ * Whenever a request to subscribe to a private or presence channel is made, the client will ask
+ * the channelAuthorizationDelegate delegate to perform the authorization and call back to the client
+ * when it has finished.
+ *
+ * Note: if you set this property, the built-in server based authorization will not be performed
+ * and it is up to you to correctly implement the delegate protocol to authorize channel access.
+ *
+ * @see PTPusherChannelAuthorizationDelegate
+ */
+@property (nonatomic, weak) id<PTPusherChannelAuthorizationDelegate> channelAuthorizationDelegate;
 
 ///------------------------------------------------------------------------------------/
 /// @name Creating new instances
