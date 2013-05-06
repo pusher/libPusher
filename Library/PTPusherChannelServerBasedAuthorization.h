@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PTPusherChannelAuthorization.h"
+#import "PTPusherChannelAuthorizationDelegate.h"
 #import "PTURLRequestOperation.h"
 
 @interface PTPusherChannelServerBasedAuthorization : NSObject <PTPusherChannelAuthorizationDelegate>

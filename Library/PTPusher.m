@@ -14,7 +14,6 @@
 #import "PTTargetActionEventListener.h"
 #import "PTBlockEventListener.h"
 #import "PTPusherErrors.h"
-#import "PTPusherChannelAuthorization.h"
 #import "PTPusherChannelServerBasedAuthorization.h"
 
 #define kPUSHER_HOST @"ws.pusherapp.com"
@@ -51,7 +50,6 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 
 @interface PTPusher ()
 @property (nonatomic, strong, readwrite) PTPusherConnection *connection;
-@property (nonatomic, weak) id<PTPusherChannelAuthorizationDelegate> channelAuthorizationDelegate;
 @end
 
 @interface PTPusherChannel ()
