@@ -31,6 +31,7 @@ typedef enum {
 @property (nonatomic, copy) void (^completionHandler)(PTPusherChannelAuthorizationOperation *);
 @property (nonatomic, readonly, getter=isAuthorized) BOOL authorized;
 @property (nonatomic, strong, readonly) NSDictionary *authorizationData;
+@property (nonatomic, copy) NSDictionary *customRequestParameters;
 @property (unsafe_unretained, nonatomic, readonly) NSMutableURLRequest *mutableURLRequest;
 @property (nonatomic, readonly) NSError *error;
 

@@ -21,7 +21,7 @@
 {
   if ((self = [super init])) {
     _authorizationURL = URL;
-    
+
     authorizationQueue = [[NSOperationQueue alloc] init];
     authorizationQueue.maxConcurrentOperationCount = 5;
     authorizationQueue.name = @"com.pusher.libPusher.authorizationQueue";
@@ -37,15 +37,15 @@
 - (void)pusherChannel:(PTPusherChannel *)channel requiresAuthorizationForSocketID:(NSString *)socketID completionHandler:(void (^)(BOOL, NSDictionary *, NSError *))completionHandler
 {
   PTPusherChannelAuthorizationOperation *authOperation = [PTPusherChannelAuthorizationOperation operationWithAuthorizationURL:self.authorizationURL channelName:channel.name socketID:socketID];
-  
+
   [authOperation setCompletionHandler:^(PTPusherChannelAuthorizationOperation *operation) {
     completionHandler(operation.isAuthorized, operation.authorizationData, operation.error);
   }];
-  
+
   if (_requestBlock) {
     _requestBlock(authOperation, channel);
   }
-  
+
   [authorizationQueue addOperation:authOperation];
 }
 
@@ -62,7 +62,9 @@
 @property (nonatomic, readwrite) NSError *error;
 @end
 
-@implementation PTPusherChannelAuthorizationOperation
+@implementation PTPusherChannelAuthorizationOperation {
+  NSDictionary *requestParameters;
+}
 
 - (NSMutableURLRequest *)mutableURLRequest
 {
@@ -73,23 +75,42 @@
 + (id)operationWithAuthorizationURL:(NSURL *)URL channelName:(NSString *)channelName socketID:(NSString *)socketID
 {
   NSAssert(URL, @"URL is required for authorization! (Did you set PTPusher.authorizationURL?)");
-  
+
   // a short-circuit for testing, using a special URL
   if ([[URL absoluteString] isEqualToString:PTPusherAuthorizationBypassURL]) {
     return [[PTPusherChannelAuthorizationBypassOperation alloc] init];
   }
-  
+
   NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
   [request setHTTPMethod:@"POST"];
   [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-  
-  NSMutableDictionary *requestData = [NSMutableDictionary dictionary];
-  requestData[@"socket_id"] = socketID;
-  requestData[@"channel_name"] = channelName;
-  
-  [request setHTTPBody:[[requestData sortedQueryString] dataUsingEncoding:NSUTF8StringEncoding]];
-  
-  return [[self alloc] initWithURLRequest:request];
+
+  NSMutableDictionary *requestParameters = [NSMutableDictionary dictionary];
+  [requestParameters setObject:socketID forKey:@"socket_id"];
+  [requestParameters setObject:channelName forKey:@"channel_name"];
+
+  return [[self alloc] initWithURLRequest:request parameters:requestParameters];
+}
+
+- (id)initWithURLRequest:(NSURLRequest *)request parameters:(NSDictionary *)parameters
+{
+  if ((self = [super initWithURLRequest:request])) {
+    requestParameters = [parameters copy];
+  }
+  return self;
+}
+
+- (void)start
+{
+  NSMutableDictionary *parameters = [requestParameters mutableCopy];
+
+  if (self.customRequestParameters) {
+    [parameters addEntriesFromDictionary:self.customRequestParameters];
+  }
+
+  [self.mutableURLRequest setHTTPBody:[[parameters sortedQueryString] dataUsingEncoding:NSUTF8StringEncoding]];
+
+  [super start];
 }
 
 - (void)finish
@@ -98,41 +119,41 @@
     [super finish];
     return;
   }
-  
+
   if (self.connectionError) {
     self.error = [NSError errorWithDomain:PTPusherErrorDomain code:PTPusherChannelAuthorizationConnectionError userInfo:@{NSUnderlyingErrorKey: self.connectionError}];
   }
   else {
     _authorized = YES;
-    
+
     if ([URLResponse isKindOfClass:[NSHTTPURLResponse class]]) {
       _authorized = ([(NSHTTPURLResponse *)URLResponse statusCode] == 200 || [(NSHTTPURLResponse *)URLResponse statusCode] == 201);
     }
-    
+
     if (_authorized) {
       _authorizationData = [[PTJSON JSONParser] objectFromJSONData:responseData];
-      
+
       if (![_authorizationData isKindOfClass:[NSDictionary class]]) {
         NSDictionary *userInfo = nil;
-        
+
         if (_authorizationData) { // make sure it isn't nil as a result of invalid JSON first
           userInfo = @{@"reason": @"Authorization data was not a dictionary", @"authorization_data": _authorizationData};
         }
         else {
           userInfo = @{@"reason": @"Authorization data was not valid JSON"};
         }
-        
+
         self.error = [NSError errorWithDomain:PTPusherErrorDomain code:PTPusherChannelAuthorizationBadResponseError userInfo:userInfo];
-        
+
         _authorized = NO;
       }
     }
   }
-    
+
   if (self.completionHandler) {
     self.completionHandler(self);
   }
-  
+
   [super finish];
 }
 
@@ -154,7 +175,7 @@
   // we complete after a tiny delay, to simulate the asynchronous nature
   // of channel authorization. The low priorty queue ensures any polling
   // in the test (which probably use the main queue/thread is not broken.
-  
+
   double delayInSeconds = 0.1;
   dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
   dispatch_after(popTime, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^(void){
