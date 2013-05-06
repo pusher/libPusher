@@ -136,10 +136,10 @@
    This demonstrates how we can intercept the authorization request to configure it for our app's
    authentication/authorisation needs.
  */
-- (void)pusher:(PTPusher *)pusher willAuthorizeChannelWithRequest:(NSMutableURLRequest *)request
+- (void)pusher:(PTPusher *)pusher willAuthorizeChannel:(PTPusherChannel *)channel withAuthOperation:(PTPusherChannelAuthorizationOperation *)operation
 {
   NSLog(@"[pusher-%@] Authorizing channel access...", pusher.connection.socketID);
-  [request setHTTPBasicAuthUsername:CHANNEL_AUTH_USERNAME password:CHANNEL_AUTH_PASSWORD];
+  [operation.mutableURLRequest setHTTPBasicAuthUsername:CHANNEL_AUTH_USERNAME password:CHANNEL_AUTH_PASSWORD];
 }
 
 @end

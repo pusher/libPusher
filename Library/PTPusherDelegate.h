@@ -13,6 +13,7 @@
 @class PTPusherChannel;
 @class PTPusherEvent;
 @class PTPusherErrorEvent;
+@class PTPusherChannelAuthorizationOperation;
 
 /** The PTPusherDelegate protocol can be implemented to receive important events in a PTPusher object's lifetime.
  
@@ -112,8 +113,10 @@
  
  By implementing this delegate method, you will be able to set any credentials as necessary by
  modifying the request as required (such as setting POST parameters or headers).
+ 
+ See PTPusherChannelAuthorizationOperation for details on how to modify the outgoing request.
  */
-- (void)pusher:(PTPusher *)pusher willAuthorizeChannel:(PTPusherChannel *)channel withRequest:(NSMutableURLRequest *)request;
+- (void)pusher:(PTPusher *)pusher willAuthorizeChannel:(PTPusherChannel *)channel withAuthOperation:(PTPusherChannelAuthorizationOperation *)operation;
 
 /** Notifies the delegate that the PTPusher instance has subscribed to the specified channel.
  
