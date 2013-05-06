@@ -131,6 +131,9 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 
 - (void)setAuthorizationURL:(NSURL *)authorizationURL
 {
+  if (self.channelAuthorizationDelegate && ![self.channelAuthorizationDelegate isKindOfClass:[PTPusherChannelServerBasedAuthorization class]])
+    return;
+  
   serverAuthorizationStrategy = [[PTPusherChannelServerBasedAuthorization alloc] initWithAuthorizationURL:authorizationURL];
 
   __weak PTPusher *weakSelf = self;
