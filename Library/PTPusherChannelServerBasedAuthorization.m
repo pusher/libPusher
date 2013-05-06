@@ -34,7 +34,7 @@
   _requestBlock = [requestBlock copy];
 }
 
-- (void)authorizeChannel:(PTPusherChannel *)channel socketID:(NSString *)socketID completionHandler:(void(^)(BOOL, NSDictionary *, NSError *))completionHandler
+- (void)pusherChannel:(PTPusherChannel *)channel requiresAuthorizationForSocketID:(NSString *)socketID completionHandler:(void (^)(BOOL, NSDictionary *, NSError *))completionHandler
 {
   PTPusherChannelAuthorizationOperation *authOperation = [PTPusherChannelAuthorizationOperation operationWithAuthorizationURL:self.authorizationURL channelName:channel.name socketID:socketID];
   
@@ -47,11 +47,6 @@
   }
   
   [authorizationQueue addOperation:authOperation];
-}
-
-- (void)cancelAuthorization
-{
-  [authorizationQueue cancelAllOperations];
 }
 
 @end
