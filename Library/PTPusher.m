@@ -133,24 +133,23 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 {
   if (self.channelAuthorizationDelegate && ![self.channelAuthorizationDelegate isKindOfClass:[PTPusherChannelServerBasedAuthorization class]])
     return;
-  
+
   serverAuthorizationStrategy = [[PTPusherChannelServerBasedAuthorization alloc] initWithAuthorizationURL:authorizationURL];
 
   __weak PTPusher *weakSelf = self;
 
   // use this to support our current delegate-based API for HTTP authorization
-  [serverAuthorizationStrategy customizeRequestsWithBlock:^(NSMutableURLRequest *request, PTPusherChannel *channel) {
+  [serverAuthorizationStrategy customizeOperationsWithBlock:^(PTPusherChannelAuthorizationOperation *op, PTPusherChannel *channel) {
     __strong PTPusher *strongSelf = weakSelf;
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
     if ([strongSelf.delegate respondsToSelector:@selector(pusher:willAuthorizeChannelWithRequest:)]) { // deprecated call
-      [strongSelf.delegate pusher:strongSelf willAuthorizeChannelWithRequest:request];
+      [strongSelf.delegate pusher:strongSelf willAuthorizeChannelWithRequest:op.mutableURLRequest];
     }
 #pragma clang diagnostic pop
-
-    if ([strongSelf.delegate respondsToSelector:@selector(pusher:willAuthorizeChannel:withRequest:)]) {
-      [strongSelf.delegate pusher:strongSelf willAuthorizeChannel:channel withRequest:request];
+    if ([strongSelf.delegate respondsToSelector:@selector(pusher:willAuthorizeChannel:withAuthOperation:)]) {
+      [strongSelf.delegate pusher:strongSelf willAuthorizeChannel:channel withAuthOperation:op];
     }
   }];
   self.channelAuthorizationDelegate = serverAuthorizationStrategy;

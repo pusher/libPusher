@@ -7,6 +7,7 @@
 //
 
 #import <Pusher/PTPusher.h>
+#import <Pusher/PTPusherServerBasedAuthorization.h>
 #import <Pusher/PTPusherChannel.h>
 #import <Pusher/PTPusherEvent.h>
 #import <Pusher/PTPusherAPI.h>

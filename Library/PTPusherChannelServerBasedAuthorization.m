@@ -14,7 +14,7 @@
 
 @implementation PTPusherChannelServerBasedAuthorization {
   NSOperationQueue *authorizationQueue;
-  void (^_requestBlock)(NSMutableURLRequest *, PTPusherChannel *);
+  void (^_requestBlock)(PTPusherChannelAuthorizationOperation *, PTPusherChannel *);
 }
 
 - (id)initWithAuthorizationURL:(NSURL *)URL
@@ -29,7 +29,7 @@
   return self;
 }
 
-- (void)customizeRequestsWithBlock:(void (^)(NSMutableURLRequest *request, PTPusherChannel *))requestBlock
+- (void)customizeOperationsWithBlock:(void (^)(PTPusherChannelAuthorizationOperation *request, PTPusherChannel *))requestBlock
 {
   _requestBlock = [requestBlock copy];
 }
@@ -43,7 +43,7 @@
   }];
   
   if (_requestBlock) {
-    _requestBlock(authOperation.mutableURLRequest, channel);
+    _requestBlock(authOperation, channel);
   }
   
   [authorizationQueue addOperation:authOperation];

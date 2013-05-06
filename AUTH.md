@@ -16,12 +16,12 @@ In order to support backwards compatibility, it is not currently necessary to in
 pusher.authorizationURL = [NSURL URLWithString:@"http://www.yourserver.com/authorise"];
 ```
 
-Unlike web-based clients, you cannot rely on cookies and sessions to authenticate users when making these channel authorisation requests; instead, you must use some other form of authentication like token or basic authentication. To do this, you can implement the delegate method `pusher:willAuthorizeChannel:withRequest:` and modify the request before it is sent, e.g.:
+Unlike web-based clients, you cannot rely on cookies and sessions to authenticate users when making these channel authorisation requests; instead, you must use some other form of authentication like token or basic authentication. To do this, you can implement the delegate method `pusher:willAuthorizeChannel:withAuthOperation:` and modify the request before it is sent, e.g.:
 
 ```objc
-- (void)pusher:(PTPusher *)pusher willAuthorizeChannel:(PTPusherChannel *)channel withRequest:(NSMutableURLRequest *)request
+- (void)pusher:(PTPusher *)pusher willAuthorizeChannel:(PTPusherChannel *)channel withAuthOperation:(PTPusherChannelAuthorizationOperation *)operation
 {
-  [request setValue:@"some-authentication-token" forHTTPHeaderField:@"X-MyCustom-AuthTokenHeader"];
+  [operation.mutableURLRequest setValue:@"some-authentication-token" forHTTPHeaderField:@"X-MyCustom-AuthTokenHeader"];
 }
 ```
 
