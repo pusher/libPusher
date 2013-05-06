@@ -62,7 +62,9 @@
 @property (nonatomic, readwrite) NSError *error;
 @end
 
-@implementation PTPusherChannelAuthorizationOperation
+@implementation PTPusherChannelAuthorizationOperation {
+  NSDictionary *requestParameters;
+}
 
 @synthesize authorized;
 @synthesize authorizationData;
@@ -88,13 +90,32 @@
   [request setHTTPMethod:@"POST"];
   [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
   
-  NSMutableDictionary *requestData = [NSMutableDictionary dictionary];
-  [requestData setObject:socketID forKey:@"socket_id"];
-  [requestData setObject:channelName forKey:@"channel_name"];
+  NSMutableDictionary *requestParameters = [NSMutableDictionary dictionary];
+  [requestParameters setObject:socketID forKey:@"socket_id"];
+  [requestParameters setObject:channelName forKey:@"channel_name"];
   
-  [request setHTTPBody:[[requestData sortedQueryString] dataUsingEncoding:NSUTF8StringEncoding]];
+  return [[self alloc] initWithURLRequest:request parameters:requestParameters];
+}
+
+- (id)initWithURLRequest:(NSURLRequest *)request parameters:(NSDictionary *)parameters
+{
+  if ((self = [super initWithURLRequest:request])) {
+    requestParameters = [parameters copy];
+  }
+  return self;
+}
+
+- (void)start
+{
+  NSMutableDictionary *parameters = [requestParameters mutableCopy];
   
-  return [[self alloc] initWithURLRequest:request];
+  if (self.customRequestParameters) {
+    [parameters addEntriesFromDictionary:self.customRequestParameters];
+  }
+  
+  [self.mutableURLRequest setHTTPBody:[[parameters sortedQueryString] dataUsingEncoding:NSUTF8StringEncoding]];
+  
+  [super start];
 }
 
 - (void)finish
