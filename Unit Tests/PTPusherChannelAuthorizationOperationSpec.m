@@ -7,7 +7,7 @@
 //
 
 #import "SpecHelper.h"
-#import "PTPusherChannelAuthorizationOperation.h"
+#import "PTPusherChannelServerBasedAuthorization.h"
 #import "OHHTTPStubs.h"
 
 SPEC_BEGIN(PTPusherChannelAuthorizationOperationSpec)

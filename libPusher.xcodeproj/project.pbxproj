@@ -17,8 +17,6 @@
 		A30575D115233CC800DA19BD /* PTPusherPresenceChannelSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = A30575CE15233C1200DA19BD /* PTPusherPresenceChannelSpec.m */; };
 		A317375B155D2D7D007E4BBA /* PTPusherMockConnectionSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = A3173754155D2CDF007E4BBA /* PTPusherMockConnectionSpec.m */; };
 		A317375C155D2E82007E4BBA /* PTPusherMockConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = A3173759155D2D21007E4BBA /* PTPusherMockConnection.m */; };
-		A317375F155D38C4007E4BBA /* PTPusher+Testing.h in Headers */ = {isa = PBXBuildFile; fileRef = A317375D155D38C4007E4BBA /* PTPusher+Testing.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A3173760155D38C4007E4BBA /* PTPusher+Testing.m in Sources */ = {isa = PBXBuildFile; fileRef = A317375E155D38C4007E4BBA /* PTPusher+Testing.m */; };
 		A3226317155D481C00A46067 /* PTPusherMockConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = A3173758155D2D21007E4BBA /* PTPusherMockConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3382DE31525C3F70025550D /* PTJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = A30950121525C272008F695B /* PTJSON.m */; };
 		A3382DE41525C3FA0025550D /* PTJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = A30950111525C272008F695B /* PTJSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -62,6 +60,8 @@
 		A3A297DC17368BE300BD956D /* libPusher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3D1D2B71158013F009A12AD /* libPusher.a */; };
 		A3A297DD17368BE300BD956D /* libPusher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3D1D2B71158013F009A12AD /* libPusher.a */; };
 		A3A297DE17368BEB00BD956D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F700C4637DC43EFA335D40F /* libPods.a */; };
+		A3A297E21737E6A500BD956D /* PTPusherChannelAuthorizationBypass.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A297E11737E6A500BD956D /* PTPusherChannelAuthorizationBypass.m */; };
+		A3A297E31737E6A500BD956D /* PTPusherChannelAuthorizationBypass.m in Sources */ = {isa = PBXBuildFile; fileRef = A3A297E11737E6A500BD956D /* PTPusherChannelAuthorizationBypass.m */; };
 		A3A9F95A1496E96100F83617 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3A9F9591496E96100F83617 /* SenTestingKit.framework */; };
 		A3A9F95B1496E96100F83617 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		A3A9F95C1496E96100F83617 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -143,8 +143,6 @@
 		A3173754155D2CDF007E4BBA /* PTPusherMockConnectionSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTPusherMockConnectionSpec.m; sourceTree = "<group>"; };
 		A3173758155D2D21007E4BBA /* PTPusherMockConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherMockConnection.h; sourceTree = "<group>"; };
 		A3173759155D2D21007E4BBA /* PTPusherMockConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTPusherMockConnection.m; sourceTree = "<group>"; };
-		A317375D155D38C4007E4BBA /* PTPusher+Testing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PTPusher+Testing.h"; sourceTree = "<group>"; };
-		A317375E155D38C4007E4BBA /* PTPusher+Testing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PTPusher+Testing.m"; sourceTree = "<group>"; };
 		A3382DEA1525D01B0025550D /* JSONKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = JSONKit.h; path = Library/JSONKit.h; sourceTree = SOURCE_ROOT; };
 		A35281CE13F721A8000687C0 /* PTPusherConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherConnection.h; sourceTree = "<group>"; };
 		A35281CF13F721A8000687C0 /* PTPusherConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTPusherConnection.m; sourceTree = "<group>"; };
@@ -181,6 +179,8 @@
 		A3A1A111115814D0001EF877 /* OCHamcrest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OCHamcrest.framework; path = Frameworks/OCHamcrest.framework; sourceTree = "<group>"; };
 		A3A1A41611582DC3001EF877 /* PTPusherDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherDelegate.h; sourceTree = "<group>"; };
 		A3A297DF1736EA5700BD956D /* PTPusherChannelAuthorizationDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PTPusherChannelAuthorizationDelegate.h; sourceTree = "<group>"; };
+		A3A297E01737E6A400BD956D /* PTPusherChannelAuthorizationBypass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherChannelAuthorizationBypass.h; sourceTree = "<group>"; };
+		A3A297E11737E6A500BD956D /* PTPusherChannelAuthorizationBypass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTPusherChannelAuthorizationBypass.m; sourceTree = "<group>"; };
 		A3A9F9581496E96100F83617 /* Functional Specs.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Functional Specs.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3A9F9591496E96100F83617 /* SenTestingKit.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		A3A9F95F1496E96100F83617 /* Functional Specs-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Functional Specs-Info.plist"; sourceTree = "<group>"; };
@@ -373,8 +373,6 @@
 		A3173757155D2D12007E4BBA /* Testing */ = {
 			isa = PBXGroup;
 			children = (
-				A317375D155D38C4007E4BBA /* PTPusher+Testing.h */,
-				A317375E155D38C4007E4BBA /* PTPusher+Testing.m */,
 				A3173758155D2D21007E4BBA /* PTPusherMockConnection.h */,
 				A3173759155D2D21007E4BBA /* PTPusherMockConnection.m */,
 			);
@@ -436,6 +434,8 @@
 				A3A9F9661496E96100F83617 /* Functional Specs-Prefix.pch */,
 				A3A9F96C1496E9E500F83617 /* SpecHelper.h */,
 				A3A9F96D1496E9E500F83617 /* SpecHelper.m */,
+				A3A297E01737E6A400BD956D /* PTPusherChannelAuthorizationBypass.h */,
+				A3A297E11737E6A500BD956D /* PTPusherChannelAuthorizationBypass.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -540,7 +540,6 @@
 				A3382DE41525C3FA0025550D /* PTJSON.h in Headers */,
 				A3382DF61525D06C0025550D /* JSONKit.h in Headers */,
 				A3382E011525D0D50025550D /* PTJSONParser.h in Headers */,
-				A317375F155D38C4007E4BBA /* PTPusher+Testing.h in Headers */,
 				A3226317155D481C00A46067 /* PTPusherMockConnection.h in Headers */,
 				4D81597F1712C6CA0013A485 /* Pusher.h in Headers */,
 			);
@@ -840,6 +839,7 @@
 				A30575D115233CC800DA19BD /* PTPusherPresenceChannelSpec.m in Sources */,
 				A317375B155D2D7D007E4BBA /* PTPusherMockConnectionSpec.m in Sources */,
 				A304896C1667AAB4009511CB /* PTPusherChannelAuthorizationOperationSpec.m in Sources */,
+				A3A297E21737E6A500BD956D /* PTPusherChannelAuthorizationBypass.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -854,6 +854,7 @@
 				A369CFE414FDB1DC00A8D56B /* NSData+Base64.m in Sources */,
 				A373A2CA1565248C00BFAECE /* PusherClientSpec.m in Sources */,
 				A3B7E4EB1581672A00CDA6DA /* ClientEventsSpec.m in Sources */,
+				A3A297E31737E6A500BD956D /* PTPusherChannelAuthorizationBypass.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -875,7 +876,6 @@
 				A3AC28C413F76C51001C4808 /* PTPusherChannelServerBasedAuthorization.m in Sources */,
 				A3382DE31525C3F70025550D /* PTJSON.m in Sources */,
 				A317375C155D2E82007E4BBA /* PTPusherMockConnection.m in Sources */,
-				A3173760155D38C4007E4BBA /* PTPusher+Testing.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

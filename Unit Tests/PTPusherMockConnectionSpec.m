@@ -9,8 +9,8 @@
 #import "SpecHelper.h"
 #import "PTPusherMockConnection.h"
 #import "PTPusher.h"
-#import "PTPusher+Testing.h"
 #import "PTPusherChannel.h"
+#import "PTPusherChannelAuthorizationBypass.h"
 
 SPEC_BEGIN(PTMockConnectionSpec)
 
@@ -20,6 +20,7 @@ describe(@"PTPusherMockConnectionSpec", ^{
   
   beforeEach(^{
     pusher = [[PTPusher alloc] initWithConnection:connection connectAutomatically:NO];
+    pusher.channelAuthorizationDelegate = [PTPusherChannelAuthorizationBypass new];
   });
   
   it(@"handles connections and reports connected", ^{
@@ -45,8 +46,7 @@ describe(@"PTPusherMockConnectionSpec", ^{
     [[theReturnValueOfBlock(^{ return theValue(channel.isSubscribed); }) shouldEventually] beTrue];
 	});
   
-  it(@"simulates the correct response when subscribing to a private channel when auth bypass is enabled", ^{
-    [pusher enableChannelAuthorizationBypassMode];
+  it(@"simulates the correct response when subscribing to a private channel when authorization is successful", ^{
     [pusher connect];
     PTPusherChannel *channel = [pusher subscribeToPresenceChannelNamed:@"test-channel"];
     [[theReturnValueOfBlock(^{ return theValue(channel.isSubscribed); }) shouldEventually] beTrue];

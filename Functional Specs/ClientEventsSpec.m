@@ -7,6 +7,7 @@
 //
 
 #import "SpecHelper.h"
+#import "PTPusherChannelAuthorizationBypass.h"
 
 SPEC_BEGIN(ClientEventsSpec)
 
@@ -20,7 +21,7 @@ describe(@"Client events", ^{
   
   beforeEach(^{
     client = newTestClientWithMockConnection();
-    [client enableChannelAuthorizationBypassMode];
+    client.channelAuthorizationDelegate = [PTPusherChannelAuthorizationBypass new];
     connection = (PTPusherMockConnection *)client.connection;
   });
   
