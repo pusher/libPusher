@@ -8,7 +8,7 @@ Apple provides its own push notification service which is great for getting aler
 
 ## Installation instructions
 
-The latest release is 1.4. A list of changes can be found in the [CHANGELOG](CHANGELOG.md).
+The latest release is 1.4. A list of changes can be found in the [CHANGELOG](CHANGES.md).
 
 1.4 will be the final release of Pusher to support iOS 4.
 
