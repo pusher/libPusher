@@ -86,9 +86,6 @@ NSString *const PTPusherConnectionPingEvent        = @"pusher:ping";
 
 - (void)send:(id)object
 {
-//    NSAssert(self.isConnected, @"Cannot send data unless connected.");
-//    There is no point for using NSAssert here.
-//    If connection has not been stablished yet, messesage should be ignored instead of forcing the app to crash.
     if (self.isConnected) {
         NSData *JSONData = [[PTJSON JSONParser] JSONDataFromObject:object];
         NSString *message = [[NSString alloc] initWithData:JSONData encoding:NSUTF8StringEncoding];
