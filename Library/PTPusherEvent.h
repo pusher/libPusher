@@ -66,7 +66,11 @@ typedef enum {
 
 /** A textual description of the error.
  */
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 50000
+@property (weak, nonatomic, readonly) NSString *message;
+#else
 @property (unsafe_unretained, nonatomic, readonly) NSString *message;
+#endif
 
 /** The error code. See PTPusherServerErrorCodes for available errors.
  */

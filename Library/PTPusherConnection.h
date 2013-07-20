@@ -34,7 +34,11 @@ typedef enum {
 
 @interface PTPusherConnection : NSObject <SRWebSocketDelegate>
 
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 50000
+@property (nonatomic, weak) id<PTPusherConnectionDelegate> delegate;
+#else
 @property (nonatomic, unsafe_unretained) id<PTPusherConnectionDelegate> delegate;
+#endif
 @property (nonatomic, readonly, getter=isConnected) BOOL connected;
 @property (nonatomic, copy, readonly) NSString *socketID;
 
