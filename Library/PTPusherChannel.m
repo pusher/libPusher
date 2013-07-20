@@ -58,7 +58,11 @@
      and the target/action binding object.
      */
     
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 50000
+    __weak PTPusherChannel *weakChannel = self;
+#else
     __unsafe_unretained PTPusherChannel *weakChannel = self;
+#endif
     
     [internalBindings addObject:
      [self bindToEventNamed:@"pusher_internal:subscription_succeeded" 
@@ -271,8 +275,13 @@
     eventName = [@"client-" stringByAppendingString:eventName];
   }
   
-  __unsafe_unretained PTPusherChannel *weakSelf = self;
-  __unsafe_unretained PTPusher *weakPusher = pusher;
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 50000
+    __weak PTPusherChannel *weakSelf = self;
+    __weak PTPusher *weakPusher = pusher;
+#else
+    __unsafe_unretained PTPusherChannel *weakSelf = self;
+    __unsafe_unretained PTPusher *weakPusher = pusher;
+#endif
   
   [clientEventQueue addOperationWithBlock:^{
     [weakPusher sendEventNamed:eventName data:eventData channel:weakSelf.name];
@@ -297,8 +306,12 @@
     /* Set up event handlers for pre-defined channel events.
      As above, use blocks as proxies to a weak channel reference to avoid retain cycles.
      */
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 50000
+      __weak PTPusherPresenceChannel *weakChannel = self;
+#else
+      __unsafe_unretained PTPusherPresenceChannel *weakChannel = self;
+#endif
     
-    __unsafe_unretained PTPusherPresenceChannel *weakChannel = self;
     
     [internalBindings addObject:
      [self bindToEventNamed:@"pusher_internal:member_added" 
