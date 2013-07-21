@@ -1,4 +1,12 @@
 GIT
+  remote: git://github.com/alloy/ios-sim-test.git
+  revision: ec0c4e9e779895a199d6fc9b0bec92f00071c9e9
+  specs:
+    ios-sim-test (0.0.1)
+      claide (>= 0.2)
+      colored (~> 1.2)
+
+GIT
   remote: git://github.com/lukeredpath/github-downloads.git
   revision: 0ed8d7a59f5e15d72ce87c44a9000e301d3fa952
   specs:
@@ -92,6 +100,7 @@ PLATFORMS
 DEPENDENCIES
   cocoapods (~> 0.22.0)
   github-downloads!
+  ios-sim-test!
   json
   osx_keychain
   pusher
