@@ -58,7 +58,7 @@
      and the target/action binding object.
      */
     
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 50000
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_5_0
     __weak PTPusherChannel *weakChannel = self;
 #else
     __unsafe_unretained PTPusherChannel *weakChannel = self;
@@ -275,7 +275,7 @@
     eventName = [@"client-" stringByAppendingString:eventName];
   }
   
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 50000
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_5_0
     __weak PTPusherChannel *weakSelf = self;
     __weak PTPusher *weakPusher = pusher;
 #else
@@ -306,7 +306,7 @@
     /* Set up event handlers for pre-defined channel events.
      As above, use blocks as proxies to a weak channel reference to avoid retain cycles.
      */
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 50000
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_5_0
       __weak PTPusherPresenceChannel *weakChannel = self;
 #else
       __unsafe_unretained PTPusherPresenceChannel *weakChannel = self;

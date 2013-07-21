@@ -66,7 +66,7 @@ typedef enum {
 
 /** A textual description of the error.
  */
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 50000
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_5_0
 @property (weak, nonatomic, readonly) NSString *message;
 #else
 @property (unsafe_unretained, nonatomic, readonly) NSString *message;

@@ -77,7 +77,7 @@ extern NSString *const PTPusherErrorUnderlyingEventKey;
  
  The delegate must implement the PTPusherDelegate protocol. The delegate is not retained.
  */
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 50000
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_5_0
 @property (nonatomic, weak) id<PTPusherDelegate> delegate;
 #else 
 @property (nonatomic, unsafe_unretained) id<PTPusherDelegate> delegate;

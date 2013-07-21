@@ -38,7 +38,7 @@
  */
 @interface PTPusherChannel : NSObject <PTPusherEventBindings, PTEventListener> {
   NSString *name;
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 50000
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_5_0
     __weak PTPusher *pusher;
 #else
     __unsafe_unretained PTPusher *pusher;
@@ -164,7 +164,7 @@
  The presence delegate will be notified of presence channel-specific events, such as the initial
  member list on subscription and member added/removed events.
  */
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 50000
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_5_0
 @property (nonatomic, weak) id<PTPusherPresenceChannelDelegate> presenceDelegate;
 #else
 @property (nonatomic, unsafe_unretained) id<PTPusherPresenceChannelDelegate> presenceDelegate;
