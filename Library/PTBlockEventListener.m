@@ -21,16 +21,18 @@
     block = [aBlock copy];
     queue = aQueue;
     _invalid = NO;
-    
+#if !OS_OBJECT_USE_OBJC
     dispatch_retain(queue);
+#endif
   }
   return self;
 }
 
 - (void)dealloc
 {
+#if !OS_OBJECT_USE_OBJC
   dispatch_release(queue);
-  
+#endif
 }
 
 - (void)invalidate
