@@ -232,7 +232,7 @@ namespace :test do
   end
 
   desc "Run unit tests"
-  task :run => 'xcode:build' do
+  task :run => 'xcode:cleanbuild' do
     sh "bundle exec ios-sim-test logic --workspace=libPusher.xcworkspace --scheme=UnitTests"
   end
 end
