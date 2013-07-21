@@ -12,6 +12,7 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		4D81597F1712C6CA0013A485 /* Pusher.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D81597E1712C6CA0013A485 /* Pusher.h */; };
+		5D5C4E7E0F2A4C92B9D85932 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F700C4637DC43EFA335D40F /* libPods.a */; };
 		6D926C9364F64493B0A7BE5A /* libPods-specs.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 34CD0B6EB8B94D28B0AEC265 /* libPods-specs.a */; };
 		A304896C1667AAB4009511CB /* PTPusherChannelAuthorizationOperationSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = A304895E1667A8A6009511CB /* PTPusherChannelAuthorizationOperationSpec.m */; };
 		A30575D115233CC800DA19BD /* PTPusherPresenceChannelSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = A30575CE15233C1200DA19BD /* PTPusherPresenceChannelSpec.m */; };
@@ -61,7 +62,6 @@
 		A3A297DB17368BE200BD956D /* libPusher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3D1D2B71158013F009A12AD /* libPusher.a */; };
 		A3A297DC17368BE300BD956D /* libPusher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3D1D2B71158013F009A12AD /* libPusher.a */; };
 		A3A297DD17368BE300BD956D /* libPusher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A3D1D2B71158013F009A12AD /* libPusher.a */; };
-		A3A297DE17368BEB00BD956D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F700C4637DC43EFA335D40F /* libPods.a */; };
 		A3A9F95A1496E96100F83617 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3A9F9591496E96100F83617 /* SenTestingKit.framework */; };
 		A3A9F95B1496E96100F83617 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		A3A9F95C1496E96100F83617 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -235,6 +235,7 @@
 				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
 				A3D1D0B61157CCDE009A12AD /* CFNetwork.framework in Frameworks */,
 				A3A297DB17368BE200BD956D /* libPusher.a in Frameworks */,
+				5D5C4E7E0F2A4C92B9D85932 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -272,7 +273,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A3A297DE17368BEB00BD956D /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -551,6 +551,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "SampleApp" */;
 			buildPhases = (
+				885CA5CA287D45A28ED26D57 /* Check Pods Manifest.lock */,
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
@@ -742,6 +743,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		885CA5CA287D45A28ED26D57 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		8E36B64CB84E4C429428A183 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -901,6 +917,7 @@
 /* Begin XCBuildConfiguration section */
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A315780A14D0751C000136A9 /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -919,6 +936,7 @@
 		};
 		1D6058950D05DD3E006BFB54 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A315780A14D0751C000136A9 /* Pods.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -1074,6 +1092,7 @@
 				GCC_PREFIX_HEADER = libPusher_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "kPTPusherClientLibraryVersion=@\"$(CURRENT_PROJECT_VERSION)\"";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = Pusher;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1093,6 +1112,7 @@
 				GCC_PREFIX_HEADER = libPusher_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "kPTPusherClientLibraryVersion=@\"$(CURRENT_PROJECT_VERSION)\"";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = Pusher;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1113,6 +1133,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_LDFLAGS = "$(inherited)";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-Wno-arc-performSelector-leaks";
 			};
@@ -1131,6 +1152,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_LDFLAGS = "$(inherited)";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-Wno-arc-performSelector-leaks";
 			};

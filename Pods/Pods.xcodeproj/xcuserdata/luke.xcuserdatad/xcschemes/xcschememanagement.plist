@@ -4,6 +4,26 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Pods-Reachability.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>8</integer>
+		</dict>
+		<key>Pods-SocketRocket.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>9</integer>
+		</dict>
+		<key>Pods-specs-Kiwi.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>10</integer>
+		</dict>
+		<key>Pods-specs-OHHTTPStubs.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>11</integer>
+		</dict>
 		<key>Pods-specs.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -32,6 +52,11 @@
 			<true/>
 		</dict>
 		<key>0740E1FCFA6244CA9A993FE8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>08A9D5DF7A934C5D91224A9D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -81,12 +106,67 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>6D969D3FAB6E4637B46C3BDC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>70AC31718F814251B089774D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>72A00082A6D7484B918AFF7E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7328A4F9C6374686A27D248B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>78EDC9E21ECC43ED93C722D9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>81CAD16CBB3143C8A5F918C4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>99E902D1C70F44B3920567BD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AD2504D2DA164CE9AB24E9DA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BB4868375DD040F191C7C834</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EF4179F378294E3EB69819FE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F0531BAE563D403FBDFF4C89</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>F090D02198D143ECB4D5792B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FCC83C166A0C45879BF8464F</key>
 		<dict>
 			<key>primary</key>
 			<true/>

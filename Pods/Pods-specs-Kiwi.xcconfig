@@ -1,0 +1,2 @@
+PODS_SPECS_KIWI_FRAMEWORK_SEARCH_PATHS = $(inherited) "$(SDKROOT)/Developer/Library/Frameworks" "$(DEVELOPER_LIBRARY_DIR)/Frameworks"
+PODS_SPECS_KIWI_OTHER_LDFLAGS = -framework SenTestingKit
