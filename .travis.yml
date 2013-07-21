@@ -1,3 +1,3 @@
 language: objective-c
 before_install: sudo gem update --system && bundle install --without scripts
-script: bundle exec rake test
+script: bundle exec rake debug:cleanbuild
