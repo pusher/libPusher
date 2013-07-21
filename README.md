@@ -1,5 +1,7 @@
 # libPusher, an Objective-C client for Pusher
 
+[![Build Status](https://travis-ci.org/[YOUR_GITHUB_USERNAME]/[YOUR_PROJECT_NAME].png)](https://travis-ci.org/[YOUR_GITHUB_USERNAME]/[YOUR_PROJECT_NAME])
+
 [Pusher](http://pusherapp.com/) is a hosted service that sits between your web application and the browser that lets you deliver events in real-time using HTML5 WebSockets.
 
 This project was borne out of the idea that a web browser doesn't have to be the only client that receives your web app's real-time notifications. Why couldn't your iPhone, iPad or Mac OSX app receive real-time notifications either?
