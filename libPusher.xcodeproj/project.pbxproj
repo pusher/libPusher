@@ -92,6 +92,7 @@
 		A3D1D2CA11580162009A12AD /* PTPusher.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D28F1157FA4C009A12AD /* PTPusher.m */; };
 		A3D1D2CB11580162009A12AD /* PTPusherEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = A3D1D2901157FA4C009A12AD /* PTPusherEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3D1D2CC11580162009A12AD /* PTPusherEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D2911157FA4C009A12AD /* PTPusherEvent.m */; };
+		A3F032471822CC8A00976DA0 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F700C4637DC43EFA335D40F /* libPods.a */; };
 		A3FE41CB11811161009CF5D7 /* NewEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FE41C911811161009CF5D7 /* NewEventViewController.m */; };
 		A3FE41CC11811161009CF5D7 /* NewEventViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3FE41CA11811161009CF5D7 /* NewEventViewController.xib */; };
 		A3FE429E11811EEE009CF5D7 /* NSString+Hashing.h in Headers */ = {isa = PBXBuildFile; fileRef = A3FE429B11811EE8009CF5D7 /* NSString+Hashing.h */; };
@@ -264,6 +265,7 @@
 				A3A9F95A1496E96100F83617 /* SenTestingKit.framework in Frameworks */,
 				A3A9F95B1496E96100F83617 /* UIKit.framework in Frameworks */,
 				A3A9F95C1496E96100F83617 /* Foundation.framework in Frameworks */,
+				A3F032471822CC8A00976DA0 /* libPods.a in Frameworks */,
 				A3A9FA4F1496EEE000F83617 /* CFNetwork.framework in Frameworks */,
 				A37E158D14E499E000DCA3A6 /* Security.framework in Frameworks */,
 				6D926C9364F64493B0A7BE5A /* libPods-specs.a in Frameworks */,
