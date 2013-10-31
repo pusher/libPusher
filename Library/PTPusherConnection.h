@@ -42,6 +42,15 @@ typedef enum {
 @property (nonatomic, readonly, getter=isConnected) BOOL connected;
 @property (nonatomic, copy, readonly) NSString *socketID;
 
+/* If the connection does not receive any new data within the time specified,
+ * a ping event will be sent.
+ */
+@property (nonatomic, assign) NSTimeInterval activityTimeout;
+
+/* The amount of time to wait for a pong in response to a ping before disconnecting.
+ */
+@property (nonatomic, assign) NSTimeInterval pongTimeout;
+
 ///------------------------------------------------------------------------------------/
 /// @name Initialisation
 ///------------------------------------------------------------------------------------/
