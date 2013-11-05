@@ -7,7 +7,6 @@ Pod::Spec.new do |s|
   s.author       = 'Luke Redpath'
   s.source       = { :git => 'git://github.com/lukeredpath/libPusher.git', :tag => 'v1.4' }
   s.source_files = 'Library/*'
-  s.clean_paths  = ["Frameworks", "Functional Specs", "Sample", "Scripts", "Unit Tests", "*.xcodeproj", "*.xcworkspace"]
   s.requires_arc = true
   s.dependency 'SocketRocket', "0.2"
   s.compiler_flags = '-Wno-arc-performSelector-leaks', '-Wno-format'
