@@ -10,4 +10,5 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.dependency 'SocketRocket', "0.2"
   s.compiler_flags = '-Wno-arc-performSelector-leaks', '-Wno-format'
+  s.xcconfig = { 'GCC_PREPROCESSOR_DEFINITIONS' => 'kPTPusherClientLibraryVersion=@\"1.5\"' }
 end
