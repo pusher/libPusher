@@ -42,11 +42,20 @@
 
 /** Notifies the delegate that the PTPusher instance has disconnected from the Pusher service.
  
- @deprecated Use pusher:connection:didDisconnectWithError:
+ @deprecated Use pusher:connection:didDisconnectWithError:willAttemptReconnect:
  @param pusher The PTPusher instance that has connected.
  @param connection The connection for the pusher instance.
  */
 - (void)pusher:(PTPusher *)pusher connectionDidDisconnect:(PTPusherConnection *)connection __PUSHER_DEPRECATED__;
+
+/** Notifies the delegate that the PTPusher instance has disconnected from the Pusher service.
+
+ @deprecated Use pusher:connection:didDisconnectWithError:willAttemptReconnect:
+ @param pusher The PTPusher instance that has connected.
+ @param connection The connection for the pusher instance.
+ @param error If the connection disconnected abnormally, error will be non-nil.
+ */
+- (void)pusher:(PTPusher *)pusher connection:(PTPusherConnection *)connection didDisconnectWithError:(NSError *)error __PUSHER_DEPRECATED__;
 
 /** Notifies the delegate that the PTPusher instance has disconnected from the Pusher service.
  

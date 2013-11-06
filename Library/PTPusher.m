@@ -372,6 +372,13 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
     [self.delegate pusher:self connectionDidDisconnect:connection];
 #pragma clang diagnostic pop
   }
+
+  if ([self.delegate respondsToSelector:@selector(pusher:connection:didDisconnectWithError:)]) { // deprecated call
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+    [self.delegate pusher:self connection:connection didDisconnectWithError:error];
+#pragma clang diagnostic pop
+  }
     
   if ([self.delegate respondsToSelector:@selector(pusher:connection:didDisconnectWithError:willAttemptReconnect:)]) {
     [self.delegate pusher:self connection:connection didDisconnectWithError:error willAttemptReconnect:willReconnect];
