@@ -113,6 +113,8 @@ NSString *const PTPusherConnectionPongEvent        = @"pusher:pong";
 
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error;
 {
+  [self.pingTimer invalidate];
+  [self.pongTimer invalidate];
   BOOL wasConnected = self.isConnected;
   self.state = PTPusherConnectionDisconnected;
   [self.delegate pusherConnection:self didFailWithError:error wasConnected:wasConnected];
@@ -122,6 +124,8 @@ NSString *const PTPusherConnectionPongEvent        = @"pusher:pong";
 
 - (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean
 {
+  [self.pingTimer invalidate];
+  [self.pongTimer invalidate];
   self.state = PTPusherConnectionDisconnected;
   [self.delegate pusherConnection:self didDisconnectWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean];
   self.socketID = nil;
