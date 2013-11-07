@@ -143,8 +143,6 @@ NSString *const PTPusherConnectionPongEvent        = @"pusher:pong";
 #ifdef DEBUG
     NSLog(@"[pusher] Server responded to ping (pong!)");
 #endif
-    
-    [self.pongTimer invalidate];
     return;
   }
   
@@ -168,6 +166,8 @@ NSString *const PTPusherConnectionPongEvent        = @"pusher:pong";
 - (void)resetPingPongTimer
 {
   [self.pingTimer invalidate];
+  // Any activity also invalidates the pong timer if set
+  [self.pongTimer invalidate];
   
   self.pingTimer = [NSTimer scheduledTimerWithTimeInterval:self.activityTimeout target:self selector:@selector(handleActivityTimeout) userInfo:nil repeats:NO];
 }
