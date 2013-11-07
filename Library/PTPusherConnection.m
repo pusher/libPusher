@@ -190,7 +190,7 @@ NSString *const PTPusherConnectionPongEvent        = @"pusher:pong";
   
   [self sendPing];
   
-  self.pongTimer = [NSTimer scheduledTimerWithTimeInterval:self.activityTimeout target:self selector:@selector(handlePongTimeout) userInfo:nil repeats:NO];
+  self.pongTimer = [NSTimer scheduledTimerWithTimeInterval:self.pongTimeout target:self selector:@selector(handlePongTimeout) userInfo:nil repeats:NO];
 }
 
 - (void)handlePongTimeout
