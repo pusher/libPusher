@@ -138,16 +138,7 @@ NSString *const PTPusherConnectionPongEvent        = @"pusher:pong";
   
   NSDictionary *messageDictionary = [[PTJSON JSONParser] objectFromJSONString:message];
   PTPusherEvent *event = [PTPusherEvent eventFromMessageDictionary:messageDictionary];
-  
-  if ([event.name isEqualToString:PTPusherConnectionPingEvent]) {
-    // don't forward on ping events, just handle them and return
-#ifdef DEBUG
-    NSLog(@"[pusher] Responding to server sent ping (pong!)");
-#endif
 
-    [self sendPong];
-    return;
-  }
   if ([event.name isEqualToString:PTPusherConnectionPongEvent]) {
 #ifdef DEBUG
     NSLog(@"[pusher] Server responded to ping (pong!)");
@@ -172,11 +163,6 @@ NSString *const PTPusherConnectionPongEvent        = @"pusher:pong";
 - (void)sendPing
 {
   [self send:[NSDictionary dictionaryWithObject:@"pusher:ping" forKey:@"event"]];
-}
-
-- (void)sendPong
-{
-  [self send:[NSDictionary dictionaryWithObject:@"pusher:pong" forKey:@"event"]];
 }
 
 - (void)resetPingPongTimer
