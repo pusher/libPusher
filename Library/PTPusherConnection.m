@@ -113,6 +113,8 @@ NSString *const PTPusherConnectionPongEvent        = @"pusher:pong";
 
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error;
 {
+  [self.pingTimer invalidate];
+  [self.pongTimer invalidate];
   BOOL wasConnected = self.isConnected;
   self.state = PTPusherConnectionDisconnected;
   [self.delegate pusherConnection:self didFailWithError:error wasConnected:wasConnected];
@@ -122,6 +124,8 @@ NSString *const PTPusherConnectionPongEvent        = @"pusher:pong";
 
 - (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean
 {
+  [self.pingTimer invalidate];
+  [self.pongTimer invalidate];
   self.state = PTPusherConnectionDisconnected;
   [self.delegate pusherConnection:self didDisconnectWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean];
   self.socketID = nil;
@@ -134,22 +138,11 @@ NSString *const PTPusherConnectionPongEvent        = @"pusher:pong";
   
   NSDictionary *messageDictionary = [[PTJSON JSONParser] objectFromJSONString:message];
   PTPusherEvent *event = [PTPusherEvent eventFromMessageDictionary:messageDictionary];
-  
-  if ([event.name isEqualToString:PTPusherConnectionPingEvent]) {
-    // don't forward on ping events, just handle them and return
-#ifdef DEBUG
-    NSLog(@"[pusher] Responding to server sent ping (pong!)");
-#endif
 
-    [self sendPong];
-    return;
-  }
   if ([event.name isEqualToString:PTPusherConnectionPongEvent]) {
 #ifdef DEBUG
     NSLog(@"[pusher] Server responded to ping (pong!)");
 #endif
-    
-    [self.pongTimer invalidate];
     return;
   }
   
@@ -170,14 +163,11 @@ NSString *const PTPusherConnectionPongEvent        = @"pusher:pong";
   [self send:[NSDictionary dictionaryWithObject:@"pusher:ping" forKey:@"event"]];
 }
 
-- (void)sendPong
-{
-  [self send:[NSDictionary dictionaryWithObject:@"pusher:pong" forKey:@"event"]];
-}
-
 - (void)resetPingPongTimer
 {
   [self.pingTimer invalidate];
+  // Any activity also invalidates the pong timer if set
+  [self.pongTimer invalidate];
   
   self.pingTimer = [NSTimer scheduledTimerWithTimeInterval:self.activityTimeout target:self selector:@selector(handleActivityTimeout) userInfo:nil repeats:NO];
 }
@@ -190,7 +180,7 @@ NSString *const PTPusherConnectionPongEvent        = @"pusher:pong";
   
   [self sendPing];
   
-  self.pongTimer = [NSTimer scheduledTimerWithTimeInterval:self.activityTimeout target:self selector:@selector(handlePongTimeout) userInfo:nil repeats:NO];
+  self.pongTimer = [NSTimer scheduledTimerWithTimeInterval:self.pongTimeout target:self selector:@selector(handlePongTimeout) userInfo:nil repeats:NO];
 }
 
 - (void)handlePongTimeout
