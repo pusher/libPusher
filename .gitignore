@@ -24,3 +24,4 @@ dist
 .bundle
 xcodebuild.log
 Pods/Documentation
+*.xccheckout
