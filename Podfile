@@ -1,5 +1,7 @@
 platform :ios, :deployment_target => '4.0'
 
+inhibit_all_warnings!
+
 pod 'Reachability'
 pod 'SocketRocket', :head
 
