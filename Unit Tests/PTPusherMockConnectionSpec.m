@@ -19,7 +19,7 @@ describe(@"PTPusherMockConnectionSpec", ^{
   __block PTPusher *pusher;
   
   beforeEach(^{
-    pusher = [[PTPusher alloc] initWithConnection:connection connectAutomatically:NO];
+    pusher = [[PTPusher alloc] initWithConnection:connection];
   });
   
   it(@"handles connections and reports connected", ^{

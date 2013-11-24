@@ -65,6 +65,16 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 
 - (id)initWithConnection:(PTPusherConnection *)connection connectAutomatically:(BOOL)connectAutomatically
 {
+  if ((self = [self initWithConnection:connection])) {
+    if (connectAutomatically) {
+      [self connect];
+    }
+  }
+  return self;
+}
+
+- (id)initWithConnection:(PTPusherConnection *)connection
+{
   if (self = [super init]) {
     dispatcher = [[PTPusherEventDispatcher alloc] init];
     channels = [[NSMutableDictionary alloc] init];
@@ -76,10 +86,6 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
     self.connection = connection;
     self.connection.delegate = self;
     self.reconnectDelay = kPTPusherDefaultReconnectDelay;
-    
-    if (connectAutomatically) {
-      [self connect];
-    }
   }
   return self;
 }
@@ -91,23 +97,31 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 
 + (id)pusherWithKey:(NSString *)key delegate:(id<PTPusherDelegate>)delegate encrypted:(BOOL)isEncrypted
 {
-  PTPusher *pusher = [self pusherWithKey:key connectAutomatically:NO encrypted:isEncrypted];
+  NSURL *serviceURL = PTPusherConnectionURL(kPUSHER_HOST, key, @"libPusher", isEncrypted);
+  PTPusherConnection *connection = [[PTPusherConnection alloc] initWithURL:serviceURL];
+  PTPusher *pusher = [[self alloc] initWithConnection:connection];
   pusher.delegate = delegate;
-  [pusher connect];
   return pusher;
 }
 
+#pragma mark - Deprecated methods
+
 + (id)pusherWithKey:(NSString *)key connectAutomatically:(BOOL)connectAutomatically
 {
-  return [self pusherWithKey:key connectAutomatically:connectAutomatically encrypted:YES];
+  PTPusher *client = [self pusherWithKey:key delegate:nil encrypted:YES];
+  if (connectAutomatically) {
+    [client connect];
+  }
+  return client;
 }
 
 + (id)pusherWithKey:(NSString *)key connectAutomatically:(BOOL)connectAutomatically encrypted:(BOOL)isEncrypted
 {
-  NSURL *serviceURL = PTPusherConnectionURL(kPUSHER_HOST, key, @"libPusher", isEncrypted);
-  PTPusherConnection *connection = [[PTPusherConnection alloc] initWithURL:serviceURL];
-  PTPusher *pusher = [[self alloc] initWithConnection:connection connectAutomatically:connectAutomatically];
-  return pusher;
+  PTPusher *client = [self pusherWithKey:key delegate:nil encrypted:isEncrypted];
+  if (connectAutomatically) {
+    [client connect];
+  }
+  return client;
 }
 
 - (void)dealloc;
