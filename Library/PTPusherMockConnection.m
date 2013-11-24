@@ -18,7 +18,7 @@
 
 - (id)init
 {
-  if ((self = [super init])) {
+  if ((self = [super initWithURL:nil])) {
     sentClientEvents = [[NSMutableArray alloc] init];
   }
   return self;
