@@ -16,4 +16,4 @@ SPEC CHECKSUMS:
   Reachability: 500bd76bf6cd8ff2c6fb715fc5f44ef6e4c024f2
   SocketRocket: bca43a94bd9aac3a629df42c06843402399ee67b
 
-COCOAPODS: 0.22.2
+COCOAPODS: 0.28.0
