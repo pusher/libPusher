@@ -370,6 +370,7 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
   if ([self.delegate respondsToSelector:@selector(pusher:connectionDidDisconnect:)]) { // deprecated call
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
+    NSLog(@"pusher:connectionDidDisconnect: is deprecated and will be removed in 1.6. Use pusher:connection:didDisconnectWithError:willAttemptReconnect: instead.");
     [self.delegate pusher:self connectionDidDisconnect:connection];
 #pragma clang diagnostic pop
   }
@@ -377,6 +378,7 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
   if ([self.delegate respondsToSelector:@selector(pusher:connection:didDisconnectWithError:)]) { // deprecated call
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
+    NSLog(@"pusher:connectionDidDisconnectWithError: is deprecated and will be removed in 1.6. Use pusher:connection:didDisconnectWithError:willAttemptReconnect: instead.");
     [self.delegate pusher:self connection:connection didDisconnectWithError:error];
 #pragma clang diagnostic pop
   }
