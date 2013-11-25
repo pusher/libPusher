@@ -142,6 +142,7 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 
 - (void)connect
 {
+  _numberOfReconnectAttempts = 0;
   [self.connection connect];
 }
 
