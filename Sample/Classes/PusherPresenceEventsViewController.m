@@ -18,6 +18,9 @@
 #import "PusherEventsAppDelegate.h"
 
 @interface PusherPresenceEventsViewController ()
+@property (nonatomic, strong) UIBarButtonItem *joinButtonItem;
+@property (nonatomic, strong) UIBarButtonItem *leaveButtonItem;
+@property (nonatomic, strong) NSMutableArray *members;
 @end
 
 @implementation PusherPresenceEventsViewController
@@ -31,19 +34,22 @@
   
   self.title = @"Presence";
   self.tableView.rowHeight = 55;
+  self.members = [NSMutableArray array];
 
-  UIBarButtonItem *newClientButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Add Client" style:UIBarButtonItemStyleBordered target:self action:@selector(connectClient)];
-  UIBarButtonItem *disconnectClientButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Remove Client" style:UIBarButtonItemStyleBordered target:self action:@selector(disconnectLastClient)];
-  self.toolbarItems = [NSArray arrayWithObjects:newClientButtonItem, disconnectClientButtonItem, nil];
+  self.joinButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Join"
+                                                         style:UIBarButtonItemStyleBordered
+                                                        target:self
+                                                        action:@selector(joinChannel:)];
+  
+  self.leaveButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Leave"
+                                                          style:UIBarButtonItemStyleBordered
+                                                         target:self
+                                                         action:@selector(leaveChannel:)];
+  
+  self.navigationItem.rightBarButtonItem = self.joinButtonItem;
   
   // configure the auth URL for private/presence channels
   self.pusher.authorizationURL = [NSURL URLWithString:@"http://localhost:9292/presence/auth"];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-  [super viewWillAppear:animated];
-  [self subscribeToPresenceChannel:@"demo"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -51,11 +57,25 @@
   [super viewWillDisappear:animated];
   
   if ([self.currentChannel isSubscribed]) {
-    // unsubscribe before we go back to the main menu
     [self.currentChannel unsubscribe];
   }
 }
 
+- (void)joinChannel:(id)sender
+{
+  [self subscribeToPresenceChannel:@"demo"];
+}
+
+- (void)leaveChannel:(id)sender
+{
+  [self.currentChannel unsubscribe];
+  self.currentChannel = nil;
+  
+  self.navigationItem.rightBarButtonItem = self.joinButtonItem;
+
+  [self.members removeAllObjects];
+  [self.tableView reloadData];
+}
 
 #pragma mark - Subscribing
 
@@ -66,28 +86,40 @@
 
 #pragma mark - Presence channel events
 
-- (void)presenceChannel:(PTPusherPresenceChannel *)channel didSubscribeWithMemberList:(NSArray *)members
+- (void)presenceChannelDidSubscribe:(PTPusherPresenceChannel *)channel
 {
-  NSLog(@"[pusher] Channel members: %@", members);
+  NSLog(@"[pusher] Channel members: %@", channel.members);
+
+  self.navigationItem.rightBarButtonItem = self.leaveButtonItem;
+
+  [channel.members enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
+    [self.members addObject:obj];
+  }];
+  
   [self.tableView reloadData];
 }
 
-- (void)presenceChannel:(PTPusherPresenceChannel *)channel memberAddedWithID:(NSString *)memberID memberInfo:(NSDictionary *)memberInfo
+- (void)presenceChannel:(PTPusherPresenceChannel *)channel memberAdded:(PTPusherChannelMember *)member
 {
-  NSLog(@"[pusher] Member joined channel: %@", memberInfo);
+  NSLog(@"[pusher] Member joined channel: %@", member);
+  
+  [self.members addObject:member];
   
   [self.tableView beginUpdates];
-  [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:[channel.memberIDs indexOfObject:memberID] inSection:0]]
+  [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:self.members.count-1 inSection:0]]
                         withRowAnimation:UITableViewRowAnimationTop];
   [self.tableView endUpdates];
 }
 
-- (void)presenceChannel:(PTPusherPresenceChannel *)channel memberRemovedWithID:(NSString *)memberID atIndex:(NSInteger)index
+- (void)presenceChannel:(PTPusherPresenceChannel *)channel memberRemoved:(PTPusherChannelMember *)member
 {
-  NSLog(@"[pusher] Member left channel: %@", memberID);
+  NSLog(@"[pusher] Member left channel: %@", member);
+  
+  NSInteger memberIndex = [self.members indexOfObject:member];
+  [self.members removeObject:member];
 
   [self.tableView beginUpdates];
-  [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:index inSection:0]] 
+  [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:memberIndex inSection:0]]
                         withRowAnimation:UITableViewRowAnimationTop];
   [self.tableView endUpdates];
 }
@@ -96,7 +128,7 @@
 
 - (NSInteger)tableView:(UITableView *)table numberOfRowsInSection:(NSInteger)section;
 {
-  return self.currentChannel.memberCount;
+  return self.currentChannel.members.count;
 }
 
 static NSString *EventCellIdentifier = @"EventCell";
@@ -107,11 +139,10 @@ static NSString *EventCellIdentifier = @"EventCell";
   if (cell == nil) {
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:EventCellIdentifier];
   }
-  NSString *memberID = [self.currentChannel.memberIDs objectAtIndex:indexPath.row];
-  NSDictionary *memberInfo = [self.currentChannel infoForMemberWithID:memberID];
+  PTPusherChannelMember *member = self.members[indexPath.row];
 
-  cell.textLabel.text = [NSString stringWithFormat:@"Member: %@", memberID];
-  cell.detailTextLabel.text = [NSString stringWithFormat:@"Name: %@ Email: %@", [memberInfo objectForKey:@"name"], [memberInfo objectForKey:@"email"]];
+  cell.textLabel.text = [NSString stringWithFormat:@"Member: %@", member.userID];
+  cell.detailTextLabel.text = [NSString stringWithFormat:@"Name: %@ Email: %@", member.userInfo[@"name"], member.userInfo[@"email"]];
   
   return cell;
 }
