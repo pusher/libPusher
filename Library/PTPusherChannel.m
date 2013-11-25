@@ -14,6 +14,7 @@
 #import "PTBlockEventListener.h"
 #import "PTPusherChannelAuthorizationOperation.h"
 #import "PTPusherErrors.h"
+#import "PTJSON.h"
 
 @interface PTPusher ()
 - (void)__unsubscribeFromChannel:(PTPusherChannel *)channel;
@@ -293,17 +294,27 @@
 
 #pragma mark -
 
+@interface PTPusherChannelMembers ()
+
+@property (nonatomic, copy) NSString *myID;
+
+- (void)reset;
+- (void)handleSubscription:(NSDictionary *)subscriptionData;
+- (PTPusherChannelMember *)handleMemberAdded:(NSDictionary *)memberData;
+- (PTPusherChannelMember *)handleMemberRemoved:(NSDictionary *)memberData;
+
+@end
+
 @implementation PTPusherPresenceChannel
 
 @synthesize presenceDelegate;
-@synthesize members;
+@synthesize members = _members;
 
 - (id)initWithName:(NSString *)channelName pusher:(PTPusher *)aPusher
 {
   if ((self = [super initWithName:channelName pusher:aPusher])) {
-    members = [[NSMutableDictionary alloc] init];
-    memberIDs = [[NSMutableArray alloc] init];
-    
+    _members = [[PTPusherChannelMembers alloc] init];
+
     /* Set up event handlers for pre-defined channel events.
      As above, use blocks as proxies to a weak channel reference to avoid retain cycles.
      */
@@ -330,13 +341,32 @@
   return self;
 }
 
+- (void)subscribeWithAuthorization:(NSDictionary *)authData
+{
+  [super subscribeWithAuthorization:authData];
+  
+  NSDictionary *channelData = [[PTJSON JSONParser] objectFromJSONString:authData[@"channel_data"]];
+  self.members.myID = channelData[@"user_id"];
+}
+
 - (void)handleSubscribeEvent:(PTPusherEvent *)event
 {
-  NSDictionary *presenceData = [event.data objectForKey:@"presence"];
   [super handleSubscribeEvent:event];
-  [members setDictionary:[presenceData objectForKey:@"hash"]];
-  [memberIDs setArray:[presenceData objectForKey:@"ids"]];
-  [self.presenceDelegate presenceChannel:self didSubscribeWithMemberList:memberIDs];
+  [self.members handleSubscription:event.data];
+  
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+  if ([self.presenceDelegate respondsToSelector:@selector(presenceChannel:didSubscribeWithMemberList:)]) { // deprecated call
+    NSLog(@"presenceChannel:didSubscribeWithMemberList: is deprecated and will be removed in 1.6. Use presenceChannelDidSubscribe: instead.");
+    NSMutableArray *members = [NSMutableArray arrayWithCapacity:self.members.count];
+    [self.members enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
+      [members addObject:obj];
+    }];
+    [self.presenceDelegate presenceChannel:self didSubscribeWithMemberList:members];
+  }
+#pragma clang diagnostic pop
+
+  [self.presenceDelegate presenceChannelDidSubscribe:self];
 }
 
 - (BOOL)isPresence
@@ -346,38 +376,162 @@
 
 - (NSDictionary *)infoForMemberWithID:(NSString *)memberID
 {
-  return [members objectForKey:memberID];
+  return self.members[memberID];
 }
 
 - (NSArray *)memberIDs
 {
-  return [memberIDs copy];
+  NSMutableArray *memberIDs = [NSMutableArray array];
+  [self.members enumerateObjectsUsingBlock:^(PTPusherChannelMember *member, BOOL *stop) {
+    [memberIDs addObject:member.userID];
+  }];
+  return memberIDs;
 }
 
 - (NSInteger)memberCount
 {
-  return [memberIDs count];
+  return self.members.count;
 }
 
 - (void)handleMemberAddedEvent:(PTPusherEvent *)event
 {
-  NSString *memberID = [event.data objectForKey:@"user_id"];
-  NSDictionary *memberInfo = [event.data objectForKey:@"user_info"];
-  if (memberInfo == nil) {
-    memberInfo = [NSDictionary dictionary];
+  PTPusherChannelMember *member = [self.members handleMemberAdded:event.data];
+  
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+  if ([self.presenceDelegate respondsToSelector:@selector(presenceChannel:memberAddedWithID:memberInfo:)]) { // deprecated call
+    NSLog(@"presenceChannel:memberAddedWithID:memberInfo: is deprecated and will be removed in 1.6. Use presenceChannel:memberAdded: instead.");
+    [self.presenceDelegate presenceChannel:self memberAddedWithID:member.userID memberInfo:member.userInfo];
   }
-  [memberIDs addObject:memberID];
-  [members setObject:memberInfo forKey:memberID];
-  [self.presenceDelegate presenceChannel:self memberAddedWithID:memberID memberInfo:memberInfo];
+#pragma clang diagnostic pop
+
+  [self.presenceDelegate presenceChannel:self memberAdded:member];
 }
 
 - (void)handleMemberRemovedEvent:(PTPusherEvent *)event
 {
-  NSString *memberID = [event.data valueForKey:@"user_id"];
-  NSInteger memberIndex = [memberIDs indexOfObject:memberID];
-  [memberIDs removeObject:memberID];
-  [members removeObjectForKey:memberID]; 
-  [self.presenceDelegate presenceChannel:self memberRemovedWithID:memberID atIndex:memberIndex];
+  PTPusherChannelMember *member = [self.members handleMemberRemoved:event.data];
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+  if ([self.presenceDelegate respondsToSelector:@selector(presenceChannel:memberRemovedWithID:atIndex:)]) { // deprecated call
+    NSLog(@"presenceChannel:memberRemovedWithID:atIndex: is deprecated and will be removed in 1.6. Use presenceChannel:memberRemoved: instead.");
+    // we just send an index of -1 here: I don't want to jump through hoops to support a deprecated API call
+    [self.presenceDelegate presenceChannel:self memberRemovedWithID:member.userID atIndex:-1];
+  }
+#pragma clang diagnostic pop
+  
+  [self.presenceDelegate presenceChannel:self memberRemoved:member];
+}
+
+@end
+
+#pragma mark -
+
+@implementation PTPusherChannelMember
+
+- (id)initWithUserID:(NSString *)userID userInfo:(NSDictionary *)userInfo
+{
+  if ((self = [super init])) {
+    _userID = [userID copy];
+    _userInfo = [userInfo copy];
+  }
+  return self;
+}
+
+- (NSString *)description
+{
+  return [NSString stringWithFormat:@"<PTPusherChannelMember id:%@ info:%@>", self.userID, self.userInfo];
+}
+
+- (id)objectForKeyedSubscript:(id <NSCopying>)key
+{
+  return self.userInfo[key];
+}
+
+@end
+
+@implementation PTPusherChannelMembers {
+  NSMutableDictionary *_members;
+}
+
+- (id)init
+{
+  self = [super init];
+  if (self) {
+    _members = [[NSMutableDictionary alloc] init];
+  }
+  return self;
+}
+
+- (void)reset
+{
+  _members = [[NSMutableDictionary alloc] init];
+  self.myID = nil;
+}
+
+- (NSString *)description
+{
+  return [NSString stringWithFormat:@"<PTPusherChannelMembers members:%@>", _members];
+}
+
+- (NSInteger)count
+{
+  return _members.count;
+}
+
+- (id)objectForKeyedSubscript:(id <NSCopying>)key
+{
+  return _members[key];
+}
+
+- (void)enumerateObjectsUsingBlock:(void (^)(id obj, BOOL *stop))block
+{
+  [_members enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+    block(obj, stop);
+  }];
+}
+
+
+- (PTPusherChannelMember *)me
+{
+  return self[self.myID];
+}
+
+- (PTPusherChannelMember *)memberWithID:(NSString *)userID
+{
+  return self[userID];
+}
+
+#pragma mark - Channel event handling
+
+- (void)handleSubscription:(NSDictionary *)subscriptionData
+{
+  NSDictionary *memberHash = subscriptionData[@"presence"][@"hash"];
+  
+  [memberHash enumerateKeysAndObjectsUsingBlock:^(NSString *userID, NSDictionary *userInfo, BOOL *stop) {
+    PTPusherChannelMember *member = [[PTPusherChannelMember alloc] initWithUserID:userID userInfo:userInfo];
+    _members[userID] = member;
+  }];
+}
+
+- (PTPusherChannelMember *)handleMemberAdded:(NSDictionary *)memberData
+{
+  PTPusherChannelMember *member = [self memberWithID:memberData[@"user_id"]];
+  if (member == nil) {
+    member = [[PTPusherChannelMember alloc] initWithUserID:memberData[@"user_id"] userInfo:memberData[@"user_info"]];
+    [_members setObject:member forKey:member.userID];
+  }
+  return member;
+}
+
+- (PTPusherChannelMember *)handleMemberRemoved:(NSDictionary *)memberData
+{
+  PTPusherChannelMember *member = [self memberWithID:memberData[@"user_id"]];
+  if (member) {
+    [_members removeObjectForKey:member.userID];
+  }
+  return member;
 }
 
 @end

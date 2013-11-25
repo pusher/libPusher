@@ -933,6 +933,7 @@
 				GCC_PREFIX_HEADER = libPusher_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "libPusher-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = SampleApp;
 				SKIP_INSTALL = YES;
 			};
@@ -950,6 +951,7 @@
 				GCC_PREFIX_HEADER = libPusher_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "libPusher-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = SampleApp;
 				SKIP_INSTALL = YES;
 			};

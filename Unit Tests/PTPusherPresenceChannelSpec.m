@@ -31,10 +31,9 @@ describe(@"PTPusherPresenceChannel", ^{
       
       [channel dispatchEvent:event];
       
-      [[theReturnValueOfBlock(^{ return theValue(channel.memberCount); }) shouldEventually] equal:[NSNumber numberWithInt:1]];
+      [[theReturnValueOfBlock(^{ return theValue(channel.members.count); }) shouldEventually] equal:[NSNumber numberWithInt:1]];
 
-      [[channel.memberIDs should] contain:@"123"];
-      [[[[channel infoForMemberWithID:@"123"] objectForKey:@"name"] should] equal:@"Joe Bloggs"];
+      [[[channel.members[@"123"] userInfo][@"name"] should] equal:@"Joe Bloggs"];
     });
     
     it(@"adds an empty dictionary for the member if it has no info", ^{
@@ -44,7 +43,7 @@ describe(@"PTPusherPresenceChannel", ^{
       
       [channel dispatchEvent:event];
       
-      [[[channel infoForMemberWithID:@"123"] shouldEventually] equal:[NSDictionary dictionary]];
+      [[[channel.members[@"123"] userInfo] shouldEventually] equal:[NSDictionary dictionary]];
     });
   });
 });

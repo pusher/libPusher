@@ -48,7 +48,7 @@ describe(@"PTPusherMockConnectionSpec", ^{
   it(@"simulates the correct response when subscribing to a private channel when auth bypass is enabled", ^{
     [pusher enableChannelAuthorizationBypassMode];
     [pusher connect];
-    PTPusherChannel *channel = [pusher subscribeToPresenceChannelNamed:@"test-channel"];
+    PTPusherChannel *channel = [pusher subscribeToPrivateChannelNamed:@"test-channel"];
     [[theReturnValueOfBlock(^{ return theValue(channel.isSubscribed); }) shouldEventually] beTrue];
 	});
   
