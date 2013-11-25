@@ -277,6 +277,11 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 {
   NSParameterAssert(name);
   
+  if (self.connection.isConnected == NO) {
+    NSLog(@"Warning: attempting to send event while disconnected. Event will not be sent.");
+    return;
+  }
+  
   NSMutableDictionary *payload = [NSMutableDictionary dictionary];  
   [payload setObject:name forKey:PTPusherEventKey];
   
