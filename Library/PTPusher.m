@@ -49,6 +49,8 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 
 @implementation PTPusher {
   NSOperationQueue *authorizationQueue;
+  NSUInteger _numberOfReconnectAttempts;
+  NSUInteger _maximumNumberOfReconnectAttempts;
 }
 
 @synthesize connection = _connection;
@@ -80,6 +82,18 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
     self.connection = connection;
     self.connection.delegate = self;
     self.reconnectDelay = kPTPusherDefaultReconnectDelay;
+    
+    /* Three reconnection attempts should be more than enough attempts
+     * to reconnect where the user has simply locked their device or
+     * backgrounded the app.
+     *
+     * If there is no internet connection, we don't want to retry too
+     * many times.
+     *
+     * We may consider making this user-customisable in future but not 
+     * for now.
+     */
+    _maximumNumberOfReconnectAttempts = 3;
   }
   return self;
 }
@@ -307,6 +321,8 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 
 - (void)pusherConnectionDidConnect:(PTPusherConnection *)connection
 {
+  _numberOfReconnectAttempts = 0;
+  
   if ([self.delegate respondsToSelector:@selector(pusher:connectionDidConnect:)]) {
     [self.delegate pusher:self connectionDidConnect:connection];
   }
@@ -328,27 +344,27 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
     
     // 4000-4099 -> The connection SHOULD NOT be re-established unchanged.
     if (errorCode >= 4000 && errorCode <= 4099) {
-      [self handleDisconnection:connection error:error willReconnect:NO reconnectDelay:0];
+      [self handleDisconnection:connection error:error shouldReconnect:NO reconnectDelay:0];
     } else
     // 4200-4299 -> The connection SHOULD be re-established immediately.
     if(errorCode >= 4200 && errorCode <= 4299) {
-      [self handleDisconnection:connection error:error willReconnect:YES reconnectDelay:0];
+      [self handleDisconnection:connection error:error shouldReconnect:YES reconnectDelay:0];
     }
     
     else {
       // i.e. 4100-4199 -> The connection SHOULD be re-established after backing off.
-      [self handleDisconnection:connection error:error willReconnect:YES reconnectDelay:self.reconnectDelay];
+      [self handleDisconnection:connection error:error shouldReconnect:YES reconnectDelay:self.reconnectDelay];
     }
   }
   else {
-    [self handleDisconnection:connection error:error willReconnect:YES reconnectDelay:self.reconnectDelay];
+    [self handleDisconnection:connection error:error shouldReconnect:YES reconnectDelay:self.reconnectDelay];
   }
 }
 
 - (void)pusherConnection:(PTPusherConnection *)connection didFailWithError:(NSError *)error wasConnected:(BOOL)wasConnected
 {
   if (wasConnected) {
-    [self handleDisconnection:connection error:error willReconnect:NO reconnectDelay:0];
+    [self handleDisconnection:connection error:error shouldReconnect:NO reconnectDelay:0];
   }
   else {
     if ([self.delegate respondsToSelector:@selector(pusher:connection:failedWithError:)]) {
@@ -376,7 +392,7 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
      userInfo:[NSDictionary dictionaryWithObject:event forKey:PTPusherEventUserInfoKey]];
 }
 
-- (void)handleDisconnection:(PTPusherConnection *)connection error:(NSError *)error willReconnect:(BOOL)willReconnect reconnectDelay:(NSTimeInterval)reconnectDelay
+- (void)handleDisconnection:(PTPusherConnection *)connection error:(NSError *)error shouldReconnect:(BOOL)shouldReconnect reconnectDelay:(NSTimeInterval)reconnectDelay
 {
   [authorizationQueue cancelAllOperations];
   
@@ -398,6 +414,12 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
     NSLog(@"pusher:connectionDidDisconnectWithError: is deprecated and will be removed in 1.6. Use pusher:connection:didDisconnectWithError:willAttemptReconnect: instead.");
     [self.delegate pusher:self connection:connection didDisconnectWithError:error];
 #pragma clang diagnostic pop
+  }
+  
+  BOOL willReconnect = NO;
+  
+  if (shouldReconnect && _numberOfReconnectAttempts < _maximumNumberOfReconnectAttempts) {
+    willReconnect = YES;
   }
     
   if ([self.delegate respondsToSelector:@selector(pusher:connection:didDisconnectWithError:willAttemptReconnect:)]) {
@@ -427,6 +449,8 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
   dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delay * NSEC_PER_SEC);
   dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
     [_connection connect];
+    
+    _numberOfReconnectAttempts++;
   });
 }
 
