@@ -24,13 +24,15 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
   _events = [[NSMutableArray alloc] init];
+  
+  self.pusher = [PTPusher pusherWithKey:PUSHER_API_KEY delegate:self encrypted:NO];
 }
 
 - (IBAction)connect:(id)sender 
 {
   [sender setEnabled:NO];
   
-  self.pusher = [PTPusher pusherWithKey:PUSHER_API_KEY delegate:self encrypted:NO];
+  [self.pusher connect];
   
   PTPusherChannel *channel = [self.pusher subscribeToChannelNamed:@"messages"];
   
