@@ -19,6 +19,13 @@
 
 #define kPUSHER_HOST @"ws.pusherapp.com"
 
+typedef NS_ENUM(NSUInteger, PTPusherAutoReconnectMode) {
+  PTPusherAutoReconnectModeNoReconnect,
+  PTPusherAutoReconnectModeReconnectImmediately,
+  PTPusherAutoReconnectModeReconnectWithConfiguredDelay,
+  PTPusherAutoReconnectModeReconnectWithBackoffDelay
+};
+
 NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, BOOL secure);
 
 NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotification";
@@ -345,27 +352,27 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
     
     // 4000-4099 -> The connection SHOULD NOT be re-established unchanged.
     if (errorCode >= 4000 && errorCode <= 4099) {
-      [self handleDisconnection:connection error:error shouldReconnect:NO reconnectDelay:0];
+      [self handleDisconnection:connection error:error reconnectMode:PTPusherAutoReconnectModeNoReconnect];
     } else
     // 4200-4299 -> The connection SHOULD be re-established immediately.
     if(errorCode >= 4200 && errorCode <= 4299) {
-      [self handleDisconnection:connection error:error shouldReconnect:YES reconnectDelay:0];
+      [self handleDisconnection:connection error:error reconnectMode:PTPusherAutoReconnectModeReconnectImmediately];
     }
     
     else {
       // i.e. 4100-4199 -> The connection SHOULD be re-established after backing off.
-      [self handleDisconnection:connection error:error shouldReconnect:YES reconnectDelay:self.reconnectDelay];
+      [self handleDisconnection:connection error:error reconnectMode:PTPusherAutoReconnectModeReconnectWithBackoffDelay];
     }
   }
   else {
-    [self handleDisconnection:connection error:error shouldReconnect:YES reconnectDelay:self.reconnectDelay];
+    [self handleDisconnection:connection error:error reconnectMode:PTPusherAutoReconnectModeReconnectWithConfiguredDelay];
   }
 }
 
 - (void)pusherConnection:(PTPusherConnection *)connection didFailWithError:(NSError *)error wasConnected:(BOOL)wasConnected
 {
   if (wasConnected) {
-    [self handleDisconnection:connection error:error shouldReconnect:YES reconnectDelay:self.reconnectDelay];
+    [self handleDisconnection:connection error:error reconnectMode:PTPusherAutoReconnectModeReconnectWithConfiguredDelay];
   }
   else {
     if ([self.delegate respondsToSelector:@selector(pusher:connection:failedWithError:)]) {
@@ -393,7 +400,7 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
      userInfo:[NSDictionary dictionaryWithObject:event forKey:PTPusherEventUserInfoKey]];
 }
 
-- (void)handleDisconnection:(PTPusherConnection *)connection error:(NSError *)error shouldReconnect:(BOOL)shouldReconnect reconnectDelay:(NSTimeInterval)reconnectDelay
+- (void)handleDisconnection:(PTPusherConnection *)connection error:(NSError *)error reconnectMode:(PTPusherAutoReconnectMode)reconnectMode
 {
   [authorizationQueue cancelAllOperations];
   
@@ -419,7 +426,7 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
   
   BOOL willReconnect = NO;
   
-  if (shouldReconnect && _numberOfReconnectAttempts < _maximumNumberOfReconnectAttempts) {
+  if (reconnectMode > PTPusherAutoReconnectModeNoReconnect && _numberOfReconnectAttempts < _maximumNumberOfReconnectAttempts) {
     willReconnect = YES;
   }
     
@@ -428,7 +435,7 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
   }
   
   if (willReconnect) {
-    [self reconnectAfterDelay:reconnectDelay];
+    [self reconnectUsingMode:reconnectMode];
   }
 }
 
@@ -439,8 +446,25 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
   [authorizationQueue addOperation:operation];
 }
 
-- (void)reconnectAfterDelay:(NSTimeInterval)delay
+- (void)reconnectUsingMode:(PTPusherAutoReconnectMode)reconnectMode
 {
+  _numberOfReconnectAttempts++;
+  
+  NSTimeInterval delay;
+  
+  switch (reconnectMode) {
+    case PTPusherAutoReconnectModeReconnectImmediately:
+      delay = 0;
+      break;
+    case PTPusherAutoReconnectModeReconnectWithConfiguredDelay:
+      delay = self.reconnectDelay;
+      break;
+    case PTPusherAutoReconnectModeReconnectWithBackoffDelay:
+      delay = self.reconnectDelay * _numberOfReconnectAttempts;
+    default:
+      break;
+  }
+  
   if ([self.delegate respondsToSelector:@selector(pusher:connectionWillAutomaticallyReconnect:afterDelay:)]) {
     BOOL shouldProceed = [self.delegate pusher:self connectionWillAutomaticallyReconnect:_connection afterDelay:delay];
     
@@ -450,8 +474,6 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
   dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delay * NSEC_PER_SEC);
   dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
     [_connection connect];
-    
-    _numberOfReconnectAttempts++;
   });
 }
 
