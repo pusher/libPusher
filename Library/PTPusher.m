@@ -259,6 +259,13 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
   }];
 }
 
+- (void)subscribeAll
+{
+  for (PTPusherChannel *channel in [channels allValues]) {
+    [self subscribeToChannel:channel];
+  }
+}
+
 #pragma mark - Sending events
 
 - (void)sendEventNamed:(NSString *)name data:(id)data
@@ -299,9 +306,7 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
     [self.delegate pusher:self connectionDidConnect:connection];
   }
   
-  for (PTPusherChannel *channel in [channels allValues]) {
-    [self subscribeToChannel:channel];
-  }
+  [self subscribeAll];
 }
 
 - (void)pusherConnection:(PTPusherConnection *)connection didDisconnectWithCode:(NSInteger)errorCode reason:(NSString *)reason wasClean:(BOOL)wasClean
@@ -374,7 +379,7 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
   [authorizationQueue cancelAllOperations];
   
   for (PTPusherChannel *channel in [channels allValues]) {
-    [channel markAsUnsubscribed];
+    [channel handleDisconnect];
   }
   
   if ([self.delegate respondsToSelector:@selector(pusher:connectionDidDisconnect:)]) { // deprecated call

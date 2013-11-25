@@ -193,7 +193,7 @@
   [pusher __unsubscribeFromChannel:self];
 }
 
-- (void)markAsUnsubscribed
+- (void)handleDisconnect
 {
   self.subscribed = NO;
 }
@@ -223,9 +223,9 @@
   [clientEventQueue setSuspended:NO];
 }
 
-- (void)markAsUnSubscribed
+- (void)handleDisconnect
 {
-  [super markAsUnsubscribed];
+  [super handleDisconnect];
   [clientEventQueue setSuspended:YES];
 }
 
@@ -324,7 +324,6 @@
       __unsafe_unretained PTPusherPresenceChannel *weakChannel = self;
 #endif
     
-    
     [internalBindings addObject:
      [self bindToEventNamed:@"pusher_internal:member_added" 
             handleWithBlock:^(PTPusherEvent *event) {
@@ -341,6 +340,12 @@
   return self;
 }
 
+- (void)handleDisconnect
+{
+  [super handleDisconnect];
+  [self.members reset];
+}
+
 - (void)subscribeWithAuthorization:(NSDictionary *)authData
 {
   [super subscribeWithAuthorization:authData];
@@ -352,6 +357,7 @@
 - (void)handleSubscribeEvent:(PTPusherEvent *)event
 {
   [super handleSubscribeEvent:event];
+  
   [self.members handleSubscription:event.data];
   
 #pragma clang diagnostic push
