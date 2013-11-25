@@ -62,7 +62,8 @@
   
   if ([reachability isReachable]) {
     // we appear to have a connection, so something else must have gone wrong
-    NSLog(@"Internet reachable, is Pusher down?");
+    NSLog(@"Internet reachable, reconnecting");
+    [_pusherClient connect];
   }
   else {
     NSLog(@"Waiting for reachability");
