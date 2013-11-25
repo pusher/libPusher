@@ -461,7 +461,9 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
       break;
     case PTPusherAutoReconnectModeReconnectWithBackoffDelay:
       delay = self.reconnectDelay * _numberOfReconnectAttempts;
+      break;
     default:
+      delay = 0;
       break;
   }
   
