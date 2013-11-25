@@ -104,7 +104,6 @@
   }
 }
 
-
 - (void)pusher:(PTPusher *)pusher connection:(PTPusherConnection *)connection didDisconnectWithError:(NSError *)error willAttemptReconnect:(BOOL)willAttemptReconnect
 {
   NSLog(@"[pusher-%@] Pusher Connection disconnected with error: %@", pusher.connection.socketID, error);
@@ -113,7 +112,7 @@
     NSLog(@"[pusher-%@] Client will attempt to reconnect automatically", pusher.connection.socketID);
   }
   else {
-    if ([error.domain isEqualToString:NSPOSIXErrorDomain]) {
+    if (![error.domain isEqualToString:PTPusherErrorDomain]) {
       [self startReachabilityCheck];
     }
   }
