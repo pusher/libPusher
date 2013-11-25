@@ -15,6 +15,7 @@
 #import "PTBlockEventListener.h"
 #import "PTPusherErrors.h"
 #import "PTPusherChannelAuthorizationOperation.h"
+#import "PTPusherChannel_Private.h"
 
 #define kPUSHER_HOST @"ws.pusherapp.com"
 
@@ -42,13 +43,6 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 
 @interface PTPusher ()
 @property (nonatomic, strong, readwrite) PTPusherConnection *connection;
-@end
-
-@interface PTPusherChannel ()
-/* These methods should only be called internally */
-- (void)subscribeWithAuthorization:(NSDictionary *)authData;
-- (void)unsubscribe;
-- (void)markAsUnsubscribed;
 @end
 
 #pragma mark -

@@ -296,7 +296,7 @@
 
 @interface PTPusherChannelMembers ()
 
-@property (nonatomic, copy) NSString *myID;
+@property (nonatomic, copy, readwrite) NSString *myID;
 
 - (void)reset;
 - (void)handleSubscription:(NSDictionary *)subscriptionData;

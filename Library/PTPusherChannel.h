@@ -219,6 +219,7 @@
 @interface PTPusherChannelMembers : NSObject
 
 @property (nonatomic, readonly) NSInteger count;
+@property (nonatomic, copy, readonly) NSString *myID;
 @property (nonatomic, readonly) NSDictionary *me;
 
 - (PTPusherChannelMember *)memberWithID:(NSString *)userID;

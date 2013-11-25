@@ -21,6 +21,7 @@
 		A317375F155D38C4007E4BBA /* PTPusher+Testing.h in Headers */ = {isa = PBXBuildFile; fileRef = A317375D155D38C4007E4BBA /* PTPusher+Testing.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3173760155D38C4007E4BBA /* PTPusher+Testing.m in Sources */ = {isa = PBXBuildFile; fileRef = A317375E155D38C4007E4BBA /* PTPusher+Testing.m */; };
 		A3226317155D481C00A46067 /* PTPusherMockConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = A3173758155D2D21007E4BBA /* PTPusherMockConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A32EE793184364D800E3B072 /* PTPusherChannel_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = A32EE792184364D800E3B072 /* PTPusherChannel_Private.h */; };
 		A3382DE31525C3F70025550D /* PTJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = A30950121525C272008F695B /* PTJSON.m */; };
 		A3382DE41525C3FA0025550D /* PTJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = A30950111525C272008F695B /* PTJSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3382DF61525D06C0025550D /* JSONKit.h in Headers */ = {isa = PBXBuildFile; fileRef = A3382DEA1525D01B0025550D /* JSONKit.h */; };
@@ -147,6 +148,7 @@
 		A3173759155D2D21007E4BBA /* PTPusherMockConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTPusherMockConnection.m; sourceTree = "<group>"; };
 		A317375D155D38C4007E4BBA /* PTPusher+Testing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PTPusher+Testing.h"; sourceTree = "<group>"; };
 		A317375E155D38C4007E4BBA /* PTPusher+Testing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PTPusher+Testing.m"; sourceTree = "<group>"; };
+		A32EE792184364D800E3B072 /* PTPusherChannel_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherChannel_Private.h; sourceTree = "<group>"; };
 		A3382DEA1525D01B0025550D /* JSONKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = JSONKit.h; path = Library/JSONKit.h; sourceTree = SOURCE_ROOT; };
 		A35281CE13F721A8000687C0 /* PTPusherConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherConnection.h; sourceTree = "<group>"; };
 		A35281CF13F721A8000687C0 /* PTPusherConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTPusherConnection.m; sourceTree = "<group>"; };
@@ -308,6 +310,7 @@
 				A35281CF13F721A8000687C0 /* PTPusherConnection.m */,
 				A39E238613F7E3FD0083CAD7 /* PTPusherErrors.h */,
 				A39E238A13F7E85C0083CAD7 /* PTPusherPresenceChannelDelegate.h */,
+				A32EE792184364D800E3B072 /* PTPusherChannel_Private.h */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -532,6 +535,7 @@
 				A3D1D2C711580162009A12AD /* PTEventListener.h in Headers */,
 				A3AC28B613F75530001C4808 /* PTURLRequestOperation.h in Headers */,
 				A3AC28BF13F75BF1001C4808 /* PusherExampleMenuViewController.h in Headers */,
+				A32EE793184364D800E3B072 /* PTPusherChannel_Private.h in Headers */,
 				A3AC28C313F76C51001C4808 /* PTPusherChannelAuthorizationOperation.h in Headers */,
 				A3B2931F14D8D96900C6B79F /* PTPusherPresenceChannelDelegate.h in Headers */,
 				A3CA666914D96814003E2F1E /* PTPusherChannel.h in Headers */,
