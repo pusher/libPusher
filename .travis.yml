@@ -1,5 +1,5 @@
 language: objective-c
 xcode_workspace: libPusher.xcworkspace
 xcode_scheme: libPusher
+xcode_sdk: iphonesimulator
 install: true
-  
