@@ -87,8 +87,8 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
      * to reconnect where the user has simply locked their device or
      * backgrounded the app.
      *
-     * If there is no internet connection, we don't want to retry too
-     * many times.
+     * If there is no internet connection, we will only end up retrying
+     * once as after the first failure we will no longer auto-retry.
      *
      * We may consider making this user-customisable in future but not 
      * for now.
