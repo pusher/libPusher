@@ -201,23 +201,39 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
   return [channels objectForKey:name];
 }
 
+/* This is only called when a client explicitly unsubscribes from a channel
+ * by calling either [channel unsubscribe] or using the deprecated API 
+ * [client unsubscribeFromChannel:].
+ *
+ * This effectively ends the lifetime of a channel: the client will remove it
+ * from it's channels collection and all bindings will be removed. If no other
+ * code outside of libPusher has a strong reference to the channel, it will
+ * be deallocated.
+ *
+ * This is different to implicit unsubscribes (where the connection has been lost)
+ * where the channel will object will remain and be re-subscribed when connection
+ * is re-established.
+ *
+ * A pusher:unsubscribe event will only be sent if there is a connection, otherwise
+ * it's not necessary as the channel is already implicitly unsubscribed due to the
+ * disconnection.
+ */
 - (void)__unsubscribeFromChannel:(PTPusherChannel *)channel
 {
   NSParameterAssert(channel != nil);
   
-  if (channel.isSubscribed == NO) return;
-  
-  [self sendEventNamed:@"pusher:unsubscribe" 
-                  data:[NSDictionary dictionaryWithObject:channel.name forKey:@"channel"]];
-  
   [channel removeAllBindings];
-  [channel markAsUnsubscribed];
+  
+  if (self.connection.isConnected) {
+    [self sendEventNamed:@"pusher:unsubscribe"
+                    data:[NSDictionary dictionaryWithObject:channel.name forKey:@"channel"]];
+  }
+  
+  [channels removeObjectForKey:channel.name];
   
   if ([self.delegate respondsToSelector:@selector(pusher:didUnsubscribeFromChannel:)]) {
     [self.delegate pusher:self didUnsubscribeFromChannel:channel];
   }
-  
-  [channels removeObjectForKey:channel.name];
 }
 
 - (void)unsubscribeFromChannel:(PTPusherChannel *)channel
