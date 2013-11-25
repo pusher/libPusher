@@ -53,6 +53,35 @@
 #endif
 }
 
+#pragma mark - Reachability
+
+- (void)startReachabilityCheck
+{
+  // we probably have no internet connection, so lets check with Reachability
+  Reachability *reachability = [Reachability reachabilityWithHostname:self.pusherClient.connection.URL.host];
+  
+  if ([reachability isReachable]) {
+    // we appear to have a connection, so something else must have gone wrong
+    NSLog(@"Internet reachable, is Pusher down?");
+  }
+  else {
+    NSLog(@"Waiting for reachability");
+    
+    [reachability setReachableBlock:^(Reachability *reachability) {
+      if ([reachability isReachable]) {
+        NSLog(@"Internet is now reachable");
+        [reachability stopNotifier];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+          [self.pusherClient connect];
+        });
+      }
+    }];
+    
+    [reachability startNotifier];
+  }
+}
+
 #pragma mark - PTPusherDelegate methods
 
 - (BOOL)pusher:(PTPusher *)pusher connectionWillConnect:(PTPusherConnection *)connection
@@ -69,31 +98,8 @@
 - (void)pusher:(PTPusher *)pusher connection:(PTPusherConnection *)connection failedWithError:(NSError *)error
 {
   NSLog(@"[pusher] Pusher Connection failed with error: %@", error);
-  
   if ([error.domain isEqualToString:(NSString *)kCFErrorDomainCFNetwork]) {
-    // we probably have no internet connection, so lets check with Reachability
-    Reachability *reachability = [Reachability reachabilityForInternetConnection];
-    
-    if ([reachability isReachable]) {
-      // we appear to have a connection, so something else must have gone wrong
-      NSLog(@"Internet reachable, is Pusher down?");
-    }
-    else {
-      NSLog(@"Waiting for reachability");
-      
-      [reachability setReachableBlock:^(Reachability *reachability) {
-        if ([reachability isReachable]) {
-          NSLog(@"Internet is now reachable");
-          [reachability stopNotifier];
-          
-          dispatch_async(dispatch_get_main_queue(), ^{
-            [pusher connect];
-          });
-        }
-      }];
-      
-      [reachability startNotifier];
-    }
+    [self startReachabilityCheck];
   }
 }
 
@@ -104,6 +110,11 @@
   
   if (willAttemptReconnect) {
     NSLog(@"[pusher-%@] Client will attempt to reconnect automatically", pusher.connection.socketID);
+  }
+  else {
+    if ([error.domain isEqualToString:NSPOSIXErrorDomain]) {
+      [self startReachabilityCheck];
+    }
   }
 }
 
