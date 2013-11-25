@@ -53,7 +53,7 @@ NSString *const PTPusherConnectionPongEvent        = @"pusher:pong";
   return self;
 }
 
-- (void)dealloc 
+- (void)dealloc
 {
   [self.pingTimer invalidate];
   [self.pongTimer invalidate];
@@ -76,7 +76,7 @@ NSString *const PTPusherConnectionPongEvent        = @"pusher:pong";
 - (void)connect;
 {
   if (self.state >= PTPusherConnectionConnecting) return;
-    
+  
   BOOL shouldConnect = [self.delegate pusherConnectionWillConnect:self];
   
   if (!shouldConnect) return;
@@ -120,21 +120,25 @@ NSString *const PTPusherConnectionPongEvent        = @"pusher:pong";
 {
   [self.pingTimer invalidate];
   [self.pongTimer invalidate];
+  
   BOOL wasConnected = self.isConnected;
   self.state = PTPusherConnectionDisconnected;
-  [self.delegate pusherConnection:self didFailWithError:error wasConnected:wasConnected];
   self.socketID = nil;
   socket = nil;
+  
+  [self.delegate pusherConnection:self didFailWithError:error wasConnected:wasConnected];
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didCloseWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean
 {
   [self.pingTimer invalidate];
   [self.pongTimer invalidate];
+  
   self.state = PTPusherConnectionDisconnected;
-  [self.delegate pusherConnection:self didDisconnectWithCode:(NSInteger)code reason:(NSString *)reason wasClean:(BOOL)wasClean];
   self.socketID = nil;
   socket = nil;
+  
+  [self.delegate pusherConnection:self didDisconnectWithCode:(NSInteger)code reason:(NSString *)reason wasClean:wasClean];
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(NSString *)message
@@ -143,7 +147,7 @@ NSString *const PTPusherConnectionPongEvent        = @"pusher:pong";
   
   NSDictionary *messageDictionary = [[PTJSON JSONParser] objectFromJSONString:message];
   PTPusherEvent *event = [PTPusherEvent eventFromMessageDictionary:messageDictionary];
-
+  
   if ([event.name isEqualToString:PTPusherConnectionPongEvent]) {
 #ifdef DEBUG
     NSLog(@"[pusher] Server responded to ping (pong!)");
