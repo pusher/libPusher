@@ -11,7 +11,7 @@
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
-		4D81597F1712C6CA0013A485 /* Pusher.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D81597E1712C6CA0013A485 /* Pusher.h */; };
+		4D81597F1712C6CA0013A485 /* Pusher.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D81597E1712C6CA0013A485 /* Pusher.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5D5C4E7E0F2A4C92B9D85932 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F700C4637DC43EFA335D40F /* libPods.a */; };
 		6D926C9364F64493B0A7BE5A /* libPods-specs.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 34CD0B6EB8B94D28B0AEC265 /* libPods-specs.a */; };
 		A304896C1667AAB4009511CB /* PTPusherChannelAuthorizationOperationSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = A304895E1667A8A6009511CB /* PTPusherChannelAuthorizationOperationSpec.m */; };
