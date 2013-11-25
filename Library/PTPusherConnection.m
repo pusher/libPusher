@@ -66,6 +66,11 @@ NSString *const PTPusherConnectionPongEvent        = @"pusher:pong";
   return (self.state == PTPusherConnectionConnected);
 }
 
+- (NSURL *)URL
+{
+  return request.URL;
+}
+
 #pragma mark - Connection management
 
 - (void)connect;
