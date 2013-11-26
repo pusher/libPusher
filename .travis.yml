@@ -4,4 +4,4 @@ env:
   matrix:
     - XCODE_SCHEME=libPusher
     - XCODE_SCHEME-libPusher-OSX
-script: xctool -workspace libPusher.xcworkspace -scheme $XCODE_SCHEME build
+script: xctool -workspace libPusher.xcworkspace -scheme $XCODE_SCHEME -sdk iphonesimulator build test
