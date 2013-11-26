@@ -1,5 +1,7 @@
 language: objective-c
-xcode_workspace: libPusher.xcworkspace
-xcode_scheme: libPusher
-xcode_sdk: iphonesimulator
 install: true
+env:
+  matrix:
+    - XCODE_SCHEME=libPusher
+    - XCODE_SCHEME-libPusher-OSX
+script: xctool -workspace libPusher.xcworkspace -scheme $XCODE_SCHEME build
