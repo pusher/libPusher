@@ -1,6 +1,6 @@
 # libPusher, an Objective-C client for Pusher
 
-[![Build Status](https://travis-ci.org/lukeredpath/libPusher.png)](https://travis-ci.org/[YOUR_GITHUB_USERNAME]/[YOUR_PROJECT_NAME])
+[![Build Status](https://travis-ci.org/lukeredpath/libPusher.png)](https://travis-ci.org/lukeredpath/libPusher)
 
 [Pusher](http://pusherapp.com/) is a hosted service that sits between your web application and the browser that lets you deliver events in real-time using HTML5 WebSockets.
 
