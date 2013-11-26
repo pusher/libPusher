@@ -80,7 +80,7 @@ NSString *const PTPusherChannelKey = @"channel";
 
 - (NSString *)description
 {
-  return [NSString stringWithFormat:@"<PTPusherErrorEvent code:%d message:%@>", self.code, self.message];
+  return [NSString stringWithFormat:@"<PTPusherErrorEvent code:%ld message:%@>", (long)self.code, self.message];
 }
 
 @end
