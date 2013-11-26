@@ -1,3 +1,5 @@
 language: objective-c
-before_install: sudo gem update --system && bundle install --without scripts
-script: bundle exec rake debug:cleanbuild
+xcode_workspace: libPusher.xcworkspace
+xcode_scheme: libPusher
+xcode_sdk: iphonesimulator
+install: true
