@@ -147,6 +147,11 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 
 #pragma mark - Connection management
 
+- (void)setReconnectDelay:(NSTimeInterval)reconnectDelay
+{
+  _reconnectDelay = MAX(reconnectDelay, 1);
+}
+
 - (void)connect
 {
   _numberOfReconnectAttempts = 0;
