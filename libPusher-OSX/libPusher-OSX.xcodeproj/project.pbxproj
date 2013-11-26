@@ -7,16 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A3141C4A176F2F4A008330D7 /* Pusher.h in Headers */ = {isa = PBXBuildFile; fileRef = A3141C49176F2F4A008330D7 /* Pusher.h */; };
-		A3382DFE1525D0C90025550D /* PTJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = A3382DFB1525D0C90025550D /* PTJSON.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A3141C4A176F2F4A008330D7 /* Pusher.h in Headers */ = {isa = PBXBuildFile; fileRef = A3141C49176F2F4A008330D7 /* Pusher.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A3382DFE1525D0C90025550D /* PTJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = A3382DFB1525D0C90025550D /* PTJSON.h */; };
 		A3382DFF1525D0C90025550D /* PTJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = A3382DFC1525D0C90025550D /* PTJSON.m */; };
-		A373A2831562D3B000BFAECE /* PTPusher+Testing.h in Headers */ = {isa = PBXBuildFile; fileRef = A373A2811562D3B000BFAECE /* PTPusher+Testing.h */; };
+		A373A2831562D3B000BFAECE /* PTPusher+Testing.h in Headers */ = {isa = PBXBuildFile; fileRef = A373A2811562D3B000BFAECE /* PTPusher+Testing.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A373A2841562D3B000BFAECE /* PTPusher+Testing.m in Sources */ = {isa = PBXBuildFile; fileRef = A373A2821562D3B000BFAECE /* PTPusher+Testing.m */; };
 		A37E161214E4C95C00DCA3A6 /* base64.c in Sources */ = {isa = PBXBuildFile; fileRef = A37E160B14E4C95B00DCA3A6 /* base64.c */; };
 		A37E161314E4C95C00DCA3A6 /* base64.h in Headers */ = {isa = PBXBuildFile; fileRef = A37E160C14E4C95B00DCA3A6 /* base64.h */; };
 		A37E161414E4C95C00DCA3A6 /* NSData+SRB64Additions.h in Headers */ = {isa = PBXBuildFile; fileRef = A37E160D14E4C95B00DCA3A6 /* NSData+SRB64Additions.h */; };
 		A37E161514E4C95C00DCA3A6 /* NSData+SRB64Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = A37E160E14E4C95C00DCA3A6 /* NSData+SRB64Additions.m */; };
-		A37E161714E4C95C00DCA3A6 /* SRWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A37E161014E4C95C00DCA3A6 /* SRWebSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A37E161714E4C95C00DCA3A6 /* SRWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A37E161014E4C95C00DCA3A6 /* SRWebSocket.h */; };
 		A37E161814E4C95C00DCA3A6 /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = A37E161114E4C95C00DCA3A6 /* SRWebSocket.m */; };
 		A37E161C14E4C9CC00DCA3A6 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A37E161B14E4C9CC00DCA3A6 /* Security.framework */; };
 		A37E162014E4CA6400DCA3A6 /* libicucore.A.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A37E161F14E4CA6400DCA3A6 /* libicucore.A.dylib */; };
@@ -240,20 +240,20 @@
 				A3CA679914DBCB95003E2F1E /* PTPusherChannelAuthorizationOperation.h in Headers */,
 				A3CA679B14DBCB95003E2F1E /* PTPusherConnection.h in Headers */,
 				A3CA679F14DBCB95003E2F1E /* PTPusherDelegate.h in Headers */,
+				A373A2831562D3B000BFAECE /* PTPusher+Testing.h in Headers */,
 				A3CA67A014DBCB95003E2F1E /* PTPusherErrors.h in Headers */,
 				A3CA67A114DBCB95003E2F1E /* PTPusherEvent.h in Headers */,
+				A3141C4A176F2F4A008330D7 /* Pusher.h in Headers */,
 				A3CA67A314DBCB95003E2F1E /* PTPusherEventDispatcher.h in Headers */,
 				A3CA67A514DBCB95003E2F1E /* PTPusherEventPublisher.h in Headers */,
 				A3CA67A614DBCB95003E2F1E /* PTPusherPresenceChannelDelegate.h in Headers */,
 				A3CA67A714DBCB95003E2F1E /* PTTargetActionEventListener.h in Headers */,
+				A37E161714E4C95C00DCA3A6 /* SRWebSocket.h in Headers */,
+				A3382DFE1525D0C90025550D /* PTJSON.h in Headers */,
 				A3CA67A914DBCB95003E2F1E /* PTURLRequestOperation.h in Headers */,
 				A37E161314E4C95C00DCA3A6 /* base64.h in Headers */,
 				A37E161414E4C95C00DCA3A6 /* NSData+SRB64Additions.h in Headers */,
-				A37E161714E4C95C00DCA3A6 /* SRWebSocket.h in Headers */,
 				A37E168214E5736300DCA3A6 /* PTPusherMacros.h in Headers */,
-				A3382DFE1525D0C90025550D /* PTJSON.h in Headers */,
-				A373A2831562D3B000BFAECE /* PTPusher+Testing.h in Headers */,
-				A3141C4A176F2F4A008330D7 /* Pusher.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,7 +455,7 @@
 				GCC_PREFIX_HEADER = "libPusher-OSX/libPusher-OSX-Prefix.pch";
 				HEADER_SEARCH_PATHS = "\"$(PROJECT_DIR)/usr/include\"";
 				INFOPLIST_FILE = "libPusher-OSX/libPusher-OSX-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.6.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = framework;
 			};
@@ -470,7 +470,7 @@
 				GCC_PREFIX_HEADER = "libPusher-OSX/libPusher-OSX-Prefix.pch";
 				HEADER_SEARCH_PATHS = "\"$(PROJECT_DIR)/usr/include\"";
 				INFOPLIST_FILE = "libPusher-OSX/libPusher-OSX-Info.plist";
-				MACOSX_DEPLOYMENT_TARGET = 10.6.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = framework;
 			};
