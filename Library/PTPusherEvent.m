@@ -15,11 +15,6 @@ NSString *const PTPusherChannelKey = @"channel";
 
 @implementation PTPusherEvent
 
-@synthesize name = _name;
-@synthesize data = _data;
-@synthesize channel = _channel;
-@synthesize timeReceived = _timeReceived;
-
 + (id)eventFromMessageDictionary:(NSDictionary *)dictionary
 {
   if ([dictionary[PTPusherEventKey] isEqualToString:@"pusher:error"]) {

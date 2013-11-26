@@ -17,9 +17,7 @@ extern NSString *const PTPusherChannelKey;
  All events dispatched by libPusher (via either bindings or notifications) will be represented
  by instances of this class.
  */
-@interface PTPusherEvent : NSObject {
-  NSString *_name;
-}
+@interface PTPusherEvent : NSObject
 
 ///------------------------------------------------------------------------------------/
 /// @name Properties

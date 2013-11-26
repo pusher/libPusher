@@ -8,8 +8,12 @@
 
 #import "PTBlockEventListener.h"
 
+@interface PTBlockEventListener : NSObject <PTEventListener>
+@end
 
 @implementation PTBlockEventListener {
+  PTBlockEventListenerBlock _block;
+  dispatch_queue_t _queue;
   BOOL _invalid;
 }
 
@@ -18,11 +22,11 @@
   NSParameterAssert(aBlock);
   
   if ((self = [super init])) {
-    block = [aBlock copy];
-    queue = aQueue;
+    _block = [aBlock copy];
+    _queue = aQueue;
     _invalid = NO;
 #if !OS_OBJECT_USE_OBJC
-    dispatch_retain(queue);
+    dispatch_retain(_queue);
 #endif
   }
   return self;
@@ -31,7 +35,7 @@
 - (void)dealloc
 {
 #if !OS_OBJECT_USE_OBJC
-  dispatch_release(queue);
+  dispatch_release(_queue);
 #endif
 }
 
@@ -42,9 +46,9 @@
 
 - (void)dispatchEvent:(PTPusherEvent *)event
 {
-  dispatch_async(queue, ^{
+  dispatch_async(_queue, ^{
     if (!_invalid) {
-      block(event);
+      _block(event);
     }
   });
 }

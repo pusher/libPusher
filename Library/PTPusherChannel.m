@@ -21,16 +21,16 @@
 - (void)beginAuthorizationOperation:(PTPusherChannelAuthorizationOperation *)operation;
 @end
 
-@interface PTPusherChannel () 
+@interface PTPusherChannel ()
+@property (nonatomic, weak) PTPusher *pusher;
+@property (nonatomic, strong) PTPusherEventDispatcher *dispatcher;
 @property (nonatomic, assign, readwrite) BOOL subscribed;
+@property (nonatomic, readonly) NSMutableArray *internalBindings;
 @end
 
 #pragma mark -
 
 @implementation PTPusherChannel
-
-@synthesize name;
-@synthesize subscribed;
 
 + (id)channelWithName:(NSString *)name pusher:(PTPusher *)pusher
 {
@@ -46,10 +46,10 @@
 - (id)initWithName:(NSString *)channelName pusher:(PTPusher *)aPusher
 {
   if (self = [super init]) {
-    name = [channelName copy];
-    pusher = aPusher;
-    dispatcher = [[PTPusherEventDispatcher alloc] init];
-    internalBindings = [[NSMutableArray alloc] init];
+    _name = [channelName copy];
+    _pusher = aPusher;
+    _dispatcher = [[PTPusherEventDispatcher alloc] init];
+    _internalBindings = [[NSMutableArray alloc] init];
     
     /*
      Set up event handlers for pre-defined channel events
@@ -58,20 +58,15 @@
      Using a target-action binding will create a retain cycle between the channel
      and the target/action binding object.
      */
-    
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_5_0
     __weak PTPusherChannel *weakChannel = self;
-#else
-    __unsafe_unretained PTPusherChannel *weakChannel = self;
-#endif
     
-    [internalBindings addObject:
+    [self.internalBindings addObject:
      [self bindToEventNamed:@"pusher_internal:subscription_succeeded" 
             handleWithBlock:^(PTPusherEvent *event) {
               [weakChannel handleSubscribeEvent:event];
             }]];
     
-    [internalBindings addObject:
+    [self.internalBindings addObject:
      [self bindToEventNamed:@"subscription_error" 
             handleWithBlock:^(PTPusherEvent *event) {
               [weakChannel handleSubcribeErrorEvent:event];
@@ -82,8 +77,8 @@
 
 - (void)dealloc 
 {
-  [internalBindings enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL *stop) {
-    [dispatcher removeBinding:object];
+  [self.internalBindings enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL *stop) {
+    [_dispatcher removeBinding:object];
   }];
 }
 
@@ -103,17 +98,17 @@
 {
   self.subscribed = YES;
   
-  if ([pusher.delegate respondsToSelector:@selector(pusher:didSubscribeToChannel:)]) {
-    [pusher.delegate pusher:pusher didSubscribeToChannel:self];
+  if ([self.pusher.delegate respondsToSelector:@selector(pusher:didSubscribeToChannel:)]) {
+    [self.pusher.delegate pusher:self.pusher didSubscribeToChannel:self];
   }
 }
 
 - (void)handleSubcribeErrorEvent:(PTPusherEvent *)event
 {
-  if ([pusher.delegate respondsToSelector:@selector(pusher:didFailToSubscribeToChannel:withError:)]) {
+  if ([self.pusher.delegate respondsToSelector:@selector(pusher:didFailToSubscribeToChannel:withError:)]) {
     NSDictionary *userInfo = @{PTPusherErrorUnderlyingEventKey: event};
     NSError *error = [NSError errorWithDomain:PTPusherErrorDomain code:PTPusherSubscriptionError userInfo:userInfo];
-    [pusher.delegate pusher:pusher didFailToSubscribeToChannel:self withError:error];
+    [self.pusher.delegate pusher:self.pusher didFailToSubscribeToChannel:self withError:error];
   }
 }
 
@@ -128,7 +123,7 @@
 
 - (PTPusherEventBinding *)bindToEventNamed:(NSString *)eventName target:(id)target action:(SEL)selector
 {
-  return [dispatcher addEventListenerForEventNamed:eventName target:target action:selector];
+  return [self.dispatcher addEventListenerForEventNamed:eventName target:target action:selector];
 }
 
 - (PTPusherEventBinding *)bindToEventNamed:(NSString *)eventName handleWithBlock:(PTPusherEventBlockHandler)block
@@ -138,12 +133,12 @@
 
 - (PTPusherEventBinding *)bindToEventNamed:(NSString *)eventName handleWithBlock:(PTPusherEventBlockHandler)block queue:(dispatch_queue_t)queue
 {
-  return [dispatcher addEventListenerForEventNamed:eventName block:block queue:queue];
+  return [self.dispatcher addEventListenerForEventNamed:eventName block:block queue:queue];
 }
 
 - (void)removeBinding:(PTPusherEventBinding *)binding
 {
-  [dispatcher removeBinding:binding];
+  [self.dispatcher removeBinding:binding];
 }
 
 - (void)removeAllBindings
@@ -152,16 +147,16 @@
   
   // need to unpack the bindings from the nested arrays, so we can
   // iterate over them safely whilst removing them from the dispatcher
-  for (NSArray *bindingsArray in [dispatcher.bindings allValues]) {
+  for (NSArray *bindingsArray in [self.dispatcher.bindings allValues]) {
     for (PTPusherEventBinding *binding in bindingsArray) {
-	    if (![internalBindings containsObject:binding]) {
+	    if (![self.internalBindings containsObject:binding]) {
         [bindingsToRemove addObject:binding];
       }
 	  }
   }
   
   for (PTPusherEventBinding *binding in bindingsToRemove) {
-    [dispatcher removeBinding:binding];
+    [self.dispatcher removeBinding:binding];
   }
 }
 
@@ -169,7 +164,7 @@
 
 - (void)dispatchEvent:(PTPusherEvent *)event
 {
-  [dispatcher dispatchEvent:event];
+  [self.dispatcher dispatchEvent:event];
   
   [[NSNotificationCenter defaultCenter] 
    postNotificationName:PTPusherEventReceivedNotification 
@@ -183,14 +178,14 @@
 {
   if (self.isSubscribed) return;
   
-  [pusher sendEventNamed:@"pusher:subscribe" 
+  [self.pusher sendEventNamed:@"pusher:subscribe"
                     data:@{@"channel": self.name}
                  channel:nil];
 }
 
 - (void)unsubscribe
 {
-  [pusher __unsubscribeFromChannel:self];
+  [self.pusher __unsubscribeFromChannel:self];
 }
 
 - (void)handleDisconnect
@@ -203,16 +198,16 @@
 #pragma mark -
 
 @implementation PTPusherPrivateChannel {
-  NSOperationQueue *clientEventQueue;
+  NSOperationQueue *_clientEventQueue;
 }
 
 - (id)initWithName:(NSString *)channelName pusher:(PTPusher *)aPusher
 {
   if ((self = [super initWithName:channelName pusher:aPusher])) {
-    clientEventQueue = [[NSOperationQueue alloc] init];
-    clientEventQueue.maxConcurrentOperationCount = 1;
-    clientEventQueue.name = @"com.pusher.libPusher.clientEventQueue";
-    clientEventQueue.suspended = YES;
+    _clientEventQueue = [[NSOperationQueue alloc] init];
+    _clientEventQueue.maxConcurrentOperationCount = 1;
+    _clientEventQueue.name = @"com.pusher.libPusher.clientEventQueue";
+    _clientEventQueue.suspended = YES;
   }
   return self;
 }
@@ -220,13 +215,13 @@
 - (void)handleSubscribeEvent:(PTPusherEvent *)event
 {
   [super handleSubscribeEvent:event];
-  [clientEventQueue setSuspended:NO];
+  [_clientEventQueue setSuspended:NO];
 }
 
 - (void)handleDisconnect
 {
   [super handleDisconnect];
-  [clientEventQueue setSuspended:YES];
+  [_clientEventQueue setSuspended:YES];
 }
 
 - (BOOL)isPrivate
@@ -236,7 +231,7 @@
 
 - (void)authorizeWithCompletionHandler:(void(^)(BOOL, NSDictionary *, NSError *))completionHandler
 {
-  PTPusherChannelAuthorizationOperation *authOperation = [PTPusherChannelAuthorizationOperation operationWithAuthorizationURL:pusher.authorizationURL channelName:self.name socketID:pusher.connection.socketID];
+  PTPusherChannelAuthorizationOperation *authOperation = [PTPusherChannelAuthorizationOperation operationWithAuthorizationURL:self.pusher.authorizationURL channelName:self.name socketID:self.pusher.connection.socketID];
   
   [authOperation setCompletionHandler:^(PTPusherChannelAuthorizationOperation *operation) {
     completionHandler(operation.isAuthorized, operation.authorizationData, operation.error);
@@ -245,16 +240,16 @@
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
   NSLog(@"willAuthorizeChannelWithRequest: is deprecated and will be removed in 1.6. Use pusher:willAuthorizeChannel:withRequest: instead.");
-  if ([pusher.delegate respondsToSelector:@selector(pusher:willAuthorizeChannelWithRequest:)]) { // deprecated call
-    [pusher.delegate pusher:pusher willAuthorizeChannelWithRequest:authOperation.mutableURLRequest];
+  if ([self.pusher.delegate respondsToSelector:@selector(pusher:willAuthorizeChannelWithRequest:)]) { // deprecated call
+    [self.pusher.delegate pusher:self.pusher willAuthorizeChannelWithRequest:authOperation.mutableURLRequest];
   }
 #pragma clang diagnostic pop
     
-  if ([pusher.delegate respondsToSelector:@selector(pusher:willAuthorizeChannel:withRequest:)]) {
-    [pusher.delegate pusher:pusher willAuthorizeChannel:self withRequest:authOperation.mutableURLRequest];
+  if ([self.pusher.delegate respondsToSelector:@selector(pusher:willAuthorizeChannel:withRequest:)]) {
+    [self.pusher.delegate pusher:self.pusher willAuthorizeChannel:self withRequest:authOperation.mutableURLRequest];
   }
   
-  [pusher beginAuthorizationOperation:authOperation];
+  [self.pusher beginAuthorizationOperation:authOperation];
 }
 
 - (void)subscribeWithAuthorization:(NSDictionary *)authData
@@ -264,7 +259,7 @@
   NSMutableDictionary *eventData = [authData mutableCopy];
   eventData[@"channel"] = self.name;
   
-  [pusher sendEventNamed:@"pusher:subscribe" 
+  [self.pusher sendEventNamed:@"pusher:subscribe"
                     data:eventData
                  channel:nil];
 }
@@ -277,16 +272,10 @@
     eventName = [@"client-" stringByAppendingString:eventName];
   }
   
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_5_0
-    __weak PTPusherChannel *weakSelf = self;
-    __weak PTPusher *weakPusher = pusher;
-#else
-    __unsafe_unretained PTPusherChannel *weakSelf = self;
-    __unsafe_unretained PTPusher *weakPusher = pusher;
-#endif
+  __weak PTPusherChannel *weakSelf = self;
   
-  [clientEventQueue addOperationWithBlock:^{
-    [weakPusher sendEventNamed:eventName data:eventData channel:weakSelf.name];
+  [_clientEventQueue addOperationWithBlock:^{
+    [weakSelf.pusher sendEventNamed:eventName data:eventData channel:weakSelf.name];
   }];
 }
 
@@ -307,9 +296,6 @@
 
 @implementation PTPusherPresenceChannel
 
-@synthesize presenceDelegate;
-@synthesize members = _members;
-
 - (id)initWithName:(NSString *)channelName pusher:(PTPusher *)aPusher
 {
   if ((self = [super initWithName:channelName pusher:aPusher])) {
@@ -318,19 +304,15 @@
     /* Set up event handlers for pre-defined channel events.
      As above, use blocks as proxies to a weak channel reference to avoid retain cycles.
      */
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_5_0
       __weak PTPusherPresenceChannel *weakChannel = self;
-#else
-      __unsafe_unretained PTPusherPresenceChannel *weakChannel = self;
-#endif
     
-    [internalBindings addObject:
+    [self.internalBindings addObject:
      [self bindToEventNamed:@"pusher_internal:member_added" 
             handleWithBlock:^(PTPusherEvent *event) {
               [weakChannel handleMemberAddedEvent:event];
             }]];
     
-    [internalBindings addObject:
+    [self.internalBindings addObject:
      [self bindToEventNamed:@"pusher_internal:member_removed" 
             handleWithBlock:^(PTPusherEvent *event) {
               [weakChannel handleMemberRemovedEvent:event];

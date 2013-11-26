@@ -19,10 +19,7 @@
  As well as your Pusher API key, you will also need your app ID and secret key
  for signing requests.
  */
-@interface PTPusherAPI : NSObject {
-  NSString *key, *appID, *secretKey;
-  NSOperationQueue *operationQueue;
-}
+@interface PTPusherAPI : NSObject 
 
 ///------------------------------------------------------------------------------------/
 /// @name Initialisation

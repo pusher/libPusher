@@ -59,13 +59,9 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
   NSOperationQueue *authorizationQueue;
   NSUInteger _numberOfReconnectAttempts;
   NSUInteger _maximumNumberOfReconnectAttempts;
+  PTPusherEventDispatcher *dispatcher;
+  NSMutableDictionary *channels;
 }
-
-@synthesize connection = _connection;
-@synthesize delegate;
-@synthesize reconnectAutomatically;
-@synthesize reconnectDelay = _reconnectDelay;
-@synthesize authorizationURL;
 
 - (id)initWithConnection:(PTPusherConnection *)connection connectAutomatically:(BOOL)connectAutomatically
 {

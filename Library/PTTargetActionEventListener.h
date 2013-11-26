@@ -10,14 +10,6 @@
 #import "PTEventListener.h"
 #import "PTPusherEventDispatcher.h"
 
-
-@interface PTTargetActionEventListener : NSObject <PTEventListener> {
-  id target;
-  SEL action;
-}
-- (id)initWithTarget:(id)aTarget action:(SEL)aSelector;
-@end
-
 @interface PTPusherEventDispatcher (PTTargetActionFactory)
 - (PTPusherEventBinding *)addEventListenerForEventNamed:(NSString *)eventName target:(id)target action:(SEL)action;
 @end

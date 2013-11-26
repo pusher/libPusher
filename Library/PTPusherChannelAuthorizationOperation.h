@@ -19,11 +19,7 @@ typedef enum {
 @property (nonatomic, copy) void (^completionHandler)(PTPusherChannelAuthorizationOperation *);
 @property (nonatomic, readonly, getter=isAuthorized) BOOL authorized;
 @property (nonatomic, strong, readonly) NSDictionary *authorizationData;
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_5_0
 @property (weak, nonatomic, readonly) NSMutableURLRequest *mutableURLRequest;
-#else
-@property (unsafe_unretained, nonatomic, readonly) NSMutableURLRequest *mutableURLRequest;
-#endif
 @property (nonatomic, readonly) NSError *error;
 
 + (id)operationWithAuthorizationURL:(NSURL *)URL channelName:(NSString *)channelName socketID:(NSString *)socketID;

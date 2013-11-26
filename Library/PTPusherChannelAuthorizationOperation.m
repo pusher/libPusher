@@ -22,11 +22,6 @@
 
 @implementation PTPusherChannelAuthorizationOperation
 
-@synthesize authorized;
-@synthesize authorizationData;
-@synthesize completionHandler;
-@synthesize error;
-
 - (NSMutableURLRequest *)mutableURLRequest
 {
   // we can be sure this is always mutable
@@ -66,20 +61,20 @@
     self.error = [NSError errorWithDomain:PTPusherErrorDomain code:PTPusherChannelAuthorizationConnectionError userInfo:@{NSUnderlyingErrorKey: self.connectionError}];
   }
   else {
-    authorized = YES;
+    _authorized = YES;
     
     if ([URLResponse isKindOfClass:[NSHTTPURLResponse class]]) {
-      authorized = ([(NSHTTPURLResponse *)URLResponse statusCode] == 200 || [(NSHTTPURLResponse *)URLResponse statusCode] == 201);
+      _authorized = ([(NSHTTPURLResponse *)URLResponse statusCode] == 200 || [(NSHTTPURLResponse *)URLResponse statusCode] == 201);
     }
     
-    if (authorized) {
-      authorizationData = [[PTJSON JSONParser] objectFromJSONData:responseData];
+    if (_authorized) {
+      _authorizationData = [[PTJSON JSONParser] objectFromJSONData:responseData];
       
-      if (![authorizationData isKindOfClass:[NSDictionary class]]) {
+      if (![_authorizationData isKindOfClass:[NSDictionary class]]) {
         NSDictionary *userInfo = nil;
         
-        if (authorizationData) { // make sure it isn't nil as a result of invalid JSON first
-          userInfo = @{@"reason": @"Authorization data was not a dictionary", @"authorization_data": authorizationData};
+        if (_authorizationData) { // make sure it isn't nil as a result of invalid JSON first
+          userInfo = @{@"reason": @"Authorization data was not a dictionary", @"authorization_data": _authorizationData};
         }
         else {
           userInfo = @{@"reason": @"Authorization data was not valid JSON"};
@@ -87,7 +82,7 @@
         
         self.error = [NSError errorWithDomain:PTPusherErrorDomain code:PTPusherChannelAuthorizationBadResponseError userInfo:userInfo];
         
-        authorized = NO;
+        _authorized = NO;
       }
     }
   }

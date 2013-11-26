@@ -28,10 +28,6 @@ NSString *const PTPusherConnectionPongEvent        = @"pusher:pong";
   NSURLRequest *request;
 }
 
-@synthesize delegate = _delegate;
-@synthesize state;
-@synthesize socketID;
-
 - (id)initWithURL:(NSURL *)aURL secure:(BOOL)secure
 {
   return [self initWithURL:aURL secure:NO];

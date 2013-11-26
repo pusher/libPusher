@@ -78,10 +78,7 @@ extern NSString *const PTPusherErrorUnderlyingEventKey;
  Note: due to various problems people have had connecting to Pusher without SSL over a 3G connection,
  it is highly recommend that you use SSL. For this reason, SSL is enabled by default.
  */
-@interface PTPusher : NSObject <PTPusherConnectionDelegate, PTPusherEventBindings> {
-  PTPusherEventDispatcher *dispatcher;
-  NSMutableDictionary *channels;
-}
+@interface PTPusher : NSObject <PTPusherConnectionDelegate, PTPusherEventBindings>
 
 ///------------------------------------------------------------------------------------/
 /// @name Properties

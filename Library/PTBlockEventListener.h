@@ -10,16 +10,7 @@
 #import "PTEventListener.h"
 #import "PTPusherEventDispatcher.h"
 
-@class PTPusherEvent;
-
 typedef void (^PTBlockEventListenerBlock)(PTPusherEvent *);
-
-@interface PTBlockEventListener : NSObject <PTEventListener> {
-  PTBlockEventListenerBlock block;
-  dispatch_queue_t queue;
-}
-- (id)initWithBlock:(PTBlockEventListenerBlock)aBlock dispatchQueue:(dispatch_queue_t)queue;
-@end
 
 @interface PTPusherEventDispatcher (PTBlockEventFactory)
 

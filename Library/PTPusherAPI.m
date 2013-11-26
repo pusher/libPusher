@@ -15,7 +15,10 @@
 
 #define kPUSHER_API_DEFAULT_HOST @"api.pusherapp.com"
 
-@implementation PTPusherAPI
+@implementation PTPusherAPI {
+  NSString *key, *appID, *secretKey;
+  NSOperationQueue *operationQueue;
+}
 
 - (id)initWithKey:(NSString *)aKey appID:(NSString *)anAppID secretKey:(NSString *)aSecretKey
 {
