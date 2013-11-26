@@ -31,11 +31,11 @@
 
 - (PTPusherEventBinding *)addEventListener:(id<PTEventListener>)listener forEventNamed:(NSString *)eventName
 {
-  NSMutableArray *bindingsForEvent = [bindings objectForKey:eventName];
+  NSMutableArray *bindingsForEvent = bindings[eventName];
   
   if (bindingsForEvent == nil) {
     bindingsForEvent = [NSMutableArray array];
-    [bindings setObject:bindingsForEvent forKey:eventName];
+    bindings[eventName] = bindingsForEvent;
   }
   PTPusherEventBinding *binding = [[PTPusherEventBinding alloc] initWithEventListener:listener eventName:eventName];
   [bindingsForEvent addObject:binding];
@@ -45,7 +45,7 @@
 
 - (void)removeBinding:(PTPusherEventBinding *)binding
 {
-  NSMutableArray *bindingsForEvent = [bindings objectForKey:binding.eventName];
+  NSMutableArray *bindingsForEvent = bindings[binding.eventName];
   
   if ([bindingsForEvent containsObject:binding]) {
     [binding invalidate];
@@ -67,7 +67,7 @@
 
 - (void)dispatchEvent:(PTPusherEvent *)event
 {
-  for (PTPusherEventBinding *binding in [bindings objectForKey:event.name]) {
+  for (PTPusherEventBinding *binding in bindings[event.name]) {
     [binding dispatchEvent:event];
   }
 }

@@ -47,8 +47,8 @@
   [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
   
   NSMutableDictionary *requestData = [NSMutableDictionary dictionary];
-  [requestData setObject:socketID forKey:@"socket_id"];
-  [requestData setObject:channelName forKey:@"channel_name"];
+  requestData[@"socket_id"] = socketID;
+  requestData[@"channel_name"] = channelName;
   
   [request setHTTPBody:[[requestData sortedQueryString] dataUsingEncoding:NSUTF8StringEncoding]];
   
@@ -63,7 +63,7 @@
   }
   
   if (self.connectionError) {
-    self.error = [NSError errorWithDomain:PTPusherErrorDomain code:PTPusherChannelAuthorizationConnectionError userInfo:[NSDictionary dictionaryWithObject:self.connectionError forKey:NSUnderlyingErrorKey]];
+    self.error = [NSError errorWithDomain:PTPusherErrorDomain code:PTPusherChannelAuthorizationConnectionError userInfo:@{NSUnderlyingErrorKey: self.connectionError}];
   }
   else {
     authorized = YES;
@@ -79,10 +79,10 @@
         NSDictionary *userInfo = nil;
         
         if (authorizationData) { // make sure it isn't nil as a result of invalid JSON first
-          userInfo = [NSDictionary dictionaryWithObjectsAndKeys:@"Authorization data was not a dictionary", @"reason", authorizationData, @"authorization_data", nil];
+          userInfo = @{@"reason": @"Authorization data was not a dictionary", @"authorization_data": authorizationData};
         }
         else {
-          userInfo = [NSDictionary dictionaryWithObject:@"Authorization data was not valid JSON" forKey:@"reason"];
+          userInfo = @{@"reason": @"Authorization data was not valid JSON"};
         }
         
         self.error = [NSError errorWithDomain:PTPusherErrorDomain code:PTPusherChannelAuthorizationBadResponseError userInfo:userInfo];
@@ -132,7 +132,7 @@
 
 - (NSDictionary *)authorizationData
 {
-  return [NSDictionary dictionary];
+  return @{};
 }
 
 - (NSMutableURLRequest *)mutableURLRequest

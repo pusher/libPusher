@@ -195,10 +195,10 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 
 - (PTPusherChannel *)subscribeToChannelNamed:(NSString *)name
 {
-  PTPusherChannel *channel = [channels objectForKey:name];
+  PTPusherChannel *channel = channels[name];
   if (channel == nil) {
     channel = [PTPusherChannel channelWithName:name pusher:self]; 
-    [channels setObject:channel forKey:name];
+    channels[name] = channel;
   }
   // private/presence channels require a socketID to authenticate
   if (self.connection.isConnected && self.connection.socketID) {
@@ -226,7 +226,7 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 
 - (PTPusherChannel *)channelNamed:(NSString *)name
 {
-  return [channels objectForKey:name];
+  return channels[name];
 }
 
 /* This is only called when a client explicitly unsubscribes from a channel
@@ -254,7 +254,7 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
   
   if (self.connection.isConnected) {
     [self sendEventNamed:@"pusher:unsubscribe"
-                    data:[NSDictionary dictionaryWithObject:channel.name forKey:@"channel"]];
+                    data:@{@"channel": channel.name}];
   }
   
   [channels removeObjectForKey:channel.name];
@@ -311,14 +311,14 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
   }
   
   NSMutableDictionary *payload = [NSMutableDictionary dictionary];  
-  [payload setObject:name forKey:PTPusherEventKey];
+  payload[PTPusherEventKey] = name;
   
   if (data) {
-    [payload setObject:data forKey:PTPusherDataKey];
+    payload[PTPusherDataKey] = data;
   }
   
   if (channelName) {
-    [payload setObject:channelName forKey:PTPusherChannelKey];
+    payload[PTPusherChannelKey] = channelName;
   }
   [self.connection send:payload];
 }
@@ -360,7 +360,7 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
     }
     
     // check for error codes based on the Pusher Websocket protocol see http://pusher.com/docs/pusher_protocol
-    error = [NSError errorWithDomain:errorDomain code:errorCode userInfo:[NSDictionary dictionaryWithObject:reason forKey:@"reason"]];
+    error = [NSError errorWithDomain:errorDomain code:errorCode userInfo:@{@"reason": reason}];
     
     // 4000-4099 -> The connection SHOULD NOT be re-established unchanged.
     if (errorCode >= 4000 && errorCode <= 4099) {
@@ -402,14 +402,14 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
   }
   
   if (event.channel) {
-    [[channels objectForKey:event.channel] dispatchEvent:event];
+    [channels[event.channel] dispatchEvent:event];
   }
   [dispatcher dispatchEvent:event];
   
   [[NSNotificationCenter defaultCenter] 
      postNotificationName:PTPusherEventReceivedNotification
      object:self 
-     userInfo:[NSDictionary dictionaryWithObject:event forKey:PTPusherEventUserInfoKey]];
+     userInfo:@{PTPusherEventUserInfoKey: event}];
 }
 
 - (void)handleDisconnection:(PTPusherConnection *)connection error:(NSError *)error reconnectMode:(PTPusherAutoReconnectMode)reconnectMode

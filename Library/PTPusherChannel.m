@@ -111,7 +111,7 @@
 - (void)handleSubcribeErrorEvent:(PTPusherEvent *)event
 {
   if ([pusher.delegate respondsToSelector:@selector(pusher:didFailToSubscribeToChannel:withError:)]) {
-    NSDictionary *userInfo = [NSDictionary dictionaryWithObject:event forKey:PTPusherErrorUnderlyingEventKey];
+    NSDictionary *userInfo = @{PTPusherErrorUnderlyingEventKey: event};
     NSError *error = [NSError errorWithDomain:PTPusherErrorDomain code:PTPusherSubscriptionError userInfo:userInfo];
     [pusher.delegate pusher:pusher didFailToSubscribeToChannel:self withError:error];
   }
@@ -121,7 +121,7 @@
 
 - (void)authorizeWithCompletionHandler:(void(^)(BOOL, NSDictionary *, NSError *))completionHandler
 {
-  completionHandler(YES, [NSDictionary dictionary], nil); // public channels do not require authorization
+  completionHandler(YES, @{}, nil); // public channels do not require authorization
 }
 
 #pragma mark - Binding to events
@@ -174,7 +174,7 @@
   [[NSNotificationCenter defaultCenter] 
    postNotificationName:PTPusherEventReceivedNotification 
    object:self 
-   userInfo:[NSDictionary dictionaryWithObject:event forKey:PTPusherEventUserInfoKey]];
+   userInfo:@{PTPusherEventUserInfoKey: event}];
 }
 
 #pragma mark - Internal use only
@@ -184,7 +184,7 @@
   if (self.isSubscribed) return;
   
   [pusher sendEventNamed:@"pusher:subscribe" 
-                    data:[NSDictionary dictionaryWithObject:self.name forKey:@"channel"]
+                    data:@{@"channel": self.name}
                  channel:nil];
 }
 
@@ -262,7 +262,7 @@
   if (self.isSubscribed) return;
   
   NSMutableDictionary *eventData = [authData mutableCopy];
-  [eventData setObject:self.name forKey:@"channel"];
+  eventData[@"channel"] = self.name;
   
   [pusher sendEventNamed:@"pusher:subscribe" 
                     data:eventData
@@ -526,7 +526,7 @@
   PTPusherChannelMember *member = [self memberWithID:memberData[@"user_id"]];
   if (member == nil) {
     member = [[PTPusherChannelMember alloc] initWithUserID:memberData[@"user_id"] userInfo:memberData[@"user_info"]];
-    [_members setObject:member forKey:member.userID];
+    _members[member.userID] = member;
   }
   return member;
 }

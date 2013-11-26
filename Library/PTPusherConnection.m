@@ -158,7 +158,7 @@ NSString *const PTPusherConnectionPongEvent        = @"pusher:pong";
   }
   
   if ([event.name isEqualToString:PTPusherConnectionEstablishedEvent]) {
-    self.socketID = [event.data objectForKey:@"socket_id"];
+    self.socketID = (event.data)[@"socket_id"];
     self.state = PTPusherConnectionConnected;
     
     [self.delegate pusherConnectionDidConnect:self];
@@ -171,7 +171,7 @@ NSString *const PTPusherConnectionPongEvent        = @"pusher:pong";
 
 - (void)sendPing
 {
-  [self send:[NSDictionary dictionaryWithObject:@"pusher:ping" forKey:@"event"]];
+  [self send:@{@"event": @"pusher:ping"}];
 }
 
 - (void)resetPingPongTimer
