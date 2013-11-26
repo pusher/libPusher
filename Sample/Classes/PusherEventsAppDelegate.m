@@ -62,7 +62,8 @@
   
   if ([reachability isReachable]) {
     // we appear to have a connection, so something else must have gone wrong
-    NSLog(@"Internet reachable, is Pusher down?");
+    NSLog(@"Internet reachable, reconnecting");
+    [_pusherClient connect];
   }
   else {
     NSLog(@"Waiting for reachability");
@@ -103,7 +104,6 @@
   }
 }
 
-
 - (void)pusher:(PTPusher *)pusher connection:(PTPusherConnection *)connection didDisconnectWithError:(NSError *)error willAttemptReconnect:(BOOL)willAttemptReconnect
 {
   NSLog(@"[pusher-%@] Pusher Connection disconnected with error: %@", pusher.connection.socketID, error);
@@ -112,7 +112,7 @@
     NSLog(@"[pusher-%@] Client will attempt to reconnect automatically", pusher.connection.socketID);
   }
   else {
-    if ([error.domain isEqualToString:NSPOSIXErrorDomain]) {
+    if (![error.domain isEqualToString:PTPusherErrorDomain]) {
       [self startReachabilityCheck];
     }
   }

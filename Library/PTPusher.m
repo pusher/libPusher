@@ -19,6 +19,13 @@
 
 #define kPUSHER_HOST @"ws.pusherapp.com"
 
+typedef NS_ENUM(NSUInteger, PTPusherAutoReconnectMode) {
+  PTPusherAutoReconnectModeNoReconnect,
+  PTPusherAutoReconnectModeReconnectImmediately,
+  PTPusherAutoReconnectModeReconnectWithConfiguredDelay,
+  PTPusherAutoReconnectModeReconnectWithBackoffDelay
+};
+
 NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, BOOL secure);
 
 NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotification";
@@ -49,12 +56,14 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 
 @implementation PTPusher {
   NSOperationQueue *authorizationQueue;
+  NSUInteger _numberOfReconnectAttempts;
+  NSUInteger _maximumNumberOfReconnectAttempts;
 }
 
 @synthesize connection = _connection;
 @synthesize delegate;
 @synthesize reconnectAutomatically;
-@synthesize reconnectDelay;
+@synthesize reconnectDelay = _reconnectDelay;
 @synthesize authorizationURL;
 
 - (id)initWithConnection:(PTPusherConnection *)connection connectAutomatically:(BOOL)connectAutomatically
@@ -80,6 +89,18 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
     self.connection = connection;
     self.connection.delegate = self;
     self.reconnectDelay = kPTPusherDefaultReconnectDelay;
+    
+    /* Three reconnection attempts should be more than enough attempts
+     * to reconnect where the user has simply locked their device or
+     * backgrounded the app.
+     *
+     * If there is no internet connection, we will only end up retrying
+     * once as after the first failure we will no longer auto-retry.
+     *
+     * We may consider making this user-customisable in future but not 
+     * for now.
+     */
+    _maximumNumberOfReconnectAttempts = 3;
   }
   return self;
 }
@@ -128,6 +149,7 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 
 - (void)connect
 {
+  _numberOfReconnectAttempts = 0;
   [self.connection connect];
 }
 
@@ -307,6 +329,8 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 
 - (void)pusherConnectionDidConnect:(PTPusherConnection *)connection
 {
+  _numberOfReconnectAttempts = 0;
+  
   if ([self.delegate respondsToSelector:@selector(pusher:connectionDidConnect:)]) {
     [self.delegate pusher:self connectionDidConnect:connection];
   }
@@ -328,30 +352,27 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
     
     // 4000-4099 -> The connection SHOULD NOT be re-established unchanged.
     if (errorCode >= 4000 && errorCode <= 4099) {
-      [self handleDisconnection:connection error:error willReconnect:NO];
+      [self handleDisconnection:connection error:error reconnectMode:PTPusherAutoReconnectModeNoReconnect];
     } else
     // 4200-4299 -> The connection SHOULD be re-established immediately.
     if(errorCode >= 4200 && errorCode <= 4299) {
-      [self handleDisconnection:connection error:error willReconnect:YES];
-      [self reconnectAfterDelay:0];
+      [self handleDisconnection:connection error:error reconnectMode:PTPusherAutoReconnectModeReconnectImmediately];
     }
     
     else {
       // i.e. 4100-4199 -> The connection SHOULD be re-established after backing off.
-      [self handleDisconnection:connection error:error willReconnect:YES];
-      [self reconnectAfterDelay:self.reconnectDelay];
+      [self handleDisconnection:connection error:error reconnectMode:PTPusherAutoReconnectModeReconnectWithBackoffDelay];
     }
   }
   else {
-    [self handleDisconnection:connection error:error willReconnect:YES];
-    [self reconnectAfterDelay:self.reconnectDelay];
+    [self handleDisconnection:connection error:error reconnectMode:PTPusherAutoReconnectModeReconnectWithConfiguredDelay];
   }
 }
 
 - (void)pusherConnection:(PTPusherConnection *)connection didFailWithError:(NSError *)error wasConnected:(BOOL)wasConnected
 {
   if (wasConnected) {
-    [self handleDisconnection:connection error:error willReconnect:NO];
+    [self handleDisconnection:connection error:error reconnectMode:PTPusherAutoReconnectModeReconnectImmediately];
   }
   else {
     if ([self.delegate respondsToSelector:@selector(pusher:connection:failedWithError:)]) {
@@ -379,7 +400,7 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
      userInfo:[NSDictionary dictionaryWithObject:event forKey:PTPusherEventUserInfoKey]];
 }
 
-- (void)handleDisconnection:(PTPusherConnection *)connection error:(NSError *)error willReconnect:(BOOL)willReconnect
+- (void)handleDisconnection:(PTPusherConnection *)connection error:(NSError *)error reconnectMode:(PTPusherAutoReconnectMode)reconnectMode
 {
   [authorizationQueue cancelAllOperations];
   
@@ -402,9 +423,19 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
     [self.delegate pusher:self connection:connection didDisconnectWithError:error];
 #pragma clang diagnostic pop
   }
+  
+  BOOL willReconnect = NO;
+  
+  if (reconnectMode > PTPusherAutoReconnectModeNoReconnect && _numberOfReconnectAttempts < _maximumNumberOfReconnectAttempts) {
+    willReconnect = YES;
+  }
     
   if ([self.delegate respondsToSelector:@selector(pusher:connection:didDisconnectWithError:willAttemptReconnect:)]) {
     [self.delegate pusher:self connection:connection didDisconnectWithError:error willAttemptReconnect:willReconnect];
+  }
+  
+  if (willReconnect) {
+    [self reconnectUsingMode:reconnectMode];
   }
 }
 
@@ -415,8 +446,27 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
   [authorizationQueue addOperation:operation];
 }
 
-- (void)reconnectAfterDelay:(NSUInteger)delay
+- (void)reconnectUsingMode:(PTPusherAutoReconnectMode)reconnectMode
 {
+  _numberOfReconnectAttempts++;
+  
+  NSTimeInterval delay;
+  
+  switch (reconnectMode) {
+    case PTPusherAutoReconnectModeReconnectImmediately:
+      delay = 0;
+      break;
+    case PTPusherAutoReconnectModeReconnectWithConfiguredDelay:
+      delay = self.reconnectDelay;
+      break;
+    case PTPusherAutoReconnectModeReconnectWithBackoffDelay:
+      delay = self.reconnectDelay * _numberOfReconnectAttempts;
+      break;
+    default:
+      delay = 0;
+      break;
+  }
+  
   if ([self.delegate respondsToSelector:@selector(pusher:connectionWillAutomaticallyReconnect:afterDelay:)]) {
     BOOL shouldProceed = [self.delegate pusher:self connectionWillAutomaticallyReconnect:_connection afterDelay:delay];
     
