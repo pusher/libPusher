@@ -31,6 +31,7 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 NSString *const PTPusherEventReceivedNotification = @"PTPusherEventReceivedNotification";
 NSString *const PTPusherEventUserInfoKey          = @"PTPusherEventUserInfoKey";
 NSString *const PTPusherErrorDomain               = @"PTPusherErrorDomain";
+NSString *const PTPusherFatalErrorDomain          = @"PTPusherFatalErrorDomain";
 NSString *const PTPusherErrorUnderlyingEventKey   = @"PTPusherErrorUnderlyingEventKey";
 
 /** The Pusher protocol version, used to determined which features
@@ -352,8 +353,14 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
         reason = @"Unknown error"; // not sure what could cause this to be nil, but just playing it safe
     }
     
+    NSString *errorDomain = PTPusherErrorDomain;
+
+    if (errorCode >= 400 && errorCode <= 4099) {
+      errorDomain = PTPusherFatalErrorDomain;
+    }
+    
     // check for error codes based on the Pusher Websocket protocol see http://pusher.com/docs/pusher_protocol
-    error = [NSError errorWithDomain:PTPusherErrorDomain code:errorCode userInfo:[NSDictionary dictionaryWithObject:reason forKey:@"reason"]];
+    error = [NSError errorWithDomain:errorDomain code:errorCode userInfo:[NSDictionary dictionaryWithObject:reason forKey:@"reason"]];
     
     // 4000-4099 -> The connection SHOULD NOT be re-established unchanged.
     if (errorCode >= 4000 && errorCode <= 4099) {
