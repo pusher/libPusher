@@ -1,9 +1,10 @@
-platform :ios, :deployment_target => '4.0'
+platform :ios, :deployment_target => '5.0'
 
 inhibit_all_warnings!
 
 pod 'Reachability'
 pod 'SocketRocket', :head
+pod 'ReactiveCocoa'
 
 post_install do |installer|
   # we don't want to link static lib to the icucore dylib or it will fail to build
