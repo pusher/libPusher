@@ -11,6 +11,7 @@
 #import "Pusher.h"
 #import "NSMutableURLRequest+BasicAuth.h"
 #import "Reachability.h"
+#import "PTPusher+ReactiveExtensions.h"
 
 // All events will be logged
 #define kLOG_ALL_EVENTS
@@ -29,11 +30,9 @@
   self.pusherClient = [PTPusher pusherWithKey:PUSHER_API_KEY delegate:self encrypted:YES];
   
   // log all events received, regardless of which channel they come from
-  [[NSNotificationCenter defaultCenter]
-       addObserver:self
-          selector:@selector(handlePusherEvent:)
-              name:PTPusherEventReceivedNotification
-            object:self.pusherClient];
+  [[self.pusherClient allEvents] subscribeNext:^(PTPusherEvent *event) {
+    NSLog(@"[pusher] Received event %@", event);
+  }];
   
   self.menuViewController.pusher = self.pusherClient;
   self.window.rootViewController = self.navigationController;
@@ -41,16 +40,6 @@
   [self.window makeKeyAndVisible];
   
   [self.pusherClient connect];
-}
-
-#pragma mark - Event notifications
-
-- (void)handlePusherEvent:(NSNotification *)note
-{
-#ifdef kLOG_ALL_EVENTS
-  PTPusherEvent *event = [note.userInfo objectForKey:PTPusherEventUserInfoKey];
-  NSLog(@"[pusher] Received event %@", event);
-#endif
 }
 
 #pragma mark - Reachability

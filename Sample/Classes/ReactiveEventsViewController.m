@@ -29,16 +29,25 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
   
   self.api = [[PTPusherAPI alloc] initWithKey:PUSHER_API_KEY appID:PUSHER_APP_ID secretKey:PUSHER_API_SECRET];
   
-  /* Create a signal by mapping a channel events to a UIColor, converting the color string then a UIColor value */
-  RACSignal *colorSignal = [[[self.pusher subscribeToChannelNamed:@"colors"] eventsOfType:@"color"] map:^id(PTPusherEvent *event) {
+  // subscribe to the channel
+  PTPusherChannel *colorChannel = [self.pusher subscribeToChannelNamed:@"colors"];
+  
+  // Create a signal by mapping a channel events to a UIColor, converting the color string then a UIColor value
+  RACSignal *colorSignal = [[colorChannel eventsOfType:@"color"] map:^id(PTPusherEvent *event) {
     NSScanner *scanner = [NSScanner scannerWithString:event.data[@"color"]];
     unsigned long long hexValue;
     [scanner scanHexLongLong:&hexValue];
     return UIColorFromRGBHexValue(hexValue);
   }];
   
-  /* Bind the view's background color to colors as the arrive */
+  // Bind the view's background color to colors as the arrivecol
   RAC(self.view, backgroundColor) = colorSignal;
+  
+  
+  // log all events received on the channel using the allEvents signal
+  [[[colorChannel allEvents] takeUntil:[self rac_willDeallocSignal]] subscribeNext:^(PTPusherEvent *event) {
+    NSLog(@"[pusher] Received color event %@", event);
+  }];
 }
 
 - (IBAction)tappedSendButton:(id)sender
