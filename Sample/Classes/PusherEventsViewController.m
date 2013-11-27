@@ -73,7 +73,7 @@
 {
   NewEventViewController *newEventController = [[NewEventViewController alloc] init];
   newEventController.delegate = self;
-  [self presentModalViewController:newEventController animated:YES];
+  [self presentViewController:newEventController animated:YES completion:nil];
 }
 
 - (void)sendEventWithMessage:(NSString *)message;
@@ -83,7 +83,7 @@
 
   // send the event after a short delay, wait for modal view to disappear
   [self performSelector:@selector(sendEvent:) withObject:payload afterDelay:0.3];
-  [self dismissModalViewControllerAnimated:YES];
+  [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)sendEvent:(id)payload;
