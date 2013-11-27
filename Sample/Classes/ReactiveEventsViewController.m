@@ -9,6 +9,7 @@
 #import "ReactiveEventsViewController.h"
 #import "PTPusherAPI.h"
 #import "Constants.h"
+#import "Pusher.h"
 #import "PTPusherChannel+ReactiveExtensions.h"
 
 #define UIColorFromRGBHexValue(rgbValue) [UIColor \
