@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-ReactiveCocoa.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-SocketRocket.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -37,32 +42,37 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>61FDDB3765BC40D8AD1CA677</key>
+		<key>0402D00C4DFB42199217841D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8CD183EA2D3E4A6B8D5761CE</key>
+		<key>063659C829454C82A619E4F8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8E4EBA6C393D4E669F393B84</key>
+		<key>5BF559B20D784F7096C0D5FF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>995F1D8F06324A69AC7ADD72</key>
+		<key>6CAA6E31029C41429D0B0213</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A7D9977497BA4F6AB4A0889F</key>
+		<key>8024D3DAD4AE415E897DC585</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BDBE7202A8214393ACF3E379</key>
+		<key>9A6B6BFEB33144239FDB185C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EA2B21702FD443F39A8DE00E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
