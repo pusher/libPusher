@@ -1,13 +1,62 @@
-# 1.5 - May 2013
+# 1.5 - December 2013
 
-* Deprecated `reconnectAutomatically`, which is now ignored. Pusher will now try and reconnect automatically whenever possible by default, based on the error code returned by Pusher as defined in the latest Pusher protocol.
-* Generally improved reconnection strategy.
-* Added a global Pusher.h header file to reduce the number of imports needed
-* Added `pusher:connectionWillConnect:` delegate method.
-* Deprecated `pusher:willAuthorizeChannelWithRequest:` delegate method, replaced with pusher:willAuthorizeChannel:withRequest:.
+This release contains some significant bug fixes and API changes. All deprecated API in this release will be removed in the next release after this one.
+
+## Upgrade notes
+
+This is a summary of the changes in this release and notes on how to upgrade. The recommended way of installing libPusher is to use CocoaPods.
+
+As of this version, support for iOS < 5.0 and OSX < 10.8 has been dropped.
+
+### Improvements to disconnection handling
+
+`PTPusher` now goes to great lengths to ensure it remains connected whenever possible, including correctly handling error codes returned by the Pusher service (see http://pusher.com/docs/pusher_protocol#error-codes). 
+
+In most cases where the connection fails or disconnects, Pusher will attempt to reconnect either immediately or after a configured delay (which defaults to 5s and can still be customised using the `reconnectDelay` property. 
+
+In the case where Pusher returns a 4100 error code (over capacity), reconnection attempts will be attempted using a linear back-off delay. In all cases, Pusher will limit reconnection attempts to a maximum of three attempts before giving up.
+
+There are two circumstances in which the client will not reconnect automatically:
+
+  * The client disconnects with an error code in the 4000-4099 range, which generally indicates a client misconfiguration.
+  * The client is not able to connect in the first place (i.e. it fails on it's first attempt), which normally indicates that there is no network connection or there is a server-side issue.
+
+A new delegate method, `pusher:connection:didDisconnectWithError:willAttemptReconnect:` will be called when Pusher disconnects. The `willAttemptReconnect:` parameter will indicate to clients that `PTPusher` will automatically reconnect. If this is `NO`, clients should decide how they want to proceed (e.g. you may want to check network reachability and manually reconnect when reachability changes).
+
+These changes should ensure that libPusher is much more reliable. You no longer need to explicitly disconnect and reconnect the client when going to the background or when the device is locked - in these situations the client will automatically reconnect when the app returns to the foreground or the device is unlocked.
+
+The delegate methods `pusher:connection:didDisconnectWithError` and `pusher:connection:didDisconnect:` are now deprecated and will be removed in the next release.
+
+Additionally, the `reconnectAutomatically` property of `PTPusher` has been deprecated. Setting this will not affect the automatic reconnection behaviour of `PTPusher`. If you need to take control of the auto-reconnect behaviour, a new delegate method is provided, `pusher:connectionWillAutomaticallyReconnect:afterDelay:`. Returning `NO` from this method will prevent the automatic reconnection attempt from happening. You will be responsible for manually reconnecting the client.
+
+Pusher can be prevented from connecting *at any time* by returning `NO` from another new delegate method, `pusher:connectionWillConnect:`.
+
+### Changes to presence channel members API
+
+The API for accessing members of a channel has been brought in line with the JavaScript client.
+
+Presence channels have a property `members`, which returns a instance of `PTPusherChannelMembers`, which is an unordered collection of members. Members can be retrieved by ID using the `memberWithID:` method. Members are represented by instances of the class `PTPusherChannelMember` rather than `NSDictionary` - see the headers for more information. There is also a property, `me`, which returns your own member object.
+
+### Experimental ReactiveExtensions
+
+This release contains some extensions that allow binding to events using ReactiveCocoa signals. These extensions are bundled as a separate library and if you're using CocoaPods, a sub-spec that is excluded from the default spec. These are still experimental so proceed with caution. You can add them to your project by adding `libPusher/ReactiveExtensions` to your `Podfile`. 
+
+### Bug Fixes
+
+* There have been numerous bug fixes around connection handling and Pusher should generally be more stable and remain connected in most cases where you have network connectivity. 
+* libPusher now uses socket-native ping/pong and also sends client-side pings to keep the connection alive.
+* Removed an assertion that would cause a crash if trying to send a client-send event when not connected.
+* Calling `unsubscribe` on a channel while disconnected works as expected, with the channel being removed from the channels list and all bindings removed.
+
+### Other enhancements and changes
+
 * Bumped Pusher protocol to version 6.
-* Removed support for iOS4.
 * Switched to latest SocketRocket backend, improved threading issues
+* Removed private headers from CocoaPod specification
+* Moved fatal protocol errors that disallow reconnection into a new `PTPusherFatalErrorDomain` error domain.
+* Fixed 64bit warnings.
+* Removed JSONKit support.
+* Log warnings when calling deprecated delegate methods.
 
 # 1.4 - October 2012
 
