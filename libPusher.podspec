@@ -16,14 +16,8 @@ Pod::Spec.new do |s|
   s.subspec 'Core' do |subspec|
     subspec.dependency 'SocketRocket', "0.2"
     
-    subspec.source_files         = 'Library/*'
-    subspec.private_header_files = *%w(
-      PTJSON.h 
-      PTJSONParser.h 
-      NSString+Hashing.h 
-      NSDictionary+QueryString.h 
-      PTPusherChannel_Private.h
-    )
+    subspec.source_files         = 'Library/**/*.{h,m}'
+    subspec.private_header_files = 'Library/Private Headers/*'
     subspec.xcconfig             = { 
       'GCC_PREPROCESSOR_DEFINITIONS' => 'kPTPusherClientLibraryVersion=@\"1.5\"' 
     }
