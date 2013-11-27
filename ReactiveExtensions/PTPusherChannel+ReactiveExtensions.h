@@ -6,8 +6,8 @@
 //
 //
 
-#import <Pusher/Pusher.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
+#import "PTPusherChannel.h"
 
 @interface PTPusherChannel (ReactiveExtensions)
 

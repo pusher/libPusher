@@ -6,8 +6,8 @@
 //
 //
 
-#import <Pusher/Pusher.h>
 #import <ReactiveCocoa/ReactiveCocoa.h>
+#import "PTPusher.h"
 #import "PTPusherChannel+ReactiveExtensions.h"
 
 /** Reactive extensions for Pusher provide an alternative means of binding to events,

@@ -6,8 +6,8 @@
 //
 //
 
-#import <Pusher/Pusher.h>
 #import <ReactiveCocoa/NSNotificationCenter+RACSupport.h>
+#import "PTPusher.h"
 
 @interface PTPusher (ReactiveExtensionsInternal)
 
