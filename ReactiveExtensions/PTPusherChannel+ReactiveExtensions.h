@@ -11,6 +11,8 @@
 
 @interface PTPusherChannel (ReactiveExtensions)
 
+/** Returns a signal that emits events as they arrive this channel.
+ */
 - (RACSignal *)eventsOfType:(NSString *)eventName;
 
 @end

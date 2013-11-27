@@ -7,22 +7,13 @@
 //
 
 #import "PTPusherChannel+ReactiveExtensions.h"
-#import "PTPusherEventPublisher.h"
+#import "PTPusher+ReactiveExtensions.h"
 
 @implementation PTPusherChannel (ReactiveExtensions)
 
 - (RACSignal *)eventsOfType:(NSString *)eventName
 {
-  return [[RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-    PTPusherEventBinding *binding = [self bindToEventNamed:eventName handleWithBlock:^(PTPusherEvent *event) {
-      [subscriber sendNext:event];
-    }];
-    
-    return [RACDisposable disposableWithBlock:^{
-      [self removeBinding:binding];
-    }];
-    
-  }] setNameWithFormat:@"-eventsOfType:%@ onChannel:%@", eventName, self.name];
+  return [PTPusher signalForEvents:eventName onBindable:self];
 }
 
 @end
