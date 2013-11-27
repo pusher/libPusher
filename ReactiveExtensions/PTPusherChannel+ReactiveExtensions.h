@@ -15,4 +15,8 @@
  */
 - (RACSignal *)eventsOfType:(NSString *)eventName;
 
+/** Returns a signal that emits all events on this channel.
+ */
+- (RACSignal *)allEvents;
+
 @end

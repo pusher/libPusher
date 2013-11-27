@@ -7,13 +7,18 @@
 //
 
 #import "PTPusherChannel+ReactiveExtensions.h"
-#import "PTPusher+ReactiveExtensions.h"
+#import "PTPusher+ReactiveExtensions_Internal.h"
 
 @implementation PTPusherChannel (ReactiveExtensions)
 
 - (RACSignal *)eventsOfType:(NSString *)eventName
 {
   return [PTPusher signalForEvents:eventName onBindable:self];
+}
+
+- (RACSignal *)allEvents
+{
+  return [PTPusher signalForAllEventsOnBindable:self];
 }
 
 @end

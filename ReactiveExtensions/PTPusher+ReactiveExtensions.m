@@ -7,8 +7,23 @@
 //
 
 #import "PTPusher+ReactiveExtensions.h"
+#import "PTPusher+ReactiveExtensions_Internal.h"
 
 @implementation PTPusher (ReactiveExtensions)
+
+- (RACSignal *)eventsOfType:(NSString *)eventName
+{
+  return [[self class] signalForEvents:eventName onBindable:self];
+}
+
+- (RACSignal *)allEvents
+{
+  return [[self class] signalForAllEventsOnBindable:self];
+}
+
+@end
+
+@implementation PTPusher (ReactiveExtensionsInternal)
 
 + (RACSignal *)signalForEvents:(NSString *)eventName onBindable:(id<PTPusherEventBindings>)bindable
 {
@@ -22,12 +37,15 @@
     }];
     
   }] setNameWithFormat:@"-eventsOfType:%@ onBindable:%@", eventName, bindable];
-
 }
 
-- (RACSignal *)eventsOfType:(NSString *)eventName
++ (RACSignal *)signalForAllEventsOnBindable:(id<PTPusherEventBindings>)bindable
 {
-  return [[self class] signalForEvents:eventName onBindable:self];
+  RACSignal *notifications = [[NSNotificationCenter defaultCenter] rac_addObserverForName:PTPusherEventReceivedNotification object:bindable];
+  
+  return [[notifications map:^id(NSNotification *note) {
+    return note.userInfo[PTPusherEventUserInfoKey];
+  }] setNameWithFormat:@"-allEvents onBindable:%@", bindable];
 }
 
 @end

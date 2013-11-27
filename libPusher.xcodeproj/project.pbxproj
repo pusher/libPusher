@@ -54,7 +54,7 @@
 		A37E167414E572C900DCA3A6 /* PTPusherMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = A37E167314E572C900DCA3A6 /* PTPusherMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A394E6F118451CD3004C70A2 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3A9F9591496E96100F83617 /* SenTestingKit.framework */; };
 		A394E6F218451CFE004C70A2 /* PTPusherSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = A394E6EF18451C99004C70A2 /* PTPusherSpec.m */; };
-		A394E6F918463DFA004C70A2 /* PTPusherChannel+ReactiveExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = A394E6F718463DFA004C70A2 /* PTPusherChannel+ReactiveExtensions.h */; };
+		A394E6F918463DFA004C70A2 /* PTPusherChannel+ReactiveExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = A394E6F718463DFA004C70A2 /* PTPusherChannel+ReactiveExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A394E6FA18463DFA004C70A2 /* PTPusherChannel+ReactiveExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = A394E6F818463DFA004C70A2 /* PTPusherChannel+ReactiveExtensions.m */; };
 		A39E238913F7E6AB0083CAD7 /* PusherPresenceEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A39E238813F7E6AB0083CAD7 /* PusherPresenceEventsViewController.m */; };
 		A3A1A149115814F7001EF877 /* OCHamcrest.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = A3A1A111115814D0001EF877 /* OCHamcrest.framework */; };
@@ -96,8 +96,9 @@
 		A3E5CBF5184640C3006A54DD /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A3E5CBF4184640C3006A54DD /* Default-568h@2x.png */; };
 		A3E5CBF818464164006A54DD /* ReactiveEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3E5CBF718464164006A54DD /* ReactiveEventsViewController.m */; };
 		A3E5CBFA18464227006A54DD /* ReactiveEventsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3E5CBF918464227006A54DD /* ReactiveEventsViewController.xib */; };
-		A3E5CBFD1846461A006A54DD /* PTPusher+ReactiveExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CBFB1846461A006A54DD /* PTPusher+ReactiveExtensions.h */; };
+		A3E5CBFD1846461A006A54DD /* PTPusher+ReactiveExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CBFB1846461A006A54DD /* PTPusher+ReactiveExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3E5CBFE1846461A006A54DD /* PTPusher+ReactiveExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = A3E5CBFC1846461A006A54DD /* PTPusher+ReactiveExtensions.m */; };
+		A3E5CC0218464959006A54DD /* PTPusher+ReactiveExtensions_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC0118464959006A54DD /* PTPusher+ReactiveExtensions_Internal.h */; };
 		A3F032471822CC8A00976DA0 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F700C4637DC43EFA335D40F /* libPods.a */; };
 		A3FE41CB11811161009CF5D7 /* NewEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FE41C911811161009CF5D7 /* NewEventViewController.m */; };
 		A3FE41CC11811161009CF5D7 /* NewEventViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3FE41CA11811161009CF5D7 /* NewEventViewController.xib */; };
@@ -227,6 +228,7 @@
 		A3E5CBF918464227006A54DD /* ReactiveEventsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ReactiveEventsViewController.xib; path = Sample/ReactiveEventsViewController.xib; sourceTree = "<group>"; };
 		A3E5CBFB1846461A006A54DD /* PTPusher+ReactiveExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PTPusher+ReactiveExtensions.h"; sourceTree = "<group>"; };
 		A3E5CBFC1846461A006A54DD /* PTPusher+ReactiveExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PTPusher+ReactiveExtensions.m"; sourceTree = "<group>"; };
+		A3E5CC0118464959006A54DD /* PTPusher+ReactiveExtensions_Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PTPusher+ReactiveExtensions_Internal.h"; sourceTree = "<group>"; };
 		A3FE41C811811161009CF5D7 /* NewEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewEventViewController.h; sourceTree = "<group>"; };
 		A3FE41C911811161009CF5D7 /* NewEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewEventViewController.m; sourceTree = "<group>"; };
 		A3FE41CA11811161009CF5D7 /* NewEventViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = NewEventViewController.xib; path = Sample/Classes/NewEventViewController.xib; sourceTree = "<group>"; };
@@ -426,6 +428,7 @@
 				A394E6F818463DFA004C70A2 /* PTPusherChannel+ReactiveExtensions.m */,
 				A3E5CBFB1846461A006A54DD /* PTPusher+ReactiveExtensions.h */,
 				A3E5CBFC1846461A006A54DD /* PTPusher+ReactiveExtensions.m */,
+				A3E5CC0118464959006A54DD /* PTPusher+ReactiveExtensions_Internal.h */,
 			);
 			path = ReactiveExtensions;
 			sourceTree = "<group>";
@@ -554,6 +557,7 @@
 				A3D1D2C711580162009A12AD /* PTEventListener.h in Headers */,
 				A3AC28B613F75530001C4808 /* PTURLRequestOperation.h in Headers */,
 				A32EE793184364D800E3B072 /* PTPusherChannel_Private.h in Headers */,
+				A3E5CC0218464959006A54DD /* PTPusher+ReactiveExtensions_Internal.h in Headers */,
 				A3AC28C313F76C51001C4808 /* PTPusherChannelAuthorizationOperation.h in Headers */,
 				A3B2931F14D8D96900C6B79F /* PTPusherPresenceChannelDelegate.h in Headers */,
 				A3382DE41525C3FA0025550D /* PTJSON.h in Headers */,
