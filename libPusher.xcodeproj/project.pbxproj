@@ -94,6 +94,8 @@
 		A3D1D2CB11580162009A12AD /* PTPusherEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = A3D1D2901157FA4C009A12AD /* PTPusherEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3D1D2CC11580162009A12AD /* PTPusherEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D2911157FA4C009A12AD /* PTPusherEvent.m */; };
 		A3E5CBF5184640C3006A54DD /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A3E5CBF4184640C3006A54DD /* Default-568h@2x.png */; };
+		A3E5CBF818464164006A54DD /* ReactiveEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3E5CBF718464164006A54DD /* ReactiveEventsViewController.m */; };
+		A3E5CBFA18464227006A54DD /* ReactiveEventsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3E5CBF918464227006A54DD /* ReactiveEventsViewController.xib */; };
 		A3F032471822CC8A00976DA0 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F700C4637DC43EFA335D40F /* libPods.a */; };
 		A3FE41CB11811161009CF5D7 /* NewEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FE41C911811161009CF5D7 /* NewEventViewController.m */; };
 		A3FE41CC11811161009CF5D7 /* NewEventViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3FE41CA11811161009CF5D7 /* NewEventViewController.xib */; };
@@ -218,6 +220,9 @@
 		A3D1D29B1157FA80009A12AD /* libPusher-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "libPusher-Info.plist"; sourceTree = "<group>"; };
 		A3D1D2B71158013F009A12AD /* libPusher.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPusher.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3E5CBF4184640C3006A54DD /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		A3E5CBF618464164006A54DD /* ReactiveEventsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReactiveEventsViewController.h; sourceTree = "<group>"; };
+		A3E5CBF718464164006A54DD /* ReactiveEventsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReactiveEventsViewController.m; sourceTree = "<group>"; };
+		A3E5CBF918464227006A54DD /* ReactiveEventsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ReactiveEventsViewController.xib; path = Sample/ReactiveEventsViewController.xib; sourceTree = "<group>"; };
 		A3FE41C811811161009CF5D7 /* NewEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewEventViewController.h; sourceTree = "<group>"; };
 		A3FE41C911811161009CF5D7 /* NewEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewEventViewController.m; sourceTree = "<group>"; };
 		A3FE41CA11811161009CF5D7 /* NewEventViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = NewEventViewController.xib; path = Sample/Classes/NewEventViewController.xib; sourceTree = "<group>"; };
@@ -488,6 +493,8 @@
 				A3698FED13FF0868005CF130 /* NSMutableURLRequest+BasicAuth.m */,
 				A3698FFD13FF200C005CF130 /* NSData+Base64.h */,
 				A3698FFE13FF200C005CF130 /* NSData+Base64.m */,
+				A3E5CBF618464164006A54DD /* ReactiveEventsViewController.h */,
+				A3E5CBF718464164006A54DD /* ReactiveEventsViewController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -498,6 +505,7 @@
 				A3FE41CA11811161009CF5D7 /* NewEventViewController.xib */,
 				A3D1D2831157FA30009A12AD /* MainWindow.xib */,
 				A3D1D2851157FA30009A12AD /* PusherEventsViewController.xib */,
+				A3E5CBF918464227006A54DD /* ReactiveEventsViewController.xib */,
 			);
 			name = Resources;
 			path = ..;
@@ -671,6 +679,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3E5CBFA18464227006A54DD /* ReactiveEventsViewController.xib in Resources */,
 				A3D1D2891157FA30009A12AD /* MainWindow.xib in Resources */,
 				A3E5CBF5184640C3006A54DD /* Default-568h@2x.png in Resources */,
 				A3D1D28B1157FA30009A12AD /* PusherEventsViewController.xib in Resources */,
@@ -850,6 +859,7 @@
 				A39E238913F7E6AB0083CAD7 /* PusherPresenceEventsViewController.m in Sources */,
 				A3698FF213FF0A7A005CF130 /* NSMutableURLRequest+BasicAuth.m in Sources */,
 				A3698FFF13FF200C005CF130 /* NSData+Base64.m in Sources */,
+				A3E5CBF818464164006A54DD /* ReactiveEventsViewController.m in Sources */,
 				A37E15EA14E4BBBA00DCA3A6 /* PusherExampleMenuViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
