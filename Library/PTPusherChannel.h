@@ -205,7 +205,7 @@
 
 @property (nonatomic, readonly) NSInteger count;
 @property (nonatomic, copy, readonly) NSString *myID;
-@property (nonatomic, readonly) NSDictionary *me;
+@property (nonatomic, readonly) PTPusherChannelMember *me;
 
 - (PTPusherChannelMember *)memberWithID:(NSString *)userID;
 - (void)enumerateObjectsUsingBlock:(void (^)(id obj, BOOL *stop))block;
