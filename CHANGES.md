@@ -8,6 +8,12 @@ This is a summary of the changes in this release and notes on how to upgrade. Th
 
 As of this version, support for iOS < 5.0 and OSX < 10.8 has been dropped.
 
+### Initial connection is no longer automatic
+
+`PTPusher` will no longer connect automatically on initialisation and all methods that accept a connect `connectAutomatically` parameter (including the initialiser and all factory methods) are deprecated. 
+
+You should now explicitly call `connect` when you are ready to connect.
+
 ### Improvements to disconnection handling
 
 `PTPusher` now goes to great lengths to ensure it remains connected whenever possible, including correctly handling error codes returned by the Pusher service (see http://pusher.com/docs/pusher_protocol#error-codes). 
