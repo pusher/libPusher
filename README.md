@@ -308,8 +308,6 @@ If `willAttemptReconnect` is `NO`, you should first check the error to see if th
 
 How you handle disconnections is up to you, but the general idea is to check if there is network connectivity and if there is not, wait until there is before reconnecting.
 
-The following examples use Apple's Reachability class (version 2.2) to check the network reachability status. Apple recommends that in most circumstances, you do not do any pre-flight checks and simply try and open a connection. This example follows this advice.
-
 #### Example: handling disconnections using the Reachability library
 
 In this example, we first check for any fatal Pusher errors, before using Reachability to wait for an internet connection to become available before manually reconnecting.
