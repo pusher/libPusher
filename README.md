@@ -12,11 +12,11 @@ The libPusher API mirrors the Pusher Javascript client as closely as possible, w
 Subscribe to the ```chat``` channel and bind to the ```new-message``` event.
 
 ```
-// _client is a strong instance variable of class PTPusher
-_client = [PTPusher pusherWithKey:@"YOUR_API_KEY" delegate:self encrypted:YES];
+// self.client is a strong instance variable of class PTPusher
+self.client = [PTPusher pusherWithKey:@"YOUR_API_KEY" delegate:self encrypted:YES];
     
 // subscribe to channel and bind to event
-PTPusherChannel *channel = [_client subscribeToChannelNamed:@"chat"];
+PTPusherChannel *channel = [self.client subscribeToChannelNamed:@"chat"];
 [channel bindToEventNamed:@"new-message" handleWithBlock:^(PTPusherEvent *channelEvent) {
 	// channelEvent.data is a NSDictianary of the JSON object received
     NSString *message = [channelEvent.data objectForKey:@"text"];
@@ -26,41 +26,33 @@ PTPusherChannel *channel = [_client subscribeToChannelNamed:@"chat"];
 
 ## Installation
 
-Install using CocoaPods.
+Install using CocoaPods is recommended.
 
-```
-pod 'libPusher', '~> 1.4'
+```ruby
+pod 'libPusher', '~> 1.5'
 ```
 
 Import Pusher into the class that wants to make use of the library.
 
+```objc
+#import <Pusher/Pusher.h>
 ```
-#import <libPusher/libPusher.h>
-```
-A step-by-step guide on how to [install and setup CocoaPods]() to use libPusher is available on the wiki.
 
+A step-by-step guide on how to [install and setup CocoaPods]() to use libPusher without using CocoaPods is available on the wiki.
 
 ## Usage
 
-**Note**: in the following examples, ```_client``` is a strong instance variable. The instance returned by the```pusherWithKey:*:``` methods will be auto-released, according to standard Objective-C return conventions. You must retain the client otherwise it will be auto-released before anything useful happens causing silent failures and unexpected behaviour.
+**Note**: in the following examples, ```client``` is a strong property. The instance returned by the ```pusherWithKey:*:``` methods will be auto-released, according to standard Objective-C return conventions. You must retain the client otherwise it will be auto-released before anything useful happens causing silent failures and unexpected behaviour.
 
+### Create a client and connecting
 
-### Create a connection
+```objc
+self.client = [PTPusher pusherWithKey:@"YOUR_API_KEY" delegate:self encrypted:YES];
 
+[self.client connect];
 ```
-_client = [PTPusher pusherWithKey:@"YOUR_API_KEY" delegate:self encrypted:YES];
-```
-When calling the above method, the connection will be established immediately. 
-If you want to defer connection, you can do so:
 
-```
-_client = [PTPusher pusherWithKey:@"YOUR_API_KEY" connectAutomatically:NO encrypted:YES];
-```
-When you are ready to connect, call
-
-```
-[_client connect]
-```
+Note that client's do not connect automatically (as of version 1.5) - you are responsible for calling connect as needed.
 
 It is recommended to implement the PTPusherDelegate protocol in order to be notified when significant connection events happen such as connection errors, disconnects and retries.
 
@@ -74,8 +66,8 @@ There is no need to wait for the client to establish a connection before subscri
 
 #### Subscribing to public channels
 
-```
-PTPusherChannel *channel = [_client subscribeToChannelNamed:@"chat"];
+```objc
+PTPusherChannel *channel = [self.client subscribeToChannelNamed:@"chat"];
 ```
 
 #### Subscribing to private channels
@@ -84,9 +76,9 @@ This method will add the appropriate ```private-``` prefix to the channel name f
 
 Subscribing to private channels needs server-side authorisation. See section [Channel Authorisation](#channel-auth) for details.
 
-```
-// subsribe to private-chat channel
-PTPusherPrivateChannel *private = [_client subscribeToPrivateChannelNamed:@"chat"];
+```objc
+// subscribe to private-chat channel
+PTPusherPrivateChannel *private = [self.client subscribeToPrivateChannelNamed:@"chat"];
 ```
 
 #### Subscribing to presence channels
@@ -95,20 +87,38 @@ This method will add the appropriate ```presence-``` prefix to the channel name 
 
 Subscribing to presence channels needs server-side authorisation. See section [Channel Authorisation](#channel-auth) for details.
 
-```
-// subsribe to presence-chat channel
+```objc
+// subscribe to presence-chat channel
 PTPusherPresenceChannel *presence = [client subscribeToPresenceChannelNamed:@"chat" delegate:self];
 ```
 
 It is recommended to implement ```PTPusherPresenceChannelDelegate``` protocol, to receive notifications for members subscribing or unsubscribing from the presence channel. 
 
+### Accessing subscribed channels
+
+You can use the `channelNamed:` method to retrieve an existing subscribed channel. If you have not subscribed to the requested channel, it will return `nil`.
+
+```objc
+// get the 'chat' channel that you've already subscribed to
+PTPusherChannel *channel = [self.client channelNamed:@"chat"];
+```
+
 ### Unsubscribe from channels
 
 If you no longer want to receive event over a channel, you can unsubscribe.
 
+```objc
+PTPusherChannel *channel = [self.client channelNamed:@"chat"];
+[channel unsubscribe];
 ```
-[_client unsubscribeFromChannel:channel];
-```
+
+### Channel object lifetime
+
+When the Pusher client disconnects, all subscribed channels are implicitly unsubscribed (`isSubscribed` will return NO), however the channel objects will persist and so will any event bindings. 
+
+When the client reconnects, all previously subscribed channels will be resubcribed (which might involve another authentication request for any private/presence channels) and your existing event bindings will continue working as they did prior to the disconnection.
+
+If you explicitly unsubscribe from a channel, **all event bindings will be removed and the client will remove the channel object from it's list of subscribed channels**. If no other code has a strong reference to the channel object, it will be deallocated. If you resubscribe to the channel, a new channel object will be created. You should bear this in mind if you maintain any strong references to a channel object in your application code.
 
 ### <a id="channel-auth"></a>Channel authorisation
 
@@ -118,48 +128,49 @@ Private and presence channels require server-side authorisation before they can 
 
 In order to connect to a private or presence channel, you first need to configure your server authorisation URL.
 
-```
-_client.authorizationURL = [NSURL URLWithString:@"http://www.yourserver.com/authorise"];
+```objc
+self.client.authorizationURL = [NSURL URLWithString:@"http://www.yourserver.com/authorise"];
 ```
 
-When you attempt to connect to a private or presence channel, libPusher will make a form-encoded POST request to the above URL, passing along the ```socket_id``` and ```channel_name``` as parameters. Prior to sending the request, the Pusher delegate will be notified, passing in the NSMutableURLRequest instance that will be sent.
+When you attempt to connect to a private or presence channel, libPusher will make a form-encoded POST request to the above URL, passing along the ```socket_id``` and ```channel_name``` as parameters. Prior to sending the request, the Pusher delegate will be notified, passing in the channel and the NSMutableURLRequest instance that will be sent.
 
 Its up to you to configure the request to handle whatever authentication mechanism you are using. In this example, we simply set a custom header with a token which the server will use to authenticate the user before proceeding with authorisation.
 
-```
-- (void)pusher:(PTPusher *)pusher willAuthorizeChannelWithRequest:(NSMutableURLRequest *)request
+```objc
+- (void)pusher:(PTPusher *)pusher willAuthorizeChannel:(PTPusherChannel *)channel withRequest:(NSMutableURLRequest *)request
 {
 	[request setValue:@"some-authentication-token" forHTTPHeaderField:@"X-MyCustom-AuthTokenHeader"];
 }
 ```
 
-
 ----------
 
 ### Binding to events
 
-There are generally two ways to bind to events: Binding to an event on the PTPusher client itself or binding to a specific channel. 
+There are generally two ways to bind to events: Binding to an event on the PTPusher client itself or binding to a specific channel.
+
+Two types of direct binding are supported: target/action and block-based bindings. The examples below using block-based bindings.
 
 #### Binding to a channel
-Once you have created an instance of PTPusherChannel, you can set up event bindings. There is no need to wait for the PTPusher client connection to be established.
+
+Once you have created an instance of PTPusherChannel, you can set up event bindings. There is no need to wait for the PTPusher client connection to be established or the channel to be subscribed.
 
 When you bind to events on a single channel, you will only receive events with that name if they are sent over this channel.
 
-```
-PTPusherChannel *channel = [_client subscribeToChannelNamed:@"chat"];
+```objc
+PTPusherChannel *channel = [self.client subscribeToChannelNamed:@"chat"];
 [channel bindToEventNamed:@"new-message" handleWithBlock:^(PTPusherEvent *channelEvent) {
-  // channelEvent.data is a NSDictianary of the JSON object received
+  // channelEvent.data is a NSDictionary of the JSON object received
 }];
 ```
 
 #### Binding directly to the client
-Once you have created an instance of the PTPusher client, you can set up event bindings. There is no need to wait for the connection to be established.
 
 When you bind to events on the client, you will receive all events with that name, regardless of the channel from which they originated.
 
-```
-[_client bindToEventNamed:@"new-message" handleWithBlock:^(PTPusherEvent *event) {
-  // event.data is a NSDictianary of the JSON object received
+```objc
+[self.client bindToEventNamed:@"new-message" handleWithBlock:^(PTPusherEvent *event) {
+  // event.data is a NSDictionary of the JSON object received
 }];
 ```
 
@@ -167,12 +178,63 @@ When you bind to events on the client, you will receive all events with that nam
 
 If you no longer want to receive events with a specific name, you can remove the binding. Removing a binding is as simple as storing a reference to the binding object, then passing that as an argument to ```removeBinding:``` at a later point.
 
-```
-_binding = [_client bindToEventNamed:@"new-message" target:self action:@selector(handleEvent:)];
+**Note:** Binding objects are owned by the client or channel that they relate to and will exist for the lifetime of the binding. For this reason, you generally only need to store a weak reference to the binding object in order to remove the binding. In the event that something else removes the binding (perhaps as a result of calling `removeAllBindings` or explicitly unsubscribing from the channel), the weak reference will ensure that the binding object will become nil, so you should check this before calling `removeBinding:`.
 
-// later
-[_client removeBinding:_binding];   
-``` 
+```objc
+// _binding is a weak reference
+_binding = [self.client bindToEventNamed:@"new-message" target:self action:@selector(handleEvent:)];
+
+// check that nothing else has removed the binding already
+if (_binding) {
+  [self.client removeBinding:_binding];
+}
+```
+
+#### Memory management considerations for block-based bindings
+
+Similar caveats apply to block-based bindings as they do to using block based `NSNotificationCenter` observers, i.e. when referencing `self` in your event handler block, it is possible in some situations to create retain cycles or prevent `self` from being deallocated.
+
+When you reference `self` in your event handler block, the block will retain a strong reference to `self`. This means that `self` will never be deallocated until the binding (and in turn the event handler block) is destroyed by removing the binding. For this reason, you should be wary about removing event bindings in `dealloc` methods as `dealloc` will never be called if the binding references `self`.
+
+For example, you might push a `UIViewController` on to a `UINavigationController` stack, then create an event binding in that view controller's `viewDidAppear:` method:
+
+```objc
+- (void)viewDidAppear:(BOOL)animated
+{
+  // _binding is a weak instance variable
+  _binding = [self.client bindToEventNamed:@"new-message" handleWithBlock:^(PTPusherEvent *event) {
+    [self doSomethingWithEvent:event];
+  }];
+}
+```
+
+If you were to then pop that view controller off the navigation stack without removing the event binding, because the binding block has a strong reference to `self`, the view controller will never be deallocated and you will have a memory leak.
+
+You can handle this in one of two ways. The first is to ensure you remove the binding when in the corresponding `viewDidDisappear:`
+
+```objc
+- (void)viewDidDisappear:(BOOL)animated
+{
+  [self.client removeBinding:_binding];
+}
+```
+
+The second, is to prevent a strong reference to `self` being captured in the first place:
+
+````objc
+- (void)viewDidAppear:(BOOL)animated
+{
+  __weak typeof(self) weakSelf = self;
+  
+  // _binding is a weak instance variable
+  _binding = [self.client bindToEventNamed:@"new-message" handleWithBlock:^(PTPusherEvent *event) {
+    __strong typeof(weakSelf) strongSelf = weakSelf;
+    [strongSelf doSomethingWithEvent:event];
+  }];
+}
+```
+
+Finally, if you reference `self` in a block and store a *strong* reference to the binding object, you will create a retain cycle (`self` -> `binding` -> `block` -> `self`). You should avoid keeping strong references to binding objects but if you really need to, you should ensure you only capture a weak reference to `self` in the block as in the above example.
 
 #### Binding to all events
 
@@ -181,19 +243,19 @@ libPusher will publish a ```NSNotification``` for every event received. You can 
 
 Binding to all events using NSNotificationCenter:
 
-```
+```objc
 [[NSNotificationCenter defaultCenter] 
           addObserver:self 
              selector:@selector(didReceiveEventNotification:) 
                  name:PTPusherEventReceivedNotification 
-               object:_client];
+               object:self.client];
 ```
 
 Bind to all events on a single channel:
 
-```
+```objc
 // get chat channel
-PTPusherChannel *channel = [_client channelNamed:@"chat"];
+PTPusherChannel *channel = [self.client channelNamed:@"chat"];
 
 [[NSNotificationCenter defaultCenter] 
           addObserver:self 
@@ -220,9 +282,9 @@ The following examples use Apple's Reachability class (version 2.2) to check the
 You can configure libPusher to automatically try and re-connect if it disconnects or it initially fails to connect.
 
 ```
-_client = [PTPusher pusherWithKey:@"YOUR_API_KEY" delegate:self encrypted:YES];
-_client.reconnectAutomatically = YES;
-_client.reconnectDelay = 30; // defaults to 5 seconds
+self.client = [PTPusher pusherWithKey:@"YOUR_API_KEY" delegate:self encrypted:YES];
+self.client.reconnectAutomatically = YES;
+self.client.reconnectDelay = 30; // defaults to 5 seconds
 ```
 
 What you don't want to do is keep on blindly trying to reconnect if there is no available network and therefore no possible way a connection could be successful. You should implement the ```PTPusherDelegate``` methods ```pusher:connectionDidDisconnect:``` and ```pusher:connection:didFailWithError:```.
@@ -234,7 +296,7 @@ What you don't want to do is keep on blindly trying to reconnect if there is no 
 
 	if ([reachability currentReachabilityStatus] == NotReachable) {
 		// there is no point in trying to reconnect at this point
-		_client.reconnectAutomatically = NO;
+		self.client.reconnectAutomatically = NO;
 
 		// start observing the reachability status to see when we come back online
 		[[NSNotificationCenter defaultCenter] 
@@ -259,14 +321,14 @@ Now you simply need to wait for the network to become reachable again. There is 
 
 	if ([reachability currentReachabilityStatus] != NotReachable) {
 		// we seem to have some kind of network reachability, try to connect again
-		[_client connect];
+		[self.client connect];
 
 		// we can stop observing reachability changes now
 		[[NSNotificationCenter defaultCenter] removeObserver:self];
 		[reachability stopNotifier];
 
 		// re-enable auto-reconnect
-		_client.reconnectAutomatically = YES;
+		self.client.reconnectAutomatically = YES;
   	}
 }
 ```
@@ -276,7 +338,7 @@ Finally, you may prefer to not turn on automatic reconnection immediately, but i
 ```
 - (void)pusher:(PTPusher *)client connectionDidConnect:(PTPusherConnection *)connection
 {
-	_client.reconnectAutomatically = YES;
+	self.client.reconnectAutomatically = YES;
 }
 ```
 
