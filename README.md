@@ -277,76 +277,105 @@ The event can be retrieved in your callback from the notification's userInfo dic
 
 The nature of a mobile device is that connections will come and go. There are a number of things you can do do ensure that your Pusher connection remains active for as long as you have a network connection and reconnects after network connectivity has been re-established.
 
+### Automatic reconnection behaviour
+
+Pusher will generally try and do it's best to keep you connected in most cases:
+
+* If the connection fails having been previously connected, the client will try and reconnect immediately.
+* If the connection disconnects with a Pusher error code in the range 4200-4299, the client will try and reconnect immediately.
+* If the connection disconnects with a Pusher error code in the range 4100-4199, the client will try and reconnect with a linear back-off delay.
+* If the connection disconnects for an unknown reason, the client will try and reconnect after a configured delay (defaults to 5 seconds and can be changed using the `reconnectDelay` property).
+
+All automatic reconnection attempts will be repeated up to a maximum limit before giving up.
+
+Automatic reconnection will not happen in the following situations:
+
+* The connection fails on the initial attempt (i.e. not previously connected)
+* The connection disconnects with a Pusher error code in the range 4000-4099 (indicating a client error, normally a misconfiguration)
+* The maximum number of automatic reconnection attempts have been reached
+
+An error code in the range 4000-4099 generally indicates a client misconfiguration (e.g. invalid API key) or rate limiting. See the [Pusher protocol documentation](http://pusher.com/docs/pusher_protocol) for more information.
+
+The other scenarios generally indicate that it is not currently possible to connect to the Pusher service - this might be because of an issue with the service but more likely is that there simply isn't an internet connection.
+
+### Handling disconnections
+
+If the client fails to connect at all, the delegate method `pusher:connection:failedWithError:` will be called and no automatic reconnection will be attempted.
+
+If the client disconnects, the delegate method `pusher:connection:didDisconnectWithError:willAttemptReconnect:` will be called. If `willAttemptReconnect` is `YES`, you don't have any further work to do.
+
+If `willAttemptReconnect` is `NO`, you should first check the error to see if there is a client misconfiguration. If the client is refusing to automatically reconnect due to a Pusher error code, the `NSError` will have a domain of `PTPusherFatalErrorDomain`.
+
+How you handle disconnections is up to you, but the general idea is to check if there is network connectivity and if there is not, wait until there is before reconnecting.
+
 The following examples use Apple's Reachability class (version 2.2) to check the network reachability status. Apple recommends that in most circumstances, you do not do any pre-flight checks and simply try and open a connection. This example follows this advice.
 
-You can configure libPusher to automatically try and re-connect if it disconnects or it initially fails to connect.
+#### Example: handling disconnections using the Reachability library
 
-```
-self.client = [PTPusher pusherWithKey:@"YOUR_API_KEY" delegate:self encrypted:YES];
-self.client.reconnectAutomatically = YES;
-self.client.reconnectDelay = 30; // defaults to 5 seconds
-```
+In this example, we first check for any fatal Pusher errors, before using Reachability to wait for an internet connection to become available before manually reconnecting.
 
-What you don't want to do is keep on blindly trying to reconnect if there is no available network and therefore no possible way a connection could be successful. You should implement the ```PTPusherDelegate``` methods ```pusher:connectionDidDisconnect:``` and ```pusher:connection:didFailWithError:```.
-
-```
-- (void)pusher:(PTPusher *)client connectionDidDisconnect:(PTPusherConnection *)connection
+```objc
+- (void)pusher:(PTPusher *)pusher connection:(PTPusherConnection *)connection failedWithError:(NSError *)error
 {
-	Reachability *reachability = [Reachability reachabilityForInternetConnection];
+  [self handleDisconnectionWithError:error];
+}
 
-	if ([reachability currentReachabilityStatus] == NotReachable) {
-		// there is no point in trying to reconnect at this point
-		self.client.reconnectAutomatically = NO;
-
-		// start observing the reachability status to see when we come back online
-		[[NSNotificationCenter defaultCenter] 
-				addObserver:self 
-             	   selector:@selector(reachabilityChanged:) 
-                 	   name:kReachabilityChangedNotification]
-               		 object:reachability];
-
-	    [reachability startNotifier];
-  	}
+- (void)pusher:(PTPusher *)pusher connection:(PTPusherConnection *)connection didDisconnectWithError:(NSError *)error willAttemptReconnect:(BOOL)willAttemptReconnect
+{
+  if (!willAttemptReconnect) {
+    [self handleDisconnectionWithError:error];
+  }
 }
 ```
 
-The implementation of ```pusher:connection:didFailWithError:``` will look similar to the above although you may wish to do some further checking of the error.
+The implementation of `handleDisconnectionWithError` performs the error check and waits for Reachability to change:
 
-Now you simply need to wait for the network to become reachable again. There is no guarantee that you will be able to establish a connection but it is an indicator that it would be reasonable to try again.
-
-```
-- (void)reachabilityChanged:(NSNotification *)notification
+```objc
+- (void)handleDisconnectionWithError:(NSError *)error
 {
-	Reachability *reachability = notification.object;
+  Reachability *reachability = [Reachability reachabilityWithHostname:self.client.connection.URL.host];
+  
+  if (error && [error.domain isEqualToString:PTPusherFatalErrorDomain]) {
+    NSLog(@"FATAL PUSHER ERROR, COULD NOT CONNECT! %@", error);
+  }
+  else {
+    if ([reachability isReachable]) {
+      // we do have reachability so let's wait for a set delay before trying again
+      [self.client performSelector:@selector(connect) withObject:nil afterDelay:5];
+    }
+    else {
+      // we need to wait for reachability to change
+      [[NSNotificationCenter defaultCenter] addObserver:self 
+                                               selector:@selector(_reachabilityChanged:) 
+                                                   name:kReachabilityChangedNotification 
+                                                 object:reachability];
+                                                 
+      [reachability startNotifier];
+    }
+  }
+}
 
-	if ([reachability currentReachabilityStatus] != NotReachable) {
-		// we seem to have some kind of network reachability, try to connect again
-		[self.client connect];
+- (void)_reachabilityChanged:(NSNotification *note)
+{
+  Reachability *reachability = [note object];
+  
+  if ([reachability isReachable]) {
+    // we're reachable, we can try and reconnect, otherwise keep waiting
+    [self.client connect];
+    
+    // stop watching for reachability changes
+    [reachability stopNotifier];
 
-		// we can stop observing reachability changes now
-		[[NSNotificationCenter defaultCenter] removeObserver:self];
-		[reachability stopNotifier];
-
-		// re-enable auto-reconnect
-		self.client.reconnectAutomatically = YES;
-  	}
+    [[NSNotificationCenter defaultCenter] 
+        removeObserver:self 
+                  name:kReachabilityChangedNotification 
+                object:reachability];
+  }
 }
 ```
 
-Finally, you may prefer to not turn on automatic reconnection immediately, but instead wait until you've successfully connected. You could do this by implementing the ```pusher:connectionDidConnect:``` delegate method:
-
-```
-- (void)pusher:(PTPusher *)client connectionDidConnect:(PTPusherConnection *)connection
-{
-	self.client.reconnectAutomatically = YES;
-}
-```
-
-Doing it this way means you do not need to re-enable auto-reconnect in your Reachability notification handler as it will happen automatically once you have connected.
-
-If Pusher disconnects but Reachability indicates that the network is reachable, it is possible that there is a problem with the Pusher service or something is interfering with the connection. In this situation, you would be advised to simply allow libPusher to try and reconnect automatically (if you have enabled this).
-
-You may want to implement the ```pusher:connectionWillReconnect:afterDelay:``` delegate method and keep track of the number of retry attempts and gradually back off your retry attempts by increasing the reconnect delay after a number of retry attempts have failed. This stops you from constantly trying to connect to Pusher while it is experiencing issues.
+For a more sophisticated implementation of handling client disconnections and to see how this integrates with a real application, you could take a look at the `ClientDisconnectionHandler` class in the [official Pusher iOS Diagnostics app](https://github.com/pusher/pusher-test-iOS/).
 
 ## License
+
 All code is licensed under the MIT license. See the LICENSE file for more details.
