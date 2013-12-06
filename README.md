@@ -279,7 +279,7 @@ The nature of a mobile device is that connections will come and go. There are a 
 
 ### Automatic reconnection behaviour
 
-Pusher will generally try and do it's best to keep you connected in most cases:
+libPusher will generally try and do it's best to keep you connected in most cases:
 
 * If the connection fails having been previously connected, the client will try and reconnect immediately.
 * If the connection disconnects with a Pusher error code in the range 4200-4299, the client will try and reconnect immediately.
