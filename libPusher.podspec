@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
   s.osx.deployment_target = '10.8'
   
   s.subspec 'Core' do |subspec|
-    subspec.dependency 'SocketRocket', "0.2"
+    subspec.dependency 'SocketRocket', "0.3.1-beta2"
     
     subspec.source_files         = 'Library/**/*.{h,m}'
     subspec.private_header_files = 'Library/Private Headers/*'
@@ -24,7 +24,7 @@ Pod::Spec.new do |s|
   end
   
   s.subspec 'ReactiveExtensions' do |subspec|
-    subspec.dependency 'ReactiveCocoa', '2.1.7'
+    subspec.dependency 'ReactiveCocoa', '~> 2.1'
 
     subspec.source_files = 'ReactiveExtensions/*'
     subspec.private_header_files = '*_Internal.h'
