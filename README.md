@@ -294,7 +294,7 @@ Automatic reconnection will not happen in the following situations:
 * The connection disconnects with a Pusher error code in the range 4000-4099 (indicating a client error, normally a misconfiguration)
 * The maximum number of automatic reconnection attempts have been reached
 
-An error code in the range 4000-4099 generally indicates a client misconfiguration (e.g. invalid API key) or rate limiting. See the [Pusher protocol documentation](http://pusher.com/docs/pusher_protocol) for more information.
+An error code in the range 4000-4099 generally indicates a client misconfiguration (e.g. invalid API key) or rate limiting. See the [Pusher protocol documentation](http://pusher.com/docs/pusher_protocol#error-codes) for more information.
 
 The other scenarios generally indicate that it is not currently possible to connect to the Pusher service - this might be because of an issue with the service but more likely is that there simply isn't an internet connection.
 
