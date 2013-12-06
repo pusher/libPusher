@@ -8,11 +8,13 @@ This is a summary of the changes in this release and notes on how to upgrade. Th
 
 As of this version, support for iOS < 5.0 and OSX < 10.8 has been dropped.
 
-### Initial connection is no longer automatic
+### Connection is no longer automatic
 
 `PTPusher` will no longer connect automatically on initialisation and all methods that accept a connect `connectAutomatically` parameter (including the initialiser and all factory methods) are deprecated. 
 
 You should now explicitly call `connect` when you are ready to connect.
+
+The method `reconnectAutomatically` has been removed completely (see below).
 
 ### Improvements to disconnection handling
 
@@ -59,6 +61,7 @@ This release contains some extensions that allow binding to events using Reactiv
 * Bumped Pusher protocol to version 6.
 * Switched to latest SocketRocket backend, improved threading issues
 * Removed private headers from CocoaPod specification
+* Removed `PTPusher` property, `reconnectAutomatically`
 * Moved fatal protocol errors that disallow reconnection into a new `PTPusherFatalErrorDomain` error domain.
 * Fixed 64bit warnings.
 * Removed JSONKit support.
