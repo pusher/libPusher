@@ -15,17 +15,12 @@ NSString *const PTPusherChannelKey = @"channel";
 
 @implementation PTPusherEvent
 
-@synthesize name = _name;
-@synthesize data = _data;
-@synthesize channel = _channel;
-@synthesize timeReceived = _timeReceived;
-
 + (id)eventFromMessageDictionary:(NSDictionary *)dictionary
 {
-  if ([[dictionary objectForKey:PTPusherEventKey] isEqualToString:@"pusher:error"]) {
-    return [[PTPusherErrorEvent alloc] initWithEventName:[dictionary objectForKey:PTPusherEventKey] channel:nil data:[dictionary objectForKey:PTPusherDataKey]];
+  if ([dictionary[PTPusherEventKey] isEqualToString:@"pusher:error"]) {
+    return [[PTPusherErrorEvent alloc] initWithEventName:dictionary[PTPusherEventKey] channel:nil data:dictionary[PTPusherDataKey]];
   }
-  return [[self alloc] initWithEventName:[dictionary objectForKey:PTPusherEventKey] channel:[dictionary objectForKey:PTPusherChannelKey] data:[dictionary objectForKey:PTPusherDataKey]];
+  return [[self alloc] initWithEventName:dictionary[PTPusherEventKey] channel:dictionary[PTPusherChannelKey] data:dictionary[PTPusherDataKey]];
 }
 
 - (id)initWithEventName:(NSString *)name channel:(NSString *)channel data:(id)data
@@ -65,12 +60,12 @@ NSString *const PTPusherChannelKey = @"channel";
 
 - (NSString *)message
 {
-  return [self.data objectForKey:@"message"];
+  return (self.data)[@"message"];
 }
 
 - (NSInteger)code
 {
-  id eventCode = [self.data objectForKey:@"code"];
+  id eventCode = (self.data)[@"code"];
 
   if (eventCode == nil || eventCode == [NSNull null]) {
     return PTPusherErrorUnknown;
@@ -80,7 +75,7 @@ NSString *const PTPusherChannelKey = @"channel";
 
 - (NSString *)description
 {
-  return [NSString stringWithFormat:@"<PTPusherErrorEvent code:%d message:%@>", self.code, self.message];
+  return [NSString stringWithFormat:@"<PTPusherErrorEvent code:%ld message:%@>", (long)self.code, self.message];
 }
 
 @end

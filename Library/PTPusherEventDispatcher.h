@@ -20,9 +20,17 @@
 - (void)removeAllBindings;
 @end
 
+/** Represents an event binding created when calling one of the binding methods defined
+  in the PTPusherEventBindings protocol.
+ 
+  You should keep a reference to binding objects if you need to remove them later. 
+ 
+ For more information on managing event bindings, see the README.
+ */
 @interface PTPusherEventBinding : NSObject <PTEventListener>
 
-/** The event this binding binds to. */
+/** The event name this binding is bound to.
+ */
 @property (nonatomic, readonly) NSString *eventName;
 
 /** Returns YES if this binding is still attached to its event publisher.

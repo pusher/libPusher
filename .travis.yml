@@ -1,3 +1,7 @@
 language: objective-c
-before_install: sudo gem update --system && bundle install --without scripts
-script: bundle exec rake debug:cleanbuild
+install: true
+env:
+  matrix:
+    - XCODE_SCHEME=libPusher SDK=iphonesimulator
+    - XCODE_SCHEME=libPusher-OSX SDK=macosx10.9
+script: xctool -workspace libPusher.xcworkspace -scheme $XCODE_SCHEME -sdk $SDK build test

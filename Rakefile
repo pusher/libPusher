@@ -38,10 +38,9 @@ task :docs => "docs:generate"
 namespace :docs do
   def appledoc_cmd(output_dir)
     "appledoc \
-      -t /usr/local/Cellar/appledoc/2.0.4/Templates \
+      -t /usr/local/Cellar/appledoc/2.0.5/Templates \
       --no-search-undocumented-doc \
       --keep-intermediate-files \
-      --verbose 1 \
       --docset-feed-url http://lukeredpath.github.com/libPusher/%DOCSETATOMFILENAME \
       --docset-package-url http://lukeredpath.github.com/libPusher/%DOCSETPACKAGEFILENAME \
       --publish-docset \
@@ -233,7 +232,7 @@ namespace :test do
 
   desc "Run unit tests"
   task :run => 'xcode:cleanbuild' do
-    sh "bundle exec ios-sim-test logic --workspace=libPusher.xcworkspace --scheme=UnitTests"
+    sh "bundle exec ios-sim-test logic --workspace=libPusher.xcworkspace --scheme=UnitTests --configuration=Debug"
   end
 end
 

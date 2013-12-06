@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "PTPusherMacros.h"
 
+@class PTPusherChannelMember;
 @class PTPusherPresenceChannel;
 
 @protocol PTPusherPresenceChannelDelegate <NSObject>
@@ -16,32 +18,45 @@
  
  Whenever you subscribe to a presence channel, a list of current subscribers will be returned by Pusher.
  
- The list will be an array of member IDs. Further metadata can be obtained by asking the channel object
- for information about a particular member using `-[PTPusherChannel infoForMemberWithID:]`.
+ The members list can be accessed using the `members` property on the channel.
+
+ @param channel The presence channel that was subscribed to.
+ */
+- (void)presenceChannelDidSubscribe:(PTPusherPresenceChannel *)channel;
+
+/** Notifies the delegate that a member has joined the channel.
  
  @param channel The presence channel that was subscribed to.
- @param members The current members subscribed to the channel.
+ @param member The member that was removed.
  */
-- (void)presenceChannel:(PTPusherPresenceChannel *)channel didSubscribeWithMemberList:(NSArray *)members;
 
-/** Notifies the delegate that a new member subscribed to the presence channel.
+- (void)presenceChannel:(PTPusherPresenceChannel *)channel memberAdded:(PTPusherChannelMember *)member;
 
- The member info can contain arbitrary user data returned by the authorization server.
- 
+/** Notifies the delegate that a member has left from the channel.
+
  @param channel The presence channel that was subscribed to.
- @param memberID The ID for the new member.
- @param memberInfo The custom user data for the new member.
+ @param member The member that was removed.
  */
-- (void)presenceChannel:(PTPusherPresenceChannel *)channel memberAddedWithID:(NSString *)memberID memberInfo:(NSDictionary *)memberInfo;
+- (void)presenceChannel:(PTPusherPresenceChannel *)channel memberRemoved:(PTPusherChannelMember *)member;
+
+#pragma mark - Deprecated methods
+
+@optional
+
+/** Notifies the delegate that the presence channel subscribed successfully.
+ @deprecated Use presenceChannelDidSubscribe: and access the members property.
+ */
+- (void)presenceChannel:(PTPusherPresenceChannel *)channel didSubscribeWithMemberList:(NSArray *)members __PUSHER_DEPRECATED__;
+
+/** Notifies the delegate that a member has joined the channel.
+ @deprecated Use presenceChannel:memberAdded:
+ */
+
+- (void)presenceChannel:(PTPusherPresenceChannel *)channel memberAddedWithID:(NSString *)memberID memberInfo:(NSDictionary *)memberInfo __PUSHER_DEPRECATED__;
 
 /** Notifies the delegate that a member subscribed to the presence channel has unsubscribed.
- 
- The member data can contain arbitrary user data returned by the authorization server.
- 
- @param channel The presence channel that was subscribed to.
- @param memberID The ID of the member removed.
- @param index The internal index of the member (depends on the order joined/left or returned in the server member list)
+ @deprecated Use presenceChannel:memberRemoved:
  */
-- (void)presenceChannel:(PTPusherPresenceChannel *)channel memberRemovedWithID:(NSString *)memberID atIndex:(NSInteger)index;
+- (void)presenceChannel:(PTPusherPresenceChannel *)channel memberRemovedWithID:(NSString *)memberID atIndex:(NSInteger)index __PUSHER_DEPRECATED__;
 
 @end

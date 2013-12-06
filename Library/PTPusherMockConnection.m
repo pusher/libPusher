@@ -18,7 +18,7 @@
 
 - (id)init
 {
-  if ((self = [super init])) {
+  if ((self = [super initWithURL:nil])) {
     sentClientEvents = [[NSMutableArray alloc] init];
   }
   return self;
@@ -31,7 +31,7 @@
   NSInteger socketID = (NSInteger)[NSDate timeIntervalSinceReferenceDate];
 
   [self simulateServerEventNamed:PTPusherConnectionEstablishedEvent 
-                            data:[NSDictionary dictionaryWithObject:[NSNumber numberWithInteger:socketID] forKey:@"socket_id"]];
+                            data:@{@"socket_id": @(socketID)}];
 }
 
 - (void)disconnect
@@ -55,14 +55,14 @@
 {
   NSMutableDictionary *event = [NSMutableDictionary dictionary];
   
-  [event setObject:name forKey:PTPusherEventKey];
+  event[PTPusherEventKey] = name;
   
   if (data) {
-    [event setObject:data forKey:PTPusherDataKey];
+    event[PTPusherDataKey] = data;
   }
   
   if (channelName) {
-    [event setObject:channelName forKey:PTPusherChannelKey];
+    event[PTPusherChannelKey] = channelName;
   }
   
   NSString *message = [[PTJSON JSONParser] JSONStringFromObject:event];
@@ -92,7 +92,7 @@
 {
   [self simulateServerEventNamed:@"pusher_internal:subscription_succeeded" 
                             data:nil
-                         channel:[subscribeEvent.data objectForKey:PTPusherChannelKey]];
+                         channel:(subscribeEvent.data)[PTPusherChannelKey]];
 }
 
 @end

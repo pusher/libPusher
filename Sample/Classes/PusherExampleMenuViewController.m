@@ -28,6 +28,12 @@
   [exampleTwo setObject:@"PusherPresenceEventsViewController" forKey:@"controllerClass"];
   [options addObject:exampleTwo];
   
+  NSMutableDictionary *exampleThree = [NSMutableDictionary dictionary];
+  [exampleThree setObject:@"Reactive events" forKey:@"name"];
+  [exampleThree setObject:@"Demonstrates using the ReactiveExtensions API." forKey:@"description"];
+  [exampleThree setObject:@"ReactiveEventsViewController" forKey:@"controllerClass"];
+  [options addObject:exampleThree];
+  
   menuOptions = [options copy];
 }
 

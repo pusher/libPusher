@@ -15,7 +15,10 @@
 
 #define kPUSHER_API_DEFAULT_HOST @"api.pusherapp.com"
 
-@implementation PTPusherAPI
+@implementation PTPusherAPI {
+  NSString *key, *appID, *secretKey;
+  NSOperationQueue *operationQueue;
+}
 
 - (id)initWithKey:(NSString *)aKey appID:(NSString *)anAppID secretKey:(NSString *)aSecretKey
 {
@@ -37,19 +40,19 @@
   
   NSMutableDictionary *queryParameters = [NSMutableDictionary dictionary];
   
-  [queryParameters setObject:[[bodyString MD5Hash] lowercaseString] forKey:@"body_md5"];
-  [queryParameters setObject:key forKey:@"auth_key"];
-  [queryParameters setObject:[NSNumber numberWithDouble:time(NULL)] forKey:@"auth_timestamp"];
-  [queryParameters setObject:@"1.0" forKey:@"auth_version"];
-  [queryParameters setObject:eventName forKey:@"name"];
+  queryParameters[@"body_md5"] = [[bodyString MD5Hash] lowercaseString];
+  queryParameters[@"auth_key"] = key;
+  queryParameters[@"auth_timestamp"] = @((double)time(NULL));
+  queryParameters[@"auth_version"] = @"1.0";
+  queryParameters[@"name"] = eventName;
   
   if (socketID) {
-    [queryParameters setObject:socketID forKey:@"socket_id"];
+    queryParameters[@"socket_id"] = socketID;
   }
     
   NSString *signatureString = [NSString stringWithFormat:@"POST\n%@\n%@", path, [queryParameters sortedQueryString]];
   
-  [queryParameters setObject:[signatureString HMACDigestUsingSecretKey:secretKey] forKey:@"auth_signature"];
+  queryParameters[@"auth_signature"] = [signatureString HMACDigestUsingSecretKey:secretKey];
   
   NSString *URLString = [NSString stringWithFormat:@"http://%@%@?%@", kPUSHER_API_DEFAULT_HOST, path, [queryParameters sortedQueryString]];
   

@@ -20,14 +20,13 @@ PTPusher *newTestClient(void) {
 PTPusher *newTestClientWithMockConnection(void)
 {
   PTPusherMockConnection *mockConnection = [[PTPusherMockConnection alloc] init];
-  PTPusher *client = [[PTPusher alloc] initWithConnection:mockConnection connectAutomatically:NO];
+  PTPusher *client = [[PTPusher alloc] initWithConnection:mockConnection];
   client.delegate = [PTPusherClientTestHelperDelegate sharedInstance];
   return [client retain];
 }
 
 PTPusher *newTestClientDisconnected(void) {
-  PTPusher *client = [PTPusher pusherWithKey:PUSHER_API_KEY connectAutomatically:NO encrypted:kUSE_ENCRYPTED_CONNECTION];
-  client.delegate = [PTPusherClientTestHelperDelegate sharedInstance];
+  PTPusher *client = [PTPusher pusherWithKey:PUSHER_API_KEY delegate:[PTPusherClientTestHelperDelegate sharedInstance] encrypted:NO];
   return [client retain];
 }
 

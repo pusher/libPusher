@@ -1,1 +1,1 @@
-../../OHHTTPStubs/OHHTTPStubs/OHHTTPStubsResponse.h
+../../OHHTTPStubs/OHHTTPStubs/Sources/OHHTTPStubsResponse.h

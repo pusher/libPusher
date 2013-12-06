@@ -21,10 +21,12 @@ describe(@"PTPusherChannelAuthorizationOperation", ^{
     beforeEach(^{
       NSURL *authURL = [NSURL URLWithString:@"http://example.com/authorize"];
       
-      [OHHTTPStubs addRequestHandler:^OHHTTPStubsResponse *(NSURLRequest *request, BOOL onlyCheck) {
+      [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
+        return [request.URL isEqual:authURL];
+        
+      } withStubResponse:^OHHTTPStubsResponse *(NSURLRequest *request) {
         return [OHHTTPStubsResponse responseWithData:[NSJSONSerialization dataWithJSONObject:@{@"channel": @"test-channel"} options:0 error:nil]
                                           statusCode:200
-                                        responseTime:0
                                              headers:nil];
       }];
       
@@ -58,10 +60,12 @@ describe(@"PTPusherChannelAuthorizationOperation", ^{
     beforeEach(^{
       NSURL *authURL = [NSURL URLWithString:@"http://example.com/authorize"];
       
-      [OHHTTPStubs addRequestHandler:^OHHTTPStubsResponse *(NSURLRequest *request, BOOL onlyCheck) {
+      [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
+        return [request.URL isEqual:authURL];
+        
+      } withStubResponse:^OHHTTPStubsResponse *(NSURLRequest *request) {
         return [OHHTTPStubsResponse responseWithData:nil
                                           statusCode:400
-                                        responseTime:0
                                              headers:nil];
       }];
       
@@ -95,10 +99,12 @@ describe(@"PTPusherChannelAuthorizationOperation", ^{
     beforeEach(^{
       NSURL *authURL = [NSURL URLWithString:@"http://example.com/authorize"];
       
-      [OHHTTPStubs addRequestHandler:^OHHTTPStubsResponse *(NSURLRequest *request, BOOL onlyCheck) {
+      [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
+        return [request.URL isEqual:authURL];
+        
+      } withStubResponse:^OHHTTPStubsResponse *(NSURLRequest *request) {
         return [OHHTTPStubsResponse responseWithData:nil
                                           statusCode:200
-                                        responseTime:0
                                              headers:nil];
       }];
       
@@ -136,10 +142,12 @@ describe(@"PTPusherChannelAuthorizationOperation", ^{
     beforeEach(^{
       NSURL *authURL = [NSURL URLWithString:@"http://example.com/authorize"];
       
-      [OHHTTPStubs addRequestHandler:^OHHTTPStubsResponse *(NSURLRequest *request, BOOL onlyCheck) {
+      [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
+        return [request.URL isEqual:authURL];
+        
+      } withStubResponse:^OHHTTPStubsResponse *(NSURLRequest *request) {
         return [OHHTTPStubsResponse responseWithData:[@"{malformed json" dataUsingEncoding:NSUTF8StringEncoding]
                                           statusCode:200
-                                        responseTime:0
                                              headers:nil];
       }];
       
@@ -177,7 +185,10 @@ describe(@"PTPusherChannelAuthorizationOperation", ^{
     beforeEach(^{
       NSURL *authURL = [NSURL URLWithString:@"http://example.com/authorize"];
       
-      [OHHTTPStubs addRequestHandler:^OHHTTPStubsResponse *(NSURLRequest *request, BOOL onlyCheck) {
+      [OHHTTPStubs stubRequestsPassingTest:^BOOL(NSURLRequest *request) {
+        return [request.URL isEqual:authURL];
+        
+      } withStubResponse:^OHHTTPStubsResponse *(NSURLRequest *request) {
         return [OHHTTPStubsResponse responseWithError:[NSError errorWithDomain:NSURLErrorDomain code:NSURLErrorCannotFindHost userInfo:nil]];
       }];
       

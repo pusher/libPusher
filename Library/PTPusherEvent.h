@@ -17,9 +17,7 @@ extern NSString *const PTPusherChannelKey;
  All events dispatched by libPusher (via either bindings or notifications) will be represented
  by instances of this class.
  */
-@interface PTPusherEvent : NSObject {
-  NSString *_name;
-}
+@interface PTPusherEvent : NSObject
 
 ///------------------------------------------------------------------------------------/
 /// @name Properties
@@ -46,6 +44,7 @@ extern NSString *const PTPusherChannelKey;
 
 - (id)initWithEventName:(NSString *)name channel:(NSString *)channel data:(id)data;
 + (id)eventFromMessageDictionary:(NSDictionary *)dictionary;
+
 @end
 
 typedef enum {
@@ -66,11 +65,7 @@ typedef enum {
 
 /** A textual description of the error.
  */
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_5_0
 @property (weak, nonatomic, readonly) NSString *message;
-#else
-@property (unsafe_unretained, nonatomic, readonly) NSString *message;
-#endif
 
 /** The error code. See PTPusherServerErrorCodes for available errors.
  */

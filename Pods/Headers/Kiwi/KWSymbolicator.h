@@ -1,1 +1,1 @@
-../../Kiwi/Classes/KWSymbolicator.h
+../../Kiwi/NonARC/KWSymbolicator.h

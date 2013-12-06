@@ -1,1 +1,1 @@
-../../Kiwi/Classes/KWStub.h
+../../Kiwi/NonARC/KWStub.h

@@ -14,15 +14,13 @@
 @end
 
 @implementation PTPusherEventDispatcher {
-  NSMutableDictionary *bindings;
+  NSMutableDictionary *_bindings;
 }
-
-@synthesize bindings;
 
 - (id)init
 {
   if ((self = [super init])) {
-    bindings = [[NSMutableDictionary alloc] init];
+    _bindings = [[NSMutableDictionary alloc] init];
   }
   return self;
 }
@@ -31,11 +29,11 @@
 
 - (PTPusherEventBinding *)addEventListener:(id<PTEventListener>)listener forEventNamed:(NSString *)eventName
 {
-  NSMutableArray *bindingsForEvent = [bindings objectForKey:eventName];
+  NSMutableArray *bindingsForEvent = _bindings[eventName];
   
   if (bindingsForEvent == nil) {
     bindingsForEvent = [NSMutableArray array];
-    [bindings setObject:bindingsForEvent forKey:eventName];
+    _bindings[eventName] = bindingsForEvent;
   }
   PTPusherEventBinding *binding = [[PTPusherEventBinding alloc] initWithEventListener:listener eventName:eventName];
   [bindingsForEvent addObject:binding];
@@ -45,7 +43,7 @@
 
 - (void)removeBinding:(PTPusherEventBinding *)binding
 {
-  NSMutableArray *bindingsForEvent = [bindings objectForKey:binding.eventName];
+  NSMutableArray *bindingsForEvent = _bindings[binding.eventName];
   
   if ([bindingsForEvent containsObject:binding]) {
     [binding invalidate];
@@ -55,19 +53,19 @@
 
 - (void)removeAllBindings
 {
-  for (NSArray *eventBindings in [bindings allValues]) {
+  for (NSArray *eventBindings in [_bindings allValues]) {
     for (PTPusherEventBinding *binding in eventBindings) {
 	    [binding invalidate];
 	  }
   }
-  [bindings removeAllObjects];
+  [_bindings removeAllObjects];
 }
 
 #pragma mark - Dispatching events
 
 - (void)dispatchEvent:(PTPusherEvent *)event
 {
-  for (PTPusherEventBinding *binding in [bindings objectForKey:event.name]) {
+  for (PTPusherEventBinding *binding in _bindings[event.name]) {
     [binding dispatchEvent:event];
   }
 }
@@ -77,8 +75,6 @@
 @implementation PTPusherEventBinding {
   id<PTEventListener> _eventListener;
 }
-
-@synthesize eventName = _eventName;
 
 - (id)initWithEventListener:(id<PTEventListener>)eventListener eventName:(NSString *)eventName
 {
