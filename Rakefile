@@ -38,10 +38,9 @@ task :docs => "docs:generate"
 namespace :docs do
   def appledoc_cmd(output_dir)
     "appledoc \
-      -t /usr/local/Cellar/appledoc/2.0.4/Templates \
+      -t /usr/local/Cellar/appledoc/2.0.5/Templates \
       --no-search-undocumented-doc \
       --keep-intermediate-files \
-      --verbose 1 \
       --docset-feed-url http://lukeredpath.github.com/libPusher/%DOCSETATOMFILENAME \
       --docset-package-url http://lukeredpath.github.com/libPusher/%DOCSETPACKAGEFILENAME \
       --publish-docset \

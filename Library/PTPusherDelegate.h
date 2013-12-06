@@ -14,7 +14,8 @@
 @class PTPusherEvent;
 @class PTPusherErrorEvent;
 
-/** The PTPusherDelegate protocol can be implemented to receive important events in a PTPusher object's lifetime.
+/** Implementing the PTPusherDelegate protocol lets you react to important events in the Pusher client's
+  lifetime, such as connection and disconnection, channel subscription and errors.
  
  All of the delegate methods are optional; you only need to implement what is required for your app.
  
@@ -24,6 +25,10 @@
 @protocol PTPusherDelegate <NSObject>
 
 @optional
+
+///------------------------------------------------------------------------------------/
+/// @name Connection handling
+///------------------------------------------------------------------------------------/
 
 /** Notifies the delegate that the PTPusher instance is about to connect to the Pusher service.
  
@@ -42,23 +47,6 @@
 
 /** Notifies the delegate that the PTPusher instance has disconnected from the Pusher service.
  
- @deprecated Use pusher:connection:didDisconnectWithError:willAttemptReconnect:
- @param pusher The PTPusher instance that has connected.
- @param connection The connection for the pusher instance.
- */
-- (void)pusher:(PTPusher *)pusher connectionDidDisconnect:(PTPusherConnection *)connection __PUSHER_DEPRECATED__;
-
-/** Notifies the delegate that the PTPusher instance has disconnected from the Pusher service.
-
- @deprecated Use pusher:connection:didDisconnectWithError:willAttemptReconnect:
- @param pusher The PTPusher instance that has connected.
- @param connection The connection for the pusher instance.
- @param error If the connection disconnected abnormally, error will be non-nil.
- */
-- (void)pusher:(PTPusher *)pusher connection:(PTPusherConnection *)connection didDisconnectWithError:(NSError *)error __PUSHER_DEPRECATED__;
-
-/** Notifies the delegate that the PTPusher instance has disconnected from the Pusher service.
- 
  Clients should check the value of the willAttemptReconnect parameter before trying to reconnect manually. 
  In most cases, the client will try and automatically reconnect, depending on the error code returned by
  the Pusher service. 
@@ -66,6 +54,9 @@
  If willAttemptReconnect is YES, clients can expect a pusher:connectionWillReconnect:afterDelay: message 
  immediately following this one. Clients can return NO from that delegate method to cancel the automatic
  reconnection attempt.
+ 
+ If the client has disconnected due to a fatal Pusher error (as indicated by the error code),
+ willAttemptReconnect will be NO and the error domain will be `PTPusherFatalErrorDomain`.
  
  @param pusher The PTPusher instance that has connected.
  @param connection The connection for the pusher instance.
@@ -96,19 +87,9 @@
  */
 - (BOOL)pusher:(PTPusher *)pusher connectionWillAutomaticallyReconnect:(PTPusherConnection *)connection afterDelay:(NSTimeInterval)delay;
 
-/** Notifies the delegate of the request that will be used to authorize access to a channel.
- 
- When using the Pusher Javascript client, authorization typically relies on an existing session cookie
- on the server; when the Javascript client makes an AJAX POST to the server, the server can return
- the user's credentials based on their current session.
- 
- When using libPusher, there will likely be no existing server-side session; authorization will
- need to happen by some other means (e.g. an authorization token or HTTP basic auth).
- 
- By implementing this delegate method, you will be able to set any credentials as necessary by
- modifying the request as required (such as setting POST parameters or headers).
- */
-- (void)pusher:(PTPusher *)pusher willAuthorizeChannelWithRequest:(NSMutableURLRequest *)request __PUSHER_DEPRECATED__;
+///------------------------------------------------------------------------------------/
+/// @name Channel subscription and authorization
+///------------------------------------------------------------------------------------/
 
 /** Notifies the delegate of the request that will be used to authorize access to a channel.
  
@@ -121,6 +102,10 @@
  
  By implementing this delegate method, you will be able to set any credentials as necessary by
  modifying the request as required (such as setting POST parameters or headers).
+ 
+ @param pusher The PTPusher instance that is requesting authorization
+ @param channel The channel that requires authorizing
+ @param request A mutable URL request that will be POSTed to the configured `authorizationURL`
  */
 - (void)pusher:(PTPusher *)pusher willAuthorizeChannel:(PTPusherChannel *)channel withRequest:(NSMutableURLRequest *)request;
 
@@ -152,6 +137,10 @@
  */
 - (void)pusher:(PTPusher *)pusher didFailToSubscribeToChannel:(PTPusherChannel *)channel withError:(NSError *)error;
 
+///------------------------------------------------------------------------------------/
+/// @name Errors
+///------------------------------------------------------------------------------------/
+
 /** Notifies the delegate that an error event has been received.
  
  If a client is binding to all events, either through the client or using NSNotificationCentre, they will also
@@ -161,4 +150,41 @@
  @param errorEvent The error event.
  */
 - (void)pusher:(PTPusher *)pusher didReceiveErrorEvent:(PTPusherErrorEvent *)errorEvent;
+
+
+///------------------------------------------------------------------------------------/
+/// @name Deprecated methods
+///------------------------------------------------------------------------------------/
+
+/** Notifies the delegate that the PTPusher instance has disconnected from the Pusher service.
+ 
+ @deprecated Use pusher:connection:didDisconnectWithError:willAttemptReconnect:
+ @param pusher The PTPusher instance that has connected.
+ @param connection The connection for the pusher instance.
+ */
+- (void)pusher:(PTPusher *)pusher connectionDidDisconnect:(PTPusherConnection *)connection __PUSHER_DEPRECATED__;
+
+/** Notifies the delegate that the PTPusher instance has disconnected from the Pusher service.
+ 
+ @deprecated Use pusher:connection:didDisconnectWithError:willAttemptReconnect:
+ @param pusher The PTPusher instance that has connected.
+ @param connection The connection for the pusher instance.
+ @param error If the connection disconnected abnormally, error will be non-nil.
+ */
+- (void)pusher:(PTPusher *)pusher connection:(PTPusherConnection *)connection didDisconnectWithError:(NSError *)error __PUSHER_DEPRECATED__;
+
+/** Notifies the delegate of the request that will be used to authorize access to a channel.
+ 
+ When using the Pusher Javascript client, authorization typically relies on an existing session cookie
+ on the server; when the Javascript client makes an AJAX POST to the server, the server can return
+ the user's credentials based on their current session.
+ 
+ When using libPusher, there will likely be no existing server-side session; authorization will
+ need to happen by some other means (e.g. an authorization token or HTTP basic auth).
+ 
+ By implementing this delegate method, you will be able to set any credentials as necessary by
+ modifying the request as required (such as setting POST parameters or headers).
+ */
+- (void)pusher:(PTPusher *)pusher willAuthorizeChannelWithRequest:(NSMutableURLRequest *)request __PUSHER_DEPRECATED__;
+
 @end

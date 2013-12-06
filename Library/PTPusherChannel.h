@@ -35,6 +35,13 @@
  
  Channels can be subscribed to or unsubscribed to at any time, even before the initial 
  Pusher connection has been established.
+ 
+ Generally, channel objects will exist from the point of creation until you explicitly unsubscribe
+ from them, unless you maintain your own strong references to the channel object. Channels become
+ implicitly unsubscribed when the connection is lost but will be re-subscribed once connection 
+ is re-established. This means you can use the same channel object across connections.
+ 
+ See the README for more information on channel object lifetime.
  */
 @interface PTPusherChannel : NSObject <PTPusherEventBindings, PTEventListener>
 
@@ -51,39 +58,36 @@
  Whilst public channels are subscribed to immediately, presence and private channels require
  authorization first. This property will be set to YES once an internal Pusher event has
  been received indicating that the channel subscription has been registered.
+ 
+ You can bind to events on a channel without waiting for it to become subscribed and any
+ event bindings will be kept if the channel becomes unsubscribed due to a loss of connection.
  */
 @property (nonatomic, readonly, getter=isSubscribed) BOOL subscribed;
 
 /** Indicates whether or not this is a private channel.
- 
- The value of this property will be YES for private and presence channels.
  */
 @property (nonatomic, readonly) BOOL isPrivate;
 
 /** Indicates whether or not this is a presence channel.
- 
- The value of this property will be YES for presence channels only.
  */
 @property (nonatomic, readonly) BOOL isPresence;
 
-///------------------------------------------------------------------------------------/
-/// @name Initialisation
-///------------------------------------------------------------------------------------/
-
 + (id)channelWithName:(NSString *)name pusher:(PTPusher *)pusher;
 - (id)initWithName:(NSString *)channelName pusher:(PTPusher *)pusher;
-
-///------------------------------------------------------------------------------------/
-/// @name Authorization
-///------------------------------------------------------------------------------------/
-
 - (void)authorizeWithCompletionHandler:(void(^)(BOOL, NSDictionary *, NSError *))completionHandler;
 
 ///------------------------------------------------------------------------------------/
 /// @name Unsubscribing
 ///------------------------------------------------------------------------------------/
 
-/** Unsubscribes from the channel. 
+/** Unsubscribes from the channel.
+ 
+ PTPusher will remove any strong references to the channel when you unsusbcribe. If you
+ do not have any strong references to the channel object, it will be deallocated after
+ unsubscribing.
+ 
+ If there is an active connection when this is called, an unsubscribe event will be
+ ssent to the server.
  */
 - (void)unsubscribe;
 
@@ -96,7 +100,7 @@
  
  Private channel names always have the prefix of "private-".
  
- Only private and presence channels support the triggering client events.
+ Only private and presence channels support client triggered events.
  */
 @interface PTPusherPrivateChannel : PTPusherChannel
 
@@ -158,6 +162,10 @@
  */
 @property (nonatomic, readonly) PTPusherChannelMembers *members;
 
+///------------------------------------------------------------------------------------/
+/// @name Deprecated methods
+///------------------------------------------------------------------------------------/
+
 /** Returns a dictionary of member metadata (email, name etc.) for the given member ID.
  *
  * @deprecated Use the members object.
@@ -184,9 +192,17 @@
  */
 @interface PTPusherChannelMember : NSObject
 
+/** The user's ID.
+ */
 @property (nonatomic, readonly) NSString *userID;
+
+/** A dictionary of user info - this is normally application specific.
+ *
+ */
 @property (nonatomic, readonly) NSDictionary *userInfo;
 
+/** Provides object subscripting access to userInfo data.
+ */
 - (id)objectForKeyedSubscript:(id <NSCopying>)key;
 
 @end
@@ -203,12 +219,33 @@
  */
 @interface PTPusherChannelMembers : NSObject
 
+/** The number of members in the channel.
+ */
 @property (nonatomic, readonly) NSInteger count;
+
+/** The ID of the client's member.
+ */
 @property (nonatomic, copy, readonly) NSString *myID;
+
+/** The client member.
+ */
 @property (nonatomic, readonly) PTPusherChannelMember *me;
 
+/** Can be used to look up a channel member by ID.
+ 
+ @return The member with the given ID, or nil if it does not exist.
+ */
 - (PTPusherChannelMember *)memberWithID:(NSString *)userID;
+
+/** Can be used to iterate over each member in the channel.
+ */
 - (void)enumerateObjectsUsingBlock:(void (^)(id obj, BOOL *stop))block;
+
+/** Provides object subscripting access to members by key.
+ 
+ @param key The member ID
+ @returns The member with the specified ID, or nil if it does not exist.
+ */
 - (id)objectForKeyedSubscript:(id <NSCopying>)key;
 
 @end

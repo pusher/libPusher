@@ -13,11 +13,12 @@
  This functionality used to be part of the main PTPusher library but
  has been extracted into a standalone component.
  
- The PTPusher client has alpha support for channel-based event triggering
- but for general event triggering the API can be used.
+ The PTPusher client has support for client-sent events but if your account does not
+ support these you can use this class to send events using the standard Pusher REST API.
  
  As well as your Pusher API key, you will also need your app ID and secret key
- for signing requests.
+ for signing requests. You should take care not to expose these in your application's
+ header files.
  */
 @interface PTPusherAPI : NSObject 
 
@@ -25,6 +26,14 @@
 /// @name Initialisation
 ///------------------------------------------------------------------------------------/
 
+/** Designated initializer
+ 
+ You will need your account credentials which can be located on your account dashboard.
+ 
+ @param aKey Your Pusher API key
+ @param anAppID Your Pusher app ID
+ @param aSecretKey Your Pusher app secret.
+ */
 - (id)initWithKey:(NSString *)aKey appID:(NSString *)anAppID secretKey:(NSString *)aSecretKey;
 
 ///------------------------------------------------------------------------------------/
