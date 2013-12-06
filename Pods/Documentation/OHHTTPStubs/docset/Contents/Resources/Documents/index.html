@@ -1,0 +1,270 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>OHHTTPStubs 1.0.1 Reference</title>
+		<link rel="stylesheet" type="text/css" href="css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.0.5 (build 737)" />
+	</head>
+	<body>
+		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="index.html">OHHTTPStubs 1.0.1 </a></h1>
+				<a id="developerHome" href="index.html">Olivier Halligon</a>
+			</div>
+			
+			<div id="title" role="banner">
+				<h1 class="hideInXcode">OHHTTPStubs 1.0.1 Reference</h1>
+			</div>
+			<ul id="headerButtons" role="toolbar"></ul>
+		</header>
+		<article>
+			<div id="overview_contents" role="main">
+				<div class="main-navigation navigation-top">
+					<a href="hierarchy.html">Next</a>
+				</div>
+				<div id="header">
+					<div class="section-header">
+						<h1 class="title title-header">OHHTTPStubs 1.0.1 Reference</h1>
+					</div>		
+				</div>
+				<div id="container">
+					
+					<div class="section section-overview index-overview">
+						
+						
+						<h1><a href="Classes/OHHTTPStubs.html">OHHTTPStubs</a></h1>
+
+<p>A class to stub network requests easily: test your apps with fake network data (stubbed from file) and custom response time</p>
+
+<ul>
+<li><a href="#basic-usage">Basic Usage</a></li>
+<li><a href="#the-ohhttpstubsresponse-object">The OHHTTPStubsResponse object</a></li>
+<li><a href="#advanced-usage">Advanced Usage</a></li>
+<li><a href="#return-a-response-depending-on-the-request">Return a response depending on the request</a></li>
+<li><a href="#using-download-speed-instead-of-responsetime">Using download speed instead of responseTime</a></li>
+<li><a href="#return-quickly-when-onlycheckyes">Return quickly when <code>onlyCheck=YES</code></a></li>
+<li><a href="#stack-multiple-requesthandlers">Stack multiple requestHandlers</a></li>
+<li><a href="#complete-example">Complete Example</a></li>
+<li><a href="#change-log">Change Log</a></li>
+<li><a href="#arc-support">ARC Support</a></li>
+<li><a href="#license-and-credits">License and Credits</a></li>
+</ul>
+
+
+<hr />
+
+<h2>Basic Usage</h2>
+
+<p>This is aimed to be very simple to use. It uses block to intercept outgoing requests and allow you to
+return data from a file instead.</p>
+
+<p>This is the most simple way to use it:</p>
+
+<pre><code>[OHHTTPStubs addRequestHandler:^OHHTTPStubsResponse*(NSURLRequest *request, BOOL onlyCheck)
+ {
+   return [OHHTTPStubsResponse responseWithFile:@"response.json" contentType:@"text/json" responseTime:2.0];
+ }];
+</code></pre>
+
+<p>This will return the <code>NSData</code> corresponding to the content of the &ldquo;<code>response.json</code>&rdquo; file (that must be in your bundle)
+with a &ldquo;<code>Content-Type</code>&rdquo; header of &ldquo;<code>text/json</code>&rdquo; in the HTTP response, after 2 seconds.</p>
+
+<h2>The <a href="Classes/OHHTTPStubsResponse.html">OHHTTPStubsResponse</a> object</h2>
+
+<p>Each time a network request is done by your application
+ (whatever the framework used, <code>NSURLConnection</code>, <a href="https://github.com/AFNetworking/AFNetworking/">AFNetworking</a>, or anything else)
+this requestHandler block will be called, allowing you to return an <code>OHHTTPStubsResponse</code> object
+describing the response to return. If you return a non-nil <code>OHHTTPStubsResponse</code>, it will automatically
+build a NSURLResponse and behave exactly like if you received the response from the network.
+<em>If your return <code>nil</code>, the normal request will be sent.</em></p>
+
+<p>The <code>OHHTTPStubsResponse</code> class exposes multiple initializers:</p>
+
+<h5>The designed intializer</h5>
+
+<pre><code>+(id)responseWithData:(NSData*)data
+           statusCode:(int)statusCode
+         responseTime:(NSTimeInterval)responseTime
+              headers:(NSDictionary*)httpHeaders;
+</code></pre>
+
+<h5>Commodity initializer to load data from a file in your bundle</h5>
+
+<pre><code>+(id)responseWithFile:(NSString*)fileName
+           statusCode:(int)statusCode
+         responseTime:(NSTimeInterval)responseTime
+              headers:(NSDictionary*)httpHeaders;
+</code></pre>
+
+<h5>Useful short-form initializer to load data from a file in your bundle, using the specified &ldquo;Content-Type&rdquo; header</h5>
+
+<pre><code>+(id)responseWithFile:(NSString*)fileName
+          contentType:(NSString*)contentType
+         responseTime:(NSTimeInterval)responseTime;
+</code></pre>
+
+<h5>To respond with an error instead of a success</h5>
+
+<pre><code>+(id)responseWithError:(NSError*)error;
+</code></pre>
+
+<p><em>(e.g. you could use an error like <code>[NSError errorWithDomain:NSURLErrorDomain code:404 userInfo:nil]</code>)</em></p>
+
+<h2>Advanced Usage</h2>
+
+<h3>Return a response depending on the request</h3>
+
+<p>Of course, and that&rsquo;s the main reason this is implemented with blocks,
+you can do whatever you need in the block implementation. This includes
+checking the request URL to see if you want to return a stub or not,
+and pick the right file according to the requested URL.</p>
+
+<p>Example:</p>
+
+<pre><code>[OHHTTPStubs addRequestHandler:^OHHTTPStubsResponse*(NSURLRequest *request, BOOL onlyCheck)
+ {
+   if ([request.URL.absoluteString hasPrefix:@".json"]) {
+     NSString* basename = [request.URL.absoluteString lastPathComponent]
+     return [OHHTTPStubsResponse responseWithFile:basename contentType:@"text/json" responseTime:2.0];
+   } else {
+     return nil; // Don't stub
+   }
+ }];
+</code></pre>
+
+<h3>Using download speed instead of responseTime</h3>
+
+<p>When building the <code>OHHTTPStubsResponse</code> object, you can specify a response time (in seconds) so
+that the sending of the fake response will be postponed (using GCD&rsquo;s <code>dispatch_after function</code>).
+This allows you to simulate a slow network for example.</p>
+
+<p>If you specify a negative value for the responseTime parameter, instead of being interpreted as
+a time in seconds, it will be interpreted as a download speed in KBytes/s.
+In that case, the response time will be computed using the size of the response&rsquo;s data to simulate
+the indicated download speed.</p>
+
+<p>The <code>OHHTTPStubsResponse</code> header defines some constants for standard download speeds:
+* <code>OHHTTPStubsDownloadSpeedGPRS</code>   :    56 kbps (7 KB/s)
+* <code>OHHTTPStubsDownloadSpeedEDGE</code>   :   128 kbps (16 KB/s)
+* <code>OHHTTPStubsDownloadSpeed3G</code>     :  3200 kbps (400 KB/s)
+* <code>OHHTTPStubsDownloadSpeed3GPlus</code> :  7200 kbps (900 KB/s)
+* <code>OHHTTPStubsDownloadSpeedWifi</code>   : 12000 kbps (1500 KB/s)</p>
+
+<h3>Return quickly when <code>onlyCheck=YES</code></h3>
+
+<p>If the <code>onlyCheck</code> parameter of the requestHandler block is <code>YES</code>, then it means that the handler is called
+   only to check if you will be able to return a stubbed response or if it has to do the standard request.
+In this scenario, the response will not actually be used but will only be compared to <code>nil</code> to check if it has to be stubbed later.
+   <em>The handler will be called later again (with <code>onlyCheck=NO</code>) to fetch the actual <a href="Classes/OHHTTPStubsResponse.html">OHHTTPStubsResponse</a> object.</em></p>
+
+<p>So in such cases (<code>onlyCheck==YES</code>), you can simply return <code>nil</code> if you don&rsquo;t want to provide a stubbed response,
+   and <strong><em>any</em> non-nil value</strong> to indicate that you will provide a stubbed response later.</p>
+
+<p>This may be useful if you intend to do some no-so-fast work to build your real <a href="Classes/OHHTTPStubsResponse.html"><code>OHHTTPStubsResponse</code></a>
+  (like reading some large file for example): in that case you can quickly return a dummy value when <code>onlyCheck==YES</code>
+  without the burden of building the actual <a href="Classes/OHHTTPStubsResponse.html"><code>OHHTTPStubsResponse</code></a> object.
+You will obviously return the real <a href="Classes/OHHTTPStubsResponse.html"><code>OHHTTPStubsResponse</code></a> in the later call when <code>onlyCheck==NO</code>.</p>
+
+<p>There is a macro <code>OHHTTPStubsResponseUseStub</code> provided in the header that you can use as a dummy return value
+  for that purpose <em>(it actually evaluates to <code>(OHHTTPStubsReponse*)1</code>)</em></p>
+
+<h3>Stack multiple requestHandlers</h3>
+
+<p>You can call <code>+addRequestHandler:</code> multiple times.
+It will just add the response handlers in an internal list of handler.</p>
+
+<p>When a network request is performed by the system, the response handlers are called in the reverse
+  order that they have been added, the last added handler having priority over the first added ones.
+  The first non-nil <a href="Classes/OHHTTPStubsResponse.html">OHHTTPStubsResponse</a> returned is used to reply to the request.</p>
+
+<p><em>This may be useful to install different stubs in different classes (say different UIViewControllers) and various places in your application.</em></p>
+
+<p>You can remove the latest added handler with the <code>removeLastRequestHandler</code> method.</p>
+
+<p>You can also remove any given handler with the <code>removeRequestHandler:</code> method. This method takes as a parameter the object returned by <code>addRequestHandler:</code>. <em>Note that this returned object is already retained by <a href="Classes/OHHTTPStubs.html">OHHTTPStubs</a>, so you may keep it in a <code>__weak</code> variable.</em></p>
+
+<h2>Complete example</h2>
+
+<pre><code>NSArray* stubs = [NSArray arrayWithObjects:@"file1", @"file2", nil];
+
+[OHHTTPStubs addRequestHandler:^OHHTTPStubsResponse*(NSURLRequest *request, BOOL onlyCheck)
+ {
+     NSString* basename = [request.URL.absoluteString lastPathComponent];
+     if (onlyCheck) {
+         return ([stubs containsObject:basename] ? OHHTTPStubsResponseUseStub : nil);
+     }
+
+     NSString* file = [basename stringByAppendingPathExtension:@"json"];
+     return [OHHTTPStubsResponse responseWithFile:file contentType:@"text/json"
+                                     responseTime:OHHTTPStubsDownloadSpeedEDGE];
+ }];
+
+ ...
+
+// Then this call (sending a request using the AFNetworking framework) will actually
+// receive a fake response issued from the file "file1.json"
+NSURLRequest* request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.example.com/file1"]]http://www.example.com/file1"]];
+AFJSONRequestOperation* req =
+[AFJSONRequestOperation JSONRequestOperationWithRequest:request success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON)
+ {
+    ...
+ } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON)
+ {
+    ...
+ }];
+[req start];
+</code></pre>
+
+<h2>Change Log</h2>
+
+<p>The changelog is available <a href="https://github.com/AliSoftware/OHHTTPStubs/wiki/ChangeLog">here in the dedicated wiki page</a>.</p>
+
+<h2>ARC Support</h2>
+
+<p>This classes now support both ARC and non-ARC projects :)</p>
+
+<h2>License and Credits</h2>
+
+<p>This project is brought to you by Olivier Halligon and is under MIT License</p>
+
+<p>It has been inspired by <a href="http://www.infinite-loop.dk/blog/2011/09/using-nsurlprotocol-for-injecting-test-data/">this article from InfiniteLoop.dk</a>
+<em>(See also his <a href="https://github.com/InfiniteLoopDK/ILTesting">GitHub repository</a>)</em></p>
+						
+						
+					</div>
+					
+					
+					
+					<div class="index-column">
+						<h2 class="index-title">Class References</h2>
+						<ul>
+							
+							<li><a href="Classes/OHHTTPStubs.html">OHHTTPStubs</a></li>
+							
+							<li><a href="Classes/OHHTTPStubsResponse.html">OHHTTPStubsResponse</a></li>
+							
+						</ul>
+					</div>
+					
+					
+					
+				</div>
+				<div class="main-navigation navigation-bottom">
+					<a href="hierarchy.html">Next</a>
+				</div>
+				<div id="footer">
+					<hr />
+					<div class="footer-copyright">
+						<p><span class="copyright">&copy; 2012 Olivier Halligon. All rights reserved. (Last updated: 2012-11-29)</span><br />
+						
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.5 (build 737)</a>.</span></p>
+						
+	
+					</div>
+				</div>
+			</div>
+		</article>		
+	</body>
+</html>

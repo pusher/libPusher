@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/OHHTTPStubsResponse.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/OHHTTPStubsResponse</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OHHTTPStubsResponse.h</DeclaredIn>
+			
+			<NodeRef refid="2"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/OHHTTPStubsResponse/httpHeaders</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OHHTTPStubsResponse.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, retain) NSDictionary *httpHeaders</Declaration>
+			
+			
+			<Anchor>//api/name/httpHeaders</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/OHHTTPStubsResponse/statusCode</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OHHTTPStubsResponse.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) int statusCode</Declaration>
+			
+			
+			<Anchor>//api/name/statusCode</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/OHHTTPStubsResponse/responseData</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OHHTTPStubsResponse.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, retain) NSData *responseData</Declaration>
+			
+			
+			<Anchor>//api/name/responseData</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/OHHTTPStubsResponse/responseTime</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OHHTTPStubsResponse.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, assign) NSTimeInterval responseTime</Declaration>
+			
+			
+			<Anchor>//api/name/responseTime</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/OHHTTPStubsResponse/error</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OHHTTPStubsResponse.h</DeclaredIn>			
+			
+			<Declaration>@property (nonatomic, retain) NSError *error</Declaration>
+			
+			
+			<Anchor>//api/name/error</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/OHHTTPStubsResponse/responseWithData:statusCode:responseTime:headers:</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OHHTTPStubsResponse.h</DeclaredIn>			
+			
+			<Declaration>+ (OHHTTPStubsResponse *)responseWithData:(NSData *)data statusCode:(int)statusCode responseTime:(NSTimeInterval)responseTime headers:(NSDictionary *)httpHeaders</Declaration>
+			
+			
+			<Anchor>//api/name/responseWithData:statusCode:responseTime:headers:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/OHHTTPStubsResponse/responseWithFile:statusCode:responseTime:headers:</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OHHTTPStubsResponse.h</DeclaredIn>			
+			
+			<Declaration>+ (OHHTTPStubsResponse *)responseWithFile:(NSString *)fileName statusCode:(int)statusCode responseTime:(NSTimeInterval)responseTime headers:(NSDictionary *)httpHeaders</Declaration>
+			
+			
+			<Anchor>//api/name/responseWithFile:statusCode:responseTime:headers:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/OHHTTPStubsResponse/responseWithFile:contentType:responseTime:</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OHHTTPStubsResponse.h</DeclaredIn>			
+			
+			<Declaration>+ (OHHTTPStubsResponse *)responseWithFile:(NSString *)fileName contentType:(NSString *)contentType responseTime:(NSTimeInterval)responseTime</Declaration>
+			
+			
+			<Anchor>//api/name/responseWithFile:contentType:responseTime:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/OHHTTPStubsResponse/responseWithError:</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OHHTTPStubsResponse.h</DeclaredIn>			
+			
+			<Declaration>+ (OHHTTPStubsResponse *)responseWithError:(NSError *)error</Declaration>
+			
+			
+			<Anchor>//api/name/responseWithError:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/OHHTTPStubsResponse/initWithData:statusCode:responseTime:headers:</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OHHTTPStubsResponse.h</DeclaredIn>			
+			
+			<Declaration>- (OHHTTPStubsResponse *)initWithData:(NSData *)data statusCode:(int)statusCode responseTime:(NSTimeInterval)responseTime headers:(NSDictionary *)httpHeaders</Declaration>
+			
+			
+			<Anchor>//api/name/initWithData:statusCode:responseTime:headers:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/OHHTTPStubsResponse/initWithError:</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OHHTTPStubsResponse.h</DeclaredIn>			
+			
+			<Declaration>- (OHHTTPStubsResponse *)initWithError:(NSError *)error</Declaration>
+			
+			
+			<Anchor>//api/name/initWithError:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

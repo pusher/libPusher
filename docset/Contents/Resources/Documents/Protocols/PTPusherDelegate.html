@@ -1,15 +1,21 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
+		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
 		<title>PTPusherDelegate Protocol Reference</title>
-		<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=utf-8" />
 		<meta id="xcode-display" name="xcode-display" content="render"/>
 		<meta name="viewport" content="width=550" />
-		<link rel="stylesheet" type="text/css" href="../css/styles.css" />
-		<meta name="generator" content="appledoc 2.0.4 (build 698)" />
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.2 (build 963)" />
 	</head>
 	<body>
 		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="../index.html">libPusher </a></h1>
+				<a id="developerHome" href="../index.html">Luke Redpath</a>
+			</div>
+			
 			<div id="title" role="banner">
 				<h1 class="hideInXcode">PTPusherDelegate Protocol Reference</h1>
 			</div>
@@ -38,13 +44,19 @@
 	
 	<option value="instance_methods">Instance Methods</option>
 	
+	<option value="//api/name/pusher:connection:didDisconnectWithError:">&nbsp;&nbsp;&nbsp;&nbsp;- pusher:connection:didDisconnectWithError:</option>
+	
+	<option value="//api/name/pusher:connection:didDisconnectWithError:willAttemptReconnect:">&nbsp;&nbsp;&nbsp;&nbsp;- pusher:connection:didDisconnectWithError:willAttemptReconnect:</option>
+	
 	<option value="//api/name/pusher:connection:failedWithError:">&nbsp;&nbsp;&nbsp;&nbsp;- pusher:connection:failedWithError:</option>
 	
 	<option value="//api/name/pusher:connectionDidConnect:">&nbsp;&nbsp;&nbsp;&nbsp;- pusher:connectionDidConnect:</option>
 	
 	<option value="//api/name/pusher:connectionDidDisconnect:">&nbsp;&nbsp;&nbsp;&nbsp;- pusher:connectionDidDisconnect:</option>
 	
-	<option value="//api/name/pusher:connectionWillReconnect:afterDelay:">&nbsp;&nbsp;&nbsp;&nbsp;- pusher:connectionWillReconnect:afterDelay:</option>
+	<option value="//api/name/pusher:connectionWillAutomaticallyReconnect:afterDelay:">&nbsp;&nbsp;&nbsp;&nbsp;- pusher:connectionWillAutomaticallyReconnect:afterDelay:</option>
+	
+	<option value="//api/name/pusher:connectionWillConnect:">&nbsp;&nbsp;&nbsp;&nbsp;- pusher:connectionWillConnect:</option>
 	
 	<option value="//api/name/pusher:didFailToSubscribeToChannel:withError:">&nbsp;&nbsp;&nbsp;&nbsp;- pusher:didFailToSubscribeToChannel:withError:</option>
 	
@@ -53,6 +65,8 @@
 	<option value="//api/name/pusher:didSubscribeToChannel:">&nbsp;&nbsp;&nbsp;&nbsp;- pusher:didSubscribeToChannel:</option>
 	
 	<option value="//api/name/pusher:didUnsubscribeFromChannel:">&nbsp;&nbsp;&nbsp;&nbsp;- pusher:didUnsubscribeFromChannel:</option>
+	
+	<option value="//api/name/pusher:willAuthorizeChannel:withRequest:">&nbsp;&nbsp;&nbsp;&nbsp;- pusher:willAuthorizeChannel:withRequest:</option>
 	
 	<option value="//api/name/pusher:willAuthorizeChannelWithRequest:">&nbsp;&nbsp;&nbsp;&nbsp;- pusher:willAuthorizeChannelWithRequest:</option>
 	
@@ -72,6 +86,14 @@
 
 <li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Connection handling">Connection handling</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Channel subscription and authorization">Channel subscription and authorization</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Errors">Errors</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Deprecated methods">Deprecated methods</a></span></li>
+	
 </ul></li>
 
 
@@ -84,13 +106,19 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/pusher:connection:didDisconnectWithError:">pusher:connection:didDisconnectWithError:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/pusher:connection:didDisconnectWithError:willAttemptReconnect:">pusher:connection:didDisconnectWithError:willAttemptReconnect:</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/pusher:connection:failedWithError:">pusher:connection:failedWithError:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/pusher:connectionDidConnect:">pusher:connectionDidConnect:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/pusher:connectionDidDisconnect:">pusher:connectionDidDisconnect:</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/pusher:connectionWillReconnect:afterDelay:">pusher:connectionWillReconnect:afterDelay:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/pusher:connectionWillAutomaticallyReconnect:afterDelay:">pusher:connectionWillAutomaticallyReconnect:afterDelay:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/pusher:connectionWillConnect:">pusher:connectionWillConnect:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/pusher:didFailToSubscribeToChannel:withError:">pusher:didFailToSubscribeToChannel:withError:</a></span></li>
 	
@@ -99,6 +127,8 @@
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/pusher:didSubscribeToChannel:">pusher:didSubscribeToChannel:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/pusher:didUnsubscribeFromChannel:">pusher:didUnsubscribeFromChannel:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/pusher:willAuthorizeChannel:withRequest:">pusher:willAuthorizeChannel:withRequest:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/pusher:willAuthorizeChannelWithRequest:">pusher:willAuthorizeChannelWithRequest:</a></span></li>
 	
@@ -139,7 +169,8 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>The <a href="PTPusherDelegate.html">PTPusherDelegate</a> protocol can be implemented to receive important events in a <a href="../Classes/PTPusher.html">PTPusher</a> object&rsquo;s lifetime.</p>
+						<p>Implementing the PTPusherDelegate protocol lets you react to important events in the Pusher client&rsquo;s
+  lifetime, such as connection and disconnection, channel subscription and errors.</p>
 
 <p>All of the delegate methods are optional; you only need to implement what is required for your app.</p>
 
@@ -156,11 +187,18 @@ your user interface accordingly.</p>
 						<h2 class="subtitle subtitle-tasks">Tasks</h2>
 						
 						
-						
-						
+						<a title="Connection handling" name="task_Connection handling"></a>
+						<h3 class="subsubtitle task-title">Connection handling</h3>
 
 						<ul class="task-list">
 							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/pusher:connectionWillConnect:">&ndash;&nbsp;pusher:connectionWillConnect:</a></code>
+		<span class="tooltip"><p>Notifies the delegate that the <a href="../Classes/PTPusher.html">PTPusher</a> instance is about to connect to the Pusher service.</p></span>
+	</span>
+	
+	
+</li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/pusher:connectionDidConnect:">&ndash;&nbsp;pusher:connectionDidConnect:</a></code>
 		<span class="tooltip"><p>Notifies the delegate that the <a href="../Classes/PTPusher.html">PTPusher</a> instance has connected to the Pusher service successfully.</p></span>
@@ -169,7 +207,7 @@ your user interface accordingly.</p>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/pusher:connectionDidDisconnect:">&ndash;&nbsp;pusher:connectionDidDisconnect:</a></code>
+		<code><a href="#//api/name/pusher:connection:didDisconnectWithError:willAttemptReconnect:">&ndash;&nbsp;pusher:connection:didDisconnectWithError:willAttemptReconnect:</a></code>
 		<span class="tooltip"><p>Notifies the delegate that the <a href="../Classes/PTPusher.html">PTPusher</a> instance has disconnected from the Pusher service.</p></span>
 	</span>
 	
@@ -183,14 +221,22 @@ your user interface accordingly.</p>
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/pusher:connectionWillReconnect:afterDelay:">&ndash;&nbsp;pusher:connectionWillReconnect:afterDelay:</a></code>
-		<span class="tooltip"><p>Notifies the delegate that the <a href="../Classes/PTPusher.html">PTPusher</a> instance is about to attempt reconnection.</p></span>
+		<code><a href="#//api/name/pusher:connectionWillAutomaticallyReconnect:afterDelay:">&ndash;&nbsp;pusher:connectionWillAutomaticallyReconnect:afterDelay:</a></code>
+		<span class="tooltip"><p>Notifies the delegate that the <a href="../Classes/PTPusher.html">PTPusher</a> instance will attempt to automatically reconnect.</p></span>
 	</span>
 	
 	
-</li><li>
+</li>
+						</ul>
+						
+						
+						<a title="Channel subscription and authorization" name="task_Channel subscription and authorization"></a>
+						<h3 class="subsubtitle task-title">Channel subscription and authorization</h3>
+
+						<ul class="task-list">
+							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/pusher:willAuthorizeChannelWithRequest:">&ndash;&nbsp;pusher:willAuthorizeChannelWithRequest:</a></code>
+		<code><a href="#//api/name/pusher:willAuthorizeChannel:withRequest:">&ndash;&nbsp;pusher:willAuthorizeChannel:withRequest:</a></code>
 		<span class="tooltip"><p>Notifies the delegate of the request that will be used to authorize access to a channel.</p></span>
 	</span>
 	
@@ -216,10 +262,47 @@ your user interface accordingly.</p>
 	</span>
 	
 	
-</li><li>
+</li>
+						</ul>
+						
+						
+						<a title="Errors" name="task_Errors"></a>
+						<h3 class="subsubtitle task-title">Errors</h3>
+
+						<ul class="task-list">
+							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/pusher:didReceiveErrorEvent:">&ndash;&nbsp;pusher:didReceiveErrorEvent:</a></code>
 		<span class="tooltip"><p>Notifies the delegate that an error event has been received.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+						
+						<a title="Deprecated methods" name="task_Deprecated methods"></a>
+						<h3 class="subsubtitle task-title">Deprecated methods</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/pusher:connectionDidDisconnect:">&ndash;&nbsp;pusher:connectionDidDisconnect:</a></code>
+		<span class="tooltip"><p>Notifies the delegate that the <a href="../Classes/PTPusher.html">PTPusher</a> instance has disconnected from the Pusher service. (<b class="deprecated">Deprecated:</b><span class="deprecated"> Use pusher:connection:didDisconnectWithError:willAttemptReconnect:</span>)</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/pusher:connection:didDisconnectWithError:">&ndash;&nbsp;pusher:connection:didDisconnectWithError:</a></code>
+		<span class="tooltip"><p>Notifies the delegate that the <a href="../Classes/PTPusher.html">PTPusher</a> instance has disconnected from the Pusher service. (<b class="deprecated">Deprecated:</b><span class="deprecated"> Use pusher:connection:didDisconnectWithError:willAttemptReconnect:</span>)</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/pusher:willAuthorizeChannelWithRequest:">&ndash;&nbsp;pusher:willAuthorizeChannelWithRequest:</a></code>
+		<span class="tooltip"><p>Notifies the delegate of the request that will be used to authorize access to a channel.</p></span>
 	</span>
 	
 	
@@ -239,6 +322,140 @@ your user interface accordingly.</p>
 					<div class="section section-methods">
 						<a title="Instance Methods" name="instance_methods"></a>
 						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/pusher:connection:didDisconnectWithError:" title="pusher:connection:didDisconnectWithError:"></a>
+	<h3 class="subsubtitle method-title">pusher:connection:didDisconnectWithError:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Notifies the delegate that the <a href="../Classes/PTPusher.html">PTPusher</a> instance has disconnected from the Pusher service. (<b class="deprecated">Deprecated:</b><span class="deprecated"> Use pusher:connection:didDisconnectWithError:willAttemptReconnect:</span>)</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)pusher:(PTPusher *)<em>pusher</em> connection:(PTPusherConnection *)<em>connection</em> didDisconnectWithError:(NSError *)<em>error</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>pusher</em></dt>
+			<dd><p>The <a href="../Classes/PTPusher.html">PTPusher</a> instance that has connected.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>connection</em></dt>
+			<dd><p>The connection for the pusher instance.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>error</em></dt>
+			<dd><p>If the connection disconnected abnormally, error will be non-nil.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Notifies the delegate that the <a href="../Classes/PTPusher.html">PTPusher</a> instance has disconnected from the Pusher service.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">PTPusherDelegate.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/pusher:connection:didDisconnectWithError:willAttemptReconnect:" title="pusher:connection:didDisconnectWithError:willAttemptReconnect:"></a>
+	<h3 class="subsubtitle method-title">pusher:connection:didDisconnectWithError:willAttemptReconnect:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Notifies the delegate that the <a href="../Classes/PTPusher.html">PTPusher</a> instance has disconnected from the Pusher service.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)pusher:(PTPusher *)<em>pusher</em> connection:(PTPusherConnection *)<em>connection</em> didDisconnectWithError:(NSError *)<em>error</em> willAttemptReconnect:(BOOL)<em>willAttemptReconnect</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>pusher</em></dt>
+			<dd><p>The <a href="../Classes/PTPusher.html">PTPusher</a> instance that has connected.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>connection</em></dt>
+			<dd><p>The connection for the pusher instance.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>error</em></dt>
+			<dd><p>If the connection disconnected abnormally, error will be non-nil.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>willAttemptReconnect</em></dt>
+			<dd><p>YES if the client will try and reconnect automatically.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Notifies the delegate that the <a href="../Classes/PTPusher.html">PTPusher</a> instance has disconnected from the Pusher service.</p>
+
+<p>Clients should check the value of the willAttemptReconnect parameter before trying to reconnect manually.
+In most cases, the client will try and automatically reconnect, depending on the error code returned by
+the Pusher service.</p>
+
+<p>If willAttemptReconnect is YES, clients can expect a pusher:connectionWillReconnect:afterDelay: message
+immediately following this one. Clients can return NO from that delegate method to cancel the automatic
+reconnection attempt.</p>
+
+<p>If the client has disconnected due to a fatal Pusher error (as indicated by the error code),
+willAttemptReconnect will be NO and the error domain will be <code>PTPusherFatalErrorDomain</code>.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">PTPusherDelegate.h</code><br />
+	</div>				
+	
+	
+</div>
 						
 						<div class="section-method">
 	<a name="//api/name/pusher:connection:failedWithError:" title="pusher:connection:failedWithError:"></a>
@@ -278,15 +495,15 @@ your user interface accordingly.</p>
 	
 	
 	
+	
+	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>Notifies the delegate that the <a href="../Classes/PTPusher.html">PTPusher</a> instance failed to connect to the Pusher service.</p>
 
-<p>If reconnectAutomatically is YES, <a href="../Classes/PTPusher.html">PTPusher</a> will attempt to reconnect if the initial connection failed.</p>
-
-<p>This reconnect attempt will happen after this message is sent to the delegate, giving the delegate
-a chance to inspect the connection error and disable automatic reconnection if it thinks the reconnection
-attempt is likely to fail, depending on the error.</p>
+<p>In the case of connection failures, the client will <em>not</em> attempt to reconnect automatically.
+Instead, clients should implement this method and check the error code and manually reconnect
+the client if it makes sense to do so.</p>
 	</div>
 	
 	
@@ -336,6 +553,8 @@ attempt is likely to fail, depending on the error.</p>
 	
 	
 	
+	
+	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>Notifies the delegate that the <a href="../Classes/PTPusher.html">PTPusher</a> instance has connected to the Pusher service successfully.</p>
@@ -362,7 +581,7 @@ attempt is likely to fail, depending on the error.</p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Notifies the delegate that the <a href="../Classes/PTPusher.html">PTPusher</a> instance has disconnected from the Pusher service.</p>
+		<p>Notifies the delegate that the <a href="../Classes/PTPusher.html">PTPusher</a> instance has disconnected from the Pusher service. (<b class="deprecated">Deprecated:</b><span class="deprecated"> Use pusher:connection:didDisconnectWithError:willAttemptReconnect:</span>)</p>
 	</div>		
 	
 	
@@ -388,6 +607,8 @@ attempt is likely to fail, depending on the error.</p>
 	
 	
 	
+	
+	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>Notifies the delegate that the <a href="../Classes/PTPusher.html">PTPusher</a> instance has disconnected from the Pusher service.</p>
@@ -408,17 +629,17 @@ attempt is likely to fail, depending on the error.</p>
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/pusher:connectionWillReconnect:afterDelay:" title="pusher:connectionWillReconnect:afterDelay:"></a>
-	<h3 class="subsubtitle method-title">pusher:connectionWillReconnect:afterDelay:</h3>
+	<a name="//api/name/pusher:connectionWillAutomaticallyReconnect:afterDelay:" title="pusher:connectionWillAutomaticallyReconnect:afterDelay:"></a>
+	<h3 class="subsubtitle method-title">pusher:connectionWillAutomaticallyReconnect:afterDelay:</h3>
 	
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Notifies the delegate that the <a href="../Classes/PTPusher.html">PTPusher</a> instance is about to attempt reconnection.</p>
+		<p>Notifies the delegate that the <a href="../Classes/PTPusher.html">PTPusher</a> instance will attempt to automatically reconnect.</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>- (void)pusher:(PTPusher *)<em>pusher</em> connectionWillReconnect:(PTPusherConnection *)<em>connection</em> afterDelay:(NSTimeInterval)<em>delay</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (BOOL)pusher:(PTPusher *)<em>pusher</em> connectionWillAutomaticallyReconnect:(PTPusherConnection *)<em>connection</em> afterDelay:(NSTimeInterval)<em>delay</em></code></div>
 	
 	
 	<div class="method-subsection arguments-section parameters">
@@ -438,16 +659,79 @@ attempt is likely to fail, depending on the error.</p>
 	
 	
 	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>NO if you do not want the client to attempt an automatic reconnection.</p>
+	</div>
+	
+	
+	
 	
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Notifies the delegate that the <a href="../Classes/PTPusher.html">PTPusher</a> instance is about to attempt reconnection.</p>
+		<p>Notifies the delegate that the <a href="../Classes/PTPusher.html">PTPusher</a> instance will attempt to automatically reconnect.</p>
 
-<p>You may wish to use this method to keep track of the number of reconnection attempts and abort after a fixed number.</p>
-
-<p>If you do not set the <code>reconnectAutomatically</code> property of the <a href="../Classes/PTPusher.html">PTPusher</a> instance to NO, it will continue attempting
-to reconnect until a successful connection has been established.</p>
+<p>You may wish to use this method to keep track of the number of automatic reconnection attempts and abort after a fixed number.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">PTPusherDelegate.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/pusher:connectionWillConnect:" title="pusher:connectionWillConnect:"></a>
+	<h3 class="subsubtitle method-title">pusher:connectionWillConnect:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Notifies the delegate that the <a href="../Classes/PTPusher.html">PTPusher</a> instance is about to connect to the Pusher service.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (BOOL)pusher:(PTPusher *)<em>pusher</em> connectionWillConnect:(PTPusherConnection *)<em>connection</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>pusher</em></dt>
+			<dd><p>The <a href="../Classes/PTPusher.html">PTPusher</a> instance that is connecting.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>connection</em></dt>
+			<dd><p>The connection for the pusher instance.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>NO to abort the connection attempt.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Notifies the delegate that the <a href="../Classes/PTPusher.html">PTPusher</a> instance is about to connect to the Pusher service.</p>
 	</div>
 	
 	
@@ -502,6 +786,8 @@ to reconnect until a successful connection has been established.</p>
 	
 	
 	
+	
+	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>Notifies the delegate that the <a href="../Classes/PTPusher.html">PTPusher</a> instance failed to subscribe to the specified channel.</p>
@@ -551,6 +837,8 @@ to reconnect until a successful connection has been established.</p>
 		</dl>
 		
 	</div>
+	
+	
 	
 	
 	
@@ -611,6 +899,8 @@ receive notification of this event like any other.</p>
 	
 	
 	
+	
+	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>Notifies the delegate that the <a href="../Classes/PTPusher.html">PTPusher</a> instance has subscribed to the specified channel.</p>
@@ -665,11 +955,82 @@ receive notification of this event like any other.</p>
 	
 	
 	
+	
+	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>Notifies the delegate that the <a href="../Classes/PTPusher.html">PTPusher</a> instance has unsubscribed from the specified channel.</p>
 
 <p>This method will be called immediately after unsubscribing from a channel.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">PTPusherDelegate.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/pusher:willAuthorizeChannel:withRequest:" title="pusher:willAuthorizeChannel:withRequest:"></a>
+	<h3 class="subsubtitle method-title">pusher:willAuthorizeChannel:withRequest:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Notifies the delegate of the request that will be used to authorize access to a channel.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)pusher:(PTPusher *)<em>pusher</em> willAuthorizeChannel:(PTPusherChannel *)<em>channel</em> withRequest:(NSMutableURLRequest *)<em>request</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>pusher</em></dt>
+			<dd><p>The <a href="../Classes/PTPusher.html">PTPusher</a> instance that is requesting authorization</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>channel</em></dt>
+			<dd><p>The channel that requires authorizing</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>request</em></dt>
+			<dd><p>A mutable URL request that will be POSTed to the configured <code>authorizationURL</code></p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Notifies the delegate of the request that will be used to authorize access to a channel.</p>
+
+<p>When using the Pusher Javascript client, authorization typically relies on an existing session cookie
+on the server; when the Javascript client makes an AJAX POST to the server, the server can return
+the user&rsquo;s credentials based on their current session.</p>
+
+<p>When using libPusher, there will likely be no existing server-side session; authorization will
+need to happen by some other means (e.g. an authorization token or HTTP basic auth).</p>
+
+<p>By implementing this delegate method, you will be able to set any credentials as necessary by
+modifying the request as required (such as setting POST parameters or headers).</p>
 	</div>
 	
 	
@@ -698,6 +1059,8 @@ receive notification of this event like any other.</p>
 	
 	
 	<div class="method-subsection method-declaration"><code>- (void)pusher:(PTPusher *)<em>pusher</em> willAuthorizeChannelWithRequest:(NSMutableURLRequest *)<em>request</em></code></div>
+	
+	
 	
 	
 	
@@ -746,9 +1109,9 @@ modifying the request as required (such as setting POST parameters or headers).<
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 Luke Redpath. All rights reserved. (Last updated: 2012-02-01)</span><br />
+						<p><span class="copyright">&copy; 2013 Luke Redpath. All rights reserved. (Last updated: 2013-12-06)</span><br />
 						
-						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.4 (build 698)</a>.</span></p>
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2 (build 963)</a>.</span></p>
 						
 					</div>
 				</div>

@@ -1,15 +1,21 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
+		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
 		<title>PTPusherConnection Class Reference</title>
-		<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=utf-8" />
 		<meta id="xcode-display" name="xcode-display" content="render"/>
 		<meta name="viewport" content="width=550" />
-		<link rel="stylesheet" type="text/css" href="../css/styles.css" />
-		<meta name="generator" content="appledoc 2.0.4 (build 698)" />
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.2 (build 963)" />
 	</head>
 	<body>
 		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="../index.html">libPusher </a></h1>
+				<a id="developerHome" href="../index.html">Luke Redpath</a>
+			</div>
+			
 			<div id="title" role="banner">
 				<h1 class="hideInXcode">PTPusherConnection Class Reference</h1>
 			</div>
@@ -30,6 +36,15 @@
 	
 	
 	
+	<option value="properties">Properties</option>
+	
+	<option value="//api/name/URL">&nbsp;&nbsp;&nbsp;&nbsp;URL</option>
+	
+	<option value="//api/name/connected">&nbsp;&nbsp;&nbsp;&nbsp;connected</option>
+	
+	<option value="//api/name/socketID">&nbsp;&nbsp;&nbsp;&nbsp;socketID</option>
+	
+	
 	
 	
 	
@@ -39,6 +54,8 @@
 	<option value="//api/name/connect">&nbsp;&nbsp;&nbsp;&nbsp;- connect</option>
 	
 	<option value="//api/name/disconnect">&nbsp;&nbsp;&nbsp;&nbsp;- disconnect</option>
+	
+	<option value="//api/name/initWithURL:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithURL:</option>
 	
 	<option value="//api/name/initWithURL:secure:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithURL:secure:</option>
 	
@@ -64,11 +81,23 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Sending data">Sending data</a></span></li>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Deprecated methods">Deprecated methods</a></span></li>
+	
 </ul></li>
 
 
 
 
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#properties">Properties</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/URL">URL</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/connected">connected</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/socketID">socketID</a></span></li>
+	
+</ul></li>
 
 
 
@@ -79,6 +108,8 @@
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/connect">connect</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/disconnect">disconnect</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithURL:">initWithURL:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithURL:secure:">initWithURL:secure:</a></span></li>
 	
@@ -111,7 +142,7 @@
 	<td class="specification-value">NSObject</td>
 </tr><tr>
 	<td class="specification-title">Conforms to</td>
-	<td class="specification-value">ZTWebSocketDelegate</td>
+	<td class="specification-value">SRWebSocketDelegate</td>
 </tr><tr>
 	<td class="specification-title">Declared in</td>
 	<td class="specification-value">PTPusherConnection.h<br />PTPusherConnection.m</td>
@@ -128,14 +159,43 @@
 						<h2 class="subtitle subtitle-tasks">Tasks</h2>
 						
 						
+						
+						<h3 class="subsubtitle task-title">Other Methods</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/connected">&nbsp;&nbsp;connected</a></code>
+		<span class="tooltip"><p>Indicates if the connection is connected to the Pusher service.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/socketID">&nbsp;&nbsp;socketID</a></code>
+		<span class="tooltip"><p>The unique socket ID for this connection.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/URL">&nbsp;&nbsp;URL</a></code>
+		<span class="tooltip"><p>The Pusher service URL.</p></span>
+	</span>
+	<span class="task-item-suffix">property</span>
+	
+</li>
+						</ul>
+						
+						
 						<a title="Initialisation" name="task_Initialisation"></a>
 						<h3 class="subsubtitle task-title">Initialisation</h3>
 
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/initWithURL:secure:">&ndash;&nbsp;initWithURL:secure:</a></code>
-		<span class="tooltip"><p>Creates a new <a href="PTPusherConnection.html">PTPusherConnection</a> instance.</p></span>
+		<code><a href="#//api/name/initWithURL:">&ndash;&nbsp;initWithURL:</a></code>
+		<span class="tooltip"><p>Creates a new PTPusherConnection instance.</p></span>
 	</span>
 	
 	
@@ -179,11 +239,158 @@
 </li>
 						</ul>
 						
+						
+						<a title="Deprecated methods" name="task_Deprecated methods"></a>
+						<h3 class="subsubtitle task-title">Deprecated methods</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/initWithURL:secure:">&ndash;&nbsp;initWithURL:secure:</a></code>
+		<span class="tooltip"><p>Creates a new PTPusherConnection instance.</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
+						
 					</div>
 					
 					
 					
 					
+					
+					<div class="section section-methods">
+						<a title="Properties" name="properties"></a>
+						<h2 class="subtitle subtitle-methods">Properties</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/URL" title="URL"></a>
+	<h3 class="subsubtitle method-title">URL</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The Pusher service URL.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) NSURL *URL</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>The Pusher service URL.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">PTPusherConnection.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/connected" title="connected"></a>
+	<h3 class="subsubtitle method-title">connected</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Indicates if the connection is connected to the Pusher service.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly, getter=isConnected) BOOL connected</code></div>
+	
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>YES, if the socket has connected and a handshake has been received from the server, otherwise NO.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Indicates if the connection is connected to the Pusher service.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">PTPusherConnection.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/socketID" title="socketID"></a>
+	<h3 class="subsubtitle method-title">socketID</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>The unique socket ID for this connection.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, copy, readonly) NSString *socketID</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>The unique socket ID for this connection.</p>
+
+<p>Every time the connection connects to the service, a new socket ID is received on handshake.</p>
+
+<p>This is normally used when authorizing private and presence channel subscriptions.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">PTPusherConnection.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+					</div>
 					
 					
 					
@@ -211,12 +418,16 @@
 	
 	
 	
+	
+	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>Establishes a web socket connection to the Pusher server.</p>
 
 <p>The delegate will only be sent a didConnect message when the web socket receives a
-&lsquo;connection_established&rsquo; event from Pusher, regardless of the web socket&rsquo;s connection state.</p>
+&lsquo;connection_established&rsquo; event from Pusher, regardless of the web socket&rsquo;s connection <a href="#//api/name/state">state</a>.</p>
+
+<p>Calling this does nothing if already <a href="#//api/name/connected">connected</a>.</p>
 	</div>
 	
 	
@@ -251,9 +462,69 @@
 	
 	
 	
+	
+	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
 		<p>Closes the web socket connection</p>
+
+<p>Calling this does nothing if already dis<a href="#//api/name/connected">connected</a>.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">PTPusherConnection.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/initWithURL:" title="initWithURL:"></a>
+	<h3 class="subsubtitle method-title">initWithURL:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Creates a new PTPusherConnection instance.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (id)initWithURL:(NSURL *)<em>aURL</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>aURL</em></dt>
+			<dd><p>The websocket endpoint</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>delegate</em></dt>
+			<dd><p>The delegate for this connection</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Creates a new PTPusherConnection instance.</p>
+
+<p>Connections are not opened immediately; an explicit call to <a href="#//api/name/connect">connect</a> is required.</p>
 	</div>
 	
 	
@@ -277,7 +548,7 @@
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Creates a new <a href="PTPusherConnection.html">PTPusherConnection</a> instance.</p>
+		<p>Creates a new PTPusherConnection instance.</p>
 	</div>		
 	
 	
@@ -308,11 +579,16 @@
 	
 	
 	
+	
+	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Creates a new <a href="PTPusherConnection.html">PTPusherConnection</a> instance.</p>
+		<p>Creates a new PTPusherConnection instance.</p>
 
 <p>Connections are not opened immediately; an explicit call to <a href="#//api/name/connect">connect</a> is required.</p>
+
+<p>DEPRECATED IN VERSION 1.2. The secure parameter is now ignored; secure mode will be
+enabled automatically when the <a href="#//api/name/URL">URL</a> protocol is wss.</p>
 	</div>
 	
 	
@@ -341,6 +617,8 @@
 	
 	
 	<div class="method-subsection method-declaration"><code>- (void)send:(id)<em>object</em></code></div>
+	
+	
 	
 	
 	
@@ -382,9 +660,9 @@ that can be converted into JSON (typically, any plist compatible object).</p>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 Luke Redpath. All rights reserved. (Last updated: 2012-02-01)</span><br />
+						<p><span class="copyright">&copy; 2013 Luke Redpath. All rights reserved. (Last updated: 2013-12-06)</span><br />
 						
-						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.4 (build 698)</a>.</span></p>
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2 (build 963)</a>.</span></p>
 						
 					</div>
 				</div>

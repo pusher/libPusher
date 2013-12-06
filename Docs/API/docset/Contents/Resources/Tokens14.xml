@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Protocols/PTPusherPresenceChannelDelegate.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intf/PTPusherPresenceChannelDelegate</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>PTPusherPresenceChannelDelegate.h</DeclaredIn>
+			
+			<NodeRef refid="14"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/PTPusherPresenceChannelDelegate/presenceChannelDidSubscribe:</TokenIdentifier>
+			<Abstract>Notifies the delegate that the presence channel subscribed successfully.</Abstract>
+			<DeclaredIn>PTPusherPresenceChannelDelegate.h</DeclaredIn>			
+			
+			<Declaration>- (void)presenceChannelDidSubscribe:(PTPusherPresenceChannel *)channel</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>channel</Name>
+					<Abstract>The presence channel that was subscribed to.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/presenceChannelDidSubscribe:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/PTPusherPresenceChannelDelegate/presenceChannel:memberAdded:</TokenIdentifier>
+			<Abstract>Notifies the delegate that a member has joined the channel.</Abstract>
+			<DeclaredIn>PTPusherPresenceChannelDelegate.h</DeclaredIn>			
+			
+			<Declaration>- (void)presenceChannel:(PTPusherPresenceChannel *)channel memberAdded:(PTPusherChannelMember *)member</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>channel</Name>
+					<Abstract>The presence channel that was subscribed to.</Abstract>
+				</Parameter><Parameter>
+					<Name>member</Name>
+					<Abstract>The member that was removed.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/presenceChannel:memberAdded:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/PTPusherPresenceChannelDelegate/presenceChannel:memberRemoved:</TokenIdentifier>
+			<Abstract>Notifies the delegate that a member has left from the channel.</Abstract>
+			<DeclaredIn>PTPusherPresenceChannelDelegate.h</DeclaredIn>			
+			
+			<Declaration>- (void)presenceChannel:(PTPusherPresenceChannel *)channel memberRemoved:(PTPusherChannelMember *)member</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>channel</Name>
+					<Abstract>The presence channel that was subscribed to.</Abstract>
+				</Parameter><Parameter>
+					<Name>member</Name>
+					<Abstract>The member that was removed.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/presenceChannel:memberRemoved:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/PTPusherPresenceChannelDelegate/presenceChannel:didSubscribeWithMemberList:</TokenIdentifier>
+			<Abstract>Notifies the delegate that the presence channel subscribed successfully. (<b class="deprecated">Deprecated:</b><span class="deprecated"> Use presenceChannelDidSubscribe: and access the members property.</span>)</Abstract>
+			<DeclaredIn>PTPusherPresenceChannelDelegate.h</DeclaredIn>			
+			
+			<Declaration>- (void)presenceChannel:(PTPusherPresenceChannel *)channel didSubscribeWithMemberList:(NSArray *)members</Declaration>
+			
+			
+			<Anchor>//api/name/presenceChannel:didSubscribeWithMemberList:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/PTPusherPresenceChannelDelegate/presenceChannel:memberAddedWithID:memberInfo:</TokenIdentifier>
+			<Abstract>Notifies the delegate that a member has joined the channel. (<b class="deprecated">Deprecated:</b><span class="deprecated"> Use presenceChannel:memberAdded:</span>)</Abstract>
+			<DeclaredIn>PTPusherPresenceChannelDelegate.h</DeclaredIn>			
+			
+			<Declaration>- (void)presenceChannel:(PTPusherPresenceChannel *)channel memberAddedWithID:(NSString *)memberID memberInfo:(NSDictionary *)memberInfo</Declaration>
+			
+			
+			<Anchor>//api/name/presenceChannel:memberAddedWithID:memberInfo:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/PTPusherPresenceChannelDelegate/presenceChannel:memberRemovedWithID:atIndex:</TokenIdentifier>
+			<Abstract>Notifies the delegate that a member subscribed to the presence channel has unsubscribed. (<b class="deprecated">Deprecated:</b><span class="deprecated"> Use presenceChannel:memberRemoved:</span>)</Abstract>
+			<DeclaredIn>PTPusherPresenceChannelDelegate.h</DeclaredIn>			
+			
+			<Declaration>- (void)presenceChannel:(PTPusherPresenceChannel *)channel memberRemovedWithID:(NSString *)memberID atIndex:(NSInteger)index</Declaration>
+			
+			
+			<Anchor>//api/name/presenceChannel:memberRemovedWithID:atIndex:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

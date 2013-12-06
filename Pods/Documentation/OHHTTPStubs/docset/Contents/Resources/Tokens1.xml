@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/OHHTTPStubs.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/OHHTTPStubs</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OHHTTPStubs.h</DeclaredIn>
+			
+			<NodeRef refid="1"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/OHHTTPStubs/sharedInstance</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OHHTTPStubs.h</DeclaredIn>			
+			
+			<Declaration>+ (OHHTTPStubs *)sharedInstance</Declaration>
+			
+			
+			<Anchor>//api/name/sharedInstance</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/OHHTTPStubs/addRequestHandler:</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OHHTTPStubs.h</DeclaredIn>			
+			
+			<Declaration>+ (id)addRequestHandler:(OHHTTPStubsRequestHandler)handler</Declaration>
+			
+			
+			<Anchor>//api/name/addRequestHandler:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/OHHTTPStubs/removeRequestHandler:</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OHHTTPStubs.h</DeclaredIn>			
+			
+			<Declaration>+ (BOOL)removeRequestHandler:(id)handler</Declaration>
+			
+			
+			<Anchor>//api/name/removeRequestHandler:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/OHHTTPStubs/removeLastRequestHandler</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OHHTTPStubs.h</DeclaredIn>			
+			
+			<Declaration>+ (void)removeLastRequestHandler</Declaration>
+			
+			
+			<Anchor>//api/name/removeLastRequestHandler</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/OHHTTPStubs/removeAllRequestHandlers</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OHHTTPStubs.h</DeclaredIn>			
+			
+			<Declaration>+ (void)removeAllRequestHandlers</Declaration>
+			
+			
+			<Anchor>//api/name/removeAllRequestHandlers</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/OHHTTPStubs/setEnabled:</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OHHTTPStubs.h</DeclaredIn>			
+			
+			<Declaration>+ (void)setEnabled:(BOOL)enabled</Declaration>
+			
+			
+			<Anchor>//api/name/setEnabled:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/OHHTTPStubs/addRequestHandler:</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OHHTTPStubs.h</DeclaredIn>			
+			
+			<Declaration>- (id)addRequestHandler:(OHHTTPStubsRequestHandler)handler</Declaration>
+			
+			
+			<Anchor>//api/name/addRequestHandler:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/OHHTTPStubs/removeRequestHandler:</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OHHTTPStubs.h</DeclaredIn>			
+			
+			<Declaration>- (BOOL)removeRequestHandler:(id)handler</Declaration>
+			
+			
+			<Anchor>//api/name/removeRequestHandler:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/OHHTTPStubs/removeLastRequestHandler</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OHHTTPStubs.h</DeclaredIn>			
+			
+			<Declaration>- (void)removeLastRequestHandler</Declaration>
+			
+			
+			<Anchor>//api/name/removeLastRequestHandler</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/OHHTTPStubs/removeAllRequestHandlers</TokenIdentifier>
+			<Abstract></Abstract>
+			<DeclaredIn>OHHTTPStubs.h</DeclaredIn>			
+			
+			<Declaration>- (void)removeAllRequestHandlers</Declaration>
+			
+			
+			<Anchor>//api/name/removeAllRequestHandlers</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

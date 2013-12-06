@@ -1,15 +1,21 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
+		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
 		<title>PTPusherAPI Class Reference</title>
-		<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=utf-8" />
 		<meta id="xcode-display" name="xcode-display" content="render"/>
 		<meta name="viewport" content="width=550" />
-		<link rel="stylesheet" type="text/css" href="../css/styles.css" />
-		<meta name="generator" content="appledoc 2.0.4 (build 698)" />
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.2 (build 963)" />
 	</head>
 	<body>
 		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="../index.html">libPusher </a></h1>
+				<a id="developerHome" href="../index.html">Luke Redpath</a>
+			</div>
+			
 			<div id="title" role="banner">
 				<h1 class="hideInXcode">PTPusherAPI Class Reference</h1>
 			</div>
@@ -38,6 +44,8 @@
 	
 	<option value="instance_methods">Instance Methods</option>
 	
+	<option value="//api/name/initWithKey:appID:secretKey:">&nbsp;&nbsp;&nbsp;&nbsp;- initWithKey:appID:secretKey:</option>
+	
 	<option value="//api/name/triggerEvent:onChannel:data:socketID:">&nbsp;&nbsp;&nbsp;&nbsp;- triggerEvent:onChannel:data:socketID:</option>
 	
 	
@@ -56,6 +64,8 @@
 
 <li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Initialisation">Initialisation</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Triggering events">Triggering events</a></span></li>
 	
 </ul></li>
@@ -69,6 +79,8 @@
 
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/initWithKey:appID:secretKey:">initWithKey:appID:secretKey:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/triggerEvent:onChannel:data:socketID:">triggerEvent:onChannel:data:socketID:</a></span></li>
 	
@@ -114,11 +126,12 @@
 <p>This functionality used to be part of the main <a href="../Classes/PTPusher.html">PTPusher</a> library but
 has been extracted into a standalone component.</p>
 
-<p>The <a href="../Classes/PTPusher.html">PTPusher</a> client has alpha support for channel-based event triggering
-but for general event triggering the API can be used.</p>
+<p>The <a href="../Classes/PTPusher.html">PTPusher</a> client has support for client-sent events but if your account does not
+support these you can use this class to send events using the standard Pusher REST API.</p>
 
 <p>As well as your Pusher API key, you will also need your app ID and secret key
-for signing requests.</p>
+for signing requests. You should take care not to expose these in your application&rsquo;s
+header files.</p>
 					</div>
 					
 					
@@ -130,9 +143,24 @@ for signing requests.</p>
 						<h2 class="subtitle subtitle-tasks">Tasks</h2>
 						
 						
-						<a title="Triggering events" name="task_Triggering events"></a>
+						<a title="Initialisation" name="task_Initialisation"></a>
+						<h3 class="subsubtitle task-title">Initialisation</h3>
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/initWithKey:appID:secretKey:">&ndash;&nbsp;initWithKey:appID:secretKey:</a></code>
+		<span class="tooltip"><p>Designated initializer</p></span>
+	</span>
+	
+	
+</li>
+						</ul>
 						
-<h3 class="subsubtitle task-title">Triggering events</h3>
+						
+						<a title="Triggering events" name="task_Triggering events"></a>
+						<h3 class="subsubtitle task-title">Triggering events</h3>
+
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
@@ -157,6 +185,67 @@ for signing requests.</p>
 					<div class="section section-methods">
 						<a title="Instance Methods" name="instance_methods"></a>
 						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/initWithKey:appID:secretKey:" title="initWithKey:appID:secretKey:"></a>
+	<h3 class="subsubtitle method-title">initWithKey:appID:secretKey:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Designated initializer</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (id)initWithKey:(NSString *)<em>aKey</em> appID:(NSString *)<em>anAppID</em> secretKey:(NSString *)<em>aSecretKey</em></code></div>
+	
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>aKey</em></dt>
+			<dd><p>Your Pusher API key</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>anAppID</em></dt>
+			<dd><p>Your Pusher app ID</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>aSecretKey</em></dt>
+			<dd><p>Your Pusher app secret.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Designated initializer</p>
+
+<p>You will need your account credentials which can be located on your account dashboard.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">PTPusherAPI.h</code><br />
+	</div>				
+	
+	
+</div>
 						
 						<div class="section-method">
 	<a name="//api/name/triggerEvent:onChannel:data:socketID:" title="triggerEvent:onChannel:data:socketID:"></a>
@@ -191,6 +280,8 @@ for signing requests.</p>
 		</dl>
 		
 	</div>
+	
+	
 	
 	
 	
@@ -231,9 +322,9 @@ transformed into JSON (typically any plist-compatible object).</p>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 Luke Redpath. All rights reserved. (Last updated: 2012-02-01)</span><br />
+						<p><span class="copyright">&copy; 2013 Luke Redpath. All rights reserved. (Last updated: 2013-12-06)</span><br />
 						
-						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.4 (build 698)</a>.</span></p>
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2 (build 963)</a>.</span></p>
 						
 					</div>
 				</div>

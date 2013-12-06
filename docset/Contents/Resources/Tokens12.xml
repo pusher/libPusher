@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Protocols/PTPusherDelegate.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intf/PTPusherDelegate</TokenIdentifier>
+			<Abstract>Implementing the PTPusherDelegate protocol lets you react to important events in the Pusher client's
+  lifetime, such as connection and disconnection, channel subscription and errors.</Abstract>
+			<DeclaredIn>PTPusherDelegate.h</DeclaredIn>
+			
+			<NodeRef refid="12"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/PTPusherDelegate/pusher:connectionWillConnect:</TokenIdentifier>
+			<Abstract>Notifies the delegate that the PTPusher instance is about to connect to the Pusher service.</Abstract>
+			<DeclaredIn>PTPusherDelegate.h</DeclaredIn>			
+			
+			<Declaration>- (BOOL)pusher:(PTPusher *)pusher connectionWillConnect:(PTPusherConnection *)connection</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>pusher</Name>
+					<Abstract>The PTPusher instance that is connecting.</Abstract>
+				</Parameter><Parameter>
+					<Name>connection</Name>
+					<Abstract>The connection for the pusher instance.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract>NO to abort the connection attempt.</Abstract></ReturnValue>
+			<Anchor>//api/name/pusher:connectionWillConnect:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/PTPusherDelegate/pusher:connectionDidConnect:</TokenIdentifier>
+			<Abstract>Notifies the delegate that the PTPusher instance has connected to the Pusher service successfully.</Abstract>
+			<DeclaredIn>PTPusherDelegate.h</DeclaredIn>			
+			
+			<Declaration>- (void)pusher:(PTPusher *)pusher connectionDidConnect:(PTPusherConnection *)connection</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>pusher</Name>
+					<Abstract>The PTPusher instance that has connected.</Abstract>
+				</Parameter><Parameter>
+					<Name>connection</Name>
+					<Abstract>The connection for the pusher instance.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/pusher:connectionDidConnect:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/PTPusherDelegate/pusher:connection:didDisconnectWithError:willAttemptReconnect:</TokenIdentifier>
+			<Abstract>Notifies the delegate that the PTPusher instance has disconnected from the Pusher service.</Abstract>
+			<DeclaredIn>PTPusherDelegate.h</DeclaredIn>			
+			
+			<Declaration>- (void)pusher:(PTPusher *)pusher connection:(PTPusherConnection *)connection didDisconnectWithError:(NSError *)error willAttemptReconnect:(BOOL)willAttemptReconnect</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>pusher</Name>
+					<Abstract>The PTPusher instance that has connected.</Abstract>
+				</Parameter><Parameter>
+					<Name>connection</Name>
+					<Abstract>The connection for the pusher instance.</Abstract>
+				</Parameter><Parameter>
+					<Name>error</Name>
+					<Abstract>If the connection disconnected abnormally, error will be non-nil.</Abstract>
+				</Parameter><Parameter>
+					<Name>willAttemptReconnect</Name>
+					<Abstract>YES if the client will try and reconnect automatically.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/pusher:connection:didDisconnectWithError:willAttemptReconnect:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/PTPusherDelegate/pusher:connection:failedWithError:</TokenIdentifier>
+			<Abstract>Notifies the delegate that the PTPusher instance failed to connect to the Pusher service.</Abstract>
+			<DeclaredIn>PTPusherDelegate.h</DeclaredIn>			
+			
+			<Declaration>- (void)pusher:(PTPusher *)pusher connection:(PTPusherConnection *)connection failedWithError:(NSError *)error</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>pusher</Name>
+					<Abstract>The PTPusher instance that has connected.</Abstract>
+				</Parameter><Parameter>
+					<Name>connection</Name>
+					<Abstract>The connection for the pusher instance.</Abstract>
+				</Parameter><Parameter>
+					<Name>error</Name>
+					<Abstract>The connection error.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/pusher:connection:failedWithError:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/PTPusherDelegate/pusher:connectionWillAutomaticallyReconnect:afterDelay:</TokenIdentifier>
+			<Abstract>Notifies the delegate that the PTPusher instance will attempt to automatically reconnect.</Abstract>
+			<DeclaredIn>PTPusherDelegate.h</DeclaredIn>			
+			
+			<Declaration>- (BOOL)pusher:(PTPusher *)pusher connectionWillAutomaticallyReconnect:(PTPusherConnection *)connection afterDelay:(NSTimeInterval)delay</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>pusher</Name>
+					<Abstract>The PTPusher instance that has connected.</Abstract>
+				</Parameter><Parameter>
+					<Name>connection</Name>
+					<Abstract>The connection for the pusher instance.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract>NO if you do not want the client to attempt an automatic reconnection.</Abstract></ReturnValue>
+			<Anchor>//api/name/pusher:connectionWillAutomaticallyReconnect:afterDelay:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/PTPusherDelegate/pusher:willAuthorizeChannel:withRequest:</TokenIdentifier>
+			<Abstract>Notifies the delegate of the request that will be used to authorize access to a channel.</Abstract>
+			<DeclaredIn>PTPusherDelegate.h</DeclaredIn>			
+			
+			<Declaration>- (void)pusher:(PTPusher *)pusher willAuthorizeChannel:(PTPusherChannel *)channel withRequest:(NSMutableURLRequest *)request</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>pusher</Name>
+					<Abstract>The PTPusher instance that is requesting authorization</Abstract>
+				</Parameter><Parameter>
+					<Name>channel</Name>
+					<Abstract>The channel that requires authorizing</Abstract>
+				</Parameter><Parameter>
+					<Name>request</Name>
+					<Abstract>A mutable URL request that will be POSTed to the configured authorizationURL</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/pusher:willAuthorizeChannel:withRequest:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/PTPusherDelegate/pusher:didSubscribeToChannel:</TokenIdentifier>
+			<Abstract>Notifies the delegate that the PTPusher instance has subscribed to the specified channel.</Abstract>
+			<DeclaredIn>PTPusherDelegate.h</DeclaredIn>			
+			
+			<Declaration>- (void)pusher:(PTPusher *)pusher didSubscribeToChannel:(PTPusherChannel *)channel</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>pusher</Name>
+					<Abstract>The PTPusher instance that has connected.</Abstract>
+				</Parameter><Parameter>
+					<Name>channel</Name>
+					<Abstract>The channel that was subscribed to.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/pusher:didSubscribeToChannel:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/PTPusherDelegate/pusher:didUnsubscribeFromChannel:</TokenIdentifier>
+			<Abstract>Notifies the delegate that the PTPusher instance has unsubscribed from the specified channel.</Abstract>
+			<DeclaredIn>PTPusherDelegate.h</DeclaredIn>			
+			
+			<Declaration>- (void)pusher:(PTPusher *)pusher didUnsubscribeFromChannel:(PTPusherChannel *)channel</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>pusher</Name>
+					<Abstract>The PTPusher instance that has connected.</Abstract>
+				</Parameter><Parameter>
+					<Name>channel</Name>
+					<Abstract>The channel that was unsubscribed from.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/pusher:didUnsubscribeFromChannel:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/PTPusherDelegate/pusher:didFailToSubscribeToChannel:withError:</TokenIdentifier>
+			<Abstract>Notifies the delegate that the PTPusher instance failed to subscribe to the specified channel.</Abstract>
+			<DeclaredIn>PTPusherDelegate.h</DeclaredIn>			
+			
+			<Declaration>- (void)pusher:(PTPusher *)pusher didFailToSubscribeToChannel:(PTPusherChannel *)channel withError:(NSError *)error</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>pusher</Name>
+					<Abstract>The PTPusher instance that has connected.</Abstract>
+				</Parameter><Parameter>
+					<Name>channel</Name>
+					<Abstract>The channel that was subscribed to.</Abstract>
+				</Parameter><Parameter>
+					<Name>error</Name>
+					<Abstract>The error returned when attempting to subscribe.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/pusher:didFailToSubscribeToChannel:withError:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/PTPusherDelegate/pusher:didReceiveErrorEvent:</TokenIdentifier>
+			<Abstract>Notifies the delegate that an error event has been received.</Abstract>
+			<DeclaredIn>PTPusherDelegate.h</DeclaredIn>			
+			
+			<Declaration>- (void)pusher:(PTPusher *)pusher didReceiveErrorEvent:(PTPusherErrorEvent *)errorEvent</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>pusher</Name>
+					<Abstract>The PTPusher instance that received the event.</Abstract>
+				</Parameter><Parameter>
+					<Name>errorEvent</Name>
+					<Abstract>The error event.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/pusher:didReceiveErrorEvent:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/PTPusherDelegate/pusher:connectionDidDisconnect:</TokenIdentifier>
+			<Abstract>Notifies the delegate that the PTPusher instance has disconnected from the Pusher service. (<b class="deprecated">Deprecated:</b><span class="deprecated"> Use pusher:connection:didDisconnectWithError:willAttemptReconnect:</span>)</Abstract>
+			<DeclaredIn>PTPusherDelegate.h</DeclaredIn>			
+			
+			<Declaration>- (void)pusher:(PTPusher *)pusher connectionDidDisconnect:(PTPusherConnection *)connection</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>pusher</Name>
+					<Abstract>The PTPusher instance that has connected.</Abstract>
+				</Parameter><Parameter>
+					<Name>connection</Name>
+					<Abstract>The connection for the pusher instance.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/pusher:connectionDidDisconnect:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/PTPusherDelegate/pusher:connection:didDisconnectWithError:</TokenIdentifier>
+			<Abstract>Notifies the delegate that the PTPusher instance has disconnected from the Pusher service. (<b class="deprecated">Deprecated:</b><span class="deprecated"> Use pusher:connection:didDisconnectWithError:willAttemptReconnect:</span>)</Abstract>
+			<DeclaredIn>PTPusherDelegate.h</DeclaredIn>			
+			
+			<Declaration>- (void)pusher:(PTPusher *)pusher connection:(PTPusherConnection *)connection didDisconnectWithError:(NSError *)error</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>pusher</Name>
+					<Abstract>The PTPusher instance that has connected.</Abstract>
+				</Parameter><Parameter>
+					<Name>connection</Name>
+					<Abstract>The connection for the pusher instance.</Abstract>
+				</Parameter><Parameter>
+					<Name>error</Name>
+					<Abstract>If the connection disconnected abnormally, error will be non-nil.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/pusher:connection:didDisconnectWithError:</Anchor>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/PTPusherDelegate/pusher:willAuthorizeChannelWithRequest:</TokenIdentifier>
+			<Abstract>Notifies the delegate of the request that will be used to authorize access to a channel.</Abstract>
+			<DeclaredIn>PTPusherDelegate.h</DeclaredIn>			
+			
+			<Declaration>- (void)pusher:(PTPusher *)pusher willAuthorizeChannelWithRequest:(NSMutableURLRequest *)request</Declaration>
+			
+			
+			<Anchor>//api/name/pusher:willAuthorizeChannelWithRequest:</Anchor>
+		</Token>
+		
+	</File>
+</Tokens>

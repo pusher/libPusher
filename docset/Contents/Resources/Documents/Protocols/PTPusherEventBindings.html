@@ -1,15 +1,21 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
+		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
 		<title>PTPusherEventBindings Protocol Reference</title>
-		<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=utf-8" />
 		<meta id="xcode-display" name="xcode-display" content="render"/>
 		<meta name="viewport" content="width=550" />
-		<link rel="stylesheet" type="text/css" href="../css/styles.css" />
-		<meta name="generator" content="appledoc 2.0.4 (build 698)" />
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.2 (build 963)" />
 	</head>
 	<body>
 		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="../index.html">libPusher </a></h1>
+				<a id="developerHome" href="../index.html">Luke Redpath</a>
+			</div>
+			
 			<div id="title" role="banner">
 				<h1 class="hideInXcode">PTPusherEventBindings Protocol Reference</h1>
 			</div>
@@ -44,6 +50,10 @@
 	
 	<option value="//api/name/bindToEventNamed:target:action:">&nbsp;&nbsp;&nbsp;&nbsp;- bindToEventNamed:target:action:</option>
 	
+	<option value="//api/name/removeAllBindings">&nbsp;&nbsp;&nbsp;&nbsp;- removeAllBindings</option>
+	
+	<option value="//api/name/removeBinding:">&nbsp;&nbsp;&nbsp;&nbsp;- removeBinding:</option>
+	
 	
 	
 </select>
@@ -77,6 +87,10 @@
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/bindToEventNamed:handleWithBlock:queue:">bindToEventNamed:handleWithBlock:queue:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/bindToEventNamed:target:action:">bindToEventNamed:target:action:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/removeAllBindings">removeAllBindings</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/removeBinding:">removeBinding:</a></span></li>
 	
 </ul></li>
 
@@ -162,6 +176,20 @@ one you use depends entirely on the requirements of your application.</p>
 	</span>
 	
 	<span class="task-item-suffix">required method</span>
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/removeBinding:">&ndash;&nbsp;removeBinding:</a></code>
+		<span class="tooltip"><p>Removes the specified binding.</p></span>
+	</span>
+	
+	<span class="task-item-suffix">required method</span>
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/removeAllBindings">&ndash;&nbsp;removeAllBindings</a></code>
+		<span class="tooltip"><p>Removes all bindings that have been set up.</p></span>
+	</span>
+	
+	<span class="task-item-suffix">required method</span>
 </li>
 						</ul>
 						
@@ -190,7 +218,9 @@ one you use depends entirely on the requirements of your application.</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>- (void)bindToEventNamed:(NSString *)<em>eventName</em> handleWithBlock:(PTPusherEventBlockHandler)<em>block</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (PTPusherEventBinding *)bindToEventNamed:(NSString *)<em>eventName</em> handleWithBlock:(PTPusherEventBlockHandler)<em>block</em></code></div>
+	
+	
 	
 	
 	
@@ -239,7 +269,9 @@ event when it is triggered:</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>- (void)bindToEventNamed:(NSString *)<em>eventName</em> handleWithBlock:(PTPusherEventBlockHandler)<em>block</em> queue:(dispatch_queue_t)<em>queue</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (PTPusherEventBinding *)bindToEventNamed:(NSString *)<em>eventName</em> handleWithBlock:(PTPusherEventBlockHandler)<em>block</em> queue:(dispatch_queue_t)<em>queue</em></code></div>
+	
+	
 	
 	
 	
@@ -281,7 +313,9 @@ Grand Central Dispatch queue.</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>- (void)bindToEventNamed:(NSString *)<em>eventName</em> target:(id)<em>target</em> action:(SEL)<em>selector</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (PTPusherEventBinding *)bindToEventNamed:(NSString *)<em>eventName</em> target:(id)<em>target</em> action:(SEL)<em>selector</em></code></div>
+	
+	
 	
 	
 	
@@ -323,6 +357,88 @@ the <a href="../Classes/PTPusherEvent.html"><code>PTPusherEvent</code></a> as th
 	
 </div>
 						
+						<div class="section-method">
+	<a name="//api/name/removeAllBindings" title="removeAllBindings"></a>
+	<h3 class="subsubtitle method-title">removeAllBindings</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Removes all bindings that have been set up.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)removeAllBindings</code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Removes all bindings that have been set up.</p>
+
+<p>  Any retained references to <a href="../Classes/PTPusherEventBinding.html">PTPusherEventBinding</a> objects will become invalid.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">PTPusherEventPublisher.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/removeBinding:" title="removeBinding:"></a>
+	<h3 class="subsubtitle method-title">removeBinding:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Removes the specified binding.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)removeBinding:(PTPusherEventBinding *)<em>binding</em></code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Removes the specified binding.</p>
+
+<p>Any further events will not trigger any callbacks after the binding has been removed.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">PTPusherEventPublisher.h</code><br />
+	</div>				
+	
+	
+</div>
+						
 					</div>
 					
 					
@@ -336,9 +452,9 @@ the <a href="../Classes/PTPusherEvent.html"><code>PTPusherEvent</code></a> as th
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 Luke Redpath. All rights reserved. (Last updated: 2012-02-01)</span><br />
+						<p><span class="copyright">&copy; 2013 Luke Redpath. All rights reserved. (Last updated: 2013-12-06)</span><br />
 						
-						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.4 (build 698)</a>.</span></p>
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2 (build 963)</a>.</span></p>
 						
 					</div>
 				</div>

@@ -1,15 +1,21 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
+		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
 		<title>PTPusherPresenceChannel Class Reference</title>
-		<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=utf-8" />
 		<meta id="xcode-display" name="xcode-display" content="render"/>
 		<meta name="viewport" content="width=550" />
-		<link rel="stylesheet" type="text/css" href="../css/styles.css" />
-		<meta name="generator" content="appledoc 2.0.4 (build 698)" />
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.2 (build 963)" />
 	</head>
 	<body>
 		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="../index.html">libPusher </a></h1>
+				<a id="developerHome" href="../index.html">Luke Redpath</a>
+			</div>
+			
 			<div id="title" role="banner">
 				<h1 class="hideInXcode">PTPusherPresenceChannel Class Reference</h1>
 			</div>
@@ -68,6 +74,8 @@
 <li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Properties">Properties</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#task_Deprecated methods">Deprecated methods</a></span></li>
 	
 </ul></li>
 
@@ -132,7 +140,7 @@
 					<div class="section section-overview">
 						<a title="Overview" name="overview"></a>
 						<h2 class="subtitle subtitle-overview">Overview</h2>
-						<p>A <a href="PTPusherPresenceChannel.html">PTPusherPresenceChannel</a> object represents a Pusher presence channel.</p>
+						<p>A PTPusherPresenceChannel object represents a Pusher presence channel.</p>
 
 <p>Presence channels build on the security of Private channels and expose the additional feature
 of an awareness of who is subscribed to that channel. This makes it extremely easy to build
@@ -140,7 +148,7 @@ chat room and &ldquo;who&rsquo;s online&rdquo; type functionality to your applic
 
 <p>Presence channel names always have the prefix of &ldquo;presence-&rdquo;.</p>
 
-<p>Unlike the Pusher Javascript client API, <a href="PTPusherPresenceChannel.html">PTPusherPresenceChannel</a> does not use events to notify
+<p>Unlike the Pusher Javascript client API, PTPusherPresenceChannel does not use events to notify
 when <a href="#//api/name/members">members</a> are added or removed. Instead, you should assign a <a href="#//api/name/presenceDelegate">presenceDelegate</a> which will
 be notified of these events.</p>
 					</div>
@@ -155,8 +163,8 @@ be notified of these events.</p>
 						
 						
 						<a title="Properties" name="task_Properties"></a>
-						
-<h3 class="subsubtitle task-title">Properties</h3>
+						<h3 class="subsubtitle task-title">Properties</h3>
+
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
@@ -168,28 +176,36 @@ be notified of these events.</p>
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/members">&nbsp;&nbsp;members</a></code>
-		<span class="tooltip"><p>Returns the current list of channel <a href="#//api/name/members">members</a>.</p></span>
+		<span class="tooltip"><p>Returns the channel member list.</p></span>
 	</span>
 	<span class="task-item-suffix">property</span>
 	
-</li><li>
+</li>
+						</ul>
+						
+						
+						<a title="Deprecated methods" name="task_Deprecated methods"></a>
+						<h3 class="subsubtitle task-title">Deprecated methods</h3>
+
+						<ul class="task-list">
+							<li>
 	<span class="tooltip">
 		<code><a href="#//api/name/infoForMemberWithID:">&ndash;&nbsp;infoForMemberWithID:</a></code>
-		<span class="tooltip"><p>Returns a dictionary of member metadata (email, name etc.) for the given member ID.</p></span>
+		<span class="tooltip"><p>Returns a dictionary of member metadata (email, name etc.) for the given member ID. (<b class="deprecated">Deprecated:</b><span class="deprecated"> Use the members object.</span>)</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/memberIDs">&ndash;&nbsp;memberIDs</a></code>
-		<span class="tooltip"><p>Returns an array of available member IDs</p></span>
+		<span class="tooltip"><p>Returns an array of available member IDs (<b class="deprecated">Deprecated:</b><span class="deprecated"> Use the members object.</span>)</p></span>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
 		<code><a href="#//api/name/memberCount">&ndash;&nbsp;memberCount</a></code>
-		<span class="tooltip"><p>Returns the number of <a href="#//api/name/members">members</a> currently connected to this channel.</p></span>
+		<span class="tooltip"><p>Returns the number of <a href="#//api/name/members">members</a> currently connected to this channel. (<b class="deprecated">Deprecated:</b><span class="deprecated"> Use the members object.</span>)</p></span>
 	</span>
 	
 	
@@ -213,11 +229,13 @@ be notified of these events.</p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Returns the current list of channel <a href="#//api/name/members">members</a>.</p>
+		<p>Returns the channel member list.</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) NSDictionary *members</code></div>
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, readonly) PTPusherChannelMembers *members</code></div>
+	
+	
 	
 	
 	
@@ -226,11 +244,7 @@ be notified of these events.</p>
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Returns the current list of channel <a href="#//api/name/members">members</a>.</p>
-
-<p>Members are stored as a dictionary of dictionaries, keyed on the member&rsquo;s &ldquo;user_id&rdquo; field.</p>
-
-<p>@deprecated Use the methods below for accessing member data.</p>
+		<p>Returns the channel member list.</p>
 	</div>
 	
 	
@@ -258,7 +272,9 @@ be notified of these events.</p>
 	</div>		
 	
 	
-	<div class="method-subsection method-declaration"><code>@property (nonatomic, assign) id&lt;PTPusherPresenceChannelDelegate&gt; presenceDelegate</code></div>
+	<div class="method-subsection method-declaration"><code>@property (nonatomic, weak) id&lt;PTPusherPresenceChannelDelegate&gt; presenceDelegate</code></div>
+	
+	
 	
 	
 	
@@ -304,11 +320,13 @@ member list on subscription and member added/removed events.</p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Returns a dictionary of member metadata (email, name etc.) for the given member ID.</p>
+		<p>Returns a dictionary of member metadata (email, name etc.) for the given member ID. (<b class="deprecated">Deprecated:</b><span class="deprecated"> Use the members object.</span>)</p>
 	</div>		
 	
 	
 	<div class="method-subsection method-declaration"><code>- (NSDictionary *)infoForMemberWithID:(NSString *)<em>memberID</em></code></div>
+	
+	
 	
 	
 	
@@ -341,11 +359,13 @@ member list on subscription and member added/removed events.</p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Returns the number of <a href="#//api/name/members">members</a> currently connected to this channel.</p>
+		<p>Returns the number of <a href="#//api/name/members">members</a> currently connected to this channel. (<b class="deprecated">Deprecated:</b><span class="deprecated"> Use the members object.</span>)</p>
 	</div>		
 	
 	
 	<div class="method-subsection method-declaration"><code>- (NSInteger)memberCount</code></div>
+	
+	
 	
 	
 	
@@ -378,11 +398,13 @@ member list on subscription and member added/removed events.</p>
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Returns an array of available member IDs</p>
+		<p>Returns an array of available member IDs (<b class="deprecated">Deprecated:</b><span class="deprecated"> Use the members object.</span>)</p>
 	</div>		
 	
 	
 	<div class="method-subsection method-declaration"><code>- (NSArray *)memberIDs</code></div>
+	
+	
 	
 	
 	
@@ -421,9 +443,9 @@ member list on subscription and member added/removed events.</p>
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 Luke Redpath. All rights reserved. (Last updated: 2012-02-01)</span><br />
+						<p><span class="copyright">&copy; 2013 Luke Redpath. All rights reserved. (Last updated: 2013-12-06)</span><br />
 						
-						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.4 (build 698)</a>.</span></p>
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2 (build 963)</a>.</span></p>
 						
 					</div>
 				</div>

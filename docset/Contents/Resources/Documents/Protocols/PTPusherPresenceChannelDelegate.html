@@ -1,15 +1,21 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
+		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
 		<title>PTPusherPresenceChannelDelegate Protocol Reference</title>
-		<meta http-equiv="Content-Type" content="application/xhtml+xml;charset=utf-8" />
 		<meta id="xcode-display" name="xcode-display" content="render"/>
 		<meta name="viewport" content="width=550" />
-		<link rel="stylesheet" type="text/css" href="../css/styles.css" />
-		<meta name="generator" content="appledoc 2.0.4 (build 698)" />
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.2 (build 963)" />
 	</head>
 	<body>
 		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="../index.html">libPusher </a></h1>
+				<a id="developerHome" href="../index.html">Luke Redpath</a>
+			</div>
+			
 			<div id="title" role="banner">
 				<h1 class="hideInXcode">PTPusherPresenceChannelDelegate Protocol Reference</h1>
 			</div>
@@ -38,9 +44,15 @@
 	
 	<option value="//api/name/presenceChannel:didSubscribeWithMemberList:">&nbsp;&nbsp;&nbsp;&nbsp;- presenceChannel:didSubscribeWithMemberList:</option>
 	
+	<option value="//api/name/presenceChannel:memberAdded:">&nbsp;&nbsp;&nbsp;&nbsp;- presenceChannel:memberAdded:</option>
+	
 	<option value="//api/name/presenceChannel:memberAddedWithID:memberInfo:">&nbsp;&nbsp;&nbsp;&nbsp;- presenceChannel:memberAddedWithID:memberInfo:</option>
 	
+	<option value="//api/name/presenceChannel:memberRemoved:">&nbsp;&nbsp;&nbsp;&nbsp;- presenceChannel:memberRemoved:</option>
+	
 	<option value="//api/name/presenceChannel:memberRemovedWithID:atIndex:">&nbsp;&nbsp;&nbsp;&nbsp;- presenceChannel:memberRemovedWithID:atIndex:</option>
+	
+	<option value="//api/name/presenceChannelDidSubscribe:">&nbsp;&nbsp;&nbsp;&nbsp;- presenceChannelDidSubscribe:</option>
 	
 	
 	
@@ -70,9 +82,15 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/presenceChannel:didSubscribeWithMemberList:">presenceChannel:didSubscribeWithMemberList:</a></span></li>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/presenceChannel:memberAdded:">presenceChannel:memberAdded:</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/presenceChannel:memberAddedWithID:memberInfo:">presenceChannel:memberAddedWithID:memberInfo:</a></span></li>
 	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/presenceChannel:memberRemoved:">presenceChannel:memberRemoved:</a></span></li>
+	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/presenceChannel:memberRemovedWithID:atIndex:">presenceChannel:memberRemovedWithID:atIndex:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/presenceChannelDidSubscribe:">presenceChannelDidSubscribe:</a></span></li>
 	
 </ul></li>
 
@@ -121,25 +139,46 @@
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/presenceChannel:didSubscribeWithMemberList:">&ndash;&nbsp;presenceChannel:didSubscribeWithMemberList:</a></code>
+		<code><a href="#//api/name/presenceChannelDidSubscribe:">&ndash;&nbsp;presenceChannelDidSubscribe:</a></code>
 		<span class="tooltip"><p>Notifies the delegate that the presence channel subscribed successfully.</p></span>
 	</span>
 	
 	<span class="task-item-suffix">required method</span>
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/presenceChannel:memberAddedWithID:memberInfo:">&ndash;&nbsp;presenceChannel:memberAddedWithID:memberInfo:</a></code>
-		<span class="tooltip"><p>Notifies the delegate that a new member subscribed to the presence channel.</p></span>
+		<code><a href="#//api/name/presenceChannel:memberAdded:">&ndash;&nbsp;presenceChannel:memberAdded:</a></code>
+		<span class="tooltip"><p>Notifies the delegate that a member has joined the channel.</p></span>
 	</span>
 	
 	<span class="task-item-suffix">required method</span>
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/presenceChannel:memberRemovedWithID:atIndex:">&ndash;&nbsp;presenceChannel:memberRemovedWithID:atIndex:</a></code>
-		<span class="tooltip"><p>Notifies the delegate that a member subscribed to the presence channel has unsubscribed.</p></span>
+		<code><a href="#//api/name/presenceChannel:memberRemoved:">&ndash;&nbsp;presenceChannel:memberRemoved:</a></code>
+		<span class="tooltip"><p>Notifies the delegate that a member has left from the channel.</p></span>
 	</span>
 	
 	<span class="task-item-suffix">required method</span>
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/presenceChannel:didSubscribeWithMemberList:">&ndash;&nbsp;presenceChannel:didSubscribeWithMemberList:</a></code>
+		<span class="tooltip"><p>Notifies the delegate that the presence channel subscribed successfully. (<b class="deprecated">Deprecated:</b><span class="deprecated"> Use presenceChannelDidSubscribe: and access the members property.</span>)</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/presenceChannel:memberAddedWithID:memberInfo:">&ndash;&nbsp;presenceChannel:memberAddedWithID:memberInfo:</a></code>
+		<span class="tooltip"><p>Notifies the delegate that a member has joined the channel. (<b class="deprecated">Deprecated:</b><span class="deprecated"> Use presenceChannel:memberAdded:</span>)</p></span>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/presenceChannel:memberRemovedWithID:atIndex:">&ndash;&nbsp;presenceChannel:memberRemovedWithID:atIndex:</a></code>
+		<span class="tooltip"><p>Notifies the delegate that a member subscribed to the presence channel has unsubscribed. (<b class="deprecated">Deprecated:</b><span class="deprecated"> Use presenceChannel:memberRemoved:</span>)</p></span>
+	</span>
+	
+	
 </li>
 						</ul>
 						
@@ -164,11 +203,50 @@
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Notifies the delegate that the presence channel subscribed successfully.</p>
+		<p>Notifies the delegate that the presence channel subscribed successfully. (<b class="deprecated">Deprecated:</b><span class="deprecated"> Use presenceChannelDidSubscribe: and access the members property.</span>)</p>
 	</div>		
 	
 	
 	<div class="method-subsection method-declaration"><code>- (void)presenceChannel:(PTPusherPresenceChannel *)<em>channel</em> didSubscribeWithMemberList:(NSArray *)<em>members</em></code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Notifies the delegate that the presence channel subscribed successfully.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">PTPusherPresenceChannelDelegate.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/presenceChannel:memberAdded:" title="presenceChannel:memberAdded:"></a>
+	<h3 class="subsubtitle method-title">presenceChannel:memberAdded:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Notifies the delegate that a member has joined the channel.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)presenceChannel:(PTPusherPresenceChannel *)<em>channel</em> memberAdded:(PTPusherChannelMember *)<em>member</em></code></div>
 	
 	
 	<div class="method-subsection arguments-section parameters">
@@ -180,8 +258,8 @@
 		</dl>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>members</em></dt>
-			<dd><p>The current members subscribed to the channel.</p></dd>
+			<dt><em>member</em></dt>
+			<dd><p>The member that was removed.</p></dd>
 		</dl>
 		
 	</div>
@@ -190,14 +268,11 @@
 	
 	
 	
+	
+	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Notifies the delegate that the presence channel subscribed successfully.</p>
-
-<p>Whenever you subscribe to a presence channel, a list of current subscribers will be returned by Pusher.</p>
-
-<p>The list will be an array of member IDs. Further metadata can be obtained by asking the channel object
-for information about a particular member using <code>[PTPusherChannel infoForMemberWithID:]</code>.</p>
+		<p>Notifies the delegate that a member has joined the channel.</p>
 	</div>
 	
 	
@@ -221,11 +296,50 @@ for information about a particular member using <code>[PTPusherChannel infoForMe
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Notifies the delegate that a new member subscribed to the presence channel.</p>
+		<p>Notifies the delegate that a member has joined the channel. (<b class="deprecated">Deprecated:</b><span class="deprecated"> Use presenceChannel:memberAdded:</span>)</p>
 	</div>		
 	
 	
 	<div class="method-subsection method-declaration"><code>- (void)presenceChannel:(PTPusherPresenceChannel *)<em>channel</em> memberAddedWithID:(NSString *)<em>memberID</em> memberInfo:(NSDictionary *)<em>memberInfo</em></code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Notifies the delegate that a member has joined the channel.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">PTPusherPresenceChannelDelegate.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/presenceChannel:memberRemoved:" title="presenceChannel:memberRemoved:"></a>
+	<h3 class="subsubtitle method-title">presenceChannel:memberRemoved:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Notifies the delegate that a member has left from the channel.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)presenceChannel:(PTPusherPresenceChannel *)<em>channel</em> memberRemoved:(PTPusherChannelMember *)<em>member</em></code></div>
 	
 	
 	<div class="method-subsection arguments-section parameters">
@@ -237,13 +351,8 @@ for information about a particular member using <code>[PTPusherChannel infoForMe
 		</dl>
 		
 		<dl class="argument-def parameter-def">
-			<dt><em>memberID</em></dt>
-			<dd><p>The ID for the new member.</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>memberInfo</em></dt>
-			<dd><p>The custom user data for the new member.</p></dd>
+			<dt><em>member</em></dt>
+			<dd><p>The member that was removed.</p></dd>
 		</dl>
 		
 	</div>
@@ -252,11 +361,11 @@ for information about a particular member using <code>[PTPusherChannel infoForMe
 	
 	
 	
+	
+	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Notifies the delegate that a new member subscribed to the presence channel.</p>
-
-<p>The member info can contain arbitrary user data returned by the authorization server.</p>
+		<p>Notifies the delegate that a member has left from the channel.</p>
 	</div>
 	
 	
@@ -280,11 +389,50 @@ for information about a particular member using <code>[PTPusherChannel infoForMe
 	
 	
 	<div class="method-subsection brief-description">
-		<p>Notifies the delegate that a member subscribed to the presence channel has unsubscribed.</p>
+		<p>Notifies the delegate that a member subscribed to the presence channel has unsubscribed. (<b class="deprecated">Deprecated:</b><span class="deprecated"> Use presenceChannel:memberRemoved:</span>)</p>
 	</div>		
 	
 	
 	<div class="method-subsection method-declaration"><code>- (void)presenceChannel:(PTPusherPresenceChannel *)<em>channel</em> memberRemovedWithID:(NSString *)<em>memberID</em> atIndex:(NSInteger)<em>index</em></code></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>Notifies the delegate that a member subscribed to the presence channel has unsubscribed.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">PTPusherPresenceChannelDelegate.h</code><br />
+	</div>				
+	
+	
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/presenceChannelDidSubscribe:" title="presenceChannelDidSubscribe:"></a>
+	<h3 class="subsubtitle method-title">presenceChannelDidSubscribe:</h3>
+	
+	
+	
+	<div class="method-subsection brief-description">
+		<p>Notifies the delegate that the presence channel subscribed successfully.</p>
+	</div>		
+	
+	
+	<div class="method-subsection method-declaration"><code>- (void)presenceChannelDidSubscribe:(PTPusherPresenceChannel *)<em>channel</em></code></div>
 	
 	
 	<div class="method-subsection arguments-section parameters">
@@ -295,17 +443,9 @@ for information about a particular member using <code>[PTPusherChannel infoForMe
 			<dd><p>The presence channel that was subscribed to.</p></dd>
 		</dl>
 		
-		<dl class="argument-def parameter-def">
-			<dt><em>memberID</em></dt>
-			<dd><p>The ID of the member removed.</p></dd>
-		</dl>
-		
-		<dl class="argument-def parameter-def">
-			<dt><em>index</em></dt>
-			<dd><p>The internal index of the member (depends on the order joined/left or returned in the server member list)</p></dd>
-		</dl>
-		
 	</div>
+	
+	
 	
 	
 	
@@ -313,9 +453,11 @@ for information about a particular member using <code>[PTPusherChannel infoForMe
 	
 	<div class="method-subsection discussion-section">
 		<h4 class="method-subtitle">Discussion</h4>
-		<p>Notifies the delegate that a member subscribed to the presence channel has unsubscribed.</p>
+		<p>Notifies the delegate that the presence channel subscribed successfully.</p>
 
-<p>The member data can contain arbitrary user data returned by the authorization server.</p>
+<p>Whenever you subscribe to a presence channel, a list of current subscribers will be returned by Pusher.</p>
+
+<p>The members list can be accessed using the <code>members</code> property on the channel.</p>
 	</div>
 	
 	
@@ -345,9 +487,9 @@ for information about a particular member using <code>[PTPusherChannel infoForMe
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2012 Luke Redpath. All rights reserved. (Last updated: 2012-02-01)</span><br />
+						<p><span class="copyright">&copy; 2013 Luke Redpath. All rights reserved. (Last updated: 2013-12-06)</span><br />
 						
-						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.0.4 (build 698)</a>.</span></p>
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2 (build 963)</a>.</span></p>
 						
 					</div>
 				</div>

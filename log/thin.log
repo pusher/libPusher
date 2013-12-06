@@ -1,0 +1,679 @@
+>> Writing PID to Scripts/auth_server.pid
+>> Exiting!
+/Users/luke/Code/mine/libPusher/Scripts/auth_server.rb:8:in `load': no such file to load -- /Users/luke/Code/mine/libPusher/Scripts/auth_credentials.rb (LoadError)
+	from /Users/luke/Code/mine/libPusher/Scripts/auth_server.rb:8:in `<top (required)>'
+	from Scripts/auth_server.ru:1:in `require'
+	from Scripts/auth_server.ru:1:in `block in <main>'
+	from /Users/luke/.rvm/gems/ruby-1.9.2-p180/gems/rack-1.4.1/lib/rack/builder.rb:51:in `instance_eval'
+	from /Users/luke/.rvm/gems/ruby-1.9.2-p180/gems/rack-1.4.1/lib/rack/builder.rb:51:in `initialize'
+	from Scripts/auth_server.ru:1:in `new'
+	from Scripts/auth_server.ru:1:in `<main>'
+	from /Users/luke/.rvm/gems/ruby-1.9.2-p180/gems/thin-1.3.1/lib/rack/adapter/loader.rb:36:in `eval'
+	from /Users/luke/.rvm/gems/ruby-1.9.2-p180/gems/thin-1.3.1/lib/rack/adapter/loader.rb:36:in `load'
+	from /Users/luke/.rvm/gems/ruby-1.9.2-p180/gems/thin-1.3.1/lib/thin/controllers/controller.rb:181:in `load_rackup_config'
+	from /Users/luke/.rvm/gems/ruby-1.9.2-p180/gems/thin-1.3.1/lib/thin/controllers/controller.rb:71:in `start'
+	from /Users/luke/.rvm/gems/ruby-1.9.2-p180/gems/thin-1.3.1/lib/thin/runner.rb:185:in `run_command'
+	from /Users/luke/.rvm/gems/ruby-1.9.2-p180/gems/thin-1.3.1/lib/thin/runner.rb:151:in `run!'
+	from /Users/luke/.rvm/gems/ruby-1.9.2-p180/gems/thin-1.3.1/bin/thin:6:in `<top (required)>'
+	from /Users/luke/.rvm/gems/ruby-1.9.2-p180/bin/thin:19:in `load'
+	from /Users/luke/.rvm/gems/ruby-1.9.2-p180/bin/thin:19:in `<main>'
+>> Writing PID to Scripts/auth_server.pid
+>> Thin web server (v1.3.1 codename Triple Espresso)
+>> Maximum connections set to 1024
+>> Listening on 0.0.0.0:9292, CTRL+C to stop
+>> Authenticating presence channel:presence-demo socket:4066.639777
+>> Authenticated (4 users remaining)
+>> Authenticating presence channel:presence-demo socket:4062.640313
+>> Authenticated (3 users remaining)
+>> Authenticating presence channel:presence-demo socket:4175.455262
+>> Authenticated (2 users remaining)
+>> Authenticating presence channel:presence-demo socket:4076.639938
+>> Authenticated (1 users remaining)
+>> Authenticating presence channel:presence-demo socket:4165.635558
+>> Authenticated (0 users remaining)
+>> Authenticating presence channel:presence-demo socket:4069.640699
+>> Authentication failed, no users available.
+>> Authenticating presence channel:presence-demo socket:4152.636457
+>> Authentication failed, no users available.
+>> Authenticating presence channel:presence-demo socket:4092.639084
+>> Authentication failed, no users available.
+>> Authenticating presence channel:presence-demo socket:4087.640186
+>> Authentication failed, no users available.
+>> Authenticating presence channel:presence-demo socket:4090.639607
+>> Authentication failed, no users available.
+>> Stopping ...
+>> Exiting!
+>> Writing PID to Scripts/auth_server.pid
+>> Thin web server (v1.3.1 codename Triple Espresso)
+>> Maximum connections set to 1024
+>> Listening on 0.0.0.0:9292, CTRL+C to stop
+>> Authenticating private channel:private-secret-channel socket:4532.62634
+>> Authenticating private channel:private-secret-channel socket:4473.65368
+>> Authenticating private channel:private-secret-channel socket:4453.66078
+>> Authenticating private channel:private-secret-channel socket:4532.63134
+>> Authenticating private channel:private-secret-channel socket:4466.66429
+>> Authenticating private channel:private-secret-channel socket:4494.65260
+>> Authenticating private channel:private-secret-channel socket:4523.63978
+>> Authenticating private channel:private-secret-channel socket:4474.66083
+>> Authenticating private channel:private-secret-channel socket:4475.66343
+>> Authenticating private channel:private-secret-channel socket:4515.64990
+>> Authenticating private channel:private-secret-channel socket:4453.66998
+>> Authenticating private channel:private-secret-channel socket:4484.66074
+>> Authenticating private channel:private-secret-channel socket:4521.64793
+>> Authenticating private channel:private-secret-channel socket:4511.65349
+>> Authenticating private channel:private-secret-channel socket:4461.67265
+>> Authenticating private channel:private-secret-channel socket:4524.64746
+>> Authenticating private channel:private-secret-channel-2 socket:4527.64777
+>> Authenticating private channel:private-secret-channel-3 socket:4527.64777
+>> Authenticating private channel:private-secret-channel-0 socket:4527.64777
+>> Authenticating private channel:private-secret-channel-4 socket:4527.64777
+>> Authenticating private channel:private-secret-channel-1 socket:4527.64777
+>> Authenticating private channel:private-secret-channel-5 socket:4527.64777
+>> Authenticating private channel:private-secret-channel socket:4474.66609
+>> Authenticating private channel:private-secret-channel-2 socket:4515.65440
+>> Authenticating private channel:private-secret-channel-9 socket:4515.65440
+>> Authenticating private channel:private-secret-channel-3 socket:4515.65440
+>> Authenticating private channel:private-secret-channel-10 socket:4515.65440
+>> Authenticating private channel:private-secret-channel-4 socket:4515.65440
+>> Authenticating private channel:private-secret-channel-5 socket:4515.65440
+>> Authenticating private channel:private-secret-channel-6 socket:4515.65440
+>> Authenticating private channel:private-secret-channel-0 socket:4515.65440
+>> Authenticating private channel:private-secret-channel-7 socket:4515.65440
+>> Authenticating private channel:private-secret-channel-1 socket:4515.65440
+>> Authenticating private channel:private-secret-channel-8 socket:4515.65440
+>> Authenticating private channel:private-secret-channel socket:4477.66434
+>> Authenticating private channel:private-secret-channel-2 socket:4526.64847
+>> Authenticating private channel:private-secret-channel-3 socket:4526.64847
+>> Authenticating private channel:private-secret-channel socket:4518.65142
+>> Authenticating private channel:private-secret-channel-2 socket:4511.65561
+>> Authenticating private channel:private-secret-channel-3 socket:4511.65561
+>> Authenticating private channel:private-secret-channel socket:4499.65917
+>> Authenticating private channel:private-secret-channel-2 socket:4462.67588
+>> Authenticating private channel:private-secret-channel-3 socket:4462.67588
+>> Authenticating private channel:private-secret-channel socket:4524.65063
+>> Authenticating private channel:private-secret-channel-2 socket:4521.65314
+>> Authenticating private channel:private-secret-channel-3 socket:4521.65314
+>> Authenticating private channel:private-secret-channel socket:4494.66150
+>> Authenticating private channel:private-secret-channel-2 socket:4525.65058
+>> Authenticating private channel:private-secret-channel-3 socket:4525.65058
+>> Authenticating private channel:private-secret-channel-0 socket:4525.65058
+>> Authenticating private channel:private-secret-channel-4 socket:4525.65058
+>> Authenticating private channel:private-secret-channel-1 socket:4525.65058
+>> Authenticating private channel:private-secret-channel-5 socket:4525.65058
+>> Authenticating private channel:private-secret-channel socket:4534.64862
+>> Authenticating private channel:private-secret-channel-2 socket:4530.64369
+>> Authenticating private channel:private-secret-channel-3 socket:4530.64369
+>> Authenticating private channel:private-secret-channel-0 socket:4530.64369
+>> Authenticating private channel:private-secret-channel-4 socket:4530.64369
+>> Authenticating private channel:private-secret-channel-1 socket:4530.64369
+>> Authenticating private channel:private-secret-channel socket:4542.64676
+>> Authenticating private channel:private-secret-channel-2 socket:4518.65505
+>> Authenticating private channel:private-secret-channel-3 socket:4518.65505
+>> Authenticating private channel:private-secret-channel socket:4519.65796
+>> Authenticating private channel:private-secret-channel-2 socket:4487.66838
+>> Authenticating private channel:private-secret-channel-3 socket:4487.66838
+>> Authenticating private channel:private-secret-channel socket:4492.66372
+>> Authenticating private channel:private-secret-channel-2 socket:4515.66172
+>> Authenticating private channel:private-secret-channel-3 socket:4515.66172
+>> Authenticating private channel:private-secret-channel socket:4536.64839
+>> Authenticating private channel:private-secret-channel-2 socket:4533.65540
+>> Authenticating private channel:private-secret-channel-3 socket:4533.65540
+>> Authenticating private channel:private-secret-channel socket:4461.68317
+>> Authenticating private channel:private-secret-channel-2 socket:4500.66717
+>> Authenticating private channel:private-secret-channel-3 socket:4500.66717
+>> Authenticating private channel:private-secret-channel socket:4517.66012
+>> Authenticating private channel:private-secret-channel-2 socket:4510.66275
+>> Authenticating private channel:private-secret-channel-3 socket:4510.66275
+>> Authenticating private channel:private-secret-channel socket:4528.65746
+>> Authenticating private channel:private-secret-channel-2 socket:4532.65407
+>> Authenticating private channel:private-secret-channel-3 socket:4532.65407
+>> Authenticating private channel:private-secret-channel socket:4537.65369
+>> Authenticating private channel:private-secret-channel-2 socket:4528.65841
+>> Authenticating private channel:private-secret-channel-3 socket:4528.65841
+>> Authenticating private channel:private-secret-channel socket:4519.66342
+>> Authenticating private channel:private-secret-channel-2 socket:4540.65092
+>> Authenticating private channel:private-secret-channel-3 socket:4540.65092
+>> Authenticating private channel:private-secret-channel socket:4511.67020
+>> Authenticating private channel:private-secret-channel-2 socket:4515.66921
+>> Authenticating private channel:private-secret-channel-3 socket:4515.66921
+>> Authenticating private channel:private-secret-channel socket:4497.67268
+>> Authenticating private channel:private-secret-channel-2 socket:4516.67060
+>> Authenticating private channel:private-secret-channel-3 socket:4516.67060
+>> Authenticating private channel:private-secret-channel-0 socket:4516.67060
+>> Authenticating private channel:private-secret-channel-4 socket:4516.67060
+>> Authenticating private channel:private-secret-channel-1 socket:4516.67060
+>> Authenticating private channel:private-secret-channel socket:4499.67458
+>> Authenticating private channel:private-secret-channel-2 socket:4456.69731
+>> Authenticating private channel:private-secret-channel-3 socket:4456.69731
+>> Authenticating private channel:private-secret-channel-0 socket:4456.69731
+>> Authenticating private channel:private-secret-channel-4 socket:4456.69731
+>> Authenticating private channel:private-secret-channel-1 socket:4456.69731
+>> Authenticating private channel:private-secret-channel socket:4529.66201
+>> Authenticating private channel:private-secret-channel-2 socket:4514.66892
+>> Authenticating private channel:private-secret-channel-3 socket:4514.66892
+>> Authenticating private channel:private-secret-channel-0 socket:4514.66892
+>> Authenticating private channel:private-secret-channel-4 socket:4514.66892
+>> Authenticating private channel:private-secret-channel-1 socket:4514.66892
+>> Exiting!
+>> Writing PID to Scripts/auth_server.pid
+>> Thin web server (v1.3.1 codename Triple Espresso)
+>> Maximum connections set to 1024
+>> Listening on 0.0.0.0:9292, CTRL+C to stop
+>> Authenticating private channel:private-secret-channel socket:6442.403953
+>> Authenticating private channel:private-secret-channel-2 socket:6416.404467
+>> Authenticating private channel:private-secret-channel-3 socket:6416.404467
+>> Authenticating private channel:private-secret-channel-0 socket:6416.404467
+>> Authenticating private channel:private-secret-channel-4 socket:6416.404467
+>> Authenticating private channel:private-secret-channel-1 socket:6416.404467
+>> Stopping ...
+>> Exiting!
+>> Writing PID to Scripts/auth_server.pid
+>> Thin web server (v1.3.1 codename Triple Espresso)
+>> Maximum connections set to 1024
+>> Listening on 0.0.0.0:9292, CTRL+C to stop
+>> Authenticating private channel:private-secret-channel socket:7004.778277
+>> Authenticating private channel:private-secret-channel-2 socket:7015.777601
+>> Authenticating private channel:private-secret-channel-3 socket:7015.777601
+>> Authenticating private channel:private-secret-channel-0 socket:7015.777601
+>> Authenticating private channel:private-secret-channel-4 socket:7015.777601
+>> Authenticating private channel:private-secret-channel-1 socket:7015.777601
+>> Authenticating private channel:private-secret-channel socket:7055.776331
+>> Authenticating private channel:private-secret-channel-2 socket:7076.776073
+>> Authenticating private channel:private-secret-channel-3 socket:7076.776073
+>> Authenticating private channel:private-secret-channel-0 socket:7076.776073
+>> Authenticating private channel:private-secret-channel-4 socket:7076.776073
+>> Authenticating private channel:private-secret-channel-1 socket:7076.776073
+>> Authenticating private channel:private-secret-channel socket:7053.775676
+>> Authenticating private channel:private-secret-channel-2 socket:7024.777028
+>> Authenticating private channel:private-secret-channel-3 socket:7024.777028
+>> Authenticating private channel:private-secret-channel-0 socket:7024.777028
+>> Authenticating private channel:private-secret-channel-4 socket:7024.777028
+>> Authenticating private channel:private-secret-channel-1 socket:7024.777028
+>> Authenticating private channel:private-secret-channel-0 socket:7050.784534
+>> Authenticating private channel:private-secret-channel-1 socket:7050.784534
+>> Authenticating private channel:private-secret-channel-2 socket:7050.784534
+>> Authenticating private channel:private-secret-channel-3 socket:7050.784534
+>> Authenticating private channel:private-secret-channel-4 socket:7050.784534
+>> Authenticating private channel:private-secret-channel-2 socket:7050.784534
+>> Authenticating private channel:private-secret-channel socket:7065.783534
+>> Authenticating private channel:private-secret-channel socket:7065.783534
+>> Authenticating private channel:private-secret-channel-0 socket:7033.784555
+>> Authenticating private channel:private-secret-channel-1 socket:7033.784555
+>> Authenticating private channel:private-secret-channel-2 socket:7033.784555
+>> Authenticating private channel:private-secret-channel-3 socket:7033.784555
+>> Authenticating private channel:private-secret-channel-4 socket:7033.784555
+>> Authenticating private channel:private-secret-channel-2 socket:7033.784555
+>> Authenticating private channel:private-secret-channel socket:7055.784411
+>> Authenticating private channel:private-secret-channel socket:7055.784411
+>> Authenticating private channel:private-secret-channel-0 socket:7025.785665
+>> Authenticating private channel:private-secret-channel-1 socket:7025.785665
+>> Authenticating private channel:private-secret-channel-2 socket:7025.785665
+>> Authenticating private channel:private-secret-channel-3 socket:7025.785665
+>> Authenticating private channel:private-secret-channel-4 socket:7025.785665
+>> Authenticating private channel:private-secret-channel-2 socket:7025.785665
+>> Authenticating private channel:private-secret-channel socket:7057.784972
+>> Authenticating private channel:private-secret-channel socket:7057.784972
+>> Authenticating private channel:private-secret-channel-0 socket:7041.785369
+>> Authenticating private channel:private-secret-channel-1 socket:7041.785369
+>> Authenticating private channel:private-secret-channel-2 socket:7041.785369
+>> Authenticating private channel:private-secret-channel-3 socket:7041.785369
+>> Authenticating private channel:private-secret-channel socket:7063.783747
+>> Authenticating private channel:private-secret-channel socket:7063.783747
+>> Authenticating private channel:private-secret-channel-0 socket:7020.786404
+>> Authenticating private channel:private-secret-channel-1 socket:7020.786404
+>> Authenticating private channel:private-secret-channel-2 socket:7020.786404
+>> Authenticating private channel:private-secret-channel-3 socket:7020.786404
+>> Authenticating private channel:private-secret-channel-4 socket:7020.786404
+>> Authenticating private channel:private-secret-channel-2 socket:7020.786404
+>> Authenticating private channel:private-secret-channel socket:7013.787493
+>> Authenticating private channel:private-secret-channel socket:7013.787493
+>> Authenticating private channel:private-secret-channel-0 socket:7028.785785
+>> Authenticating private channel:private-secret-channel-1 socket:7028.785785
+>> Authenticating private channel:private-secret-channel-2 socket:7028.785785
+>> Authenticating private channel:private-secret-channel-3 socket:7028.785785
+>> Authenticating private channel:private-secret-channel-4 socket:7028.785785
+>> Authenticating private channel:private-secret-channel-2 socket:7028.785785
+>> Authenticating private channel:private-secret-channel socket:7012.785977
+>> Authenticating private channel:private-secret-channel socket:7012.785977
+>> Authenticating private channel:private-secret-channel-0 socket:7017.785564
+>> Authenticating private channel:private-secret-channel-1 socket:7017.785564
+>> Authenticating private channel:private-secret-channel-2 socket:7017.785564
+>> Authenticating private channel:private-secret-channel-3 socket:7017.785564
+>> Authenticating private channel:private-secret-channel-4 socket:7017.785564
+>> Authenticating private channel:private-secret-channel-2 socket:7017.785564
+>> Authenticating private channel:private-secret-channel socket:7078.784192
+>> Authenticating private channel:private-secret-channel socket:7078.784192
+>> Authenticating private channel:private-secret-channel-0 socket:7058.785453
+>> Authenticating private channel:private-secret-channel-1 socket:7058.785453
+>> Authenticating private channel:private-secret-channel-2 socket:7058.785453
+>> Authenticating private channel:private-secret-channel-3 socket:7058.785453
+>> Authenticating private channel:private-secret-channel-4 socket:7058.785453
+>> Authenticating private channel:private-secret-channel-2 socket:7058.785453
+>> Authenticating private channel:private-secret-channel socket:7069.784928
+>> Authenticating private channel:private-secret-channel socket:7069.784928
+>> Authenticating private channel:private-secret-channel-0 socket:7015.786503
+>> Authenticating private channel:private-secret-channel-1 socket:7015.786503
+>> Authenticating private channel:private-secret-channel-2 socket:7015.786503
+>> Authenticating private channel:private-secret-channel-3 socket:7015.786503
+>> Authenticating private channel:private-secret-channel-4 socket:7015.786503
+>> Authenticating private channel:private-secret-channel-2 socket:7015.786503
+>> Authenticating private channel:private-secret-channel socket:7028.786039
+>> Authenticating private channel:private-secret-channel socket:7028.786039
+>> Authenticating private channel:private-secret-channel-0 socket:7038.786217
+>> Authenticating private channel:private-secret-channel-1 socket:7038.786217
+>> Authenticating private channel:private-secret-channel-2 socket:7038.786217
+>> Authenticating private channel:private-secret-channel-3 socket:7038.786217
+>> Authenticating private channel:private-secret-channel-4 socket:7038.786217
+>> Authenticating private channel:private-secret-channel-2 socket:7038.786217
+>> Authenticating private channel:private-secret-channel socket:6997.787699
+>> Authenticating private channel:private-secret-channel socket:6997.787699
+>> Authenticating private channel:private-secret-channel-0 socket:7018.787123
+>> Authenticating private channel:private-secret-channel-1 socket:7018.787123
+>> Authenticating private channel:private-secret-channel-2 socket:7018.787123
+>> Authenticating private channel:private-secret-channel-3 socket:7018.787123
+>> Authenticating private channel:private-secret-channel-4 socket:7018.787123
+>> Authenticating private channel:private-secret-channel-2 socket:7018.787123
+>> Authenticating private channel:private-secret-channel socket:7028.786149
+>> Authenticating private channel:private-secret-channel socket:7028.786149
+>> Authenticating private channel:private-secret-channel-0 socket:7061.784554
+>> Authenticating private channel:private-secret-channel-1 socket:7061.784554
+>> Authenticating private channel:private-secret-channel-2 socket:7061.784554
+>> Authenticating private channel:private-secret-channel-3 socket:7061.784554
+>> Authenticating private channel:private-secret-channel-4 socket:7061.784554
+>> Authenticating private channel:private-secret-channel-2 socket:7061.784554
+>> Authenticating private channel:private-secret-channel socket:7076.784988
+>> Authenticating private channel:private-secret-channel socket:7076.784988
+>> Authenticating private channel:private-secret-channel-0 socket:7026.786784
+>> Authenticating private channel:private-secret-channel-1 socket:7026.786784
+>> Authenticating private channel:private-secret-channel-2 socket:7026.786784
+>> Authenticating private channel:private-secret-channel-3 socket:7026.786784
+>> Authenticating private channel:private-secret-channel-4 socket:7026.786784
+>> Authenticating private channel:private-secret-channel-2 socket:7026.786784
+>> Authenticating private channel:private-secret-channel socket:7063.784376
+>> Authenticating private channel:private-secret-channel socket:7063.784376
+>> Authenticating private channel:private-secret-channel-0 socket:7065.784690
+>> Authenticating private channel:private-secret-channel-1 socket:7065.784690
+>> Authenticating private channel:private-secret-channel socket:7034.785992
+>> Authenticating private channel:private-secret-channel socket:7034.785992
+>> Authenticating private channel:private-secret-channel-0 socket:7038.786902
+>> Authenticating private channel:private-secret-channel-1 socket:7038.786902
+>> Authenticating private channel:private-secret-channel-2 socket:7038.786902
+>> Authenticating private channel:private-secret-channel-3 socket:7038.786902
+>> Authenticating private channel:private-secret-channel-4 socket:7038.786902
+>> Authenticating private channel:private-secret-channel-2 socket:7038.786902
+>> Authenticating private channel:private-secret-channel socket:7058.786423
+>> Authenticating private channel:private-secret-channel socket:7058.786423
+>> Authenticating private channel:private-secret-channel-0 socket:7026.787466
+>> Authenticating private channel:private-secret-channel-1 socket:7026.787466
+>> Authenticating private channel:private-secret-channel-2 socket:7026.787466
+>> Authenticating private channel:private-secret-channel-3 socket:7026.787466
+>> Authenticating private channel:private-secret-channel-4 socket:7026.787466
+>> Authenticating private channel:private-secret-channel-2 socket:7026.787466
+>> Authenticating private channel:private-secret-channel socket:7035.787187
+>> Authenticating private channel:private-secret-channel socket:7035.787187
+>> Authenticating private channel:private-secret-channel-0 socket:6997.788582
+>> Authenticating private channel:private-secret-channel socket:7017.786916
+>> Authenticating private channel:private-secret-channel socket:7017.786916
+>> Authenticating private channel:private-secret-channel-0 socket:7066.786115
+>> Authenticating private channel:private-secret-channel-1 socket:7066.786115
+>> Authenticating private channel:private-secret-channel-2 socket:7066.786115
+>> Authenticating private channel:private-secret-channel-3 socket:7066.786115
+>> Authenticating private channel:private-secret-channel-4 socket:7066.786115
+>> Authenticating private channel:private-secret-channel-2 socket:7066.786115
+>> Authenticating private channel:private-secret-channel-3 socket:7066.786115
+>> Authenticating private channel:private-secret-channel-0 socket:7066.786115
+>> Authenticating private channel:private-secret-channel socket:7007.788058
+>> Authenticating private channel:private-secret-channel socket:7007.788058
+>> Authenticating private channel:private-secret-channel-0 socket:7055.786345
+>> Authenticating private channel:private-secret-channel-1 socket:7055.786345
+>> Authenticating private channel:private-secret-channel-2 socket:7055.786345
+>> Authenticating private channel:private-secret-channel-3 socket:7055.786345
+>> Authenticating private channel:private-secret-channel-4 socket:7055.786345
+>> Authenticating private channel:private-secret-channel-2 socket:7055.786345
+>> Authenticating private channel:private-secret-channel-3 socket:7055.786345
+>> Authenticating private channel:private-secret-channel-0 socket:7055.786345
+>> Users reset.
+>> Stopping ...
+>> Exiting!
+>> Writing PID to Scripts/auth_server.pid
+>> Thin web server (v1.3.1 codename Triple Espresso)
+>> Maximum connections set to 1024
+>> Listening on 0.0.0.0:9292, CTRL+C to stop
+>> Stopping ...
+>> Exiting!
+>> Writing PID to Scripts/auth_server.pid
+>> Thin web server (v1.3.1 codename Triple Espresso)
+>> Maximum connections set to 1024
+>> Listening on 0.0.0.0:9292, CTRL+C to stop
+>> Authenticating presence channel:presence-demo socket:7415.1219235
+>> Authenticated (4 users remaining)
+>> Authenticating presence channel:presence-demo socket:7415.1219235
+>> Authenticated (3 users remaining)
+>> Authenticating presence channel:presence-demo socket:7415.1219235
+>> Authenticated (2 users remaining)
+>> Authenticating presence channel:presence-demo socket:7382.1219918
+>> Authenticated (1 users remaining)
+>> Authenticating presence channel:presence-demo socket:7382.1219918
+>> Authenticated (0 users remaining)
+>> Authenticating presence channel:presence-demo socket:7382.1219918
+>> Authentication failed, no users available.
+>> Users reset.
+>> Authenticating presence channel:presence-demo socket:7517.1211770
+>> Authenticated (4 users remaining)
+>> Authenticating presence channel:presence-demo socket:7517.1211770
+>> Authenticated (3 users remaining)
+>> Stopping ...
+>> Exiting!
+>> Writing PID to Scripts/auth_server.pid
+>> Thin web server (v1.3.1 codename Triple Espresso)
+>> Maximum connections set to 1024
+>> Listening on 0.0.0.0:9292, CTRL+C to stop
+>> Authenticating private channel:private-secret-channel socket:7458.1378155
+>> Authenticating private channel:private-secret-channel socket:7458.1378155
+>> Authenticating private channel:private-secret-channel-0 socket:7529.64317
+>> Authenticating private channel:private-secret-channel-1 socket:7529.64317
+>> Authenticating private channel:private-secret-channel-2 socket:7529.64317
+>> Authenticating private channel:private-secret-channel-3 socket:7529.64317
+>> Authenticating private channel:private-secret-channel-4 socket:7529.64317
+>> Authenticating private channel:private-secret-channel-2 socket:7529.64317
+>> Authenticating private channel:private-secret-channel-4 socket:7529.64317
+>> Authenticating private channel:private-secret-channel-0 socket:7529.64317
+>> Authenticating private channel:private-secret-channel-3 socket:7529.64317
+>> Authenticating private channel:private-secret-channel socket:7422.1378383
+>> Authenticating private channel:private-secret-channel socket:7422.1378383
+>> Authenticating private channel:private-secret-channel-0 socket:7450.1377624
+>> Authenticating private channel:private-secret-channel-1 socket:7450.1377624
+>> Authenticating private channel:private-secret-channel-2 socket:7450.1377624
+>> Authenticating private channel:private-secret-channel-3 socket:7450.1377624
+>> Authenticating private channel:private-secret-channel-4 socket:7450.1377624
+>> Authenticating private channel:private-secret-channel-2 socket:7450.1377624
+>> Authenticating private channel:private-secret-channel-3 socket:7450.1377624
+>> Authenticating private channel:private-secret-channel-4 socket:7450.1377624
+>> Authenticating private channel:private-secret-channel-0 socket:7450.1377624
+>> Authenticating private channel:private-secret-channel socket:7455.1378964
+>> Authenticating private channel:private-secret-channel socket:7455.1378964
+>> Authenticating private channel:private-secret-channel-0 socket:7406.1380238
+>> Authenticating private channel:private-secret-channel-1 socket:7406.1380238
+>> Authenticating private channel:private-secret-channel-2 socket:7406.1380238
+>> Authenticating private channel:private-secret-channel-3 socket:7406.1380238
+>> Authenticating private channel:private-secret-channel-4 socket:7406.1380238
+>> Authenticating private channel:private-secret-channel-2 socket:7406.1380238
+>> Authenticating private channel:private-secret-channel-4 socket:7406.1380238
+>> Authenticating private channel:private-secret-channel-0 socket:7406.1380238
+>> Authenticating private channel:private-secret-channel-3 socket:7406.1380238
+>> Exiting!
+>> Writing PID to Scripts/auth_server.pid
+>> Thin web server (v1.4.1 codename Chromeo)
+>> Maximum connections set to 1024
+>> Listening on 0.0.0.0:9292, CTRL+C to stop
+>> Authenticating private channel:private-secret-channel socket:10862.622634
+>> Authenticating private channel:private-secret-channel-0 socket:10920.621670
+>> Authenticating private channel:private-secret-channel-2 socket:10920.621670
+>> Authenticating private channel:private-secret-channel-1 socket:10920.621670
+>> Authenticating private channel:private-secret-channel-3 socket:10920.621670
+>> Authenticating private channel:private-secret-channel-4 socket:10920.621670
+>> Authenticating private channel:private-secret-channel-2 socket:10920.621670
+>> Authenticating private channel:private-secret-channel-3 socket:10920.621670
+>> Authenticating private channel:private-secret-channel-4 socket:10920.621670
+>> Authenticating private channel:private-secret-channel-0 socket:10920.621670
+>> Authenticating private channel:private-secret-channel-1 socket:10920.621670
+>> Stopping ...
+>> Exiting!
+>> Writing PID to Scripts/auth_server.pid
+>> Thin web server (v1.4.1 codename Chromeo)
+>> Maximum connections set to 1024
+>> Listening on 0.0.0.0:9292, CTRL+C to stop
+>> Authenticating private channel:private-secret-channel socket:12180.1686601
+>> Authenticating private channel:private-secret-channel-0 socket:12108.1687163
+>> Authenticating private channel:private-secret-channel-2 socket:12108.1687163
+>> Authenticating private channel:private-secret-channel-3 socket:12108.1687163
+>> Authenticating private channel:private-secret-channel-4 socket:12108.1687163
+>> Authenticating private channel:private-secret-channel-1 socket:12108.1687163
+>> Authenticating private channel:private-secret-channel-2 socket:12108.1687163
+>> Authenticating private channel:private-secret-channel-0 socket:12108.1687163
+>> Authenticating private channel:private-secret-channel-4 socket:12108.1687163
+>> Authenticating private channel:private-secret-channel-3 socket:12108.1687163
+>> Authenticating private channel:private-secret-channel-1 socket:12108.1687163
+>> Authenticating private channel:private-secret-channel socket:12044.1689667
+>> Authenticating private channel:private-secret-channel-1 socket:12073.1690227
+>> Authenticating private channel:private-secret-channel-0 socket:12073.1690227
+>> Authenticating private channel:private-secret-channel-2 socket:12073.1690227
+>> Authenticating private channel:private-secret-channel-3 socket:12073.1690227
+>> Authenticating private channel:private-secret-channel-4 socket:12073.1690227
+>> Authenticating private channel:private-secret-channel-2 socket:12073.1690227
+>> Authenticating private channel:private-secret-channel-3 socket:12073.1690227
+>> Authenticating private channel:private-secret-channel-0 socket:12073.1690227
+>> Authenticating private channel:private-secret-channel-4 socket:12073.1690227
+>> Authenticating private channel:private-secret-channel-1 socket:12073.1690227
+>> Stopping ...
+>> Exiting!
+>> Writing PID to Scripts/auth_server.pid
+>> Thin web server (v1.5.0 codename Knife)
+>> Maximum connections set to 1024
+>> Listening on 0.0.0.0:9292, CTRL+C to stop
+>> Authenticating private channel:private-secret-channel socket:17857.5708
+>> Authenticating private channel:private-secret-channel-0 socket:17879.5517
+>> Authenticating private channel:private-secret-channel-1 socket:17879.5517
+>> Authenticating private channel:private-secret-channel-2 socket:17879.5517
+>> Authenticating private channel:private-secret-channel-3 socket:17879.5517
+>> Authenticating private channel:private-secret-channel-4 socket:17879.5517
+>> Authenticating private channel:private-secret-channel-2 socket:17879.5517
+>> Authenticating private channel:private-secret-channel-0 socket:17879.5517
+>> Authenticating private channel:private-secret-channel-3 socket:17879.5517
+>> Authenticating private channel:private-secret-channel-4 socket:17879.5517
+>> Authenticating private channel:private-secret-channel socket:18913.3130
+>> Authenticating private channel:private-secret-channel-0 socket:18294.5632
+>> Authenticating private channel:private-secret-channel-1 socket:18294.5632
+>> Authenticating private channel:private-secret-channel-2 socket:18294.5632
+>> Authenticating private channel:private-secret-channel-3 socket:18294.5632
+>> Authenticating private channel:private-secret-channel-4 socket:18294.5632
+>> Authenticating private channel:private-secret-channel-2 socket:18294.5632
+>> Authenticating private channel:private-secret-channel-3 socket:18294.5632
+>> Authenticating private channel:private-secret-channel-0 socket:18294.5632
+>> Authenticating private channel:private-secret-channel-4 socket:18294.5632
+>> Authenticating private channel:private-secret-channel socket:19922.215541
+>> Authenticating private channel:private-secret-channel-0 socket:19869.215589
+>> Authenticating private channel:private-secret-channel-1 socket:19869.215589
+>> Authenticating private channel:private-secret-channel-2 socket:19869.215589
+>> Authenticating private channel:private-secret-channel-3 socket:19869.215589
+>> Authenticating private channel:private-secret-channel-4 socket:19869.215589
+>> Authenticating private channel:private-secret-channel-2 socket:19869.215589
+>> Authenticating private channel:private-secret-channel-3 socket:19869.215589
+>> Authenticating private channel:private-secret-channel-0 socket:19869.215589
+>> Authenticating private channel:private-secret-channel-4 socket:19869.215589
+>> Authenticating private channel:private-secret-channel-1 socket:19869.215589
+>> Exiting!
+>> Writing PID to Scripts/auth_server.pid
+>> Thin web server (v1.5.0 codename Knife)
+>> Maximum connections set to 1024
+>> Listening on 0.0.0.0:9292, CTRL+C to stop
+>> Authenticating private channel:private-secret-channel socket:27848.1280330
+>> Authenticating private channel:private-secret-channel-0 socket:27828.1282207
+>> Authenticating private channel:private-secret-channel-2 socket:27828.1282207
+>> Authenticating private channel:private-secret-channel-1 socket:27828.1282207
+>> Authenticating private channel:private-secret-channel-3 socket:27828.1282207
+>> Authenticating private channel:private-secret-channel-4 socket:27828.1282207
+>> Authenticating private channel:private-secret-channel-2 socket:27828.1282207
+>> Authenticating private channel:private-secret-channel-3 socket:27828.1282207
+>> Authenticating private channel:private-secret-channel-0 socket:27828.1282207
+>> Authenticating private channel:private-secret-channel-4 socket:27828.1282207
+>> Authenticating private channel:private-secret-channel socket:28062.546360
+>> Authenticating private channel:private-secret-channel-0 socket:28026.547787
+>> Authenticating private channel:private-secret-channel-1 socket:28026.547787
+>> Authenticating private channel:private-secret-channel-3 socket:28026.547787
+>> Authenticating private channel:private-secret-channel-4 socket:28026.547787
+>> Authenticating private channel:private-secret-channel-2 socket:28026.547787
+>> Authenticating private channel:private-secret-channel-2 socket:28026.547787
+>> Authenticating private channel:private-secret-channel-3 socket:28026.547787
+>> Authenticating private channel:private-secret-channel-0 socket:28026.547787
+>> Authenticating private channel:private-secret-channel-4 socket:28026.547787
+>> Authenticating private channel:private-secret-channel socket:28017.654127
+>> Authenticating private channel:private-secret-channel-0 socket:27730.658824
+>> Authenticating private channel:private-secret-channel-1 socket:27730.658824
+>> Authenticating private channel:private-secret-channel-2 socket:27730.658824
+>> Authenticating private channel:private-secret-channel-3 socket:27730.658824
+>> Authenticating private channel:private-secret-channel-4 socket:27730.658824
+>> Authenticating private channel:private-secret-channel-2 socket:27730.658824
+>> Authenticating private channel:private-secret-channel-3 socket:27730.658824
+>> Authenticating private channel:private-secret-channel-0 socket:27730.658824
+>> Authenticating private channel:private-secret-channel-4 socket:27730.658824
+>> Authenticating private channel:private-secret-channel socket:27959.430745
+>> Authenticating private channel:private-secret-channel-0 socket:27936.431612
+>> Authenticating private channel:private-secret-channel-1 socket:27936.431612
+>> Authenticating private channel:private-secret-channel-4 socket:27936.431612
+>> Authenticating private channel:private-secret-channel-2 socket:27936.431612
+>> Authenticating private channel:private-secret-channel-3 socket:27936.431612
+>> Authenticating private channel:private-secret-channel-2 socket:27936.431612
+>> Authenticating private channel:private-secret-channel-0 socket:27936.431612
+>> Authenticating private channel:private-secret-channel-3 socket:27936.431612
+>> Authenticating private channel:private-secret-channel-4 socket:27936.431612
+>> Authenticating private channel:private-secret-channel socket:28084.658176
+>> Authenticating private channel:private-secret-channel-0 socket:27934.661493
+>> Authenticating private channel:private-secret-channel-1 socket:27934.661493
+>> Authenticating private channel:private-secret-channel-4 socket:27934.661493
+>> Authenticating private channel:private-secret-channel-3 socket:27934.661493
+>> Authenticating private channel:private-secret-channel-2 socket:27934.661493
+>> Authenticating private channel:private-secret-channel-2 socket:27934.661493
+>> Authenticating private channel:private-secret-channel-0 socket:27934.661493
+>> Authenticating private channel:private-secret-channel-3 socket:27934.661493
+>> Authenticating private channel:private-secret-channel-1 socket:27934.661493
+>> Authenticating private channel:private-secret-channel socket:28086.660189
+>> Authenticating private channel:private-secret-channel socket:28086.660189
+>> Authenticating private channel:private-secret-channel-0 socket:28061.660311
+>> Authenticating private channel:private-secret-channel-2 socket:28061.660311
+>> Authenticating private channel:private-secret-channel-4 socket:28061.660311
+>> Authenticating private channel:private-secret-channel-1 socket:28061.660311
+>> Authenticating private channel:private-secret-channel-3 socket:28061.660311
+>> Authenticating private channel:private-secret-channel-2 socket:28061.660311
+>> Authenticating private channel:private-secret-channel-3 socket:28061.660311
+>> Authenticating private channel:private-secret-channel-1 socket:28061.660311
+>> Authenticating private channel:private-secret-channel-0 socket:28061.660311
+>> Authenticating private channel:private-secret-channel-4 socket:28061.660311
+>> Authenticating private channel:private-secret-channel socket:27974.432031
+>> Authenticating private channel:private-secret-channel-1 socket:28021.431443
+>> Authenticating private channel:private-secret-channel-3 socket:28021.431443
+>> Authenticating private channel:private-secret-channel-0 socket:28021.431443
+>> Authenticating private channel:private-secret-channel-2 socket:28021.431443
+>> Authenticating private channel:private-secret-channel-4 socket:28021.431443
+>> Authenticating private channel:private-secret-channel-2 socket:28021.431443
+>> Authenticating private channel:private-secret-channel-3 socket:28021.431443
+>> Authenticating private channel:private-secret-channel-0 socket:28021.431443
+>> Authenticating private channel:private-secret-channel-4 socket:28021.431443
+!! Invalid request
+>> Stopping ...
+>> Exiting!
+>> Writing PID to Scripts/auth_server.pid
+>> Thin web server (v1.5.0 codename Knife)
+>> Maximum connections set to 1024
+>> Listening on 0.0.0.0:9292, CTRL+C to stop
+>> Authenticating private channel:private-secret-channel socket:31590.4044782
+>> Authenticating private channel:private-secret-channel-0 socket:31590.4044804
+>> Authenticating private channel:private-secret-channel-2 socket:31590.4044804
+>> Authenticating private channel:private-secret-channel-1 socket:31590.4044804
+>> Authenticating private channel:private-secret-channel-3 socket:31590.4044804
+>> Authenticating private channel:private-secret-channel-4 socket:31590.4044804
+>> Authenticating private channel:private-secret-channel-2 socket:31590.4044804
+>> Authenticating private channel:private-secret-channel-3 socket:31590.4044804
+>> Authenticating private channel:private-secret-channel-0 socket:31590.4044804
+>> Authenticating private channel:private-secret-channel-4 socket:31590.4044804
+>> Authenticating private channel:private-secret-channel-1 socket:31590.4044804
+>> Stopping ...
+>> Exiting!
+Writing PID to Scripts/auth_server.pid
+Thin web server (v1.6.1 codename Death Proof)
+Maximum connections set to 1024
+Listening on 0.0.0.0:9292, CTRL+C to stop
+>> Authenticating presence channel:presence-demo socket:32015.18941065
+>> Authenticated (4 users remaining)
+>> Authenticating presence channel:presence-demo socket:32088.6387518
+>> Authenticated (3 users remaining)
+>> Authenticating presence channel:presence-demo socket:32088.6387518
+>> Authenticated (2 users remaining)
+>> Authenticating presence channel:presence-demo socket:31951.20561530
+>> Authenticated (1 users remaining)
+>> Authenticating presence channel:presence-demo socket:31980.20418224
+>> Authenticated (0 users remaining)
+>> Authenticating presence channel:presence-demo socket:31984.16657828
+>> Authentication failed, no users available.
+Stopping ...
+Exiting!
+Writing PID to Scripts/auth_server.pid
+Thin web server (v1.6.1 codename Death Proof)
+Maximum connections set to 1024
+Listening on 0.0.0.0:9292, CTRL+C to stop
+>> Authenticating presence channel:presence-demo socket:31984.16657828
+>> Authenticated (4 users remaining)
+>> Authenticating presence channel:presence-demo socket:31984.16657828
+>> Authenticated (3 users remaining)
+>> Authenticating presence channel:presence-demo socket:31946.20701335
+>> Authenticated (2 users remaining)
+>> Authenticating presence channel:presence-demo socket:32012.19093357
+>> Authenticated (1 users remaining)
+>> Authenticating presence channel:presence-demo socket:31944.20666922
+>> Authenticated (0 users remaining)
+>> Authenticating presence channel:presence-demo socket:31949.20698742
+>> Authentication failed, no users available.
+>> Authenticating presence channel:presence-demo socket:32015.19100758
+>> Authentication failed, no users available.
+Stopping ...
+Exiting!
+Writing PID to Scripts/auth_server.pid
+Thin web server (v1.6.1 codename Death Proof)
+Maximum connections set to 1024
+Listening on 0.0.0.0:9292, CTRL+C to stop
+>> Authenticating presence channel:presence-demo socket:32015.19100758
+>> Authenticated (4 users remaining)
+>> Authenticating presence channel:presence-demo socket:31945.20728489
+>> Authenticated (3 users remaining)
+>> Authenticating presence channel:presence-demo socket:32095.6499835
+>> Authenticated (2 users remaining)
+>> Authenticating presence channel:presence-demo socket:31973.20557266
+>> Authenticated (1 users remaining)
+Stopping ...
+Exiting!
+Writing PID to Scripts/auth_server.pid
+Thin web server (v1.6.1 codename Death Proof)
+Maximum connections set to 1024
+Listening on 0.0.0.0:9292, CTRL+C to stop
+>> Authenticating presence channel:presence-demo socket:31973.20557266
+>> Authenticated (4 users remaining)
+>> Authenticating presence channel:presence-demo socket:31973.20557266
+>> Authenticated (3 users remaining)
+>> Authenticating presence channel:presence-demo socket:31981.21705816
+>> Authenticated (2 users remaining)
+Stopping ...
+Exiting!
+Writing PID to Scripts/auth_server.pid
+Thin web server (v1.6.1 codename Death Proof)
+Maximum connections set to 1024
+Listening on 0.0.0.0:9292, CTRL+C to stop
+>> Authenticating presence channel:presence-demo socket:32010.20276673
+>> Authenticated (4 users remaining)
+>> Authenticating presence channel:presence-demo socket:31953.17778458
+>> Authenticated (3 users remaining)
+>> Authenticating presence channel:presence-demo socket:31983.17632711
+>> Authenticated (2 users remaining)
+>> Authenticating presence channel:presence-demo socket:31983.17632711
+>> Authenticated (1 users remaining)
+>> Authenticating presence channel:presence-demo socket:31953.17778458
+>> Authenticated (0 users remaining)
+>> Authenticating presence channel:presence-demo socket:31983.17632711
+>> Authentication failed, no users available.
+Stopping ...
+Exiting!
+Writing PID to Scripts/auth_server.pid
+Thin web server (v1.6.1 codename Death Proof)
+Maximum connections set to 1024
+Listening on 0.0.0.0:9292, CTRL+C to stop
+>> Authenticating private channel:private-secret-channel socket:32607.8975967
+>> Authenticating private channel:private-secret-channel-0 socket:32571.9000856
+>> Authenticating private channel:private-secret-channel-1 socket:32571.9000856
+>> Authenticating private channel:private-secret-channel-2 socket:32571.9000856
+>> Authenticating private channel:private-secret-channel-3 socket:32571.9000856
+>> Authenticating private channel:private-secret-channel-4 socket:32571.9000856
+>> Authenticating private channel:private-secret-channel-2 socket:32571.9000856
+>> Authenticating private channel:private-secret-channel socket:32584.8984255
+>> Authenticating private channel:private-secret-channel-3 socket:32571.9000856
+>> Authenticating private channel:private-secret-channel-0 socket:32571.9000856
+>> Authenticating private channel:private-secret-channel-4 socket:32571.9000856
+>> Authenticating private channel:private-secret-channel-1 socket:32571.9000856
