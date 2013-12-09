@@ -76,7 +76,7 @@ PTPusherChannel *channel = [self.client subscribeToChannelNamed:@"chat"];
 
 This method will add the appropriate ```private-``` prefix to the channel name for you and return a channel cast to the correct PTPusherChannel subclass PTPusherPrivateChannel.
 
-Subscribing to private channels needs server-side authorisation. See section [Channel Authorisation](#channel-auth) for details.
+Subscribing to private channels needs server-side authorisation. See section [Channel Authorisation](#channel-authorisation) for details.
 
 ```objc
 // subscribe to private-chat channel
@@ -87,7 +87,7 @@ PTPusherPrivateChannel *private = [self.client subscribeToPrivateChannelNamed:@"
 
 This method will add the appropriate ```presence-``` prefix to the channel name for you and return a channel cast to the correct PTPusherChannel subclass PTPusherPresenceChannel.
 
-Subscribing to presence channels needs server-side authorisation. See section [Channel Authorisation](#channel-auth) for details.
+Subscribing to presence channels needs server-side authorisation. See section [Channel Authorisation](#channel-authorisation) for details.
 
 ```objc
 // subscribe to presence-chat channel
@@ -122,7 +122,7 @@ When the client reconnects, all previously subscribed channels will be resubcrib
 
 If you explicitly unsubscribe from a channel, **all event bindings will be removed and the client will remove the channel object from it's list of subscribed channels**. If no other code has a strong reference to the channel object, it will be deallocated. If you resubscribe to the channel, a new channel object will be created. You should bear this in mind if you maintain any strong references to a channel object in your application code.
 
-### <a id="channel-auth"></a>Channel authorisation
+### Channel authorisation
 
 Private and presence channels require server-side authorisation before they can connect. 
 
