@@ -42,7 +42,7 @@
   
   queryParameters[@"body_md5"] = [[bodyString MD5Hash] lowercaseString];
   queryParameters[@"auth_key"] = key;
-  queryParameters[@"auth_timestamp"] = @((double)time(NULL));
+  queryParameters[@"auth_timestamp"] = @([[NSDate date] timeIntervalSince1970]);
   queryParameters[@"auth_version"] = @"1.0";
   queryParameters[@"name"] = eventName;
   
