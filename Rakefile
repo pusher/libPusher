@@ -139,7 +139,6 @@ namespace :release do
     t.configuration = "Release"
     t.sdk = "iphoneos"
     t.formatter = XcodeBuild::Formatters::ProgressFormatter.new
-    t.arch = "'armv7 armv7s'"
     t.after_build { |build| copy_artefacts_from_build(build, :include_headers => true) }
     t.xcodebuild_log_path = XCODEBUILD_LOG
   end
@@ -149,7 +148,6 @@ namespace :release do
     t.scheme = "libPusher"
     t.configuration = "Release"
     t.sdk = "iphonesimulator"
-    t.arch = "i386"
     t.formatter = XcodeBuild::Formatters::ProgressFormatter.new
     t.after_build { |build| copy_artefacts_from_build(build) }
     t.xcodebuild_log_path = XCODEBUILD_LOG
