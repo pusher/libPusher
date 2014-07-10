@@ -1,4 +1,7 @@
 language: objective-c
+before_install:
+  - brew update
+  - brew upgrade xctool
 install: true
 env:
   matrix:
