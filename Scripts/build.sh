@@ -1,3 +1,3 @@
 #!/bin/sh
-sh Scripts/update-pods.sh
+bundle install
 bundle exec rake release:combined
