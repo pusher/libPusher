@@ -18,6 +18,7 @@
 #import "PTPusherChannel_Private.h"
 
 #define kPUSHER_HOST @"ws.pusherapp.com"
+#define kPUSHER_EU_HOST @"ws-eu.pusher.com"
 
 typedef NS_ENUM(NSUInteger, PTPusherAutoReconnectMode) {
   PTPusherAutoReconnectModeNoReconnect,
@@ -109,11 +110,23 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 
 + (id)pusherWithKey:(NSString *)key delegate:(id<PTPusherDelegate>)delegate encrypted:(BOOL)isEncrypted
 {
-  NSURL *serviceURL = PTPusherConnectionURL(kPUSHER_HOST, key, @"libPusher", isEncrypted);
-  PTPusherConnection *connection = [[PTPusherConnection alloc] initWithURL:serviceURL];
-  PTPusher *pusher = [[self alloc] initWithConnection:connection];
-  pusher.delegate = delegate;
-  return pusher;
+    return [self pusherWithKey:(NSString *)key delegate:(id<PTPusherDelegate>)delegate encrypted:(BOOL)isEncrypted cluster:(NSString *) nil];
+}
+
++ (id)pusherWithKey:(NSString *)key delegate:(id<PTPusherDelegate>)delegate encrypted:(BOOL)isEncrypted cluster:(NSString *) cluster
+{
+    NSString * hostURL;
+    if ([cluster isEqual:@"eu"]) {
+        hostURL = kPUSHER_EU_HOST;
+    } else {
+        hostURL = kPUSHER_HOST;
+    }
+    
+    NSURL *serviceURL = PTPusherConnectionURL(hostURL, key, @"libPusher", isEncrypted);
+    PTPusherConnection *connection = [[PTPusherConnection alloc] initWithURL:serviceURL];
+    PTPusher *pusher = [[self alloc] initWithConnection:connection];
+    pusher.delegate = delegate;
+    return pusher;
 }
 
 #pragma mark - Deprecated methods
