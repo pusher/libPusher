@@ -132,12 +132,22 @@ extern NSString *const PTPusherErrorUnderlyingEventKey;
 - (id)initWithConnection:(PTPusherConnection *)connection;
 
 /** Returns a new PTPusher instance with a connection configured with the given key.
- 
+
  @param key         Your application's API key. It can be found in the API Access section of your application within the Pusher user dashboard.
  @param delegate    The delegate for this instance
  @param isEncrypted If yes, a secure connection over SSL will be established.
  */
 + (id)pusherWithKey:(NSString *)key delegate:(id<PTPusherDelegate>)delegate encrypted:(BOOL)isEncrypted;
+
+/** Returns a new PTPusher instance with a connection configured with the given key and allows to set different cluster
+
+ @param key         Your application's API key. It can be found in the API Access section of your application within the Pusher user dashboard.
+ @param delegate    The delegate for this instance
+ @param isEncrypted If yes, a secure connection over SSL will be established.
+ @param cluster     If set, connects to the provided cluster
+ */
+
++ (id)pusherWithKey:(NSString *)key delegate:(id<PTPusherDelegate>)delegate encrypted:(BOOL)isEncrypted cluster:(NSString *) cluster;
 
 /** Returns a new PTPusher instance with an connection configured with the given key.
  
