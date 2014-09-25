@@ -22,12 +22,12 @@ PTPusher *newTestClientWithMockConnection(void)
   PTPusherMockConnection *mockConnection = [[PTPusherMockConnection alloc] init];
   PTPusher *client = [[PTPusher alloc] initWithConnection:mockConnection];
   client.delegate = [PTPusherClientTestHelperDelegate sharedInstance];
-  return [client retain];
+  return client;
 }
 
 PTPusher *newTestClientDisconnected(void) {
   PTPusher *client = [PTPusher pusherWithKey:PUSHER_API_KEY delegate:[PTPusherClientTestHelperDelegate sharedInstance] encrypted:NO];
-  return [client retain];
+  return client;
 }
 
 void enableClientDebugging(void)
@@ -131,7 +131,6 @@ void waitForClientToDisconnect(PTPusher *client)
     block();
   }
   else {
-    [connectedBlock release];
     connectedBlock = [block copy];
   }
 }
@@ -165,21 +164,19 @@ void waitForClientToDisconnect(PTPusher *client)
   }
   if (connectedBlock) {
     connectedBlock();
-
-    [connectedBlock release]; connectedBlock = nil;
+    connectedBlock = nil;
   }
   connected = YES;
 }
 
-- (void)pusher:(PTPusher *)pusher connectionDidDisconnect:(PTPusherConnection *)connection
+- (void)pusher:(PTPusher *)pusher connection:(PTPusherConnection *)connection didDisconnectWithError:(NSError *)error willAttemptReconnect:(BOOL)willAttemptReconnect
 {
   if (self.debugEnabled) {
     NSLog(@"[DEBUG] Client disconnected");
   }
   if (disconnectedBlock) {
     disconnectedBlock();
-    
-    [disconnectedBlock release]; disconnectedBlock = nil;
+    disconnectedBlock = nil;
   }
   connected = NO;
   connectedBlock = nil;
@@ -198,7 +195,7 @@ void waitForClientToDisconnect(PTPusher *client)
   onSubscribeBlock = nil;
 }
 
-- (void)pusher:(PTPusher *)pusher willAuthorizeChannelWithRequest:(NSMutableURLRequest *)request
+- (void)pusher:(PTPusher *)pusher willAuthorizeChannel:(PTPusherChannel *)channel withRequest:(NSMutableURLRequest *)request
 {
   if (onAuthorizationBlock) {
     onAuthorizationBlock(request);
@@ -238,12 +235,6 @@ void waitForClientToDisconnect(PTPusher *client)
     observers = [[NSMutableDictionary alloc] init];
   }
   return self;
-}
-
-- (void)dealloc 
-{
-  [observers release];
-  [super dealloc];
 }
 
 - (void)addObserverForNotificationName:(NSString *)notificationName object:(id)object 

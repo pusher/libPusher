@@ -36,7 +36,7 @@ describe(@"A pusher channel", ^{
       PTPusherChannel *channel = [client subscribeToChannelNamed:kTEST_CHANNEL];
       
       [channel bindToEventNamed:kTEST_EVENT_NAME handleWithBlock:^(PTPusherEvent *event) {
-        theEvent = [event retain];
+        theEvent = event;
       }];
       
       onConnect(^{
@@ -52,7 +52,7 @@ describe(@"A pusher channel", ^{
       [client subscribeToChannelNamed:kTEST_CHANNEL];
       
       [client bindToEventNamed:kTEST_EVENT_NAME handleWithBlock:^(PTPusherEvent *event) {
-        theEvent = [event retain];
+        theEvent = event;
       }];
       
       onConnect(^{
@@ -74,7 +74,7 @@ describe(@"A pusher channel", ^{
       
       // we'll use this one to confirm the event has been dispatched
       [client bindToEventNamed:kTEST_EVENT_NAME handleWithBlock:^(PTPusherEvent *event) {
-        theEvent = [event retain];
+        theEvent = event;
       }];
       
       [client removeBinding:binding];
@@ -84,7 +84,7 @@ describe(@"A pusher channel", ^{
       });
       
       [[expectFutureValue(theEvent) shouldEventuallyBeforeTimingOutAfter(5)] beEventNamed:kTEST_EVENT_NAME];
-      [[theReturnValueOfBlock(^{ return theEventFromUnboundBlock; }) should] beNil];
+      [[expectFutureValue(theEventFromUnboundBlock) should] beNil];
     });
     
     it(@"will not yield events to handlers after all bindings have been removed", ^{
@@ -101,7 +101,7 @@ describe(@"A pusher channel", ^{
       
       // we'll use this one to confirm the event has been dispatched
       [client bindToEventNamed:kTEST_EVENT_NAME handleWithBlock:^(PTPusherEvent *event) {
-        theEvent = [event retain];
+        theEvent = event;
       }];
       
       onConnect(^{
@@ -109,7 +109,7 @@ describe(@"A pusher channel", ^{
       });
       
       [[expectFutureValue(theEvent) shouldEventuallyBeforeTimingOutAfter(5)] beEventNamed:kTEST_EVENT_NAME];
-      [[theReturnValueOfBlock(^{ return theEventFromUnboundBlock; }) should] beNil];
+      [[expectFutureValue(theEventFromUnboundBlock) should] beNil];
     });
     
     it(@"will notify observers of channel events using NSNotification", ^{
@@ -118,7 +118,7 @@ describe(@"A pusher channel", ^{
       PTPusherChannel *channel = [client subscribeToChannelNamed:kTEST_CHANNEL];
       
       [[NSNotificationCenter defaultCenter] addObserver:PTPusherEventReceivedNotification object:channel usingBlock:^(NSNotification *note) {
-        theEvent = [[note.userInfo objectForKey:PTPusherEventUserInfoKey] retain];
+        theEvent = [note.userInfo objectForKey:PTPusherEventUserInfoKey];
       }];
       
       onConnect(^{
@@ -134,7 +134,7 @@ describe(@"A pusher channel", ^{
       [client subscribeToChannelNamed:kTEST_CHANNEL];
       
       [[NSNotificationCenter defaultCenter] addObserver:PTPusherEventReceivedNotification object:client usingBlock:^(NSNotification *note) {
-        theEvent = [[note.userInfo objectForKey:PTPusherEventUserInfoKey] retain];
+        theEvent = [note.userInfo objectForKey:PTPusherEventUserInfoKey];
       }];
       
       onConnect(^{
