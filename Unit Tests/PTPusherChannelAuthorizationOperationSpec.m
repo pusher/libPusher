@@ -37,7 +37,7 @@ describe(@"PTPusherChannelAuthorizationOperation", ^{
       
       [[NSOperationQueue mainQueue] addOperation:theOperation];
       
-      [[theReturnValueOfBlock(^{ return @(theOperation.isFinished); }) shouldEventually] beTrue];
+      [[expectFutureValue(@(theOperation.isFinished)) shouldEventually] beTrue];
     });
     
     it(@"stores the parsed JSON authorization data", ^{
@@ -76,11 +76,11 @@ describe(@"PTPusherChannelAuthorizationOperation", ^{
       
       [[NSOperationQueue mainQueue] addOperation:theOperation];
       
-      [[theReturnValueOfBlock(^{ return @(theOperation.isFinished); }) shouldEventually] beTrue];
+      [[expectFutureValue(@(theOperation.isFinished)) shouldEventually] beTrue];
     });
     
     it(@"has no authorization data", ^{
-	    [[theReturnValueOfBlock(^{ return theOperation.authorizationData; }) should] beNil];
+	    [[expectFutureValue(theOperation.authorizationData) should] beNil];
     });
     
     it(@"is not flagged as authorized", ^{
@@ -115,11 +115,11 @@ describe(@"PTPusherChannelAuthorizationOperation", ^{
       
       [[NSOperationQueue mainQueue] addOperation:theOperation];
       
-      [[theReturnValueOfBlock(^{ return @(theOperation.isFinished); }) shouldEventually] beTrue];
+      [[expectFutureValue(@(theOperation.isFinished)) shouldEventually] beTrue];
     });
     
     it(@"has no authorization data", ^{
-	    [[theReturnValueOfBlock(^{ return theOperation.authorizationData; }) should] beNil];
+	    [[expectFutureValue(theOperation.authorizationData) should] beNil];
     });
     
     it(@"is flagged as not authorized", ^{
@@ -158,11 +158,11 @@ describe(@"PTPusherChannelAuthorizationOperation", ^{
       
       [[NSOperationQueue mainQueue] addOperation:theOperation];
       
-      [[theReturnValueOfBlock(^{ return @(theOperation.isFinished); }) shouldEventually] beTrue];
+      [[expectFutureValue(@(theOperation.isFinished)) shouldEventually] beTrue];
     });
     
     it(@"has no authorization data", ^{
-	    [[theReturnValueOfBlock(^{ return theOperation.authorizationData; }) should] beNil];
+	    [[expectFutureValue(theOperation.authorizationData) should] beNil];
     });
     
     it(@"is flagged as not authorized", ^{
@@ -199,11 +199,11 @@ describe(@"PTPusherChannelAuthorizationOperation", ^{
       
       [[NSOperationQueue mainQueue] addOperation:theOperation];
       
-      [[theReturnValueOfBlock(^{ return @(theOperation.isFinished); }) shouldEventually] beTrue];
+      [[expectFutureValue(@(theOperation.isFinished)) shouldEventually] beTrue];
     });
     
     it(@"has no authorization data", ^{
-	    [[theReturnValueOfBlock(^{ return theOperation.authorizationData; }) should] beNil];
+	    [[expectFutureValue(theOperation.authorizationData) should] beNil];
     });
     
     it(@"is flagged as not authorized", ^{

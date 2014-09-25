@@ -50,7 +50,7 @@ describe(@"Subscribing to a private channel", ^{
       }
     });
     
-    [[expectFutureValue(theValue(subscribed)) shouldEventuallyBeforeTimingOutAfter(3)] beYes];
+    [[expectFutureValue(@(subscribed)) shouldEventuallyBeforeTimingOutAfter(3)] beYes];
 	});
   
   it(@"fails when authorization fails", ^{
@@ -72,7 +72,7 @@ describe(@"Subscribing to a private channel", ^{
       }
     });
     
-    [[expectFutureValue(theValue(failedToSubscribe)) shouldEventuallyBeforeTimingOutAfter(3)] beYes];
+    [[expectFutureValue(@(failedToSubscribe)) shouldEventuallyBeforeTimingOutAfter(3)] beYes];
 	});
 });
 
@@ -119,7 +119,7 @@ describe(@"Subscribing to multiple private channels with delays (see issue #26)"
       }
     });
 
-    [[expectFutureValue(theValue(allSubscribed)) shouldEventuallyBeforeTimingOutAfter(10)] beYes];
+    [[expectFutureValue(@(allSubscribed)) shouldEventuallyBeforeTimingOutAfter(10)] beYes];
 	});
 });
 

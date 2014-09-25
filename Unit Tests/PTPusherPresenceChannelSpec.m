@@ -42,7 +42,7 @@ describe(@"PTPusherPresenceChannel", ^{
     PTPusherEvent *subscribeEvent = [[PTPusherEvent alloc] initWithEventName:@"pusher_internal:subscription_succeeded" channel:channel.name data:subscribeEventData];
     [channel dispatchEvent:subscribeEvent];
     
-    [[theReturnValueOfBlock(^{ return theValue(channel.members.count); }) shouldEventually] equal:@1];
+    [[expectFutureValue(@(channel.members.count)) shouldEventually] equal:@1];
 	});
   
   it(@"can return the subscribed member after authorising and subscribing", ^{
@@ -59,7 +59,7 @@ describe(@"PTPusherPresenceChannel", ^{
     PTPusherEvent *subscribeEvent = [[PTPusherEvent alloc] initWithEventName:@"pusher_internal:subscription_succeeded" channel:channel.name data:subscribeEventData];
     [channel dispatchEvent:subscribeEvent];
     
-    [[theReturnValueOfBlock(^{ return channel.members.me; }) shouldEventually] haveValue:@"user-1" forKey:@"userID"];
+    [[expectFutureValue(channel.members.me) shouldEventually] haveValue:@"user-1" forKey:@"userID"];
 	});
   
   it(@"handles member_added events", ^{
@@ -68,7 +68,7 @@ describe(@"PTPusherPresenceChannel", ^{
     PTPusherEvent *event = [[PTPusherEvent alloc] initWithEventName:@"pusher_internal:member_added" channel:channel.name data:eventData];
     [channel dispatchEvent:event];
     
-    [[theReturnValueOfBlock(^{ return theValue(channel.members.count); }) shouldEventually] equal:@1];
+    [[expectFutureValue(@(channel.members.count)) shouldEventually] equal:@1];
     [[[channel.members[@"123"] userInfo][@"name"] should] equal:@"Joe Bloggs"];
   });
   
@@ -76,12 +76,12 @@ describe(@"PTPusherPresenceChannel", ^{
     PTPusherEvent *memberAddedEvent = [[PTPusherEvent alloc] initWithEventName:@"pusher_internal:member_added" channel:channel.name data:@{@"user_id": @"123", @"user_info": @{@"name": @"Joe Bloggs"}}];
     [channel dispatchEvent:memberAddedEvent];
     
-    [[theReturnValueOfBlock(^{ return theValue(channel.members.count); }) shouldEventually] equal:@1];
+    [[expectFutureValue(@(channel.members.count)) shouldEventually] equal:@1];
     
     PTPusherEvent *memberRemovedEvent = [[PTPusherEvent alloc] initWithEventName:@"pusher_internal:member_removed" channel:channel.name data:@{@"user_id": @"123"}];
     [channel dispatchEvent:memberRemovedEvent];
     
-    [[theReturnValueOfBlock(^{ return theValue(channel.members.count); }) shouldEventually] equal:@0];
+    [[expectFutureValue(@(channel.members.count)) shouldEventually] equal:@0];
     
     [[channel.members[@"123"] should] beNil];
   });

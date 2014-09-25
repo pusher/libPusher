@@ -19,9 +19,9 @@ describe(@"PTPusherMockConnectionSpec", ^{
   __block PTPusher *pusher = [[PTPusher alloc] initWithConnection:connection];
   
   it(@"handles connections and reports connected", ^{
-    [[theValue(connection.isConnected) should] beFalse];
+    [[@(connection.isConnected) should] beFalse];
     [pusher connect];
-    [[theValue(connection.isConnected) should] beTrue];
+    [[@(connection.isConnected) should] beTrue];
 	});
   
   it(@"simulates a handshake event with a dummy socket ID after connecting", ^{
@@ -32,20 +32,20 @@ describe(@"PTPusherMockConnectionSpec", ^{
   it(@"handles disconnections and reports not connected", ^{
     [pusher connect];
     [pusher disconnect];
-    [[theValue(connection.isConnected) should] beFalse];
+    [[@(connection.isConnected) should] beFalse];
 	});
   
   it(@"simulates the correct response when subscribing to a public channel", ^{
     [pusher connect];
     PTPusherChannel *channel = [pusher subscribeToChannelNamed:@"test-channel"];
-    [[theReturnValueOfBlock(^{ return theValue(channel.isSubscribed); }) shouldEventually] beTrue];
+    [[expectFutureValue(@(channel.isSubscribed)) shouldEventually] beTrue];
 	});
   
   it(@"simulates the correct response when subscribing to a private channel when auth bypass is enabled", ^{
     [pusher enableChannelAuthorizationBypassMode];
     [pusher connect];
     PTPusherChannel *channel = [pusher subscribeToPrivateChannelNamed:@"test-channel"];
-    [[theReturnValueOfBlock(^{ return theValue(channel.isSubscribed); }) shouldEventually] beTrue];
+    [[expectFutureValue(@(channel.isSubscribed)) shouldEventually] beTrue];
 	});
   
   it(@"allows the direct simulation of server events", ^{
@@ -61,7 +61,7 @@ describe(@"PTPusherMockConnectionSpec", ^{
     
     [connection simulateServerEventNamed:@"test-event" data:nil channel:@"test-channel"];
     
-    [[theReturnValueOfBlock(^{ return receivedEvent; }) shouldEventually] beNonNil];
+    [[expectFutureValue(receivedEvent) shouldEventually] beNonNil];
 	});
 });
 
