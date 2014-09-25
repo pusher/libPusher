@@ -1,7 +1,8 @@
 language: objective-c
 before_install:
   - brew update
-  - brew upgrade xctool
+  - brew unlink xctool
+  - brew install xctool --HEAD
 install: true
 env:
   matrix:
