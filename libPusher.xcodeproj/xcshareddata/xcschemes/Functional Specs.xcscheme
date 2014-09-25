@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A3A9F9571496E96100F83617"
-               BuildableName = "Functional Specs.octest"
+               BuildableName = "Functional Specs.xctest"
                BlueprintName = "Functional Specs"
                ReferencedContainer = "container:libPusher.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "A3A9F9571496E96100F83617"
-               BuildableName = "Functional Specs.octest"
+               BuildableName = "Functional Specs.xctest"
                BlueprintName = "Functional Specs"
                ReferencedContainer = "container:libPusher.xcodeproj">
             </BuildableReference>
@@ -49,6 +49,15 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "A3A9F9571496E96100F83617"
+            BuildableName = "Functional Specs.xctest"
+            BlueprintName = "Functional Specs"
+            ReferencedContainer = "container:libPusher.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
