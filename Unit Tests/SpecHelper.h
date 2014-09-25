@@ -12,3 +12,5 @@
 @class PTPusherEvent;
 
 PTPusherEvent *anEventNamed(NSString *name);
+
+#define theReturnValueOfBlock(block) [KWFutureObject futureObjectWithBlock:block]

@@ -16,11 +16,7 @@ SPEC_BEGIN(PTMockConnectionSpec)
 
 describe(@"PTPusherMockConnectionSpec", ^{
   __block PTPusherMockConnection *connection = [[PTPusherMockConnection alloc] init];
-  __block PTPusher *pusher;
-  
-  beforeEach(^{
-    pusher = [[PTPusher alloc] initWithConnection:connection];
-  });
+  __block PTPusher *pusher = [[PTPusher alloc] initWithConnection:connection];
   
   it(@"handles connections and reports connected", ^{
     [[theValue(connection.isConnected) should] beFalse];

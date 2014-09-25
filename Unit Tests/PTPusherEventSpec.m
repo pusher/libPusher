@@ -38,7 +38,7 @@ describe(@"Pusher Events", ^{
   });
   
   context(@"from an event message dictionary", ^{
-    __block PTPusherEvent *event = [[PTPusherEvent eventFromMessageDictionary:[NSDictionary dictionaryWithObjectsAndKeys:@"event data", @"data", @"test-event", @"event", @"some-channel", @"channel", nil]] retain];
+    __block PTPusherEvent *event = [PTPusherEvent eventFromMessageDictionary:[NSDictionary dictionaryWithObjectsAndKeys:@"event data", @"data", @"test-event", @"event", @"some-channel", @"channel", nil]];
                                     
     it(@"returns it's name", ^{
 	    [[event.name should] equal:@"test-event"];
