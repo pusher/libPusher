@@ -681,7 +681,7 @@
 			name = UnitTests;
 			productName = UnitTests;
 			productReference = A3A1A0EB115813E2001EF877 /* UnitTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 		A3A9F9571496E96100F83617 /* Functional Specs */ = {
 			isa = PBXNativeTarget;
@@ -701,7 +701,7 @@
 			name = "Functional Specs";
 			productName = "Functional Specs";
 			productReference = A3A9F9581496E96100F83617 /* Functional Specs.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 		A3D1D2B61158013F009A12AD /* libPusher */ = {
 			isa = PBXNativeTarget;

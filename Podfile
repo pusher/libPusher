@@ -26,6 +26,6 @@ end
 target :specs, :exclusive => true do
   link_with ['Functional Specs', 'UnitTests']
   
-  pod 'Kiwi', '~> 2.2'
+  pod 'Kiwi', '~> 2.3'
   pod 'OHHTTPStubs', '~> 3.0'
 end

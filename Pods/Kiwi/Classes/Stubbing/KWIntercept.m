@@ -10,13 +10,29 @@
 #import "KWStub.h"
 
 static const char * const KWInterceptClassSuffix = "_KWIntercept";
-static NSMutableDictionary *KWObjectStubs = nil;
-static NSMutableDictionary *KWMessageSpies = nil;
-static NSMutableArray *KWRestoredObjects = nil;
+
+void KWObjectStubsInit(void);
+void KWClearObjectStubs(id anObject);
+void KWClearAllObjectStubs(void);
+NSMutableArray *KWObjectStubsForObject(id anObject);
+void KWObjectStubsSet(id anObject, NSMutableArray *stubs);
+
+void KWMessageSpiesInit(void);
+NSMapTable *KWMessageSpiesForObject(id anObject);
+void KWClearMessageSpies(id anObject);
+void KWMessageSpiesSet(id anObject, NSMapTable *spies);
+
+Class KWRestoreOriginalClass(id anObject);
+BOOL KWObjectClassRestored(id anObject);
+
+typedef id (^KWInterceptedObjectBlock)(void);
+// Use KWInterceptedObjectKey, instead of the object itself, when
+// registering an object in a global map table, to prevent an infinite
+// loop when the object is hashed.
+KWInterceptedObjectBlock KWInterceptedObjectKey(id anObject);
 
 #pragma mark - Intercept Enabled Method Implementations
 
-Class KWRestoreOriginalClass(id anObject);
 void KWInterceptedForwardInvocation(id anObject, SEL aSelector, NSInvocation* anInvocation);
 void KWInterceptedDealloc(id anObject, SEL aSelector);
 Class KWInterceptedClass(id anObject, SEL aSelector);
@@ -32,7 +48,11 @@ IMP KWRegularForwardingImplementation(void) {
 }
 
 IMP KWStretForwardingImplementation(void) {
+#ifndef __arm64__
     return class_getMethodImplementation_stret([NSObject class], @selector(KWNonExistantSelector));
+#else
+    return class_getMethodImplementation([NSObject class], @selector(KWNonExistantSelector));
+#endif
 }
 
 #pragma clang diagnostic pop
@@ -89,8 +109,10 @@ Class KWInterceptClassForCanonicalClass(Class canonicalClass) {
     objc_registerClassPair(interceptClass);
 
     class_addMethod(interceptClass, @selector(forwardInvocation:), (IMP)KWInterceptedForwardInvocation, "v@:@");
-    class_addMethod(interceptClass, @selector(dealloc), (IMP)KWInterceptedDealloc, "v@:");
     class_addMethod(interceptClass, @selector(class), (IMP)KWInterceptedClass, "#@:");
+    //TODO: potentially get rid of this?
+    class_addMethod(interceptClass, NSSelectorFromString(@"dealloc"), (IMP)KWInterceptedDealloc, "v@:");
+    //
     class_addMethod(interceptClass, @selector(superclass), (IMP)KWInterceptedSuperclass, "#@:");
 
     Class interceptMetaClass = object_getClass(interceptClass);
@@ -157,35 +179,19 @@ void KWSetupMethodInterceptSupport(Class interceptClass, SEL aSelector) {
 
 #pragma mark - Intercept Enabled Method Implementations
 
-Class KWRestoreOriginalClass(id anObject) {
-    Class interceptClass = object_getClass(anObject);
-    if (KWClassIsInterceptClass(interceptClass))
-    {
-        Class originalClass = class_getSuperclass(interceptClass);
-        // anObject->isa = originalClass;
-        object_setClass(anObject, originalClass);
-    }
-    return interceptClass;
-}
-
 void KWInterceptedForwardInvocation(id anObject, SEL aSelector, NSInvocation* anInvocation) {
-    NSValue *key = [NSValue valueWithNonretainedObject:anObject];
-    NSMutableDictionary *spyArrayDictionary = KWMessageSpies[key];
-
-    for (KWMessagePattern *messagePattern in spyArrayDictionary) {
+    NSMapTable *spiesMap = KWMessageSpiesForObject(anObject);
+    for (KWMessagePattern *messagePattern in spiesMap) {
         if ([messagePattern matchesInvocation:anInvocation]) {
-            NSArray *spies = spyArrayDictionary[messagePattern];
+            NSArray *spies = [spiesMap objectForKey:messagePattern];
 
-            for (NSValue *spyWrapper in spies) {
-                id<KWMessageSpying> spy = [spyWrapper nonretainedObjectValue];
+            for (id<KWMessageSpying> spy in spies) {
                 [spy object:anObject didReceiveInvocation:anInvocation];
             }
         }
     }
 
-    NSMutableArray *stubs = KWObjectStubs[key];
-
-    for (KWStub *stub in stubs) {
+    for (KWStub *stub in KWObjectStubsForObject(anObject)) {
         if ([stub processInvocation:anInvocation])
             return;
     }
@@ -197,12 +203,9 @@ void KWInterceptedForwardInvocation(id anObject, SEL aSelector, NSInvocation* an
 }
 
 void KWInterceptedDealloc(id anObject, SEL aSelector) {
-    NSValue *key = [NSValue valueWithNonretainedObject:anObject];
-    [KWMessageSpies removeObjectForKey:key];
-    [KWObjectStubs removeObjectForKey:key];
-
+    KWClearMessageSpies(anObject);
+    KWClearObjectStubs(anObject);
     KWRestoreOriginalClass(anObject);
-    [anObject dealloc];
 }
 
 Class KWInterceptedClass(id anObject, SEL aSelector) {
@@ -218,28 +221,15 @@ Class KWInterceptedSuperclass(id anObject, SEL aSelector) {
     return originalSuperclass;
 }
 
-#pragma mark - Managing Stubs & Spies
-
-void KWClearStubsAndSpies(void) {
-    KWRestoredObjects = [NSMutableArray array];
-    KWClearAllMessageSpies();
-    KWClearAllObjectStubs();
-    KWRestoredObjects = nil;
-}
-
 #pragma mark - Managing Objects Stubs
 
 void KWAssociateObjectStub(id anObject, KWStub *aStub, BOOL overrideExisting) {
-    if (KWObjectStubs == nil)
-        KWObjectStubs = [[NSMutableDictionary alloc] init];
+    KWObjectStubsInit();
 
-    NSValue *key = [NSValue valueWithNonretainedObject:anObject];
-    NSMutableArray *stubs = KWObjectStubs[key];
-
+    NSMutableArray *stubs = KWObjectStubsForObject(anObject);
     if (stubs == nil) {
         stubs = [[NSMutableArray alloc] init];
-        KWObjectStubs[key] = stubs;
-        [stubs release];
+        KWObjectStubsSet(anObject, stubs);
     }
 
     NSUInteger stubCount = [stubs count];
@@ -260,70 +250,142 @@ void KWAssociateObjectStub(id anObject, KWStub *aStub, BOOL overrideExisting) {
     [stubs addObject:aStub];
 }
 
+#pragma mark - Managing Message Spies
+
+void KWAssociateMessageSpy(id anObject, id aSpy, KWMessagePattern *aMessagePattern) {
+    KWMessageSpiesInit();
+
+    NSMapTable *spies = KWMessageSpiesForObject(anObject);
+    if (spies == nil) {
+        spies = [NSMapTable mapTableWithKeyOptions:NSMapTableStrongMemory valueOptions:NSMapTableStrongMemory];
+        KWMessageSpiesSet(anObject, spies);
+    }
+
+    NSMutableArray *messagePatternSpies = [spies objectForKey:aMessagePattern];
+    if (messagePatternSpies == nil) {
+        messagePatternSpies = [[NSMutableArray alloc] init];
+        [spies setObject:messagePatternSpies forKey:aMessagePattern];
+    }
+
+
+    if ([messagePatternSpies containsObject:aSpy])
+        return;
+
+    [messagePatternSpies addObject:aSpy];
+}
+
+#pragma mark - KWMessageSpies
+
+static NSMapTable *KWMessageSpies = nil;
+
+void KWMessageSpiesInit(void) {
+    if (KWMessageSpies == nil) {
+        KWMessageSpies = [NSMapTable mapTableWithKeyOptions:NSMapTableStrongMemory valueOptions:NSMapTableStrongMemory];
+    };
+}
+
+NSMapTable *KWMessageSpiesForObject(id anObject) {
+    return [KWMessageSpies objectForKey:KWInterceptedObjectKey(anObject)];
+}
+
+void KWMessageSpiesSet(id anObject, NSMapTable *spies) {
+    [KWMessageSpies setObject:spies forKey:KWInterceptedObjectKey(anObject)];
+}
+
+void KWClearObjectSpy(id anObject, id aSpy, KWMessagePattern *aMessagePattern) {
+    NSMapTable *spyArrayDictionary = KWMessageSpiesForObject(anObject);
+    NSMutableArray *spies = [spyArrayDictionary objectForKey:aMessagePattern];
+    [spies removeObject:aSpy];
+}
+
+void KWClearMessageSpies(id anObject) {
+    [KWMessageSpies removeObjectForKey:KWInterceptedObjectKey(anObject)];
+}
+
+void KWClearAllMessageSpies(void) {
+    for (KWInterceptedObjectBlock key in KWMessageSpies) {
+        id spiedObject = key();
+        if (KWObjectClassRestored(spiedObject)) {
+            continue;
+        }
+        KWRestoreOriginalClass(spiedObject);
+    }
+    [KWMessageSpies removeAllObjects];
+}
+
+
+#pragma mark KWObjectStubs
+
+static NSMapTable *KWObjectStubs = nil;
+
+void KWObjectStubsInit(void) {
+    if (KWObjectStubs == nil) {
+        KWObjectStubs = [NSMapTable mapTableWithKeyOptions:NSMapTableStrongMemory valueOptions:NSMapTableStrongMemory];
+    }
+}
+
+NSMutableArray *KWObjectStubsForObject(id anObject) {
+    return [KWObjectStubs objectForKey:KWInterceptedObjectKey(anObject)];
+}
+
+void KWObjectStubsSet(id anObject, NSMutableArray *stubs) {
+    [KWObjectStubs setObject:stubs forKey:KWInterceptedObjectKey(anObject)];
+}
+
 void KWClearObjectStubs(id anObject) {
-    NSValue *key = [NSValue valueWithNonretainedObject:anObject];
-    [KWObjectStubs removeObjectForKey:key];
+    [KWObjectStubs removeObjectForKey:KWInterceptedObjectKey(anObject)];
 }
 
 void KWClearAllObjectStubs(void) {
-    for (NSValue *objectKey in KWObjectStubs) {
-        id stubbedObject = [objectKey nonretainedObjectValue];
-        if ([KWRestoredObjects containsObject:stubbedObject]) {
+    for (KWInterceptedObjectBlock key in KWObjectStubs) {
+        id stubbedObject = key();
+        if (KWObjectClassRestored(stubbedObject)) {
             continue;
         }
         KWRestoreOriginalClass(stubbedObject);
-        [KWRestoredObjects addObject:stubbedObject];
     }
     [KWObjectStubs removeAllObjects];
 }
 
-#pragma mark - Managing Message Spies
+#pragma mark KWRestoredObjects
 
-void KWAssociateMessageSpy(id anObject, id aSpy, KWMessagePattern *aMessagePattern) {
-    if (KWMessageSpies == nil)
-        KWMessageSpies = [[NSMutableDictionary alloc] init];
+static NSMutableArray *KWRestoredObjects = nil;
 
-    NSValue *key = [NSValue valueWithNonretainedObject:anObject];
-    NSMutableDictionary *spies = KWMessageSpies[key];
-
-    if (spies == nil) {
-        spies = [[NSMutableDictionary alloc] init];
-        KWMessageSpies[key] = spies;
-        [spies release];
-    }
-
-    NSMutableArray *messagePatternSpies = spies[aMessagePattern];
-
-    if (messagePatternSpies == nil) {
-        messagePatternSpies = [[NSMutableArray alloc] init];
-        spies[aMessagePattern] = messagePatternSpies;
-        [messagePatternSpies release];
-    }
-
-    NSValue *spyWrapper = [NSValue valueWithNonretainedObject:aSpy];
-
-    if ([messagePatternSpies containsObject:spyWrapper])
-        return;
-
-    [messagePatternSpies addObject:spyWrapper];
+BOOL KWObjectClassRestored(id anObject) {
+    return [KWRestoredObjects containsObject:KWInterceptedObjectKey(anObject)];
 }
 
-void KWClearObjectSpy(id anObject, id aSpy, KWMessagePattern *aMessagePattern) {
-    NSValue *key = [NSValue valueWithNonretainedObject:anObject];
-    NSMutableDictionary *spyArrayDictionary = KWMessageSpies[key];
-    NSMutableArray *spies = spyArrayDictionary[aMessagePattern];
-    NSValue *spyWrapper = [NSValue valueWithNonretainedObject:aSpy];
-    [spies removeObject:spyWrapper];
+Class KWRestoreOriginalClass(id anObject) {
+    Class interceptClass = object_getClass(anObject);
+    if (KWClassIsInterceptClass(interceptClass))
+    {
+        Class originalClass = class_getSuperclass(interceptClass);
+        // anObject->isa = originalClass;
+        object_setClass(anObject, originalClass);
+    }
+    [KWRestoredObjects addObject:anObject];
+    return interceptClass;
 }
 
-void KWClearAllMessageSpies(void) {
-    for (NSValue *objectKey in KWMessageSpies) {
-        id spiedObject = [objectKey nonretainedObjectValue];
-        if ([KWRestoredObjects containsObject:spiedObject]) {
-            continue;
-        }
-        KWRestoreOriginalClass(spiedObject);
-        [KWRestoredObjects addObject:spiedObject];
+#pragma mark KWInterceptedObjectKey
+
+static void *kKWInterceptedObjectKey = &kKWInterceptedObjectKey;
+
+KWInterceptedObjectBlock KWInterceptedObjectKey(id anObject) {
+    KWInterceptedObjectBlock key = objc_getAssociatedObject(anObject, kKWInterceptedObjectKey);
+    if (key == nil) {
+        __weak id weakobj = anObject;
+        key = ^{ return weakobj; };
+        objc_setAssociatedObject(anObject, kKWInterceptedObjectKey, [key copy], OBJC_ASSOCIATION_COPY);
     }
-    [KWMessageSpies removeAllObjects];
+    return key;
+}
+
+#pragma mark - Managing Stubs & Spies
+
+void KWClearStubsAndSpies(void) {
+    KWRestoredObjects = [NSMutableArray array];
+    KWClearAllMessageSpies();
+    KWClearAllObjectStubs();
+    KWRestoredObjects = nil;
 }

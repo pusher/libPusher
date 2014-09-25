@@ -1,11 +1,5 @@
 PODS:
-  - Kiwi (2.2.3):
-    - Kiwi/SenTestingKit
-  - Kiwi/ARC (2.2.3)
-  - Kiwi/NonARC (2.2.3)
-  - Kiwi/SenTestingKit (2.2.3):
-    - Kiwi/ARC
-    - Kiwi/NonARC
+  - Kiwi (2.3.0)
   - OHHTTPStubs (3.0.2)
   - Reachability (3.1.1)
   - ReactiveCocoa (2.1.7):
@@ -24,10 +18,10 @@ DEPENDENCIES:
   - SocketRocket (= 0.3.1-beta2)
 
 SPEC CHECKSUMS:
-  Kiwi: 04c51e880831d291748ec702d42c4101f7eb95c9
-  OHHTTPStubs: 7be864a1c40c6a5007fe3e8679c109ca45590803
-  Reachability: be4883bb93f31e38266ae3365e5600a317aae735
-  ReactiveCocoa: 1117f7968c8667d2ca00b5aa47156fabcb56af75
-  SocketRocket: 7ac946bcce46287a791dfff3c1f8daa692821dae
+  Kiwi: 54bece5b35564d9b8e03c608d926f1a22fcfc589
+  OHHTTPStubs: 655f246d7be70b7d6a198170b592cb5b6d389307
+  Reachability: 8e9635e3cb4f98e7f825e51147f677ecc694d0e7
+  ReactiveCocoa: be6d4fb0a2598980d61336a5de3c370a1ddd5f0f
+  SocketRocket: 79a68ae186063c65e1fe6f638b1ae2927aa5f304
 
-COCOAPODS: 0.28.0
+COCOAPODS: 0.33.1

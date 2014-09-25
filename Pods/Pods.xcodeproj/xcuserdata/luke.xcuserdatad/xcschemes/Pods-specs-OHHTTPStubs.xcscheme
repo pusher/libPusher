@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0500"
+   LastUpgradeVersion = "0510"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "15A359E7D4AF402D99E6EC37"
+               BlueprintIdentifier = "1CC0B64C6DE64EA8A08B051C"
                BuildableName = "libPods-specs-OHHTTPStubs.a"
                BlueprintName = "Pods-specs-OHHTTPStubs"
                ReferencedContainer = "container:Pods.xcodeproj">
