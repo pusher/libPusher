@@ -131,7 +131,7 @@ Private and presence channels require server-side authorisation before they can 
 In order to connect to a private or presence channel, you first need to configure your server authorisation URL.
 
 ```objc
-self.client.authorizationURL = [NSURL URLWithString:@"http://www.yourserver.com/authorise"];
+self.client.authorizationURL = [NSURL URLWithString:@"https://www.yourserver.com/authorise"];
 ```
 
 When you attempt to connect to a private or presence channel, libPusher will make a form-encoded POST request to the above URL, passing along the ```socket_id``` and ```channel_name``` as parameters. Prior to sending the request, the Pusher delegate will be notified, passing in the channel and the NSMutableURLRequest instance that will be sent.
