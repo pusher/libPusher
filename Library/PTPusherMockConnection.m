@@ -10,11 +10,17 @@
 #import "PTJSON.h"
 #import "PTPusherEvent.h"
 
+@interface PTPusherMockConnection ()
+@property (nonatomic, copy) NSString *socketID;
+@property (nonatomic, assign) PTPusherConnectionState state;
+@end
+
 @implementation PTPusherMockConnection {
   NSMutableArray *sentClientEvents;
 }
 
 @synthesize sentClientEvents;
+@synthesize socketID = _socketID;
 
 - (id)init
 {
@@ -26,7 +32,7 @@
 
 - (void)connect
 {
-  [self webSocketDidOpen:nil];
+  self.state = PTPusherConnectionConnecting;
   
   NSInteger socketID = (NSInteger)[NSDate timeIntervalSinceReferenceDate];
 
@@ -36,7 +42,8 @@
 
 - (void)disconnect
 {
-  [self webSocket:nil didCloseWithCode:0 reason:nil wasClean:YES];
+  self.state = PTPusherConnectionDisconnecting;
+  self.socketID = nil;
 }
 
 - (void)send:(id)object
@@ -53,26 +60,39 @@
 
 - (void)simulateServerEventNamed:(NSString *)name data:(id)data channel:(NSString *)channelName
 {
-  NSMutableDictionary *event = [NSMutableDictionary dictionary];
+  NSMutableDictionary *eventDict = [NSMutableDictionary dictionary];
   
-  event[PTPusherEventKey] = name;
+  eventDict[PTPusherEventKey] = name;
   
   if (data) {
-    event[PTPusherDataKey] = data;
+    eventDict[PTPusherDataKey] = data;
   }
   
   if (channelName) {
-    event[PTPusherChannelKey] = channelName;
+    eventDict[PTPusherChannelKey] = channelName;
   }
   
-  NSString *message = [[PTJSON JSONParser] JSONStringFromObject:event];
-  
-  [self webSocket:nil didReceiveMessage:message];
+  NSString *message = [[PTJSON JSONParser] JSONStringFromObject:eventDict];
+
+  NSDictionary *messageDictionary = [[PTJSON JSONParser] objectFromJSONString:message];
+  PTPusherEvent *event = [PTPusherEvent eventFromMessageDictionary:messageDictionary];
+
+  if ([event.name isEqualToString:PTPusherConnectionEstablishedEvent]) {
+    self.socketID = (event.data)[@"socket_id"];
+    self.state = PTPusherConnectionConnected;
+
+    [self.delegate pusherConnectionDidConnect:self];
+  }
+
+  [self.delegate pusherConnection:self didReceiveEvent:event];
 }
 
 - (void)simulateUnexpectedDisconnection
 {
-  [self webSocket:nil didCloseWithCode:kPTPusherSimulatedDisconnectionErrorCode reason:nil wasClean:NO];
+  self.state = PTPusherConnectionDisconnected;
+  self.socketID = nil;
+  // we always call this last, to prevent a race condition if the delegate calls 'connect'
+  [self.delegate pusherConnection:self didDisconnectWithCode:kPTPusherSimulatedDisconnectionErrorCode reason:nil wasClean:NO];
 }
 
 #pragma mark - Client event handling
