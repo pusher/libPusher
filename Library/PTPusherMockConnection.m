@@ -9,10 +9,9 @@
 #import "PTPusherMockConnection.h"
 #import "PTJSON.h"
 #import "PTPusherEvent.h"
+#import "SRWebSocket.h"
 
-@interface PTPusherMockConnection ()
-@property (nonatomic, copy) NSString *socketID;
-@property (nonatomic, assign) PTPusherConnectionState state;
+@interface PTPusherConnection () <SRWebSocketDelegate>
 @end
 
 @implementation PTPusherMockConnection {
@@ -20,7 +19,6 @@
 }
 
 @synthesize sentClientEvents;
-@synthesize socketID = _socketID;
 
 - (id)init
 {
@@ -32,7 +30,7 @@
 
 - (void)connect
 {
-  self.state = PTPusherConnectionConnecting;
+  [self webSocketDidOpen:nil];
   
   NSInteger socketID = (NSInteger)[NSDate timeIntervalSinceReferenceDate];
 
@@ -42,8 +40,7 @@
 
 - (void)disconnect
 {
-  self.state = PTPusherConnectionDisconnecting;
-  self.socketID = nil;
+  [self webSocket:nil didCloseWithCode:0 reason:nil wasClean:YES];
 }
 
 - (void)send:(id)object
@@ -60,39 +57,26 @@
 
 - (void)simulateServerEventNamed:(NSString *)name data:(id)data channel:(NSString *)channelName
 {
-  NSMutableDictionary *eventDict = [NSMutableDictionary dictionary];
+  NSMutableDictionary *event = [NSMutableDictionary dictionary];
   
-  eventDict[PTPusherEventKey] = name;
+  event[PTPusherEventKey] = name;
   
   if (data) {
-    eventDict[PTPusherDataKey] = data;
+    event[PTPusherDataKey] = data;
   }
   
   if (channelName) {
-    eventDict[PTPusherChannelKey] = channelName;
+    event[PTPusherChannelKey] = channelName;
   }
   
-  NSString *message = [[PTJSON JSONParser] JSONStringFromObject:eventDict];
-
-  NSDictionary *messageDictionary = [[PTJSON JSONParser] objectFromJSONString:message];
-  PTPusherEvent *event = [PTPusherEvent eventFromMessageDictionary:messageDictionary];
-
-  if ([event.name isEqualToString:PTPusherConnectionEstablishedEvent]) {
-    self.socketID = (event.data)[@"socket_id"];
-    self.state = PTPusherConnectionConnected;
-
-    [self.delegate pusherConnectionDidConnect:self];
-  }
-
-  [self.delegate pusherConnection:self didReceiveEvent:event];
+  NSString *message = [[PTJSON JSONParser] JSONStringFromObject:event];
+  
+  [self webSocket:nil didReceiveMessage:message];
 }
 
 - (void)simulateUnexpectedDisconnection
 {
-  self.state = PTPusherConnectionDisconnected;
-  self.socketID = nil;
-  // we always call this last, to prevent a race condition if the delegate calls 'connect'
-  [self.delegate pusherConnection:self didDisconnectWithCode:kPTPusherSimulatedDisconnectionErrorCode reason:nil wasClean:NO];
+  [self webSocket:nil didCloseWithCode:kPTPusherSimulatedDisconnectionErrorCode reason:nil wasClean:NO];
 }
 
 #pragma mark - Client event handling
