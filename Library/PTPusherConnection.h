@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SRWebSocket.h"
 #import "PTPusherMacros.h"
 
 @class PTPusherConnection;
@@ -32,7 +31,7 @@ typedef enum {
   PTPusherConnectionConnected
 } PTPusherConnectionState;
 
-@interface PTPusherConnection : NSObject <SRWebSocketDelegate>
+@interface PTPusherConnection : NSObject
 
 @property (nonatomic, weak) id<PTPusherConnectionDelegate> delegate;
 
