@@ -10,3 +10,4 @@
 #import <Pusher/PTPusherChannel.h>
 #import <Pusher/PTPusherEvent.h>
 #import <Pusher/PTPusherAPI.h>
+#import <Pusher/PTPusherEventDispatcher.h>
