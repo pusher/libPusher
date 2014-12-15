@@ -25,3 +25,4 @@ dist
 xcodebuild.log
 Pods/Documentation
 *.xccheckout
+xcuserdata
