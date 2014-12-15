@@ -697,7 +697,7 @@
 			name = "Functional Specs";
 			productName = "Functional Specs";
 			productReference = A3A9F9581496E96100F83617 /* Functional Specs.xctest */;
-			productType = "com.apple.product-type.bundle.ocunit-test";
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		A3D1D2B61158013F009A12AD /* libPusher */ = {
 			isa = PBXNativeTarget;
@@ -1218,6 +1218,7 @@
 				);
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				PRODUCT_NAME = Pusher;
+				PUBLIC_HEADERS_FOLDER_PATH = include/$PRODUCT_NAME;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
@@ -1240,6 +1241,7 @@
 				);
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				PRODUCT_NAME = Pusher;
+				PUBLIC_HEADERS_FOLDER_PATH = include/$PRODUCT_NAME;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				ZERO_LINK = NO;
