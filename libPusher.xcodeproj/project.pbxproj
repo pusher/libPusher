@@ -697,7 +697,7 @@
 			name = "Functional Specs";
 			productName = "Functional Specs";
 			productReference = A3A9F9581496E96100F83617 /* Functional Specs.xctest */;
-			productType = "com.apple.product-type.bundle.ocunit-test";
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		A3D1D2B61158013F009A12AD /* libPusher */ = {
 			isa = PBXNativeTarget;
@@ -1207,7 +1207,6 @@
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1.5;
 				DSTROOT = /tmp/xcodeproj.dst;
-				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1231,7 +1230,6 @@
 				CURRENT_PROJECT_VERSION = 1.5;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DSTROOT = /tmp/xcodeproj.dst;
-				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = libPusher_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1253,7 +1251,6 @@
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1.5;
 				DSTROOT = /tmp/xcodeproj.dst;
-				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1277,7 +1274,6 @@
 				CURRENT_PROJECT_VERSION = 1.5;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DSTROOT = /tmp/xcodeproj.dst;
-				DYLIB_CURRENT_VERSION = "$(CURRENT_PROJECT_VERSION)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = libPusher_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1298,7 +1294,7 @@
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1.1;
-				DYLIB_CURRENT_VERSION = 1.1;
+				DYLIB_CURRENT_VERSION = 1.5;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -1308,7 +1304,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "$(inherited)";
 				SDKROOT = iphoneos;
@@ -1322,12 +1318,12 @@
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1.1;
-				DYLIB_CURRENT_VERSION = 1.1;
+				DYLIB_CURRENT_VERSION = 1.5;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_LDFLAGS = "$(inherited)";
 				SDKROOT = iphoneos;
 				WARNING_CFLAGS = "-Wno-arc-performSelector-leaks";
