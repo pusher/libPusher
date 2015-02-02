@@ -8,7 +8,7 @@ Pusher is a hosted service that sits between your web application and the browse
 
 The libPusher API mirrors the Pusher Javascript client as closely as possible, with some allowances for Objective-C conventions. In particular, whilst the Javascript client uses event binding for all event handling, where events are pre-defined, libPusher uses the standard Cocoa delegation pattern.
 
-[API Documentation](http://lukeredpath.github.io/libPusher/html/index.html)
+[API Documentation](http://cocoadocs.org/docsets/libPusher/1.5/)
 
 ## Example
 Subscribe to the ```chat``` channel and bind to the ```new-message``` event.
