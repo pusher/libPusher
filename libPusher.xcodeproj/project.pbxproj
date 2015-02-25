@@ -384,8 +384,10 @@
 				A315780A14D0751C000136A9 /* Pods.xcconfig */,
 				A31577F714D0731B000136A9 /* Pods-specs.xcconfig */,
 			);
+			indentWidth = 2;
 			name = CustomTemplate;
 			sourceTree = "<group>";
+			tabWidth = 2;
 		};
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
