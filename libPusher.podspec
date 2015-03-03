@@ -24,6 +24,7 @@ Pod::Spec.new do |s|
   end
   
   s.subspec 'ReactiveExtensions' do |subspec|
+    subspec.dependency 'libPusher/Core'
     subspec.dependency 'ReactiveCocoa', '~> 2.1'
 
     subspec.source_files = 'ReactiveExtensions/*'

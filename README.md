@@ -42,6 +42,16 @@ Import Pusher into the class that wants to make use of the library.
 
 A step-by-step guide on how to [install and setup CocoaPods]() to use libPusher without using CocoaPods is available on the wiki.
 
+If you want to use the ReactiveExtensions version of libPusher, add the following line to your Podfile instead.
+
+```ruby
+pod 'libPusher/ReactiveExtensions', '~> 1.6'
+```
+
+This will also load the core libPusher library and ReactiveCocoa as a dependency.
+
+If you are not using CocoaPods, you can simply drop the extensions into your project.
+
 ## Usage
 
 **Note**: in the following examples, ```client``` is a strong property. The instance returned by the ```pusherWithKey:*:``` methods will be auto-released, according to standard Objective-C return conventions. You must retain the client otherwise it will be auto-released before anything useful happens causing silent failures and unexpected behaviour.
