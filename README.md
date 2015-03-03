@@ -31,7 +31,7 @@ PTPusherChannel *channel = [self.client subscribeToChannelNamed:@"chat"];
 Install using CocoaPods is recommended.
 
 ```ruby
-pod 'libPusher', '~> 1.5'
+pod 'libPusher', '~> 1.6'
 ```
 
 Import Pusher into the class that wants to make use of the library.
