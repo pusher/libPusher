@@ -281,6 +281,9 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 {
   [channel authorizeWithCompletionHandler:^(BOOL isAuthorized, NSDictionary *authData, NSError *error) {
     if (isAuthorized && self.connection.isConnected) {
+      if ([self.delegate respondsToSelector:@selector(pusher:authorizationPayloadFromResponseData:)]) {
+        authData = [self.delegate pusher:self authorizationPayloadFromResponseData:authData];
+      }    
       [channel subscribeWithAuthorization:authData];
     }
     else {

@@ -109,6 +109,21 @@
  */
 - (void)pusher:(PTPusher *)pusher willAuthorizeChannel:(PTPusherChannel *)channel withRequest:(NSMutableURLRequest *)request;
 
+/** Allows the delegate to return authorization data in the format required by Pusher from a
+ non-standard respnse.
+ 
+ When using a remote server to authorize access to a private channel, the server is expected to 
+ return an authorization payload in a specific format which is then sent to Pusher when connecting
+ to a private channel.
+ 
+ Sometimes, a server might return a non-standard response, for example, the auth data may be a sub-set
+ of some bigger response.
+ 
+ If implemented, Pusher will call this method with the response data returned from the authorization
+ URL and will use whatever dictionary is returned instead.
+*/
+ - (NSDictionary *)pusher:(PTPusher *)pusher authorizationPayloadFromResponseData:(NSDictionary *)responseData;
+
 /** Notifies the delegate that the PTPusher instance has subscribed to the specified channel.
  
  This method will be called after any channel authorization has taken place and when a subscribe event has been received.
