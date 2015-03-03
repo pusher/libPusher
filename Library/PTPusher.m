@@ -63,16 +63,6 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
   NSMutableDictionary *channels;
 }
 
-- (id)initWithConnection:(PTPusherConnection *)connection connectAutomatically:(BOOL)connectAutomatically
-{
-  if ((self = [self initWithConnection:connection])) {
-    if (connectAutomatically) {
-      [self connect];
-    }
-  }
-  return self;
-}
-
 - (id)initWithConnection:(PTPusherConnection *)connection
 {
   if (self = [super init]) {
@@ -126,26 +116,6 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
     PTPusher *pusher = [[self alloc] initWithConnection:connection];
     pusher.delegate = delegate;
     return pusher;
-}
-
-#pragma mark - Deprecated methods
-
-+ (id)pusherWithKey:(NSString *)key connectAutomatically:(BOOL)connectAutomatically
-{
-  PTPusher *client = [self pusherWithKey:key delegate:nil encrypted:YES];
-  if (connectAutomatically) {
-    [client connect];
-  }
-  return client;
-}
-
-+ (id)pusherWithKey:(NSString *)key connectAutomatically:(BOOL)connectAutomatically encrypted:(BOOL)isEncrypted
-{
-  PTPusher *client = [self pusherWithKey:key delegate:nil encrypted:isEncrypted];
-  if (connectAutomatically) {
-    [client connect];
-  }
-  return client;
 }
 
 - (void)dealloc;
@@ -270,11 +240,6 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
   if ([self.delegate respondsToSelector:@selector(pusher:didUnsubscribeFromChannel:)]) {
     [self.delegate pusher:self didUnsubscribeFromChannel:channel];
   }
-}
-
-- (void)unsubscribeFromChannel:(PTPusherChannel *)channel
-{
-  [self __unsubscribeFromChannel:channel];
 }
 
 - (void)subscribeToChannel:(PTPusherChannel *)channel
@@ -429,22 +394,6 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
   
   for (PTPusherChannel *channel in [channels allValues]) {
     [channel handleDisconnect];
-  }
-  
-  if ([self.delegate respondsToSelector:@selector(pusher:connectionDidDisconnect:)]) { // deprecated call
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-    NSLog(@"pusher:connectionDidDisconnect: is deprecated and will be removed in 1.6. Use pusher:connection:didDisconnectWithError:willAttemptReconnect: instead.");
-    [self.delegate pusher:self connectionDidDisconnect:connection];
-#pragma clang diagnostic pop
-  }
-
-  if ([self.delegate respondsToSelector:@selector(pusher:connection:didDisconnectWithError:)]) { // deprecated call
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-    NSLog(@"pusher:connectionDidDisconnectWithError: is deprecated and will be removed in 1.6. Use pusher:connection:didDisconnectWithError:willAttemptReconnect: instead.");
-    [self.delegate pusher:self connection:connection didDisconnectWithError:error];
-#pragma clang diagnostic pop
   }
   
   BOOL willReconnect = NO;

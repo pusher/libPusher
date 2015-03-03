@@ -28,11 +28,6 @@ NSString *const PTPusherConnectionPongEvent        = @"pusher:pong";
   NSURLRequest *request;
 }
 
-- (id)initWithURL:(NSURL *)aURL secure:(BOOL)secure
-{
-  return [self initWithURL:aURL secure:NO];
-}
-
 - (id)initWithURL:(NSURL *)aURL
 {
   if ((self = [super init])) {

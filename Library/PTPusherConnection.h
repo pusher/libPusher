@@ -111,21 +111,4 @@ typedef enum {
  */
 - (void)send:(id)object;
 
-///------------------------------------------------------------------------------------/
-/// @name Deprecated methods
-///------------------------------------------------------------------------------------/
-
-/** Creates a new PTPusherConnection instance.
- 
- Connections are not opened immediately; an explicit call to connect is required.
- 
- DEPRECATED IN VERSION 1.2. The secure parameter is now ignored; secure mode will be
- enabled automatically when the URL protocol is wss.
- 
- @param aURL      The websocket endpoint
- @param delegate  The delegate for this connection
- @param secure    Whether this connection should be secure (TLS)
- */
-- (id)initWithURL:(NSURL *)aURL secure:(BOOL)secure __PUSHER_DEPRECATED__;
-
 @end

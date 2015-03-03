@@ -2,6 +2,7 @@
 
 * Swift and 64-bit compatibility
 * Added new delegate method to support extracting auth response from wrapped payloads (#171)
+* Removed deprecated methods and delegate calls
 * Removed SocketRocket from the public interface (#157)
 * Fix deprecation warning for willAuthorizeChannelWithRequest (#147)
 * Use NSDate instead of C API for setting timestamp on auth request (#133)

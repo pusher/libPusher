@@ -162,27 +162,6 @@
  */
 @property (nonatomic, readonly) PTPusherChannelMembers *members;
 
-///------------------------------------------------------------------------------------/
-/// @name Deprecated methods
-///------------------------------------------------------------------------------------/
-
-/** Returns a dictionary of member metadata (email, name etc.) for the given member ID.
- *
- * @deprecated Use the members object.
- */
-- (NSDictionary *)infoForMemberWithID:(NSString *)memberID __PUSHER_DEPRECATED__;
-
-/** Returns an array of available member IDs 
- *
- * @deprecated Use the members object.
- */
-- (NSArray *)memberIDs __PUSHER_DEPRECATED__;
-
-/** Returns the number of members currently connected to this channel.
- *
- * @deprecated Use the members object.
- */
-- (NSInteger)memberCount __PUSHER_DEPRECATED__;
 @end
 
 /** Represents a single member in a presence channel.
