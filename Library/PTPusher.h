@@ -87,6 +87,13 @@ extern NSString *const PTPusherErrorUnderlyingEventKey;
 @property (nonatomic, weak) id<PTPusherDelegate> delegate;
 
 /** Specifies the delay between reconnection attempts. Defaults to 5 seconds.
+ *
+ * If the client disconnects for an unknown reason, the client will attempt to automatically
+ * reconnect after this delay has elapsed.
+ *
+ * PTPusher will not automatically reconnect if `disconnect` is called explicitly and it
+ * will also handle reconnection differently if disconnection happens with a known error code,
+ * as per the Pusher protocol documentation.
  */
 @property (nonatomic, assign) NSTimeInterval reconnectDelay;
 
@@ -171,7 +178,8 @@ extern NSString *const PTPusherErrorUnderlyingEventKey;
 
 /** Disconnects from the Pusher server.
  
- If already disconnected, this method does nothing.
+ If already disconnected, this method does nothing. PTPusher will not attempt to 
+ reconnect if you call this method. To reconnect, you must call `connect` again.
  */
 - (void)disconnect;
 

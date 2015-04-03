@@ -310,6 +310,9 @@ An error code in the range 4000-4099 generally indicates a client misconfigurati
 
 The other scenarios generally indicate that it is not currently possible to connect to the Pusher service - this might be because of an issue with the service but more likely is that there simply isn't an internet connection.
 
+Up to version 1.6, automatic reconnection would happen after the configured `reconnectDelay` even after explicitly 
+calling `disconnect`. This behaviour was undesirable and in all subsequent versions this no longer happens and an explicit call to `connect` is required to reconnect in this case.
+
 ### Handling disconnections
 
 If the client fails to connect at all, the delegate method `pusher:connection:failedWithError:` will be called and no automatic reconnection will be attempted.
