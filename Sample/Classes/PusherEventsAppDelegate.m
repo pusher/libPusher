@@ -101,7 +101,7 @@
     NSLog(@"[pusher-%@] Client will attempt to reconnect automatically", pusher.connection.socketID);
   }
   else {
-    if (![error.domain isEqualToString:PTPusherErrorDomain]) {
+    if (error && ![error.domain isEqualToString:PTPusherErrorDomain]) {
       [self startReachabilityCheck];
     }
   }
