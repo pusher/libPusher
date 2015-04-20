@@ -32,7 +32,7 @@
 
 @implementation PTPusherChannel
 
-+ (id)channelWithName:(NSString *)name pusher:(PTPusher *)pusher
++ (instancetype)channelWithName:(NSString *)name pusher:(PTPusher *)pusher
 {
   if ([name hasPrefix:@"private-"]) {
     return [[PTPusherPrivateChannel alloc] initWithName:name pusher:pusher];

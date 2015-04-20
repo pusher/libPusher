@@ -93,17 +93,17 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
   return self;
 }
 
-+ (id)pusherWithKey:(NSString *)key delegate:(id<PTPusherDelegate>)delegate
++ (instancetype)pusherWithKey:(NSString *)key delegate:(id<PTPusherDelegate>)delegate
 {
   return [self pusherWithKey:key delegate:delegate encrypted:YES];
 }
 
-+ (id)pusherWithKey:(NSString *)key delegate:(id<PTPusherDelegate>)delegate encrypted:(BOOL)isEncrypted
++ (instancetype)pusherWithKey:(NSString *)key delegate:(id<PTPusherDelegate>)delegate encrypted:(BOOL)isEncrypted
 {
   return [self pusherWithKey:(NSString *)key delegate:(id<PTPusherDelegate>)delegate encrypted:(BOOL)isEncrypted cluster:(NSString *) nil];
 }
 
-+ (id)pusherWithKey:(NSString *)key delegate:(id<PTPusherDelegate>)delegate encrypted:(BOOL)isEncrypted cluster:(NSString *) cluster
++ (instancetype)pusherWithKey:(NSString *)key delegate:(id<PTPusherDelegate>)delegate encrypted:(BOOL)isEncrypted cluster:(NSString *) cluster
 {
     NSString * hostURL;
     if ([cluster length] == 0) {
