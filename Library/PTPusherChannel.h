@@ -72,7 +72,7 @@
  */
 @property (nonatomic, readonly) BOOL isPresence;
 
-+ (id)channelWithName:(NSString *)name pusher:(PTPusher *)pusher;
++ (instancetype)channelWithName:(NSString *)name pusher:(PTPusher *)pusher;
 - (id)initWithName:(NSString *)channelName pusher:(PTPusher *)pusher;
 - (void)authorizeWithCompletionHandler:(void(^)(BOOL, NSDictionary *, NSError *))completionHandler;
 
