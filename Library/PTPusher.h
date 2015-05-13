@@ -87,6 +87,13 @@ extern NSString *const PTPusherErrorUnderlyingEventKey;
 @property (nonatomic, weak) id<PTPusherDelegate> delegate;
 
 /** Specifies the delay between reconnection attempts. Defaults to 5 seconds.
+ *
+ * If the client disconnects for an unknown reason, the client will attempt to automatically
+ * reconnect after this delay has elapsed.
+ *
+ * PTPusher will not automatically reconnect if `disconnect` is called explicitly and it
+ * will also handle reconnection differently if disconnection happens with a known error code,
+ * as per the Pusher protocol documentation.
  */
 @property (nonatomic, assign) NSTimeInterval reconnectDelay;
 
@@ -137,7 +144,7 @@ extern NSString *const PTPusherErrorUnderlyingEventKey;
  @param delegate    The delegate for this instance
  @param isEncrypted If yes, a secure connection over SSL will be established.
  */
-+ (id)pusherWithKey:(NSString *)key delegate:(id<PTPusherDelegate>)delegate encrypted:(BOOL)isEncrypted;
++ (instancetype)pusherWithKey:(NSString *)key delegate:(id<PTPusherDelegate>)delegate encrypted:(BOOL)isEncrypted;
 
 /** Returns a new PTPusher instance with a connection configured with the given key and allows to set different cluster
 
@@ -147,7 +154,7 @@ extern NSString *const PTPusherErrorUnderlyingEventKey;
  @param cluster     If set, connects to the provided cluster
  */
 
-+ (id)pusherWithKey:(NSString *)key delegate:(id<PTPusherDelegate>)delegate encrypted:(BOOL)isEncrypted cluster:(NSString *) cluster;
++ (instancetype)pusherWithKey:(NSString *)key delegate:(id<PTPusherDelegate>)delegate encrypted:(BOOL)isEncrypted cluster:(NSString *) cluster;
 
 /** Returns a new PTPusher instance with an connection configured with the given key.
  
@@ -157,7 +164,7 @@ extern NSString *const PTPusherErrorUnderlyingEventKey;
  @param key       Your application's API key. It can be found in the API Access section of your application within the Pusher user dashboard.
  @param delegate  The delegate for this instance
  */
-+ (id)pusherWithKey:(NSString *)key delegate:(id<PTPusherDelegate>)delegate;
++ (instancetype)pusherWithKey:(NSString *)key delegate:(id<PTPusherDelegate>)delegate;
 
 ///------------------------------------------------------------------------------------/
 /// @name Managing the connection
@@ -171,7 +178,8 @@ extern NSString *const PTPusherErrorUnderlyingEventKey;
 
 /** Disconnects from the Pusher server.
  
- If already disconnected, this method does nothing.
+ If already disconnected, this method does nothing. PTPusher will not attempt to 
+ reconnect if you call this method. To reconnect, you must call `connect` again.
  */
 - (void)disconnect;
 
@@ -240,21 +248,6 @@ extern NSString *const PTPusherErrorUnderlyingEventKey;
  */
 - (PTPusherPresenceChannel *)subscribeToPresenceChannelNamed:(NSString *)name delegate:(id<PTPusherPresenceChannelDelegate>)presenceDelegate;
 
-/** Unsubscribes from the specified channel.
- 
- This method is deprecated. You should use -[PTPusherChannel unsubscribe] instead.
- 
- When you explicitly unsubscribe from a channel, it will never be re-subscribed to and
- PTPusher will remove any of it's references to the channel. If you maintain no strong
- references to the channel of your own, the channel object will be deallocated. 
- 
- If you do maintain a strong reference to a channel object, you should discard it after
- calling `unsubscribe`.
- 
- @param channel The channel to unsubscribe from.
- */
-- (void)unsubscribeFromChannel:(PTPusherChannel *)channel __PUSHER_DEPRECATED__;
-
 /** Returns a previously subscribed channel with the given name.
  
  If the channel specified has not been subscribed to previously, or has been explicilty
@@ -290,39 +283,6 @@ extern NSString *const PTPusherErrorUnderlyingEventKey;
  @warning Note: This Pusher feature is currently in beta and requires enabling on your account.
  */
 - (void)sendEventNamed:(NSString *)name data:(id)data channel:(NSString *)channelName;
-
-///------------------------------------------------------------------------------------/
-/// @name Deprecated methods
-///------------------------------------------------------------------------------------/
-
-/** Initialises a new PTPusher instance with a connection configured with the given key.
- 
- If you intend to set a delegate for this instance, you are recommended to set connectAutomatically
- to NO, set the delegate then manually call connect.
- 
- @deprecated      Use pusherWithKey:delegate:encrypted: or pusherWithKey:delegate:
- @param key       Your application's API key. It can be found in the API Access section of your application within the Pusher user dashboard.
- @param connect   Automatically If YES, the connection will be connected on initialisation.
- */
-+ (id)pusherWithKey:(NSString *)key connectAutomatically:(BOOL)connectAutomatically __PUSHER_DEPRECATED__;
-
-/** Initialises a new PTPusher instance with a connection configured with the given key.
- 
- If you intend to set a delegate for this instance, you are recommended to set connectAutomatically
- to NO, set the delegate then manually call connect.
- 
- @deprecated      Use pusherWithKey:delegate:encrypted: or pusherWithKey:delegate:
- @param key       Your application's API key. It can be found in the API Access section of your application within the Pusher user dashboard.
- @param connectAutomatically If YES, the connection will be connected on initialisation.
- @param isEncrypted If yes, a secure connection over SSL will be established.
- */
-+ (id)pusherWithKey:(NSString *)key connectAutomatically:(BOOL)connectAutomatically encrypted:(BOOL)isEncrypted __PUSHER_DEPRECATED__;
-
-/**
- * @deprecated See initWithConnection:
- */
-- (id)initWithConnection:(PTPusherConnection *)connection connectAutomatically:(BOOL)connectAutomatically __PUSHER_DEPRECATED__;
-
 
 @end
 

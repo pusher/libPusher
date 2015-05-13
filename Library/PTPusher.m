@@ -51,6 +51,7 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 
 @interface PTPusher ()
 @property (nonatomic, strong, readwrite) PTPusherConnection *connection;
+@property (nonatomic, assign) PTPusherAutoReconnectMode autoReconnectMode;
 @end
 
 #pragma mark -
@@ -61,16 +62,6 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
   NSUInteger _maximumNumberOfReconnectAttempts;
   PTPusherEventDispatcher *dispatcher;
   NSMutableDictionary *channels;
-}
-
-- (id)initWithConnection:(PTPusherConnection *)connection connectAutomatically:(BOOL)connectAutomatically
-{
-  if ((self = [self initWithConnection:connection])) {
-    if (connectAutomatically) {
-      [self connect];
-    }
-  }
-  return self;
 }
 
 - (id)initWithConnection:(PTPusherConnection *)connection
@@ -102,17 +93,17 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
   return self;
 }
 
-+ (id)pusherWithKey:(NSString *)key delegate:(id<PTPusherDelegate>)delegate
++ (instancetype)pusherWithKey:(NSString *)key delegate:(id<PTPusherDelegate>)delegate
 {
   return [self pusherWithKey:key delegate:delegate encrypted:YES];
 }
 
-+ (id)pusherWithKey:(NSString *)key delegate:(id<PTPusherDelegate>)delegate encrypted:(BOOL)isEncrypted
++ (instancetype)pusherWithKey:(NSString *)key delegate:(id<PTPusherDelegate>)delegate encrypted:(BOOL)isEncrypted
 {
   return [self pusherWithKey:(NSString *)key delegate:(id<PTPusherDelegate>)delegate encrypted:(BOOL)isEncrypted cluster:(NSString *) nil];
 }
 
-+ (id)pusherWithKey:(NSString *)key delegate:(id<PTPusherDelegate>)delegate encrypted:(BOOL)isEncrypted cluster:(NSString *) cluster
++ (instancetype)pusherWithKey:(NSString *)key delegate:(id<PTPusherDelegate>)delegate encrypted:(BOOL)isEncrypted cluster:(NSString *) cluster
 {
     NSString * hostURL;
     if ([cluster length] == 0) {
@@ -126,26 +117,6 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
     PTPusher *pusher = [[self alloc] initWithConnection:connection];
     pusher.delegate = delegate;
     return pusher;
-}
-
-#pragma mark - Deprecated methods
-
-+ (id)pusherWithKey:(NSString *)key connectAutomatically:(BOOL)connectAutomatically
-{
-  PTPusher *client = [self pusherWithKey:key delegate:nil encrypted:YES];
-  if (connectAutomatically) {
-    [client connect];
-  }
-  return client;
-}
-
-+ (id)pusherWithKey:(NSString *)key connectAutomatically:(BOOL)connectAutomatically encrypted:(BOOL)isEncrypted
-{
-  PTPusher *client = [self pusherWithKey:key delegate:nil encrypted:isEncrypted];
-  if (connectAutomatically) {
-    [client connect];
-  }
-  return client;
 }
 
 - (void)dealloc;
@@ -164,11 +135,14 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 - (void)connect
 {
   _numberOfReconnectAttempts = 0;
+  self.autoReconnectMode = PTPusherAutoReconnectModeReconnectWithConfiguredDelay;
   [self.connection connect];
 }
 
 - (void)disconnect
 {
+  // we do not want to reconnect if a user explicitly disconnects
+  self.autoReconnectMode = PTPusherAutoReconnectModeNoReconnect;
   [self.connection disconnect];
 }
 
@@ -272,15 +246,13 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
   }
 }
 
-- (void)unsubscribeFromChannel:(PTPusherChannel *)channel
-{
-  [self __unsubscribeFromChannel:channel];
-}
-
 - (void)subscribeToChannel:(PTPusherChannel *)channel
 {
   [channel authorizeWithCompletionHandler:^(BOOL isAuthorized, NSDictionary *authData, NSError *error) {
     if (isAuthorized && self.connection.isConnected) {
+      if ([self.delegate respondsToSelector:@selector(pusher:authorizationPayloadFromResponseData:)]) {
+        authData = [self.delegate pusher:self authorizationPayloadFromResponseData:authData];
+      }    
       [channel subscribeWithAuthorization:authData];
     }
     else {
@@ -385,7 +357,7 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
     }
   }
   else {
-    [self handleDisconnection:connection error:error reconnectMode:PTPusherAutoReconnectModeReconnectWithConfiguredDelay];
+    [self handleDisconnection:connection error:error reconnectMode:self.autoReconnectMode];
   }
 }
 
@@ -426,22 +398,6 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
   
   for (PTPusherChannel *channel in [channels allValues]) {
     [channel handleDisconnect];
-  }
-  
-  if ([self.delegate respondsToSelector:@selector(pusher:connectionDidDisconnect:)]) { // deprecated call
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-    NSLog(@"pusher:connectionDidDisconnect: is deprecated and will be removed in 1.6. Use pusher:connection:didDisconnectWithError:willAttemptReconnect: instead.");
-    [self.delegate pusher:self connectionDidDisconnect:connection];
-#pragma clang diagnostic pop
-  }
-
-  if ([self.delegate respondsToSelector:@selector(pusher:connection:didDisconnectWithError:)]) { // deprecated call
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-    NSLog(@"pusher:connectionDidDisconnectWithError: is deprecated and will be removed in 1.6. Use pusher:connection:didDisconnectWithError:willAttemptReconnect: instead.");
-    [self.delegate pusher:self connection:connection didDisconnectWithError:error];
-#pragma clang diagnostic pop
   }
   
   BOOL willReconnect = NO;

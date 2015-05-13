@@ -134,7 +134,9 @@
 				A3CA675714DBCB2D003E2F1E /* Frameworks */,
 				A3CA675614DBCB2D003E2F1E /* Products */,
 			);
+			indentWidth = 2;
 			sourceTree = "<group>";
+			tabWidth = 2;
 		};
 		A3CA675614DBCB2D003E2F1E /* Products */ = {
 			isa = PBXGroup;

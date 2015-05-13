@@ -8,7 +8,7 @@ Pusher is a hosted service that sits between your web application and the browse
 
 The libPusher API mirrors the Pusher Javascript client as closely as possible, with some allowances for Objective-C conventions. In particular, whilst the Javascript client uses event binding for all event handling, where events are pre-defined, libPusher uses the standard Cocoa delegation pattern.
 
-[API Documentation](http://lukeredpath.github.io/libPusher/html/index.html)
+[API Documentation](http://cocoadocs.org/docsets/libPusher/1.5/)
 
 ## Example
 Subscribe to the ```chat``` channel and bind to the ```new-message``` event.
@@ -31,7 +31,7 @@ PTPusherChannel *channel = [self.client subscribeToChannelNamed:@"chat"];
 Install using CocoaPods is recommended.
 
 ```ruby
-pod 'libPusher', '~> 1.5'
+pod 'libPusher', '~> 1.6'
 ```
 
 Import Pusher into the class that wants to make use of the library.
@@ -41,6 +41,16 @@ Import Pusher into the class that wants to make use of the library.
 ```
 
 A step-by-step guide on how to [install and setup CocoaPods]() to use libPusher without using CocoaPods is available on the wiki.
+
+If you want to use the ReactiveExtensions version of libPusher, add the following line to your Podfile instead.
+
+```ruby
+pod 'libPusher/ReactiveExtensions', '~> 1.6'
+```
+
+This will also load the core libPusher library and ReactiveCocoa as a dependency.
+
+If you are not using CocoaPods, you can simply drop the extensions into your project.
 
 ## Usage
 
@@ -299,6 +309,9 @@ Automatic reconnection will not happen in the following situations:
 An error code in the range 4000-4099 generally indicates a client misconfiguration (e.g. invalid API key) or rate limiting. See the [Pusher protocol documentation](http://pusher.com/docs/pusher_protocol#error-codes) for more information.
 
 The other scenarios generally indicate that it is not currently possible to connect to the Pusher service - this might be because of an issue with the service but more likely is that there simply isn't an internet connection.
+
+Up to version 1.6, automatic reconnection would happen after the configured `reconnectDelay` even after explicitly 
+calling `disconnect`. This behaviour was undesirable and in all subsequent versions this no longer happens and an explicit call to `connect` is required to reconnect in this case.
 
 ### Handling disconnections
 

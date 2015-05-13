@@ -32,7 +32,7 @@
 
 @implementation PTPusherChannel
 
-+ (id)channelWithName:(NSString *)name pusher:(PTPusher *)pusher
++ (instancetype)channelWithName:(NSString *)name pusher:(PTPusher *)pusher
 {
   if ([name hasPrefix:@"private-"]) {
     return [[PTPusherPrivateChannel alloc] initWithName:name pusher:pusher];
@@ -236,14 +236,6 @@
   [authOperation setCompletionHandler:^(PTPusherChannelAuthorizationOperation *operation) {
     completionHandler(operation.isAuthorized, operation.authorizationData, operation.error);
   }];
-  
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-  if ([self.pusher.delegate respondsToSelector:@selector(pusher:willAuthorizeChannelWithRequest:)]) { // deprecated call
-    NSLog(@"willAuthorizeChannelWithRequest: is deprecated and will be removed in 1.6. Use pusher:willAuthorizeChannel:withRequest: instead.");
-    [self.pusher.delegate pusher:self.pusher willAuthorizeChannelWithRequest:authOperation.mutableURLRequest];
-  }
-#pragma clang diagnostic pop
     
   if ([self.pusher.delegate respondsToSelector:@selector(pusher:willAuthorizeChannel:withRequest:)]) {
     [self.pusher.delegate pusher:self.pusher willAuthorizeChannel:self withRequest:authOperation.mutableURLRequest];
@@ -339,21 +331,7 @@
 - (void)handleSubscribeEvent:(PTPusherEvent *)event
 {
   [super handleSubscribeEvent:event];
-  
   [self.members handleSubscription:event.data];
-  
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-  if ([self.presenceDelegate respondsToSelector:@selector(presenceChannel:didSubscribeWithMemberList:)]) { // deprecated call
-    NSLog(@"presenceChannel:didSubscribeWithMemberList: is deprecated and will be removed in 1.6. Use presenceChannelDidSubscribe: instead.");
-    NSMutableArray *members = [NSMutableArray arrayWithCapacity:self.members.count];
-    [self.members enumerateObjectsUsingBlock:^(id obj, BOOL *stop) {
-      [members addObject:obj];
-    }];
-    [self.presenceDelegate presenceChannel:self didSubscribeWithMemberList:members];
-  }
-#pragma clang diagnostic pop
-
   [self.presenceDelegate presenceChannelDidSubscribe:self];
 }
 
@@ -362,36 +340,9 @@
   return YES;
 }
 
-- (NSDictionary *)infoForMemberWithID:(NSString *)memberID
-{
-  return self.members[memberID];
-}
-
-- (NSArray *)memberIDs
-{
-  NSMutableArray *memberIDs = [NSMutableArray array];
-  [self.members enumerateObjectsUsingBlock:^(PTPusherChannelMember *member, BOOL *stop) {
-    [memberIDs addObject:member.userID];
-  }];
-  return memberIDs;
-}
-
-- (NSInteger)memberCount
-{
-  return self.members.count;
-}
-
 - (void)handleMemberAddedEvent:(PTPusherEvent *)event
 {
   PTPusherChannelMember *member = [self.members handleMemberAdded:event.data];
-  
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-  if ([self.presenceDelegate respondsToSelector:@selector(presenceChannel:memberAddedWithID:memberInfo:)]) { // deprecated call
-    NSLog(@"presenceChannel:memberAddedWithID:memberInfo: is deprecated and will be removed in 1.6. Use presenceChannel:memberAdded: instead.");
-    [self.presenceDelegate presenceChannel:self memberAddedWithID:member.userID memberInfo:member.userInfo];
-  }
-#pragma clang diagnostic pop
 
   [self.presenceDelegate presenceChannel:self memberAdded:member];
 }
@@ -399,15 +350,6 @@
 - (void)handleMemberRemovedEvent:(PTPusherEvent *)event
 {
   PTPusherChannelMember *member = [self.members handleMemberRemoved:event.data];
-
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-  if ([self.presenceDelegate respondsToSelector:@selector(presenceChannel:memberRemovedWithID:atIndex:)]) { // deprecated call
-    NSLog(@"presenceChannel:memberRemovedWithID:atIndex: is deprecated and will be removed in 1.6. Use presenceChannel:memberRemoved: instead.");
-    // we just send an index of -1 here: I don't want to jump through hoops to support a deprecated API call
-    [self.presenceDelegate presenceChannel:self memberRemovedWithID:member.userID atIndex:-1];
-  }
-#pragma clang diagnostic pop
   
   [self.presenceDelegate presenceChannel:self memberRemoved:member];
 }
