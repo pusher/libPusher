@@ -67,7 +67,7 @@ describe(@"Client events", ^{
     });
     
     onSubscribe(^(PTPusherChannel *channel) {
-      NSLog(@"here");
+      PTLog(@"here");
     });
     
     [client connect];

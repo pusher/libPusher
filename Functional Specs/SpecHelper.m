@@ -81,7 +81,7 @@ void waitForClientToDisconnect(PTPusher *client)
   if (![[PTPusherClientTestHelperDelegate sharedInstance] connected]) return;
 
   while ([[PTPusherClientTestHelperDelegate sharedInstance] connected]) {
-    NSLog(@"Waiting for client to disconnect...");
+    PTLog(@"Waiting for client to disconnect...");
     [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
   }
 }
@@ -160,7 +160,7 @@ void waitForClientToDisconnect(PTPusher *client)
 - (void)pusher:(PTPusher *)pusher connectionDidConnect:(PTPusherConnection *)connection
 {
   if (self.debugEnabled) {
-    NSLog(@"[DEBUG] Client connected");
+    PTLog(@"[DEBUG] Client connected");
   }
   if (connectedBlock) {
     connectedBlock();
@@ -172,7 +172,7 @@ void waitForClientToDisconnect(PTPusher *client)
 - (void)pusher:(PTPusher *)pusher connection:(PTPusherConnection *)connection didDisconnectWithError:(NSError *)error willAttemptReconnect:(BOOL)willAttemptReconnect
 {
   if (self.debugEnabled) {
-    NSLog(@"[DEBUG] Client disconnected");
+    PTLog(@"[DEBUG] Client disconnected");
   }
   if (disconnectedBlock) {
     disconnectedBlock();
@@ -187,7 +187,7 @@ void waitForClientToDisconnect(PTPusher *client)
 - (void)pusher:(PTPusher *)pusher connection:(PTPusherConnection *)connection failedWithError:(NSError *)error
 {
   if (self.debugEnabled) {
-     NSLog(@"[DEBUG] Client connection failed with error %@", error);
+     PTLog(@"[DEBUG] Client connection failed with error %@", error);
   }
   connected = NO;
   connectedBlock = nil;

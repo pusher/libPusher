@@ -19,6 +19,8 @@
 
 #define kPUSHER_HOST @"ws.pusherapp.com"
 
+
+
 typedef NS_ENUM(NSUInteger, PTPusherAutoReconnectMode) {
   PTPusherAutoReconnectModeNoReconnect,
   PTPusherAutoReconnectModeReconnectImmediately,
@@ -33,6 +35,7 @@ NSString *const PTPusherEventUserInfoKey          = @"PTPusherEventUserInfoKey";
 NSString *const PTPusherErrorDomain               = @"PTPusherErrorDomain";
 NSString *const PTPusherFatalErrorDomain          = @"PTPusherFatalErrorDomain";
 NSString *const PTPusherErrorUnderlyingEventKey   = @"PTPusherErrorUnderlyingEventKey";
+BOOL ptLoggingEnabled = true;
 
 /** The Pusher protocol version, used to determined which features
  are supported.
@@ -286,7 +289,7 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
   NSParameterAssert(name);
   
   if (self.connection.isConnected == NO) {
-    NSLog(@"Warning: attempting to send event while disconnected. Event will not be sent.");
+    PTLog(@"Warning: attempting to send event while disconnected. Event will not be sent.");
     return;
   }
   

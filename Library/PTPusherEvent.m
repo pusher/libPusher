@@ -6,6 +6,7 @@
 //  Copyright 2010 LJR Software Limited. All rights reserved.
 //
 
+#import "PTPusher.h"
 #import "PTPusherEvent.h"
 #import "PTJSON.h"
 
@@ -35,7 +36,7 @@ NSString *const PTPusherChannelKey = @"channel";
       _data = [[[PTJSON JSONParser] objectFromJSONString:data] copy];
 
       if (_data == nil) {
-        NSLog(@"[pusher] Error parsing event data (not JSON?)");
+        PTLog(@"[pusher] Error parsing event data (not JSON?)");
         _data = [data copy];
       }
     }

@@ -19,4 +19,12 @@ _sharedObject = block(); \
 }); \
 return _sharedObject; \
 
+#define PTLog(log, ...) \
+do { \
+  if (ptLoggingEnabled) { \
+    NSLog(log, ##__VA_ARGS__); \
+  } \
+} while(0)
+
+
 #endif

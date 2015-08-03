@@ -42,6 +42,12 @@ extern NSString *const PTPusherFatalErrorDomain;
  */
 extern NSString *const PTPusherErrorUnderlyingEventKey;
 
+/** The key which determines whether or not logging is enabled. 
+ *
+ * Default is true.
+ */
+extern BOOL ptLoggingEnabled;
+
 @class PTPusherChannel;
 @class PTPusherPresenceChannel;
 @class PTPusherPrivateChannel;

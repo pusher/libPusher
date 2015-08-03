@@ -11,6 +11,7 @@
 #define SR_ENABLE_LOG
 #import "SRWebSocket.h"
 #import "PTJSON.h"
+#import "PTPusher.h"
 
 NSString *const PTPusherConnectionEstablishedEvent = @"pusher:connection_established";
 NSString *const PTPusherConnectionPingEvent        = @"pusher:ping";
@@ -34,7 +35,7 @@ NSString *const PTPusherConnectionPongEvent        = @"pusher:pong";
     request = [NSURLRequest requestWithURL:aURL];
     
 #ifdef DEBUG
-    NSLog(@"[pusher] Debug logging enabled");
+    PTLog(@"[pusher] Debug logging enabled");
 #endif
     
     // Timeout defaults as recommended by the Pusher protocol documentation.
@@ -143,7 +144,7 @@ NSString *const PTPusherConnectionPongEvent        = @"pusher:pong";
   
   if ([event.name isEqualToString:PTPusherConnectionPongEvent]) {
 #ifdef DEBUG
-    NSLog(@"[pusher] Server responded to ping (pong!)");
+    PTLog(@"[pusher] Server responded to ping (pong!)");
 #endif
     return;
   }
@@ -177,7 +178,7 @@ NSString *const PTPusherConnectionPongEvent        = @"pusher:pong";
 - (void)handleActivityTimeout
 {
 #ifdef DEBUG
-  NSLog(@"[pusher] Pusher connection activity timeout reached, sending ping to server");
+  PTLog(@"[pusher] Pusher connection activity timeout reached, sending ping to server");
 #endif
   
   [self sendPing];
@@ -188,7 +189,7 @@ NSString *const PTPusherConnectionPongEvent        = @"pusher:pong";
 - (void)handlePongTimeout
 {
 #ifdef DEBUG
-  NSLog(@"[pusher] Server did not respond to ping within timeout, disconnecting");
+  PTLog(@"[pusher] Server did not respond to ping within timeout, disconnecting");
 #endif
   
   [self disconnect];
