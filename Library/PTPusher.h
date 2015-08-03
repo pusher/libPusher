@@ -46,7 +46,7 @@ extern NSString *const PTPusherErrorUnderlyingEventKey;
  *
  * Default is true.
  */
-extern BOOL ptLoggingEnabled;
+extern BOOL PTLoggingEnabled;
 
 @class PTPusherChannel;
 @class PTPusherPresenceChannel;

@@ -21,7 +21,7 @@ return _sharedObject; \
 
 #define PTLog(log, ...) \
 do { \
-  if (ptLoggingEnabled) { \
+  if (PTLoggingEnabled) { \
     NSLog(log, ##__VA_ARGS__); \
   } \
 } while(0)

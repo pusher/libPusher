@@ -35,7 +35,7 @@ NSString *const PTPusherEventUserInfoKey          = @"PTPusherEventUserInfoKey";
 NSString *const PTPusherErrorDomain               = @"PTPusherErrorDomain";
 NSString *const PTPusherFatalErrorDomain          = @"PTPusherFatalErrorDomain";
 NSString *const PTPusherErrorUnderlyingEventKey   = @"PTPusherErrorUnderlyingEventKey";
-BOOL ptLoggingEnabled = true;
+BOOL PTLoggingEnabled = true;
 
 /** The Pusher protocol version, used to determined which features
  are supported.
