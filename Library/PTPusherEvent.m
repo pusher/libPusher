@@ -31,7 +31,8 @@ NSString *const PTPusherChannelKey = @"channel";
     _timeReceived = [NSDate date];
     
     // try and deserialize the data as JSON if possible
-    if ([data respondsToSelector:@selector(dataUsingEncoding:)]) {
+      if ([data respondsToSelector:@selector(dataUsingEncoding:)]  &&
+          !([data isKindOfClass:[NSString class]] && [data isEqualToString:@""]) ) {
       _data = [[[PTJSON JSONParser] objectFromJSONString:data] copy];
 
       if (_data == nil) {
