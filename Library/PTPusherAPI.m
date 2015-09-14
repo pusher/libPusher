@@ -17,6 +17,8 @@
 
 @implementation PTPusherAPI {
   NSString *key, *appID, *secretKey;
+  NSString *host;
+  NSInteger port;
   NSOperationQueue *operationQueue;
 }
 
@@ -27,10 +29,14 @@
     appID = [anAppID copy];
     secretKey = [aSecretKey copy];
     operationQueue = [[NSOperationQueue alloc] init];
+    host = kPUSHER_API_DEFAULT_HOST;
   }
   return self;
 }
 
+- (void)setHost:(NSString *)value {
+    host = value;
+}
 
 - (void)triggerEvent:(NSString *)eventName onChannel:(NSString *)channelName data:(id)eventData socketID:(NSString *)socketID
 {
@@ -54,7 +60,7 @@
   
   queryParameters[@"auth_signature"] = [signatureString HMACDigestUsingSecretKey:secretKey];
   
-  NSString *URLString = [NSString stringWithFormat:@"http://%@%@?%@", kPUSHER_API_DEFAULT_HOST, path, [queryParameters sortedQueryString]];
+  NSString *URLString = [NSString stringWithFormat:@"http://%@%@?%@", host, path, [queryParameters sortedQueryString]];
   
   NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:URLString]];
   [request setHTTPBody:bodyData];

@@ -42,6 +42,8 @@ extern NSString *const PTPusherFatalErrorDomain;
  */
 extern NSString *const PTPusherErrorUnderlyingEventKey;
 
+extern NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, BOOL encrypted);
+
 @class PTPusherChannel;
 @class PTPusherPresenceChannel;
 @class PTPusherPrivateChannel;

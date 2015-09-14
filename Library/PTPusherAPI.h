@@ -36,6 +36,8 @@
  */
 - (id)initWithKey:(NSString *)aKey appID:(NSString *)anAppID secretKey:(NSString *)aSecretKey;
 
+- (void)setHost:(NSString *)value;
+
 ///------------------------------------------------------------------------------------/
 /// @name Triggering events
 ///------------------------------------------------------------------------------------/
