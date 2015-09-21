@@ -1,27 +1,30 @@
 PODS:
-  - Kiwi (2.3.0)
-  - OHHTTPStubs (3.0.2)
-  - Reachability (3.1.1)
-  - ReactiveCocoa (2.1.7):
-    - ReactiveCocoa/Core (= 2.1.7)
-    - ReactiveCocoa/no-arc (= 2.1.7)
-  - ReactiveCocoa/Core (2.1.7):
+  - Kiwi (2.4.0)
+  - OHHTTPStubs (3.1.12):
+    - OHHTTPStubs/Core (= 3.1.12)
+  - OHHTTPStubs/Core (3.1.12)
+  - Reachability (3.2)
+  - ReactiveCocoa (2.5):
+    - ReactiveCocoa/UI (= 2.5)
+  - ReactiveCocoa/Core (2.5):
     - ReactiveCocoa/no-arc
-  - ReactiveCocoa/no-arc (2.1.7)
-  - SocketRocket (0.4)
+  - ReactiveCocoa/no-arc (2.5)
+  - ReactiveCocoa/UI (2.5):
+    - ReactiveCocoa/Core
+  - SocketRocket (0.4.1)
 
 DEPENDENCIES:
   - Kiwi (~> 2.3)
   - OHHTTPStubs (~> 3.0)
   - Reachability (~> 3.1)
   - ReactiveCocoa (~> 2.1)
-  - SocketRocket (~> 0.4)
+  - SocketRocket (~> 0.4.1)
 
 SPEC CHECKSUMS:
-  Kiwi: 4c3988bd551f80f6ca0009f302f7c1a2e3777bf2
-  OHHTTPStubs: e80c54e759b2d1a9f3bfd0586d779d1a377316cf
-  Reachability: dd9aa4fb6667b9f787690a74f53cb7634ce99893
-  ReactiveCocoa: 568ce4edcb99802f23507a4974993f4a380045ca
-  SocketRocket: 01443933b7bc362621325f4607b80b4286a99707
+  Kiwi: f49c9d54b28917df5928fe44968a39ed198cb8a8
+  OHHTTPStubs: 8cf0cfe6f34f13fc88fdf5b2a1b2c2536e8c0261
+  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+  ReactiveCocoa: e2db045570aa97c695e7aa97c2bcab222ae51f4a
+  SocketRocket: ee0b5c34182d37bb4f1f8d628bbe737718126daa
 
 COCOAPODS: 0.38.2

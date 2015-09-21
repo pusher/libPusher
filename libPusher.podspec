@@ -14,8 +14,8 @@ Pod::Spec.new do |s|
   s.osx.deployment_target = '10.8'
   
   s.subspec 'Core' do |subspec|
-    subspec.dependency 'SocketRocket', "0.3.1-beta2"
-    
+    subspec.dependency 'SocketRocket', "0.4.1"
+
     subspec.source_files         = 'Library/**/*.{h,m}'
     subspec.private_header_files = 'Library/Private Headers/*'
     subspec.xcconfig             = { 
