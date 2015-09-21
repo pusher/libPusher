@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name            = 'libPusher'
-  s.version         = '1.6'
+  s.version         = '1.6.1'
   s.license         = 'MIT'
   s.summary         = 'An Objective-C client for the Pusher.com service'
   s.homepage        = 'https://github.com/lukeredpath/libPusher'
