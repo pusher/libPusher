@@ -28,6 +28,6 @@ Pod::Spec.new do |s|
     subspec.dependency 'ReactiveCocoa', '~> 2.1'
 
     subspec.source_files = 'ReactiveExtensions/*'
-    subspec.private_header_files = '*_Internal.h'
+    subspec.private_header_files = 'ReactiveExtensions/*_Internal.h'
   end
 end
