@@ -1,0 +1,6 @@
+FRAMEWORK_SEARCH_PATHS = $(inherited) "$(SDKROOT)/Developer/Library/Frameworks" "$(PLATFORM_DIR)/Developer/Library/Frameworks"
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1 XCODE_VERSION=$(XCODE_VERSION_MAJOR)
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/Kiwi" "${PODS_ROOT}/Headers/Public/OHHTTPStubs" "${PODS_ROOT}/Headers/Public/Reachability" "${PODS_ROOT}/Headers/Public/ReactiveCocoa" "${PODS_ROOT}/Headers/Public/SocketRocket"
+OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/Kiwi" -isystem "${PODS_ROOT}/Headers/Public/OHHTTPStubs" -isystem "${PODS_ROOT}/Headers/Public/Reachability" -isystem "${PODS_ROOT}/Headers/Public/ReactiveCocoa" -isystem "${PODS_ROOT}/Headers/Public/SocketRocket"
+OTHER_LDFLAGS = $(inherited) -ObjC -l"Kiwi" -l"OHHTTPStubs" -framework "CFNetwork" -framework "Foundation" -framework "XCTest"
+PODS_ROOT = ${SRCROOT}/Pods
