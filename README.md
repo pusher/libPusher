@@ -31,7 +31,7 @@ PTPusherChannel *channel = [self.client subscribeToChannelNamed:@"chat"];
 Install using CocoaPods is recommended.
 
 ```ruby
-pod 'libPusher', '~> 1.6'
+pod 'libPusher', '~> 1.6.1'
 ```
 
 Import Pusher into the class that wants to make use of the library.
@@ -45,7 +45,7 @@ A step-by-step guide on how to [install and setup CocoaPods]() to use libPusher 
 If you want to use the ReactiveExtensions version of libPusher, add the following line to your Podfile instead.
 
 ```ruby
-pod 'libPusher/ReactiveExtensions', '~> 1.6'
+pod 'libPusher/ReactiveExtensions', '~> 1.6.1'
 ```
 
 This will also load the core libPusher library and ReactiveCocoa as a dependency.

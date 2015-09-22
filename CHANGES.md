@@ -1,3 +1,9 @@
+# 1.6.1 - September 2015
+
+* Update SocketRocket to 0.4.1 (#181)
+* Update Gemfile to use more recent version of Cocoapods
+* Changed iOS deployment target to 6.0
+
 # 1.6 - March 2015
 
 * Swift and 64-bit compatibility

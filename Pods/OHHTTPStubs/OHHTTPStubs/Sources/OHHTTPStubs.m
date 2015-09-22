@@ -101,14 +101,11 @@ static NSTimeInterval const kSlotTime = 0.25; // Must be >0. We will send a chun
 ////////////////////////////////////////////////////////////////////////////////
 #pragma mark - Setup & Teardown
 
-extern void _OHHTTPStubs_InstallNSURLSessionConfigurationMagicSupport();
-
 + (void)initialize
 {
     if (self == [OHHTTPStubs class])
     {
         [self setEnabled:YES];
-        _OHHTTPStubs_InstallNSURLSessionConfigurationMagicSupport();
     }
 }
 - (id)init
@@ -169,8 +166,7 @@ extern void _OHHTTPStubs_InstallNSURLSessionConfigurationMagicSupport();
     currentEnabledState = enable;
 }
 
-#if (defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 70000) \
- || (defined(__MAC_OS_X_VERSION_MAX_ALLOWED) && __MAC_OS_X_VERSION_MAX_ALLOWED >= 1090)
+#if defined(__IPHONE_7_0) || defined(__MAC_10_9)
 + (void)setEnabled:(BOOL)enable forSessionConfiguration:(NSURLSessionConfiguration*)sessionConfig
 {
     // Runtime check to make sure the API is available on this version
@@ -181,9 +177,9 @@ extern void _OHHTTPStubs_InstallNSURLSessionConfigurationMagicSupport();
         Class protoCls = OHHTTPStubsProtocol.class;
         if (enable && ![urlProtocolClasses containsObject:protoCls])
         {
-            [urlProtocolClasses addObject:protoCls];
+            [urlProtocolClasses insertObject:protoCls atIndex:0];
         }
-        else if (!enable  && [urlProtocolClasses containsObject:protoCls])
+        else if (!enable && [urlProtocolClasses containsObject:protoCls])
         {
             [urlProtocolClasses removeObject:protoCls];
         }
@@ -191,7 +187,9 @@ extern void _OHHTTPStubs_InstallNSURLSessionConfigurationMagicSupport();
     }
     else
     {
-        NSLog(@"[OHHTTPStubs] %@ is only available when running on iOS7+. Use conditions like 'if ([NSURLSessionConfiguration class])' to only call this method if the user is running iOS7+.", NSStringFromSelector(_cmd));
+        NSLog(@"[OHHTTPStubs] %@ is only available when running on iOS7+/OSX9+. "
+              @"Use conditions like 'if ([NSURLSessionConfiguration class])' to only call "
+              @"this method if the user is running iOS7+/OSX9+.", NSStringFromSelector(_cmd));
     }
 }
 #endif
@@ -280,7 +278,8 @@ extern void _OHHTTPStubs_InstallNSURLSessionConfigurationMagicSupport();
 #pragma mark - Private Protocol Class
 
 @interface OHHTTPStubsProtocol()
-@property(nonatomic, assign) BOOL stopped;
+@property(assign) BOOL stopped;
+@property(strong) OHHTTPStubsDescriptor* stub;
 @end
 
 @implementation OHHTTPStubsProtocol
@@ -293,7 +292,9 @@ extern void _OHHTTPStubs_InstallNSURLSessionConfigurationMagicSupport();
 - (id)initWithRequest:(NSURLRequest *)request cachedResponse:(NSCachedURLResponse *)response client:(id<NSURLProtocolClient>)client
 {
     // Make super sure that we never use a cached response.
-    return [super initWithRequest:request cachedResponse:nil client:client];
+    OHHTTPStubsProtocol* proto = [super initWithRequest:request cachedResponse:nil client:client];
+    proto.stub = [OHHTTPStubs.sharedInstance firstStubPassingTestForRequest:request];
+    return proto;
 }
 
 + (NSURLRequest *)canonicalRequestForRequest:(NSURLRequest *)request
@@ -309,19 +310,32 @@ extern void _OHHTTPStubs_InstallNSURLSessionConfigurationMagicSupport();
 - (void)startLoading
 {
     NSURLRequest* request = self.request;
-	id<NSURLProtocolClient> client = self.client;
+    id<NSURLProtocolClient> client = self.client;
     
-    OHHTTPStubsDescriptor* stub = [OHHTTPStubs.sharedInstance firstStubPassingTestForRequest:request];
-    NSAssert(stub, @"At the time startLoading is called, canInitRequest should have assured that stub is != nil beforehand");
-    OHHTTPStubsResponse* responseStub = stub.responseBlock(request);
-
+    if (!self.stub)
+    {
+        NSDictionary* userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
+                                  @"It seems like the stub has been removed BEFORE the response had time to be sent.",
+                                  NSLocalizedFailureReasonErrorKey,
+                                  @"For more info, see https://github.com/AliSoftware/OHHTTPStubs/wiki/OHHTTPStubs-and-asynchronous-tests",
+                                  NSLocalizedRecoverySuggestionErrorKey,
+                                  request.URL, // Stop right here if request.URL is nil
+                                  NSURLErrorFailingURLErrorKey,
+                                  nil];
+        NSError* error = [NSError errorWithDomain:@"OHHTTPStubs" code:500 userInfo:userInfo];
+        [client URLProtocol:self didFailWithError:error];
+        return;
+    }
+    
+    OHHTTPStubsResponse* responseStub = self.stub.responseBlock(request);
+    
     if (OHHTTPStubs.sharedInstance.onStubActivationBlock)
     {
-        OHHTTPStubs.sharedInstance.onStubActivationBlock(request, stub);
+        OHHTTPStubs.sharedInstance.onStubActivationBlock(request, self.stub);
     }
     
     if (responseStub.error == nil)
-    {        
+    {
         NSHTTPURLResponse* urlResponse = [[NSHTTPURLResponse alloc] initWithURL:request.URL
                                                                      statusCode:responseStub.statusCode
                                                                     HTTPVersion:@"HTTP/1.1"
@@ -348,7 +362,7 @@ extern void _OHHTTPStubs_InstallNSURLSessionConfigurationMagicSupport();
         {
             redirectLocationURL = nil;
         }
-        if (((responseStub.statusCode >= 300) && (responseStub.statusCode < 400)) && redirectLocationURL)
+        if (((responseStub.statusCode > 300) && (responseStub.statusCode < 400)) && redirectLocationURL)
         {
             NSURLRequest* redirectRequest = [NSURLRequest requestWithURL:redirectLocationURL];
             execute_after(responseStub.requestTime, ^{
@@ -411,7 +425,7 @@ typedef struct {
            withStubResponse:(OHHTTPStubsResponse*)stubResponse
                  completion:(void(^)(NSError * error))completion
 {
-    if (stubResponse.inputStream.hasBytesAvailable && !self.stopped)
+    if ((stubResponse.dataSize>0) && stubResponse.inputStream.hasBytesAvailable && (!self.stopped))
     {
         // Compute timing data once and for all for this stub
         
@@ -458,7 +472,7 @@ typedef struct {
 {
     NSParameterAssert(timingInfo.chunkSizePerSlot > 0);
     
-    if (inputStream.hasBytesAvailable && !self.stopped)
+    if (inputStream.hasBytesAvailable && (!self.stopped))
     {
         // This is needed in case we computed a non-integer chunkSizePerSlot, to avoid cumulative errors
         double cumulativeChunkSizeAfterRead = timingInfo.cumulativeChunkSize + timingInfo.chunkSizePerSlot;
@@ -473,7 +487,7 @@ typedef struct {
                                timingInfo:timingInfo completion:completion];
             });
         } else {
-            uint8_t buffer[chunkSizeToRead];
+            uint8_t* buffer = (uint8_t*)malloc(sizeof(uint8_t)*chunkSizeToRead);
             NSInteger bytesRead = [inputStream read:buffer maxLength:chunkSizeToRead];
             if (bytesRead > 0)
             {
@@ -496,6 +510,7 @@ typedef struct {
                     completion(inputStream.streamError);
                 }
             }
+            free(buffer);
         }
     }
     else
