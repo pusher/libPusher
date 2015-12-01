@@ -13,10 +13,10 @@ The libPusher API mirrors the Pusher Javascript client as closely as possible, w
 ## Example
 Subscribe to the ```chat``` channel and bind to the ```new-message``` event.
 
-```
+```objc
 // self.client is a strong instance variable of class PTPusher
 self.client = [PTPusher pusherWithKey:@"YOUR_API_KEY" delegate:self encrypted:YES];
-    
+
 // subscribe to channel and bind to event
 PTPusherChannel *channel = [self.client subscribeToChannelNamed:@"chat"];
 [channel bindToEventNamed:@"new-message" handleWithBlock:^(PTPusherEvent *channelEvent) {
@@ -24,6 +24,8 @@ PTPusherChannel *channel = [self.client subscribeToChannelNamed:@"chat"];
     NSString *message = [channelEvent.data objectForKey:@"text"];
 	NSLog(@"message received: %@", message);
 }];
+
+[self.client connect];
 ```
 
 ## Installation
