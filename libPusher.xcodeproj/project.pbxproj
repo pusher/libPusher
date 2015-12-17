@@ -1214,6 +1214,7 @@
 					"kPTPusherClientLibraryVersion=@\"$(CURRENT_PROJECT_VERSION)\"",
 				);
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INSTALL_PATH = "";
 				PRODUCT_NAME = Pusher;
 				PUBLIC_HEADERS_FOLDER_PATH = include/$PRODUCT_NAME;
 				SDKROOT = iphoneos;
@@ -1236,6 +1237,7 @@
 					"kPTPusherClientLibraryVersion=@\"$(CURRENT_PROJECT_VERSION)\"",
 				);
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INSTALL_PATH = "";
 				PRODUCT_NAME = Pusher;
 				PUBLIC_HEADERS_FOLDER_PATH = include/$PRODUCT_NAME;
 				SDKROOT = iphoneos;
