@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/lukeredpath/libPusher.png)](https://travis-ci.org/lukeredpath/libPusher)
 
-An Objective-C client library for the [Pusher.com](http://pusher.com) real-time service. 
+An Objective-C client library for the [Pusher.com](http://pusher.com) real-time service.
 
 Pusher is a hosted service that sits between your web application and the browser that lets you deliver events in real-time using HTML5 WebSockets.
 
@@ -70,6 +70,14 @@ Note that client's do not connect automatically (as of version 1.5) - you are re
 
 It is recommended to implement the PTPusherDelegate protocol in order to be notified when significant connection events happen such as connection errors, disconnects and retries.
 
+When the Pusher app is created in a different cluster to the default cluster, you must specify the `cluster` parameter.
+
+```objc
+self.client = [PTPusher pusehrWithKey:@"YOUR_API_KEY" delegate:self encrypt:YES cluster:@"YOUR_APP_CLUSTER"]
+
+[self.client connect];
+```
+
 ----------
 
 ### Subscribe to channels
@@ -106,7 +114,7 @@ Subscribing to presence channels needs server-side authorisation. See section [C
 PTPusherPresenceChannel *presence = [client subscribeToPresenceChannelNamed:@"chat" delegate:self];
 ```
 
-It is recommended to implement ```PTPusherPresenceChannelDelegate``` protocol, to receive notifications for members subscribing or unsubscribing from the presence channel. 
+It is recommended to implement ```PTPusherPresenceChannelDelegate``` protocol, to receive notifications for members subscribing or unsubscribing from the presence channel.
 
 ### Accessing subscribed channels
 
@@ -128,7 +136,7 @@ PTPusherChannel *channel = [self.client channelNamed:@"chat"];
 
 ### Channel object lifetime
 
-When the Pusher client disconnects, all subscribed channels are implicitly unsubscribed (`isSubscribed` will return NO), however the channel objects will persist and so will any event bindings. 
+When the Pusher client disconnects, all subscribed channels are implicitly unsubscribed (`isSubscribed` will return NO), however the channel objects will persist and so will any event bindings.
 
 When the client reconnects, all previously subscribed channels will be resubcribed (which might involve another authentication request for any private/presence channels) and your existing event bindings will continue working as they did prior to the disconnection.
 
@@ -136,7 +144,7 @@ If you explicitly unsubscribe from a channel, **all event bindings will be remov
 
 ### Channel authorisation
 
-Private and presence channels require server-side authorisation before they can connect. 
+Private and presence channels require server-side authorisation before they can connect.
 
 **Note**: Make sure your server responds correctly to the authentication request. See the [authentication signature](http://pusher.com/docs/auth_signatures) and [user authentication](http://pusher.com/docs/authenticating_users) docs for details and examples on how to implement authorization on the server side.
 
@@ -239,7 +247,7 @@ The second, is to prevent a strong reference to `self` being captured in the fir
 - (void)viewDidAppear:(BOOL)animated
 {
   __weak typeof(self) weakSelf = self;
-  
+
   // _binding is a weak instance variable
   _binding = [self.client bindToEventNamed:@"new-message" handleWithBlock:^(PTPusherEvent *event) {
     __strong typeof(weakSelf) strongSelf = weakSelf;
@@ -258,10 +266,10 @@ libPusher will publish a ```NSNotification``` for every event received. You can 
 Binding to all events using NSNotificationCenter:
 
 ```objc
-[[NSNotificationCenter defaultCenter] 
-          addObserver:self 
-             selector:@selector(didReceiveEventNotification:) 
-                 name:PTPusherEventReceivedNotification 
+[[NSNotificationCenter defaultCenter]
+          addObserver:self
+             selector:@selector(didReceiveEventNotification:)
+                 name:PTPusherEventReceivedNotification
                object:self.client];
 ```
 
@@ -271,10 +279,10 @@ Bind to all events on a single channel:
 // get chat channel
 PTPusherChannel *channel = [self.client channelNamed:@"chat"];
 
-[[NSNotificationCenter defaultCenter] 
-          addObserver:self 
-             selector:@selector(didReceiveChannelEventNotification:) 
-                 name:PTPusherEventReceivedNotification 
+[[NSNotificationCenter defaultCenter]
+          addObserver:self
+             selector:@selector(didReceiveChannelEventNotification:)
+                 name:PTPusherEventReceivedNotification
                object:channel];
 ```
 
@@ -312,7 +320,7 @@ An error code in the range 4000-4099 generally indicates a client misconfigurati
 
 The other scenarios generally indicate that it is not currently possible to connect to the Pusher service - this might be because of an issue with the service but more likely is that there simply isn't an internet connection.
 
-Up to version 1.6, automatic reconnection would happen after the configured `reconnectDelay` even after explicitly 
+Up to version 1.6, automatic reconnection would happen after the configured `reconnectDelay` even after explicitly
 calling `disconnect`. This behaviour was undesirable and in all subsequent versions this no longer happens and an explicit call to `connect` is required to reconnect in this case.
 
 ### Handling disconnections
@@ -349,7 +357,7 @@ The implementation of `handleDisconnectionWithError` performs the error check an
 - (void)handleDisconnectionWithError:(NSError *)error
 {
   Reachability *reachability = [Reachability reachabilityWithHostname:self.client.connection.URL.host];
-  
+
   if (error && [error.domain isEqualToString:PTPusherFatalErrorDomain]) {
     NSLog(@"FATAL PUSHER ERROR, COULD NOT CONNECT! %@", error);
   }
@@ -360,11 +368,11 @@ The implementation of `handleDisconnectionWithError` performs the error check an
     }
     else {
       // we need to wait for reachability to change
-      [[NSNotificationCenter defaultCenter] addObserver:self 
-                                               selector:@selector(_reachabilityChanged:) 
-                                                   name:kReachabilityChangedNotification 
+      [[NSNotificationCenter defaultCenter] addObserver:self
+                                               selector:@selector(_reachabilityChanged:)
+                                                   name:kReachabilityChangedNotification
                                                  object:reachability];
-                                                 
+
       [reachability startNotifier];
     }
   }
@@ -373,17 +381,17 @@ The implementation of `handleDisconnectionWithError` performs the error check an
 - (void)_reachabilityChanged:(NSNotification *note)
 {
   Reachability *reachability = [note object];
-  
+
   if ([reachability isReachable]) {
     // we're reachable, we can try and reconnect, otherwise keep waiting
     [self.client connect];
-    
+
     // stop watching for reachability changes
     [reachability stopNotifier];
 
-    [[NSNotificationCenter defaultCenter] 
-        removeObserver:self 
-                  name:kReachabilityChangedNotification 
+    [[NSNotificationCenter defaultCenter]
+        removeObserver:self
+                  name:kReachabilityChangedNotification
                 object:reachability];
   }
 }
