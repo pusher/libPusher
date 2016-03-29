@@ -3,12 +3,12 @@ SocketRocket Objective-C WebSocket Client (beta)
 A conforming WebSocket (`RFC 6455 <http://tools.ietf.org/html/rfc6455>`_)
 client library.
 
-`Test results for SocketRocket here <http://square.github.com/SocketRocket/results/>`_.
+`Test results for SocketRocket here <http://square.github.io/SocketRocket/results/>`_.
 You can compare to what `modern browsers look like here
-<http://www.tavendo.de/autobahn/testsuite/report/clients/index.html>`_.
+<http://tavendo.com/autobahn/testsuite/report/clients/index.html>`_.
 
 SocketRocket currently conforms to all ~300 of `Autobahn
-<http://www.tavendo.de/autobahn/testsuite.html>`_'s fuzzing tests (aside from
+<http://autobahn.ws/testsuite/>`_'s fuzzing tests (aside from
 two UTF-8 ones where it is merely *non-strict*. tests 6.4.2 and 6.4.4)
 
 Features/Design
@@ -192,11 +192,11 @@ SocketRocket root directory and type::
 
   make test
 
-This will set up your `virtualenv <http://pypi.python.org/pypi/virtualenv>`_.
+This will set up your `virtualenv <https://pypi.python.org/pypi/virtualenv>`_.
 Now, in your terminal::
 
   source .env/bin/activate
-  pip install git+https://github.com/facebook/tornado.git
+  pip install git+https://github.com/tornadoweb/tornado.git
 
 In the same terminal session, start the chatroom server::
 
@@ -209,7 +209,7 @@ There's also a Go implementation (with the latest weekly) where you can::
 
 Chatting
 ````````
-Now, start TestChat.app (just run the target in the XCode project).  If you had
+Now, start TestChat.app (just run the target in the Xcode project).  If you had
 it started already you can hit the refresh button to reconnect.  It should say
 "Connected!" on top.
 
@@ -222,8 +222,8 @@ WebSocket Server Implementation Recommendations
 SocketRocket has been used with the following libraries:
 
 - `Tornado <https://github.com/facebook/tornado>`_
-- Go's `WebSocket package <http://godoc.org/code.google.com/p/go.net/websocket>`_ or Gorilla's `version <http://www.gorillatoolkit.org/pkg/websocket>`_
-- `Autobahn <http://www.tavendo.de/autobahn/testsuite.html>`_ (using its fuzzing
+- Go's `WebSocket package <https://godoc.org/golang.org/x/net/websocket>`_ or Gorilla's `version <http://www.gorillatoolkit.org/pkg/websocket>`_
+- `Autobahn <http://tavendo.com/autobahn/testsuite.html>`_ (using its fuzzing
   client)
 
 The Tornado one is dirt simple and works like a charm.  (`IPython notebook
@@ -243,13 +243,4 @@ you are already using twisted though, Autobahn is probably for you.
 
 Contributing
 ------------
-Any contributors to the master SocketRocket repository must sign the `Individual
-Contributor License Agreement
-(CLA)
-<https://spreadsheets.google.com/spreadsheet/viewform?formkey=dDViT2xzUHAwRkI3X3k5Z0lQM091OGc6MQ&ndplr=1>`_.
-It's a short form that covers our bases and makes sure you're eligible to
-contribute.
-
-When you have a change you'd like to see in the master repository, `send a pull
-request <https://github.com/square/SocketRocket/pulls>`_. Before we merge your
-request, we'll make sure you're in the list of people who have signed a CLA.
+We’re glad you’re interested in SocketRocket, and we’d love to see where you take it. Please read our `contributing guidelines <https://github.com/square/SocketRocket/blob/master/Contributing.md>`_ prior to submitting a Pull Request.

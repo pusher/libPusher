@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '4CB3F7F46945EE16A19F86EAB6FC5CAF'
-               BlueprintName = 'Kiwi'
+               BlueprintIdentifier = '9CD431A5FF7DD9532D32CE1CAC4918B5'
+               BlueprintName = 'Pods-libPusher_ReactiveExtensions.a'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'libKiwi.a'>
+               BuildableName = 'libPods-libPusher_ReactiveExtensions.a.a'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
