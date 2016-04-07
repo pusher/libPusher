@@ -277,15 +277,10 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 - (void)unsubscribeAllChannels
 {
   if (channels && channels.count) {
-	NSMutableArray *channelsToUnsubscribe = [[NSMutableArray alloc] init];
-	  for (PTPusherChannel *channel in [channels allValues]) {
-		[channelsToUnsubscribe addObject:channel];
-	  }
-
-	  for (PTPusherChannel *channel in channelsToUnsubscribe) {
-		[channel unsubscribe];
-	  }
-	}
+    for (PTPusherChannel *channel in [channels allValues]) {
+      [channel unsubscribe];
+    }
+  }
 }
 
 #pragma mark - Sending events
