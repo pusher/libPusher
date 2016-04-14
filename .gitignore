@@ -25,3 +25,5 @@ dist
 xcodebuild.log
 Pods/Documentation
 *.xccheckout
+
+Carthage/
