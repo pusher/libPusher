@@ -13,6 +13,9 @@
 #import "PTPusherPresenceChannelDelegate.h"
 
 /** The name of the notification posted when PTPusher receives an event.
+ *
+ * This notification will be posted before any other binding is executed.
+ *
  */
 extern NSString *const PTPusherEventReceivedNotification;
 
