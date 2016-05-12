@@ -16,12 +16,7 @@ SPEC_BEGIN(PTMockConnectionSpec)
 
 describe(@"PTPusherMockConnectionSpec", ^{
   __block PTPusherMockConnection *connection = [[PTPusherMockConnection alloc] init];
-  __block PTPusher *pusher;
-
-  beforeEach(^{
-    pusher = [[PTPusher alloc] initWithConnection:connection connectAutomatically:NO];
-    pusher.channelAuthorizationDelegate = [PTPusherChannelAuthorizationBypass new];
-  });
+  __block PTPusher *pusher = [[PTPusher alloc] initWithConnection:connection];
 
   it(@"handles connections and reports connected", ^{
     [[@(connection.isConnected) should] beFalse];
@@ -47,10 +42,20 @@ describe(@"PTPusherMockConnectionSpec", ^{
 	});
 
   it(@"simulates the correct response when subscribing to a private channel when authorization is successful", ^{
+    PTPusherChannelAuthorizationBypass *authorizationBypass = [[PTPusherChannelAuthorizationBypass alloc] init];
+    pusher.channelAuthorizationDelegate = authorizationBypass;
     [pusher connect];
     PTPusherChannel *channel = [pusher subscribeToPrivateChannelNamed:@"test-channel"];
     [[expectFutureValue(@(channel.isSubscribed)) shouldEventually] beTrue];
 	});
+  
+  it(@"simulates the correct response when subscribing to a presence channel when authorization is successful", ^{
+    PTPusherChannelAuthorizationBypass *authorizationBypass = [[PTPusherChannelAuthorizationBypass alloc] init];
+    pusher.channelAuthorizationDelegate = authorizationBypass;
+    [pusher connect];
+    PTPusherChannel *channel = [pusher subscribeToPresenceChannelNamed:@"test-channel"];
+    [[expectFutureValue(@(channel.isSubscribed)) shouldEventually] beTrue];
+  });
 
   it(@"allows the direct simulation of server events", ^{
     [pusher connect];

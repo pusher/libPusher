@@ -7,12 +7,17 @@
 //
 
 #import "PTPusherChannelAuthorizationBypass.h"
+#import "PTPusherChannel.h"
 
 @implementation PTPusherChannelAuthorizationBypass
 
 - (void)pusherChannel:(PTPusherChannel *)channel requiresAuthorizationForSocketID:(NSString *)socketID completionHandler:(void (^)(BOOL, NSDictionary *, NSError *))completionHandler
 {
-  completionHandler(YES, @{}, nil);
+  if (channel.isPresence) {
+    completionHandler(YES, @{ @"channel_data": @"{\"user_id\":\"12345\"}" }, nil);
+  } else {
+    completionHandler(YES, @{}, nil);
+  }
 }
 
 @end
