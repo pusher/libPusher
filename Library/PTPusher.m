@@ -15,6 +15,7 @@
 #import "PTBlockEventListener.h"
 #import "PTPusherErrors.h"
 #import "PTPusherChannelServerBasedAuthorization.h"
+#import "PTPusherChannel_Private.h"
 
 #define kPUSHER_HOST @"ws.pusherapp.com"
 
@@ -50,27 +51,24 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 
 @interface PTPusher ()
 @property (nonatomic, strong, readwrite) PTPusherConnection *connection;
-@end
-
-@interface PTPusherChannel ()
-/* These methods should only be called internally */
-- (void)subscribeWithAuthorization:(NSDictionary *)authData;
-- (void)unsubscribe;
-- (void)markAsUnsubscribed;
+@property (nonatomic, assign) PTPusherAutoReconnectMode autoReconnectMode;
 @end
 
 #pragma mark -
 
 @implementation PTPusher {
+  NSUInteger _numberOfReconnectAttempts;
+  NSUInteger _maximumNumberOfReconnectAttempts;
+  PTPusherEventDispatcher *dispatcher;
+  NSMutableDictionary *channels;
   PTPusherChannelServerBasedAuthorization *serverAuthorizationStrategy;
 }
 
 @synthesize connection = _connection;
 @synthesize delegate;
 @synthesize reconnectAutomatically;
-@synthesize reconnectDelay;
 
-- (id)initWithConnection:(PTPusherConnection *)connection connectAutomatically:(BOOL)connectAutomatically
+- (id)initWithConnection:(PTPusherConnection *)connection
 {
   if (self = [super init]) {
     dispatcher = [[PTPusherEventDispatcher alloc] init];
@@ -143,10 +141,6 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
     __strong PTPusher *strongSelf = weakSelf;
 
 #pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-    if ([strongSelf.delegate respondsToSelector:@selector(pusher:willAuthorizeChannelWithRequest:)]) { // deprecated call
-      [strongSelf.delegate pusher:strongSelf willAuthorizeChannelWithRequest:op.mutableURLRequest];
-    }
 #pragma clang diagnostic pop
     if ([strongSelf.delegate respondsToSelector:@selector(pusher:willAuthorizeChannel:withAuthOperation:)]) {
       [strongSelf.delegate pusher:strongSelf willAuthorizeChannel:channel withAuthOperation:op];
@@ -455,7 +449,7 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 
 #pragma mark - Private
 
-- (void)reconnectAfterDelay:(NSUInteger)delay
+- (void)reconnectUsingMode:(PTPusherAutoReconnectMode)reconnectMode
 {
   _numberOfReconnectAttempts++;
 
