@@ -1,6 +1,6 @@
 # libPusher
 
-[![Build Status](https://travis-ci.org/lukeredpath/libPusher.png)](https://travis-ci.org/lukeredpath/libPusher)
+[![Build Status](https://travis-ci.org/pusher/libPusher.png)](https://travis-ci.org/pusher/libPusher)
 
 An Objective-C client library for the [Pusher.com](http://pusher.com) real-time service.
 
