@@ -66,7 +66,6 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 
 @synthesize connection = _connection;
 @synthesize delegate;
-@synthesize reconnectAutomatically;
 
 - (id)initWithConnection:(PTPusherConnection *)connection
 {
