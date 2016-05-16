@@ -11,3 +11,6 @@
 #import <Pusher/PTPusherEvent.h>
 #import <Pusher/PTPusherAPI.h>
 #import <Pusher/PTPusherEventDispatcher.h>
+#import <Pusher/PTPusher+Testing.h>
+#import <Pusher/PTPusherErrors.h>
+#import <Pusher/PTPusherMockConnection.h>
