@@ -61,13 +61,13 @@
     __weak PTPusherChannel *weakChannel = self;
     
     [self.internalBindings addObject:
-     [self bindToEventNamed:@"pusher_internal:subscription_succeeded"
+     [self bindToEventNamed:@"pusher_internal:subscription_succeeded" 
             handleWithBlock:^(PTPusherEvent *event) {
               [weakChannel handleSubscribeEvent:event];
             }]];
     
     [self.internalBindings addObject:
-     [self bindToEventNamed:@"subscription_error"
+     [self bindToEventNamed:@"subscription_error" 
             handleWithBlock:^(PTPusherEvent *event) {
               [weakChannel handleSubcribeErrorEvent:event];
             }]];
@@ -75,7 +75,7 @@
   return self;
 }
 
-- (void)dealloc
+- (void)dealloc 
 {
   [self.internalBindings enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL *stop) {
     [_dispatcher removeBinding:object];
@@ -149,10 +149,10 @@
   // iterate over them safely whilst removing them from the dispatcher
   for (NSArray *bindingsArray in [self.dispatcher.bindings allValues]) {
     for (PTPusherEventBinding *binding in bindingsArray) {
-      if (![self.internalBindings containsObject:binding]) {
+	    if (![self.internalBindings containsObject:binding]) {
         [bindingsToRemove addObject:binding];
       }
-    }
+	  }
   }
   
   for (PTPusherEventBinding *binding in bindingsToRemove) {
@@ -166,9 +166,9 @@
 {
   [self.dispatcher dispatchEvent:event];
   
-  [[NSNotificationCenter defaultCenter]
-   postNotificationName:PTPusherEventReceivedNotification
-   object:self
+  [[NSNotificationCenter defaultCenter] 
+   postNotificationName:PTPusherEventReceivedNotification 
+   object:self 
    userInfo:@{PTPusherEventUserInfoKey: event}];
 }
 
@@ -179,8 +179,8 @@
   if (self.isSubscribed) return;
   
   [self.pusher sendEventNamed:@"pusher:subscribe"
-                         data:@{@"channel": self.name}
-                      channel:nil];
+                    data:@{@"channel": self.name}
+                 channel:nil];
 }
 
 - (void)unsubscribe
@@ -236,7 +236,7 @@
   [authOperation setCompletionHandler:^(PTPusherChannelAuthorizationOperation *operation) {
     completionHandler(operation.isAuthorized, operation.authorizationData, operation.error);
   }];
-  
+    
   if ([self.pusher.delegate respondsToSelector:@selector(pusher:willAuthorizeChannel:withRequest:)]) {
     [self.pusher.delegate pusher:self.pusher willAuthorizeChannel:self withRequest:authOperation.mutableURLRequest];
   }
@@ -252,8 +252,8 @@
   eventData[@"channel"] = self.name;
   
   [self.pusher sendEventNamed:@"pusher:subscribe"
-                         data:eventData
-                      channel:nil];
+                    data:eventData
+                 channel:nil];
 }
 
 #pragma mark - Triggering events
@@ -292,20 +292,20 @@
 {
   if ((self = [super initWithName:channelName pusher:aPusher])) {
     _members = [[PTPusherChannelMembers alloc] init];
-    
+
     /* Set up event handlers for pre-defined channel events.
      As above, use blocks as proxies to a weak channel reference to avoid retain cycles.
      */
-    __weak PTPusherPresenceChannel *weakChannel = self;
+      __weak PTPusherPresenceChannel *weakChannel = self;
     
     [self.internalBindings addObject:
-     [self bindToEventNamed:@"pusher_internal:member_added"
+     [self bindToEventNamed:@"pusher_internal:member_added" 
             handleWithBlock:^(PTPusherEvent *event) {
               [weakChannel handleMemberAddedEvent:event];
             }]];
     
     [self.internalBindings addObject:
-     [self bindToEventNamed:@"pusher_internal:member_removed"
+     [self bindToEventNamed:@"pusher_internal:member_removed" 
             handleWithBlock:^(PTPusherEvent *event) {
               [weakChannel handleMemberRemovedEvent:event];
             }]];
@@ -343,7 +343,7 @@
 - (void)handleMemberAddedEvent:(PTPusherEvent *)event
 {
   PTPusherChannelMember *member = [self.members handleMemberAdded:event.data];
-  
+
   [self.presenceDelegate presenceChannel:self memberAdded:member];
 }
 
