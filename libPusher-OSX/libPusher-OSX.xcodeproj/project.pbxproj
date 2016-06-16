@@ -10,6 +10,16 @@
 		334042731D12C58300759DF7 /* PTPusherChannelAuthorizationDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 334042721D12C58300759DF7 /* PTPusherChannelAuthorizationDelegate.h */; };
 		334042761D12C59D00759DF7 /* PTPusherChannelServerBasedAuthorization.h in Headers */ = {isa = PBXBuildFile; fileRef = 334042741D12C59D00759DF7 /* PTPusherChannelServerBasedAuthorization.h */; };
 		334042771D12C59D00759DF7 /* PTPusherChannelServerBasedAuthorization.m in Sources */ = {isa = PBXBuildFile; fileRef = 334042751D12C59D00759DF7 /* PTPusherChannelServerBasedAuthorization.m */; };
+		334042851D12C8E600759DF7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 334042841D12C8E600759DF7 /* main.m */; };
+		3340429C1D12C97200759DF7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3340429B1D12C97200759DF7 /* main.m */; };
+		3340429E1D12C97200759DF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3340429D1D12C97200759DF7 /* Assets.xcassets */; };
+		334042A61D12C9CE00759DF7 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 334042861D12C8F300759DF7 /* MainMenu.xib */; };
+		334042A71D12CA3700759DF7 /* PusherSampleOSX-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3340428D1D12C91E00759DF7 /* PusherSampleOSX-Info.plist */; };
+		334042A81D12CA3A00759DF7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 334042801D12C8C500759DF7 /* InfoPlist.strings */; };
+		334042A91D12CA3F00759DF7 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 3340427E1D12C8C500759DF7 /* Credits.rtf */; };
+		334042AA1D12CAB100759DF7 /* LRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 334042891D12C8F300759DF7 /* LRAppDelegate.m */; };
+		334042AC1D12CB9400759DF7 /* Pusher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3CA675514DBCB2D003E2F1E /* Pusher.framework */; };
+		334042AD1D12CB9D00759DF7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3CA675814DBCB2D003E2F1E /* Cocoa.framework */; };
 		A3141C4A176F2F4A008330D7 /* Pusher.h in Headers */ = {isa = PBXBuildFile; fileRef = A3141C49176F2F4A008330D7 /* Pusher.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3382DFF1525D0C90025550D /* PTJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = A3382DFC1525D0C90025550D /* PTJSON.m */; };
 		A37E161714E4C95C00DCA3A6 /* SRWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = A37E161014E4C95C00DCA3A6 /* SRWebSocket.h */; };
@@ -55,6 +65,21 @@
 		334042721D12C58300759DF7 /* PTPusherChannelAuthorizationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PTPusherChannelAuthorizationDelegate.h; path = ../../Library/PTPusherChannelAuthorizationDelegate.h; sourceTree = "<group>"; };
 		334042741D12C59D00759DF7 /* PTPusherChannelServerBasedAuthorization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PTPusherChannelServerBasedAuthorization.h; path = ../../Library/PTPusherChannelServerBasedAuthorization.h; sourceTree = "<group>"; };
 		334042751D12C59D00759DF7 /* PTPusherChannelServerBasedAuthorization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PTPusherChannelServerBasedAuthorization.m; path = ../../Library/PTPusherChannelServerBasedAuthorization.m; sourceTree = "<group>"; };
+		3340427F1D12C8C500759DF7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = PusherSampleOSX/en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		334042811D12C8C500759DF7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = PusherSampleOSX/en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		334042841D12C8E600759DF7 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = PusherSampleOSX/main.m; sourceTree = "<group>"; };
+		334042871D12C8F300759DF7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = PusherSampleOSX/en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		334042881D12C8F300759DF7 /* LRAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LRAppDelegate.h; path = PusherSampleOSX/LRAppDelegate.h; sourceTree = "<group>"; };
+		334042891D12C8F300759DF7 /* LRAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LRAppDelegate.m; path = PusherSampleOSX/LRAppDelegate.m; sourceTree = "<group>"; };
+		3340428D1D12C91E00759DF7 /* PusherSampleOSX-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PusherSampleOSX-Info.plist"; sourceTree = "<group>"; };
+		3340428E1D12C91E00759DF7 /* PusherSampleOSX-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PusherSampleOSX-Prefix.pch"; sourceTree = "<group>"; };
+		334042951D12C97200759DF7 /* PusherSampleOSX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PusherSampleOSX.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		334042971D12C97200759DF7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		334042981D12C97200759DF7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		3340429B1D12C97200759DF7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3340429D1D12C97200759DF7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		334042A21D12C97200759DF7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		334042AB1D12CAC500759DF7 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = PusherSampleOSX/Constants.h; sourceTree = "<group>"; };
 		A3141C49176F2F4A008330D7 /* Pusher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pusher.h; sourceTree = "<group>"; };
 		A3382DFC1525D0C90025550D /* PTJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PTJSON.m; path = ../../Library/PTJSON.m; sourceTree = "<group>"; };
 		A37E161014E4C95C00DCA3A6 /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SRWebSocket.h; path = ../../Pods/SocketRocket/SocketRocket/SRWebSocket.h; sourceTree = "<group>"; };
@@ -103,6 +128,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		334042921D12C97200759DF7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				334042AD1D12CB9D00759DF7 /* Cocoa.framework in Frameworks */,
+				334042AC1D12CB9400759DF7 /* Pusher.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A3CA675114DBCB2D003E2F1E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -117,10 +151,56 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3340427C1D12C86A00759DF7 /* PusherSampleOSX */ = {
+			isa = PBXGroup;
+			children = (
+				334042881D12C8F300759DF7 /* LRAppDelegate.h */,
+				334042891D12C8F300759DF7 /* LRAppDelegate.m */,
+				3340427D1D12C89900759DF7 /* Supporting Files */,
+				334042AB1D12CAC500759DF7 /* Constants.h */,
+			);
+			name = PusherSampleOSX;
+			sourceTree = "<group>";
+		};
+		3340427D1D12C89900759DF7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				334042841D12C8E600759DF7 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		334042961D12C97200759DF7 /* PusherSampleOSX */ = {
+			isa = PBXGroup;
+			children = (
+				334042971D12C97200759DF7 /* AppDelegate.h */,
+				334042981D12C97200759DF7 /* AppDelegate.m */,
+				3340429D1D12C97200759DF7 /* Assets.xcassets */,
+				334042861D12C8F300759DF7 /* MainMenu.xib */,
+				334042A21D12C97200759DF7 /* Info.plist */,
+				3340429A1D12C97200759DF7 /* Supporting Files */,
+			);
+			path = PusherSampleOSX;
+			sourceTree = "<group>";
+		};
+		3340429A1D12C97200759DF7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3340428D1D12C91E00759DF7 /* PusherSampleOSX-Info.plist */,
+				334042801D12C8C500759DF7 /* InfoPlist.strings */,
+				3340429B1D12C97200759DF7 /* main.m */,
+				3340428E1D12C91E00759DF7 /* PusherSampleOSX-Prefix.pch */,
+				3340427E1D12C8C500759DF7 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		A3CA674914DBCB2D003E2F1E = {
 			isa = PBXGroup;
 			children = (
+				3340427C1D12C86A00759DF7 /* PusherSampleOSX */,
 				A3CA675E14DBCB2D003E2F1E /* libPusher-OSX */,
+				334042961D12C97200759DF7 /* PusherSampleOSX */,
 				A3CA675714DBCB2D003E2F1E /* Frameworks */,
 				A3CA675614DBCB2D003E2F1E /* Products */,
 			);
@@ -132,6 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				A3CA675514DBCB2D003E2F1E /* Pusher.framework */,
+				334042951D12C97200759DF7 /* PusherSampleOSX.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -258,6 +339,23 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		334042941D12C97200759DF7 /* PusherSampleOSX */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 334042A31D12C97200759DF7 /* Build configuration list for PBXNativeTarget "PusherSampleOSX" */;
+			buildPhases = (
+				334042911D12C97200759DF7 /* Sources */,
+				334042921D12C97200759DF7 /* Frameworks */,
+				334042931D12C97200759DF7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PusherSampleOSX;
+			productName = PusherSampleOSX;
+			productReference = 334042951D12C97200759DF7 /* PusherSampleOSX.app */;
+			productType = "com.apple.product-type.application";
+		};
 		A3CA675414DBCB2D003E2F1E /* Pusher */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A3CA676A14DBCB2D003E2F1E /* Build configuration list for PBXNativeTarget "Pusher" */;
@@ -285,6 +383,11 @@
 			attributes = {
 				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "LJR Software Limited";
+				TargetAttributes = {
+					334042941D12C97200759DF7 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+				};
 			};
 			buildConfigurationList = A3CA674E14DBCB2D003E2F1E /* Build configuration list for PBXProject "libPusher-OSX" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -292,6 +395,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = A3CA674914DBCB2D003E2F1E;
 			productRefGroup = A3CA675614DBCB2D003E2F1E /* Products */;
@@ -299,11 +403,24 @@
 			projectRoot = "";
 			targets = (
 				A3CA675414DBCB2D003E2F1E /* Pusher */,
+				334042941D12C97200759DF7 /* PusherSampleOSX */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		334042931D12C97200759DF7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				334042A91D12CA3F00759DF7 /* Credits.rtf in Resources */,
+				3340429E1D12C97200759DF7 /* Assets.xcassets in Resources */,
+				334042A81D12CA3A00759DF7 /* InfoPlist.strings in Resources */,
+				334042A71D12CA3700759DF7 /* PusherSampleOSX-Info.plist in Resources */,
+				334042A61D12C9CE00759DF7 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A3CA675314DBCB2D003E2F1E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -332,6 +449,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		334042911D12C97200759DF7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				334042AA1D12CAB100759DF7 /* LRAppDelegate.m in Sources */,
+				3340429C1D12C97200759DF7 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A3CA675014DBCB2D003E2F1E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -346,6 +472,7 @@
 				A3CA679C14DBCB95003E2F1E /* PTPusherConnection.m in Sources */,
 				A3CA67A214DBCB95003E2F1E /* PTPusherEvent.m in Sources */,
 				A3CA67A414DBCB95003E2F1E /* PTPusherEventDispatcher.m in Sources */,
+				334042851D12C8E600759DF7 /* main.m in Sources */,
 				A3CA67A814DBCB95003E2F1E /* PTTargetActionEventListener.m in Sources */,
 				A3CA67AA14DBCB95003E2F1E /* PTURLRequestOperation.m in Sources */,
 				A37E161814E4C95C00DCA3A6 /* SRWebSocket.m in Sources */,
@@ -356,6 +483,33 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		3340427E1D12C8C500759DF7 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3340427F1D12C8C500759DF7 /* en */,
+			);
+			name = Credits.rtf;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		334042801D12C8C500759DF7 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				334042811D12C8C500759DF7 /* en */,
+			);
+			name = InfoPlist.strings;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		334042861D12C8F300759DF7 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				334042871D12C8F300759DF7 /* en */,
+			);
+			name = MainMenu.xib;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		A3CA676114DBCB2D003E2F1E /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -367,6 +521,59 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		334042A41D12C97200759DF7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = PusherSampleOSX/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pusher.PusherSampleOSX;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		334042A51D12C97200759DF7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CODE_SIGN_IDENTITY = "-";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				INFOPLIST_FILE = PusherSampleOSX/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pusher.PusherSampleOSX;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		A3CA676814DBCB2D003E2F1E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -483,6 +690,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		334042A31D12C97200759DF7 /* Build configuration list for PBXNativeTarget "PusherSampleOSX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				334042A41D12C97200759DF7 /* Debug */,
+				334042A51D12C97200759DF7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		A3CA674E14DBCB2D003E2F1E /* Build configuration list for PBXProject "libPusher-OSX" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
