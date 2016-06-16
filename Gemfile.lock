@@ -66,9 +66,9 @@ GEM
       netrc (= 0.7.8)
     cocoapods-try (0.4.5)
     colored (1.2)
-    daemons (1.1.9)
+    daemons (1.2.3)
     escape (0.0.4)
-    eventmachine (1.0.3)
+    eventmachine (1.2.0.1)
     fuzzy_match (2.0.4)
     highline (1.6.21)
     hirb (0.7.2)
@@ -89,7 +89,7 @@ GEM
       httpclient (~> 2.3.0)
       multi_json (~> 1.0)
       signature (~> 0.1.6)
-    rack (1.5.2)
+    rack (1.6.4)
     rack-protection (1.5.3)
       rack
     rake (10.4.2)
@@ -104,10 +104,10 @@ GEM
       tilt (~> 1.3, >= 1.3.4)
     state_machine (1.1.2)
     systemu (2.6.4)
-    thin (1.6.2)
-      daemons (>= 1.0.9)
-      eventmachine (>= 1.0.0)
-      rack (>= 1.0.0)
+    thin (1.7.0)
+      daemons (~> 1.0, >= 1.0.9)
+      eventmachine (~> 1.0, >= 1.0.4)
+      rack (>= 1, < 3)
     thread_safe (0.3.5)
     tilt (1.4.1)
     tzinfo (1.2.2)
@@ -126,7 +126,6 @@ DEPENDENCIES
   cocoapods (>= 0.32.1)
   github-downloads!
   ios-sim-test!
-  json
   osx_keychain
   pusher
   rake
@@ -136,3 +135,6 @@ DEPENDENCIES
   uuid
   xcodebuild-rb!
   xcodeproj
+
+BUNDLED WITH
+   1.12.4
