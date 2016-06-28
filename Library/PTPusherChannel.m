@@ -164,12 +164,12 @@
 
 - (void)dispatchEvent:(PTPusherEvent *)event
 {
-  [self.dispatcher dispatchEvent:event];
-  
-  [[NSNotificationCenter defaultCenter] 
-   postNotificationName:PTPusherEventReceivedNotification 
-   object:self 
+  [[NSNotificationCenter defaultCenter]
+   postNotificationName:PTPusherEventReceivedNotification
+   object:self
    userInfo:@{PTPusherEventUserInfoKey: event}];
+  
+  [self.dispatcher dispatchEvent:event];
 }
 
 #pragma mark - Internal use only
