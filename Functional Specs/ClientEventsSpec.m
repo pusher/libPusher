@@ -15,13 +15,15 @@ describe(@"Client events", ^{
   
   __block PTPusher *client = nil;
   __block PTPusherMockConnection *connection = nil;
+  __block PTPusherChannelAuthorizationBypass *authBypass = nil;
   
   registerMatchers(@"PT");
   enableClientDebugging();
   
   beforeEach(^{
     client = newTestClientWithMockConnection();
-    client.channelAuthorizationDelegate = [PTPusherChannelAuthorizationBypass new];
+    authBypass = [PTPusherChannelAuthorizationBypass new];
+    client.channelAuthorizationDelegate = authBypass;
     connection = (PTPusherMockConnection *)client.connection;
   });
   
