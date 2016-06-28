@@ -8,85 +8,101 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>6</integer>
 		</dict>
 		<key>OHHTTPStubs.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>7</integer>
 		</dict>
-		<key>Pods-specs.xcscheme</key>
+		<key>Pods-Functional Specs.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>9</integer>
 		</dict>
-		<key>Pods.xcscheme</key>
+		<key>Pods-SampleApp.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>8</integer>
+		</dict>
+		<key>Pods-UnitTests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-libPusher.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-libPusher_ReactiveExtensions.a.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Reachability.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>10</integer>
 		</dict>
 		<key>ReactiveCocoa.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>11</integer>
 		</dict>
 		<key>SocketRocket.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>12</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>1893DE70459B9C5430E1E53597BF9817</key>
+		<key>0A4AD807C9A8481FA265F747FBB8CF12</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>214A7DD9C187426010670AF1D664BB71</key>
+		<key>4BDE528C2F74441AA33312554D41C5F4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6951DA9871DA259A9AAA6EFC68AEF8EB</key>
+		<key>4CB3F7F46945EE16A19F86EAB6FC5CAF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6AC9549B9E611F507675716C73EB33D6</key>
+		<key>9CD431A5FF7DD9532D32CE1CAC4918B5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>825E4B43D132FD84E959611547F4ADB6</key>
+		<key>9E5E5340EFF552E3A5550B177B564A21</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>94F7F189F3302603E3064AD0A6552133</key>
+		<key>BDA427F367B739C812688A45E85DD7E4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AA35CC91EBB5AFE426D8FBE422FE172E</key>
+		<key>BFF27B931EBC0AC0A628EBD31EAB0B16</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D64AF82B99D73CBA378945CEF3982990</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DF74C4422C39FDDB61748518E5F2BADC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F13767D9D79C70180A114A116070D93C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
