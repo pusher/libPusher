@@ -4,7 +4,7 @@ require 'pusher'
 require 'json'
 require 'uuid'
 
-# this needs to be created or values set in ENV
+# auth_credentials.rb needs to be created or values set in ENV
 auth_creds_file_path = File.join(File.dirname(__FILE__), *%w[auth_credentials.rb])
 
 if File.exists?(auth_creds_file_path)
