@@ -23,7 +23,7 @@ describe(@"PTPusherEventDispatcher", ^{
     id mockListener = [KWMock mockForProtocol:@protocol(PTEventListener)];
     [dispatcher addEventListener:mockListener forEventNamed:@"test-event"];
     PTPusherEvent *event = anEventNamed(@"test-event");
-    [[[mockListener should] receive] dispatchEvent:event];
+    [[mockListener should] receive:@selector(dispatchEvent:) withArguments:event];
     [dispatcher dispatchEvent:event];
   });
 
@@ -31,14 +31,14 @@ describe(@"PTPusherEventDispatcher", ^{
     id mockListener = [KWMock mockForProtocol:@protocol(PTEventListener)];
     [dispatcher addEventListener:mockListener forEventNamed:@"test-event"];
     PTPusherEvent *event = anEventNamed(@"another-event");
-    [[[mockListener shouldNot] receive] dispatchEvent:event];
+    [[mockListener shouldNot] receive:@selector(dispatchEvent:)];
     [dispatcher dispatchEvent:event];
   });
   
   it(@"invalidates listeners when removing a binding", ^{
     id mockListener = [KWMock mockForProtocol:@protocol(PTEventListener)];
     PTPusherEventBinding *binding = [dispatcher addEventListener:mockListener forEventNamed:@"test-event"];
-    [[[mockListener should] receive] invalidate];
+    [[mockListener should] receive:@selector(invalidate)];
     [dispatcher removeBinding:binding];
   });
 
@@ -48,7 +48,7 @@ describe(@"PTPusherEventDispatcher", ^{
     [[mockListener stub] invalidate];
     [dispatcher removeBinding:binding];
     PTPusherEvent *eventOne = anEventNamed(@"test-event");
-    [[[mockListener shouldNot] receive] dispatchEvent:eventOne];
+    [[mockListener shouldNot] receive:@selector(dispatchEvent:) withArguments:eventOne];
     [dispatcher dispatchEvent:eventOne];
   });
   
