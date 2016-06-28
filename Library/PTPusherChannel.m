@@ -15,6 +15,7 @@
 #import "PTPusherChannelAuthorizationOperation.h"
 #import "PTPusherErrors.h"
 #import "PTJSON.h"
+#import "NSDictionary+StringValue.h"
 
 @interface PTPusher ()
 - (void)__unsubscribeFromChannel:(PTPusherChannel *)channel;
@@ -325,7 +326,7 @@
   [super subscribeWithAuthorization:authData];
   
   NSDictionary *channelData = [[PTJSON JSONParser] objectFromJSONString:authData[@"channel_data"]];
-  self.members.myID = channelData[@"user_id"];
+  self.members.myID = [channelData stringValueForKey:@"user_id"];
 }
 
 - (void)handleSubscribeEvent:(PTPusherEvent *)event
@@ -439,7 +440,7 @@
 {
   NSDictionary *memberHash = subscriptionData[@"presence"][@"hash"];
   
-  [memberHash enumerateKeysAndObjectsUsingBlock:^(NSString *userID, NSDictionary *userInfo, BOOL *stop) {
+  [memberHash enumerateStringKeysAndObjectsUsingBlock:^(NSString *userID, NSDictionary *userInfo, BOOL *stop) {
     PTPusherChannelMember *member = [[PTPusherChannelMember alloc] initWithUserID:userID userInfo:userInfo];
     _members[userID] = member;
   }];
@@ -447,9 +448,10 @@
 
 - (PTPusherChannelMember *)handleMemberAdded:(NSDictionary *)memberData
 {
-  PTPusherChannelMember *member = [self memberWithID:memberData[@"user_id"]];
+  NSString *userID = [memberData stringValueForKey:@"user_id"];
+  PTPusherChannelMember *member = [self memberWithID:userID];
   if (member == nil) {
-    member = [[PTPusherChannelMember alloc] initWithUserID:memberData[@"user_id"] userInfo:memberData[@"user_info"]];
+    member = [[PTPusherChannelMember alloc] initWithUserID:userID userInfo:memberData[@"user_info"]];
     _members[member.userID] = member;
   }
   return member;
@@ -457,7 +459,7 @@
 
 - (PTPusherChannelMember *)handleMemberRemoved:(NSDictionary *)memberData
 {
-  PTPusherChannelMember *member = [self memberWithID:memberData[@"user_id"]];
+  PTPusherChannelMember *member = [self memberWithID:[memberData stringValueForKey:@"user_id"]];
   if (member) {
     [_members removeObjectForKey:member.userID];
   }

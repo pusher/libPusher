@@ -120,6 +120,8 @@
 		A3FE429F11811EEE009CF5D7 /* NSString+Hashing.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FE429C11811EE8009CF5D7 /* NSString+Hashing.m */; };
 		A3FE44761181B7FE009CF5D7 /* PTPusherChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FE42191181173B009CF5D7 /* PTPusherChannel.m */; };
 		A3FE44E71181C3C5009CF5D7 /* NSDictionary+QueryString.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FE430011812541009CF5D7 /* NSDictionary+QueryString.m */; };
+		CE7158F61BBDCBD0000391EA /* NSDictionary+StringValue.h in Headers */ = {isa = PBXBuildFile; fileRef = CE7158F41BBDCBD0000391EA /* NSDictionary+StringValue.h */; settings = {ASSET_TAGS = (); }; };
+		CE7158F91BBDD138000391EA /* NSDictionary+StringValue.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7158F81BBDD138000391EA /* NSDictionary+StringValue.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -260,6 +262,8 @@
 		A3FE42191181173B009CF5D7 /* PTPusherChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTPusherChannel.m; sourceTree = "<group>"; };
 		A3FE429C11811EE8009CF5D7 /* NSString+Hashing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Hashing.m"; sourceTree = "<group>"; };
 		A3FE430011812541009CF5D7 /* NSDictionary+QueryString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+QueryString.m"; sourceTree = "<group>"; };
+		CE7158F41BBDCBD0000391EA /* NSDictionary+StringValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+StringValue.h"; sourceTree = "<group>"; };
+		CE7158F81BBDD138000391EA /* NSDictionary+StringValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+StringValue.m"; sourceTree = "<group>"; };
 		F1A8F1FD27B9464DAC1AADB5 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -555,6 +559,7 @@
 				A3E5CC4218466CD5006A54DD /* PTPusherChannelAuthorizationOperation.h */,
 				A3E5CC4318466CD5006A54DD /* PTTargetActionEventListener.h */,
 				A3E5CC4418466CD5006A54DD /* PTURLRequestOperation.h */,
+				CE7158F41BBDCBD0000391EA /* NSDictionary+StringValue.h */,
 			);
 			path = "Private Headers";
 			sourceTree = "<group>";
@@ -574,6 +579,7 @@
 		A3FE429311811ED6009CF5D7 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				CE7158F81BBDD138000391EA /* NSDictionary+StringValue.m */,
 				A3AC28B513F75530001C4808 /* PTURLRequestOperation.m */,
 				A30950121525C272008F695B /* PTJSON.m */,
 				A3FE429C11811EE8009CF5D7 /* NSString+Hashing.m */,
@@ -596,6 +602,7 @@
 				A3D1D2C911580162009A12AD /* PTPusher.h in Headers */,
 				A3E5CC4618466CD5006A54DD /* NSString+Hashing.h in Headers */,
 				A3E5CC4818466CD5006A54DD /* PTJSON.h in Headers */,
+				CE7158F61BBDCBD0000391EA /* NSDictionary+StringValue.h in Headers */,
 				A3D1D2CB11580162009A12AD /* PTPusherEvent.h in Headers */,
 				A35281D013F721A8000687C0 /* PTPusherConnection.h in Headers */,
 				A35281D313F72E03000687C0 /* PTPusherEventPublisher.h in Headers */,
@@ -992,6 +999,7 @@
 				A35281E513F75010000687C0 /* PTBlockEventListener.m in Sources */,
 				A35281EA13F75265000687C0 /* PTPusherAPI.m in Sources */,
 				A3AC28B713F75530001C4808 /* PTURLRequestOperation.m in Sources */,
+				CE7158F91BBDD138000391EA /* NSDictionary+StringValue.m in Sources */,
 				A3AC28C413F76C51001C4808 /* PTPusherChannelAuthorizationOperation.m in Sources */,
 				A3382DE31525C3F70025550D /* PTJSON.m in Sources */,
 				A317375C155D2E82007E4BBA /* PTPusherMockConnection.m in Sources */,
