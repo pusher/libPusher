@@ -251,6 +251,14 @@ extern NSString *const PTPusherErrorUnderlyingEventKey;
  */
 - (PTPusherPresenceChannel *)subscribeToPresenceChannelNamed:(NSString *)name delegate:(id<PTPusherPresenceChannelDelegate>)presenceDelegate;
 
+/** Unsubscribes from all Pusher channels and stops holding reference to them.
+
+ If the channels are not referenced anywhere else, they will be deallocated from memory.
+
+ If there are no channels at all, nothing will change.
+ */
+- (void)unsubscribeAllChannels;
+
 /** Returns a previously subscribed channel with the given name.
  
  If the channel specified has not been subscribed to previously, or has been explicilty

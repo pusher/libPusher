@@ -274,6 +274,15 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
   }
 }
 
+- (void)unsubscribeAllChannels
+{
+  if (channels && channels.count) {
+    for (PTPusherChannel *channel in [channels allValues]) {
+      [channel unsubscribe];
+    }
+  }
+}
+
 #pragma mark - Sending events
 
 - (void)sendEventNamed:(NSString *)name data:(id)data
