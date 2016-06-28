@@ -9,9 +9,14 @@ install:
   - echo \#define PUSHER_APP_ID @\"$(env | grep PUSHER_APP_ID | cut -d "=" -f 2)\" >> Sample/Constants.h
   - echo \#define PUSHER_APP_KEY @\"$(env | grep PUSHER_APP_KEY | cut -d "=" -f 2)\" >> Sample/Constants.h
   - echo \#define PUSHER_APP_SECRET @\"$(env | grep PUSHER_APP_SECRET | cut -d "=" -f 2)\" >> Sample/Constants.h
+  - bundle install
 env:
   matrix:
     - XCODE_SCHEME="libPusher" SDK="iphonesimulator"
     - XCODE_SCHEME="libPusher-OSX" SDK="macosx"
     - XCODE_SCHEME="Functional Specs" SDK="iphonesimulator"
-script: xctool -workspace libPusher.xcworkspace -scheme "$XCODE_SCHEME" -sdk "$SDK" test
+script:
+  - rackup -p 9292 Scripts/auth_server.ru > logs.txt 2>&1 &
+  - xctool -workspace libPusher.xcworkspace -scheme "$XCODE_SCHEME" -sdk "$SDK" test
+after_success:
+  - sleep 5
