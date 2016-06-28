@@ -27,7 +27,13 @@ PTPusher *newTestClientWithMockConnection(void)
 }
 
 PTPusher *newTestClientDisconnected(void) {
-  PTPusher *client = [PTPusher pusherWithKey:PUSHER_API_KEY delegate:[PTPusherClientTestHelperDelegate sharedInstance] encrypted:NO];
+  NSDictionary *environment = [[NSProcessInfo processInfo] environment];
+  NSString *appKey = environment[@"PUSHER_APP_KEY"];
+
+  if (!appKey)
+    appKey = PUSHER_API_KEY;
+
+  PTPusher *client = [PTPusher pusherWithKey:appKey delegate:[PTPusherClientTestHelperDelegate sharedInstance] encrypted:NO];
   return client;
 }
 
@@ -43,10 +49,22 @@ void sendTestEvent(NSString *eventName)
 
 void sendTestEventOnChannel(NSString *channelName, NSString *eventName)
 {
+  NSDictionary *environment = [[NSProcessInfo processInfo] environment];
+  NSString *appId = environment[@"PUSHER_APP_ID"];
+  NSString *appKey = environment[@"PUSHER_APP_KEY"];
+  NSString *appSecret = environment[@"PUSHER_APP_SECRET"];
+
+  if (!appId)
+    appId = PUSHER_APP_ID;
+  if (!appKey)
+    appKey = PUSHER_API_KEY;
+  if (!appSecret)
+    appSecret = PUSHER_API_SECRET;
+
   __strong static PTPusherAPI *_sharedAPI = nil;
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
-    _sharedAPI = [[PTPusherAPI alloc] initWithKey:PUSHER_API_KEY appID:PUSHER_APP_ID secretKey:PUSHER_API_SECRET];
+    _sharedAPI = [[PTPusherAPI alloc] initWithKey:appKey appID:appId secretKey:appSecret];
   });
 
   [_sharedAPI triggerEvent:eventName onChannel:channelName data:[NSArray arrayWithObject:@"dummy data"] socketID:@"99999.99999"];
