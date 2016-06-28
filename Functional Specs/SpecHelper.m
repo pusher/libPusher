@@ -62,7 +62,7 @@ void sendTestEventOnChannel(NSString *channelName, NSString *eventName)
   }
   if (!appKey) {
     NSCAssert(![PUSHER_APP_KEY isEqualToString:@""], @"You must supply a Pusher app key");
-    appKey = PUSHER_APP_SECRET;
+    appKey = PUSHER_APP_KEY;
   }
   if (!appSecret) {
     NSCAssert(![PUSHER_APP_SECRET isEqualToString:@""], @"You must supply a Pusher app secret");
