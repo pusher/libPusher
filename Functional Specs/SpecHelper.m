@@ -10,6 +10,7 @@
 #import "Constants.h"
 #import "PTPusherAPI.h"
 #import "PTPusherMockConnection.h"
+#import "PTPusherChannelServerBasedAuthorization.h"
 
 PTPusher *newTestClient(void) {
   PTPusher *client = newTestClientDisconnected();
@@ -195,10 +196,10 @@ void waitForClientToDisconnect(PTPusher *client)
   onSubscribeBlock = nil;
 }
 
-- (void)pusher:(PTPusher *)pusher willAuthorizeChannel:(PTPusherChannel *)channel withRequest:(NSMutableURLRequest *)request
+- (void)pusher:(PTPusher *)pusher willAuthorizeChannel:(PTPusherChannel *)channel withAuthOperation:(PTPusherChannelAuthorizationOperation *)operation
 {
   if (onAuthorizationBlock) {
-    onAuthorizationBlock(request);
+    onAuthorizationBlock(operation.mutableURLRequest);
   }
 }
 

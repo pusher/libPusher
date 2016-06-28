@@ -1,5 +1,5 @@
 //
-//  PTPusherChannelAuthorizationOperation.m
+//  PTPusherChannelServerBasedAuthorization.m
 //  libPusher
 //
 //  Created by Luke Redpath on 14/08/2011.
