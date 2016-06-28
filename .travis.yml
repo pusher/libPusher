@@ -9,5 +9,5 @@ env:
   matrix:
     - XCODE_SCHEME="libPusher" SDK="iphonesimulator"
     - XCODE_SCHEME="libPusher-OSX" SDK="macosx"
-    - XCODE_SCEHME="Functional Specs" SDK="iphonesimulator"
+    - XCODE_SCHEME="Functional Specs" SDK="iphonesimulator"
 script: xctool -workspace libPusher.xcworkspace -scheme "$XCODE_SCHEME" -sdk "$SDK" test
