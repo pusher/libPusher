@@ -271,6 +271,12 @@ extern NSString *const PTPusherErrorUnderlyingEventKey;
  */
 - (PTPusherChannel *)channelNamed:(NSString *)name;
 
+
+/** Returns a shallow copy dictionary of previously subscribed channels.
+
+ */
+- (NSDictionary *)subscribedChannels;
+
 ///------------------------------------------------------------------------------------/
 /// @name Publishing events
 ///------------------------------------------------------------------------------------/

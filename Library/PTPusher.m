@@ -211,6 +211,11 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
   return channels[name];
 }
 
+- (NSDictionary *)subscribedChannels
+{
+  return [[NSDictionary alloc] initWithDictionary:channels copyItems:NO];
+}
+
 /* This is only called when a client explicitly unsubscribes from a channel
  * by calling either [channel unsubscribe] or using the deprecated API 
  * [client unsubscribeFromChannel:].
