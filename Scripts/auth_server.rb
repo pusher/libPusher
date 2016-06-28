@@ -4,8 +4,16 @@ require 'pusher'
 require 'json'
 require 'uuid'
 
-# this needs to be created
-load File.join(File.dirname(__FILE__), *%w[auth_credentials.rb])
+# this needs to be created or values set in ENV
+auth_creds_file_path = File.join(File.dirname(__FILE__), *%w[auth_credentials.rb])
+
+if File.exists?(auth_creds_file_path)
+  load auth_creds_file_path
+else
+  Pusher.app_id = ENV['PUSHER_APP_ID']
+  Pusher.key = ENV['PUSHER_APP_KEY']
+  Pusher.secret = ENV['PUSHER_APP_SECRET']
+end
 
 $uuid = UUID.new
 
