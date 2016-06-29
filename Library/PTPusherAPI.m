@@ -54,7 +54,7 @@
   
   queryParameters[@"auth_signature"] = [signatureString HMACDigestUsingSecretKey:secretKey];
   
-  NSString *URLString = [NSString stringWithFormat:@"http://%@%@?%@", kPUSHER_API_DEFAULT_HOST, path, [queryParameters sortedQueryString]];
+  NSString *URLString = [NSString stringWithFormat:@"https://%@%@?%@", kPUSHER_API_DEFAULT_HOST, path, [queryParameters sortedQueryString]];
   
   NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:URLString]];
   [request setHTTPBody:bodyData];
