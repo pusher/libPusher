@@ -19,4 +19,5 @@ script:
   - rackup -p 9292 Scripts/auth_server.ru > logs.txt 2>&1 &
   - xctool -workspace libPusher.xcworkspace -scheme "$XCODE_SCHEME" -sdk "$SDK" test
 after_success:
+  - nscurl --ats-diagnostics https://api.pusherapp.com
   - sleep 5
