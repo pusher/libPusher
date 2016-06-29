@@ -28,11 +28,11 @@ PTPusher *newTestClientWithMockConnection(void)
 
 PTPusher *newTestClientDisconnected(void) {
   NSDictionary *environment = [[NSProcessInfo processInfo] environment];
-  NSString *appKey = environment[@"PUSHER_APP_KEY"];
+  NSString *appKey = environment[@"PUSHER_API_KEY"];
 
   if (!appKey) {
-    NSCAssert(![PUSHER_APP_KEY isEqualToString:@""], @"You must supply a Pusher app key");
-    appKey = PUSHER_APP_KEY;
+    NSCAssert(![PUSHER_API_KEY isEqualToString:@""], @"You must supply a Pusher app key");
+    appKey = PUSHER_API_KEY;
   }
 
   PTPusher *client = [PTPusher pusherWithKey:appKey delegate:[PTPusherClientTestHelperDelegate sharedInstance] encrypted:NO];
@@ -54,19 +54,19 @@ void sendTestEventOnChannel(NSString *channelName, NSString *eventName)
   NSDictionary *environment = [[NSProcessInfo processInfo] environment];
   NSString *appId = environment[@"PUSHER_APP_ID"];
   NSString *appKey = environment[@"PUSHER_APP_KEY"];
-  NSString *appSecret = environment[@"PUSHER_APP_SECRET"];
+  NSString *appSecret = environment[@"PUSHER_API_SECRET"];
 
   if (!appId) {
     NSCAssert(![PUSHER_APP_ID isEqualToString:@""], @"You must supply a Pusher app ID");
     appId = PUSHER_APP_ID;
   }
   if (!appKey) {
-    NSCAssert(![PUSHER_APP_KEY isEqualToString:@""], @"You must supply a Pusher app key");
-    appKey = PUSHER_APP_KEY;
+    NSCAssert(![PUSHER_API_KEY isEqualToString:@""], @"You must supply a Pusher app key");
+    appKey = PUSHER_API_KEY;
   }
   if (!appSecret) {
-    NSCAssert(![PUSHER_APP_SECRET isEqualToString:@""], @"You must supply a Pusher app secret");
-    appSecret = PUSHER_APP_SECRET;
+    NSCAssert(![PUSHER_API_SECRET isEqualToString:@""], @"You must supply a Pusher app secret");
+    appSecret = PUSHER_API_SECRET;
   }
 
   __strong static PTPusherAPI *_sharedAPI = nil;
