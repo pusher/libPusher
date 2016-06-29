@@ -333,6 +333,8 @@ If `willAttemptReconnect` is `NO`, you should first check the error to see if th
 
 How you handle disconnections is up to you, but the general idea is to check if there is network connectivity and if there is not, wait until there is before reconnecting.
 
+It is recommended that you let the OS handle connection management. In practical terms this means that if you want to ensure that a client won't have any further messages sent to it when they have backgrounded the app then you should call `unsubscribe` on the relevant channel(s) as opposed to calling `disconnect`. Eventually the connection will be cleaned up (and therefore closed) by the OS. Trying to explicitly call `disconnect` yourself upon backgrounding can lead to unexpected behaviour with multiple connections then being opened upon the app being foregrounded again.
+
 #### Example: handling disconnections using the Reachability library
 
 In this example, we first check for any fatal Pusher errors, before using Reachability to wait for an internet connection to become available before manually reconnecting.
