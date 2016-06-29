@@ -68,11 +68,7 @@ describe(@"Client events", ^{
       PTPusherPrivateChannel *channel = [client subscribeToPrivateChannelNamed:@"test-channel"];
       [channel triggerEventNamed:@"test-event" data:nil];
     });
-    
-    onSubscribe(^(PTPusherChannel *channel) {
-      NSLog(@"here");
-    });
-    
+        
     [client connect];
     
     [[expectFutureValue([connection.sentClientEvents lastObject]) shouldEventually] beEventNamed:@"client-test-event"];
