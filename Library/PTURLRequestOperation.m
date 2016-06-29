@@ -89,7 +89,6 @@
 
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data
 {
-  NSLog(@"data: %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
   if (self.responseData == nil) { // this might be called before didReceiveResponse
     self.responseData = [NSMutableData data];
   }
@@ -101,7 +100,6 @@
 
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
 {
-  NSLog(@"error: %@", error.localizedDescription);
   self.connectionError = error;
   [self finish];
 }
