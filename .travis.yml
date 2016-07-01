@@ -18,4 +18,4 @@ env:
     - XCODE_SCHEME="Functional Specs" SDK="iphonesimulator" DESTINATION="OS=9.3,name=iPhone 6s"
 script:
   - rackup -p 9292 Scripts/auth_server.ru > logs.txt 2>&1 &
-  - xctool -workspace libPusher.xcworkspace -scheme "$XCODE_SCHEME" -sdk "$SDK" test -destination "$DESTINATION"
+  - xcodebuild -workspace libPusher.xcworkspace -scheme "$XCODE_SCHEME" -sdk "$SDK" test -destination "$DESTINATION"
