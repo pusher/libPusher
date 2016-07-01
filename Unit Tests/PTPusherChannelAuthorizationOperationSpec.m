@@ -64,7 +64,7 @@ describe(@"PTPusherChannelAuthorizationOperation", ^{
         return [request.URL isEqual:authURL];
         
       } withStubResponse:^OHHTTPStubsResponse *(NSURLRequest *request) {
-        return [OHHTTPStubsResponse responseWithData:nil
+        return [OHHTTPStubsResponse responseWithData:[[NSData alloc] init]
                                           statusCode:400
                                              headers:nil];
       }];
@@ -103,7 +103,7 @@ describe(@"PTPusherChannelAuthorizationOperation", ^{
         return [request.URL isEqual:authURL];
         
       } withStubResponse:^OHHTTPStubsResponse *(NSURLRequest *request) {
-        return [OHHTTPStubsResponse responseWithData:nil
+        return [OHHTTPStubsResponse responseWithData:[[NSData alloc] init]
                                           statusCode:200
                                              headers:nil];
       }];

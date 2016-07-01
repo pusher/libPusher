@@ -15,8 +15,8 @@ def import_pods
 end
 
 def import_test_pods
-  pod 'Kiwi', '~> 2.3'
-  pod 'OHHTTPStubs', '~> 3.0'
+  pod 'Kiwi', '~> 2.4'
+  pod 'OHHTTPStubs', '~> 5.0'
 end
 
 
