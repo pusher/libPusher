@@ -22,18 +22,13 @@
 @synthesize currentChannel;
 @synthesize eventsReceived;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-  if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
-    eventsReceived = [[NSMutableArray alloc] init];
-  }
-  return self;
-}
 
 - (void)viewDidLoad 
 {
   [super viewDidLoad];
-  
+
+  eventsReceived = [[NSMutableArray alloc] init];
+
   self.title = @"Subscribe/Trigger";
   self.tableView.rowHeight = 55;
 
@@ -114,9 +109,15 @@ static NSString *EventCellIdentifier = @"EventCell";
   PTPusherEvent *event = [eventsReceived objectAtIndex:indexPath.row];
 
   cell.textLabel.text = event.name;
+  cell.detailTextLabel.numberOfLines = 10;
   cell.detailTextLabel.text = [event.data description];
   
   return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
+{
+  return 200.0;
 }
 
 @end
