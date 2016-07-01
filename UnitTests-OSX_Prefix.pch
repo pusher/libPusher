@@ -1,0 +1,13 @@
+//
+//  UnitTests-OSX_Prefix.pch
+//  libPusher
+//
+//  Created by Hamilton Chapman on 01/07/2016.
+//
+//
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+    #import <XCTest/XCTest.h>
+#endif
+

@@ -4,12 +4,22 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Kiwi.xcscheme</key>
+		<key>Kiwi-OSX.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>OHHTTPStubs.xcscheme</key>
+		<key>Kiwi-iOS.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>OHHTTPStubs-OSX.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>OHHTTPStubs-iOS.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -24,7 +34,17 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-UnitTests-OSX.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-UnitTests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-libPusher-OSX.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -39,17 +59,32 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Reachability.xcscheme</key>
+		<key>Reachability-OSX.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>ReactiveCocoa.xcscheme</key>
+		<key>Reachability-iOS.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>SocketRocket.xcscheme</key>
+		<key>ReactiveCocoa-OSX.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>ReactiveCocoa-iOS.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SocketRocket-OSX.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SocketRocket-iOS.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -57,52 +92,87 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>35560C5E8F4B06D2DCEB4C4783B9594C</key>
+		<key>119A6BDDDB3933F6F1F42B90DCECEA32</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4BDE528C2F74441AA33312554D41C5F4</key>
+		<key>224AF66C95631734CAAAE6F5BF101EF9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4CB3F7F46945EE16A19F86EAB6FC5CAF</key>
+		<key>2E3D2608397C62894A5279E2FB1FED1F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9CD431A5FF7DD9532D32CE1CAC4918B5</key>
+		<key>332D76D554DFB90B6931973DEDA01F4E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9E5E5340EFF552E3A5550B177B564A21</key>
+		<key>3A9F4B20328169A8C6CED206B00D175E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BDA427F367B739C812688A45E85DD7E4</key>
+		<key>4CF1070A842FF4E00CBA71F79D7ADFE1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BFF27B931EBC0AC0A628EBD31EAB0B16</key>
+		<key>7AB0D67AB80C92295A956F280339749C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D64AF82B99D73CBA378945CEF3982990</key>
+		<key>7F1C984928701B8705741F5CF96ED5D8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DF74C4422C39FDDB61748518E5F2BADC</key>
+		<key>8F04D428BCB12C9D523F53FFD2C0B199</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F13767D9D79C70180A114A116070D93C</key>
+		<key>A2036C76FE38DAC6189F8892EE4493DB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D3A8C2EDA0DF79D61B2EDEFF2DFB9EAC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DD9C734A7D9C5B7C3DB9837F173C1E0B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E6860931CDBA10CD38D2A99D34B748B1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F57842095F2CD988F3DF346DB13EBE47</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FAF231F375C9A8129527F69073BDC95A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FD744BB8244BC28511B444BA3B1575DF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FF95390693868B23656ABAFB418FEE3E</key>
 		<dict>
 			<key>primary</key>
 			<true/>

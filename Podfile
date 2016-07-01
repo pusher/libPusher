@@ -3,8 +3,8 @@
 # If you are working on libPusher, you do not need to have CocoaPods installed
 # unless you want to install new development dependencies as the Pods directory
 # is part of the source tree.
-#
-platform :ios, deployment_target: '6.0'
+
+platform :ios, '6.0'
 
 inhibit_all_warnings!
 
@@ -24,6 +24,11 @@ target 'libPusher' do
   import_pods
 end
 
+target 'libPusher-OSX' do
+  platform :osx, '10.9'
+  import_pods
+end
+
 target 'libPusher_ReactiveExtensions.a' do
   import_pods
 end
@@ -33,6 +38,12 @@ target 'SampleApp' do
 end
 
 target 'UnitTests' do
+  import_pods
+  import_test_pods
+end
+
+target 'UnitTests-OSX' do
+  platform :osx, '10.9'
   import_pods
   import_test_pods
 end
