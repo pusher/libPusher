@@ -4,6 +4,7 @@ sudo: false
 before_install:
   - brew update
   - brew outdated xctool || brew upgrade xctool
+  - xctool --version
 install:
   - tail -n +4 Sample/Constants.h.example > Sample/Constants.h
   - echo \#define PUSHER_APP_ID @\"$(env | grep PUSHER_APP_ID | cut -d "=" -f 2)\" >> Sample/Constants.h
