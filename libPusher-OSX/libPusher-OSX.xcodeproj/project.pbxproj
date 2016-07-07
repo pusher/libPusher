@@ -44,14 +44,14 @@
 		A3CA67AA14DBCB95003E2F1E /* PTURLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CA678B14DBCB95003E2F1E /* PTURLRequestOperation.m */; };
 		A3E5CC5618467337006A54DD /* NSDictionary+QueryString.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC4E18467337006A54DD /* NSDictionary+QueryString.h */; };
 		A3E5CC5718467337006A54DD /* NSString+Hashing.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC4F18467337006A54DD /* NSString+Hashing.h */; };
-		A3E5CC5818467337006A54DD /* PTBlockEventListener.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC5018467337006A54DD /* PTBlockEventListener.h */; };
+		A3E5CC5818467337006A54DD /* PTBlockEventListener.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC5018467337006A54DD /* PTBlockEventListener.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		A3E5CC5918467337006A54DD /* PTJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC5118467337006A54DD /* PTJSON.h */; };
 		A3E5CC5A18467337006A54DD /* PTPusherChannel_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC5218467337006A54DD /* PTPusherChannel_Private.h */; };
 		A3E5CC5B18467337006A54DD /* PTPusherChannelAuthorizationOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC5318467337006A54DD /* PTPusherChannelAuthorizationOperation.h */; };
-		A3E5CC5C18467337006A54DD /* PTTargetActionEventListener.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC5418467337006A54DD /* PTTargetActionEventListener.h */; };
+		A3E5CC5C18467337006A54DD /* PTTargetActionEventListener.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC5418467337006A54DD /* PTTargetActionEventListener.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		A3E5CC5D18467337006A54DD /* PTURLRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC5518467337006A54DD /* PTURLRequestOperation.h */; };
-		CE7158FB1BBDD22B000391EA /* NSDictionary+StringValue.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7158FA1BBDD22B000391EA /* NSDictionary+StringValue.m */; settings = {ASSET_TAGS = (); }; };
-		CE7158FD1BBDD9A8000391EA /* NSDictionary+StringValue.h in Headers */ = {isa = PBXBuildFile; fileRef = CE7158FC1BBDD9A8000391EA /* NSDictionary+StringValue.h */; settings = {ASSET_TAGS = (); }; };
+		CE7158FB1BBDD22B000391EA /* NSDictionary+StringValue.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7158FA1BBDD22B000391EA /* NSDictionary+StringValue.m */; };
+		CE7158FD1BBDD9A8000391EA /* NSDictionary+StringValue.h in Headers */ = {isa = PBXBuildFile; fileRef = CE7158FC1BBDD9A8000391EA /* NSDictionary+StringValue.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
