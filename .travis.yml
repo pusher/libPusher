@@ -5,6 +5,7 @@ before_install:
   - brew update
   - brew outdated xctool || brew upgrade xctool
   - xctool --version
+  - gem install xcpretty
 install:
   - tail -n +4 Sample/Constants.h.example > Sample/Constants.h
   - echo \#define PUSHER_APP_ID @\"$(env | grep PUSHER_APP_ID | cut -d "=" -f 2)\" >> Sample/Constants.h
@@ -17,5 +18,6 @@ env:
     - XCODE_SCHEME="libPusher-OSX" SDK="macosx" DESTINATION="arch=x86_64"
     - XCODE_SCHEME="Functional Specs" SDK="iphonesimulator" DESTINATION="OS=9.3,name=iPhone 6s"
 script:
+  - set -o pipefail
   - rackup -p 9292 Scripts/auth_server.ru > logs.txt 2>&1 &
-  - xcodebuild -workspace libPusher.xcworkspace -scheme "$XCODE_SCHEME" -sdk "$SDK" test -destination "$DESTINATION"
+  - xcodebuild -workspace libPusher.xcworkspace -scheme "$XCODE_SCHEME" -sdk "$SDK" test -destination "$DESTINATION" | xcpretty -tc

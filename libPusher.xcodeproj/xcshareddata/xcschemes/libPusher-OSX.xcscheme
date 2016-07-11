@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A3D1D2B61158013F009A12AD"
-               BuildableName = "libPusher.a"
-               BlueprintName = "libPusher"
+               BlueprintIdentifier = "33C69EB91D267E7800ABB47A"
+               BuildableName = "liblibPusher.a"
+               BlueprintName = "libPusher-OSX"
                ReferencedContainer = "container:libPusher.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,9 +28,9 @@
             buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A3A1A0EA115813E2001EF877"
+               BlueprintIdentifier = "33C69EED1D26807B00ABB47A"
                BuildableName = "UnitTests.xctest"
-               BlueprintName = "UnitTests"
+               BlueprintName = "UnitTests-OSX"
                ReferencedContainer = "container:libPusher.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -46,9 +46,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A3A1A0EA115813E2001EF877"
+               BlueprintIdentifier = "33C69EED1D26807B00ABB47A"
                BuildableName = "UnitTests.xctest"
-               BlueprintName = "UnitTests"
+               BlueprintName = "UnitTests-OSX"
                ReferencedContainer = "container:libPusher.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -56,9 +56,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A3D1D2B61158013F009A12AD"
-            BuildableName = "libPusher.a"
-            BlueprintName = "libPusher"
+            BlueprintIdentifier = "33C69EB91D267E7800ABB47A"
+            BuildableName = "liblibPusher.a"
+            BlueprintName = "libPusher-OSX"
             ReferencedContainer = "container:libPusher.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -78,9 +78,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A3D1D2B61158013F009A12AD"
-            BuildableName = "libPusher.a"
-            BlueprintName = "libPusher"
+            BlueprintIdentifier = "33C69EB91D267E7800ABB47A"
+            BuildableName = "liblibPusher.a"
+            BlueprintName = "libPusher-OSX"
             ReferencedContainer = "container:libPusher.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -96,9 +96,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "A3D1D2B61158013F009A12AD"
-            BuildableName = "libPusher.a"
-            BlueprintName = "libPusher"
+            BlueprintIdentifier = "33C69EB91D267E7800ABB47A"
+            BuildableName = "liblibPusher.a"
+            BlueprintName = "libPusher-OSX"
             ReferencedContainer = "container:libPusher.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
