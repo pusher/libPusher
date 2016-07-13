@@ -4,8 +4,6 @@
 # unless you want to install new development dependencies as the Pods directory
 # is part of the source tree.
 
-platform :ios, '6.0'
-
 inhibit_all_warnings!
 
 def import_pods
@@ -21,6 +19,7 @@ end
 
 
 target 'libPusher' do
+  platform :ios, '6.0'
   import_pods
 end
 
@@ -30,14 +29,22 @@ target 'libPusher-OSX' do
 end
 
 target 'libPusher_ReactiveExtensions.a' do
+  platform :ios, '6.0'
   import_pods
 end
 
 target 'SampleApp' do
+  platform :ios, '6.0'
+  import_pods
+end
+
+target 'SampleAppOSX' do
+  platform :osx, '10.9'
   import_pods
 end
 
 target 'UnitTests' do
+  platform :ios, '6.0'
   import_pods
   import_test_pods
 end
@@ -49,6 +56,7 @@ target 'UnitTests-OSX' do
 end
 
 target 'Functional Specs' do
+  platform :ios, '6.0'
   import_pods
   import_test_pods
 end

@@ -34,6 +34,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-SampleAppOSX.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-UnitTests-OSX.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -168,6 +173,11 @@
 			<true/>
 		</dict>
 		<key>FD744BB8244BC28511B444BA3B1575DF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FE6C66D98DF18129EC0F53E6C2F7BA57</key>
 		<dict>
 			<key>primary</key>
 			<true/>

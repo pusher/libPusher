@@ -5,9 +5,6 @@
       location = "group:libPusher.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:libPusher-OSX/libPusher-OSX.xcodeproj">
-   </FileRef>
-   <FileRef
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>
 </Workspace>
