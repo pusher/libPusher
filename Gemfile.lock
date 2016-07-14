@@ -7,18 +7,6 @@ GIT
       colored (~> 1.2)
 
 GIT
-  remote: git://github.com/lukeredpath/github-downloads.git
-  revision: 0ed8d7a59f5e15d72ce87c44a9000e301d3fa952
-  specs:
-    github-downloads (0.1.3)
-      highline
-      hirb
-      json
-      mime-types
-      rest-client
-      simpleconsole
-
-GIT
   remote: git://github.com/lukeredpath/xcodebuild-rb.git
   revision: 3d3019756f49e892cf8166f14c9f2d5e33adf068
   specs:
@@ -28,95 +16,100 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    RubyInline (3.12.3)
-      ZenTest (~> 4.3)
-    ZenTest (4.10.1)
-    activesupport (4.2.4)
+    activesupport (4.2.6)
       i18n (~> 0.7)
       json (~> 1.7, >= 1.7.7)
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
-    claide (0.9.1)
-    cocoapods (0.38.2)
-      activesupport (>= 3.2.15)
-      claide (~> 0.9.1)
-      cocoapods-core (= 0.38.2)
-      cocoapods-downloader (~> 0.9.1)
-      cocoapods-plugins (~> 0.4.2)
-      cocoapods-stats (~> 0.5.3)
-      cocoapods-trunk (~> 0.6.1)
-      cocoapods-try (~> 0.4.5)
+    claide (1.0.0)
+    cocoapods (1.0.1)
+      activesupport (>= 4.0.2)
+      claide (>= 1.0.0, < 2.0)
+      cocoapods-core (= 1.0.1)
+      cocoapods-deintegrate (>= 1.0.0, < 2.0)
+      cocoapods-downloader (>= 1.0.0, < 2.0)
+      cocoapods-plugins (>= 1.0.0, < 2.0)
+      cocoapods-search (>= 1.0.0, < 2.0)
+      cocoapods-stats (>= 1.0.0, < 2.0)
+      cocoapods-trunk (>= 1.0.0, < 2.0)
+      cocoapods-try (>= 1.0.0, < 2.0)
       colored (~> 1.2)
       escape (~> 0.0.4)
-      molinillo (~> 0.3.1)
-      nap (~> 0.8)
-      xcodeproj (~> 0.26.3)
-    cocoapods-core (0.38.2)
-      activesupport (>= 3.2.15)
+      fourflusher (~> 0.3.0)
+      molinillo (~> 0.4.5)
+      nap (~> 1.0)
+      xcodeproj (>= 1.1.0, < 2.0)
+    cocoapods-core (1.0.1)
+      activesupport (>= 4.0.2)
       fuzzy_match (~> 2.0.4)
-      nap (~> 0.8.0)
-    cocoapods-downloader (0.9.3)
-    cocoapods-plugins (0.4.2)
+      nap (~> 1.0)
+    cocoapods-deintegrate (1.0.0)
+    cocoapods-downloader (1.0.1)
+    cocoapods-plugins (1.0.0)
       nap
-    cocoapods-stats (0.5.3)
-      nap (~> 0.8)
-    cocoapods-trunk (0.6.4)
+    cocoapods-search (1.0.0)
+    cocoapods-stats (1.0.0)
+    cocoapods-trunk (1.0.0)
       nap (>= 0.8, < 2.0)
       netrc (= 0.7.8)
-    cocoapods-try (0.4.5)
+    cocoapods-try (1.0.0)
     colored (1.2)
-    daemons (1.1.9)
+    daemons (1.2.3)
+    domain_name (0.5.20160615)
+      unf (>= 0.0.5, < 1.0.0)
     escape (0.0.4)
-    eventmachine (1.0.3)
+    eventmachine (1.2.0.1)
+    fourflusher (0.3.2)
     fuzzy_match (2.0.4)
-    highline (1.6.21)
-    hirb (0.7.2)
-    httpclient (2.3.4.1)
+    http-cookie (1.0.2)
+      domain_name (~> 0.5)
+    httpclient (2.8.0)
     i18n (0.7.0)
     json (1.8.3)
     macaddr (1.7.1)
       systemu (~> 2.6.2)
-    mime-types (2.3)
-    minitest (5.8.0)
-    molinillo (0.3.1)
-    multi_json (1.11.2)
-    nap (0.8.0)
+    mime-types (2.99.2)
+    minitest (5.9.0)
+    molinillo (0.4.5)
+    multi_json (1.12.1)
+    nap (1.1.0)
     netrc (0.7.8)
-    osx_keychain (1.0.0)
-      RubyInline (~> 3)
-    pusher (0.12.0)
-      httpclient (~> 2.3.0)
+    pusher (1.1.0)
+      httpclient (~> 2.7)
       multi_json (~> 1.0)
-      signature (~> 0.1.6)
-    rack (1.5.2)
+      pusher-signature (~> 0.1.8)
+    pusher-signature (0.1.8)
+    rack (1.6.4)
     rack-protection (1.5.3)
       rack
-    rake (10.4.2)
-    rest-client (1.7.1)
+    rake (11.2.2)
+    rest-client (1.8.0)
+      http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
-    signature (0.1.7)
-    simpleconsole (0.1.1)
-    sinatra (1.4.5)
-      rack (~> 1.4)
+    sinatra (1.4.7)
+      rack (~> 1.5)
       rack-protection (~> 1.4)
-      tilt (~> 1.3, >= 1.3.4)
+      tilt (>= 1.3, < 3)
     state_machine (1.1.2)
-    systemu (2.6.4)
-    thin (1.6.2)
-      daemons (>= 1.0.9)
-      eventmachine (>= 1.0.0)
-      rack (>= 1.0.0)
+    systemu (2.6.5)
+    thin (1.7.0)
+      daemons (~> 1.0, >= 1.0.9)
+      eventmachine (~> 1.0, >= 1.0.4)
+      rack (>= 1, < 3)
     thread_safe (0.3.5)
-    tilt (1.4.1)
+    tilt (2.0.5)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    uuid (2.3.7)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.7.2)
+    uuid (2.3.8)
       macaddr (~> 1.0)
-    xcodeproj (0.26.3)
+    xcodeproj (1.1.0)
       activesupport (>= 3)
-      claide (~> 0.9.1)
+      claide (>= 1.0.0, < 2.0)
       colored (~> 1.2)
 
 PLATFORMS
@@ -124,10 +117,8 @@ PLATFORMS
 
 DEPENDENCIES
   cocoapods (>= 0.32.1)
-  github-downloads!
   ios-sim-test!
   json
-  osx_keychain
   pusher
   rake
   rest-client
@@ -136,3 +127,6 @@ DEPENDENCIES
   uuid
   xcodebuild-rb!
   xcodeproj
+
+BUNDLED WITH
+   1.12.4

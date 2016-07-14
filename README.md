@@ -2,13 +2,13 @@
 
 [![Build Status](https://travis-ci.org/pusher/libPusher.png)](https://travis-ci.org/pusher/libPusher)
 
-An Objective-C client library for the [Pusher.com](http://pusher.com) real-time service.
+An Objective-C client library for the [Pusher](https://pusher.com) realtime service.
 
-Pusher is a hosted service that sits between your web application and the browser that lets you deliver events in real-time using HTML5 WebSockets.
+Pusher is a hosted service that sits between your web application and the browser that lets you deliver events in realtime using WebSockets.
 
 The libPusher API mirrors the Pusher Javascript client as closely as possible, with some allowances for Objective-C conventions. In particular, whilst the Javascript client uses event binding for all event handling, where events are pre-defined, libPusher uses the standard Cocoa delegation pattern.
 
-[API Documentation](http://cocoadocs.org/docsets/libPusher/1.5/)
+[API Documentation](http://cocoadocs.org/docsets/libPusher/1.6/)
 
 ## Example
 Subscribe to the ```chat``` channel and bind to the ```new-message``` event.
@@ -42,8 +42,6 @@ Import Pusher into the class that wants to make use of the library.
 #import <Pusher/Pusher.h>
 ```
 
-A step-by-step guide on how to [install and setup CocoaPods]() to use libPusher without using CocoaPods is available on the wiki.
-
 If you want to use the ReactiveExtensions version of libPusher, add the following line to your Podfile instead.
 
 ```ruby
@@ -66,9 +64,9 @@ self.client = [PTPusher pusherWithKey:@"YOUR_API_KEY" delegate:self encrypted:YE
 [self.client connect];
 ```
 
-Note that client's do not connect automatically (as of version 1.5) - you are responsible for calling connect as needed.
+Note that clients do not connect automatically (as of version 1.5). You are responsible for calling connect as needed.
 
-It is recommended to implement the PTPusherDelegate protocol in order to be notified when significant connection events happen such as connection errors, disconnects and retries.
+It is recommended to implement the PTPusherDelegate protocol in order to be notified when significant connection events happen such as connection errors, disconnects, and retries.
 
 When the Pusher app is created in a different cluster to the default cluster, you must specify the `cluster` parameter.
 
@@ -96,7 +94,7 @@ PTPusherChannel *channel = [self.client subscribeToChannelNamed:@"chat"];
 
 This method will add the appropriate ```private-``` prefix to the channel name for you and return a channel cast to the correct PTPusherChannel subclass PTPusherPrivateChannel.
 
-Subscribing to private channels needs server-side authorisation. See section [Channel Authorisation](#channel-authorisation) for details.
+Subscribing to private channels needs server-side authorization. See section [Channel authorization](#channel-authorization) for details.
 
 ```objc
 // subscribe to private-chat channel
@@ -107,7 +105,7 @@ PTPusherPrivateChannel *private = [self.client subscribeToPrivateChannelNamed:@"
 
 This method will add the appropriate ```presence-``` prefix to the channel name for you and return a channel cast to the correct PTPusherChannel subclass PTPusherPresenceChannel.
 
-Subscribing to presence channels needs server-side authorisation. See section [Channel Authorisation](#channel-authorisation) for details.
+Subscribing to presence channels needs server-side authorization. See section [Channel Authorization](#channel-authorization) for details.
 
 ```objc
 // subscribe to presence-chat channel
@@ -127,7 +125,7 @@ PTPusherChannel *channel = [self.client channelNamed:@"chat"];
 
 ### Unsubscribe from channels
 
-If you no longer want to receive event over a channel, you can unsubscribe.
+If you no longer want to receive events on a given channel, you can unsubscribe from it.
 
 ```objc
 PTPusherChannel *channel = [self.client channelNamed:@"chat"];
@@ -136,32 +134,46 @@ PTPusherChannel *channel = [self.client channelNamed:@"chat"];
 
 ### Channel object lifetime
 
-When the Pusher client disconnects, all subscribed channels are implicitly unsubscribed (`isSubscribed` will return NO), however the channel objects will persist and so will any event bindings.
+When the Pusher client disconnects, all subscribed channels are implicitly unsubscribed (`isSubscribed` will return `NO`), however the channel objects will persist and so will any event bindings.
 
-When the client reconnects, all previously subscribed channels will be resubcribed (which might involve another authentication request for any private/presence channels) and your existing event bindings will continue working as they did prior to the disconnection.
+When the client reconnects, all previously subscribed channels will be resubscribed (which might involve another authentication request for any private/presence channels) and your existing event bindings will continue working as they did prior to the disconnection.
 
-If you explicitly unsubscribe from a channel, **all event bindings will be removed and the client will remove the channel object from it's list of subscribed channels**. If no other code has a strong reference to the channel object, it will be deallocated. If you resubscribe to the channel, a new channel object will be created. You should bear this in mind if you maintain any strong references to a channel object in your application code.
+If you explicitly unsubscribe from a channel, **all event bindings will be removed and the client will remove the channel object from its list of subscribed channels**. If no other code has a strong reference to the channel object, it will be deallocated. If you resubscribe to the channel, a new channel object will be created. You should bear this in mind if you maintain any strong references to a channel object in your application code.
 
-### Channel authorisation
+### Channel authorization
 
-Private and presence channels require server-side authorisation before they can connect.
+Private and presence channels require server-side authorization before they can connect.
 
-**Note**: Make sure your server responds correctly to the authentication request. See the [authentication signature](http://pusher.com/docs/auth_signatures) and [user authentication](http://pusher.com/docs/authenticating_users) docs for details and examples on how to implement authorization on the server side.
+**Note**: Make sure your server responds correctly to the authentication request. See the [authentication signature](https://pusher.com/docs/auth_signatures) and [user authentication](https://pusher.com/docs/authenticating_users) docs for details and examples on how to implement authorization on the server side.
 
-In order to connect to a private or presence channel, you first need to configure your server authorisation URL.
+In order to connect to a private or presence channel, you first need to configure your server authorization URL.
 
 ```objc
-self.client.authorizationURL = [NSURL URLWithString:@"https://www.yourserver.com/authorise"];
+self.client.authorizationURL = [NSURL URLWithString:@"https://www.yourserver.com/authorize"];
 ```
 
 When you attempt to connect to a private or presence channel, libPusher will make a form-encoded POST request to the above URL, passing along the ```socket_id``` and ```channel_name``` as parameters. Prior to sending the request, the Pusher delegate will be notified, passing in the channel and the NSMutableURLRequest instance that will be sent.
 
-Its up to you to configure the request to handle whatever authentication mechanism you are using. In this example, we simply set a custom header with a token which the server will use to authenticate the user before proceeding with authorisation.
+#### Custom authorization
+
+In order to perform custom authorization, you need to assign the `channelAuthorizationDelegate` and implement the `PTPusherChannelAuthorizationDelegate` protocol, which currently contains a single method. The following example uses the `AFNetworking` library to perform server-based authorization:
 
 ```objc
-- (void)pusher:(PTPusher *)pusher willAuthorizeChannel:(PTPusherChannel *)channel withRequest:(NSMutableURLRequest *)request
+- (BOOL)applicationDidFinishLaunching:(UIApplication *)application
 {
-	[request setValue:@"some-authentication-token" forHTTPHeaderField:@"X-MyCustom-AuthTokenHeader"];
+  ...
+  self.pusherClient.channelAuthorizationDelegate = self;
+}
+
+- (void)pusherChannel:(PTPusherChannel *)channel requiresAuthorizationForSocketID:(NSString *)socketID completionHandler:(void(^)(BOOL isAuthorized, NSDictionary *authData, NSError *error))completionHandler
+{
+  NSDictionary *authParameters = :@{@"socket_id": socketID, @"channel_name": channel.name};
+
+  [[MyHTTPClient sharedClient] postPath:@"/pusher/auth" parameters:authParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+      completionHandler(YES, responseObject, nil);
+  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    completionHandler(NO, nil, error);
+  }];
 }
 ```
 
@@ -169,7 +181,7 @@ Its up to you to configure the request to handle whatever authentication mechani
 
 ### Binding to events
 
-There are generally two ways to bind to events: Binding to an event on the PTPusher client itself or binding to a specific channel.
+There are generally two ways to bind to events: binding to an event on the PTPusher client itself or binding to a specific channel.
 
 Two types of direct binding are supported: target/action and block-based bindings. The examples below using block-based bindings.
 
@@ -301,7 +313,7 @@ The nature of a mobile device is that connections will come and go. There are a 
 
 ### Automatic reconnection behaviour
 
-libPusher will generally try and do it's best to keep you connected in most cases:
+libPusher will generally try and do its best to keep you connected in most cases:
 
 * If the connection fails having been previously connected, the client will try and reconnect immediately.
 * If the connection disconnects with a Pusher error code in the range 4200-4299, the client will try and reconnect immediately.

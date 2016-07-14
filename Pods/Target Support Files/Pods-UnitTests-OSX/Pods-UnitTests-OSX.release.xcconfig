@@ -1,0 +1,9 @@
+FRAMEWORK_SEARCH_PATHS = $(inherited) "$(PLATFORM_DIR)/Developer/Library/Frameworks"
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/Kiwi" "${PODS_ROOT}/Headers/Public/OHHTTPStubs" "${PODS_ROOT}/Headers/Public/Reachability" "${PODS_ROOT}/Headers/Public/ReactiveCocoa" "${PODS_ROOT}/Headers/Public/SocketRocket"
+LIBRARY_SEARCH_PATHS = $(inherited) "$PODS_CONFIGURATION_BUILD_DIR/Kiwi-OSX" "$PODS_CONFIGURATION_BUILD_DIR/OHHTTPStubs-OSX" "$PODS_CONFIGURATION_BUILD_DIR/Reachability-OSX" "$PODS_CONFIGURATION_BUILD_DIR/ReactiveCocoa-OSX" "$PODS_CONFIGURATION_BUILD_DIR/SocketRocket-OSX"
+OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/Kiwi" -isystem "${PODS_ROOT}/Headers/Public/OHHTTPStubs" -isystem "${PODS_ROOT}/Headers/Public/Reachability" -isystem "${PODS_ROOT}/Headers/Public/ReactiveCocoa" -isystem "${PODS_ROOT}/Headers/Public/SocketRocket"
+OTHER_LDFLAGS = $(inherited) -ObjC -l"Kiwi-OSX" -l"OHHTTPStubs-OSX" -l"Reachability-OSX" -l"ReactiveCocoa-OSX" -l"SocketRocket-OSX"  -framework "CFNetwork" -framework "CoreServices" -framework "Foundation" -framework "Security" -framework "SystemConfiguration" -framework "XCTest"
+PODS_BUILD_DIR = $BUILD_DIR
+PODS_CONFIGURATION_BUILD_DIR = $PODS_BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
+PODS_ROOT = ${SRCROOT}/Pods

@@ -46,8 +46,10 @@ describe(@"Pusher client", ^{
     __block PTPusherChannel *channel = nil;
 
     onSubscribe(^(PTPusherChannel *subscribedChannel) {
-      channel = subscribedChannel;
-      [client disconnect];
+      if ([subscribedChannel.name isEqualToString: @"test-channel-unsubscribe-disconnected"]) {
+        channel = subscribedChannel;
+        [client disconnect];
+      }
     });
     
     onDisconnect(^{
@@ -55,14 +57,14 @@ describe(@"Pusher client", ^{
     });
     
     onConnect(^{
-      [client subscribeToChannelNamed:@"test-channel"];
+      [client subscribeToChannelNamed:@"test-channel-unsubscribe-disconnected"];
     });
     
     [client connect];
-    
+
     // we need to wait for the channel so we know we are subscribed
     [[expectFutureValue(channel) shouldEventuallyBeforeTimingOutAfter(3)] beNonNil];
-    
+
     // without the above expectation, this will pass immediately, before the channel has subscribed
     [[expectFutureValue([NSNumber numberWithBool:channel.isSubscribed]) shouldEventually] equal:[NSNumber numberWithBool:NO]];
 	});
