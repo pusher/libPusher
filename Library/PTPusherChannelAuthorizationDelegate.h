@@ -10,6 +10,8 @@
 
 @class PTPusherChannel;
 
+typedef void (^PTPusherChannelAuthorizationCallback) (BOOL, NSDictionary *, NSError *);
+
 /* Describes the authorization protocol used by the PTPusher client
  * when a channel requires authorization to subscribe.
  *
@@ -25,6 +27,6 @@
  * data) and then call the completion handler, indicating whether or not authorization
  * was successful and passing the authorization data or an error as necessary.
  */
-- (void)pusherChannel:(PTPusherChannel *)channel requiresAuthorizationForSocketID:(NSString *)socketID completionHandler:(void(^)(BOOL isAuthorized, NSDictionary *authData, NSError *error))completionHandler;
+- (void)pusherChannel:(PTPusherChannel *)channel requiresAuthorizationForSocketID:(NSString *)socketID completionHandler:(PTPusherChannelAuthorizationCallback)completionHandler;
 
 @end
