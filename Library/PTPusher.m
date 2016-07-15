@@ -38,6 +38,7 @@ NSString *const PTPusherErrorUnderlyingEventKey   = @"PTPusherErrorUnderlyingEve
  are supported.
  */
 #define kPTPusherClientProtocolVersion 6
+#define kPTPusherClientLibraryVersion @"1.6"
 
 NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, BOOL encrypted)
 {

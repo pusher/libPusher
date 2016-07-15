@@ -1,0 +1,6 @@
+framework module Pods_libPusher_OSX {
+  umbrella header "Pods-libPusher-OSX-umbrella.h"
+
+  export *
+  module * { export * }
+}

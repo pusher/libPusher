@@ -1,0 +1,6 @@
+framework module Pods_libPusher_tvOS {
+  umbrella header "Pods-libPusher-tvOS-umbrella.h"
+
+  export *
+  module * { export * }
+}

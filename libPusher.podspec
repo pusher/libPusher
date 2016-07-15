@@ -19,14 +19,11 @@ Pod::Spec.new do |s|
 
     subspec.source_files         = 'Library/**/*.{h,m}'
     subspec.private_header_files = 'Library/Private Headers/*'
-    subspec.xcconfig             = {
-      'GCC_PREPROCESSOR_DEFINITIONS' => 'kPTPusherClientLibraryVersion=@\"1.6.1\"'
-    }
   end
 
   s.subspec 'ReactiveExtensions' do |subspec|
     subspec.dependency 'libPusher/Core'
-    subspec.dependency 'ReactiveCocoa', '~> 2.1'
+    subspec.dependency 'ReactiveCocoa', '~> 4'
 
     subspec.source_files = 'ReactiveExtensions/*'
     subspec.private_header_files = 'ReactiveExtensions/*_Internal.h'

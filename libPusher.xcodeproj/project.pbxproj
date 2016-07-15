@@ -8,10 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
-		1DE1F7C222A63EC950DB9935 /* libPods-libPusher_ReactiveExtensions.a.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9F9F5CC5B9ED1CE253A7ADD /* libPods-libPusher_ReactiveExtensions.a.a */; };
+		1DD1EAAB59BC2835C39E8D4E /* Pods_libPusher_OSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA232F92B16C50C94849172F /* Pods_libPusher_OSX.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
-		20C8DC875032A83F2C15A043 /* libPods-UnitTests-OSX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4341759B83217ADDFF5742F2 /* libPods-UnitTests-OSX.a */; };
-		284FC4BFF99B53DFCF07CFE0 /* libPods-UnitTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1869A6584270C5ACDEE722A /* libPods-UnitTests.a */; };
+		202BE5F0A03173E463FFE8F6 /* Pods_UnitTests_OSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4A8F3EC7A5D4F6699759B47 /* Pods_UnitTests_OSX.framework */; };
+		23ED80960E8EE6480198479A /* Pods_Functional_Specs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7426ABED2FFDCC69F6C6530D /* Pods_Functional_Specs.framework */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		330136391D354B11004936D8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 330136381D354B11004936D8 /* AppDelegate.m */; };
 		3301363C1D354B11004936D8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3301363B1D354B11004936D8 /* main.m */; };
@@ -26,6 +26,191 @@
 		330136551D3691C5004936D8 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3301364F1D368FD7004936D8 /* libicucore.tbd */; };
 		335DD8A51D23C274002724DC /* NSDictionary+StringValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 335DD8A21D23BEC1002724DC /* NSDictionary+StringValue.h */; };
 		335DD8A61D23C283002724DC /* NSDictionary+StringValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 335DD8A31D23C219002724DC /* NSDictionary+StringValue.m */; };
+		3373FE501D37BFF500A5A73B /* PTTargetActionEventListener.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC4318466CD5006A54DD /* PTTargetActionEventListener.h */; };
+		3373FE511D37BFF500A5A73B /* PTPusherDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = A3A1A41611582DC3001EF877 /* PTPusherDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FE521D37BFF500A5A73B /* NSDictionary+StringValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 335DD8A21D23BEC1002724DC /* NSDictionary+StringValue.h */; };
+		3373FE531D37BFF500A5A73B /* PTPusher.h in Headers */ = {isa = PBXBuildFile; fileRef = A3D1D28E1157FA4C009A12AD /* PTPusher.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FE541D37BFF500A5A73B /* NSString+Hashing.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC3E18466CD5006A54DD /* NSString+Hashing.h */; };
+		3373FE551D37BFF500A5A73B /* PTJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC4018466CD5006A54DD /* PTJSON.h */; };
+		3373FE561D37BFF500A5A73B /* PTPusherEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = A3D1D2901157FA4C009A12AD /* PTPusherEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FE571D37BFF500A5A73B /* PTPusherConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = A35281CE13F721A8000687C0 /* PTPusherConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FE581D37BFF500A5A73B /* PTPusherEventPublisher.h in Headers */ = {isa = PBXBuildFile; fileRef = A35281D213F72E03000687C0 /* PTPusherEventPublisher.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FE591D37BFF500A5A73B /* PTPusherEventDispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = A35281D413F736DF000687C0 /* PTPusherEventDispatcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FE5A1D37BFF500A5A73B /* PTURLRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC4418466CD5006A54DD /* PTURLRequestOperation.h */; };
+		3373FE5B1D37BFF500A5A73B /* PTBlockEventListener.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC3F18466CD5006A54DD /* PTBlockEventListener.h */; };
+		3373FE5C1D37BFF500A5A73B /* PTPusherAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = A35281E713F75265000687C0 /* PTPusherAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FE5D1D37BFF500A5A73B /* PTEventListener.h in Headers */ = {isa = PBXBuildFile; fileRef = A3D1D28C1157FA4C009A12AD /* PTEventListener.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FE5E1D37BFF500A5A73B /* PTPusherChannel_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC4118466CD5006A54DD /* PTPusherChannel_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		3373FE5F1D37BFF500A5A73B /* PTPusherPresenceChannelDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = A39E238A13F7E85C0083CAD7 /* PTPusherPresenceChannelDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FE601D37BFF500A5A73B /* PTPusherChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = A3FE42181181173B009CF5D7 /* PTPusherChannel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FE611D37BFF500A5A73B /* PTPusherErrors.h in Headers */ = {isa = PBXBuildFile; fileRef = A39E238613F7E3FD0083CAD7 /* PTPusherErrors.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FE621D37BFF500A5A73B /* PTPusherMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = A37E167314E572C900DCA3A6 /* PTPusherMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FE631D37BFF500A5A73B /* PTPusherMockConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = A3173758155D2D21007E4BBA /* PTPusherMockConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FE641D37BFF500A5A73B /* Pusher.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D81597E1712C6CA0013A485 /* Pusher.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FE651D37BFF500A5A73B /* PTPusherChannelServerBasedAuthorization.h in Headers */ = {isa = PBXBuildFile; fileRef = 33E3DECC1CE4BF7500CCB536 /* PTPusherChannelServerBasedAuthorization.h */; };
+		3373FE661D37BFF500A5A73B /* NSDictionary+QueryString.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC3D18466CD5006A54DD /* NSDictionary+QueryString.h */; };
+		3373FE681D37BFF500A5A73B /* NSDictionary+QueryString.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FE430011812541009CF5D7 /* NSDictionary+QueryString.m */; };
+		3373FE691D37BFF500A5A73B /* PTPusherChannelServerBasedAuthorization.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E3DECD1CE4BF7500CCB536 /* PTPusherChannelServerBasedAuthorization.m */; };
+		3373FE6A1D37BFF500A5A73B /* PTPusher.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D28F1157FA4C009A12AD /* PTPusher.m */; };
+		3373FE6B1D37BFF500A5A73B /* PTPusherEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D2911157FA4C009A12AD /* PTPusherEvent.m */; };
+		3373FE6C1D37BFF500A5A73B /* NSDictionary+StringValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 335DD8A31D23C219002724DC /* NSDictionary+StringValue.m */; };
+		3373FE6D1D37BFF500A5A73B /* NSString+Hashing.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FE429C11811EE8009CF5D7 /* NSString+Hashing.m */; };
+		3373FE6E1D37BFF500A5A73B /* PTPusherChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FE42191181173B009CF5D7 /* PTPusherChannel.m */; };
+		3373FE6F1D37BFF500A5A73B /* PTPusherConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = A35281CF13F721A8000687C0 /* PTPusherConnection.m */; };
+		3373FE701D37BFF500A5A73B /* PTPusherEventDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = A35281D513F736DF000687C0 /* PTPusherEventDispatcher.m */; };
+		3373FE711D37BFF500A5A73B /* PTTargetActionEventListener.m in Sources */ = {isa = PBXBuildFile; fileRef = A35281DA13F73C54000687C0 /* PTTargetActionEventListener.m */; };
+		3373FE721D37BFF500A5A73B /* PTBlockEventListener.m in Sources */ = {isa = PBXBuildFile; fileRef = A35281E313F75010000687C0 /* PTBlockEventListener.m */; };
+		3373FE731D37BFF500A5A73B /* PTPusherAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = A35281E813F75265000687C0 /* PTPusherAPI.m */; };
+		3373FE741D37BFF500A5A73B /* PTURLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AC28B513F75530001C4808 /* PTURLRequestOperation.m */; };
+		3373FE751D37BFF500A5A73B /* PTJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = A30950121525C272008F695B /* PTJSON.m */; };
+		3373FE761D37BFF500A5A73B /* PTPusherMockConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = A3173759155D2D21007E4BBA /* PTPusherMockConnection.m */; };
+		3373FE781D37BFF500A5A73B /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		3373FE871D37D3CD00A5A73B /* libPushertvOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 3373FE861D37D3CD00A5A73B /* libPushertvOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FE8C1D37D47A00A5A73B /* Pusher.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D81597E1712C6CA0013A485 /* Pusher.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FE8D1D37D47A00A5A73B /* PTEventListener.h in Headers */ = {isa = PBXBuildFile; fileRef = A3D1D28C1157FA4C009A12AD /* PTEventListener.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FE8E1D37D47A00A5A73B /* PTPusher.h in Headers */ = {isa = PBXBuildFile; fileRef = A3D1D28E1157FA4C009A12AD /* PTPusher.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FE8F1D37D47A00A5A73B /* PTPusher.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D28F1157FA4C009A12AD /* PTPusher.m */; };
+		3373FE901D37D47A00A5A73B /* PTPusherEventPublisher.h in Headers */ = {isa = PBXBuildFile; fileRef = A35281D213F72E03000687C0 /* PTPusherEventPublisher.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FE911D37D47A00A5A73B /* PTPusherEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = A3D1D2901157FA4C009A12AD /* PTPusherEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FE921D37D47A00A5A73B /* PTPusherEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D2911157FA4C009A12AD /* PTPusherEvent.m */; };
+		3373FE931D37D47A00A5A73B /* PTPusherEventDispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = A35281D413F736DF000687C0 /* PTPusherEventDispatcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FE941D37D47A00A5A73B /* PTPusherEventDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = A35281D513F736DF000687C0 /* PTPusherEventDispatcher.m */; };
+		3373FE951D37D47A00A5A73B /* PTPusherDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = A3A1A41611582DC3001EF877 /* PTPusherDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FE961D37D47A00A5A73B /* PTPusherChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = A3FE42181181173B009CF5D7 /* PTPusherChannel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FE971D37D47A00A5A73B /* PTPusherChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FE42191181173B009CF5D7 /* PTPusherChannel.m */; };
+		3373FE981D37D47A00A5A73B /* PTPusherConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = A35281CE13F721A8000687C0 /* PTPusherConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FE991D37D47A00A5A73B /* PTPusherConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = A35281CF13F721A8000687C0 /* PTPusherConnection.m */; };
+		3373FE9A1D37D47A00A5A73B /* PTPusherErrors.h in Headers */ = {isa = PBXBuildFile; fileRef = A39E238613F7E3FD0083CAD7 /* PTPusherErrors.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FE9B1D37D47A00A5A73B /* PTPusherPresenceChannelDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = A39E238A13F7E85C0083CAD7 /* PTPusherPresenceChannelDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FE9C1D37D47A00A5A73B /* PTPusherChannelAuthorizationDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 33E3DED41CE4C11E00CCB536 /* PTPusherChannelAuthorizationDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FE9D1D37D47A00A5A73B /* PTPusherChannelServerBasedAuthorization.h in Headers */ = {isa = PBXBuildFile; fileRef = 33E3DECC1CE4BF7500CCB536 /* PTPusherChannelServerBasedAuthorization.h */; };
+		3373FE9E1D37D47A00A5A73B /* PTPusherChannelServerBasedAuthorization.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E3DECD1CE4BF7500CCB536 /* PTPusherChannelServerBasedAuthorization.m */; };
+		3373FE9F1D37D48500A5A73B /* NSDictionary+StringValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 335DD8A31D23C219002724DC /* NSDictionary+StringValue.m */; };
+		3373FEA01D37D48500A5A73B /* PTURLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AC28B513F75530001C4808 /* PTURLRequestOperation.m */; };
+		3373FEA11D37D48500A5A73B /* PTJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = A30950121525C272008F695B /* PTJSON.m */; };
+		3373FEA21D37D48500A5A73B /* NSString+Hashing.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FE429C11811EE8009CF5D7 /* NSString+Hashing.m */; };
+		3373FEA31D37D48500A5A73B /* NSDictionary+QueryString.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FE430011812541009CF5D7 /* NSDictionary+QueryString.m */; };
+		3373FEA41D37D48500A5A73B /* PTPusherMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = A37E167314E572C900DCA3A6 /* PTPusherMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FEA51D37D48900A5A73B /* PTTargetActionEventListener.m in Sources */ = {isa = PBXBuildFile; fileRef = A35281DA13F73C54000687C0 /* PTTargetActionEventListener.m */; };
+		3373FEA61D37D48900A5A73B /* PTBlockEventListener.m in Sources */ = {isa = PBXBuildFile; fileRef = A35281E313F75010000687C0 /* PTBlockEventListener.m */; };
+		3373FEA71D37D48E00A5A73B /* PTPusherAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = A35281E713F75265000687C0 /* PTPusherAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FEA81D37D48E00A5A73B /* PTPusherAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = A35281E813F75265000687C0 /* PTPusherAPI.m */; };
+		3373FEA91D37D49500A5A73B /* NSDictionary+StringValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 335DD8A21D23BEC1002724DC /* NSDictionary+StringValue.h */; };
+		3373FEAA1D37D49500A5A73B /* NSDictionary+QueryString.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC3D18466CD5006A54DD /* NSDictionary+QueryString.h */; };
+		3373FEAB1D37D49500A5A73B /* NSString+Hashing.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC3E18466CD5006A54DD /* NSString+Hashing.h */; };
+		3373FEAC1D37D49500A5A73B /* PTBlockEventListener.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC3F18466CD5006A54DD /* PTBlockEventListener.h */; };
+		3373FEAD1D37D49500A5A73B /* PTJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC4018466CD5006A54DD /* PTJSON.h */; };
+		3373FEAE1D37D49500A5A73B /* PTPusherChannel_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC4118466CD5006A54DD /* PTPusherChannel_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		3373FEAF1D37D49500A5A73B /* PTTargetActionEventListener.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC4318466CD5006A54DD /* PTTargetActionEventListener.h */; };
+		3373FEB01D37D49500A5A73B /* PTURLRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC4418466CD5006A54DD /* PTURLRequestOperation.h */; };
+		3373FEB11D37D82E00A5A73B /* PTPusherMockConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = A3173759155D2D21007E4BBA /* PTPusherMockConnection.m */; };
+		3373FEB21D37D85C00A5A73B /* PTPusherMockConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = A3173758155D2D21007E4BBA /* PTPusherMockConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FEF81D37E0CC00A5A73B /* PTPusherMockConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = A3173759155D2D21007E4BBA /* PTPusherMockConnection.m */; };
+		3373FEF91D37E0CC00A5A73B /* PTJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = A30950121525C272008F695B /* PTJSON.m */; };
+		3373FEFA1D37E0CC00A5A73B /* PTTargetActionEventListener.m in Sources */ = {isa = PBXBuildFile; fileRef = A35281DA13F73C54000687C0 /* PTTargetActionEventListener.m */; };
+		3373FEFB1D37E0CC00A5A73B /* PTPusherConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = A35281CF13F721A8000687C0 /* PTPusherConnection.m */; };
+		3373FEFC1D37E0CC00A5A73B /* NSDictionary+QueryString.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FE430011812541009CF5D7 /* NSDictionary+QueryString.m */; };
+		3373FEFD1D37E0CC00A5A73B /* PTBlockEventListener.m in Sources */ = {isa = PBXBuildFile; fileRef = A35281E313F75010000687C0 /* PTBlockEventListener.m */; };
+		3373FEFE1D37E0CC00A5A73B /* NSDictionary+StringValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 335DD8A31D23C219002724DC /* NSDictionary+StringValue.m */; };
+		3373FEFF1D37E0CC00A5A73B /* PTPusherChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FE42191181173B009CF5D7 /* PTPusherChannel.m */; };
+		3373FF001D37E0CC00A5A73B /* NSString+Hashing.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FE429C11811EE8009CF5D7 /* NSString+Hashing.m */; };
+		3373FF011D37E0CC00A5A73B /* PTURLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AC28B513F75530001C4808 /* PTURLRequestOperation.m */; };
+		3373FF021D37E0CC00A5A73B /* PTPusher.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D28F1157FA4C009A12AD /* PTPusher.m */; };
+		3373FF031D37E0CC00A5A73B /* PTPusherEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D2911157FA4C009A12AD /* PTPusherEvent.m */; };
+		3373FF041D37E0CC00A5A73B /* PTPusherAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = A35281E813F75265000687C0 /* PTPusherAPI.m */; };
+		3373FF051D37E0CC00A5A73B /* PTPusherEventDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = A35281D513F736DF000687C0 /* PTPusherEventDispatcher.m */; };
+		3373FF061D37E0CC00A5A73B /* PTPusherChannelServerBasedAuthorization.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E3DECD1CE4BF7500CCB536 /* PTPusherChannelServerBasedAuthorization.m */; };
+		3373FF0A1D37E0CC00A5A73B /* PTPusherDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = A3A1A41611582DC3001EF877 /* PTPusherDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FF0B1D37E0CC00A5A73B /* Pusher.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D81597E1712C6CA0013A485 /* Pusher.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FF0C1D37E0CC00A5A73B /* PTPusherEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = A3D1D2901157FA4C009A12AD /* PTPusherEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FF0D1D37E0CC00A5A73B /* PTPusherConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = A35281CE13F721A8000687C0 /* PTPusherConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FF0E1D37E0CC00A5A73B /* PTPusherEventDispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = A35281D413F736DF000687C0 /* PTPusherEventDispatcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FF0F1D37E0CC00A5A73B /* PTPusherAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = A35281E713F75265000687C0 /* PTPusherAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FF101D37E0CC00A5A73B /* PTPusherEventPublisher.h in Headers */ = {isa = PBXBuildFile; fileRef = A35281D213F72E03000687C0 /* PTPusherEventPublisher.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FF111D37E0CC00A5A73B /* PTPusherChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = A3FE42181181173B009CF5D7 /* PTPusherChannel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FF121D37E0CC00A5A73B /* PTPusherPresenceChannelDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = A39E238A13F7E85C0083CAD7 /* PTPusherPresenceChannelDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FF131D37E0CC00A5A73B /* PTPusherMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = A37E167314E572C900DCA3A6 /* PTPusherMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FF141D37E0CC00A5A73B /* PTPusherErrors.h in Headers */ = {isa = PBXBuildFile; fileRef = A39E238613F7E3FD0083CAD7 /* PTPusherErrors.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FF151D37E0CC00A5A73B /* PTPusherChannelAuthorizationDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 33E3DED41CE4C11E00CCB536 /* PTPusherChannelAuthorizationDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FF161D37E0CC00A5A73B /* PTEventListener.h in Headers */ = {isa = PBXBuildFile; fileRef = A3D1D28C1157FA4C009A12AD /* PTEventListener.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FF171D37E0CC00A5A73B /* PTPusherMockConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = A3173758155D2D21007E4BBA /* PTPusherMockConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FF181D37E0CC00A5A73B /* PTPusherChannel_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC4118466CD5006A54DD /* PTPusherChannel_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		3373FF1A1D37E0CC00A5A73B /* PTPusher.h in Headers */ = {isa = PBXBuildFile; fileRef = A3D1D28E1157FA4C009A12AD /* PTPusher.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FF1B1D37E0CC00A5A73B /* NSDictionary+StringValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 335DD8A21D23BEC1002724DC /* NSDictionary+StringValue.h */; };
+		3373FF1C1D37E0CC00A5A73B /* PTTargetActionEventListener.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC4318466CD5006A54DD /* PTTargetActionEventListener.h */; };
+		3373FF1D1D37E0CC00A5A73B /* PTJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC4018466CD5006A54DD /* PTJSON.h */; };
+		3373FF1E1D37E0CC00A5A73B /* NSDictionary+QueryString.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC3D18466CD5006A54DD /* NSDictionary+QueryString.h */; };
+		3373FF1F1D37E0CC00A5A73B /* PTURLRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC4418466CD5006A54DD /* PTURLRequestOperation.h */; };
+		3373FF201D37E0CC00A5A73B /* NSString+Hashing.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC3E18466CD5006A54DD /* NSString+Hashing.h */; };
+		3373FF211D37E0CC00A5A73B /* PTPusherChannelServerBasedAuthorization.h in Headers */ = {isa = PBXBuildFile; fileRef = 33E3DECC1CE4BF7500CCB536 /* PTPusherChannelServerBasedAuthorization.h */; };
+		3373FF221D37E0CC00A5A73B /* PTBlockEventListener.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC3F18466CD5006A54DD /* PTBlockEventListener.h */; };
+		3373FF2A1D37E9B500A5A73B /* libPusheriOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 3373FEEF1D37DC8800A5A73B /* libPusheriOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FF321D37EFCB00A5A73B /* ReactiveEventsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3E5CBF918464227006A54DD /* ReactiveEventsViewController.xib */; };
+		3373FF331D37EFCB00A5A73B /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3D1D2831157FA30009A12AD /* MainWindow.xib */; };
+		3373FF341D37EFCB00A5A73B /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A3E5CBF4184640C3006A54DD /* Default-568h@2x.png */; };
+		3373FF351D37EFCB00A5A73B /* PusherEventsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3D1D2851157FA30009A12AD /* PusherEventsViewController.xib */; };
+		3373FF361D37EFCB00A5A73B /* NewEventViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3FE41CA11811161009CF5D7 /* NewEventViewController.xib */; };
+		3373FF381D37EFCB00A5A73B /* PusherEventsAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D27E1157FA30009A12AD /* PusherEventsAppDelegate.m */; };
+		3373FF391D37EFCB00A5A73B /* PusherEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D2801157FA30009A12AD /* PusherEventsViewController.m */; };
+		3373FF3A1D37EFCB00A5A73B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D2821157FA30009A12AD /* main.m */; };
+		3373FF3B1D37EFCB00A5A73B /* NewEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FE41C911811161009CF5D7 /* NewEventViewController.m */; };
+		3373FF3C1D37EFCB00A5A73B /* PusherPresenceEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A39E238813F7E6AB0083CAD7 /* PusherPresenceEventsViewController.m */; };
+		3373FF3D1D37EFCB00A5A73B /* NSMutableURLRequest+BasicAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = A3698FED13FF0868005CF130 /* NSMutableURLRequest+BasicAuth.m */; };
+		3373FF3E1D37EFCB00A5A73B /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = A3698FFE13FF200C005CF130 /* NSData+Base64.m */; };
+		3373FF3F1D37EFCB00A5A73B /* ReactiveEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3E5CBF718464164006A54DD /* ReactiveEventsViewController.m */; };
+		3373FF401D37EFCB00A5A73B /* PusherExampleMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AC28BD13F75BF1001C4808 /* PusherExampleMenuViewController.m */; };
+		3373FF421D37EFCB00A5A73B /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3301364F1D368FD7004936D8 /* libicucore.tbd */; };
+		3373FF431D37EFCB00A5A73B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		3373FF441D37EFCB00A5A73B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		3373FF451D37EFCB00A5A73B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
+		3373FF461D37EFCB00A5A73B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3D1D0B51157CCDE009A12AD /* CFNetwork.framework */; };
+		3373FF511D37F4C800A5A73B /* libPusheriOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3373FF281D37E0CC00A5A73B /* libPusheriOS.framework */; };
+		3373FF5A1D380E2900A5A73B /* libPusherReactiveExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 3373FF591D380E2900A5A73B /* libPusherReactiveExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FF5F1D380E3C00A5A73B /* PTPusherChannel+ReactiveExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = A394E6F818463DFA004C70A2 /* PTPusherChannel+ReactiveExtensions.m */; };
+		3373FF601D380E3C00A5A73B /* PTPusher+ReactiveExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = A3E5CBFC1846461A006A54DD /* PTPusher+ReactiveExtensions.m */; };
+		3373FF611D380E7800A5A73B /* PTPusher+ReactiveExtensions_Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC0118464959006A54DD /* PTPusher+ReactiveExtensions_Internal.h */; };
+		3373FF621D380E8300A5A73B /* PTPusherChannel+ReactiveExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = A394E6F718463DFA004C70A2 /* PTPusherChannel+ReactiveExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FF631D380E8300A5A73B /* PTPusher+ReactiveExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CBFB1846461A006A54DD /* PTPusher+ReactiveExtensions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3373FF641D380F5300A5A73B /* libPusherReactiveExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3373FF571D380E2900A5A73B /* libPusherReactiveExtensions.framework */; };
+		33C1B5DB1D38106C00589942 /* PTPusherMockConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = A3173759155D2D21007E4BBA /* PTPusherMockConnection.m */; };
+		33C1B5DC1D38106C00589942 /* PTPusherAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = A35281E813F75265000687C0 /* PTPusherAPI.m */; };
+		33C1B5DD1D38106C00589942 /* PTTargetActionEventListener.m in Sources */ = {isa = PBXBuildFile; fileRef = A35281DA13F73C54000687C0 /* PTTargetActionEventListener.m */; };
+		33C1B5DE1D38106C00589942 /* PTBlockEventListener.m in Sources */ = {isa = PBXBuildFile; fileRef = A35281E313F75010000687C0 /* PTBlockEventListener.m */; };
+		33C1B5DF1D38106C00589942 /* NSDictionary+StringValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 335DD8A31D23C219002724DC /* NSDictionary+StringValue.m */; };
+		33C1B5E01D38106C00589942 /* PTURLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A3AC28B513F75530001C4808 /* PTURLRequestOperation.m */; };
+		33C1B5E11D38106C00589942 /* PTJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = A30950121525C272008F695B /* PTJSON.m */; };
+		33C1B5E21D38106C00589942 /* NSString+Hashing.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FE429C11811EE8009CF5D7 /* NSString+Hashing.m */; };
+		33C1B5E31D38106C00589942 /* NSDictionary+QueryString.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FE430011812541009CF5D7 /* NSDictionary+QueryString.m */; };
+		33C1B5E41D38106C00589942 /* PTPusher.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D28F1157FA4C009A12AD /* PTPusher.m */; };
+		33C1B5E51D38106C00589942 /* PTPusherEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D1D2911157FA4C009A12AD /* PTPusherEvent.m */; };
+		33C1B5E61D38106C00589942 /* PTPusherEventDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = A35281D513F736DF000687C0 /* PTPusherEventDispatcher.m */; };
+		33C1B5E71D38106C00589942 /* PTPusherChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FE42191181173B009CF5D7 /* PTPusherChannel.m */; };
+		33C1B5E81D38106C00589942 /* PTPusherConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = A35281CF13F721A8000687C0 /* PTPusherConnection.m */; };
+		33C1B5E91D38106C00589942 /* PTPusherChannelServerBasedAuthorization.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E3DECD1CE4BF7500CCB536 /* PTPusherChannelServerBasedAuthorization.m */; };
+		33C1B5EA1D38107B00589942 /* NSDictionary+StringValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 335DD8A21D23BEC1002724DC /* NSDictionary+StringValue.h */; };
+		33C1B5EB1D38107B00589942 /* NSDictionary+QueryString.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC3D18466CD5006A54DD /* NSDictionary+QueryString.h */; };
+		33C1B5EC1D38107B00589942 /* NSString+Hashing.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC3E18466CD5006A54DD /* NSString+Hashing.h */; };
+		33C1B5ED1D38107B00589942 /* PTBlockEventListener.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC3F18466CD5006A54DD /* PTBlockEventListener.h */; };
+		33C1B5EE1D38107B00589942 /* PTJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC4018466CD5006A54DD /* PTJSON.h */; };
+		33C1B5EF1D38107B00589942 /* PTPusherChannel_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC4118466CD5006A54DD /* PTPusherChannel_Private.h */; };
+		33C1B5F01D38107B00589942 /* PTTargetActionEventListener.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC4318466CD5006A54DD /* PTTargetActionEventListener.h */; };
+		33C1B5F11D38107B00589942 /* PTURLRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC4418466CD5006A54DD /* PTURLRequestOperation.h */; };
+		33C1B5F21D38109800589942 /* PTPusherMockConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = A3173758155D2D21007E4BBA /* PTPusherMockConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		33C1B5F31D38109800589942 /* PTPusherAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = A35281E713F75265000687C0 /* PTPusherAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		33C1B5F41D38109800589942 /* PTPusherMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = A37E167314E572C900DCA3A6 /* PTPusherMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		33C1B5F51D38109800589942 /* Pusher.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D81597E1712C6CA0013A485 /* Pusher.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		33C1B5F61D38109800589942 /* PTEventListener.h in Headers */ = {isa = PBXBuildFile; fileRef = A3D1D28C1157FA4C009A12AD /* PTEventListener.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		33C1B5F71D38109800589942 /* PTPusher.h in Headers */ = {isa = PBXBuildFile; fileRef = A3D1D28E1157FA4C009A12AD /* PTPusher.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		33C1B5F81D38109800589942 /* PTPusherEventPublisher.h in Headers */ = {isa = PBXBuildFile; fileRef = A35281D213F72E03000687C0 /* PTPusherEventPublisher.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		33C1B5F91D38109800589942 /* PTPusherEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = A3D1D2901157FA4C009A12AD /* PTPusherEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		33C1B5FA1D38109800589942 /* PTPusherEventDispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = A35281D413F736DF000687C0 /* PTPusherEventDispatcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		33C1B5FB1D38109800589942 /* PTPusherDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = A3A1A41611582DC3001EF877 /* PTPusherDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		33C1B5FC1D38109800589942 /* PTPusherChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = A3FE42181181173B009CF5D7 /* PTPusherChannel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		33C1B5FD1D38109800589942 /* PTPusherConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = A35281CE13F721A8000687C0 /* PTPusherConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		33C1B5FE1D38109800589942 /* PTPusherErrors.h in Headers */ = {isa = PBXBuildFile; fileRef = A39E238613F7E3FD0083CAD7 /* PTPusherErrors.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		33C1B5FF1D38109800589942 /* PTPusherPresenceChannelDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = A39E238A13F7E85C0083CAD7 /* PTPusherPresenceChannelDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		33C1B6001D38109800589942 /* PTPusherChannelAuthorizationDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 33E3DED41CE4C11E00CCB536 /* PTPusherChannelAuthorizationDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		33C1B6011D38109800589942 /* PTPusherChannelServerBasedAuthorization.h in Headers */ = {isa = PBXBuildFile; fileRef = 33E3DECC1CE4BF7500CCB536 /* PTPusherChannelServerBasedAuthorization.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		33C69EBC1D267E7800ABB47A /* PTTargetActionEventListener.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC4318466CD5006A54DD /* PTTargetActionEventListener.h */; };
 		33C69EBD1D267E7800ABB47A /* PTPusherDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = A3A1A41611582DC3001EF877 /* PTPusherDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		33C69EBE1D267E7800ABB47A /* NSDictionary+StringValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 335DD8A21D23BEC1002724DC /* NSDictionary+StringValue.h */; };
@@ -82,8 +267,13 @@
 		33E3DECF1CE4BF7500CCB536 /* PTPusherChannelServerBasedAuthorization.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E3DECD1CE4BF7500CCB536 /* PTPusherChannelServerBasedAuthorization.m */; };
 		33E3DED21CE4C07300CCB536 /* PTPusherChannelAuthorizationBypass.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E3DED11CE4C07300CCB536 /* PTPusherChannelAuthorizationBypass.m */; };
 		33E3DED31CE4C0EB00CCB536 /* PTPusherChannelAuthorizationBypass.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E3DED11CE4C07300CCB536 /* PTPusherChannelAuthorizationBypass.m */; };
-		3DCF453F041153009596773E /* libPods-SampleApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D48BE89405C21CBF94F7AA6C /* libPods-SampleApp.a */; };
 		4D81597F1712C6CA0013A485 /* Pusher.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D81597E1712C6CA0013A485 /* Pusher.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		51129BA4BE84539395F80BA0 /* Pods_libPushertvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12AD61FA5158FBE6550A05B2 /* Pods_libPushertvOS.framework */; };
+		558674169F04883AB257279D /* Pods_SampleApp2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F122CD1F9DB02F62E6FBAC9F /* Pods_SampleApp2.framework */; };
+		743F602DC8D8854C5013D433 /* Pods_libPusher_ReactiveExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F78218E10664AE54ECA3B2E /* Pods_libPusher_ReactiveExtensions.framework */; };
+		7608DA94D4B42E7F45BF6574 /* Pods_UnitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABE617DA6D00DCF159291CA8 /* Pods_UnitTests.framework */; };
+		7E503D3BA829C6AAF279B4A0 /* Pods_libPusher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45D073DC239AA8021E7CE618 /* Pods_libPusher.framework */; };
+		9767197316C14B3625EAC782 /* Pods_libPusheriOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98C6D61005683DBB3897FCC9 /* Pods_libPusheriOS.framework */; };
 		A304896C1667AAB4009511CB /* PTPusherChannelAuthorizationOperationSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = A304895E1667A8A6009511CB /* PTPusherChannelAuthorizationOperationSpec.m */; };
 		A30575D115233CC800DA19BD /* PTPusherPresenceChannelSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = A30575CE15233C1200DA19BD /* PTPusherPresenceChannelSpec.m */; };
 		A317375B155D2D7D007E4BBA /* PTPusherMockConnectionSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = A3173754155D2CDF007E4BBA /* PTPusherMockConnectionSpec.m */; };
@@ -179,10 +369,10 @@
 		A3FE429F11811EEE009CF5D7 /* NSString+Hashing.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FE429C11811EE8009CF5D7 /* NSString+Hashing.m */; };
 		A3FE44761181B7FE009CF5D7 /* PTPusherChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FE42191181173B009CF5D7 /* PTPusherChannel.m */; };
 		A3FE44E71181C3C5009CF5D7 /* NSDictionary+QueryString.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FE430011812541009CF5D7 /* NSDictionary+QueryString.m */; };
-		C0EEEAE652AC6799EC73CA19 /* libPods-libPusher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F918F1C8A1A0F68F8908558A /* libPods-libPusher.a */; };
-		C71F493DB1201F7D8B3538D2 /* libPods-Functional Specs.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 30EE92A595A8C846AFF9E98B /* libPods-Functional Specs.a */; };
-		D60F67F80768DB10F7426674 /* libPods-SampleAppOSX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF819A7AC78E37FE620D5A52 /* libPods-SampleAppOSX.a */; };
-		EBACA18CEC46E0128163BC42 /* libPods-libPusher-OSX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF0F8DC337B18B200F2362C6 /* libPods-libPusher-OSX.a */; };
+		BC7CC809A20D2D6FF1FEFAD9 /* Pods_libPusher_tvOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B6BDF75F487DC0CB93C80E0 /* Pods_libPusher_tvOS.framework */; };
+		D84524BB6935D54F3C32CB81 /* Pods_SampleApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1AA2E61C27CA2C63D3C85770 /* Pods_SampleApp.framework */; };
+		FC2A5DEF3EB837F9FBEA59F1 /* Pods_SampleAppOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 750F827F710C01C8C82DDA58 /* Pods_SampleAppOSX.framework */; };
+		FF4A27341E9484893282F7F8 /* Pods_libPusher_ReactiveExtensions_a.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6280F982E8F62BE7F046045C /* Pods_libPusher_ReactiveExtensions_a.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -233,11 +423,14 @@
 /* Begin PBXFileReference section */
 		03C3CB91CCDA476B6B6E161B /* Pods-libPusher_ReactiveExtensions.a.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-libPusher_ReactiveExtensions.a.release.xcconfig"; path = "Pods/Target Support Files/Pods-libPusher_ReactiveExtensions.a/Pods-libPusher_ReactiveExtensions.a.release.xcconfig"; sourceTree = "<group>"; };
 		074FD0B08916AFD0F8E01DF4 /* Pods-Functional Specs.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Functional Specs.release.xcconfig"; path = "Pods/Target Support Files/Pods-Functional Specs/Pods-Functional Specs.release.xcconfig"; sourceTree = "<group>"; };
+		12AD61FA5158FBE6550A05B2 /* Pods_libPushertvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_libPushertvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1AA2E61C27CA2C63D3C85770 /* Pods_SampleApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SampleApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D6058910D05DD3D006BFB54 /* SampleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SampleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		1FA2C30D96E6F2F8367AFC3F /* Pods-libPusheriOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-libPusheriOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-libPusheriOS/Pods-libPusheriOS.release.xcconfig"; sourceTree = "<group>"; };
+		2175EFE7FF5A19CF6508A64C /* Pods-libPusher-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-libPusher-tvOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-libPusher-tvOS/Pods-libPusher-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		30EE92A595A8C846AFF9E98B /* libPods-Functional Specs.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Functional Specs.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		32CA4F630368D1EE00C91783 /* libPusher_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libPusher_Prefix.pch; sourceTree = "<group>"; };
 		330136351D354B11004936D8 /* SampleAppOSX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SampleAppOSX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		330136371D354B11004936D8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -255,6 +448,19 @@
 		333C623E1D267C710016CAA3 /* UnitTests-OSX_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UnitTests-OSX_Prefix.pch"; sourceTree = "<group>"; };
 		335DD8A21D23BEC1002724DC /* NSDictionary+StringValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+StringValue.h"; sourceTree = "<group>"; };
 		335DD8A31D23C219002724DC /* NSDictionary+StringValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+StringValue.m"; sourceTree = "<group>"; };
+		3373FE7E1D37BFF500A5A73B /* libPusher-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPusher-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3373FE841D37D3CD00A5A73B /* libPushertvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = libPushertvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3373FE861D37D3CD00A5A73B /* libPushertvOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = libPushertvOS.h; sourceTree = "<group>"; };
+		3373FE881D37D3CD00A5A73B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3373FEEF1D37DC8800A5A73B /* libPusheriOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = libPusheriOS.h; sourceTree = "<group>"; };
+		3373FEF11D37DC8800A5A73B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3373FF281D37E0CC00A5A73B /* libPusheriOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = libPusheriOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3373FF291D37E0CC00A5A73B /* libPushertvOS copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "libPushertvOS copy-Info.plist"; path = "/Users/Hami/Pusher/libPusher/libPushertvOS copy-Info.plist"; sourceTree = "<absolute>"; };
+		3373FF4F1D37EFCB00A5A73B /* SampleApp2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SampleApp2.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3373FF501D37EFCC00A5A73B /* SampleApp copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "SampleApp copy-Info.plist"; path = "/Users/Hami/Pusher/libPusher/SampleApp copy-Info.plist"; sourceTree = "<absolute>"; };
+		3373FF571D380E2900A5A73B /* libPusherReactiveExtensions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = libPusherReactiveExtensions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3373FF591D380E2900A5A73B /* libPusherReactiveExtensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = libPusherReactiveExtensions.h; sourceTree = "<group>"; };
+		3373FF5B1D380E2900A5A73B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		33C69EEA1D267E7800ABB47A /* libPusher-OSX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPusher-OSX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		33C69EEB1D267EC400ABB47A /* libPusher-OSX_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "libPusher-OSX_Prefix.pch"; sourceTree = "<group>"; };
 		33C69F081D26807B00ABB47A /* UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -263,14 +469,25 @@
 		33E3DED01CE4C07300CCB536 /* PTPusherChannelAuthorizationBypass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherChannelAuthorizationBypass.h; sourceTree = "<group>"; };
 		33E3DED11CE4C07300CCB536 /* PTPusherChannelAuthorizationBypass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTPusherChannelAuthorizationBypass.m; sourceTree = "<group>"; };
 		33E3DED41CE4C11E00CCB536 /* PTPusherChannelAuthorizationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherChannelAuthorizationDelegate.h; sourceTree = "<group>"; };
-		4341759B83217ADDFF5742F2 /* libPods-UnitTests-OSX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-UnitTests-OSX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		44C60668B4549325F2BDB2AA /* Pods-SampleApp2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SampleApp2.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SampleApp2/Pods-SampleApp2.debug.xcconfig"; sourceTree = "<group>"; };
 		453F48D2ACE2BDE88A96D0E0 /* Pods-libPusher-OSX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-libPusher-OSX.release.xcconfig"; path = "Pods/Target Support Files/Pods-libPusher-OSX/Pods-libPusher-OSX.release.xcconfig"; sourceTree = "<group>"; };
+		45D073DC239AA8021E7CE618 /* Pods_libPusher.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_libPusher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		464C3DFAF92117C0B75E0818 /* Pods-libPusher-ReactiveExtensions.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-libPusher-ReactiveExtensions.debug.xcconfig"; path = "Pods/Target Support Files/Pods-libPusher-ReactiveExtensions/Pods-libPusher-ReactiveExtensions.debug.xcconfig"; sourceTree = "<group>"; };
 		4D81597E1712C6CA0013A485 /* Pusher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pusher.h; sourceTree = "<group>"; };
 		5483D0F2D40D8E01ED9F68FE /* Pods-UnitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests.debug.xcconfig"; sourceTree = "<group>"; };
+		59857EE71A0747ED2D29FA91 /* Pods-libPusher-ReactiveExtensions.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-libPusher-ReactiveExtensions.release.xcconfig"; path = "Pods/Target Support Files/Pods-libPusher-ReactiveExtensions/Pods-libPusher-ReactiveExtensions.release.xcconfig"; sourceTree = "<group>"; };
+		5B6BDF75F487DC0CB93C80E0 /* Pods_libPusher_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_libPusher_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5F78218E10664AE54ECA3B2E /* Pods_libPusher_ReactiveExtensions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_libPusher_ReactiveExtensions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6280F982E8F62BE7F046045C /* Pods_libPusher_ReactiveExtensions_a.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_libPusher_ReactiveExtensions_a.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		72EB759C9E0D96ADADF9F858 /* Pods-SampleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SampleApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-SampleApp/Pods-SampleApp.release.xcconfig"; sourceTree = "<group>"; };
+		7426ABED2FFDCC69F6C6530D /* Pods_Functional_Specs.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Functional_Specs.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		74C9DAF8CEA14A95EFF6D35F /* Pods-libPusheriOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-libPusheriOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-libPusheriOS/Pods-libPusheriOS.debug.xcconfig"; sourceTree = "<group>"; };
+		750F827F710C01C8C82DDA58 /* Pods_SampleAppOSX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SampleAppOSX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		75AF080C483BB7111F769BB3 /* Pods-UnitTests-OSX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests-OSX.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UnitTests-OSX/Pods-UnitTests-OSX.debug.xcconfig"; sourceTree = "<group>"; };
 		8538C45AFB3B37A3094540F5 /* Pods-Functional Specs.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Functional Specs.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Functional Specs/Pods-Functional Specs.debug.xcconfig"; sourceTree = "<group>"; };
 		8C73180697CF12174D13DB61 /* Pods-UnitTests-OSX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests-OSX.release.xcconfig"; path = "Pods/Target Support Files/Pods-UnitTests-OSX/Pods-UnitTests-OSX.release.xcconfig"; sourceTree = "<group>"; };
+		907366333879F036E5E1B39A /* Pods-libPushertvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-libPushertvOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-libPushertvOS/Pods-libPushertvOS.release.xcconfig"; sourceTree = "<group>"; };
+		98C6D61005683DBB3897FCC9 /* Pods_libPusheriOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_libPusheriOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A304895E1667A8A6009511CB /* PTPusherChannelAuthorizationOperationSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTPusherChannelAuthorizationOperationSpec.m; sourceTree = "<group>"; };
 		A30575CE15233C1200DA19BD /* PTPusherPresenceChannelSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PTPusherPresenceChannelSpec.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		A30790D911583B7200EBFFF8 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
@@ -359,20 +576,21 @@
 		A3FE42191181173B009CF5D7 /* PTPusherChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTPusherChannel.m; sourceTree = "<group>"; };
 		A3FE429C11811EE8009CF5D7 /* NSString+Hashing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Hashing.m"; sourceTree = "<group>"; };
 		A3FE430011812541009CF5D7 /* NSDictionary+QueryString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+QueryString.m"; sourceTree = "<group>"; };
+		ABE617DA6D00DCF159291CA8 /* Pods_UnitTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UnitTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF06129B7116745343BD4F53 /* Pods-libPusher.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-libPusher.release.xcconfig"; path = "Pods/Target Support Files/Pods-libPusher/Pods-libPusher.release.xcconfig"; sourceTree = "<group>"; };
 		B4495E6F60CB2E763DB90F8B /* Pods-libPusher_ReactiveExtensions.a.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-libPusher_ReactiveExtensions.a.debug.xcconfig"; path = "Pods/Target Support Files/Pods-libPusher_ReactiveExtensions.a/Pods-libPusher_ReactiveExtensions.a.debug.xcconfig"; sourceTree = "<group>"; };
-		D1869A6584270C5ACDEE722A /* libPods-UnitTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-UnitTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D48BE89405C21CBF94F7AA6C /* libPods-SampleApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SampleApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D9F9F5CC5B9ED1CE253A7ADD /* libPods-libPusher_ReactiveExtensions.a.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-libPusher_ReactiveExtensions.a.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C9549B300FCAF65C53B17675 /* Pods-libPusher-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-libPusher-tvOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-libPusher-tvOS/Pods-libPusher-tvOS.release.xcconfig"; sourceTree = "<group>"; };
+		CA232F92B16C50C94849172F /* Pods_libPusher_OSX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_libPusher_OSX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0DB5B1519B4831433BC8EFF /* Pods-SampleApp2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SampleApp2.release.xcconfig"; path = "Pods/Target Support Files/Pods-SampleApp2/Pods-SampleApp2.release.xcconfig"; sourceTree = "<group>"; };
+		D4A8F3EC7A5D4F6699759B47 /* Pods_UnitTests_OSX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UnitTests_OSX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D957EEFC04527979A4B6A33B /* Pods-libPushertvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-libPushertvOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-libPushertvOS/Pods-libPushertvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		E2B0C81BBE0BFE950E65ACD0 /* Pods-SampleAppOSX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SampleAppOSX.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SampleAppOSX/Pods-SampleAppOSX.debug.xcconfig"; sourceTree = "<group>"; };
 		E34B908267A5E698B5B39970 /* Pods-libPusher.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-libPusher.debug.xcconfig"; path = "Pods/Target Support Files/Pods-libPusher/Pods-libPusher.debug.xcconfig"; sourceTree = "<group>"; };
 		EC05CD67A94BC8B609CBCD43 /* Pods-UnitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UnitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests.release.xcconfig"; sourceTree = "<group>"; };
-		EF0F8DC337B18B200F2362C6 /* libPods-libPusher-OSX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-libPusher-OSX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF2E9073A7752823065B7F48 /* Pods-SampleApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SampleApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SampleApp/Pods-SampleApp.debug.xcconfig"; sourceTree = "<group>"; };
 		F07EDFFD06514F997549A956 /* Pods-SampleAppOSX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SampleAppOSX.release.xcconfig"; path = "Pods/Target Support Files/Pods-SampleAppOSX/Pods-SampleAppOSX.release.xcconfig"; sourceTree = "<group>"; };
+		F122CD1F9DB02F62E6FBAC9F /* Pods_SampleApp2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SampleApp2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2E7F75414CE31D71B0C73FB /* Pods-libPusher-OSX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-libPusher-OSX.debug.xcconfig"; path = "Pods/Target Support Files/Pods-libPusher-OSX/Pods-libPusher-OSX.debug.xcconfig"; sourceTree = "<group>"; };
-		F918F1C8A1A0F68F8908558A /* libPods-libPusher.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-libPusher.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		FF819A7AC78E37FE620D5A52 /* libPods-SampleAppOSX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SampleAppOSX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -387,7 +605,7 @@
 				A3D1D0B61157CCDE009A12AD /* CFNetwork.framework in Frameworks */,
 				A3E5CC3818466915006A54DD /* libPusher_ReactiveExtensions.a in Frameworks */,
 				A3A297DB17368BE200BD956D /* libPusher.a in Frameworks */,
-				3DCF453F041153009596773E /* libPods-SampleApp.a in Frameworks */,
+				D84524BB6935D54F3C32CB81 /* Pods_SampleApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,7 +615,55 @@
 			files = (
 				3301364C1D3636CE004936D8 /* libPusher-OSX.a in Frameworks */,
 				3301364A1D354E0E004936D8 /* Cocoa.framework in Frameworks */,
-				D60F67F80768DB10F7426674 /* libPods-SampleAppOSX.a in Frameworks */,
+				FC2A5DEF3EB837F9FBEA59F1 /* Pods_SampleAppOSX.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3373FE771D37BFF500A5A73B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3373FE781D37BFF500A5A73B /* (null) in Frameworks */,
+				BC7CC809A20D2D6FF1FEFAD9 /* Pods_libPusher_tvOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3373FE801D37D3CD00A5A73B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				51129BA4BE84539395F80BA0 /* Pods_libPushertvOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3373FF071D37E0CC00A5A73B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9767197316C14B3625EAC782 /* Pods_libPusheriOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3373FF411D37EFCB00A5A73B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3373FF641D380F5300A5A73B /* libPusherReactiveExtensions.framework in Frameworks */,
+				3373FF511D37F4C800A5A73B /* libPusheriOS.framework in Frameworks */,
+				3373FF421D37EFCB00A5A73B /* libicucore.tbd in Frameworks */,
+				3373FF431D37EFCB00A5A73B /* Foundation.framework in Frameworks */,
+				3373FF441D37EFCB00A5A73B /* UIKit.framework in Frameworks */,
+				3373FF451D37EFCB00A5A73B /* CoreGraphics.framework in Frameworks */,
+				3373FF461D37EFCB00A5A73B /* CFNetwork.framework in Frameworks */,
+				558674169F04883AB257279D /* Pods_SampleApp2.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3373FF531D380E2900A5A73B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				743F602DC8D8854C5013D433 /* Pods_libPusher_ReactiveExtensions.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,7 +671,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EBACA18CEC46E0128163BC42 /* libPods-libPusher-OSX.a in Frameworks */,
+				1DD1EAAB59BC2835C39E8D4E /* Pods_libPusher_OSX.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -419,7 +685,7 @@
 				33C69EFE1D26807B00ABB47A /* Security.framework in Frameworks */,
 				33C69EFF1D26807B00ABB47A /* CFNetwork.framework in Frameworks */,
 				33C69F001D26807B00ABB47A /* Foundation.framework in Frameworks */,
-				20C8DC875032A83F2C15A043 /* libPods-UnitTests-OSX.a in Frameworks */,
+				202BE5F0A03173E463FFE8F6 /* Pods_UnitTests_OSX.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -433,7 +699,7 @@
 				A3A1A20111581782001EF877 /* CFNetwork.framework in Frameworks */,
 				A3A1A20211581782001EF877 /* Foundation.framework in Frameworks */,
 				A3A297DC17368BE300BD956D /* libPusher.a in Frameworks */,
-				284FC4BFF99B53DFCF07CFE0 /* libPods-UnitTests.a in Frameworks */,
+				7608DA94D4B42E7F45BF6574 /* Pods_UnitTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,7 +714,7 @@
 				A3A9FA4F1496EEE000F83617 /* CFNetwork.framework in Frameworks */,
 				A37E158D14E499E000DCA3A6 /* Security.framework in Frameworks */,
 				A3A297DD17368BE300BD956D /* libPusher.a in Frameworks */,
-				C71F493DB1201F7D8B3538D2 /* libPods-Functional Specs.a in Frameworks */,
+				23ED80960E8EE6480198479A /* Pods_Functional_Specs.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,7 +722,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C0EEEAE652AC6799EC73CA19 /* libPods-libPusher.a in Frameworks */,
+				7E503D3BA829C6AAF279B4A0 /* Pods_libPusher.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -464,7 +730,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1DE1F7C222A63EC950DB9935 /* libPods-libPusher_ReactiveExtensions.a.a in Frameworks */,
+				FF4A27341E9484893282F7F8 /* Pods_libPusher_ReactiveExtensions_a.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -513,6 +779,11 @@
 				33C69EEA1D267E7800ABB47A /* libPusher-OSX.a */,
 				33C69F081D26807B00ABB47A /* UnitTests.xctest */,
 				330136351D354B11004936D8 /* SampleAppOSX.app */,
+				3373FE7E1D37BFF500A5A73B /* libPusher-tvOS.a */,
+				3373FE841D37D3CD00A5A73B /* libPushertvOS.framework */,
+				3373FF281D37E0CC00A5A73B /* libPusheriOS.framework */,
+				3373FF4F1D37EFCB00A5A73B /* SampleApp2.app */,
+				3373FF571D380E2900A5A73B /* libPusherReactiveExtensions.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -527,10 +798,15 @@
 				A3D1D2711157F961009A12AD /* Sample iOS */,
 				330136361D354B11004936D8 /* Sample OSX */,
 				A394E6F318463D9C004C70A2 /* ReactiveExtensions */,
+				3373FE851D37D3CD00A5A73B /* libPushertvOS */,
+				3373FEEE1D37DC8800A5A73B /* libPusheriOS */,
+				3373FF581D380E2900A5A73B /* libPusher-ReactiveExtensions */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				E33C609E5079EF80F514705F /* Pods */,
+				3373FF291D37E0CC00A5A73B /* libPushertvOS copy-Info.plist */,
+				3373FF501D37EFCC00A5A73B /* SampleApp copy-Info.plist */,
 			);
 			indentWidth = 2;
 			name = CustomTemplate;
@@ -563,14 +839,19 @@
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765A40DF7441C002DB57D /* CoreGraphics.framework */,
-				30EE92A595A8C846AFF9E98B /* libPods-Functional Specs.a */,
-				D48BE89405C21CBF94F7AA6C /* libPods-SampleApp.a */,
-				D1869A6584270C5ACDEE722A /* libPods-UnitTests.a */,
-				F918F1C8A1A0F68F8908558A /* libPods-libPusher.a */,
-				D9F9F5CC5B9ED1CE253A7ADD /* libPods-libPusher_ReactiveExtensions.a.a */,
-				4341759B83217ADDFF5742F2 /* libPods-UnitTests-OSX.a */,
-				EF0F8DC337B18B200F2362C6 /* libPods-libPusher-OSX.a */,
-				FF819A7AC78E37FE620D5A52 /* libPods-SampleAppOSX.a */,
+				7426ABED2FFDCC69F6C6530D /* Pods_Functional_Specs.framework */,
+				1AA2E61C27CA2C63D3C85770 /* Pods_SampleApp.framework */,
+				750F827F710C01C8C82DDA58 /* Pods_SampleAppOSX.framework */,
+				ABE617DA6D00DCF159291CA8 /* Pods_UnitTests.framework */,
+				D4A8F3EC7A5D4F6699759B47 /* Pods_UnitTests_OSX.framework */,
+				45D073DC239AA8021E7CE618 /* Pods_libPusher.framework */,
+				CA232F92B16C50C94849172F /* Pods_libPusher_OSX.framework */,
+				5B6BDF75F487DC0CB93C80E0 /* Pods_libPusher_tvOS.framework */,
+				6280F982E8F62BE7F046045C /* Pods_libPusher_ReactiveExtensions_a.framework */,
+				12AD61FA5158FBE6550A05B2 /* Pods_libPushertvOS.framework */,
+				98C6D61005683DBB3897FCC9 /* Pods_libPusheriOS.framework */,
+				F122CD1F9DB02F62E6FBAC9F /* Pods_SampleApp2.framework */,
+				5F78218E10664AE54ECA3B2E /* Pods_libPusher_ReactiveExtensions.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -596,6 +877,33 @@
 				3301363B1D354B11004936D8 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3373FE851D37D3CD00A5A73B /* libPushertvOS */ = {
+			isa = PBXGroup;
+			children = (
+				3373FE861D37D3CD00A5A73B /* libPushertvOS.h */,
+				3373FE881D37D3CD00A5A73B /* Info.plist */,
+			);
+			path = libPushertvOS;
+			sourceTree = "<group>";
+		};
+		3373FEEE1D37DC8800A5A73B /* libPusheriOS */ = {
+			isa = PBXGroup;
+			children = (
+				3373FEEF1D37DC8800A5A73B /* libPusheriOS.h */,
+				3373FEF11D37DC8800A5A73B /* Info.plist */,
+			);
+			path = libPusheriOS;
+			sourceTree = "<group>";
+		};
+		3373FF581D380E2900A5A73B /* libPusher-ReactiveExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				3373FF591D380E2900A5A73B /* libPusherReactiveExtensions.h */,
+				3373FF5B1D380E2900A5A73B /* Info.plist */,
+			);
+			path = "libPusher-ReactiveExtensions";
 			sourceTree = "<group>";
 		};
 		A3173757155D2D12007E4BBA /* Testing */ = {
@@ -772,6 +1080,16 @@
 				453F48D2ACE2BDE88A96D0E0 /* Pods-libPusher-OSX.release.xcconfig */,
 				E2B0C81BBE0BFE950E65ACD0 /* Pods-SampleAppOSX.debug.xcconfig */,
 				F07EDFFD06514F997549A956 /* Pods-SampleAppOSX.release.xcconfig */,
+				2175EFE7FF5A19CF6508A64C /* Pods-libPusher-tvOS.debug.xcconfig */,
+				C9549B300FCAF65C53B17675 /* Pods-libPusher-tvOS.release.xcconfig */,
+				D957EEFC04527979A4B6A33B /* Pods-libPushertvOS.debug.xcconfig */,
+				907366333879F036E5E1B39A /* Pods-libPushertvOS.release.xcconfig */,
+				74C9DAF8CEA14A95EFF6D35F /* Pods-libPusheriOS.debug.xcconfig */,
+				1FA2C30D96E6F2F8367AFC3F /* Pods-libPusheriOS.release.xcconfig */,
+				44C60668B4549325F2BDB2AA /* Pods-SampleApp2.debug.xcconfig */,
+				D0DB5B1519B4831433BC8EFF /* Pods-SampleApp2.release.xcconfig */,
+				464C3DFAF92117C0B75E0818 /* Pods-libPusher-ReactiveExtensions.debug.xcconfig */,
+				59857EE71A0747ED2D29FA91 /* Pods-libPusher-ReactiveExtensions.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -779,6 +1097,135 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		3373FE4F1D37BFF500A5A73B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3373FE501D37BFF500A5A73B /* PTTargetActionEventListener.h in Headers */,
+				3373FE511D37BFF500A5A73B /* PTPusherDelegate.h in Headers */,
+				3373FE521D37BFF500A5A73B /* NSDictionary+StringValue.h in Headers */,
+				3373FE531D37BFF500A5A73B /* PTPusher.h in Headers */,
+				3373FE541D37BFF500A5A73B /* NSString+Hashing.h in Headers */,
+				3373FE551D37BFF500A5A73B /* PTJSON.h in Headers */,
+				3373FE561D37BFF500A5A73B /* PTPusherEvent.h in Headers */,
+				3373FE571D37BFF500A5A73B /* PTPusherConnection.h in Headers */,
+				3373FE581D37BFF500A5A73B /* PTPusherEventPublisher.h in Headers */,
+				3373FE591D37BFF500A5A73B /* PTPusherEventDispatcher.h in Headers */,
+				3373FE5A1D37BFF500A5A73B /* PTURLRequestOperation.h in Headers */,
+				3373FE5B1D37BFF500A5A73B /* PTBlockEventListener.h in Headers */,
+				3373FE5C1D37BFF500A5A73B /* PTPusherAPI.h in Headers */,
+				3373FE5D1D37BFF500A5A73B /* PTEventListener.h in Headers */,
+				3373FE5E1D37BFF500A5A73B /* PTPusherChannel_Private.h in Headers */,
+				3373FE5F1D37BFF500A5A73B /* PTPusherPresenceChannelDelegate.h in Headers */,
+				3373FE601D37BFF500A5A73B /* PTPusherChannel.h in Headers */,
+				3373FE611D37BFF500A5A73B /* PTPusherErrors.h in Headers */,
+				3373FE621D37BFF500A5A73B /* PTPusherMacros.h in Headers */,
+				3373FE631D37BFF500A5A73B /* PTPusherMockConnection.h in Headers */,
+				3373FE641D37BFF500A5A73B /* Pusher.h in Headers */,
+				3373FE651D37BFF500A5A73B /* PTPusherChannelServerBasedAuthorization.h in Headers */,
+				3373FE661D37BFF500A5A73B /* NSDictionary+QueryString.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3373FE811D37D3CD00A5A73B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3373FE951D37D47A00A5A73B /* PTPusherDelegate.h in Headers */,
+				3373FE8C1D37D47A00A5A73B /* Pusher.h in Headers */,
+				3373FE911D37D47A00A5A73B /* PTPusherEvent.h in Headers */,
+				3373FE981D37D47A00A5A73B /* PTPusherConnection.h in Headers */,
+				3373FE931D37D47A00A5A73B /* PTPusherEventDispatcher.h in Headers */,
+				3373FEA71D37D48E00A5A73B /* PTPusherAPI.h in Headers */,
+				3373FE901D37D47A00A5A73B /* PTPusherEventPublisher.h in Headers */,
+				3373FE961D37D47A00A5A73B /* PTPusherChannel.h in Headers */,
+				3373FE9B1D37D47A00A5A73B /* PTPusherPresenceChannelDelegate.h in Headers */,
+				3373FEA41D37D48500A5A73B /* PTPusherMacros.h in Headers */,
+				3373FE9A1D37D47A00A5A73B /* PTPusherErrors.h in Headers */,
+				3373FE9C1D37D47A00A5A73B /* PTPusherChannelAuthorizationDelegate.h in Headers */,
+				3373FE8D1D37D47A00A5A73B /* PTEventListener.h in Headers */,
+				3373FEB21D37D85C00A5A73B /* PTPusherMockConnection.h in Headers */,
+				3373FEAE1D37D49500A5A73B /* PTPusherChannel_Private.h in Headers */,
+				3373FE871D37D3CD00A5A73B /* libPushertvOS.h in Headers */,
+				3373FE8E1D37D47A00A5A73B /* PTPusher.h in Headers */,
+				3373FEA91D37D49500A5A73B /* NSDictionary+StringValue.h in Headers */,
+				3373FEAF1D37D49500A5A73B /* PTTargetActionEventListener.h in Headers */,
+				3373FEAD1D37D49500A5A73B /* PTJSON.h in Headers */,
+				3373FEAA1D37D49500A5A73B /* NSDictionary+QueryString.h in Headers */,
+				3373FEB01D37D49500A5A73B /* PTURLRequestOperation.h in Headers */,
+				3373FEAB1D37D49500A5A73B /* NSString+Hashing.h in Headers */,
+				3373FE9D1D37D47A00A5A73B /* PTPusherChannelServerBasedAuthorization.h in Headers */,
+				3373FEAC1D37D49500A5A73B /* PTBlockEventListener.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3373FF091D37E0CC00A5A73B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3373FF0A1D37E0CC00A5A73B /* PTPusherDelegate.h in Headers */,
+				3373FF0B1D37E0CC00A5A73B /* Pusher.h in Headers */,
+				3373FF0C1D37E0CC00A5A73B /* PTPusherEvent.h in Headers */,
+				3373FF0D1D37E0CC00A5A73B /* PTPusherConnection.h in Headers */,
+				3373FF0E1D37E0CC00A5A73B /* PTPusherEventDispatcher.h in Headers */,
+				3373FF0F1D37E0CC00A5A73B /* PTPusherAPI.h in Headers */,
+				3373FF101D37E0CC00A5A73B /* PTPusherEventPublisher.h in Headers */,
+				3373FF111D37E0CC00A5A73B /* PTPusherChannel.h in Headers */,
+				3373FF121D37E0CC00A5A73B /* PTPusherPresenceChannelDelegate.h in Headers */,
+				3373FF131D37E0CC00A5A73B /* PTPusherMacros.h in Headers */,
+				3373FF141D37E0CC00A5A73B /* PTPusherErrors.h in Headers */,
+				3373FF151D37E0CC00A5A73B /* PTPusherChannelAuthorizationDelegate.h in Headers */,
+				3373FF161D37E0CC00A5A73B /* PTEventListener.h in Headers */,
+				3373FF171D37E0CC00A5A73B /* PTPusherMockConnection.h in Headers */,
+				3373FF2A1D37E9B500A5A73B /* libPusheriOS.h in Headers */,
+				3373FF181D37E0CC00A5A73B /* PTPusherChannel_Private.h in Headers */,
+				3373FF1A1D37E0CC00A5A73B /* PTPusher.h in Headers */,
+				3373FF1B1D37E0CC00A5A73B /* NSDictionary+StringValue.h in Headers */,
+				3373FF1C1D37E0CC00A5A73B /* PTTargetActionEventListener.h in Headers */,
+				3373FF1D1D37E0CC00A5A73B /* PTJSON.h in Headers */,
+				3373FF1E1D37E0CC00A5A73B /* NSDictionary+QueryString.h in Headers */,
+				3373FF1F1D37E0CC00A5A73B /* PTURLRequestOperation.h in Headers */,
+				3373FF201D37E0CC00A5A73B /* NSString+Hashing.h in Headers */,
+				3373FF211D37E0CC00A5A73B /* PTPusherChannelServerBasedAuthorization.h in Headers */,
+				3373FF221D37E0CC00A5A73B /* PTBlockEventListener.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3373FF541D380E2900A5A73B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3373FF5A1D380E2900A5A73B /* libPusherReactiveExtensions.h in Headers */,
+				3373FF621D380E8300A5A73B /* PTPusherChannel+ReactiveExtensions.h in Headers */,
+				3373FF631D380E8300A5A73B /* PTPusher+ReactiveExtensions.h in Headers */,
+				33C1B5F21D38109800589942 /* PTPusherMockConnection.h in Headers */,
+				33C1B5F31D38109800589942 /* PTPusherAPI.h in Headers */,
+				33C1B5F41D38109800589942 /* PTPusherMacros.h in Headers */,
+				33C1B5F51D38109800589942 /* Pusher.h in Headers */,
+				33C1B5F61D38109800589942 /* PTEventListener.h in Headers */,
+				33C1B5F71D38109800589942 /* PTPusher.h in Headers */,
+				33C1B5F81D38109800589942 /* PTPusherEventPublisher.h in Headers */,
+				33C1B5F91D38109800589942 /* PTPusherEvent.h in Headers */,
+				33C1B5FA1D38109800589942 /* PTPusherEventDispatcher.h in Headers */,
+				33C1B5FB1D38109800589942 /* PTPusherDelegate.h in Headers */,
+				33C1B5FC1D38109800589942 /* PTPusherChannel.h in Headers */,
+				33C1B5FD1D38109800589942 /* PTPusherConnection.h in Headers */,
+				33C1B5FE1D38109800589942 /* PTPusherErrors.h in Headers */,
+				33C1B5FF1D38109800589942 /* PTPusherPresenceChannelDelegate.h in Headers */,
+				33C1B6001D38109800589942 /* PTPusherChannelAuthorizationDelegate.h in Headers */,
+				33C1B6011D38109800589942 /* PTPusherChannelServerBasedAuthorization.h in Headers */,
+				33C1B5EA1D38107B00589942 /* NSDictionary+StringValue.h in Headers */,
+				33C1B5EB1D38107B00589942 /* NSDictionary+QueryString.h in Headers */,
+				33C1B5EC1D38107B00589942 /* NSString+Hashing.h in Headers */,
+				33C1B5ED1D38107B00589942 /* PTBlockEventListener.h in Headers */,
+				33C1B5EE1D38107B00589942 /* PTJSON.h in Headers */,
+				33C1B5EF1D38107B00589942 /* PTPusherChannel_Private.h in Headers */,
+				33C1B5F01D38107B00589942 /* PTTargetActionEventListener.h in Headers */,
+				33C1B5F11D38107B00589942 /* PTURLRequestOperation.h in Headers */,
+				3373FF611D380E7800A5A73B /* PTPusher+ReactiveExtensions_Internal.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		33C69EBB1D267E7800ABB47A /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -909,6 +1356,106 @@
 			productName = SampleAppOSX;
 			productReference = 330136351D354B11004936D8 /* SampleAppOSX.app */;
 			productType = "com.apple.product-type.application";
+		};
+		3373FE4D1D37BFF500A5A73B /* libPusher-tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3373FE7B1D37BFF500A5A73B /* Build configuration list for PBXNativeTarget "libPusher-tvOS" */;
+			buildPhases = (
+				3373FE4E1D37BFF500A5A73B /* [CP] Check Pods Manifest.lock */,
+				3373FE4F1D37BFF500A5A73B /* Headers */,
+				3373FE671D37BFF500A5A73B /* Sources */,
+				3373FE771D37BFF500A5A73B /* Frameworks */,
+				3373FE791D37BFF500A5A73B /* Just here to export ENV for Rake */,
+				3373FE7A1D37BFF500A5A73B /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "libPusher-tvOS";
+			productName = libPusher;
+			productReference = 3373FE7E1D37BFF500A5A73B /* libPusher-tvOS.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		3373FE831D37D3CD00A5A73B /* libPushertvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3373FE8B1D37D3CD00A5A73B /* Build configuration list for PBXNativeTarget "libPushertvOS" */;
+			buildPhases = (
+				B16C367E747B21B6AC43EFE3 /* [CP] Check Pods Manifest.lock */,
+				3373FE7F1D37D3CD00A5A73B /* Sources */,
+				3373FE801D37D3CD00A5A73B /* Frameworks */,
+				3373FE811D37D3CD00A5A73B /* Headers */,
+				3373FE821D37D3CD00A5A73B /* Resources */,
+				474885DCB016BD8079831A61 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = libPushertvOS;
+			productName = libPushertvOS;
+			productReference = 3373FE841D37D3CD00A5A73B /* libPushertvOS.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		3373FEF51D37E0CC00A5A73B /* libPusheriOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3373FF251D37E0CC00A5A73B /* Build configuration list for PBXNativeTarget "libPusheriOS" */;
+			buildPhases = (
+				3373FEF61D37E0CC00A5A73B /* [CP] Check Pods Manifest.lock */,
+				3373FEF71D37E0CC00A5A73B /* Sources */,
+				3373FF071D37E0CC00A5A73B /* Frameworks */,
+				3373FF091D37E0CC00A5A73B /* Headers */,
+				3373FF231D37E0CC00A5A73B /* Resources */,
+				3373FF241D37E0CC00A5A73B /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = libPusheriOS;
+			productName = libPushertvOS;
+			productReference = 3373FF281D37E0CC00A5A73B /* libPusheriOS.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		3373FF2B1D37EFCB00A5A73B /* SampleApp2 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3373FF4C1D37EFCB00A5A73B /* Build configuration list for PBXNativeTarget "SampleApp2" */;
+			buildPhases = (
+				3373FF301D37EFCB00A5A73B /* [CP] Check Pods Manifest.lock */,
+				3373FF311D37EFCB00A5A73B /* Resources */,
+				3373FF371D37EFCB00A5A73B /* Sources */,
+				3373FF411D37EFCB00A5A73B /* Frameworks */,
+				3373FF4A1D37EFCB00A5A73B /* [CP] Embed Pods Frameworks */,
+				3373FF4B1D37EFCB00A5A73B /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SampleApp2;
+			productName = PusherEvents;
+			productReference = 3373FF4F1D37EFCB00A5A73B /* SampleApp2.app */;
+			productType = "com.apple.product-type.application";
+		};
+		3373FF561D380E2900A5A73B /* libPusher-ReactiveExtensions */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3373FF5C1D380E2900A5A73B /* Build configuration list for PBXNativeTarget "libPusher-ReactiveExtensions" */;
+			buildPhases = (
+				2BC9256294CE24A00DE5EC49 /* [CP] Check Pods Manifest.lock */,
+				3373FF521D380E2900A5A73B /* Sources */,
+				3373FF531D380E2900A5A73B /* Frameworks */,
+				3373FF541D380E2900A5A73B /* Headers */,
+				3373FF551D380E2900A5A73B /* Resources */,
+				342E105CCC9F84807F671FB3 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "libPusher-ReactiveExtensions";
+			productName = "libPusher-ReactiveExtensions";
+			productReference = 3373FF571D380E2900A5A73B /* libPusherReactiveExtensions.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 		33C69EB91D267E7800ABB47A /* libPusher-OSX */ = {
 			isa = PBXNativeTarget;
@@ -1044,6 +1591,12 @@
 					330136341D354B11004936D8 = {
 						CreatedOnToolsVersion = 7.3.1;
 					};
+					3373FE831D37D3CD00A5A73B = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					3373FF561D380E2900A5A73B = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
 				};
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "libPusher" */;
@@ -1060,12 +1613,17 @@
 			targets = (
 				A3D1D2B61158013F009A12AD /* libPusher */,
 				33C69EB91D267E7800ABB47A /* libPusher-OSX */,
+				3373FE4D1D37BFF500A5A73B /* libPusher-tvOS */,
 				A3E5CC0318466879006A54DD /* libPusher_ReactiveExtensions.a */,
 				A3A1A0EA115813E2001EF877 /* UnitTests */,
 				33C69EED1D26807B00ABB47A /* UnitTests-OSX */,
 				A3A9F9571496E96100F83617 /* Functional Specs */,
 				1D6058900D05DD3D006BFB54 /* SampleApp */,
 				330136341D354B11004936D8 /* SampleAppOSX */,
+				3373FE831D37D3CD00A5A73B /* libPushertvOS */,
+				3373FEF51D37E0CC00A5A73B /* libPusheriOS */,
+				3373FF2B1D37EFCB00A5A73B /* SampleApp2 */,
+				3373FF561D380E2900A5A73B /* libPusher-ReactiveExtensions */,
 			);
 		};
 /* End PBXProject section */
@@ -1089,6 +1647,39 @@
 			files = (
 				330136411D354B11004936D8 /* Assets.xcassets in Resources */,
 				330136441D354B11004936D8 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3373FE821D37D3CD00A5A73B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3373FF231D37E0CC00A5A73B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3373FF311D37EFCB00A5A73B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3373FF321D37EFCB00A5A73B /* ReactiveEventsViewController.xib in Resources */,
+				3373FF331D37EFCB00A5A73B /* MainWindow.xib in Resources */,
+				3373FF341D37EFCB00A5A73B /* Default-568h@2x.png in Resources */,
+				3373FF351D37EFCB00A5A73B /* PusherEventsViewController.xib in Resources */,
+				3373FF361D37EFCB00A5A73B /* NewEventViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3373FF551D380E2900A5A73B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1130,6 +1721,140 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SampleAppOSX/Pods-SampleAppOSX-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2BC9256294CE24A00DE5EC49 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		3373FE4E1D37BFF500A5A73B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		3373FE791D37BFF500A5A73B /* Just here to export ENV for Rake */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Just here to export ENV for Rake";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "";
+		};
+		3373FE7A1D37BFF500A5A73B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-libPusher-tvOS/Pods-libPusher-tvOS-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3373FEF61D37E0CC00A5A73B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		3373FF241D37E0CC00A5A73B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-libPusheriOS/Pods-libPusheriOS-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3373FF301D37EFCB00A5A73B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		3373FF4A1D37EFCB00A5A73B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SampleApp2/Pods-SampleApp2-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3373FF4B1D37EFCB00A5A73B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SampleApp2/Pods-SampleApp2-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		33C69EBA1D267E7800ABB47A /* [CP] Check Pods Manifest.lock */ = {
@@ -1221,6 +1946,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UnitTests-OSX/Pods-UnitTests-OSX-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		342E105CCC9F84807F671FB3 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-libPusher-ReactiveExtensions/Pods-libPusher-ReactiveExtensions-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		44A21E71C1ABF609DBE02FB5 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1234,6 +1974,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UnitTests/Pods-UnitTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		474885DCB016BD8079831A61 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-libPushertvOS/Pods-libPushertvOS-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		47BCC1C1837946E1D49F32D2 /* [CP] Check Pods Manifest.lock */ = {
@@ -1384,6 +2139,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SampleApp/Pods-SampleApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		B16C367E747B21B6AC43EFE3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		BDE7B892C1B08130782E92C8 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1500,6 +2270,112 @@
 				3301363F1D354B11004936D8 /* ViewController.m in Sources */,
 				3301363C1D354B11004936D8 /* main.m in Sources */,
 				330136391D354B11004936D8 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3373FE671D37BFF500A5A73B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3373FE681D37BFF500A5A73B /* NSDictionary+QueryString.m in Sources */,
+				3373FE691D37BFF500A5A73B /* PTPusherChannelServerBasedAuthorization.m in Sources */,
+				3373FE6A1D37BFF500A5A73B /* PTPusher.m in Sources */,
+				3373FE6B1D37BFF500A5A73B /* PTPusherEvent.m in Sources */,
+				3373FE6C1D37BFF500A5A73B /* NSDictionary+StringValue.m in Sources */,
+				3373FE6D1D37BFF500A5A73B /* NSString+Hashing.m in Sources */,
+				3373FE6E1D37BFF500A5A73B /* PTPusherChannel.m in Sources */,
+				3373FE6F1D37BFF500A5A73B /* PTPusherConnection.m in Sources */,
+				3373FE701D37BFF500A5A73B /* PTPusherEventDispatcher.m in Sources */,
+				3373FE711D37BFF500A5A73B /* PTTargetActionEventListener.m in Sources */,
+				3373FE721D37BFF500A5A73B /* PTBlockEventListener.m in Sources */,
+				3373FE731D37BFF500A5A73B /* PTPusherAPI.m in Sources */,
+				3373FE741D37BFF500A5A73B /* PTURLRequestOperation.m in Sources */,
+				3373FE751D37BFF500A5A73B /* PTJSON.m in Sources */,
+				3373FE761D37BFF500A5A73B /* PTPusherMockConnection.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3373FE7F1D37D3CD00A5A73B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3373FEB11D37D82E00A5A73B /* PTPusherMockConnection.m in Sources */,
+				3373FEA11D37D48500A5A73B /* PTJSON.m in Sources */,
+				3373FEA51D37D48900A5A73B /* PTTargetActionEventListener.m in Sources */,
+				3373FE991D37D47A00A5A73B /* PTPusherConnection.m in Sources */,
+				3373FEA31D37D48500A5A73B /* NSDictionary+QueryString.m in Sources */,
+				3373FEA61D37D48900A5A73B /* PTBlockEventListener.m in Sources */,
+				3373FE9F1D37D48500A5A73B /* NSDictionary+StringValue.m in Sources */,
+				3373FE971D37D47A00A5A73B /* PTPusherChannel.m in Sources */,
+				3373FEA21D37D48500A5A73B /* NSString+Hashing.m in Sources */,
+				3373FEA01D37D48500A5A73B /* PTURLRequestOperation.m in Sources */,
+				3373FE8F1D37D47A00A5A73B /* PTPusher.m in Sources */,
+				3373FE921D37D47A00A5A73B /* PTPusherEvent.m in Sources */,
+				3373FEA81D37D48E00A5A73B /* PTPusherAPI.m in Sources */,
+				3373FE941D37D47A00A5A73B /* PTPusherEventDispatcher.m in Sources */,
+				3373FE9E1D37D47A00A5A73B /* PTPusherChannelServerBasedAuthorization.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3373FEF71D37E0CC00A5A73B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3373FEF81D37E0CC00A5A73B /* PTPusherMockConnection.m in Sources */,
+				3373FEF91D37E0CC00A5A73B /* PTJSON.m in Sources */,
+				3373FEFA1D37E0CC00A5A73B /* PTTargetActionEventListener.m in Sources */,
+				3373FEFB1D37E0CC00A5A73B /* PTPusherConnection.m in Sources */,
+				3373FEFC1D37E0CC00A5A73B /* NSDictionary+QueryString.m in Sources */,
+				3373FEFD1D37E0CC00A5A73B /* PTBlockEventListener.m in Sources */,
+				3373FEFE1D37E0CC00A5A73B /* NSDictionary+StringValue.m in Sources */,
+				3373FEFF1D37E0CC00A5A73B /* PTPusherChannel.m in Sources */,
+				3373FF001D37E0CC00A5A73B /* NSString+Hashing.m in Sources */,
+				3373FF011D37E0CC00A5A73B /* PTURLRequestOperation.m in Sources */,
+				3373FF021D37E0CC00A5A73B /* PTPusher.m in Sources */,
+				3373FF031D37E0CC00A5A73B /* PTPusherEvent.m in Sources */,
+				3373FF041D37E0CC00A5A73B /* PTPusherAPI.m in Sources */,
+				3373FF051D37E0CC00A5A73B /* PTPusherEventDispatcher.m in Sources */,
+				3373FF061D37E0CC00A5A73B /* PTPusherChannelServerBasedAuthorization.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3373FF371D37EFCB00A5A73B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3373FF381D37EFCB00A5A73B /* PusherEventsAppDelegate.m in Sources */,
+				3373FF391D37EFCB00A5A73B /* PusherEventsViewController.m in Sources */,
+				3373FF3A1D37EFCB00A5A73B /* main.m in Sources */,
+				3373FF3B1D37EFCB00A5A73B /* NewEventViewController.m in Sources */,
+				3373FF3C1D37EFCB00A5A73B /* PusherPresenceEventsViewController.m in Sources */,
+				3373FF3D1D37EFCB00A5A73B /* NSMutableURLRequest+BasicAuth.m in Sources */,
+				3373FF3E1D37EFCB00A5A73B /* NSData+Base64.m in Sources */,
+				3373FF3F1D37EFCB00A5A73B /* ReactiveEventsViewController.m in Sources */,
+				3373FF401D37EFCB00A5A73B /* PusherExampleMenuViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3373FF521D380E2900A5A73B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				33C1B5DB1D38106C00589942 /* PTPusherMockConnection.m in Sources */,
+				33C1B5DC1D38106C00589942 /* PTPusherAPI.m in Sources */,
+				33C1B5DD1D38106C00589942 /* PTTargetActionEventListener.m in Sources */,
+				33C1B5DE1D38106C00589942 /* PTBlockEventListener.m in Sources */,
+				33C1B5DF1D38106C00589942 /* NSDictionary+StringValue.m in Sources */,
+				33C1B5E01D38106C00589942 /* PTURLRequestOperation.m in Sources */,
+				33C1B5E11D38106C00589942 /* PTJSON.m in Sources */,
+				33C1B5E21D38106C00589942 /* NSString+Hashing.m in Sources */,
+				33C1B5E31D38106C00589942 /* NSDictionary+QueryString.m in Sources */,
+				33C1B5E41D38106C00589942 /* PTPusher.m in Sources */,
+				33C1B5E51D38106C00589942 /* PTPusherEvent.m in Sources */,
+				33C1B5E61D38106C00589942 /* PTPusherEventDispatcher.m in Sources */,
+				33C1B5E71D38106C00589942 /* PTPusherChannel.m in Sources */,
+				33C1B5E81D38106C00589942 /* PTPusherConnection.m in Sources */,
+				33C1B5E91D38106C00589942 /* PTPusherChannelServerBasedAuthorization.m in Sources */,
+				3373FF5F1D380E3C00A5A73B /* PTPusherChannel+ReactiveExtensions.m in Sources */,
+				3373FF601D380E3C00A5A73B /* PTPusher+ReactiveExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1769,6 +2645,412 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.pusher.SampleAppOSX;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		3373FE7C1D37BFF500A5A73B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2175EFE7FF5A19CF6508A64C /* Pods-libPusher-tvOS.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1.5;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = libPusher_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"kPTPusherClientLibraryVersion=@\"$(CURRENT_PROJECT_VERSION)\"",
+				);
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				PRODUCT_NAME = "Pusher-tvOS";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		3373FE7D1D37BFF500A5A73B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C9549B300FCAF65C53B17675 /* Pods-libPusher-tvOS.release.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = 1.5;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = libPusher_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"kPTPusherClientLibraryVersion=@\"$(CURRENT_PROJECT_VERSION)\"",
+				);
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				PRODUCT_NAME = "Pusher-tvOS";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		3373FE891D37D3CD00A5A73B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D957EEFC04527979A4B6A33B /* Pods-libPushertvOS.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1.6;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = libPushertvOS/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pusher.libPushertvOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.2;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		3373FE8A1D37D3CD00A5A73B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 907366333879F036E5E1B39A /* Pods-libPushertvOS.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1.6;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = libPushertvOS/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pusher.libPushertvOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.2;
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		3373FF261D37E0CC00A5A73B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 74C9DAF8CEA14A95EFF6D35F /* Pods-libPusheriOS.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1.6;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "libPusher-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pusher.libPushertvOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TVOS_DEPLOYMENT_TARGET = 9.2;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		3373FF271D37E0CC00A5A73B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1FA2C30D96E6F2F8367AFC3F /* Pods-libPusheriOS.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1.6;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "libPusher-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pusher.libPushertvOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TVOS_DEPLOYMENT_TARGET = 9.2;
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		3373FF4D1D37EFCB00A5A73B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 44C60668B4549325F2BDB2AA /* Pods-SampleApp2.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = libPusher_Prefix.pch;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INFOPLIST_FILE = "SampleApp copy-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		3373FF4E1D37EFCB00A5A73B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D0DB5B1519B4831433BC8EFF /* Pods-SampleApp2.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = YES;
+				DSTROOT = /tmp/xcodeproj.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = libPusher_Prefix.pch;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INFOPLIST_FILE = "SampleApp copy-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		3373FF5D1D380E2900A5A73B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 464C3DFAF92117C0B75E0818 /* Pods-libPusher-ReactiveExtensions.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "libPusher-ReactiveExtensions/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.pusher.libPusher-ReactiveExtensions";
+				PRODUCT_NAME = libPusherReactiveExtensions;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		3373FF5E1D380E2900A5A73B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 59857EE71A0747ED2D29FA91 /* Pods-libPusher-ReactiveExtensions.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				INFOPLIST_FILE = "libPusher-ReactiveExtensions/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.pusher.libPusher-ReactiveExtensions";
+				PRODUCT_NAME = libPusherReactiveExtensions;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -2108,6 +3390,51 @@
 			buildConfigurations = (
 				330136471D354B11004936D8 /* Debug */,
 				330136481D354B11004936D8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3373FE7B1D37BFF500A5A73B /* Build configuration list for PBXNativeTarget "libPusher-tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3373FE7C1D37BFF500A5A73B /* Debug */,
+				3373FE7D1D37BFF500A5A73B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3373FE8B1D37D3CD00A5A73B /* Build configuration list for PBXNativeTarget "libPushertvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3373FE891D37D3CD00A5A73B /* Debug */,
+				3373FE8A1D37D3CD00A5A73B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3373FF251D37E0CC00A5A73B /* Build configuration list for PBXNativeTarget "libPusheriOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3373FF261D37E0CC00A5A73B /* Debug */,
+				3373FF271D37E0CC00A5A73B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3373FF4C1D37EFCB00A5A73B /* Build configuration list for PBXNativeTarget "SampleApp2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3373FF4D1D37EFCB00A5A73B /* Debug */,
+				3373FF4E1D37EFCB00A5A73B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3373FF5C1D380E2900A5A73B /* Build configuration list for PBXNativeTarget "libPusher-ReactiveExtensions" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3373FF5D1D380E2900A5A73B /* Debug */,
+				3373FF5E1D380E2900A5A73B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

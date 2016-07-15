@@ -14,29 +14,35 @@ PODS:
     - OHHTTPStubs/Core
   - OHHTTPStubs/OHPathHelpers (5.1.0)
   - Reachability (3.2)
-  - ReactiveCocoa (2.5):
-    - ReactiveCocoa/UI (= 2.5)
-  - ReactiveCocoa/Core (2.5):
-    - ReactiveCocoa/no-arc
-  - ReactiveCocoa/no-arc (2.5)
-  - ReactiveCocoa/UI (2.5):
-    - ReactiveCocoa/Core
+  - ReactiveCocoa (4.2.1):
+    - Result (~> 2.0)
+  - Result (2.1.2)
   - SocketRocket (0.5.1)
 
 DEPENDENCIES:
   - Kiwi (~> 2.4)
   - OHHTTPStubs (~> 5.0)
-  - Reachability (~> 3.1)
-  - ReactiveCocoa (~> 2.1)
-  - SocketRocket (~> 0.5.0)
+  - Reachability (from `https://github.com/tonymillion/Reachability.git`)
+  - ReactiveCocoa (~> 4.0)
+  - SocketRocket (~> 0.5)
+
+EXTERNAL SOURCES:
+  Reachability:
+    :git: https://github.com/tonymillion/Reachability.git
+
+CHECKOUT OPTIONS:
+  Reachability:
+    :commit: c4d225a479379f9998dbd5b55070427373d20574
+    :git: https://github.com/tonymillion/Reachability.git
 
 SPEC CHECKSUMS:
   Kiwi: f49c9d54b28917df5928fe44968a39ed198cb8a8
   OHHTTPStubs: 592f74439d2d72615115cf99a954237a3fbe26e5
-  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
-  ReactiveCocoa: e2db045570aa97c695e7aa97c2bcab222ae51f4a
+  Reachability: a439150119232b740e0b708aed6760a5965b858d
+  ReactiveCocoa: 5a42745f11ea236f405bb9ce5e97c5e3b23562dd
+  Result: 6e722d4a66b1408680dbfcdf51c0b1c4b706316a
   SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
 
-PODFILE CHECKSUM: 61da03ba9b95e949d53763ad14de13019054f1e9
+PODFILE CHECKSUM: 49dd30b3dcdcb87f27b0fa2e16f22ec897148662
 
 COCOAPODS: 1.0.1

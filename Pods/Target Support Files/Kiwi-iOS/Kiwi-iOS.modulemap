@@ -1,0 +1,6 @@
+framework module Kiwi {
+  umbrella header "Kiwi-iOS-umbrella.h"
+
+  export *
+  module * { export * }
+}
