@@ -76,7 +76,7 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
     self.connection = connection;
     self.connection.delegate = self;
     self.reconnectDelay = kPTPusherDefaultReconnectDelay;
-
+    
     /* Three reconnection attempts should be more than enough attempts
      * to reconnect where the user has simply locked their device or
      * backgrounded the app.
@@ -115,6 +115,9 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
     PTPusherConnection *connection = [[PTPusherConnection alloc] initWithURL:serviceURL];
     PTPusher *pusher = [[self alloc] initWithConnection:connection];
     pusher.delegate = delegate;
+  
+    pusher.nativePusher = [[PTNativePusher alloc] initWithPusherAppKey:key];
+  
     return pusher;
 }
 
@@ -458,6 +461,13 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
   if (willReconnect) {
     [self reconnectUsingMode:reconnectMode];
   }
+}
+
+#pragma mark - Push Notifications
+
+- (PTNativePusher*) nativePusher
+{
+  return self.nativePusher;
 }
 
 #pragma mark - Private
