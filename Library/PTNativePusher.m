@@ -8,6 +8,7 @@
 
 #import "PTNativePusher.h"
 
+NSString *const PLATFORM_TYPE = @"apns";
 NSString *const CLIENT_API_V1_ENDPOINT = @"https://nativepushclient-cluster1.pusher.com/client_api/v1";
 
 const int MAX_FAILED_REQUEST_ATTEMPTS = 6;
@@ -53,7 +54,7 @@ const int MAX_FAILED_REQUEST_ATTEMPTS = 6;
   
   NSDictionary * params = @{
     @"app_key": self->pusherAppKey,
-    @"platform_type": @"apns", // FIXME constant
+    @"platform_type": PLATFORM_TYPE,
     @"token": deviceTokenString
     // TODO client name/version
   };
