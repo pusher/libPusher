@@ -463,13 +463,6 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
   }
 }
 
-#pragma mark - Push Notifications
-
-- (PTNativePusher*) nativePusher
-{
-  return self.nativePusher;
-}
-
 #pragma mark - Private
 
 - (void)reconnectUsingMode:(PTPusherAutoReconnectMode)reconnectMode
