@@ -15,20 +15,20 @@ const int MAX_FAILED_REQUEST_ATTEMPTS = 6;
 
 // FIXME free() of below vars? ref counting?
 @implementation PTNativePusher {
-  NSURLSession * urlSession;
+  NSURLSession *urlSession;
   int failedNativeServiceRequests;
-  NSString * pusherAppKey;
-  NSString * clientId;
-  NSMutableArray * outbox;
+  NSString *pusherAppKey;
+  NSString *clientId;
+  NSMutableArray *outbox;
 }
 
 - (id)initWithPusherAppKey:(NSString *)_pusherAppKey {
   if (self = [super init]) {
-    self->urlSession = [NSURLSession sharedSession];
-    self->failedNativeServiceRequests = 0;
-    self->pusherAppKey = _pusherAppKey;
-    self->clientId = NULL;  // NULL until we register
-    self->outbox = [NSMutableArray array];
+    urlSession = [NSURLSession sharedSession];
+    failedNativeServiceRequests = 0;
+    pusherAppKey = _pusherAppKey;
+    clientId = NULL;  // NULL until we register
+    outbox = [NSMutableArray array];
   }
   return self;
 }
@@ -46,14 +46,14 @@ const int MAX_FAILED_REQUEST_ATTEMPTS = 6;
 }
 
 - (void) registerWithDeviceToken: (NSData*) deviceToken {
-  NSMutableURLRequest * request =
+  NSMutableURLRequest *request =
   [NSMutableURLRequest requestWithURL:[NSURL URLWithString: [NSString stringWithFormat:@"%@%@", CLIENT_API_V1_ENDPOINT, @"/clients"]]];
   [request setHTTPMethod:@"POST"];
   
-  NSString* deviceTokenString = [self deviceTokenToString:deviceToken];
+  NSString *deviceTokenString = [self deviceTokenToString:deviceToken];
   
-  NSDictionary * params = @{
-    @"app_key": self->pusherAppKey,
+  NSDictionary *params = @{
+    @"app_key": pusherAppKey,
     @"platform_type": PLATFORM_TYPE,
     @"token": deviceTokenString
     // TODO client name/version
@@ -61,8 +61,8 @@ const int MAX_FAILED_REQUEST_ATTEMPTS = 6;
   
   assert([NSJSONSerialization isValidJSONObject:params]);
   
-  NSError* jsonSerializationError;
-  NSData* serializedJson = [NSJSONSerialization dataWithJSONObject:params options:@[] error: &jsonSerializationError];
+  NSError *jsonSerializationError;
+  NSData *serializedJson = [NSJSONSerialization dataWithJSONObject:params options:@[] error: &jsonSerializationError];
   if (serializedJson == nil) {
     NSLog(@"Error serializing JSON when attempting to register: %@", [jsonSerializationError description]);
     return;
@@ -73,17 +73,17 @@ const int MAX_FAILED_REQUEST_ATTEMPTS = 6;
   // FIXME what encoding does the above ^ serialization use? UTF-8?
   [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
   
-  NSURLSessionDataTask * task = [urlSession dataTaskWithRequest:request
+  NSURLSessionDataTask *task = [urlSession dataTaskWithRequest:request
                                               completionHandler: ^(NSData * data, NSURLResponse * response, NSError * error) {
-    NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*) response;
+    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*) response;
     if ([httpResponse statusCode] >= 200 && [httpResponse statusCode] < 300) {
-      NSError * jsonDecodingError;
+      NSError *jsonDecodingError;
       id jsonObj = [NSJSONSerialization JSONObjectWithData:data options:@[] error:&jsonDecodingError];
       // FIXME check jsonDecodingError
-      NSDictionary* jsonDict = (NSDictionary*) jsonObj;
-      NSObject * clientIdObj = [jsonDict objectForKey:@"id"];
-      NSString * clientIdString = (NSString*) clientIdObj;
-      self->clientId = clientIdString;
+      NSDictionary *jsonDict = (NSDictionary*) jsonObj;
+      NSObject *clientIdObj = [jsonDict objectForKey:@"id"];
+      NSString *clientIdString = (NSString*) clientIdObj;
+      clientId = clientIdString;
       [self tryFlushOutbox];
     } else {
       // TODO error
@@ -94,28 +94,28 @@ const int MAX_FAILED_REQUEST_ATTEMPTS = 6;
 
 - (void) subscribe:(NSString *)interestName {
   // TODO using a dictionary here is kinda horrible
-  [self->outbox addObject:@{ @"interestName": interestName, @"change": @"subscribe" }];
+  [outbox addObject:@{ @"interestName": interestName, @"change": @"subscribe" }];
   [self tryFlushOutbox];
 }
 
 - (void) unsubscribe:(NSString *)interestName {
-  [self->outbox addObject:@{ @"interestName": interestName, @"change": @"unsubscribe" }];
+  [outbox addObject:@{ @"interestName": interestName, @"change": @"unsubscribe" }];
   [self tryFlushOutbox];
 }
 
 - (void) tryFlushOutbox {
-  if (self->clientId != NULL && 0 < [self->outbox count]) {
-    NSDictionary* subscriptionChange = (NSDictionary*) [self->outbox objectAtIndex:0];
-    NSString* interestName = (NSString*) [subscriptionChange objectForKey:@"interestName"];
-    NSString* change = (NSString*) [subscriptionChange objectForKey:@"change"];
+  if (clientId != NULL && 0 < [outbox count]) {
+    NSDictionary *subscriptionChange = (NSDictionary*) [outbox objectAtIndex:0];
+    NSString *interestName = (NSString*) [subscriptionChange objectForKey:@"interestName"];
+    NSString *change = (NSString*) [subscriptionChange objectForKey:@"change"];
     [self
-     modifySubscriptionForPusherAppKey:self->pusherAppKey
-     clientId:self->clientId
+     modifySubscriptionForPusherAppKey:pusherAppKey
+     clientId:clientId
      interestName:interestName
      subscriptionChange:change
      callback: ^(BOOL success) {
        if (success) {
-         [self->outbox removeObjectAtIndex:0];
+         [outbox removeObjectAtIndex:0];
        }
        [self tryFlushOutbox];
      }];
@@ -123,8 +123,8 @@ const int MAX_FAILED_REQUEST_ATTEMPTS = 6;
 }
 
 - (void) modifySubscriptionForPusherAppKey:(NSString*) _pusherAppKey clientId: (NSString*) _clientId interestName: (NSString*) interestName subscriptionChange: (NSString*) subscriptionChange callback: (void(^)(BOOL)) callback {
-  NSString* url = [NSString stringWithFormat:@"%@/clients/%@/interests/%@", CLIENT_API_V1_ENDPOINT, _clientId, interestName];
-  NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL: [NSURL URLWithString:url]];
+  NSString *url = [NSString stringWithFormat:@"%@/clients/%@/interests/%@", CLIENT_API_V1_ENDPOINT, _clientId, interestName];
+  NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL: [NSURL URLWithString:url]];
   
   if ([subscriptionChange isEqualToString:@"subscribe"]) {
     [request setHTTPMethod:@"POST"];
@@ -132,7 +132,7 @@ const int MAX_FAILED_REQUEST_ATTEMPTS = 6;
     [request setHTTPMethod:@"DELETE"];
   }
   
-  NSDictionary* params = @{
+  NSDictionary *params = @{
     @"app_key": _pusherAppKey
     // TODO client name/version
     };
@@ -140,11 +140,11 @@ const int MAX_FAILED_REQUEST_ATTEMPTS = 6;
   [request setHTTPBody:[NSJSONSerialization dataWithJSONObject:params options:@[] error:NULL]]; // TODO error??
   [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"]; // TODO charset
   
-  NSURLSessionDataTask* task = [urlSession dataTaskWithRequest:request completionHandler:^(NSData * data, NSURLResponse * response, NSError * error) {
-    NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*) response;
+  NSURLSessionDataTask *task = [urlSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*) response;
     if ([httpResponse statusCode] >= 200 && [httpResponse statusCode] < 300) {
       // Reset number of failed requests to 0 upon success
-      self->failedNativeServiceRequests = 0;
+      failedNativeServiceRequests = 0;
       
       callback(true);
     } else {
@@ -154,9 +154,9 @@ const int MAX_FAILED_REQUEST_ATTEMPTS = 6;
         // TODO print error
       }
       
-      self->failedNativeServiceRequests += 1;
+      failedNativeServiceRequests += 1;
       
-      if (self->failedNativeServiceRequests < MAX_FAILED_REQUEST_ATTEMPTS) {
+      if (failedNativeServiceRequests < MAX_FAILED_REQUEST_ATTEMPTS) {
         callback(false);
       } else {
         // TODO print error

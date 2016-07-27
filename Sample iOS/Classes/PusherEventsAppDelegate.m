@@ -42,7 +42,7 @@
   [self.pusherClient connect];
   
   UIUserNotificationType notificationTypes = UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound;
-  UIUserNotificationSettings* pushNotificationSettings = [UIUserNotificationSettings settingsForTypes:notificationTypes categories: NULL];
+  UIUserNotificationSettings *pushNotificationSettings = [UIUserNotificationSettings settingsForTypes:notificationTypes categories: NULL];
   [application registerUserNotificationSettings:pushNotificationSettings];
   [application registerForRemoteNotifications];
 }
