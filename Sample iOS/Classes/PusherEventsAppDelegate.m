@@ -25,7 +25,7 @@
 
 @implementation PusherEventsAppDelegate
 
-- (void)applicationDidFinishLaunching:(UIApplication *)application 
+- (void)applicationDidFinishLaunching:(UIApplication *)application
 {
   self.pusherClient = [PTPusher pusherWithKey:PUSHER_API_KEY delegate:self encrypted:YES];
   
@@ -40,6 +40,26 @@
   [self.window makeKeyAndVisible];
   
   [self.pusherClient connect];
+  
+  UIUserNotificationType notificationTypes = UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound;
+  UIUserNotificationSettings* pushNotificationSettings = [UIUserNotificationSettings settingsForTypes:notificationTypes categories: NULL];
+  [application registerUserNotificationSettings:pushNotificationSettings];
+  [application registerForRemoteNotifications];
+}
+
+#pragma mark - Push Notifications
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+  [[[self pusherClient] nativePusher] registerWithDeviceToken:deviceToken];
+  [[[self pusherClient] nativePusher] subscribe:@"donuts"];
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+  NSLog(@"Failed to register for remote notifications with error: %@", error);
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+  NSLog(@"Received remote notification: %@", userInfo);
 }
 
 #pragma mark - Reachability
