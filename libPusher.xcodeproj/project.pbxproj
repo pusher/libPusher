@@ -183,6 +183,7 @@
 		C71F493DB1201F7D8B3538D2 /* libPods-Functional Specs.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 30EE92A595A8C846AFF9E98B /* libPods-Functional Specs.a */; };
 		D60F67F80768DB10F7426674 /* libPods-SampleAppOSX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF819A7AC78E37FE620D5A52 /* libPods-SampleAppOSX.a */; };
 		EBACA18CEC46E0128163BC42 /* libPods-libPusher-OSX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF0F8DC337B18B200F2362C6 /* libPods-libPusher-OSX.a */; };
+		FD0F8E6A1D4921C20064171C /* PTNativePusher.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2E1D8F1D466CD700FF1EB6 /* PTNativePusher.m */; };
 		FD2E1D901D466CD700FF1EB6 /* PTNativePusher.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2E1D8F1D466CD700FF1EB6 /* PTNativePusher.m */; };
 /* End PBXBuildFile section */
 
@@ -1515,6 +1516,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD0F8E6A1D4921C20064171C /* PTNativePusher.m in Sources */,
 				33C69ED41D267E7800ABB47A /* NSDictionary+QueryString.m in Sources */,
 				33C69ED51D267E7800ABB47A /* PTPusherChannelServerBasedAuthorization.m in Sources */,
 				33C69ED61D267E7800ABB47A /* PTPusher.m in Sources */,
