@@ -113,11 +113,16 @@ const int MAX_FAILED_REQUEST_ATTEMPTS = 6;
      clientId:self->clientId
      interestName:interestName
      subscriptionChange:change
-     callback: ^() { [self tryFlushOutbox]; }];
+     callback: ^(BOOL success) {
+       if (success) {
+         [self->outbox removeObjectAtIndex:0];
+       }
+       [self tryFlushOutbox];
+     }];
   }
 }
 
-- (void) modifySubscriptionForPusherAppKey:(NSString*) _pusherAppKey clientId: (NSString*) _clientId interestName: (NSString*) interestName subscriptionChange: (NSString*) subscriptionChange callback: (void(^)(void)) callback {
+- (void) modifySubscriptionForPusherAppKey:(NSString*) _pusherAppKey clientId: (NSString*) _clientId interestName: (NSString*) interestName subscriptionChange: (NSString*) subscriptionChange callback: (void(^)(BOOL)) callback {
   NSString* url = [NSString stringWithFormat:@"%@/clients/%@/interests/%@", CLIENT_API_V1_ENDPOINT, _clientId, interestName];
   NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL: [NSURL URLWithString:url]];
   
@@ -141,10 +146,8 @@ const int MAX_FAILED_REQUEST_ATTEMPTS = 6;
       // Reset number of failed requests to 0 upon success
       self->failedNativeServiceRequests = 0;
       
-      callback();
+      callback(true);
     } else {
-      [self->outbox insertObject:@{ @"interestName": interestName, @"change": subscriptionChange } atIndex:0];
-      
       if (error != nil) {
         // TODO print error
       } else {
@@ -154,7 +157,7 @@ const int MAX_FAILED_REQUEST_ATTEMPTS = 6;
       self->failedNativeServiceRequests += 1;
       
       if (self->failedNativeServiceRequests < MAX_FAILED_REQUEST_ATTEMPTS) {
-        callback();
+        callback(false);
       } else {
         // TODO print error
       }
