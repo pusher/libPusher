@@ -61,7 +61,14 @@ const int MAX_FAILED_REQUEST_ATTEMPTS = 6;
   
   assert([NSJSONSerialization isValidJSONObject:params]);
   
-  [request setHTTPBody:[NSJSONSerialization dataWithJSONObject:params options:@[] error: NULL]]; // FIXME error NULL?
+  NSError* jsonSerializationError;
+  NSData* serializedJson = [NSJSONSerialization dataWithJSONObject:params options:@[] error: &jsonSerializationError];
+  if (serializedJson == nil) {
+    NSLog(@"Error serializing JSON when attempting to register: %@", [jsonSerializationError description]);
+    return;
+  }
+
+  [request setHTTPBody: serializedJson];
   
   // FIXME what encoding does the above ^ serialization use? UTF-8?
   [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
