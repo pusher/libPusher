@@ -70,8 +70,10 @@ const int MAX_FAILED_REQUEST_ATTEMPTS = 6;
 
   [request setHTTPBody: serializedJson];
   
-  // FIXME what encoding does the above ^ serialization use? UTF-8?
-  [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+  
+  // Quoth the docs: "The resulting data is a encoded in UTF-8."
+  // https://developer.apple.com/library/ios/documentation/Foundation/Reference/NSJSONSerialization_Class
+  [request addValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
   
   NSURLSessionDataTask *task = [urlSession dataTaskWithRequest:request
                                               completionHandler: ^(NSData * data, NSURLResponse * response, NSError * error) {
@@ -144,7 +146,9 @@ const int MAX_FAILED_REQUEST_ATTEMPTS = 6;
     return;
   }
   
-  [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"]; // TODO charset
+  // Quoth the docs: "The resulting data is a encoded in UTF-8."
+  // https://developer.apple.com/library/ios/documentation/Foundation/Reference/NSJSONSerialization_Class
+  [request addValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
   
   NSURLSessionDataTask *task = [urlSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
     NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*) response;
