@@ -50,6 +50,7 @@
 #pragma mark - Push Notifications
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+  NSLog(@"Registered for remote notifications; received device token");
   [[[self pusherClient] nativePusher] registerWithDeviceToken:deviceToken];
   [[[self pusherClient] nativePusher] subscribe:@"donuts"];
 }
