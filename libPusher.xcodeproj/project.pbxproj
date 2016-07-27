@@ -183,6 +183,7 @@
 		C71F493DB1201F7D8B3538D2 /* libPods-Functional Specs.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 30EE92A595A8C846AFF9E98B /* libPods-Functional Specs.a */; };
 		D60F67F80768DB10F7426674 /* libPods-SampleAppOSX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF819A7AC78E37FE620D5A52 /* libPods-SampleAppOSX.a */; };
 		EBACA18CEC46E0128163BC42 /* libPods-libPusher-OSX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF0F8DC337B18B200F2362C6 /* libPods-libPusher-OSX.a */; };
+		FD2E1D901D466CD700FF1EB6 /* PTNativePusher.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2E1D8F1D466CD700FF1EB6 /* PTNativePusher.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -372,6 +373,8 @@
 		F07EDFFD06514F997549A956 /* Pods-SampleAppOSX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SampleAppOSX.release.xcconfig"; path = "Pods/Target Support Files/Pods-SampleAppOSX/Pods-SampleAppOSX.release.xcconfig"; sourceTree = "<group>"; };
 		F2E7F75414CE31D71B0C73FB /* Pods-libPusher-OSX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-libPusher-OSX.debug.xcconfig"; path = "Pods/Target Support Files/Pods-libPusher-OSX/Pods-libPusher-OSX.debug.xcconfig"; sourceTree = "<group>"; };
 		F918F1C8A1A0F68F8908558A /* libPods-libPusher.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-libPusher.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD2E1D8E1D466B0C00FF1EB6 /* PTNativePusher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PTNativePusher.h; sourceTree = "<group>"; };
+		FD2E1D8F1D466CD700FF1EB6 /* PTNativePusher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTNativePusher.m; sourceTree = "<group>"; };
 		FF819A7AC78E37FE620D5A52 /* libPods-SampleAppOSX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SampleAppOSX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -498,6 +501,8 @@
 				33E3DED41CE4C11E00CCB536 /* PTPusherChannelAuthorizationDelegate.h */,
 				33E3DECC1CE4BF7500CCB536 /* PTPusherChannelServerBasedAuthorization.h */,
 				33E3DECD1CE4BF7500CCB536 /* PTPusherChannelServerBasedAuthorization.m */,
+				FD2E1D8E1D466B0C00FF1EB6 /* PTNativePusher.h */,
+				FD2E1D8F1D466CD700FF1EB6 /* PTNativePusher.m */,
 			);
 			path = Library;
 			sourceTree = "<group>";
@@ -1587,6 +1592,7 @@
 				A35281E513F75010000687C0 /* PTBlockEventListener.m in Sources */,
 				A35281EA13F75265000687C0 /* PTPusherAPI.m in Sources */,
 				A3AC28B713F75530001C4808 /* PTURLRequestOperation.m in Sources */,
+				FD2E1D901D466CD700FF1EB6 /* PTNativePusher.m in Sources */,
 				A3382DE31525C3F70025550D /* PTJSON.m in Sources */,
 				A317375C155D2E82007E4BBA /* PTPusherMockConnection.m in Sources */,
 			);
