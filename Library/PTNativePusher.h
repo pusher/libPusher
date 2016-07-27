@@ -14,6 +14,12 @@
 // Takes ownership of the pusherAppKey string
 - (id)initWithPusherAppKey:(NSString *)pusherAppKey;
 
+- (void) registerWithDeviceToken: (NSData*) deviceToken;
+
+- (void) subscribe:(NSString *)interestName;
+
+- (void) unsubscribe:(NSString *)interestName;
+
 @end
 
 #endif /* PTNativePusher_h */
