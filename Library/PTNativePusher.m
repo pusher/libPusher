@@ -86,7 +86,7 @@ const int MAX_FAILED_REQUEST_ATTEMPTS = 6;
       clientId = clientIdString;
       [self tryFlushOutbox];
     } else {
-      // TODO error
+      NSLog(@"Expected 2xx response to registration request; got %ld", (long)[httpResponse statusCode]);
     }
   }];
   [task resume];
@@ -137,7 +137,13 @@ const int MAX_FAILED_REQUEST_ATTEMPTS = 6;
     // TODO client name/version
     };
   
-  [request setHTTPBody:[NSJSONSerialization dataWithJSONObject:params options:@[] error:NULL]]; // TODO error??
+  NSError *jsonSerializationError;
+  [request setHTTPBody:[NSJSONSerialization dataWithJSONObject:params options:@[] error:&jsonSerializationError]];
+  if (jsonSerializationError != nil) {
+    NSLog(@"Error serializing JSON for subscription modification request: %@", [jsonSerializationError description]);
+    return;
+  }
+  
   [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"]; // TODO charset
   
   NSURLSessionDataTask *task = [urlSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
@@ -148,10 +154,10 @@ const int MAX_FAILED_REQUEST_ATTEMPTS = 6;
       
       callback(true);
     } else {
+      NSLog(@"Expected 2xx response to subscription modification request; received %ld", (long)[httpResponse statusCode]);
+      
       if (error != nil) {
-        // TODO print error
-      } else {
-        // TODO print error
+        NSLog(@"Received error when making subscription modification HTTP request: %@", [error description]);
       }
       
       failedNativeServiceRequests += 1;
@@ -159,9 +165,8 @@ const int MAX_FAILED_REQUEST_ATTEMPTS = 6;
       if (failedNativeServiceRequests < MAX_FAILED_REQUEST_ATTEMPTS) {
         callback(false);
       } else {
-        // TODO print error
+        NSLog(@"Too many failed native service requests (tried %d times)", failedNativeServiceRequests);
       }
-      // TODO error
     }
   }];
   [task resume];
