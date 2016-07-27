@@ -413,6 +413,14 @@ The implementation of `handleDisconnectionWithError` performs the error check an
 
 For a more sophisticated implementation of handling client disconnections and to see how this integrates with a real application, you could take a look at the `ClientDisconnectionHandler` class in the [official Pusher iOS Diagnostics app](https://github.com/pusher/pusher-test-iOS/).
 
+
+## Development
+
+Open `./libPusher.xcworkspace`, not `./libPusher.xcodeproj`!
+
+Releases can be built with `rake`. Run `rake --tasks` for more details.
+
+
 ## License
 
 All code is licensed under the MIT license. See the LICENSE file for more details.
