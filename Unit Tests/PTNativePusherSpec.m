@@ -99,7 +99,7 @@ describe(@"PTNativePusherSpec", ^{
     
     [[pusher nativePusher] unsubscribe:@"donuts"];
     
-    [[expectFutureValue(@([[testDelegate subscriptions] containsObject:@"donuts"])) shouldEventually] equal:false];
+    [[expectFutureValue(@([[testDelegate subscriptions] containsObject:@"donuts"])) shouldEventually] equal:@false];
   });
 });
 
