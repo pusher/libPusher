@@ -158,4 +158,8 @@
 
 - (void)nativePusher:(PTNativePusher *)nativePusher didRegisterForPushNotificationsWithClientId:(NSString *)clientId;
 
+- (void)nativePusher:(PTNativePusher *)nativePusher didSubscribeToInterest:(NSString *)interestName;
+
+- (void)nativePusher:(PTNativePusher *)nativePusher didUnsubscribeFromInterest:(NSString *)interestName;
+
 @end
