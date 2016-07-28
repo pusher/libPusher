@@ -185,7 +185,9 @@
 		EBACA18CEC46E0128163BC42 /* libPods-libPusher-OSX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF0F8DC337B18B200F2362C6 /* libPods-libPusher-OSX.a */; };
 		FD0F8E6A1D4921C20064171C /* PTNativePusher.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2E1D8F1D466CD700FF1EB6 /* PTNativePusher.m */; };
 		FD2E1D901D466CD700FF1EB6 /* PTNativePusher.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2E1D8F1D466CD700FF1EB6 /* PTNativePusher.m */; };
-		FDBA324B1D4A15E200EF61AA /* PTNativePusherSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = FDBA324A1D4A15E200EF61AA /* PTNativePusherSpec.m */; };
+		FDBA324C1D4A42CA00EF61AA /* PTNativePusherSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = FDBA324A1D4A15E200EF61AA /* PTNativePusherSpec.m */; };
+		FDBA324D1D4A42E700EF61AA /* PTNativePusherSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = FDBA324A1D4A15E200EF61AA /* PTNativePusherSpec.m */; };
+		FDBA324E1D4A430300EF61AA /* PTNativePusherSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = FDBA324A1D4A15E200EF61AA /* PTNativePusherSpec.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1542,6 +1544,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDBA324D1D4A42E700EF61AA /* PTNativePusherSpec.m in Sources */,
 				33C69EF31D26807B00ABB47A /* PTPusherEventSpec.m in Sources */,
 				33C69EF41D26807B00ABB47A /* PTPusherEventDispatcherSpec.m in Sources */,
 				33C69EF51D26807B00ABB47A /* PTPusherSpec.m in Sources */,
@@ -1557,6 +1560,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDBA324C1D4A42CA00EF61AA /* PTNativePusherSpec.m in Sources */,
 				A3C32D9B14D083C10017FAED /* PTPusherEventSpec.m in Sources */,
 				A366E53814FD87F5002F0C39 /* PTPusherEventDispatcherSpec.m in Sources */,
 				A394E6F218451CFE004C70A2 /* PTPusherSpec.m in Sources */,
@@ -1572,6 +1576,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDBA324E1D4A430300EF61AA /* PTNativePusherSpec.m in Sources */,
 				A3A9FA491496EC0C00F83617 /* BasicEventHandlingSpec.m in Sources */,
 				A3A9FA4D1496EEB300F83617 /* SpecHelper.m in Sources */,
 				A369CFE214FDAD9200A8D56B /* PrivateChannelsSpec.m in Sources */,
@@ -1597,7 +1602,6 @@
 				A35281D113F721A8000687C0 /* PTPusherConnection.m in Sources */,
 				A35281D713F736DF000687C0 /* PTPusherEventDispatcher.m in Sources */,
 				A35281DC13F73C54000687C0 /* PTTargetActionEventListener.m in Sources */,
-				FDBA324B1D4A15E200EF61AA /* PTNativePusherSpec.m in Sources */,
 				A35281E513F75010000687C0 /* PTBlockEventListener.m in Sources */,
 				A35281EA13F75265000687C0 /* PTPusherAPI.m in Sources */,
 				A3AC28B713F75530001C4808 /* PTURLRequestOperation.m in Sources */,
