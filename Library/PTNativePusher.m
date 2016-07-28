@@ -132,7 +132,7 @@ const int MAX_FAILED_REQUEST_ATTEMPTS = 6;
   
   if ([subscriptionChange isEqualToString:@"subscribe"]) {
     [request setHTTPMethod:@"POST"];
-  } else if ([subscriptionChange isEqualToString:@"subscribe"]) {
+  } else if ([subscriptionChange isEqualToString:@"unsubscribe"]) {
     [request setHTTPMethod:@"DELETE"];
   }
   
@@ -157,6 +157,12 @@ const int MAX_FAILED_REQUEST_ATTEMPTS = 6;
     if ([httpResponse statusCode] >= 200 && [httpResponse statusCode] < 300) {
       // Reset number of failed requests to 0 upon success
       failedNativeServiceRequests = 0;
+      
+      if ([subscriptionChange isEqualToString:@"subscribe"]) {
+        [[self delegate] nativePusher:self didSubscribeToInterest:interestName];
+      } else if ([subscriptionChange isEqualToString:@"unsubscribe"]) {
+        [[self delegate] nativePusher:self didUnsubscribeFromInterest:interestName];
+      }
       
       callback(true);
     } else {
