@@ -185,6 +185,7 @@
 		EBACA18CEC46E0128163BC42 /* libPods-libPusher-OSX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF0F8DC337B18B200F2362C6 /* libPods-libPusher-OSX.a */; };
 		FD0F8E6A1D4921C20064171C /* PTNativePusher.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2E1D8F1D466CD700FF1EB6 /* PTNativePusher.m */; };
 		FD2E1D901D466CD700FF1EB6 /* PTNativePusher.m in Sources */ = {isa = PBXBuildFile; fileRef = FD2E1D8F1D466CD700FF1EB6 /* PTNativePusher.m */; };
+		FDBA324B1D4A15E200EF61AA /* PTNativePusherSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = FDBA324A1D4A15E200EF61AA /* PTNativePusherSpec.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -376,6 +377,7 @@
 		F918F1C8A1A0F68F8908558A /* libPods-libPusher.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-libPusher.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD2E1D8E1D466B0C00FF1EB6 /* PTNativePusher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PTNativePusher.h; sourceTree = "<group>"; };
 		FD2E1D8F1D466CD700FF1EB6 /* PTNativePusher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTNativePusher.m; sourceTree = "<group>"; };
+		FDBA324A1D4A15E200EF61AA /* PTNativePusherSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTNativePusherSpec.m; sourceTree = "<group>"; };
 		FF819A7AC78E37FE620D5A52 /* libPods-SampleAppOSX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SampleAppOSX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -654,6 +656,7 @@
 				A394E6EF18451C99004C70A2 /* PTPusherSpec.m */,
 				A3C32D9C14D083D60017FAED /* SpecHelper.h */,
 				A366E53914FD88B3002F0C39 /* SpecHelper.m */,
+				FDBA324A1D4A15E200EF61AA /* PTNativePusherSpec.m */,
 			);
 			name = Specs;
 			path = "Unit Tests";
@@ -1594,6 +1597,7 @@
 				A35281D113F721A8000687C0 /* PTPusherConnection.m in Sources */,
 				A35281D713F736DF000687C0 /* PTPusherEventDispatcher.m in Sources */,
 				A35281DC13F73C54000687C0 /* PTTargetActionEventListener.m in Sources */,
+				FDBA324B1D4A15E200EF61AA /* PTNativePusherSpec.m in Sources */,
 				A35281E513F75010000687C0 /* PTBlockEventListener.m in Sources */,
 				A35281EA13F75265000687C0 /* PTPusherAPI.m in Sources */,
 				A3AC28B713F75530001C4808 /* PTURLRequestOperation.m in Sources */,
