@@ -116,7 +116,7 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
     PTPusher *pusher = [[self alloc] initWithConnection:connection];
     pusher.delegate = delegate;
   
-    pusher.nativePusher = [[PTNativePusher alloc] initWithPusherAppKey:key];
+    pusher.nativePusher = [[PTNativePusher alloc] initWithPusherAppKey:key delegate:(id<PTPusherDelegate>)delegate ];
   
     return pusher;
 }
