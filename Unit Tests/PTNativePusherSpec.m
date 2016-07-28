@@ -6,4 +6,14 @@
 //
 //
 
-#import <Foundation/Foundation.h>
+#import "SpecHelper.h"
+
+SPEC_BEGIN(PTNativePusherSpec)
+
+describe(@"PTNativePusherSpec", ^{
+  it(@"should pass", ^{
+    [[7 should] equal: theValue(7)];
+  });
+});
+
+SPEC_END
