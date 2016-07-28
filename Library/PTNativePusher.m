@@ -22,13 +22,14 @@ const int MAX_FAILED_REQUEST_ATTEMPTS = 6;
   NSMutableArray *outbox;
 }
 
-- (id)initWithPusherAppKey:(NSString *)_pusherAppKey {
+- (id)initWithPusherAppKey:(NSString *)_pusherAppKey delegate:(id<PTPusherDelegate>)delegate {
   if (self = [super init]) {
     urlSession = [NSURLSession sharedSession];
     failedNativeServiceRequests = 0;
     pusherAppKey = _pusherAppKey;
     clientId = NULL;  // NULL until we register
     outbox = [NSMutableArray array];
+    [self setDelegate:delegate];
   }
   return self;
 }
@@ -86,6 +87,7 @@ const int MAX_FAILED_REQUEST_ATTEMPTS = 6;
       NSObject *clientIdObj = [jsonDict objectForKey:@"id"];
       NSString *clientIdString = (NSString*) clientIdObj;
       clientId = clientIdString;
+      [[self delegate] nativePusher:self didRegisterForPushNotificationsWithClientId:clientId];
       [self tryFlushOutbox];
     } else {
       NSLog(@"Expected 2xx response to registration request; got %ld", (long)[httpResponse statusCode]);
