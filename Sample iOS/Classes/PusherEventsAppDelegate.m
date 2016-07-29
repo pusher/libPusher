@@ -25,8 +25,7 @@
 
 @implementation PusherEventsAppDelegate
 
-- (void)applicationDidFinishLaunching:(UIApplication *)application
-{
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   self.pusherClient = [PTPusher pusherWithKey:PUSHER_API_KEY delegate:self encrypted:YES];
   
   // log all events received, regardless of which channel they come from
@@ -45,6 +44,7 @@
   UIUserNotificationSettings *pushNotificationSettings = [UIUserNotificationSettings settingsForTypes:notificationTypes categories: NULL];
   [application registerUserNotificationSettings:pushNotificationSettings];
   [application registerForRemoteNotifications];
+  return true;
 }
 
 #pragma mark - Push Notifications
@@ -161,6 +161,18 @@
 {
   NSLog(@"[pusher-%@] Authorizing channel access...", pusher.connection.socketID);
   [operation.mutableURLRequest setHTTPBasicAuthUsername:CHANNEL_AUTH_USERNAME password:CHANNEL_AUTH_PASSWORD];
+}
+
+- (void)nativePusher:(PTNativePusher *)nativePusher didRegisterForPushNotificationsWithClientId:(NSString *)clientId {
+  NSLog(@"[pusher] Registered for push notifications, received client ID: %@", clientId);
+}
+
+- (void)nativePusher:(PTNativePusher *)nativePusher didSubscribeToInterest:(NSString *)interestName {
+  NSLog(@"[pusher] Subscribed to interest '%@'", interestName);
+}
+
+- (void)nativePusher:(PTNativePusher *)nativePusher didUnsubscribeFromInterest:(NSString *)interestName {
+  NSLog(@"[pusher] Unsubscribed from interest '%@'", interestName);
 }
 
 @end
