@@ -413,6 +413,71 @@ The implementation of `handleDisconnectionWithError` performs the error check an
 
 For a more sophisticated implementation of handling client disconnections and to see how this integrates with a real application, you could take a look at the `ClientDisconnectionHandler` class in the [official Pusher iOS Diagnostics app](https://github.com/pusher/pusher-test-iOS/).
 
+## Push notifications
+
+Pusher also supports push notifications. Instances of your Objective-C application can register for push notifications and subscribe to "interests". Your server can then publish to those interests, which will be delivered to your Objective-C application as push notifications. See [our guide to setting up push notifications for iOS](https://pusher.com/docs/push_notifications/ios) for a friendly introduction.
+
+You should set up your app for push notifications in your `AppDelegate`. Start off your app in the usual way:
+
+```objc
+#import "Pusher.h"
+
+@interface AppDelegate : NSObject <UIApplicationDelegate, PTPusherDelegate>
+// ...
+@property (nonatomic, strong) PTPusher *pusher;
+@end
+
+@implementation AppDelegate
+- (void)applicationDidFinishLaunching:(UIApplication *)application
+{
+    self.pusher = [PTPusher pusherWithKey:@"YOUR_APP_KEY" delegate:self encrypted:YES];
+    // ...
+}
+@end
+```
+
+For your Objective-C app to receive push notifications, it must first register with APNs. You should do this when the application finishes launching. Your app should register for all types of notification, like so:
+
+```objc
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    // ...
+
+    UIUserNotificationType notificationTypes = UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound;
+    UIUserNotificationSettings *pushNotificationSettings = [UIUserNotificationSettings settingsForTypes:notificationTypes categories: NULL];
+    [application registerUserNotificationSettings:pushNotificationSettings];
+    [application registerForRemoteNotifications];
+
+    return true;
+}
+```
+
+Next, APNs will respond with a device token identifying your app instance. Your app should then register with Pusher, passing along its device token.
+
+Your app can now subscribe to interests. The following registers and subscribes the app to the interest "donuts":
+
+```objc
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    [[[self pusher] nativePusher] registerWithDeviceToken:deviceToken];
+    [[[self pusher] nativePusher] subscribe:@"donuts"];
+}
+```
+
+When your server publishes a notification to the interest "donuts", it will get passed to your app. This happens as a call in your `AppDelegate` which you should listen to:
+
+```objc
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)notification {
+    NSLog(@"Received remote notification: %@", notification);
+}
+```
+
+If at a later point you wish to unsubscribe from an interest, this works in the same way:
+
+```objc
+[[[self pusher] nativePusher] unsubscribe:@"donuts"];
+```
+
+For a complete example of a working app, see the [`Sample iOS/`](https://github.com/pusher/libPusher/tree/master/Sample%20iOS) directory in this repository. Specifically for push notifications code, see the [`PusherEventsAppDelegate.m`](https://github.com/pusher/libPusher/blob/master/Sample%20iOS/Classes/PusherEventsAppDelegate.m) file.
+
 
 ## Development
 
