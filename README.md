@@ -34,10 +34,10 @@ Head over to the [push-notifications](https://github.com/pusher/libPusher/tree/p
 
 ## Installation
 
-Install using CocoaPods is recommended.
+Installation using CocoaPods is recommended. While the push notifications feature is still in beta you'll need to use the code on the `push-notifications` branch, like so:
 
 ```ruby
-pod 'libPusher', '~> 1.6.1'
+pod 'libPusher', git: 'https://github.com/pusher/libPusher.git', branch: 'push-notifications'
 ```
 
 Import Pusher into the class that wants to make use of the library.
