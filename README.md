@@ -28,6 +28,10 @@ PTPusherChannel *channel = [self.client subscribeToChannelNamed:@"chat"];
 [self.client connect];
 ```
 
+## Looking for the push notifications beta?
+
+Head over to the [push-notifications](https://github.com/pusher/libPusher/tree/push-notifications) branch.
+
 ## Installation
 
 Install using CocoaPods is recommended.
