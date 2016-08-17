@@ -24,6 +24,8 @@
 		330136521D3691AA004936D8 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3301364F1D368FD7004936D8 /* libicucore.tbd */; };
 		330136541D3691B4004936D8 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 330136531D3691B4004936D8 /* libicucore.tbd */; };
 		330136551D3691C5004936D8 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 3301364F1D368FD7004936D8 /* libicucore.tbd */; };
+		330E88DA1D64765D00D8E44D /* PTPusherChannelAuthorizationDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 33E3DED41CE4C11E00CCB536 /* PTPusherChannelAuthorizationDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		330E88DB1D64765E00D8E44D /* PTPusherChannelAuthorizationDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 33E3DED41CE4C11E00CCB536 /* PTPusherChannelAuthorizationDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		335DD8A51D23C274002724DC /* NSDictionary+StringValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 335DD8A21D23BEC1002724DC /* NSDictionary+StringValue.h */; };
 		335DD8A61D23C283002724DC /* NSDictionary+StringValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 335DD8A31D23C219002724DC /* NSDictionary+StringValue.m */; };
 		33C69EBC1D267E7800ABB47A /* PTTargetActionEventListener.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC4318466CD5006A54DD /* PTTargetActionEventListener.h */; };
@@ -36,7 +38,7 @@
 		33C69EC31D267E7800ABB47A /* PTPusherConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = A35281CE13F721A8000687C0 /* PTPusherConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		33C69EC41D267E7800ABB47A /* PTPusherEventPublisher.h in Headers */ = {isa = PBXBuildFile; fileRef = A35281D213F72E03000687C0 /* PTPusherEventPublisher.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		33C69EC51D267E7800ABB47A /* PTPusherEventDispatcher.h in Headers */ = {isa = PBXBuildFile; fileRef = A35281D413F736DF000687C0 /* PTPusherEventDispatcher.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		33C69EC61D267E7800ABB47A /* PTURLRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC4418466CD5006A54DD /* PTURLRequestOperation.h */; };
+		33C69EC61D267E7800ABB47A /* PTURLRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC4418466CD5006A54DD /* PTURLRequestOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		33C69EC71D267E7800ABB47A /* PTBlockEventListener.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC3F18466CD5006A54DD /* PTBlockEventListener.h */; };
 		33C69EC81D267E7800ABB47A /* PTPusherAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = A35281E713F75265000687C0 /* PTPusherAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		33C69EC91D267E7800ABB47A /* PTEventListener.h in Headers */ = {isa = PBXBuildFile; fileRef = A3D1D28C1157FA4C009A12AD /* PTEventListener.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -47,7 +49,7 @@
 		33C69ECE1D267E7800ABB47A /* PTPusherMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = A37E167314E572C900DCA3A6 /* PTPusherMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		33C69ECF1D267E7800ABB47A /* PTPusherMockConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = A3173758155D2D21007E4BBA /* PTPusherMockConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		33C69ED01D267E7800ABB47A /* Pusher.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D81597E1712C6CA0013A485 /* Pusher.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		33C69ED11D267E7800ABB47A /* PTPusherChannelServerBasedAuthorization.h in Headers */ = {isa = PBXBuildFile; fileRef = 33E3DECC1CE4BF7500CCB536 /* PTPusherChannelServerBasedAuthorization.h */; };
+		33C69ED11D267E7800ABB47A /* PTPusherChannelServerBasedAuthorization.h in Headers */ = {isa = PBXBuildFile; fileRef = 33E3DECC1CE4BF7500CCB536 /* PTPusherChannelServerBasedAuthorization.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		33C69ED21D267E7800ABB47A /* NSDictionary+QueryString.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC3D18466CD5006A54DD /* NSDictionary+QueryString.h */; };
 		33C69ED41D267E7800ABB47A /* NSDictionary+QueryString.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FE430011812541009CF5D7 /* NSDictionary+QueryString.m */; };
 		33C69ED51D267E7800ABB47A /* PTPusherChannelServerBasedAuthorization.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E3DECD1CE4BF7500CCB536 /* PTPusherChannelServerBasedAuthorization.m */; };
@@ -78,7 +80,7 @@
 		33C69EFF1D26807B00ABB47A /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3D1D0B51157CCDE009A12AD /* CFNetwork.framework */; };
 		33C69F001D26807B00ABB47A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		33C69F0C1D2682A400ABB47A /* libPusher-OSX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 33C69EEA1D267E7800ABB47A /* libPusher-OSX.a */; };
-		33E3DECE1CE4BF7500CCB536 /* PTPusherChannelServerBasedAuthorization.h in Headers */ = {isa = PBXBuildFile; fileRef = 33E3DECC1CE4BF7500CCB536 /* PTPusherChannelServerBasedAuthorization.h */; };
+		33E3DECE1CE4BF7500CCB536 /* PTPusherChannelServerBasedAuthorization.h in Headers */ = {isa = PBXBuildFile; fileRef = 33E3DECC1CE4BF7500CCB536 /* PTPusherChannelServerBasedAuthorization.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		33E3DECF1CE4BF7500CCB536 /* PTPusherChannelServerBasedAuthorization.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E3DECD1CE4BF7500CCB536 /* PTPusherChannelServerBasedAuthorization.m */; };
 		33E3DED21CE4C07300CCB536 /* PTPusherChannelAuthorizationBypass.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E3DED11CE4C07300CCB536 /* PTPusherChannelAuthorizationBypass.m */; };
 		33E3DED31CE4C0EB00CCB536 /* PTPusherChannelAuthorizationBypass.m in Sources */ = {isa = PBXBuildFile; fileRef = 33E3DED11CE4C07300CCB536 /* PTPusherChannelAuthorizationBypass.m */; };
@@ -173,7 +175,7 @@
 		A3E5CC4818466CD5006A54DD /* PTJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC4018466CD5006A54DD /* PTJSON.h */; };
 		A3E5CC4918466CD5006A54DD /* PTPusherChannel_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC4118466CD5006A54DD /* PTPusherChannel_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		A3E5CC4B18466CD5006A54DD /* PTTargetActionEventListener.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC4318466CD5006A54DD /* PTTargetActionEventListener.h */; };
-		A3E5CC4C18466CD5006A54DD /* PTURLRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC4418466CD5006A54DD /* PTURLRequestOperation.h */; };
+		A3E5CC4C18466CD5006A54DD /* PTURLRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC4418466CD5006A54DD /* PTURLRequestOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3FE41CB11811161009CF5D7 /* NewEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FE41C911811161009CF5D7 /* NewEventViewController.m */; };
 		A3FE41CC11811161009CF5D7 /* NewEventViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3FE41CA11811161009CF5D7 /* NewEventViewController.xib */; };
 		A3FE429F11811EEE009CF5D7 /* NSString+Hashing.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FE429C11811EE8009CF5D7 /* NSString+Hashing.m */; };
@@ -723,7 +725,6 @@
 				A3E5CC4018466CD5006A54DD /* PTJSON.h */,
 				A3E5CC4118466CD5006A54DD /* PTPusherChannel_Private.h */,
 				A3E5CC4318466CD5006A54DD /* PTTargetActionEventListener.h */,
-				A3E5CC4418466CD5006A54DD /* PTURLRequestOperation.h */,
 			);
 			path = "Private Headers";
 			sourceTree = "<group>";
@@ -744,6 +745,7 @@
 			isa = PBXGroup;
 			children = (
 				335DD8A31D23C219002724DC /* NSDictionary+StringValue.m */,
+				A3E5CC4418466CD5006A54DD /* PTURLRequestOperation.h */,
 				A3AC28B513F75530001C4808 /* PTURLRequestOperation.m */,
 				A30950121525C272008F695B /* PTJSON.m */,
 				A3FE429C11811EE8009CF5D7 /* NSString+Hashing.m */,
@@ -795,6 +797,7 @@
 				33C69EC51D267E7800ABB47A /* PTPusherEventDispatcher.h in Headers */,
 				33C69EC61D267E7800ABB47A /* PTURLRequestOperation.h in Headers */,
 				33C69EC71D267E7800ABB47A /* PTBlockEventListener.h in Headers */,
+				330E88DB1D64765E00D8E44D /* PTPusherChannelAuthorizationDelegate.h in Headers */,
 				33C69EC81D267E7800ABB47A /* PTPusherAPI.h in Headers */,
 				33C69EC91D267E7800ABB47A /* PTEventListener.h in Headers */,
 				33C69ECA1D267E7800ABB47A /* PTPusherChannel_Private.h in Headers */,
@@ -834,6 +837,7 @@
 				A3CA670E14DBBAA1003E2F1E /* PTPusherErrors.h in Headers */,
 				A37E167414E572C900DCA3A6 /* PTPusherMacros.h in Headers */,
 				A3226317155D481C00A46067 /* PTPusherMockConnection.h in Headers */,
+				330E88DA1D64765D00D8E44D /* PTPusherChannelAuthorizationDelegate.h in Headers */,
 				4D81597F1712C6CA0013A485 /* Pusher.h in Headers */,
 				33E3DECE1CE4BF7500CCB536 /* PTPusherChannelServerBasedAuthorization.h in Headers */,
 				A3E5CC4518466CD5006A54DD /* NSDictionary+QueryString.h in Headers */,
