@@ -115,9 +115,11 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
     PTPusherConnection *connection = [[PTPusherConnection alloc] initWithURL:serviceURL];
     PTPusher *pusher = [[self alloc] initWithConnection:connection];
     pusher.delegate = delegate;
-  
+
+    #if TARGET_OS_IPHONE
     pusher.nativePusher = [[PTNativePusher alloc] initWithPusherAppKey:key delegate:(id<PTPusherDelegate>)delegate ];
-  
+    #endif
+
     return pusher;
 }
 

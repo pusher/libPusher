@@ -12,7 +12,10 @@
 #import "PTPusherEventPublisher.h"
 #import "PTPusherPresenceChannelDelegate.h"
 #import "PTPusherChannelAuthorizationDelegate.h"
+
+#if TARGET_OS_IPHONE
 #import "PTNativePusher.h"
+#endif
 
 /** The name of the notification posted when PTPusher receives an event.
  *
@@ -139,11 +142,15 @@ extern NSString *const PTPusherErrorUnderlyingEventKey;
  */
 @property (nonatomic, weak) id<PTPusherChannelAuthorizationDelegate> channelAuthorizationDelegate;
 
+#if TARGET_OS_IPHONE
+
 /** Provides the native push notification API.
  *
  * PTNativePusher is expected to be used as a singleton accessed via this property.
  */
 @property (nonatomic, strong) PTNativePusher* nativePusher;
+
+#endif
 
 
 ///------------------------------------------------------------------------------------/
@@ -323,12 +330,15 @@ extern NSString *const PTPusherErrorUnderlyingEventKey;
  */
 - (void)sendEventNamed:(NSString *)name data:(id)data channel:(NSString *)channelName;
 
+#if TARGET_OS_IPHONE
 
 ///------------------------------------------------------------------------------------/
 /// Push Notifications
 ///------------------------------------------------------------------------------------/
 
 - (PTNativePusher *)nativePusher;
+
+#endif
 
 @end
 
