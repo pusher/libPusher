@@ -75,6 +75,7 @@ const int MAX_FAILED_REQUEST_ATTEMPTS = 6;
   // Quoth the docs: "The resulting data is a encoded in UTF-8."
   // https://developer.apple.com/library/ios/documentation/Foundation/Reference/NSJSONSerialization_Class
   [request addValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+  [request addValue:[NSString stringWithFormat:@"libPusher %@", kPTPusherClientLibraryVersion] forHTTPHeaderField:@"X-Pusher-Library"];
   
   NSURLSessionDataTask *task = [urlSession dataTaskWithRequest:request
                                               completionHandler: ^(NSData * data, NSURLResponse * response, NSError * error) {
@@ -151,6 +152,7 @@ const int MAX_FAILED_REQUEST_ATTEMPTS = 6;
   // Quoth the docs: "The resulting data is a encoded in UTF-8."
   // https://developer.apple.com/library/ios/documentation/Foundation/Reference/NSJSONSerialization_Class
   [request addValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+  [request addValue:[NSString stringWithFormat:@"libPusher %@", kPTPusherClientLibraryVersion] forHTTPHeaderField:@"X-Pusher-Library"];
   
   NSURLSessionDataTask *task = [urlSession dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
     NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*) response;
