@@ -15,6 +15,10 @@
 @class PTPusherErrorEvent;
 @class PTPusherChannelAuthorizationOperation;
 
+#if TARGET_OS_IPHONE
+@class PTNativePusher;
+#endif
+
 /** Implementing the PTPusherDelegate protocol lets you react to important events in the Pusher client's
   lifetime, such as connection and disconnection, channel subscription and errors.
 
@@ -150,5 +154,19 @@
  @param errorEvent The error event.
  */
 - (void)pusher:(PTPusher *)pusher didReceiveErrorEvent:(PTPusherErrorEvent *)errorEvent;
+
+#if TARGET_OS_IPHONE
+
+///------------------------------------------------------------------------------------/
+/// @name Push Notifications
+///------------------------------------------------------------------------------------/
+
+- (void)nativePusher:(PTNativePusher *)nativePusher didRegisterForPushNotificationsWithClientId:(NSString *)clientId;
+
+- (void)nativePusher:(PTNativePusher *)nativePusher didSubscribeToInterest:(NSString *)interestName;
+
+- (void)nativePusher:(PTNativePusher *)nativePusher didUnsubscribeFromInterest:(NSString *)interestName;
+
+#endif
 
 @end
