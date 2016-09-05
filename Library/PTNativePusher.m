@@ -57,7 +57,6 @@ const int MAX_FAILED_REQUEST_ATTEMPTS = 6;
     @"app_key": pusherAppKey,
     @"platform_type": PLATFORM_TYPE,
     @"token": deviceTokenString
-    // TODO client name/version
   };
   
   assert([NSJSONSerialization isValidJSONObject:params]);
@@ -93,7 +92,8 @@ const int MAX_FAILED_REQUEST_ATTEMPTS = 6;
       }
       [self tryFlushOutbox];
     } else {
-      NSLog(@"Expected 2xx response to registration request; got %ld", (long)[httpResponse statusCode]);
+      NSString *dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+      NSLog(@"Expected 2xx response to registration request; got %ld with response: %@", (long)[httpResponse statusCode], dataString);
     }
   }];
   [task resume];
@@ -141,8 +141,7 @@ const int MAX_FAILED_REQUEST_ATTEMPTS = 6;
   
   NSDictionary *params = @{
     @"app_key": _pusherAppKey
-    // TODO client name/version
-    };
+  };
   
   NSError *jsonSerializationError;
   [request setHTTPBody:[NSJSONSerialization dataWithJSONObject:params options:@[] error:&jsonSerializationError]];
