@@ -88,7 +88,9 @@ const int MAX_FAILED_REQUEST_ATTEMPTS = 6;
       NSObject *clientIdObj = [jsonDict objectForKey:@"id"];
       NSString *clientIdString = (NSString*) clientIdObj;
       clientId = clientIdString;
-      [[self delegate] nativePusher:self didRegisterForPushNotificationsWithClientId:clientId];
+      if ([[self delegate] respondsToSelector:@selector(nativePusher:didUnsubscribeFromInterest:)]) {
+        [[self delegate] nativePusher:self didRegisterForPushNotificationsWithClientId:clientId];
+      }
       [self tryFlushOutbox];
     } else {
       NSLog(@"Expected 2xx response to registration request; got %ld", (long)[httpResponse statusCode]);
@@ -161,9 +163,13 @@ const int MAX_FAILED_REQUEST_ATTEMPTS = 6;
       failedNativeServiceRequests = 0;
       
       if ([subscriptionChange isEqualToString:@"subscribe"]) {
-        [[self delegate] nativePusher:self didSubscribeToInterest:interestName];
+        if ([[self delegate] respondsToSelector:@selector(nativePusher:didSubscribeToInterest:)]) {
+          [[self delegate] nativePusher:self didSubscribeToInterest:interestName];
+        }
       } else if ([subscriptionChange isEqualToString:@"unsubscribe"]) {
-        [[self delegate] nativePusher:self didUnsubscribeFromInterest:interestName];
+        if ([[self delegate] respondsToSelector:@selector(nativePusher:didUnsubscribeFromInterest:)]) {
+          [[self delegate] nativePusher:self didUnsubscribeFromInterest:interestName];
+        }
       }
       
       callback(true);
