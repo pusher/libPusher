@@ -173,7 +173,8 @@ const int MAX_FAILED_REQUEST_ATTEMPTS = 6;
       
       callback(true);
     } else {
-      NSLog(@"Expected 2xx response to subscription modification request; received %ld", (long)[httpResponse statusCode]);
+      NSString *dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+      NSLog(@"Expected 2xx response to subscription modification request; got %ld with response: %@", (long)[httpResponse statusCode], dataString);
       
       if (error != nil) {
         NSLog(@"Received error when making subscription modification HTTP request: %@", [error description]);
