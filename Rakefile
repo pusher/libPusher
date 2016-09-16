@@ -6,7 +6,7 @@ require 'xcode_build/tasks/build_task'
 require 'xcode_build/formatters/progress_formatter'
 require 'tmpdir'
 
-LIBRARY_VERSION = "1.6.1"
+LIBRARY_VERSION = "1.6.2"
 XCODEBUILD_LOG  = File.join(File.dirname(__FILE__), "xcodebuild.log")
 GITHUB_USER     = 'lukeredpath'
 GITHUB_REPO     = 'libPusher'
@@ -50,15 +50,15 @@ namespace :docs do
       --project-name libPusher \
       -v #{LIBRARY_VERSION}"
   end
-  
+
   task :generate do
     system appledoc_cmd("Docs/API") << " Library/PT*"
   end
-  
+
   task :install do
     system appledoc_cmd("Docs/API") << " --install-docset Library/PT*"
   end
-  
+
   task :publish do
     tempdir = Dir.tmpdir + "/libPusherDocs"
     system appledoc_cmd(tempdir) << " Library/PT*"
@@ -86,7 +86,7 @@ def copy_artefacts_from_build(build, options={})
   target = File.join(build.target_build_directory, "libPusher.a")
   destination = File.join(ARTEFACT_DIR, "libPusher-#{build.environment["SDK_NAME"]}.a")
   FileUtils.mv(target, destination)
-  
+
   if options[:include_headers]
     header_dir = File.join(build.target_build_directory, "usr", "local", "include")
     FileUtils.mv(header_dir, File.join(ARTEFACT_DIR, "headers"))
@@ -103,7 +103,7 @@ end
 
 def prepare_distribution_package(file_suffix, copy_readme = true)
   FileUtils.cp("README-DIST.txt", "dist/libPusher/README.txt") if copy_readme
-  
+
   Dir.chdir("dist") do
     system "zip -r libPusher-#{file_suffix}.zip libPusher"
   end
@@ -115,24 +115,24 @@ def unquote(string)
   string.gsub(/"/, '')
 end
 
-require 'github/downloads'
-require 'osx_keychain'
+# require 'github/downloads'
+# require 'osx_keychain'
 
 def upload_package_to_github(file)
   puts "Skipping Github upload (no longer supported)"
   return
-  
-  keychain = OSXKeychain.new
-  password = keychain['api.github.com', GITHUB_USER]
-  uploader = Github::Downloads.connect(GITHUB_USER, password, GITHUB_REPO)
-  
-  begin
-    uploader.create(file, "Built from #{current_git_commit_sha} at #{Time.now.strftime("%d/%m/%Y")}", :overwrite => true)
-  rescue Github::Downloads::UnexpectedResponse => e
-    puts "Unexpected response #{e}"
-    puts "Error: #{e.error_message}"
-    exit 1
-  end
+
+  # keychain = OSXKeychain.new
+  # password = keychain['api.github.com', GITHUB_USER]
+  # uploader = Github::Downloads.connect(GITHUB_USER, password, GITHUB_REPO)
+
+  # begin
+  #   uploader.create(file, "Built from #{current_git_commit_sha} at #{Time.now.strftime("%d/%m/%Y")}", :overwrite => true)
+  # rescue Github::Downloads::UnexpectedResponse => e
+  #   puts "Unexpected response #{e}"
+  #   puts "Error: #{e.error_message}"
+  #   exit 1
+  # end
 end
 
 namespace :release do
@@ -145,7 +145,7 @@ namespace :release do
     t.after_build { |build| copy_artefacts_from_build(build, :include_headers => true) }
     t.xcodebuild_log_path = XCODEBUILD_LOG
   end
-  
+
   XcodeBuild::Tasks::BuildTask.new(:simulator) do |t|
     t.workspace = "libPusher.xcworkspace"
     t.scheme = "libPusher"
@@ -155,31 +155,31 @@ namespace :release do
     t.after_build { |build| copy_artefacts_from_build(build) }
     t.xcodebuild_log_path = XCODEBUILD_LOG
   end
-  
+
   XcodeBuild::Tasks::BuildTask.new(:osx) do |t|
     t.project_name = "libPusher-OSX/libPusher-OSX.xcodeproj"
     t.target = "Pusher"
     t.configuration = "Release"
     t.formatter = XcodeBuild::Formatters::ProgressFormatter.new
-    t.after_build do |build| 
+    t.after_build do |build|
       Dir["#{unquote(build.target_build_directory)}/*.*"].each do |product|
         system %{cp -r "#{product}" "#{ARTEFACT_DIR}"}
       end
     end
     t.xcodebuild_log_path = XCODEBUILD_LOG
   end
-  
+
   desc "Build combined release libraries for both device and simulator."
   task :combined => [:prepare_distribution, "release:device:cleanbuild", "release:simulator:cleanbuild"] do
     puts "Creating fat binary from simulator and device builds..."
     combine_libraries(Dir[File.join(ARTEFACT_DIR, "*.a")], File.join(ARTEFACT_DIR, "libPusher-combined.a"))
   end
-  
+
   task :prepare_distribution do
     FileUtils.rm_rf("dist")
     FileUtils.mkdir_p(ARTEFACT_DIR)
   end
-  
+
   desc "Build and package the iOS library for nightly distribution"
   task :nightly_ios => :combined do
     puts "Crreating iOS package for nightly distribution..."
@@ -188,7 +188,7 @@ namespace :release do
     upload_package_to_github(package_file)
     puts "Finished."
   end
-  
+
   desc "Build and package the OSX framework for nightly distribution"
   task :nightly_osx => [:prepare_distribution, "osx:cleanbuild"] do
     puts "Crreating OSX package for nightly distribution..."
@@ -197,7 +197,7 @@ namespace :release do
     upload_package_to_github(package_file)
     puts "Finished."
   end
-  
+
   desc "Build and package for stable iOS distribution"
   task :stable_ios => :combined do
     puts "Crreating package for #{LIBRARY_VERSION} distribution..."
@@ -206,7 +206,7 @@ namespace :release do
     upload_package_to_github(package_file)
     puts "Finished."
   end
-  
+
   desc "Build and package for stable OSX distribution"
   task :stable_osx => [:prepare_distribution, "osx:cleanbuild"] do
     puts "Crreating package for #{LIBRARY_VERSION} distribution..."
@@ -215,7 +215,7 @@ namespace :release do
     upload_package_to_github(package_file)
     puts "Finished."
   end
-  
+
   desc "Build, package and release iOS and OSX distribution"
   task :stable => [:stable_ios, :stable_osx]
 end

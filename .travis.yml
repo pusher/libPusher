@@ -1,11 +1,20 @@
 language: objective-c
+osx_image: xcode7.3
+sudo: false
 before_install:
-  - brew update
-  - brew unlink xctool
-  - brew install xctool --HEAD
-install: true
+  - gem install xcpretty
+install:
+  - tail -n +4 Sample\ iOS/Constants.h.example > Sample\ iOS/Constants.h
+  - echo \#define PUSHER_APP_ID @\"$(env | grep PUSHER_APP_ID | cut -d "=" -f 2)\" >> Sample\ iOS/Constants.h
+  - echo \#define PUSHER_API_KEY @\"$(env | grep PUSHER_API_KEY | cut -d "=" -f 2)\" >> Sample\ iOS/Constants.h
+  - echo \#define PUSHER_API_SECRET @\"$(env | grep PUSHER_API_SECRET | cut -d "=" -f 2)\" >> Sample\ iOS/Constants.h
+  - bundle install
 env:
   matrix:
-    - XCODE_SCHEME=libPusher SDK=iphonesimulator
-    - XCODE_SCHEME=libPusher-OSX SDK=macosx10.9
-script: xctool -workspace libPusher.xcworkspace -scheme $XCODE_SCHEME -sdk $SDK test
+    - XCODE_SCHEME="libPusher" SDK="iphonesimulator" DESTINATION="OS=9.3,name=iPhone 6s"
+    - XCODE_SCHEME="libPusher-OSX" SDK="macosx" DESTINATION="arch=x86_64"
+    - XCODE_SCHEME="Functional Specs" SDK="iphonesimulator" DESTINATION="OS=9.3,name=iPhone 6s"
+script:
+  - set -o pipefail
+  - rackup -p 9292 Scripts/auth_server.ru > logs.txt 2>&1 &
+  - xcodebuild -workspace libPusher.xcworkspace -scheme "$XCODE_SCHEME" -sdk "$SDK" test -destination "$DESTINATION" | xcpretty -tc

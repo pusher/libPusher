@@ -7,6 +7,7 @@
 //
 
 #import "SpecHelper.h"
+#import "PTPusherChannelAuthorizationBypass.h"
 
 SPEC_BEGIN(ClientEventsSpec)
 
@@ -14,13 +15,15 @@ describe(@"Client events", ^{
   
   __block PTPusher *client = nil;
   __block PTPusherMockConnection *connection = nil;
+  __block PTPusherChannelAuthorizationBypass *authBypass = nil;
   
   registerMatchers(@"PT");
   enableClientDebugging();
   
   beforeEach(^{
     client = newTestClientWithMockConnection();
-    [client enableChannelAuthorizationBypassMode];
+    authBypass = [PTPusherChannelAuthorizationBypass new];
+    client.channelAuthorizationDelegate = authBypass;
     connection = (PTPusherMockConnection *)client.connection;
   });
   
@@ -65,11 +68,7 @@ describe(@"Client events", ^{
       PTPusherPrivateChannel *channel = [client subscribeToPrivateChannelNamed:@"test-channel"];
       [channel triggerEventNamed:@"test-event" data:nil];
     });
-    
-    onSubscribe(^(PTPusherChannel *channel) {
-      NSLog(@"here");
-    });
-    
+        
     [client connect];
     
     [[expectFutureValue([connection.sentClientEvents lastObject]) shouldEventually] beEventNamed:@"client-test-event"];

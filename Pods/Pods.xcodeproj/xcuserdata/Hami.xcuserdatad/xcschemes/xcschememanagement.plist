@@ -4,37 +4,92 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Kiwi.xcscheme</key>
+		<key>Kiwi-OSX.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>OHHTTPStubs.xcscheme</key>
+		<key>Kiwi-iOS.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-specs.xcscheme</key>
+		<key>OHHTTPStubs-OSX.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods.xcscheme</key>
+		<key>OHHTTPStubs-iOS.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Reachability.xcscheme</key>
+		<key>Pods-Functional Specs.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>ReactiveCocoa.xcscheme</key>
+		<key>Pods-SampleApp.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>SocketRocket.xcscheme</key>
+		<key>Pods-SampleAppOSX.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-UnitTests-OSX.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-UnitTests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-libPusher-OSX.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-libPusher.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-libPusher_ReactiveExtensions.a.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Reachability-OSX.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Reachability-iOS.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>ReactiveCocoa-OSX.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>ReactiveCocoa-iOS.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SocketRocket-OSX.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SocketRocket-iOS.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -42,37 +97,92 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>1893DE70459B9C5430E1E53597BF9817</key>
+		<key>119A6BDDDB3933F6F1F42B90DCECEA32</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>214A7DD9C187426010670AF1D664BB71</key>
+		<key>224AF66C95631734CAAAE6F5BF101EF9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6951DA9871DA259A9AAA6EFC68AEF8EB</key>
+		<key>2E3D2608397C62894A5279E2FB1FED1F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6AC9549B9E611F507675716C73EB33D6</key>
+		<key>332D76D554DFB90B6931973DEDA01F4E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>825E4B43D132FD84E959611547F4ADB6</key>
+		<key>3A9F4B20328169A8C6CED206B00D175E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>94F7F189F3302603E3064AD0A6552133</key>
+		<key>4CF1070A842FF4E00CBA71F79D7ADFE1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AA35CC91EBB5AFE426D8FBE422FE172E</key>
+		<key>7AB0D67AB80C92295A956F280339749C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7F1C984928701B8705741F5CF96ED5D8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8F04D428BCB12C9D523F53FFD2C0B199</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A2036C76FE38DAC6189F8892EE4493DB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D3A8C2EDA0DF79D61B2EDEFF2DFB9EAC</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DD9C734A7D9C5B7C3DB9837F173C1E0B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E6860931CDBA10CD38D2A99D34B748B1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F57842095F2CD988F3DF346DB13EBE47</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FAF231F375C9A8129527F69073BDC95A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FD744BB8244BC28511B444BA3B1575DF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FE6C66D98DF18129EC0F53E6C2F7BA57</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FF95390693868B23656ABAFB418FEE3E</key>
 		<dict>
 			<key>primary</key>
 			<true/>

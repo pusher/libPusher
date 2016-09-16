@@ -10,9 +10,14 @@ build/*
 profile
 
 Constants.h
+
 *.xcodeproj/xcuserdata
 *.xcodeproj/*.xcworkspace/xcuserdata
 *.xcworkspace/xcuserdata
+*.xccheckout
+**/*.xcuserdatad
+*.xcuserstate
+xcuserdata/
 
 log
 Scripts/*.pid
@@ -24,4 +29,3 @@ dist
 .bundle
 xcodebuild.log
 Pods/Documentation
-*.xccheckout
