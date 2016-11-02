@@ -282,10 +282,12 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 - (void)subscribeToChannel:(PTPusherChannel *)channel
 {
   if (channel.isPrivate) {
-    [self.channelAuthorizationDelegate pusherChannel:channel requiresAuthorizationForSocketID:self.connection.socketID completionHandler:^(BOOL isAuthorized, NSDictionary *authData, NSError *error) {
-
+    NSString *socketID = self.connection.socketID;
+    [self.channelAuthorizationDelegate pusherChannel:channel requiresAuthorizationForSocketID:socketID completionHandler:^(BOOL isAuthorized, NSDictionary *authData, NSError *error) {
+      
       if (!self.connection.isConnected) return;
-
+      if (self.connection.socketID != socketID) return; // Socket may have changed since the auth request was made
+      
       if (isAuthorized) {
         [channel subscribeWithAuthorization:authData];
       }
