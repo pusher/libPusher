@@ -264,8 +264,8 @@ void waitForClientToDisconnect(PTPusher *client)
   return self;
 }
 
-- (void)addObserverForNotificationName:(NSString *)notificationName object:(id)object 
-                    notificationCentre:(NSNotificationCenter *)notificationCenter 
+- (void)addObserverForNotificationName:(NSString *)notificationName object:(id)object
+                    notificationCentre:(NSNotificationCenter *)notificationCenter
                              withBlock:(void (^)(NSNotification *))block
 {
   [observers setObject:[block copy] forKey:notificationName];
@@ -275,7 +275,7 @@ void waitForClientToDisconnect(PTPusher *client)
 - (void)handleNotification:(NSNotification *)note
 {
   void (^block)(NSNotification *) = [observers objectForKey:note.name];
-  
+
   if (block) {
     block(note);
   }
