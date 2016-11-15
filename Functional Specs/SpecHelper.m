@@ -53,7 +53,7 @@ void sendTestEventOnChannel(NSString *channelName, NSString *eventName)
 {
   NSDictionary *environment = [[NSProcessInfo processInfo] environment];
   NSString *appId = environment[@"PUSHER_APP_ID"];
-  NSString *appKey = environment[@"PUSHER_APP_KEY"];
+  NSString *appKey = environment[@"PUSHER_API_KEY"];
   NSString *appSecret = environment[@"PUSHER_API_SECRET"];
 
   if (!appId) {
