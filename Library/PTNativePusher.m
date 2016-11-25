@@ -87,7 +87,7 @@ const int MAX_FAILED_REQUEST_ATTEMPTS = 6;
       NSObject *clientIdObj = [jsonDict objectForKey:@"id"];
       NSString *clientIdString = (NSString*) clientIdObj;
       clientId = clientIdString;
-      if ([[self delegate] respondsToSelector:@selector(nativePusher:didUnsubscribeFromInterest:)]) {
+      if ([[self delegate] respondsToSelector:@selector(nativePusher:didRegisterForPushNotificationsWithClientId:)]) {
         [[self delegate] nativePusher:self didRegisterForPushNotificationsWithClientId:clientId];
       }
       [self tryFlushOutbox];
