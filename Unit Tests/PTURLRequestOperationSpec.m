@@ -9,27 +9,39 @@
 #import "SpecHelper.h"
 #import "PTURLRequestOperation.h"
 
-SPEC_BEGIN(PTPusherSpec)
+@interface PTURLRequestOperationSpecs : XCTestCase
 
-describe(@"PTURLRequestOperation", ^{
+@property (nonatomic, strong) PTURLRequestOperation *subject;
+@property (nonatomic, weak) id<NSURLSessionDelegate> sessionDelegate;
+@property (nonatomic, weak) NSURLSession *session;
+
+@end
+
+@implementation PTURLRequestOperationSpecs
+
+- (void)setUp
+{
+  @autoreleasepool {
+    NSURL *authURL = [NSURL URLWithString:@"http://example.com/authorize"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:authURL];
+    self.subject = [[PTURLRequestOperation alloc] initWithURLRequest:request];
+    [self.subject start];
+    [[self.subject.URLSession shouldNot] beNil];
+    [[(NSObject *)self.subject.URLSession.delegate shouldNot] beNil];
+    self.sessionDelegate = self.subject.URLSession.delegate;
+    self.session = self.subject.URLSession;
+  }
+}
+
+- (void)testFinishShouldInvalidateTheSessionDestroyingTheSessionDelegateOnDeallocation
+{
+  [self.subject finish];
+  self.subject = nil;
   
-  context(@"when it finishes", ^{
-    __block PTURLRequestOperation *theOperation;
-    
-    beforeEach(^{
-      NSURL *authURL = [NSURL URLWithString:@"http://example.com/authorize"];
-      NSURLRequest *request = [NSURLRequest requestWithURL:authURL];
-      theOperation = [[PTURLRequestOperation alloc] initWithURLRequest:request];
-      [theOperation start];
-      [[theOperation.URLSession shouldNot] beNil];
-      [[theOperation.URLSession.delegate shouldNot] beNil];
-      [theOperation finish];
-    });
-    
-    it(@"should invalidate the session destroying the session delegate", ^{
-      [[theOperation.URLSession.delegate should] beNil];
-    });
-  });
-});
+  [[NSRunLoop mainRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:1]];
+  
+  [[self.session should] beNil];
+  [[(NSObject *)self.sessionDelegate should] beNil];
+}
 
-SPEC_END
+@end
