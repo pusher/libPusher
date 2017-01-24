@@ -16,15 +16,18 @@
   NSURLResponse *URLResponse;
   NSError *connectionError;
   NSMutableData *responseData;
-  NSURLSession *URLSession;
 }
 
 @property (nonatomic, strong) NSURLRequest *URLRequest;
+@property (nonatomic, strong, readonly) NSURLSession *URLSession;
 @property (nonatomic, strong, readonly) NSURLResponse *URLResponse;
 @property (nonatomic, strong, readonly) NSError *connectionError;
 @property (nonatomic, strong, readonly) NSData *responseData;
 
-- (id)initWithURLRequest:(NSURLRequest *)request;
++ (instancetype)new NS_UNAVAILABLE;
+- (instancetype)init NS_UNAVAILABLE;
+
+- (instancetype)initWithURLRequest:(NSURLRequest *)request;
 - (void)finish;
 - (void)cancelImmediately;
 - (void)checkForCancellation;

@@ -58,7 +58,7 @@
 @synthesize connectionError;
 @synthesize responseData;
 
-- (id)initWithURLRequest:(NSURLRequest *)request;
+- (instancetype)initWithURLRequest:(NSURLRequest *)request;
 {
   if ((self = [super init])) {
     URLRequest = request;
@@ -85,10 +85,10 @@
   self.sessionDelegate = [PTURLRequestOperationURLSessionDelegate new];
   self.sessionDelegate.delegate = self;
   NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
-  URLSession = [NSURLSession sessionWithConfiguration:sessionConfig delegate:self.sessionDelegate delegateQueue:nil];
-  NSURLSessionDataTask *task = [URLSession dataTaskWithRequest:URLRequest];
+  _URLSession = [NSURLSession sessionWithConfiguration:sessionConfig delegate:self.sessionDelegate delegateQueue:nil];
+  NSURLSessionDataTask *task = [_URLSession dataTaskWithRequest:URLRequest];
 
-  if (URLSession == nil) {
+  if (_URLSession == nil) {
     [self setFinished:YES];
   }
 
@@ -97,7 +97,7 @@
 
 - (void)finish
 {
-  [URLSession invalidateAndCancel];
+  [_URLSession invalidateAndCancel];
   if (self.isExecuting) {
     [self setExecuting:NO];
     [self setFinished:YES];
@@ -141,7 +141,6 @@
 
 - (void)cancelImmediately
 {
-  [URLSession invalidateAndCancel];
   [self finish];
 }
 

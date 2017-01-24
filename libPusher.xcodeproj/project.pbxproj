@@ -183,6 +183,7 @@
 		A3FE44E71181C3C5009CF5D7 /* NSDictionary+QueryString.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FE430011812541009CF5D7 /* NSDictionary+QueryString.m */; };
 		C0EEEAE652AC6799EC73CA19 /* libPods-libPusher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F918F1C8A1A0F68F8908558A /* libPods-libPusher.a */; };
 		C71F493DB1201F7D8B3538D2 /* libPods-Functional Specs.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 30EE92A595A8C846AFF9E98B /* libPods-Functional Specs.a */; };
+		CD3E77341E36DA01007A9D2B /* PTURLRequestOperationSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = CD3E77321E36DA01007A9D2B /* PTURLRequestOperationSpec.m */; };
 		D60F67F80768DB10F7426674 /* libPods-SampleAppOSX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FF819A7AC78E37FE620D5A52 /* libPods-SampleAppOSX.a */; };
 		EBACA18CEC46E0128163BC42 /* libPods-libPusher-OSX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF0F8DC337B18B200F2362C6 /* libPods-libPusher-OSX.a */; };
 /* End PBXBuildFile section */
@@ -363,6 +364,7 @@
 		A3FE430011812541009CF5D7 /* NSDictionary+QueryString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+QueryString.m"; sourceTree = "<group>"; };
 		AF06129B7116745343BD4F53 /* Pods-libPusher.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-libPusher.release.xcconfig"; path = "Pods/Target Support Files/Pods-libPusher/Pods-libPusher.release.xcconfig"; sourceTree = "<group>"; };
 		B4495E6F60CB2E763DB90F8B /* Pods-libPusher_ReactiveExtensions.a.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-libPusher_ReactiveExtensions.a.debug.xcconfig"; path = "Pods/Target Support Files/Pods-libPusher_ReactiveExtensions.a/Pods-libPusher_ReactiveExtensions.a.debug.xcconfig"; sourceTree = "<group>"; };
+		CD3E77321E36DA01007A9D2B /* PTURLRequestOperationSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTURLRequestOperationSpec.m; sourceTree = "<group>"; };
 		D1869A6584270C5ACDEE722A /* libPods-UnitTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-UnitTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D48BE89405C21CBF94F7AA6C /* libPods-SampleApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SampleApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9F9F5CC5B9ED1CE253A7ADD /* libPods-libPusher_ReactiveExtensions.a.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-libPusher_ReactiveExtensions.a.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -648,6 +650,7 @@
 				A304895E1667A8A6009511CB /* PTPusherChannelAuthorizationOperationSpec.m */,
 				A3173754155D2CDF007E4BBA /* PTPusherMockConnectionSpec.m */,
 				A394E6EF18451C99004C70A2 /* PTPusherSpec.m */,
+				CD3E77321E36DA01007A9D2B /* PTURLRequestOperationSpec.m */,
 				A3C32D9C14D083D60017FAED /* SpecHelper.h */,
 				A366E53914FD88B3002F0C39 /* SpecHelper.m */,
 			);
@@ -1580,6 +1583,7 @@
 			files = (
 				A3FE44E71181C3C5009CF5D7 /* NSDictionary+QueryString.m in Sources */,
 				33E3DECF1CE4BF7500CCB536 /* PTPusherChannelServerBasedAuthorization.m in Sources */,
+				CD3E77341E36DA01007A9D2B /* PTURLRequestOperationSpec.m in Sources */,
 				A3D1D2CA11580162009A12AD /* PTPusher.m in Sources */,
 				A3D1D2CC11580162009A12AD /* PTPusherEvent.m in Sources */,
 				335DD8A61D23C283002724DC /* NSDictionary+StringValue.m in Sources */,
