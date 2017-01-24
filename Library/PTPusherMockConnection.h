@@ -14,6 +14,7 @@
 @interface PTPusherMockConnection : PTPusherConnection
 
 @property (nonatomic, readonly) NSArray *sentClientEvents;
+@property (nonatomic, assign) NSInteger *disconnectionCode;
 
 - (void)simulateServerEventNamed:(NSString *)name data:(id)data channel:(NSString *)channelName;
 - (void)simulateServerEventNamed:(NSString *)name data:(id)data;

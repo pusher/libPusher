@@ -40,7 +40,7 @@
 
 - (void)disconnect
 {
-  [self webSocket:nil didCloseWithCode:0 reason:nil wasClean:YES];
+  [self webSocket:nil didCloseWithCode:self.disconnectionCode reason:nil wasClean:YES];
 }
 
 - (void)send:(id)object
