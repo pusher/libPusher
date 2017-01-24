@@ -8,10 +8,42 @@
 
 #import "PTURLRequestOperation.h"
 
+@interface PTURLRequestOperationURLSessionDelegate : NSObject <NSURLSessionDelegate, NSURLSessionDataDelegate>
+
+@property (nonatomic, weak, readwrite) id<NSURLSessionDelegate, NSURLSessionDataDelegate> delegate;
+
+@end
+
+@implementation PTURLRequestOperationURLSessionDelegate
+
+#pragma mark -
+#pragma mark NSURLSessionDelegate methods
+
+- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data
+{
+  [self.delegate URLSession:session dataTask:dataTask didReceiveData:data];
+}
+
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
+{
+  [self.delegate URLSession:session task:task didCompleteWithError:error];
+}
+
+#pragma mark -
+#pragma mark NSURLSessionDataDelegate methods
+
+- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveResponse:(NSURLResponse *)response completionHandler:(void (^)(NSURLSessionResponseDisposition disposition))completionHandler
+{
+  [self.delegate URLSession:session dataTask:dataTask didReceiveResponse:response completionHandler:completionHandler];
+}
+
+@end
+
 @interface PTURLRequestOperation ()
 @property (nonatomic, strong, readwrite) NSURLResponse *URLResponse;
 @property (nonatomic, strong, readwrite) NSError *connectionError;
 @property (nonatomic, strong, readwrite) NSData *responseData;
+@property (nonatomic, strong, readwrite) PTURLRequestOperationURLSessionDelegate *sessionDelegate;
 
 - (void)setExecuting:(BOOL)isExecuting;
 - (void)setFinished:(BOOL)isFinished;
@@ -50,8 +82,10 @@
 
   [self setExecuting:YES];
 
+  self.sessionDelegate = [PTURLRequestOperationURLSessionDelegate new];
+  self.sessionDelegate.delegate = self;
   NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
-  URLSession = [NSURLSession sessionWithConfiguration:sessionConfig delegate:self delegateQueue:nil];
+  URLSession = [NSURLSession sessionWithConfiguration:sessionConfig delegate:self.sessionDelegate delegateQueue:nil];
   NSURLSessionDataTask *task = [URLSession dataTaskWithRequest:URLRequest];
 
   if (URLSession == nil) {
@@ -61,8 +95,9 @@
   [task resume];
 }
 
-- (void)finish;
+- (void)finish
 {
+  [URLSession invalidateAndCancel];
   if (self.isExecuting) {
     [self setExecuting:NO];
     [self setFinished:YES];
@@ -85,7 +120,7 @@
 }
 
 #pragma mark -
-#pragma mark NSURLSession delegate methods
+#pragma mark NSURLSessionDelegate methods
 
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data
 {
@@ -118,13 +153,13 @@
 }
 
 #pragma mark -
-#pragma mark NSURLSessionData delegate methods
+#pragma mark NSURLSessionDataDelegate methods
 
 - (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveResponse:(NSURLResponse *)response completionHandler:(void (^)(NSURLSessionResponseDisposition disposition))completionHandler
 {
-    self.URLResponse = response;
-    self.responseData = [NSMutableData data];
-    completionHandler(NSURLSessionResponseAllow);
+  self.URLResponse = response;
+  self.responseData = [NSMutableData data];
+  completionHandler(NSURLSessionResponseAllow);
 }
 
 #pragma mark -
