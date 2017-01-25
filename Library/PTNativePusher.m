@@ -122,7 +122,9 @@ const int MAX_FAILED_REQUEST_ATTEMPTS = 6;
      subscriptionChange:change
      callback: ^(BOOL success) {
        if (success) {
-         [outbox removeObjectAtIndex:0];
+         if ([outbox containsObject:subscriptionChange]) {
+           [outbox removeObject:subscriptionChange];
+         }
        }
        [self tryFlushOutbox];
      }];
