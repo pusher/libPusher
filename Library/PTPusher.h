@@ -12,6 +12,7 @@
 #import "PTPusherEventPublisher.h"
 #import "PTPusherPresenceChannelDelegate.h"
 #import "PTPusherChannelAuthorizationDelegate.h"
+#import "PTNativePusher.h"
 
 /** The name of the notification posted when PTPusher receives an event.
  *
@@ -137,6 +138,13 @@ extern NSString *const PTPusherErrorUnderlyingEventKey;
  * @see PTPusherChannelAuthorizationDelegate
  */
 @property (nonatomic, weak) id<PTPusherChannelAuthorizationDelegate> channelAuthorizationDelegate;
+
+/** Provides the native push notification API.
+ *
+ * PTNativePusher is expected to be used as a singleton accessed via this property.
+ */
+@property (nonatomic, strong) PTNativePusher* nativePusher;
+
 
 ///------------------------------------------------------------------------------------/
 /// @name Creating new instances
@@ -314,6 +322,13 @@ extern NSString *const PTPusherErrorUnderlyingEventKey;
  @warning Note: This Pusher feature is currently in beta and requires enabling on your account.
  */
 - (void)sendEventNamed:(NSString *)name data:(id)data channel:(NSString *)channelName;
+
+
+///------------------------------------------------------------------------------------/
+/// Push Notifications
+///------------------------------------------------------------------------------------/
+
+- (PTNativePusher *)nativePusher;
 
 @end
 
