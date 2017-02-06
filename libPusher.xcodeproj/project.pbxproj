@@ -1980,6 +1980,7 @@
 				);
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				PRODUCT_NAME = Pusher;
+				PUBLIC_HEADERS_FOLDER_PATH = include/$PRODUCT_NAME;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 			};
@@ -2002,6 +2003,7 @@
 				);
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				PRODUCT_NAME = Pusher;
+				PUBLIC_HEADERS_FOLDER_PATH = include/$PRODUCT_NAME;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				ZERO_LINK = NO;
