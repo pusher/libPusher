@@ -28,7 +28,7 @@ describe(@"Pusher client", ^{
   });
   
   it(@"allows you to subscribe to channels before connecting", ^{
-    PTPusherChannel *channel = [client subscribeToChannelNamed:@"test-channel"];
+    PTPusherChannel *channel = [client subscribeToChannelNamed:@"test-channel-4"];
     
     __block PTPusherChannel *subscribedChannel = nil;
     
