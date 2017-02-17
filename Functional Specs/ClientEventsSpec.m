@@ -29,7 +29,7 @@ describe(@"Client events", ^{
   
   it(@"can be sent to private channels", ^{
     onConnect(^{
-      [client subscribeToPrivateChannelNamed:@"test-channel"];
+      [client subscribeToPrivateChannelNamed:@"test-channel-1"];
     });
     
     onSubscribe(^(PTPusherChannel *channel) {
@@ -42,12 +42,12 @@ describe(@"Client events", ^{
     
     PTPusherEvent *lastEvent = [connection.sentClientEvents lastObject];
     [[lastEvent.name should] equal:@"client-test-event"];
-    [[lastEvent.channel should] equal:@"private-test-channel"];
+    [[lastEvent.channel should] equal:@"private-test-channel-1"];
 	});
   
   it(@"will have their name automatically prefixed with client-", ^{
     onConnect(^{
-      [client subscribeToPrivateChannelNamed:@"test-channel"];
+      [client subscribeToPrivateChannelNamed:@"test-channel-2"];
     });
     
     onSubscribe(^(PTPusherChannel *channel) {
@@ -60,12 +60,12 @@ describe(@"Client events", ^{
     
     PTPusherEvent *lastEvent = [connection.sentClientEvents lastObject];
     [[lastEvent.name should] equal:@"client-test-event"];
-    [[lastEvent.channel should] equal:@"private-test-channel"];
+    [[lastEvent.channel should] equal:@"private-test-channel-2"];
 	});
   
   it(@"can be sent prior to being subscribed", ^{
     onConnect(^{
-      PTPusherPrivateChannel *channel = [client subscribeToPrivateChannelNamed:@"test-channel"];
+      PTPusherPrivateChannel *channel = [client subscribeToPrivateChannelNamed:@"test-channel-3"];
       [channel triggerEventNamed:@"test-event" data:nil];
     });
         
@@ -75,7 +75,7 @@ describe(@"Client events", ^{
     
     PTPusherEvent *lastEvent = [connection.sentClientEvents lastObject];
     [[lastEvent.name should] equal:@"client-test-event"];
-    [[lastEvent.channel should] equal:@"private-test-channel"];
+    [[lastEvent.channel should] equal:@"private-test-channel-3"];
 	});
 });
 
