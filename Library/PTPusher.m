@@ -16,6 +16,7 @@
 #import "PTPusherErrors.h"
 #import "PTPusherChannelServerBasedAuthorization.h"
 #import "PTPusherChannel_Private.h"
+#import "SRWebSocket.h"
 
 #define kPUSHER_HOST @"ws.pusherapp.com"
 
@@ -377,7 +378,7 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
 {
   NSError *error = nil;
 
-  if (errorCode > 0) {
+  if (errorCode > 0 && errorCode != SRStatusCodeNormal && errorCode != SRStatusCodeGoingAway) {
     if (reason == nil) {
         reason = @"Unknown error"; // not sure what could cause this to be nil, but just playing it safe
     }
