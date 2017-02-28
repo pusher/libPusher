@@ -173,7 +173,6 @@
 		A3E5CC4618466CD5006A54DD /* NSString+Hashing.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC3E18466CD5006A54DD /* NSString+Hashing.h */; };
 		A3E5CC4718466CD5006A54DD /* PTBlockEventListener.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC3F18466CD5006A54DD /* PTBlockEventListener.h */; };
 		A3E5CC4818466CD5006A54DD /* PTJSON.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC4018466CD5006A54DD /* PTJSON.h */; };
-		A3E5CC4918466CD5006A54DD /* PTPusherChannel_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC4118466CD5006A54DD /* PTPusherChannel_Private.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		A3E5CC4B18466CD5006A54DD /* PTTargetActionEventListener.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC4318466CD5006A54DD /* PTTargetActionEventListener.h */; };
 		A3E5CC4C18466CD5006A54DD /* PTURLRequestOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = A3E5CC4418466CD5006A54DD /* PTURLRequestOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A3FE41CB11811161009CF5D7 /* NewEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3FE41C911811161009CF5D7 /* NewEventViewController.m */; };
@@ -831,7 +830,6 @@
 				A3E5CC4718466CD5006A54DD /* PTBlockEventListener.h in Headers */,
 				A35281E913F75265000687C0 /* PTPusherAPI.h in Headers */,
 				A3D1D2C711580162009A12AD /* PTEventListener.h in Headers */,
-				A3E5CC4918466CD5006A54DD /* PTPusherChannel_Private.h in Headers */,
 				A3B2931F14D8D96900C6B79F /* PTPusherPresenceChannelDelegate.h in Headers */,
 				A3CA666914D96814003E2F1E /* PTPusherChannel.h in Headers */,
 				A3CA670E14DBBAA1003E2F1E /* PTPusherErrors.h in Headers */,
