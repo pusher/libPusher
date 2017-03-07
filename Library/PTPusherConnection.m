@@ -138,7 +138,8 @@ NSString *const PTPusherConnectionPongEvent        = @"pusher:pong";
 {
   [self resetPingPongTimer];
   
-  NSDictionary *messageDictionary = [[PTJSON JSONParser] objectFromJSONString:message];
+  NSDictionary *messageDictionary = [[PTJSON JSONParser] objectFromJSONString:message parseError:^(NSError *error) {
+  }];
   PTPusherEvent *event = [PTPusherEvent eventFromMessageDictionary:messageDictionary];
   
   if ([event.name isEqualToString:PTPusherConnectionPongEvent]) {

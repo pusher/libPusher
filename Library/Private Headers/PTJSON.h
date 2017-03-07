@@ -10,10 +10,10 @@
 
 @protocol PTJSONParser <NSObject>
 
-- (NSData *)JSONDataFromObject:(id)object;
-- (NSString *)JSONStringFromObject:(id)object;
-- (id)objectFromJSONData:(NSData *)data;
-- (id)objectFromJSONString:(NSString *)string;
+- (NSData * _Nullable)JSONDataFromObject:(id _Nullable)object;
+- (NSString * _Nullable)JSONStringFromObject:(id _Nullable)object;
+- (id _Nullable)objectFromJSONData:(NSData * _Nullable)data parseError:(nullable void (^)(NSError * _Nullable error))parseError;
+- (id _Nullable)objectFromJSONString:(NSString * _Nullable)string parseError:(nullable void (^)(NSError * _Nullable error))parseError;
 
 @end
 
@@ -25,6 +25,6 @@
  As of libPusher 1.5, the lowest supported deployment target is iOS 5.0
  so this will always return a parser that uses NSJSONSerialisation.
  */
-+ (id<PTJSONParser>)JSONParser;
++ (id <PTJSONParser> _Nullable)JSONParser;
 
 @end
