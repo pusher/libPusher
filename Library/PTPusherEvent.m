@@ -32,7 +32,8 @@ NSString *const PTPusherChannelKey = @"channel";
     
     // try and deserialize the data as JSON if possible
     if ([data respondsToSelector:@selector(dataUsingEncoding:)]) {
-      _data = [[[PTJSON JSONParser] objectFromJSONString:data] copy];
+      _data = [[[PTJSON JSONParser] objectFromJSONString:data parseError:^(NSError *error) {
+      }] copy];
 
       if (_data == nil) {
         NSLog(@"[pusher] Error parsing event data (not JSON?)");
