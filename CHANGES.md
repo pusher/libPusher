@@ -1,3 +1,17 @@
+# 1.6.3 - March 2017
+
+* Fix `PTURLRequestOperation` memory leak (#246)
+* Ensure socket IDs still match before proceeding with subscription (#237)
+
+# 1.6.2 - September 2016
+
+* Added option to unsubscribe from all channels without knowing their names (#200)
+* PTPusherEventReceivedNotification gets posted at correct point (#192)
+* NSURLSession replaced NSURLConnection
+* OHHTTPStubs to version 5.1.0
+* Check and cast presence channel user id to NSString (#193)
+* Expose channels reference to see what channels are currently subscribed (#197)
+
 # 1.6.1 - September 2015
 
 * Update SocketRocket to 0.4.1 (#181)

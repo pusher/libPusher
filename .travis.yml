@@ -1,5 +1,5 @@
 language: objective-c
-osx_image: xcode7.3
+osx_image: xcode8.1
 sudo: false
 before_install:
   - gem install xcpretty
@@ -11,9 +11,9 @@ install:
   - bundle install
 env:
   matrix:
-    - XCODE_SCHEME="libPusher" SDK="iphonesimulator" DESTINATION="OS=9.3,name=iPhone 6s"
+    - XCODE_SCHEME="libPusher" SDK="iphonesimulator" DESTINATION="OS=10.1,name=iPhone 7"
     - XCODE_SCHEME="libPusher-OSX" SDK="macosx" DESTINATION="arch=x86_64"
-    - XCODE_SCHEME="Functional Specs" SDK="iphonesimulator" DESTINATION="OS=9.3,name=iPhone 6s"
+    - XCODE_SCHEME="Functional Specs" SDK="iphonesimulator" DESTINATION="OS=10.1,name=iPhone 7"
 script:
   - set -o pipefail
   - rackup -p 9292 Scripts/auth_server.ru > logs.txt 2>&1 &
