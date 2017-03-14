@@ -6,7 +6,7 @@ require 'xcode_build/tasks/build_task'
 require 'xcode_build/formatters/progress_formatter'
 require 'tmpdir'
 
-LIBRARY_VERSION = "1.6.2"
+LIBRARY_VERSION = "1.6.3"
 XCODEBUILD_LOG  = File.join(File.dirname(__FILE__), "xcodebuild.log")
 GITHUB_USER     = 'lukeredpath'
 GITHUB_REPO     = 'libPusher'

@@ -37,7 +37,7 @@ Head over to the [push-notifications](https://github.com/pusher/libPusher/tree/p
 Install using CocoaPods is recommended.
 
 ```ruby
-pod 'libPusher', '~> 1.6.2'
+pod 'libPusher', '~> 1.6.3'
 ```
 
 Import Pusher into the class that wants to make use of the library.
@@ -49,7 +49,7 @@ Import Pusher into the class that wants to make use of the library.
 If you want to use the ReactiveExtensions version of libPusher, add the following line to your Podfile instead.
 
 ```ruby
-pod 'libPusher/ReactiveExtensions', '~> 1.6.2'
+pod 'libPusher/ReactiveExtensions', '~> 1.6.3'
 ```
 
 This will also load the core libPusher library and ReactiveCocoa as a dependency.
