@@ -37,7 +37,7 @@ describe(@"PTPusherChannelAuthorizationOperation", ^{
       
       [[NSOperationQueue mainQueue] addOperation:theOperation];
       
-      [[expectFutureValue(@(theOperation.isFinished)) shouldEventually] beTrue];
+      [[expectFutureValue(@(theOperation.isFinished)) shouldEventuallyBeforeTimingOutAfter(2.0)] beTrue];
     });
     
     it(@"stores the parsed JSON authorization data", ^{
