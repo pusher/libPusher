@@ -103,16 +103,21 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
   return [self pusherWithKey:(NSString *)key delegate:(id<PTPusherDelegate>)delegate encrypted:(BOOL)isEncrypted cluster:(NSString *) nil];
 }
 
-+ (instancetype)pusherWithKey:(NSString *)key delegate:(id<PTPusherDelegate>)delegate encrypted:(BOOL)isEncrypted cluster:(NSString *) cluster
++ (instancetype)pusherWithKey:(NSString *)key delegate:(id<PTPusherDelegate>)delegate encrypted:(BOOL)isEncrypted cluster:(NSString *)cluster
 {
-    NSString * hostURL;
+    NSString *host;
     if ([cluster length] == 0) {
-        hostURL = kPUSHER_HOST;
+        host = kPUSHER_HOST;
     } else {
-        hostURL = [NSString stringWithFormat:@"ws-%@.pusher.com", cluster];
+        host = [NSString stringWithFormat:@"ws-%@.pusher.com", cluster];
     }
 
-    NSURL *serviceURL = PTPusherConnectionURL(hostURL, key, @"libPusher", isEncrypted);
+    return [self pusherWithKey:key delegate:delegate encrypted:isEncrypted host:host];
+}
+
++ (instancetype)pusherWithKey:(NSString *)key delegate:(id<PTPusherDelegate>)delegate encrypted:(BOOL)isEncrypted host:(NSString *)host
+{
+    NSURL *serviceURL = PTPusherConnectionURL(host, key, @"libPusher", isEncrypted);
     PTPusherConnection *connection = [[PTPusherConnection alloc] initWithURL:serviceURL];
     PTPusher *pusher = [[self alloc] initWithConnection:connection];
     pusher.delegate = delegate;
