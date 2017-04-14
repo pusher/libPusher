@@ -77,7 +77,6 @@ typedef enum {
  Connections are not opened immediately; an explicit call to connect is required.
  
  @param aURL      The websocket endpoint
- @param delegate  The delegate for this connection
  */
 - (id)initWithURL:(NSURL *)aURL;
 
