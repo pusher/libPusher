@@ -1973,6 +1973,7 @@
 			baseConfigurationReference = E34B908267A5E698B5B39970 /* Pods-libPusher.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1.5;
 				DSTROOT = /tmp/xcodeproj.dst;
@@ -1996,6 +1997,7 @@
 			baseConfigurationReference = AF06129B7116745343BD4F53 /* Pods-libPusher.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				COPY_PHASE_STRIP = YES;
 				CURRENT_PROJECT_VERSION = 1.5;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
