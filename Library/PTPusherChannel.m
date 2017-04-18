@@ -340,7 +340,13 @@
 - (id)initWithUserID:(NSString *)userID userInfo:(NSDictionary *)userInfo
 {
   if ((self = [super init])) {
-    _userID = [userID copy];
+    if ([userID isKindOfClass:[NSNumber class]]) {
+      NSNumber *usrId = userID;
+      _userID = [NSString stringWithFormat:@"%d", usrId.longValue];
+    } else {
+      _userID = [userID copy];
+    }
+    
     _userInfo = [userInfo copy];
   }
   return self;
@@ -402,12 +408,12 @@
 
 - (PTPusherChannelMember *)me
 {
-  return self[self.myID];
+  return _members[self.myID];
 }
 
 - (PTPusherChannelMember *)memberWithID:(NSString *)userID
 {
-  return self[userID];
+  return _members[userID];
 }
 
 #pragma mark - Channel event handling
