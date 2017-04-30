@@ -259,7 +259,7 @@ You can handle this in one of two ways. The first is to ensure you remove the bi
 
 The second, is to prevent a strong reference to `self` being captured in the first place:
 
-````objc
+```objc
 - (void)viewDidAppear:(BOOL)animated
 {
   __weak typeof(self) weakSelf = self;
