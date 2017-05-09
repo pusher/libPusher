@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PTEventListener.h"
-#import "PTPusherEventDispatcher.h"
+#import <Pusher/PTEventListener.h>
+#import <Pusher/PTPusherEventDispatcher.h>
 
 typedef void (^PTBlockEventListenerBlock)(PTPusherEvent *);
 
