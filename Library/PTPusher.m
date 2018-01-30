@@ -109,7 +109,7 @@ NSURL *PTPusherConnectionURL(NSString *host, NSString *key, NSString *clientID, 
     if ([cluster length] == 0) {
         hostURL = kPUSHER_HOST;
     } else {
-        hostURL = [NSString stringWithFormat:@"ws-%@.pusher.com", cluster];
+        hostURL = [NSString stringWithFormat:@"ws-%@.pusherapp.com", cluster];
     }
 
     NSURL *serviceURL = PTPusherConnectionURL(hostURL, key, @"libPusher", isEncrypted);
