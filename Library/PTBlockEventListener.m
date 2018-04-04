@@ -47,8 +47,8 @@
 - (void)dispatchEvent:(PTPusherEvent *)event
 {
   dispatch_async(_queue, ^{
-    if (!_invalid) {
-      _block(event);
+    if (!self->_invalid) {
+      self->_block(event);
     }
   });
 }

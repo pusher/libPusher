@@ -77,7 +77,7 @@
 - (void)dealloc
 {
   [self.internalBindings enumerateObjectsUsingBlock:^(id object, NSUInteger index, BOOL *stop) {
-    [_dispatcher removeBinding:object];
+    [self.dispatcher removeBinding:object];
   }];
 }
 
@@ -417,7 +417,7 @@
   NSDictionary *memberHash = subscriptionData[@"presence"][@"hash"];
   [memberHash enumerateKeysAndObjectsUsingBlock:^(NSString *userID, NSDictionary *userInfo, BOOL *stop) {
     PTPusherChannelMember *member = [[PTPusherChannelMember alloc] initWithUserID:userID userInfo:userInfo];
-    _members[userID] = member;
+    self->_members[userID] = member;
   }];
 }
 
