@@ -43,7 +43,7 @@
 
 - (id)objectFromJSONData:(NSData *)data error:(NSError *__autoreleasing *)error
 {
-  return [NSJSONSerialization JSONObjectWithData:data options:0 error:error];
+  return [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:error];
 }
 
 - (id)objectFromJSONString:(NSString *)string error:(NSError *__autoreleasing *)error
