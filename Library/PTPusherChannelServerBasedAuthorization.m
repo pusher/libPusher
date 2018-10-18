@@ -122,7 +122,8 @@
     }
 
     if (_authorized) {
-      _authorizationData = [[PTJSON JSONParser] objectFromJSONData:responseData];
+      NSError *jsonError = nil;
+      _authorizationData = [[PTJSON JSONParser] objectFromJSONData:responseData error:&jsonError];
 
       if (![_authorizationData isKindOfClass:[NSDictionary class]]) {
         NSDictionary *userInfo = nil;
@@ -131,7 +132,7 @@
           userInfo = @{@"reason": @"Authorization data was not a dictionary", @"authorization_data": _authorizationData};
         }
         else {
-          userInfo = @{@"reason": @"Authorization data was not valid JSON"};
+          userInfo = @{@"reason": @"Authorization data was not valid JSON", @"localizedDescription": jsonError.localizedDescription};
         }
 
         self.error = [NSError errorWithDomain:PTPusherErrorDomain code:PTPusherChannelAuthorizationBadResponseError userInfo:userInfo];

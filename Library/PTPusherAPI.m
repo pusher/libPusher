@@ -35,7 +35,11 @@
 - (void)triggerEvent:(NSString *)eventName onChannel:(NSString *)channelName data:(id)eventData socketID:(NSString *)socketID
 {
   NSString *path = [NSString stringWithFormat:@"/apps/%@/channels/%@/events", appID, channelName];
-  NSData *bodyData = [[PTJSON JSONParser] JSONDataFromObject:eventData];
+  NSError *error = nil;
+  NSData *bodyData = [[PTJSON JSONParser] JSONDataFromObject:eventData error:&error];
+  if (error != nil) {
+    NSLog(@"[pusher] error: %@", error.localizedDescription);
+  }
   NSString *bodyString = [[NSString alloc] initWithData:bodyData encoding:NSUTF8StringEncoding];
   
   NSMutableDictionary *queryParameters = [NSMutableDictionary dictionary];

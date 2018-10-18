@@ -95,7 +95,11 @@ NSString *const PTPusherConnectionPongEvent        = @"pusher:pong";
 {
   if (self.isConnected == NO) return;
   
-  NSData *JSONData = [[PTJSON JSONParser] JSONDataFromObject:object];
+  NSError *error = nil;
+  NSData *JSONData = [[PTJSON JSONParser] JSONDataFromObject:object error:&error];
+  if (error != nil) {
+    NSLog(@"[pusher] error: %@", error.localizedDescription);
+  }
   NSString *message = [[NSString alloc] initWithData:JSONData encoding:NSUTF8StringEncoding];
   [socket send:message];
 }
@@ -138,7 +142,11 @@ NSString *const PTPusherConnectionPongEvent        = @"pusher:pong";
 {
   [self resetPingPongTimer];
   
-  NSDictionary *messageDictionary = [[PTJSON JSONParser] objectFromJSONString:message];
+  NSError *error = nil;
+  NSDictionary *messageDictionary = [[PTJSON JSONParser] objectFromJSONString:message error:&error];
+  if (error != nil) {
+    NSLog(@"[pusher] error: %@", error.localizedDescription);
+  }
   PTPusherEvent *event = [PTPusherEvent eventFromMessageDictionary:messageDictionary];
   
   if ([event.name isEqualToString:PTPusherConnectionPongEvent]) {

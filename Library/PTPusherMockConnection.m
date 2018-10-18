@@ -69,7 +69,11 @@
     event[PTPusherChannelKey] = channelName;
   }
   
-  NSString *message = [[PTJSON JSONParser] JSONStringFromObject:event];
+  NSError *error = nil;
+  NSString *message = [[PTJSON JSONParser] JSONStringFromObject:event error:&error];
+  if (error != nil) {
+    NSLog(@"[pusher] error: %@", error.localizedDescription);
+  }
   
   [self webSocket:nil didReceiveMessage:message];
 }

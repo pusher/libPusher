@@ -31,24 +31,24 @@
   });
 }
 
-- (NSData *)JSONDataFromObject:(id)object
+- (NSData *)JSONDataFromObject:(id)object error:(NSError *__autoreleasing *)error
 {
-  return [NSJSONSerialization dataWithJSONObject:object options:0 error:nil];
+  return [NSJSONSerialization dataWithJSONObject:object options:0 error:error];
 }
 
-- (NSString *)JSONStringFromObject:(id)object
+- (NSString *)JSONStringFromObject:(id)object error:(NSError *__autoreleasing *)error
 {
-  return [[NSString alloc] initWithData:[self JSONDataFromObject:object] encoding:NSUTF8StringEncoding];
+  return [[NSString alloc] initWithData:[self JSONDataFromObject:object error:error] encoding:NSUTF8StringEncoding];
 }
 
-- (id)objectFromJSONData:(NSData *)data
+- (id)objectFromJSONData:(NSData *)data error:(NSError *__autoreleasing *)error
 {
-  return [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+  return [NSJSONSerialization JSONObjectWithData:data options:0 error:error];
 }
 
-- (id)objectFromJSONString:(NSString *)string
+- (id)objectFromJSONString:(NSString *)string error:(NSError *__autoreleasing *)error
 {
-  return [self objectFromJSONData:[string dataUsingEncoding:NSUTF8StringEncoding]];
+  return [self objectFromJSONData:[string dataUsingEncoding:NSUTF8StringEncoding] error:error];
 }
 
 @end

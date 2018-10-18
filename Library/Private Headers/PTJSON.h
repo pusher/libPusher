@@ -10,10 +10,10 @@
 
 @protocol PTJSONParser <NSObject>
 
-- (NSData *)JSONDataFromObject:(id)object;
-- (NSString *)JSONStringFromObject:(id)object;
-- (id)objectFromJSONData:(NSData *)data;
-- (id)objectFromJSONString:(NSString *)string;
+- (NSData *)JSONDataFromObject:(id)object error:(NSError **)error;
+- (NSString *)JSONStringFromObject:(id)object error:(NSError **)error;;
+- (id)objectFromJSONData:(NSData *)data error:(NSError **)error;
+- (id)objectFromJSONString:(NSString *)string error:(NSError **)error;
 
 @end
 

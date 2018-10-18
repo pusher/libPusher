@@ -301,7 +301,11 @@
 {
   [super subscribeWithAuthorization:authData];
 
-  NSDictionary *channelData = [[PTJSON JSONParser] objectFromJSONString:authData[@"channel_data"]];
+  NSError *error = nil;
+  NSDictionary *channelData = [[PTJSON JSONParser] objectFromJSONString:authData[@"channel_data"] error:&error];
+  if (error != nil) {
+    NSLog(@"[pusher] error: %@", error.localizedDescription);
+  }
   self.members.myID = [channelData stringValueForKey:@"user_id"];
 }
 
