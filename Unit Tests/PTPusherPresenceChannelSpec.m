@@ -26,7 +26,7 @@ describe(@"PTPusherPresenceChannel", ^{
 	});
   
   it(@"stores a reference to the subscriber's user ID on authorization", ^{
-    NSDictionary *authData = @{@"channel_data": [[PTJSON JSONParser] JSONStringFromObject:@{@"user_id": @"12345"}]};
+    NSDictionary *authData = @{@"channel_data": [[PTJSON JSONParser] JSONStringFromObject:@{@"user_id": @"12345"} error:nil]};
     [channel subscribeWithAuthorization:authData];
     [[channel.members.myID should] equal:@"12345"];
 	});
@@ -46,7 +46,7 @@ describe(@"PTPusherPresenceChannel", ^{
 	});
   
   it(@"can return the subscribed member after authorising and subscribing", ^{
-    NSDictionary *authData = @{@"channel_data": [[PTJSON JSONParser] JSONStringFromObject:@{@"user_id": @"user-1"}]};
+    NSDictionary *authData = @{@"channel_data": [[PTJSON JSONParser] JSONStringFromObject:@{@"user_id": @"user-1"} error:nil]};
     [channel subscribeWithAuthorization:authData];
     
     NSDictionary *subscribeEventData = @{@"presence": @{
