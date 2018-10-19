@@ -43,7 +43,7 @@
 
 - (id)objectFromJSONData:(NSData *)data
 {
-  return [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+  return [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:nil];
 }
 
 - (id)objectFromJSONString:(NSString *)string
