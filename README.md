@@ -1,12 +1,12 @@
-# libPusher
+# Pusher Channels Objective-C Client
 
 [![Build Status](https://travis-ci.org/pusher/libPusher.png)](https://travis-ci.org/pusher/libPusher)
 
-An Objective-C client library for the [Pusher](https://pusher.com) realtime service.
+libPusher is an Objective-C client library for the [Pusher Channels](https://pusher.com/channels) realtime service.
 
-Pusher is a hosted service that sits between your web application and the browser that lets you deliver events in realtime using WebSockets.
+Pusher Channels is a hosted service that sits between your web application and the browser that lets you deliver events in realtime using WebSockets.
 
-The libPusher API mirrors the Pusher Javascript client as closely as possible, with some allowances for Objective-C conventions. In particular, whilst the Javascript client uses event binding for all event handling, where events are pre-defined, libPusher uses the standard Cocoa delegation pattern.
+The libPusher API mirrors the Pusher Channels JavaScript client as closely as possible, with some allowances for Objective-C conventions. In particular, whilst the JavaScript client uses event binding for all event handling, where events are pre-defined, libPusher uses the standard Cocoa delegation pattern.
 
 [API Documentation](http://cocoadocs.org/docsets/libPusher/1.6/)
 
@@ -84,7 +84,7 @@ self.client = [PTPusher pusehrWithKey:@"YOUR_API_KEY" delegate:self encrypt:YES 
 
 ### Subscribe to channels
 
-Channels are a way of filtering the events you want your application to receive. In addition, private and presence channels can be used to control access to events and in the case of presence channels, see who else is subscribing to events. For more information on channels, see the Pusher documentation.
+Channels are a way of filtering the events you want your application to receive. In addition, private and presence channels can be used to control access to events and in the case of presence channels, see who else is subscribing to events. For more information on channels, see the [documentation](https://pusher.com/docs/channels/using_channels/channels).
 
 There is no need to wait for the client to establish a connection before subscribing. You can subscribe to a channel immediately and any subscriptions will be created once the connection has connected.
 
@@ -138,7 +138,7 @@ PTPusherChannel *channel = [self.client channelNamed:@"chat"];
 
 ### Channel object lifetime
 
-When the Pusher client disconnects, all subscribed channels are implicitly unsubscribed (`isSubscribed` will return `NO`), however the channel objects will persist and so will any event bindings.
+When the client disconnects, all subscribed channels are implicitly unsubscribed (`isSubscribed` will return `NO`), however the channel objects will persist and so will any event bindings.
 
 When the client reconnects, all previously subscribed channels will be resubscribed (which might involve another authentication request for any private/presence channels) and your existing event bindings will continue working as they did prior to the disconnection.
 
@@ -148,7 +148,7 @@ If you explicitly unsubscribe from a channel, **all event bindings will be remov
 
 Private and presence channels require server-side authorization before they can connect.
 
-**Note**: Make sure your server responds correctly to the authentication request. See the [authentication signature](https://pusher.com/docs/auth_signatures) and [user authentication](https://pusher.com/docs/authenticating_users) docs for details and examples on how to implement authorization on the server side.
+**Note**: Make sure your server responds correctly to the authentication request. See the [authentication signature](https://pusher.com/docs/channels/library_auth_reference/auth-signatures) and [user authentication](https://pusher.com/docs/channels/server_api/authenticating-users) docs for details and examples on how to implement authorization on the server side.
 
 In order to connect to a private or presence channel, you first need to configure your server authorization URL.
 
@@ -332,7 +332,7 @@ Automatic reconnection will not happen in the following situations:
 * The connection disconnects with a Pusher error code in the range 4000-4099 (indicating a client error, normally a misconfiguration)
 * The maximum number of automatic reconnection attempts have been reached
 
-An error code in the range 4000-4099 generally indicates a client misconfiguration (e.g. invalid API key) or rate limiting. See the [Pusher protocol documentation](http://pusher.com/docs/pusher_protocol#error-codes) for more information.
+An error code in the range 4000-4099 generally indicates a client misconfiguration (e.g. invalid API key) or rate limiting. See the [Pusher protocol documentation](https://pusher.com/docs/channels/library_auth_reference/pusher-websockets-protocol#error-codes) for more information.
 
 The other scenarios generally indicate that it is not currently possible to connect to the Pusher service - this might be because of an issue with the service but more likely is that there simply isn't an internet connection.
 
