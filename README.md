@@ -84,7 +84,7 @@ self.client = [PTPusher pusehrWithKey:@"YOUR_API_KEY" delegate:self encrypt:YES 
 
 ### Subscribe to channels
 
-Channels are a way of filtering the events you want your application to receive. In addition, private and presence channels can be used to control access to events and in the case of presence channels, see who else is subscribing to events. For more information on channels, see the [Pusher Channels documentation](https://pusher.com/docs/channels).
+Channels are a way of filtering the events you want your application to receive. In addition, private and presence channels can be used to control access to events and in the case of presence channels, see who else is subscribing to events. For more information on channels, see the [documentation](https://pusher.com/docs/channels/using_channels/channels).
 
 There is no need to wait for the client to establish a connection before subscribing. You can subscribe to a channel immediately and any subscriptions will be created once the connection has connected.
 
