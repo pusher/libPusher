@@ -28,6 +28,11 @@ PTPusherChannel *channel = [self.client subscribeToChannelNamed:@"chat"];
 [self.client connect];
 ```
 
+## Supported platforms
+### Deployment targets
+- iOS 6.0 and above
+- macOS (OS X) 10.9 and above
+
 ## Installation
 
 Install using CocoaPods is recommended.
