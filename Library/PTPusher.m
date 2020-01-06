@@ -16,7 +16,7 @@
 #import "PTPusherErrors.h"
 #import "PTPusherChannelServerBasedAuthorization.h"
 #import "PTPusherChannel_Private.h"
-#import "SRWebSocket.h"
+#import <SocketRocket/SRWebSocket.h>
 
 #define kPUSHER_HOST @"ws.pusherapp.com"
 
