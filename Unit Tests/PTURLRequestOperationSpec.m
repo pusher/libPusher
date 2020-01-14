@@ -26,8 +26,8 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:authURL];
     self.subject = [[PTURLRequestOperation alloc] initWithURLRequest:request];
     [self.subject start];
-    [[self.subject.URLSession shouldNot] beNil];
-    [[(NSObject *)self.subject.URLSession.delegate shouldNot] beNil];
+    XCTAssertNotNil(self.subject.URLSession);
+    XCTAssertNotNil(self.subject.URLSession.delegate);
     self.sessionDelegate = self.subject.URLSession.delegate;
     self.session = self.subject.URLSession;
   }
@@ -40,8 +40,8 @@
   
   [[NSRunLoop mainRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:1]];
   
-  [[self.session should] beNil];
-  [[(NSObject *)self.sessionDelegate should] beNil];
+  XCTAssertNil(self.session);
+  XCTAssertNil(self.sessionDelegate);
 }
 
 @end
