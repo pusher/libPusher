@@ -8,7 +8,7 @@
 
 #import "PTURLRequestOperation.h"
 
-@interface PTURLRequestOperationURLSessionDelegate : NSObject <NSURLSessionDelegate, NSURLSessionDataDelegate>
+@interface PTURLRequestOperationURLSessionDelegate ()
 
 @property (nonatomic, weak, readwrite) id<NSURLSessionDelegate, NSURLSessionDataDelegate> delegate;
 
@@ -98,6 +98,7 @@
 - (void)finish
 {
   [_URLSession invalidateAndCancel];
+  self.sessionDelegate.delegate = nil;
   if (self.isExecuting) {
     [self setExecuting:NO];
     [self setFinished:YES];

@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+@interface PTURLRequestOperationURLSessionDelegate : NSObject <NSURLSessionDelegate, NSURLSessionDataDelegate>
+
+@end
+
 @interface PTURLRequestOperation : NSOperation <NSURLSessionDelegate, NSURLSessionDataDelegate> {
   BOOL _isExecuting;
   BOOL _isFinished;
