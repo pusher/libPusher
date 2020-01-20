@@ -1,3 +1,7 @@
+# 1.6.4 - January 2020
+
+* Fix SocketRocket header imports (#272)
+
 # 1.6.3 - March 2017
 
 * Fix `PTURLRequestOperation` memory leak (#246)
