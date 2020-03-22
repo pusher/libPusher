@@ -6,7 +6,7 @@ gem 'rest-client'
 group :scripts do
   gem 'sinatra'
   gem 'pusher'
-  gem 'json'
+  gem 'json', '>= 2.3.0'
   gem 'thin'
   gem 'uuid'
 end
