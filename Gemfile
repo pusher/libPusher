@@ -4,10 +4,10 @@ gem 'rake'
 gem 'rest-client'
 
 group :scripts do
-  gem 'sinatra'
+  gem 'sinatra', '>= 2.0.0'
   gem 'pusher'
   gem 'json'
-  gem 'thin'
+  gem 'thin', '>= 1.7.0'
   gem 'uuid'
 end
 
