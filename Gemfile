@@ -13,7 +13,7 @@ end
 
 group :building do
   gem 'xcodebuild-rb', git: 'git://github.com/lukeredpath/xcodebuild-rb.git'
-  gem 'xcodeproj'
-  gem 'cocoapods', '>=1.2.0'
+  gem 'xcodeproj', '>= 1.4.2'
+  gem 'cocoapods', '>= 1.3.0'
   gem 'ios-sim-test', git: 'git://github.com/alloy/ios-sim-test.git'
 end
